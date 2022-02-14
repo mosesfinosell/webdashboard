@@ -1,6 +1,6 @@
-import {Grid, GridItem,Box,Center,Text, Image, Flex} from '@chakra-ui/react'
+import {Grid, GridItem,Box,Center,Text, Image, Flex,Stack} from '@chakra-ui/react'
 import {Link as RLink,BrowserRouter} from 'react-router-dom'
-import { useColorModeValue } from "@chakra-ui/color-mode";
+// import { useColorModeValue } from "@chakra-ui/color-mode";
 import user1 from '../../assets/user1.png'
 import {FaAngleDown} from 'react-icons/fa'
 import { RiHomeSmile2Line } from "react-icons/ri";
