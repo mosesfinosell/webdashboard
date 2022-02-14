@@ -44,7 +44,7 @@ export default function DashboardPage() {
         <Text to='/dashboard/home' as={RLink}>Home</Text>
         </Stack>
         </Box>  
-        <Box display='flex' alignItems='center' >
+        <Box display='flex' alignItems='center' mt='20px'>
        <Stack pr='10px' fontSize='20px'>
        <RiHomeSmile2Line />
         </Stack>
