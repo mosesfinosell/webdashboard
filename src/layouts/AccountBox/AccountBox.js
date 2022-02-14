@@ -6,7 +6,7 @@ import store from '../../assets/store.png'
 import user from '../../assets/user.png'
 
 export default function AccountBox(){
-const whitebg = useColorModeValue('white.400');
+const whitebg = useColorModeValue('white.500');
 
 
     return(
