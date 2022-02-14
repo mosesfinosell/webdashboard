@@ -1,4 +1,4 @@
-import { Container,Grid, GridItem,Box,Center,Text, Image, Flex,Spacer, Stack,Link ,SimpleGrid} from '@chakra-ui/react'
+import {Grid, GridItem,Box,Center,Text, Image, Flex} from '@chakra-ui/react'
 import {Link as RLink,BrowserRouter} from 'react-router-dom'
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import user1 from '../../assets/user1.png'
@@ -9,7 +9,7 @@ import {BiUser,BiHelpCircle} from 'react-icons/bi'
 import DashRoute from './DashRoute/DashRoute';
 
 export default function DashboardPage() {
-    const yellowbtn = useColorModeValue('yellow.500')
+    // const yellowbtn = useColorModeValue('yellow.500')
 
     return(
 
@@ -44,6 +44,14 @@ export default function DashboardPage() {
         <Text to='/dashboard/home' as={RLink}>Home</Text>
         </Stack>
         </Box>  
+        <Box display='flex' alignItems='center' >
+       <Stack pr='10px' fontSize='20px'>
+       <RiHomeSmile2Line />
+        </Stack>
+        <Stack>
+        <Text to='/dashboard/deals' as={RLink}>Deals</Text>
+        </Stack>
+        </Box> 
         <Box display='flex' alignItems='center' mt='20px'>
        <Stack pr='10px' fontSize='20px'>
          <IoCardOutline/>

@@ -1,12 +1,13 @@
 import { Grid,Box,GridItem,Container,Text,Stack,Center, Heading} from "@chakra-ui/react";
 import {BsPlusSquare,BsArrowDownLeftSquare} from 'react-icons/bs'
-import {VscRocket} from "react-icons/vsc";
-// import {IconContext} from 'react-icons'
-// import AddMoneyModal from "../../HomeItems/addMoneyModal";
+import AddMoneyModal from '../../HomeItemsModal/addMoneyModal'
+import SendMoneyModal from '../../HomeItemsModal/SendMoney/sendMoneyModal'
+import  BuyAirtimeModal from '../../HomeItemsModal/BuyAirtime/BuyAirtimeModal'
+
+
 
 export default function HomeDash() {
-    // const { onOpen } = useDisclosure();
-
+ 
     return(
        <Container m='40px' maxW='container.lg'>
 <Grid
@@ -36,26 +37,20 @@ export default function HomeDash() {
  </Stack>
  
 
- <Box as='button' h='100px' w='301px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='center' >
-     
-    <Stack pr='30px' color='yellow.500' fontSize='24px'>
-    <BsPlusSquare  />
-    </Stack>
+ <Box as='button' h='100px' w='301px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='center'>
+      <AddMoneyModal/>
       <Stack>
       <Text>Add Money</Text>
            <Text>Space for subtitle text</Text> 
-      </Stack>          
+      </Stack>  
 </Box>
 
      <Box as='button' h='100px' w='301px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='center'>
-           <Stack pr='30px'color='yellow.500' fontSize='24px'>
-           <VscRocket /> 
-           </Stack>
+     <SendMoneyModal/>
            <Stack>
            <Text>Send Money</Text>
              <Text>Space for subtitle text</Text>
-           </Stack> 
- 
+           </Stack>      
 </Box>
      <Box as='button' h='100px' w='301px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='center'>
             <Stack pr='30px'color='yellow.500' fontSize='24px'>
@@ -67,9 +62,7 @@ export default function HomeDash() {
          </Stack>
      </Box>
      <Box as='button' h='100px' w='301px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='center'>
-            <Stack pr='30px'color='yellow.500' fontSize='24px'>
-            <BsPlusSquare/> 
-            </Stack>
+    <BuyAirtimeModal/>
          <Stack>
          <Text>Buy Airtime</Text>
              <Text>Space for subtitle text</Text>
