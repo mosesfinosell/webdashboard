@@ -1,6 +1,6 @@
 import { Grid,Box,GridItem,Container,Text,Stack,Center, Heading} from "@chakra-ui/react";
 import {BsPlusSquare,BsArrowDownLeftSquare} from 'react-icons/bs'
-import AddMoneyModal from '../../HomeItemsModal/addMoneyModal'
+import AddMoneyModal from '../../HomeItemsModal/AddMoney/addMoneyModal'
 import SendMoneyModal from '../../HomeItemsModal/SendMoney/sendMoneyModal'
 import  BuyAirtimeModal from '../../HomeItemsModal/BuyAirtime/BuyAirtimeModal'
 
@@ -75,7 +75,7 @@ export default function HomeDash() {
       <Text color='gray'>Transactions History</Text>
       </Stack>
 
- <Box  h='100px' w='400px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='center'>
+ <Box  h='100px' w='400px' borderRadius='0px 11px 0px 0px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='center'>
  <Box as='button' fontSize='20px' fontWeight='bold' color='black'>
  Payment
 </Box>
@@ -86,7 +86,7 @@ export default function HomeDash() {
 </Stack>
 
      </Box>
-     <Box  h='100px' w='400px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
+     <Box  h='100px' w='400px'  border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
          
           <Stack color='yellow.500' fontSize='24px' >
             <BsPlusSquare/> 
@@ -101,7 +101,7 @@ export default function HomeDash() {
              <Text fontSize='12px' color='gray'>Jan 3, 2022</Text>
          </Stack>
      </Box>
-     <Box  h='100px' w='400px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
+     <Box  h='100px' w='400px'  border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
          
          <Stack color='yellow.500' fontSize='24px' >
            <BsPlusSquare/> 
@@ -116,7 +116,7 @@ export default function HomeDash() {
             <Text fontSize='12px' color='gray'>Jan 3, 2022</Text>
         </Stack>
     </Box>
-    <Box  h='100px' w='400px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
+    <Box  h='100px' w='400px'  border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
          
          <Stack color='yellow.500' fontSize='24px' >
            <BsPlusSquare/> 
@@ -131,7 +131,7 @@ export default function HomeDash() {
             <Text fontSize='12px' color='gray'>Jan 3, 2022</Text>
         </Stack>
     </Box>
-    <Box  h='100px' w='400px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
+    <Box  h='100px' w='400px'  border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
          
          <Stack color='yellow.500' fontSize='24px' >
            <BsPlusSquare/> 
@@ -146,7 +146,7 @@ export default function HomeDash() {
             <Text fontSize='12px' color='gray'>Jan 3, 2022</Text>
         </Stack>
     </Box>
-    <Box  h='100px' w='400px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
+    <Box  h='100px' w='400px'  border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
          
          <Stack color='yellow.500' fontSize='24px' >
            <BsPlusSquare/> 
@@ -161,7 +161,7 @@ export default function HomeDash() {
             <Text fontSize='12px' color='gray'>Jan 3, 2022</Text>
         </Stack>
     </Box>
-    <Box  h='100px' w='400px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
+    <Box  h='100px' w='400px'  border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
          
          <Stack color='yellow.500' fontSize='24px' >
            <BsPlusSquare/> 

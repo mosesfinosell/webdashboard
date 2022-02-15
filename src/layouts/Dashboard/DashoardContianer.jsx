@@ -21,7 +21,7 @@ export default function DashboardPage() {
  display='flex'
 >
   <GridItem rowSpan={7} colSpan={2} bg='white'>
-   <Box bg='white' w='250px' h='800px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9'>
+   <Box bg='white' w='250px' h='800px' border='0.5px solid #D9D9D9'>
         <Center p='45px'>
         <Flex display='flex' direction='row' alignItems='center'>
         <Image mr='15px' src={user1} alt='user'/>

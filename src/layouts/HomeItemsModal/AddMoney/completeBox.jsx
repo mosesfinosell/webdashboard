@@ -51,28 +51,14 @@ export default function SendMoneyConfirmModal() {
                 <ModalCloseButton />
               
                 <ModalBody>
-                    <Box maxW='xlg' p='20' m='36' boxSizing='border-box' borderWidth='1px' borderRadius='0px 21px 21px 21px' m='20' borderRadius='lg' overflow='hidden'>
+                    <Box maxW='xlg' p='20' m='36' boxSizing='border-box' borderWidth='1px' borderRadius='0px 21px 21px 21px' m='20' borderRadius='lg' overflow='hidden' bg='#1A202C'>
                       <Center>
                           <Stack>
-                          <Text fontSize='24px' color='gray'>Amount</Text>
-                          <Text fontSize='35px'>₦230,000.00</Text>
-                          </Stack>
-                          <Stack>
-                          <Text fontSize='24px' color='gray'>Beneficiary</Text>
-                          <Text fontSize='35px'>Anita Jegede</Text>
-                          </Stack>
-                          <Stack>
-                          <Text fontSize='24px' color='gray'>Beneficiary bank</Text>
-                          <Text fontSize='35px'>GT Bank</Text>
+                          <Text fontSize='35px' color='gray'>Completed</Text>
+                          <Text fontSize='14px'>Your account has been successfully</Text>
                           </Stack>
                       </Center>
                     </Box>
-                 <Flex direction='row' align='center' mt={4} justifyContent='space-between'>
-                 <Text>Save as a benificiary</Text>
-                 <Stack onClick={handleClick} fontSize='30px' cursor='pointer' px='30px'>
-                     {show ? <BsToggleOn/> : <BsToggleOff/>}
-                 </Stack>
-                 </Flex>
                   </ModalBody>
                 <ModalFooter>
                 <Button
