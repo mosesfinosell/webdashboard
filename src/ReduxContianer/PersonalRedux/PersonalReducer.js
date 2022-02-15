@@ -18,7 +18,7 @@ const personalReducer = (state = INITIAL_STATE, action) => {
         case PersonalActionType.SIGN_UP_SUCCESS:
            return {
             ...state,
-            user: action.payload,
+            users: action.payload,
            
            }
         case PersonalActionType.SIGN_UP_ERROR: 
@@ -27,6 +27,18 @@ const personalReducer = (state = INITIAL_STATE, action) => {
             error: action.payload
            }
 
+        case PersonalActionType.SIGN_IN_SUCCESS:
+            return {
+             ...state,
+             users: action.payload,
+            }
+
+            case PersonalActionType.SIGN_IN_ERROR: 
+            return {
+             ...state,
+             error: action.payload
+            }
+            
        default:
            return state
     }

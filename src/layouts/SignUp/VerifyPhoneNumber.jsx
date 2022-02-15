@@ -11,19 +11,23 @@ import {
     Stack,
     Image,
     Text,
+    Container
   } from '@chakra-ui/react'
   import logo from '../../assets/Logomark.png'
 import { useColorModeValue } from "@chakra-ui/color-mode";
+import {useSelector} from 'react-redux'
 
 export default function VerifyPhoneNumber() {
     const yellowbtn = useColorModeValue('yellow.500')
 
+    const personal = useSelector((state) => state.personal)
+    const {users} = personal
 
 
 
 
     return (
-       
+      <Container maxW='container.lg'>
         <Box maxW='xlg' p='50' m='36' boxSizing='border-box' borderWidth='1px' borderRadius='0px 21px 21px 21px' m='20' borderRadius='lg' overflow='hidden'>
            <Center>
         <Stack>
@@ -48,17 +52,18 @@ export default function VerifyPhoneNumber() {
             {() => (
                 <Center>
               <Form mt='9'>
-                <Field name='number' >
+              <Field name='number' >
                   {({ field, form }) => (
                     <FormControl isInvalid={form.errors.name && form.touched.name}>
                       <FormLabel htmlFor=''>Phone Number</FormLabel>
                       <InputGroup>
-                      <Input {...field} type='number' placeholder='0801 234 5678' width='690px' h='90px' borderRadius='0px 11px 11px 11px'/>
+                      
+                      <Input {...field} type='number' placeholder='08012345678'  width='690px' h='90px' borderRadius='0px 11px 11px 11px'/>
                     </InputGroup>
                       <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                     </FormControl>
                   )}
-                </Field>
+                </Field> 
                 <Button
                   mt={4}
                   bg={yellowbtn}
@@ -75,6 +80,7 @@ export default function VerifyPhoneNumber() {
                  )}
                 </Formik>
         </Box>
+        </Container>
     )
 }
 

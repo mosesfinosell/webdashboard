@@ -3,6 +3,7 @@ import {
     Center,
     Input,
     InputLeftElement,
+    InputRightElement,
     InputGroup,
     FormControl,
     FormLabel,
@@ -10,18 +11,20 @@ import {
     Button,
     Text,
     Stack,
-    Link,
     Image
   } from '@chakra-ui/react'
 
 
   import {MdEmail,MdWifiCalling3} from 'react-icons/md'
-  import {FaUser} from 'react-icons/fa'
+  import {FaUser,FaLock,FaEyeSlash,FaEye} from 'react-icons/fa'
   import { useColorModeValue } from "@chakra-ui/color-mode";
   import logo from '../../assets/Logomark.png'
   import {Link as RLink} from 'react-router-dom'
   import {useState} from 'react'
   import {useSelector, useDispatch} from 'react-redux'
+  import {useHistory} from 'react-router-dom'
+  import {Redirect} from 'react-router-dom'
+  import { Spinner } from '@chakra-ui/react'
   import {personalUserSignUp} from '../../ReduxContianer/PersonalRedux/PersonalAction'
 
 
@@ -31,22 +34,33 @@ export default function PersonalAccountSignUp() {
     // Redux 
  const dispatch = useDispatch()
  const personal = useSelector((state) => state.personal)
-const {error} = personal
+const {error,loading,users} = personal
+
+
+// //router
+// const history = useHistory()
+
  // useState
     const [name ,setName] = useState('')
     const [phonenumber ,setPhonenumber] = useState('')
     const [email ,setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [show, setShow] = useState(false)
 
+    
 // Function
+const handleClick = () => setShow(!show)
+
      function handleSubmit (e) {
-         dispatch(personalUserSignUp(name,phonenumber, email))
+         dispatch(personalUserSignUp(name,phonenumber, email,password))
         e.preventDefault()
         // setEmail('');
         // setPhonenumber('');
         // setName('')
-       console.log(name,phonenumber, email)
+       console.log(name,phonenumber, email,password)
      }
 
+   
     
         return (
           <Stack m='20'>
@@ -66,10 +80,11 @@ const {error} = personal
              <Text color='gray'>Use your personal information</Text>
            </Stack>
            <Stack>
-             {error && <Text color='red'>{error}</Text>}
+          
+          <Stack>
+           {users && <Text color='green'>User Registered</Text>}
+             {!users && <Text color='red'>{error}</Text>}
            </Stack>
-           <Stack>
-             
            </Stack>
          </Center>
           <Formik>
@@ -142,7 +157,40 @@ const {error} = personal
                     </FormControl>
                   )}
                 </Field>
-                <Button
+                <Field name='password' >
+                  {({ field, form }) => (
+                    <FormControl isInvalid={form.errors.name && form.touched.name}>
+                      <FormLabel  htmlFor='password'>Password</FormLabel>
+                      <InputGroup>
+                      <InputLeftElement
+                      m='20px 1px'
+                      fontSize='18px'
+                      color='yellow.500'
+                      children={<FaLock/>}
+                      />
+
+                      <InputRightElement
+                      pointerEvents='none'
+                      m='25px 15px'
+                      color='yellow.500'  
+                   >
+                       
+                       <Button onClick={handleClick} fontSize='25px' size='sm' b='transparent' cursor='pointer'>
+                      {show ? <FaEyeSlash/> : <FaEye/>}
+                      </Button>
+                    </InputRightElement>
+               <Input {...field} 
+               type={!show ? 'password' : 'text'} 
+               onClick={handleClick}  
+               onChange={(e) => setPassword(e.target.value)} 
+               value={password} 
+               placeholder='*********' width='500px' h='80px' borderRadius='0px 11px 11px 11px'/>
+               </InputGroup>   
+                      <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+                    </FormControl>
+                  )}
+                </Field>
+              {  users  ? <Redirect to='/verify-number'/> : <Button
                   mt={4}
                   bg={yellowbtn}
                   width='500px' h='80px'
@@ -152,7 +200,7 @@ const {error} = personal
                   _hover={{bg: '#1A202C'}}
                 >
                   Continue
-                </Button>
+                </Button> } 
               </Form>
               </Center>
             )}

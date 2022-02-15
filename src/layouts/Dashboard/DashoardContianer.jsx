@@ -1,32 +1,38 @@
 import {Grid, GridItem,Box,Center,Text, Image, Flex,Stack} from '@chakra-ui/react'
 import {Link as RLink,BrowserRouter} from 'react-router-dom'
-// import { useColorModeValue } from "@chakra-ui/color-mode";
 import user1 from '../../assets/user1.png'
 import {FaAngleDown} from 'react-icons/fa'
 import { RiHomeSmile2Line } from "react-icons/ri";
 import {IoCardOutline,IoExitOutline} from "react-icons/io5"
 import {BiUser,BiHelpCircle} from 'react-icons/bi'
 import DashRoute from './DashRoute/DashRoute';
+import delicon from '../../assets/DealIcon.svg'
+import reficon from '../../assets/reficon.svg'
+import {useSelector} from 'react-redux'
+
+
+
 
 export default function DashboardPage() {
-    // const yellowbtn = useColorModeValue('yellow.500')
+    const personal = useSelector((state) => state.personal)
+    const {users} = personal
 
     return(
 
         <BrowserRouter>
      <Grid
-     p='25'
+     pl='25'
   templateRows='repeat(6, 1fr)'
   templateColumns='repeat(12, 1fr)'
  display='flex'
 >
   <GridItem rowSpan={7} colSpan={2} bg='white'>
-   <Box bg='white' w='250px' h='800px' border='0.5px solid #D9D9D9'>
+   <Box bg='white' w='250px' h='100vh' border='0.5px solid #D9D9D9'>
         <Center p='45px'>
         <Flex display='flex' direction='row' alignItems='center'>
         <Image mr='15px' src={user1} alt='user'/>
         <Stack>
-        <Text >Hello Jumoke</Text>
+        {/* <Text>Hello {users[0]}</Text> */}
         </Stack>
        <Stack>
        <FaAngleDown/>
@@ -46,7 +52,7 @@ export default function DashboardPage() {
         </Box>  
         <Box display='flex' alignItems='center' mt='20px'>
        <Stack pr='10px' fontSize='20px'>
-       <RiHomeSmile2Line />
+       <Image src={delicon} h='17px' />
         </Stack>
         <Stack>
         <Text to='/dashboard/deals' as={RLink}>Deals</Text>
@@ -78,7 +84,7 @@ export default function DashboardPage() {
     </Box>
     <Box display='flex' alignItems='center' mt='20px'>
     <Stack pr='10px' fontSize='20px'>
-       <IoExitOutline/>
+    <Image src={reficon} h='17px' />
        </Stack>
        <Stack>
         <Text to='/dashboard/refer' as={RLink}>Refer&Reward</Text>

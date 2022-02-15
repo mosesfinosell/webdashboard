@@ -80,7 +80,7 @@ export default function HomeDash() {
  Payment
 </Box>
 <Stack>
-<Box as='button' bg='white.500' h='48px' color='gray' px={34}>
+<Box as='button' bg='white.500' h='48px' fontSize='20px' fontWeight='bold' color='gray' px={34}>
     Withdrawal
 </Box>
 </Stack>

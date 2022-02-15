@@ -4,12 +4,12 @@ import PersonalActionType from '../constants/PersonalActionType'
 
 const baseUrl = `https://finosell.link/api/v2`;
 
-export const personalUserSignUp = (name,phone_number, email) => async(dispatch) => {
+export const personalUserSignUp = (name,phone_number, email,password) => async(dispatch) => {
     dispatch({
         type: PersonalActionType.DATA_REQUEST
     })
    try {
-         const {data} = await axios.post(baseUrl + `/auths/firststage`,{name,phone_number, email})    
+         const {data} = await axios.post(baseUrl + `/auths/firststage`,{name,phone_number, email,password})    
         dispatch({
             type: PersonalActionType.SIGN_UP_SUCCESS,
             payload: data
@@ -17,22 +17,26 @@ export const personalUserSignUp = (name,phone_number, email) => async(dispatch) 
    }catch(error) {
         dispatch({
           type: PersonalActionType.SIGN_UP_ERROR,
-          payload: error.response && error.response.data.message  
+          payload: error.error 
         })
    }
 }
 
-// export const verifyNumber = () => async(dispatch) =>{
-//     try {
-//         const {data} = await axios.post(baseUrl + `sms/sendsms`,{user})
+export const peronalUserLogin = (phonenumber,password) => async(dispatch) =>{
+    dispatch({
+        type: PersonalActionType.DATA_REQUEST
+    })
+    try {
+        const {data} = await axios.post(baseUrl + `/auths/login`,{phonenumber,password})
+    dispatch({
+            type: PersonalActionType.SIGN_IN_SUCCESS,
+            payload : data
+    })
 
-//     dispatch({
-//         type{
-
-   //  }
-//     })
-
-//     }catch (error){
-
-//     }
-// }
+    }catch (error){
+        dispatch({
+            type: PersonalActionType.SIGN_IN_ERROR,
+            payload: error.error
+          })
+    }
+}

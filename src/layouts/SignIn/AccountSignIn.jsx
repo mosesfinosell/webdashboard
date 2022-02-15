@@ -18,34 +18,56 @@ import {
 import {useState} from 'react'
 import {Link as RLink} from 'react-router-dom'
 import logo from '../../assets/Logomark.png'
-  import {MdEmail} from 'react-icons/md'
-  import {FaEye} from 'react-icons/fa'
-  import {FaEyeSlash} from 'react-icons/fa'
-  import {FaLock} from 'react-icons/fa'
-  import { useColorModeValue } from "@chakra-ui/color-mode";
+import {MdWifiCalling3} from 'react-icons/md'
+import {FaEyeSlash,FaEye} from 'react-icons/fa'
+import {FaLock} from 'react-icons/fa'
+import { useColorModeValue } from "@chakra-ui/color-mode";
+import {useSelector, useDispatch} from 'react-redux'
+import {useHistory} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
+import {peronalUserLogin} from '../../ReduxContianer/PersonalRedux/PersonalAction';
+
 
 export default function AccountSignIn() {
     const yellowbtn = useColorModeValue('yellow.500')
-    const [email ,setEmail] = useState('')
+    const [phonenumber ,setPhonenumber] = useState('')
     const [password, setPassword] = useState('')
-
     const [show, setShow] = useState(false)
 
-    const handleClick = () => setShow(!show)
 
+    // Redux 
+    const dispatch = useDispatch()
+    const personal = useSelector((state) => state.personal)
+   const {error,loading,users} = personal
+   
+
+    
+    // const toast = useToast({error})
+
+//router
+const history = useHistory()
+
+
+// Function
+const handleClick = () => setShow(!show)
 
     const handleSubmit = (e) => {
+      dispatch(peronalUserLogin(phonenumber,password))
       e.preventDefault()
+      console.log(phonenumber,password)
       }
-       
+
+     
       
         return (
           <Container maxW='container.lg'>
-            <Box maxW='xlg' p='20' m='36' boxSizing='border-box' borderWidth='1px' borderRadius='0px 21px 21px 21px' m='20' borderRadius='lg' overflow='hidden'>
+            <Box maxW='xlg' p='20' m='36' boxSizing='border-box' borderWidth='1px' borderRadius='0px 21px 21px 21px'  overflow='hidden'>
         <Center>
         <Stack>
         <Image mb='15' src={logo}  alt="logo" />
         </Stack>
+        </Center>
+        <Center>
         </Center>
         <Center>
         <Stack >
@@ -63,24 +85,22 @@ export default function AccountSignIn() {
             {() => (
                 <Center>
               <Form onSubmit={handleSubmit}>
-                <Field name='email' >
+              <Field name='number'>
                   {({ field, form }) => (
                     <FormControl isInvalid={form.errors.name && form.touched.name}>
-                      <FormLabel htmlFor='email'>Email</FormLabel>
+                      <FormLabel htmlFor='name'>Phone number</FormLabel>
                       <InputGroup>
                       <InputLeftElement
                       pointerEvents='none'
                       m='25px 1px'
                       fontSize='20px'
                       color='yellow.500'
-                    children={<MdEmail />}
+                    children={<MdWifiCalling3 />}
                    />
-                      <Input {...field} 
-                      type='email' 
-                      value={email}  
-                      onChange={(e) => setEmail(e.target.value)} 
-                      placeholder='Email Address' width='500px' h='80px' borderRadius='0px 11px 11px 11px'/>
-                    </InputGroup>
+               <Input {...field} value={phonenumber}
+                 onChange={(e) => setPhonenumber(e.target.value)}
+               placeholder='08012345678' width='500px' h='80px' borderRadius='0px 11px 11px 11px'/>
+               </InputGroup>   
                       <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                     </FormControl>
                   )}
@@ -118,7 +138,7 @@ export default function AccountSignIn() {
                     </FormControl>
                   )}
                 </Field>
-                <Button
+                {  users  ? <Redirect to='/verify-number'/> : <Button
                   mt={4}
                   bg={yellowbtn}
                   width='500px' h='80px'
@@ -128,7 +148,7 @@ export default function AccountSignIn() {
                   _hover={{bg: '#1A202C'}}
                 >
                   Login
-                </Button>
+                </Button> } 
               </Form>
               </Center>
             )}
