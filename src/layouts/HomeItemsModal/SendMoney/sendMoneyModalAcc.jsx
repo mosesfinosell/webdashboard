@@ -35,6 +35,7 @@ export default function SendMoneyAcountModal() {
               isOpen={isOpen}
               onClose={onClose}
               size='xl'
+              isCentered
               borderRadius='0px 11px 11px 11px'
             >      
               <ModalOverlay />

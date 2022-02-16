@@ -41,6 +41,7 @@ export default function SendMoneyPassModal() {
               isOpen={isOpen}
               onClose={onClose}
               size='xl'
+              isCentered
               borderRadius='0px 11px 11px 11px'
             >
                

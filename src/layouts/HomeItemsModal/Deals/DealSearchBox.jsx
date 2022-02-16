@@ -8,6 +8,7 @@ import { Grid,Box,GridItem,Container,Text,Stack,Button,Flex,
     FormControl,
     FormLabel,
     FormErrorMessage,
+    Tabs, TabList, TabPanels, Tab, TabPanel
 } from "@chakra-ui/react";
 import { BiShoppingBag,BiSearchAlt2} from "react-icons/bi";
 import {FaAngleDown} from 'react-icons/fa'

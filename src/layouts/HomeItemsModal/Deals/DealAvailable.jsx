@@ -1,4 +1,4 @@
-import { Grid,Box,GridItem,Container,Text,Stack,Image} from "@chakra-ui/react";
+import { Grid,Box,GridItem,Container,Text,Stack,Image,Tabs, TabList, TabPanels, Tab, TabPanel,Center} from "@chakra-ui/react";
 import { BiShoppingBag} from "react-icons/bi";
 import chef from '../../../assets/chef.svg'
 import food from '../../../assets/food.svg'

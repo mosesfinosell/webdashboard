@@ -21,14 +21,9 @@ import React, {useState} from 'react'
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import {BsToggleOn, BsToggleOff,BsPlusSquare} from 'react-icons/bs'
 
-export default function AddMoneyModal() {
+export default function AddMoneyVCModal() {
     const yellowbtn = useColorModeValue('yellow.500')
         const { isOpen, onOpen, onClose } = useDisclosure()
-
-        const [show, setShow] = useState(false)
-        const handleClick = () => setShow(!show)
-    
-    
         const initialRef = React.useRef()
         const finalRef = React.useRef()
       
@@ -43,6 +38,7 @@ export default function AddMoneyModal() {
               isOpen={isOpen}
               onClose={onClose}
               size='xl'
+              isCentered
               borderRadius='0px 11px 11px 11px'
             >
                
@@ -56,18 +52,16 @@ export default function AddMoneyModal() {
                 <ModalBody>
                   <FormControl>
                     <FormLabel>Amount</FormLabel>
-                    <Input ref={initialRef} placeholder='₦0.00' h='80px' borderRadius='0px 11px 11px 11px'/>
+                    <Input ref={initialRef} placeholder='$0.00' w='500px' h='80px' borderRadius='0px 11px 11px 11px'/>
                   </FormControl>
       
-              <FormControl mt={4}>
+                   <FormControl mt={4}>
                     <FormLabel>Last name</FormLabel>
-                    <Input ref={initialRef} placeholder='0000 0000 00000 0000'w='500px' h='80px' borderRadius='0px 11px 11px 11px'/>
+                    <Input ref={initialRef} placeholder='₦0.00' w='500px' h='80px' borderRadius='0px 11px 11px 11px'/>
                   </FormControl>
-                 <Flex direction='row' align='center' mt={4} justifyContent='space-between'>
-                 <Text>Save your Card</Text>
-                 <Stack onClick={handleClick} fontSize='30px' cursor='pointer' px='30px'>
-                     {show ? <BsToggleOn/> : <BsToggleOff/>}
-                 </Stack>
+                 <Flex direction='column' align='start' mt={4} justifyContent='space-between'>
+                 <Text color='yellow.500'>1 USD = 551.55 NGN</Text>
+                 <Text>+$2 transaction charge</Text>
                  </Flex>
                   </ModalBody>
                 <ModalFooter>

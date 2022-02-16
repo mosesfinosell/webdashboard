@@ -2,7 +2,6 @@ import {
     Modal,
     ModalOverlay,
     ModalContent,
-    Header,
     ModalFooter,
     ModalBody,
     ModalCloseButton,
@@ -17,25 +16,20 @@ import {
     Center
   } from '@chakra-ui/react'
 
-import React, {useState} from 'react'
+import React from 'react'
 import { useColorModeValue } from "@chakra-ui/color-mode";
-import {BsToggleOn, BsToggleOff,BsPlusSquare} from 'react-icons/bs'
+import {VscRocket} from "react-icons/vsc";
 
-export default function AddMoneyModal() {
+export default function WithdrawalModal() {
     const yellowbtn = useColorModeValue('yellow.500')
         const { isOpen, onOpen, onClose } = useDisclosure()
-
-        const [show, setShow] = useState(false)
-        const handleClick = () => setShow(!show)
-    
-    
         const initialRef = React.useRef()
         const finalRef = React.useRef()
       
         return (
           <>
                   <Stack pr='30px' color='yellow.500' fontSize='24px' onClick={onOpen}>  
-                  <BsPlusSquare  />
+                  <VscRocket /> 
                 </Stack> 
             <Modal
               initialFocusRef={initialRef}
@@ -43,31 +37,30 @@ export default function AddMoneyModal() {
               isOpen={isOpen}
               onClose={onClose}
               size='xl'
+              isCentered
               borderRadius='0px 11px 11px 11px'
             >
                
               <ModalOverlay />
               <ModalContent>
                <Center>
-               <Text fontSize='24px' p='35px' fontWeight='bold'>Add Money</Text>
+               <Text fontSize='24px' p='35px' fontWeight='bold'>Withdraw</Text>
                </Center>
                 <ModalCloseButton />
               
                 <ModalBody>
                   <FormControl>
                     <FormLabel>Amount</FormLabel>
-                    <Input ref={initialRef} placeholder='₦0.00' h='80px' borderRadius='0px 11px 11px 11px'/>
+                    <Input ref={initialRef} placeholder='$0.00' w='500px' h='80px' borderRadius='0px 11px 11px 11px'/>
                   </FormControl>
       
-              <FormControl mt={4}>
+                   <FormControl mt={4}>
                     <FormLabel>Last name</FormLabel>
-                    <Input ref={initialRef} placeholder='0000 0000 00000 0000'w='500px' h='80px' borderRadius='0px 11px 11px 11px'/>
+                    <Input ref={initialRef} placeholder='₦0.00' w='500px' h='80px' borderRadius='0px 11px 11px 11px'/>
                   </FormControl>
-                 <Flex direction='row' align='center' mt={4} justifyContent='space-between'>
-                 <Text>Save your Card</Text>
-                 <Stack onClick={handleClick} fontSize='30px' cursor='pointer' px='30px'>
-                     {show ? <BsToggleOn/> : <BsToggleOff/>}
-                 </Stack>
+                 <Flex direction='column' align='start' mt={4} justifyContent='space-between'>
+                 <Text color='yellow.500'>1 USD = 551.55 NGN</Text>
+                 <Text>+$2 transaction charge</Text>
                  </Flex>
                   </ModalBody>
                 <ModalFooter>
@@ -80,7 +73,7 @@ export default function AddMoneyModal() {
                   color='white'
                   _hover={{bg: '#1A202C'}}
                 >
-                  Add Money
+                  Withdraw
                 </Button>
                 </ModalFooter>
               </ModalContent>
