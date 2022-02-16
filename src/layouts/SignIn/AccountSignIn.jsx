@@ -138,7 +138,7 @@ const handleClick = () => setShow(!show)
                     </FormControl>
                   )}
                 </Field>
-                {  users  ? <Redirect to='/verify-number'/> : <Button
+                {  users  ? <Redirect to='/dashboard'/> : <Button
                   mt={4}
                   bg={yellowbtn}
                   width='500px' h='80px'

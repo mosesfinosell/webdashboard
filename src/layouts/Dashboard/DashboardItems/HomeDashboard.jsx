@@ -1,4 +1,4 @@
-import { Grid,Box,GridItem,Container,Text,Stack,Center, Heading} from "@chakra-ui/react";
+import { Grid,Box,GridItem,Container,Text,Stack,Center, Heading,Tabs, TabList, TabPanels, Tab, TabPanel} from "@chakra-ui/react";
 import {BsPlusSquare,BsArrowDownLeftSquare} from 'react-icons/bs'
 import AddMoneyModal from '../../HomeItemsModal/AddMoney/addMoneyModal'
 import SendMoneyModal from '../../HomeItemsModal/SendMoney/sendMoneyModal'
@@ -74,34 +74,21 @@ export default function HomeDash() {
       <Stack m='10px'>
       <Text color='gray'>Transactions History</Text>
       </Stack>
+      
+ <Tabs variant='unstyled'>
+  <Center>
+ <Box  h='100px' w='480px' borderRadius='0px 11px 0px 0px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='center'>
+  <TabList>
+    <Tab fontSize='20px' fontWeight='bold'   color='black'>Payment</Tab>
+    <Tab fontSize='20px' fontWeight='bold' color='black'>Withdrawal</Tab>
+  </TabList>
 
- <Box  h='100px' w='400px' borderRadius='0px 11px 0px 0px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='center'>
- <Box as='button' fontSize='20px' fontWeight='bold' color='black'>
- Payment
-</Box>
-<Stack>
-<Box as='button' bg='white.500' h='48px' fontSize='20px' fontWeight='bold' color='gray' px={34}>
-    Withdrawal
-</Box>
-</Stack>
-
-     </Box>
-     <Box  h='100px' w='400px'  border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
-         
-          <Stack color='yellow.500' fontSize='24px' >
-            <BsPlusSquare/> 
-            </Stack>
-           <Stack pr='150px'>
-           <Text>Buy Airtime</Text>
-           <Text color='gray' fontSize='12px'>Success</Text>
-           </Stack>  
-          
-         <Stack>
-             <Text fontSize='12px' color='gray'>₦12,000</Text>
-             <Text fontSize='12px' color='gray'>Jan 3, 2022</Text>
-         </Stack>
-     </Box>
-     <Box  h='100px' w='400px'  border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
+   </Box>
+   </Center>
+   <Center>
+   <TabPanels>
+    <TabPanel>
+    <Box  h='100px' w='480px'  border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
          
          <Stack color='yellow.500' fontSize='24px' >
            <BsPlusSquare/> 
@@ -116,13 +103,45 @@ export default function HomeDash() {
             <Text fontSize='12px' color='gray'>Jan 3, 2022</Text>
         </Stack>
     </Box>
-    <Box  h='100px' w='400px'  border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
+    <Box  h='100px' w='480px'  border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
+        
+        <Stack color='yellow.500' fontSize='24px' >
+          <BsPlusSquare/> 
+          </Stack>
+         <Stack pr='150px'>
+         <Text>Buy Airtime</Text>
+         <Text color='gray' fontSize='12px'>Success</Text>
+         </Stack>  
+        
+       <Stack>
+           <Text fontSize='12px' color='gray'>₦12,000</Text>
+           <Text fontSize='12px' color='gray'>Jan 3, 2022</Text>
+       </Stack>
+   </Box>
+   <Box  h='100px' w='480px'  border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
+        
+        <Stack color='yellow.500' fontSize='24px' >
+          <BsPlusSquare/> 
+          </Stack>
+         <Stack pr='150px'>
+         <Text>Buy Airtime</Text>
+         <Text color='gray' fontSize='12px'>Success</Text>
+         </Stack>  
+        
+       <Stack>
+           <Text fontSize='12px' color='gray'>₦12,000</Text>
+           <Text fontSize='12px' color='gray'>Jan 3, 2022</Text>
+       </Stack>
+   </Box>
+    </TabPanel>
+    <TabPanel>
+    <Box  h='100px' w='480px'  border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
          
          <Stack color='yellow.500' fontSize='24px' >
            <BsPlusSquare/> 
            </Stack>
           <Stack pr='150px'>
-          <Text>Buy Airtime</Text>
+          <Text>Airtime</Text>
           <Text color='gray' fontSize='12px'>Success</Text>
           </Stack>  
          
@@ -131,53 +150,40 @@ export default function HomeDash() {
             <Text fontSize='12px' color='gray'>Jan 3, 2022</Text>
         </Stack>
     </Box>
-    <Box  h='100px' w='400px'  border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
-         
-         <Stack color='yellow.500' fontSize='24px' >
-           <BsPlusSquare/> 
-           </Stack>
-          <Stack pr='150px'>
-          <Text>Buy Airtime</Text>
-          <Text color='gray' fontSize='12px'>Success</Text>
-          </Stack>  
-         
-        <Stack>
-            <Text fontSize='12px' color='gray'>₦12,000</Text>
-            <Text fontSize='12px' color='gray'>Jan 3, 2022</Text>
-        </Stack>
-    </Box>
-    <Box  h='100px' w='400px'  border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
-         
-         <Stack color='yellow.500' fontSize='24px' >
-           <BsPlusSquare/> 
-           </Stack>
-          <Stack pr='150px'>
-          <Text>Buy Airtime</Text>
-          <Text color='gray' fontSize='12px'>Success</Text>
-          </Stack>  
-         
-        <Stack>
-            <Text fontSize='12px' color='gray'>₦12,000</Text>
-            <Text fontSize='12px' color='gray'>Jan 3, 2022</Text>
-        </Stack>
-    </Box>
-    <Box  h='100px' w='400px'  border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
-         
-         <Stack color='yellow.500' fontSize='24px' >
-           <BsPlusSquare/> 
-           </Stack>
-          <Stack pr='150px'>
-          <Text>Buy Airtime</Text>
-          <Text color='gray' fontSize='12px'>Success</Text>
-          </Stack>  
-         
-        <Stack>
-            <Text fontSize='12px' color='gray'>₦12,000</Text>
-            <Text fontSize='12px' color='gray'>Jan 3, 2022</Text>
-        </Stack>
-    </Box>
-    
-     
+    <Box  h='100px' w='480px'  border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
+        
+        <Stack color='yellow.500' fontSize='24px' >
+          <BsPlusSquare/> 
+          </Stack>
+         <Stack pr='150px'>
+         <Text>Airtime Buy</Text>
+         <Text color='gray' fontSize='12px'>Success</Text>
+         </Stack>  
+        
+       <Stack>
+           <Text fontSize='12px' color='gray'>₦12,000</Text>
+           <Text fontSize='12px' color='gray'>Jan 3, 2022</Text>
+       </Stack>
+   </Box>
+   <Box  h='100px' w='480px'  border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
+        
+        <Stack color='yellow.500' fontSize='24px' >
+          <BsPlusSquare/> 
+          </Stack>
+         <Stack pr='150px'>
+         <Text>Buy Airtime</Text>
+         <Text color='gray' fontSize='12px'>Success</Text>
+         </Stack>  
+        
+       <Stack>
+           <Text fontSize='12px' color='gray'>₦12,000</Text>
+           <Text fontSize='12px' color='gray'>Jan 3, 2022</Text>
+       </Stack>
+   </Box>
+    </TabPanel>
+  </TabPanels>
+  </Center>
+</Tabs>     
   </GridItem>
 </Grid>
 </Container>
