@@ -28,7 +28,7 @@ export default function WithdrawalModal() {
       
         return (
           <>
-                  <Stack pr='30px' color='yellow.500' fontSize='24px' onClick={onOpen}>  
+                  <Stack color='yellow.500' bg='yellow.100' borderRadius='0px 8px 8px 8px' border='0.2px solid yellow.100'  p='12px' fontSize='24px' onClick={onOpen}>  
                   <VscRocket /> 
                 </Stack> 
             <Modal

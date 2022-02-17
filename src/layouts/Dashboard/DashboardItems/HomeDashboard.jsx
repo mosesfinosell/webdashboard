@@ -17,19 +17,37 @@ export default function HomeDash() {
   
 >
   <GridItem colSpan={4} rowSpan={6} bg='white'>
+  <Tabs variant='unstyled'>
  <Center>
- <Box as='button' borderRadius='md' bg='yellow.500' color='white' px={4} h='38px' borderRadius='0px 11px 11px 11px'>
+  <TabList>
+ <Tab>
+ <Box as='button' borderRadius='md' bg='yellow.500' w='150px' color='white' px={4} h='35px' borderRadius='0px 11px 11px 11px'>
  Wallet Balance
 </Box>
-<Stack>
-<Box as='button' bg='white.500' h='48px' color='gray' px={34}>
+ </Tab>
+  </TabList>
+<TabList>
+  <Tab>
+  <Box as='button' bg='white.500' w='200px' h='35px' color='gray' px={34}>
     Escrow Balance
 </Box>
-</Stack>
+  </Tab>
+</TabList>
  </Center>
- <Stack ml='30'>
+<TabPanels>
+<TabPanel>
+<Stack>
      <Heading as='h6'>₦4,867,479.76</Heading>
  </Stack>
+</TabPanel>
+<TabPanel>
+<Stack>
+     <Heading as='h6'>₦6,745,563.09</Heading>
+ </Stack>
+</TabPanel>
+</TabPanels>
+</Tabs>
+<Tabs/>
 
  <Stack pl='30'>
  <Stack pt='23'>

@@ -2,8 +2,8 @@ import {Grid, GridItem,Box,Center,Text, Image, Flex,Stack,Tabs, TabList, TabPane
 import HomeDash from "../Dashboard/DashboardItems/HomeDashboard";
 import DealDashboard from "../Dashboard/DashboardItems/DealDashboard";
 import VirtualCard from "../Dashboard/DashboardItems/VirtualCard";
-import DA from '../HomeItemsModal/Deals/DealAvailable'
-import DS from '../HomeItemsModal/Deals/DealSearchBox'
+import AccountUserProfile from './DashboardItems/AccountUserProfile';
+
 import user1 from '../../assets/user1.png'
 import {FaAngleDown} from 'react-icons/fa'
 import { RiHomeSmile2Line } from "react-icons/ri";
@@ -90,7 +90,7 @@ export default function DashboardPage() {
   <VirtualCard/>
   </TabPanel>
   <TabPanel>
-  <DA/>
+  <AccountUserProfile/>
   </TabPanel>
   <TabPanel>
   <DealDashboard/>

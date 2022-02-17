@@ -29,7 +29,7 @@ export default function VirtualCard() {
  </Stack>
  
 
- <Box as='button' h='100px' w='301px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='center'>
+ <Box as='button' h='100px' w='301px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
  
                   <AddMoneyVCModal/>
                
@@ -39,7 +39,7 @@ export default function VirtualCard() {
       </Stack>  
 </Box>
 
-     <Box as='button' h='100px' w='301px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='center'>
+     <Box as='button' h='100px' w='301px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
      <WithdrawalModal/>
         
            <Stack>
@@ -47,29 +47,29 @@ export default function VirtualCard() {
              <Text>Space for subtitle text</Text>
            </Stack>      
 </Box>
-     <Box as='button' h='100px' w='301px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='center'>
+     <Box as='button' h='100px' w='301px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
             <VirtualCardDetailsModal/>
          <Stack>
          <Text>Show card details</Text>
              <Text>Space for subtitle text</Text>
          </Stack>
      </Box>
-     <Box as='button' h='100px' w='301px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='center'>
+     <Box as='button' h='100px' w='301px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
      <FreezeCardModal/>
          <Stack>
          <Text>Freeze card</Text>
              <Text>Space for subtitle text</Text>
          </Stack>
      </Box>
-     <Box as='button' h='100px' w='301px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='center'>
+     <Box as='button' h='100px' w='301px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
     <DeactivateCardModal/>
          <Stack>
          <Text>Deactivate card</Text>
              <Text>Space for subtitle text</Text>
          </Stack>
      </Box>
-     <Box as='button' h='100px' w='301px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='center'>
-     <Stack pr='30px' color='yellow.500' fontSize='24px'>  
+     <Box as='button' h='100px' w='301px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
+     <Stack pr='30px' color='yellow.500' bg='yellow.100' borderRadius='0px 8px 8px 8px' border='0.2px solid yellow.100'  p='12px' fontSize='24px'>  
                   <BsPlusSquare  />
                 </Stack>
          <Stack>
@@ -86,7 +86,7 @@ export default function VirtualCard() {
       
  <Tabs variant='unstyled'>
   <Center>
- <Box  h='100px' w='480px' borderRadius='0px 11px 0px 0px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='center'>
+ <Box  h='100px' w='480px' borderRadius='0px 11px 0px 0px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
   <TabList>
     <Tab fontSize='16px' fontWeight='bold'   color='black'>Incoming</Tab>
     <Tab fontSize='16px' fontWeight='bold' color='black'>Outgoing</Tab>
