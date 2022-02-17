@@ -63,6 +63,7 @@ export default function DeactivateCardModal() {
                   border='1px solid #D6AA1B'
                   color='#1A202C'
                   _hover={{bg: '#D6AA1B'}}
+                  onClick={onClose}
                 >
                   Cancel
                 </Button>
@@ -74,7 +75,6 @@ export default function DeactivateCardModal() {
                   type='submit'
                   color='white'
                   _hover={{bg: '#1A202C'}}
-                  onClick={onClose}
                 >
                   Deactivate Card
                 </Button>

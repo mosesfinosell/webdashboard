@@ -1,9 +1,9 @@
 import { Grid,Box,GridItem,Container,Text,Stack,Center, Heading,Tabs, TabList, TabPanels, Tab, TabPanel} from "@chakra-ui/react";
-import {BsPlusSquare,BsArrowDownLeftSquare} from 'react-icons/bs'
+import {BsPlusSquare,BsArrowDownLeftSquare,BsPhone} from 'react-icons/bs'
+import {VscRocket} from "react-icons/vsc";
 import AddMoneyModal from '../../HomeItemsModal/AddMoney/addMoneyModal'
 import SendMoneyModal from '../../HomeItemsModal/SendMoney/sendMoneyModal'
 import  BuyAirtimeModal from '../../HomeItemsModal/BuyAirtime/BuyAirtimeModal'
-
 
 
 export default function HomeDash() {
@@ -37,7 +37,7 @@ export default function HomeDash() {
  </Stack>
  
 
- <Box as='button' h='100px' w='301px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='center'>
+ <Box as='button' h='100px' w='301px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
       <AddMoneyModal/>
       <Stack>
       <Text>Add Money</Text>
@@ -45,15 +45,15 @@ export default function HomeDash() {
       </Stack>  
 </Box>
 
-     <Box as='button' h='100px' w='301px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='center'>
+     <Box as='button' h='100px' w='301px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
      <SendMoneyModal/>
            <Stack>
            <Text>Send Money</Text>
              <Text>Space for subtitle text</Text>
            </Stack>      
 </Box>
-     <Box as='button' h='100px' w='301px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='center'>
-            <Stack pr='30px'color='yellow.500' fontSize='24px'>
+     <Box as='button' h='100px' w='301px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
+            <Stack color='yellow.500' bg='yellow.100' borderRadius='0px 8px 8px 8px' border='0.2px solid yellow.100'  p='12px' fontSize='24px'>
             <BsArrowDownLeftSquare/> 
             </Stack>
          <Stack>
@@ -61,7 +61,7 @@ export default function HomeDash() {
              <Text>Space for subtitle text</Text>
          </Stack>
      </Box>
-     <Box as='button' h='100px' w='301px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='center'>
+     <Box as='button' h='100px' w='301px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
     <BuyAirtimeModal/>
          <Stack>
          <Text>Buy Airtime</Text>
@@ -77,10 +77,10 @@ export default function HomeDash() {
       
  <Tabs variant='unstyled'>
   <Center>
- <Box  h='100px' w='480px' borderRadius='0px 11px 0px 0px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='center'>
+ <Box  h='100px' w='480px' borderRadius='0px 11px 0px 0px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
   <TabList>
-    <Tab fontSize='20px' fontWeight='bold'   color='black'>Payment</Tab>
-    <Tab fontSize='20px' fontWeight='bold' color='black'>Withdrawal</Tab>
+    <Tab fontSize='16px' fontWeight='bold'   color='black'>Payment</Tab>
+    <Tab fontSize='16px' fontWeight='bold' color='black'>Withdrawal</Tab>
   </TabList>
 
    </Box>
@@ -90,27 +90,27 @@ export default function HomeDash() {
     <TabPanel>
     <Box  h='100px' w='480px'  border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
          
-         <Stack color='yellow.500' fontSize='24px' >
+         <Stack color='green.500' bg='green.100' borderRadius='0px 8px 8px 8px' border='0.2px solid green.100'  p='12px' fontSize='22px' >
            <BsPlusSquare/> 
            </Stack>
           <Stack pr='150px'>
-          <Text>Buy Airtime</Text>
+          <Text>Transfer Funds</Text>
           <Text color='gray' fontSize='12px'>Success</Text>
           </Stack>  
          
         <Stack>
-            <Text fontSize='12px' color='gray'>₦12,000</Text>
+            <Text fontSize='12px' color='green.500'>₦12,000</Text>
             <Text fontSize='12px' color='gray'>Jan 3, 2022</Text>
         </Stack>
     </Box>
     <Box  h='100px' w='480px'  border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
         
-        <Stack color='yellow.500' fontSize='24px' >
-          <BsPlusSquare/> 
+        <Stack color='gray.500' bg='gray.100' borderRadius='0px 8px 8px 8px' border='0.2px solid gray.100' p='12px' fontSize='22px' >
+        <VscRocket /> 
           </Stack>
          <Stack pr='150px'>
-         <Text>Buy Airtime</Text>
-         <Text color='gray' fontSize='12px'>Success</Text>
+         <Text>Send Airtime</Text>
+         <Text color='gray' fontSize='12px'>Pending</Text>
          </Stack>  
         
        <Stack>
@@ -120,16 +120,16 @@ export default function HomeDash() {
    </Box>
    <Box  h='100px' w='480px'  border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
         
-        <Stack color='yellow.500' fontSize='24px' >
-          <BsPlusSquare/> 
+        <Stack color='red.500' bg='red.100' borderRadius='0px 8px 8px 8px' border='0.2px solid red.100'  p='12px' fontSize='22px'>
+        <BsPhone/>
           </Stack>
-         <Stack pr='150px'>
+         <Stack mr='150px'>
          <Text>Buy Airtime</Text>
          <Text color='gray' fontSize='12px'>Success</Text>
          </Stack>  
         
        <Stack>
-           <Text fontSize='12px' color='gray'>₦12,000</Text>
+           <Text fontSize='12px' color='red.500'>₦12,000</Text>
            <Text fontSize='12px' color='gray'>Jan 3, 2022</Text>
        </Stack>
    </Box>

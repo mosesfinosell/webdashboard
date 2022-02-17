@@ -71,18 +71,6 @@ export default function DashboardPage() {
     </Tab>
     <Tab fontSize='16px'  color='black'>
     <Stack pr='10px' fontSize='20px'>
-            <BiHelpCircle/>
-        </Stack>
-        Help
-    </Tab>
-    <Tab fontSize='16px'  color='black'>
-    <Stack pr='10px'>
-       <Image src={reficon} h='17px' />
-        </Stack>
-        Refer&Reward
-    </Tab>
-    <Tab fontSize='16px'  color='black'>
-    <Stack pr='10px' fontSize='20px'>
        <IoExitOutline/>
        </Stack>
         LogOut
@@ -103,12 +91,6 @@ export default function DashboardPage() {
   </TabPanel>
   <TabPanel>
   <DA/>
-  </TabPanel>
-  <TabPanel>
-  <DS/>
-  </TabPanel>
-  <TabPanel>
-  <DealDashboard/>
   </TabPanel>
   <TabPanel>
   <DealDashboard/>

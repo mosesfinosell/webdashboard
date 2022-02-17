@@ -63,8 +63,8 @@ export default function FreezeCardModal() {
                   type='submit'
                   border='1px solid #D6AA1B'
                   color='#1A202C'
-                  _hover={{bg: '#D6AA1B'}}
                   onClick={onClose}
+                  _hover={{bg: '#D6AA1B'}} 
                 >
                   Cancel
                 </Button>

@@ -1,5 +1,5 @@
 import { Grid,Box,GridItem,Container,Text,Stack,Center, Heading,Tabs, TabList, TabPanels, Tab, TabPanel} from "@chakra-ui/react";
-import {BsPlusSquare,BsCreditCard,BsEye} from 'react-icons/bs'
+import {BsPlusSquare,BsCreditCard} from 'react-icons/bs'
 import AddMoneyVCModal from '../../HomeItemsModal/VitualCardModal/addMoneyVCModal'
 import WithdrawalModal from "../../HomeItemsModal/VitualCardModal/withdrawalModal";
 import VirtualCardDetailsModal from "../../HomeItemsModal/VitualCardModal/virtualCardDetailsModal";
@@ -99,22 +99,22 @@ export default function VirtualCard() {
     <TabPanel>
     <Box  h='100px' w='480px'  border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
          
-         <Stack color='green.500' fontSize='24px' >
+         <Stack color='green.500' bg='green.100' borderRadius='0px 8px 8px 8px' border='0.2px solid green.100'  p='12px' fontSize='24px' >
            <BsCreditCard/> 
            </Stack>
-          <Stack pr='150px'>
+          <Stack pr='160px'>
           <Text>Buy Airtime</Text>
           <Text color='gray' fontSize='12px'>Success</Text>
           </Stack>  
          
         <Stack>
-            <Text fontSize='12px' color='gray'>₦12,000</Text>
+            <Text fontSize='12px' color='green.500'>₦12,000</Text>
             <Text fontSize='12px' color='gray'>Jan 3, 2022</Text>
         </Stack>
     </Box>
     <Box  h='100px' w='480px'  border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
         
-        <Stack color='red.500' fontSize='24px' >
+        <Stack color='red.500'  bg='red.100' borderRadius='0px 8px 8px 8px' border='0.2px solid red.100' p='12px' fontSize='24px' >
           <BsCreditCard/> 
           </Stack>
          <Stack pr='150px'>
@@ -123,13 +123,13 @@ export default function VirtualCard() {
          </Stack>  
         
        <Stack>
-           <Text fontSize='12px' color='gray'>₦12,000</Text>
+           <Text fontSize='12px' color='red.500'>₦12,000</Text>
            <Text fontSize='12px' color='gray'>Jan 3, 2022</Text>
        </Stack>
    </Box>
    <Box  h='100px' w='480px'  border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
         
-        <Stack color='yellow.500' fontSize='24px' >
+        <Stack color='yellow.500' bg='yellow.100' borderRadius='0px 8px 8px 8px' border='0.2px solid yellow.100' p='12px' fontSize='24px' >
           <BsCreditCard/> 
           </Stack>
          <Stack pr='150px'>
@@ -138,7 +138,7 @@ export default function VirtualCard() {
          </Stack>  
         
        <Stack>
-           <Text fontSize='12px' color='gray'>₦12,000</Text>
+           <Text fontSize='12px' color='yellow.500'>₦12,000</Text>
            <Text fontSize='12px' color='gray'>Jan 3, 2022</Text>
        </Stack>
    </Box>
@@ -146,7 +146,7 @@ export default function VirtualCard() {
     <TabPanel>
     <Box  h='100px' w='480px'  border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
          
-    <Stack color='yellow.500' fontSize='24px' >
+    <Stack color='yellow.500' bg='yellow.100' borderRadius='0px 8px 8px 8px' border='0.2px solid yellow.100' p='12px' fontSize='24px' >
           <BsCreditCard/> 
           </Stack>
           <Stack pr='150px'>
@@ -155,13 +155,13 @@ export default function VirtualCard() {
           </Stack>  
          
         <Stack>
-            <Text fontSize='12px' color='gray'>₦12,000</Text>
+            <Text fontSize='12px' color='yellow.500'>₦12,000</Text>
             <Text fontSize='12px' color='gray'>Jan 3, 2022</Text>
         </Stack>
     </Box>
     <Box  h='100px' w='480px'  border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
         
-    <Stack color='red.500' fontSize='24px' >
+    <Stack color='red.500' bg='red.100' borderRadius='0px 8px 8px 8px' border='0.2px solid red.100'  p='12px' fontSize='24px'>
           <BsCreditCard/> 
           </Stack>
          <Stack pr='150px'>
@@ -170,13 +170,13 @@ export default function VirtualCard() {
          </Stack>  
         
        <Stack>
-           <Text fontSize='12px' color='gray'>₦12,000</Text>
+           <Text fontSize='12px' color='red.500'>₦12,000</Text>
            <Text fontSize='12px' color='gray'>Jan 3, 2022</Text>
        </Stack>
    </Box>
    <Box  h='100px' w='480px'  border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
         
-   <Stack color='green.500' fontSize='24px' >
+   <Stack color='green.500' bg='green.100' borderRadius='0px 8px 8px 8px' border='0.2px solid green.100'  p='12px' fontSize='24px' >
            <BsCreditCard/> 
            </Stack>
          <Stack pr='150px'>
@@ -185,7 +185,7 @@ export default function VirtualCard() {
          </Stack>  
         
        <Stack>
-           <Text fontSize='12px' color='gray'>₦12,000</Text>
+           <Text fontSize='12px' color='green.500'>₦12,000</Text>
            <Text fontSize='12px' color='gray'>Jan 3, 2022</Text>
        </Stack>
    </Box>
