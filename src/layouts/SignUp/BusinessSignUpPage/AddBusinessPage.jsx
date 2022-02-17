@@ -127,6 +127,15 @@ export default function AddBusinessPage() {
                     </FormControl>
                   )}
                 </Field>
+                <Center>
+         <Stack mt='5' direction='row' justifyContent='space-between'>
+        <Text  fontSize='18px' lineHeight='5'>Will you be adding employees to your account?</Text>
+        <Stack direction='row'>
+        <Checkbox colorScheme='yellow' defaultChecked>Yes</Checkbox>
+        <Checkbox colorScheme='yellow' defaultChecked>No</Checkbox>
+        </Stack>
+        </Stack> 
+         </Center>
                 <Button
                   mt={4}
                   bg={yellowbtn}
@@ -142,15 +151,6 @@ export default function AddBusinessPage() {
               </Center>
             )}
           </Formik>
-         <Center>
-         <Stack mt='5' direction='row' justifyContent='space-between'>
-        <Text  fontSize='18px' lineHeight='5'>Already have an account?</Text>
-        <Stack direction='row'>
-        <Checkbox colorScheme='yellow' defaultChecked>Yes</Checkbox>
-        <Checkbox colorScheme='yellow' defaultChecked>No</Checkbox>
-        </Stack>
-        </Stack> 
-         </Center>
           </Stack>
         )
       }
