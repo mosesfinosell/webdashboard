@@ -13,7 +13,7 @@ import {
     Text,
     Container
   } from '@chakra-ui/react'
-  import logo from '../../assets/Logomark.png'
+  import logo from '../../../assets/Logomark.png'
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import {useSelector} from 'react-redux'
 

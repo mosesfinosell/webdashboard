@@ -18,14 +18,14 @@ import {
   import {MdEmail,MdWifiCalling3} from 'react-icons/md'
   import {FaUser,FaLock,FaEyeSlash,FaEye} from 'react-icons/fa'
   import { useColorModeValue } from "@chakra-ui/color-mode";
-  import logo from '../../assets/Logomark.png'
+  import logo from '../../../assets/Logomark.png'
   import {Link as RLink} from 'react-router-dom'
   import {useState} from 'react'
   import {useSelector, useDispatch} from 'react-redux'
   import {useHistory} from 'react-router-dom'
   import {Redirect} from 'react-router-dom'
   import { Spinner } from '@chakra-ui/react'
-  import {personalUserSignUp} from '../../ReduxContianer/PersonalRedux/PersonalAction'
+  import {personalUserSignUp} from '../../../ReduxContianer/PersonalRedux/PersonalAction'
 
 
 export default function PersonalAccountSignUp() {

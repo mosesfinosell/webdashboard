@@ -1,13 +1,16 @@
 
 import { Switch, BrowserRouter as Router, Route} from "react-router-dom";
 import AccountBox from './layouts/AccountBox/AccountBox'
-import PersonalAccountSignUp from './layouts/SignUp/PersonalAccountSignUp'
-import BusinessAccountSignUp from './layouts/SignUp/BusinessAccountSignUp'
-import AccountSignIn from "./layouts/SignIn/AccountSignIn";
-import VerifyPhoneNumber from "./layouts/SignUp/VerifyPhoneNumber";
-import InputOtp from "./layouts/SignUp/VerifyOtp";
+import PersonalAccountSignUp from './layouts/SignUp/PersonalSignUpPage/PersonalAccountSignUp'
+import PersonalAccountSignIn from "./layouts/SignIn/PersonalLogInPage/PersonalAccountSignIn";
+import PersonalForgetPassword from "./layouts/SignIn/PersonalLogInPage/PersonalForgetPassword";
+
+import BusinessAccountSignUp from './layouts/SignUp/BusinessSignUpPage/BusinessAccountSignUp'
+import BusinessAccountSignIn from './layouts/SignIn/BusinessLogInPage/BusinessAccountSignIn'
+
+import VerifyPhoneNumber from "./layouts/SignUp/PersonalSignUpPage/VerifyPhoneNumber";
+import InputOtp from "./layouts/SignUp/PersonalSignUpPage/VerifyOtp";
 import PasswordPage from "./layouts/SignUp/PasswordPage";
-import ForgetPasswordPage from "./layouts/SignIn/ForgetPasswordPage";
 import DashboardPage from "./layouts/Dashboard/DashoardContianer";
 
 
@@ -19,14 +22,14 @@ function App() {
      <Route exact path='/' >
      <AccountBox/>
      </Route>
+
+      {/* Personal Account  */}
+
         <Route path='/personal-signup'>
           <PersonalAccountSignUp/>
         </Route>
-        <Route path='/business-signup'>
-        <BusinessAccountSignUp/>
-        </Route>
-        <Route path='/login'>
-          <AccountSignIn/>
+        <Route path='/personal-signin'>
+          <PersonalAccountSignIn/>
         </Route>
         <Route path='/verify-number'>
           <VerifyPhoneNumber/>
@@ -38,12 +41,20 @@ function App() {
           <PasswordPage/>
         </Route>
         <Route path='/forget-password'>
-          <ForgetPasswordPage/>
+          <PersonalForgetPassword/>
         </Route>
         <Route exact to='/dashboard'>
           <DashboardPage/>
         </Route>
-        <Route/>
+        
+       {/* Bussiness Account  */}
+
+        <Route path='/business-signup'>
+        <BusinessAccountSignUp/>
+        </Route>
+        <Route path='/business-signin'>
+        <BusinessAccountSignIn/>
+        </Route>
         </Switch>
     </Router>
 

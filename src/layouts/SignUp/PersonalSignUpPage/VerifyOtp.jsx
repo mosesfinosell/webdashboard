@@ -7,7 +7,7 @@ import {
     Text,
     PinInput, PinInputField,HStack
   } from '@chakra-ui/react'
-  import logo from '../../assets/Logomark.png'
+  import logo from '../../../assets/Logomark.png'
 import { useColorModeValue } from "@chakra-ui/color-mode";
 
 export default function VerifyOtp() {

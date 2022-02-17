@@ -15,12 +15,12 @@ import {
     Text,
   } from '@chakra-ui/react'
 
-import logo from '../../assets/Logomark.png'
+import logo from '../../../assets/Logomark.png'
 import {useState} from 'react'
   import {MdEmail} from 'react-icons/md'
   import { useColorModeValue } from "@chakra-ui/color-mode";
 
-export default function ForgetPasswordPage() {
+export default function PersonalForgetPassword() {
     const yellowbtn = useColorModeValue('yellow.500')
     const [email ,setEmail] = useState('')
     

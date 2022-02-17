@@ -18,7 +18,7 @@ import {
   import {MdEmail,MdWifiCalling3} from 'react-icons/md'
   import {AiOutlineShop} from 'react-icons/ai'
   import { useColorModeValue } from "@chakra-ui/color-mode";
-  import logo from '../../assets/Logomark.png'
+  import logo from '../../../assets/Logomark.png'
 
 
 

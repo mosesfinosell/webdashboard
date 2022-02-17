@@ -17,7 +17,7 @@ import {
   } from '@chakra-ui/react'
 import {useState} from 'react'
 import {Link as RLink} from 'react-router-dom'
-import logo from '../../assets/Logomark.png'
+import logo from '../../../assets/Logomark.png'
 import {MdWifiCalling3} from 'react-icons/md'
 import {FaEyeSlash,FaEye} from 'react-icons/fa'
 import {FaLock} from 'react-icons/fa'
@@ -25,10 +25,10 @@ import { useColorModeValue } from "@chakra-ui/color-mode";
 import {useSelector, useDispatch} from 'react-redux'
 import {useHistory} from 'react-router-dom'
 import {Redirect} from 'react-router-dom'
-import {peronalUserLogin} from '../../ReduxContianer/PersonalRedux/PersonalAction';
+import {peronalUserLogin} from '../../../ReduxContianer/PersonalRedux/PersonalAction';
 
 
-export default function AccountSignIn() {
+export default function PersonalAccountSignIn() {
     const yellowbtn = useColorModeValue('yellow.500')
     const [phonenumber ,setPhonenumber] = useState('')
     const [password, setPassword] = useState('')
