@@ -11,10 +11,14 @@ import {
     Text,
     Stack,
     Link,
-    Image
+    Image,
+    Flex,
+    InputRightElement,
+    Checkbox
   } from '@chakra-ui/react'
 
   import {Link as RLink} from 'react-router-dom'
+  import {FaAngleDown} from 'react-icons/fa'
   import {MdEmail,MdWifiCalling3} from 'react-icons/md'
   import {AiOutlineShop} from 'react-icons/ai'
   import { useColorModeValue } from "@chakra-ui/color-mode";
@@ -23,7 +27,7 @@ import {
 
 
 
-export default function BusinessAccountSignUp() {
+export default function AddBusinessPage() {
     const yellowbtn = useColorModeValue('yellow.500')
 
         function validateName(value) {
@@ -46,23 +50,24 @@ export default function BusinessAccountSignUp() {
 
         <Center>
         <Stack >
-        <Text fontSize='36px' mt='10' fontWeight='bold' lineHeight='5'>Create Accounts</Text>
+        <Text fontSize='36px' mt='10' fontWeight='bold' lineHeight='5'>Add Business Details</Text>
         </Stack> 
         </Center>
          <Center>
            <Stack>
-             <Text color='gray'>Use your personal information</Text>
+             <Text color='gray'>Use correct information about your business</Text>
            </Stack>
          </Center>
           <Formik>
             {() => (
                 <Center>
               <Form>
+                  <Flex direction='row' justifyContent='space-evenly'>
                 <Field name='name' validate={validateName} >
                   {({ field, form }) => (
                       
                     <FormControl isInvalid={form.errors.name && form.touched.name}>
-                      <FormLabel htmlFor='name'>Name</FormLabel>
+                      <FormLabel htmlFor='name'>CAC Registeration Number *</FormLabel>
                    <InputGroup>
                       <InputLeftElement
                       pointerEvents='none'
@@ -71,7 +76,7 @@ export default function BusinessAccountSignUp() {
                       color='yellow.500'
                     children={<AiOutlineShop/>}
                    />
-               <Input {...field} id='name'  placeholder='Jumoke Adetola' width='690px' h='90px' borderRadius='0px 11px 11px 11px'/>
+               <Input {...field} id='name'  placeholder='CAC Registeration Number' width='300px' h='90px' borderRadius='0px 11px 11px 11px'/>
                </InputGroup>   
                       <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                     </FormControl>
@@ -80,7 +85,7 @@ export default function BusinessAccountSignUp() {
                 <Field name='name' validate={validateName}>
                   {({ field, form }) => (
                     <FormControl isInvalid={form.errors.name && form.touched.name}>
-                      <FormLabel htmlFor='name'>Email</FormLabel>
+                      <FormLabel htmlFor='name'>Business Category</FormLabel>
                       <InputGroup>
                       <InputLeftElement
                       pointerEvents='none'
@@ -89,17 +94,25 @@ export default function BusinessAccountSignUp() {
                       color='yellow.500'
                     children={<MdEmail />}
                    />
-                      <Input {...field} id='name' placeholder='Email Address' width='690px' h='90px' borderRadius='0px 11px 11px 11px'/>
+                    <InputRightElement
+                      pointerEvents='none'
+                      color='gray.500'  
+                      m='24px 50px'
+                      fontSize='24px'
+                      children={ <FaAngleDown/>}
+                   />
+                      <Input {...field} id='name' placeholder='Select Category' width='300px' h='90px' borderRadius='0px 11px 11px 11px'/>
                     </InputGroup>
                       <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                       
                     </FormControl>
                   )}
                 </Field>
+                </Flex>
                 <Field name='name' validate={validateName}>
                   {({ field, form }) => (
                     <FormControl isInvalid={form.errors.name && form.touched.name}>
-                      <FormLabel htmlFor='name'>Phone number</FormLabel>
+                      <FormLabel htmlFor='name'>Business Address</FormLabel>
                       <InputGroup>
                       <InputLeftElement
                       pointerEvents='none'
@@ -108,7 +121,7 @@ export default function BusinessAccountSignUp() {
                       color='yellow.500'
                     children={<MdWifiCalling3 />}
                    />
-               <Input {...field} id='name' placeholder='08012345678' width='690px' h='90px' borderRadius='0px 11px 11px 11px'/>
+               <Input {...field} id='name' placeholder='Business Address' width='690px' h='90px' borderRadius='0px 11px 11px 11px'/>
                </InputGroup>   
                       <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                     </FormControl>
@@ -130,12 +143,12 @@ export default function BusinessAccountSignUp() {
             )}
           </Formik>
          <Center>
-         <Stack mt='5'>
-        <Text  fontSize='18px' lineHeight='5'>Already have an account? 
-       <Link as={RLink} pl='2' to='/business-signin' color='yellow.500'>
-       Login
-       </Link>
-        </Text>
+         <Stack mt='5' direction='row' justifyContent='space-between'>
+        <Text  fontSize='18px' lineHeight='5'>Already have an account?</Text>
+        <Stack direction='row'>
+        <Checkbox colorScheme='yellow' defaultChecked>Yes</Checkbox>
+        <Checkbox colorScheme='yellow' defaultChecked>No</Checkbox>
+        </Stack>
         </Stack> 
          </Center>
           </Stack>

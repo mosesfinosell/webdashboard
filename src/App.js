@@ -7,6 +7,7 @@ import PersonalForgetPassword from "./layouts/SignIn/PersonalLogInPage/PersonalF
 
 import BusinessAccountSignUp from './layouts/SignUp/BusinessSignUpPage/BusinessAccountSignUp'
 import BusinessAccountSignIn from './layouts/SignIn/BusinessLogInPage/BusinessAccountSignIn'
+import AddBusinessPage from "./layouts/SignUp/BusinessSignUpPage/AddBusinessPage";
 
 import VerifyPhoneNumber from "./layouts/SignUp/PersonalSignUpPage/VerifyPhoneNumber";
 import InputOtp from "./layouts/SignUp/PersonalSignUpPage/VerifyOtp";
@@ -43,7 +44,7 @@ function App() {
         <Route path='/forget-password'>
           <PersonalForgetPassword/>
         </Route>
-        <Route exact to='/dashboard'>
+        <Route path='/dashboard'>
           <DashboardPage/>
         </Route>
         
@@ -54,6 +55,9 @@ function App() {
         </Route>
         <Route path='/business-signin'>
         <BusinessAccountSignIn/>
+        </Route>
+        <Route path='/addbusiness'>
+        <AddBusinessPage/>
         </Route>
         </Switch>
     </Router>
