@@ -8,11 +8,13 @@ import PersonalForgetPassword from "./layouts/SignIn/PersonalLogInPage/PersonalF
 import BusinessAccountSignUp from './layouts/SignUp/BusinessSignUpPage/BusinessAccountSignUp'
 import BusinessAccountSignIn from './layouts/SignIn/BusinessLogInPage/BusinessAccountSignIn'
 import AddBusinessPage from "./layouts/SignUp/BusinessSignUpPage/AddBusinessPage";
+import StoreInventory from "./layouts/Dashboard/BusinessDashboard/HomeBusiness/StoreInventory";
 
 import VerifyPhoneNumber from "./layouts/SignUp/PersonalSignUpPage/VerifyPhoneNumber";
 import InputOtp from "./layouts/SignUp/PersonalSignUpPage/VerifyOtp";
 import PasswordPage from "./layouts/SignUp/PasswordPage";
 import DashboardPage from "./layouts/Dashboard/DashoardContianer";
+import BusinessDashboard from "./layouts/Dashboard/BusinessDashboard/BusinessDashboard";
 
 
 
@@ -58,6 +60,12 @@ function App() {
         </Route>
         <Route path='/addbusiness'>
         <AddBusinessPage/>
+        </Route>
+        <Route path='/business-dashboard'>
+        <BusinessDashboard/>
+        </Route>
+        <Route path='/store-inventory'>
+        <StoreInventory/>
         </Route>
         </Switch>
     </Router>

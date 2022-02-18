@@ -11,6 +11,8 @@ import {
     Text,
     Stack,
     Link,
+    Container,
+    Box,
     Image,
     Flex,
     InputRightElement,
@@ -41,7 +43,9 @@ export default function AddBusinessPage() {
         }
       
         return (
-          <Stack m='20'>
+
+        <Container maxW='container.lg'>
+        <Box maxW='xlg' p='20' m='36' boxSizing='border-box' borderWidth='1px' borderRadius='lg' overflow='hidden'>
             <Center>
         <Stack>
         <Image mb='15' src={logo}  alt="logo" />
@@ -54,7 +58,7 @@ export default function AddBusinessPage() {
         </Stack> 
         </Center>
          <Center>
-           <Stack>
+           <Stack mb='40px'>
              <Text color='gray'>Use correct information about your business</Text>
            </Stack>
          </Center>
@@ -62,46 +66,46 @@ export default function AddBusinessPage() {
             {() => (
                 <Center>
               <Form>
-                  <Flex direction='row' justifyContent='space-evenly'>
+                  <Flex direction='row' justifyContent='space-between'>
                 <Field name='name' validate={validateName} >
                   {({ field, form }) => (
                       
                     <FormControl isInvalid={form.errors.name && form.touched.name}>
-                      <FormLabel htmlFor='name'>CAC Registeration Number *</FormLabel>
+                      <FormLabel htmlFor='name'>CAC Registeration Number</FormLabel>
                    <InputGroup>
                       <InputLeftElement
                       pointerEvents='none'
-                      m='25px 1px'
+                      m='15px 1px'
                       fontSize='20px'
                       color='yellow.500'
                     children={<AiOutlineShop/>}
                    />
-               <Input {...field} id='name'  placeholder='CAC Registeration Number' width='300px' h='90px' borderRadius='0px 11px 11px 11px'/>
+               <Input {...field} id='name'  placeholder='CAC Registeration No' width='220px' h='70px' borderRadius='0px 11px 11px 11px'/>
                </InputGroup>   
                       <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                     </FormControl>
                   )}
                 </Field>
-                <Field name='name' validate={validateName}>
+                <Field name='name' validate={validateName} pl='40px'>
                   {({ field, form }) => (
                     <FormControl isInvalid={form.errors.name && form.touched.name}>
-                      <FormLabel htmlFor='name'>Business Category</FormLabel>
+                      <FormLabel  htmlFor='name'>Business Category*</FormLabel>
                       <InputGroup>
                       <InputLeftElement
                       pointerEvents='none'
-                      m='25px 1px'
-                      fontSize='20px'
+                      m='15px 1px'
+                      fontSize='24px'
                       color='yellow.500'
                     children={<MdEmail />}
                    />
                     <InputRightElement
                       pointerEvents='none'
                       color='gray.500'  
-                      m='24px 50px'
+                      m='14px 30px'
                       fontSize='24px'
                       children={ <FaAngleDown/>}
                    />
-                      <Input {...field} id='name' placeholder='Select Category' width='300px' h='90px' borderRadius='0px 11px 11px 11px'/>
+                      <Input {...field} id='name' placeholder='Select Category'  width='220px' h='70px' borderRadius='0px 11px 11px 11px'/>
                     </InputGroup>
                       <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                       
@@ -112,23 +116,23 @@ export default function AddBusinessPage() {
                 <Field name='name' validate={validateName}>
                   {({ field, form }) => (
                     <FormControl isInvalid={form.errors.name && form.touched.name}>
-                      <FormLabel htmlFor='name'>Business Address</FormLabel>
+                      <FormLabel htmlFor='name'>Business Address*</FormLabel>
                       <InputGroup>
                       <InputLeftElement
                       pointerEvents='none'
-                      m='25px 1px'
+                      m='22px 1px'
                       fontSize='20px'
                       color='yellow.500'
                     children={<MdWifiCalling3 />}
                    />
-               <Input {...field} id='name' placeholder='Business Address' width='690px' h='90px' borderRadius='0px 11px 11px 11px'/>
+               <Input {...field} id='name' placeholder='Business Address' width='500px' h='80px' borderRadius='0px 11px 11px 11px'/>
                </InputGroup>   
                       <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                     </FormControl>
                   )}
                 </Field>
                 <Center>
-         <Stack mt='5' direction='row' justifyContent='space-between'>
+         <Stack mt='50px' direction='row' justifyContent='space-between'>
         <Text  fontSize='18px' lineHeight='5'>Will you be adding employees to your account?</Text>
         <Stack direction='row'>
         <Checkbox colorScheme='yellow' defaultChecked>Yes</Checkbox>
@@ -137,9 +141,9 @@ export default function AddBusinessPage() {
         </Stack> 
          </Center>
                 <Button
-                  mt={4}
+                  mt='50px'
                   bg={yellowbtn}
-                  width='690px' h='90px' 
+                  width='500px' h='90px' 
                   borderRadius='0px 11px 11px 11px'
                   type='submit'
                   color='white'
@@ -149,9 +153,17 @@ export default function AddBusinessPage() {
                 </Button>
               </Form>
               </Center>
-            )}
+            )} 
           </Formik>
-          </Stack>
+            <Stack mt='40px'>
+            <Center>
+            <Link as={RLink} pl='2' to='/business-signin' color='yellow.500'>
+                Skip for now
+              </Link>
+            </Center>
+            </Stack>
+          </Box>
+        </Container>
         )
       }
       

@@ -8,9 +8,9 @@ import user1 from '../../assets/user1.png'
 import {FaAngleDown} from 'react-icons/fa'
 import { RiHomeSmile2Line } from "react-icons/ri";
 import {IoCardOutline,IoExitOutline} from "react-icons/io5"
-import {BiUser,BiHelpCircle} from 'react-icons/bi'
+import {BiUser} from 'react-icons/bi'
 import delicon from '../../assets/DealIcon.svg'
-import reficon from '../../assets/reficon.svg'
+
 import {useSelector} from 'react-redux'
 
 
