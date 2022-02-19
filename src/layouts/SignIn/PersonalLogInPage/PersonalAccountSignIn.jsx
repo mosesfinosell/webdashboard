@@ -23,15 +23,16 @@ import {FaEyeSlash,FaEye} from 'react-icons/fa'
 import {FaLock} from 'react-icons/fa'
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import {useSelector, useDispatch} from 'react-redux'
-import {useHistory} from 'react-router-dom'
+import * as Yup from 'yup'
 import {Redirect} from 'react-router-dom'
 import {peronalUserLogin} from '../../../ReduxContianer/PersonalRedux/PersonalAction';
 
 
 export default function PersonalAccountSignIn() {
     const yellowbtn = useColorModeValue('yellow.500')
-    const [phonenumber ,setPhonenumber] = useState('')
+    const [phoneNumber ,setPhoneNumber] = useState('')
     const [password, setPassword] = useState('')
+
     const [show, setShow] = useState(false)
 
 
@@ -44,17 +45,21 @@ export default function PersonalAccountSignIn() {
     
     // const toast = useToast({error})
 
-//router
-const history = useHistory()
-
+//Validate
+const SignInSchema = Yup.object().shape({
+  phoneNumber: Yup.number()
+  .required("Phone number is required"),
+  password: Yup.string()
+  .required("Password is required"),
+})
 
 // Function
 const handleClick = () => setShow(!show)
 
     const handleSubmit = (e) => {
-      dispatch(peronalUserLogin(phonenumber,password))
+      dispatch(peronalUserLogin(phoneNumber,password))
       e.preventDefault()
-      console.log(phonenumber,password)
+      console.log(phoneNumber,password)
       }
 
      
@@ -79,47 +84,52 @@ const handleClick = () => setShow(!show)
              <Text color='gray'>Enter your login details</Text>
            </Stack>
          </Center>
-          <Formik 
-           
+         <Formik 
+          initialValues={{
+            phoneNumber:'',
+            email:''
+          }} 
+          onSubmit={handleSubmit}
+          validationSchema={SignInSchema}
           >
             {() => (
                 <Center>
-              <Form onSubmit={handleSubmit}>
-              <Field name='number'>
+              <Form >
+              <Field name='phoneNumber'>
                   {({ field, form }) => (
-                    <FormControl isInvalid={form.errors.name && form.touched.name}>
-                      <FormLabel htmlFor='name'>Phone number</FormLabel>
+                    <FormControl isInvalid={form.errors.phoneNumber && form.touched.phoneNumber} mt={4}>
+                      <FormLabel htmlFor='name'>Phone Number</FormLabel>
                       <InputGroup>
                       <InputLeftElement
                       pointerEvents='none'
-                      m='25px 1px'
+                      m='15px 1px'
                       fontSize='20px'
                       color='yellow.500'
                     children={<MdWifiCalling3 />}
                    />
-               <Input {...field} value={phonenumber}
-                 onChange={(e) => setPhonenumber(e.target.value)}
-               placeholder='08012345678' width='500px' h='80px' borderRadius='0px 11px 11px 11px'/>
+               <Input {...field} value={phoneNumber}
+                 onChange={(e) => setPhoneNumber(e.target.value)}
+               placeholder='08012345678' width='400px' h='70px' borderRadius='0px 11px 11px 11px'/>
                </InputGroup>   
-                      <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+                      <FormErrorMessage>{form.errors.phoneNumber}</FormErrorMessage>
                     </FormControl>
                   )}
                 </Field>
                 <Field name='password' >
                   {({ field, form }) => (
-                    <FormControl isInvalid={form.errors.name && form.touched.name}>
+                    <FormControl isInvalid={form.errors.password && form.touched.password} mt={4}>
                       <FormLabel  htmlFor='password'>Password</FormLabel>
                       <InputGroup>
                       <InputLeftElement
-                      m='20px 1px'
+                      m='15px 1px'
                       fontSize='18px'
                       color='yellow.500'
                       children={<FaLock/>}
                       />
 
                       <InputRightElement
-                      pointerEvents='none'
-                      m='25px 15px'
+                      pointerEvents='visible'
+                      m='15px 15px'
                       color='yellow.500'  
                    >
                        
@@ -132,23 +142,25 @@ const handleClick = () => setShow(!show)
                onClick={handleClick}  
                onChange={(e) => setPassword(e.target.value)} 
                value={password} 
-               placeholder='*********' width='500px' h='80px' borderRadius='0px 11px 11px 11px'/>
+               placeholder='*********' width='400px' h='70px' borderRadius='0px 11px 11px 11px'/>
                </InputGroup>   
-                      <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+                      <FormErrorMessage>{form.errors.password}</FormErrorMessage>
                     </FormControl>
                   )}
                 </Field>
-                {  users  ? <Redirect to='/dashboard'/> : <Button
+                {/* {  users  ? <Redirect to='/dashboard'/> :  */}
+                <Button
                   mt={4}
                   bg={yellowbtn}
-                  width='500px' h='80px'
+                  width='400px' h='70px'
                   borderRadius='0px 11px 11px 11px'
                   type='submit'
                   color='white'
                   _hover={{bg: '#1A202C'}}
                 >
                   Login
-                </Button> } 
+                </Button> 
+                {/* }  */}
               </Form>
               </Center>
             )}

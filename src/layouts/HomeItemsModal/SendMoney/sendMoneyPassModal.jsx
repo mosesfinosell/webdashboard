@@ -48,7 +48,7 @@ export default function SendMoneyPassModal() {
               <ModalOverlay />
               <ModalContent>
                <Center>
-               <Text fontSize='24px' p='35px' fontWeight='bold'>Send Money</Text>
+               <Text fontSize='24px' pt='35px' fontWeight='bold'>Send Money</Text>
                </Center>
                 <ModalCloseButton />
               
@@ -57,7 +57,7 @@ export default function SendMoneyPassModal() {
                       <FormLabel  htmlFor='password'>Password</FormLabel>
                       <InputGroup>
                       <InputLeftElement
-                      m='20px 1px'
+                      m='15px 1px'
                       fontSize='18px'
                       color='gray.500'
                       children={<FaLock/>}
@@ -68,7 +68,7 @@ export default function SendMoneyPassModal() {
                onClick={handleClick}  
                onChange={(e) => setPassword(e.target.value)} 
                value={password} 
-               placeholder='Password' width='500px' h='80px' borderRadius='0px 11px 11px 11px'/>
+               placeholder='Password' width='400px' h='70px' borderRadius='0px 11px 11px 11px'/>
                </InputGroup>   
                       <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                     </FormControl>
@@ -77,7 +77,7 @@ export default function SendMoneyPassModal() {
                 <Button
                   mt={4}
                   bg={yellowbtn}
-                  width='500px' h='80px'
+                  width='400px' h='70px'
                   borderRadius='0px 11px 11px 11px'
                   type='submit'
                   color='white'

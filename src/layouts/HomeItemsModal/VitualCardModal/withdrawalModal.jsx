@@ -36,7 +36,7 @@ export default function WithdrawalModal() {
               finalFocusRef={finalRef}
               isOpen={isOpen}
               onClose={onClose}
-              size='xl'
+              size='md'
               isCentered
               borderRadius='0px 11px 11px 11px'
             >
@@ -44,19 +44,19 @@ export default function WithdrawalModal() {
               <ModalOverlay />
               <ModalContent>
                <Center>
-               <Text fontSize='24px' p='35px' fontWeight='bold'>Withdraw</Text>
+               <Text fontSize='24px' pt='30px' fontWeight='bold'>Withdraw</Text>
                </Center>
                 <ModalCloseButton />
               
                 <ModalBody>
                   <FormControl>
                     <FormLabel>Amount</FormLabel>
-                    <Input ref={initialRef} placeholder='$0.00' w='500px' h='80px' borderRadius='0px 11px 11px 11px'/>
+                    <Input ref={initialRef} placeholder='$0.00' w='400px' h='70px' borderRadius='0px 11px 11px 11px'/>
                   </FormControl>
       
                    <FormControl mt={4}>
-                    <FormLabel>Last name</FormLabel>
-                    <Input ref={initialRef} placeholder='₦0.00' w='500px' h='80px' borderRadius='0px 11px 11px 11px'/>
+                    <FormLabel>Amount</FormLabel>
+                    <Input ref={initialRef} placeholder='₦0.00' w='400px' h='70px' borderRadius='0px 11px 11px 11px'/>
                   </FormControl>
                  <Flex direction='column' align='start' mt={4} justifyContent='space-between'>
                  <Text color='yellow.500'>1 USD = 551.55 NGN</Text>
@@ -67,7 +67,7 @@ export default function WithdrawalModal() {
                 <Button
                   mt={4}
                   bg={yellowbtn}
-                  width='500px' h='80px'
+                  width='400px' h='70px'
                   borderRadius='0px 11px 11px 11px'
                   type='submit'
                   color='white'

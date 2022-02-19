@@ -2,7 +2,7 @@ import {
     Modal,
     ModalOverlay,
     ModalContent,
-    Header,
+    Box,
     ModalFooter,
     ModalBody,
     ModalCloseButton,
@@ -42,26 +42,25 @@ export default function AddMoneyModal() {
               finalFocusRef={finalRef}
               isOpen={isOpen}
               onClose={onClose}
-              size='xl'
+              size='md'
               borderRadius='0px 11px 11px 11px'
-            >
-               
+            > 
               <ModalOverlay />
               <ModalContent>
                <Center>
-               <Text fontSize='24px' p='35px' fontWeight='bold'>Add Money</Text>
+               <Text fontSize='24px' pt='35px' fontWeight='bold'>Add Money</Text>
                </Center>
                 <ModalCloseButton />
               
                 <ModalBody>
                   <FormControl>
                     <FormLabel>Amount</FormLabel>
-                    <Input ref={initialRef} placeholder='₦0.00' h='80px' borderRadius='0px 11px 11px 11px'/>
+                    <Input ref={initialRef} placeholder='₦0.00' w='400px' h='70px' borderRadius='0px 11px 11px 11px'/>
                   </FormControl>
       
               <FormControl mt={4}>
-                    <FormLabel>Last name</FormLabel>
-                    <Input ref={initialRef} placeholder='0000 0000 00000 0000'w='500px' h='80px' borderRadius='0px 11px 11px 11px'/>
+                    <FormLabel>Card number</FormLabel>
+                    <Input ref={initialRef} placeholder='0000 0000 00000 0000' w='400px' h='70px' borderRadius='0px 11px 11px 11px'/>
                   </FormControl>
                  <Flex direction='row' align='center' mt={4} justifyContent='space-between'>
                  <Text>Save your Card</Text>
@@ -74,7 +73,7 @@ export default function AddMoneyModal() {
                 <Button
                   mt={4}
                   bg={yellowbtn}
-                  width='500px' h='80px'
+                  width='400px' h='70px'
                   borderRadius='0px 11px 11px 11px'
                   type='submit'
                   color='white'
@@ -82,6 +81,7 @@ export default function AddMoneyModal() {
                 >
                   Add Money
                 </Button>
+               
                 </ModalFooter>
               </ModalContent>
             </Modal>

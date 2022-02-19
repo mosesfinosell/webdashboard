@@ -43,7 +43,7 @@ export default function SendMoneyModal() {
               finalFocusRef={finalRef}
               isOpen={isOpen}
               onClose={onClose}
-              size='xl'
+              size='md'
               isCentered
               borderRadius='0px 11px 11px 11px'
             >
@@ -51,7 +51,7 @@ export default function SendMoneyModal() {
               <ModalOverlay />
               <ModalContent>
               <Center>
-               <Text fontSize='24px' p='35px' fontWeight='bold'>Send Money</Text>
+               <Text fontSize='24px' pt='35px' fontWeight='bold'>Send Money</Text>
                </Center>
                 <ModalCloseButton />
               
@@ -62,29 +62,29 @@ export default function SendMoneyModal() {
                     <InputRightElement
                       pointerEvents='none'
                       color='gray.500'  
-                      m='24px 35px'
+                      m='15px 15px'
                       fontSize='24px'
                       children={ <FaAngleDown/>}
                    />
-                    <Input ref={initialRef} placeholder='Select Benificiary' w='500px' h='80px' borderRadius='0px 11px 11px 11px'/>
+                    <Input ref={initialRef} placeholder='Select Benificiary' w='400px' h='70px' borderRadius='0px 11px 11px 11px'/>
                    </InputGroup>
                   </FormControl>
       
                   <FormControl mt={4}>
                     <FormLabel>Account Number</FormLabel>
-                    <Input ref={initialRef} placeholder='0123456789' w='500px' h='80px' borderRadius='0px 11px 11px 11px'/>
+                    <Input ref={initialRef} placeholder='0123456789' w='400px' h='70px' borderRadius='0px 11px 11px 11px'/>
                   </FormControl>
-                 <FormControl mt={4} pr={6}>
+                 <FormControl mt={4}>
                     <FormLabel>Select Bank</FormLabel>
                     <InputGroup>
                     <InputRightElement
                       pointerEvents='none'
                       color='gray.500'  
-                      m='24px 15px'
+                      m='15px 15px'
                       fontSize='24px'
                       children={ <FaAngleDown/>}
                    />
-                    <Input ref={initialRef} placeholder='Select Bank' w='500px' h='80px' borderRadius='0px 11px 11px 11px'/>
+                    <Input ref={initialRef} placeholder='Select Bank' w='400px' h='70px' borderRadius='0px 11px 11px 11px'/>
                    </InputGroup>
                    </FormControl>
                   </ModalBody>
@@ -92,7 +92,7 @@ export default function SendMoneyModal() {
                 <Button
                   mt={4}
                   bg={yellowbtn}
-                  width='500px' h='80px'
+                  width='400px' h='70px'
                   borderRadius='0px 11px 11px 11px'
                   type='submit'
                   color='white'

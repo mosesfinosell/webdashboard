@@ -11,10 +11,12 @@ import {
     Button,
     Text,
     Stack,
-    Image
+    Image,
+    Box,
+    Container
   } from '@chakra-ui/react'
 
-
+  import * as Yup from 'yup';
   import {MdEmail,MdWifiCalling3} from 'react-icons/md'
   import {FaUser,FaLock,FaEyeSlash,FaEye} from 'react-icons/fa'
   import { useColorModeValue } from "@chakra-ui/color-mode";
@@ -22,7 +24,6 @@ import {
   import {Link as RLink} from 'react-router-dom'
   import {useState} from 'react'
   import {useSelector, useDispatch} from 'react-redux'
-  import {useHistory} from 'react-router-dom'
   import {Redirect} from 'react-router-dom'
   import { Spinner } from '@chakra-ui/react'
   import {personalUserSignUp} from '../../../ReduxContianer/PersonalRedux/PersonalAction'
@@ -42,7 +43,7 @@ const {error,loading,users} = personal
 
  // useState
     const [name ,setName] = useState('')
-    const [phonenumber ,setPhonenumber] = useState('')
+    const [phoneNumber ,setPhoneNumber] = useState('')
     const [email ,setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [show, setShow] = useState(false)
@@ -51,20 +52,33 @@ const {error,loading,users} = personal
 // Function
 const handleClick = () => setShow(!show)
 
-     function handleSubmit (e) {
-         dispatch(personalUserSignUp(name,phonenumber, email,password))
+function handleSubmit (e) {
+         dispatch(personalUserSignUp(name,phoneNumber, email,password))
         e.preventDefault()
         // setEmail('');
-        // setPhonenumber('');
+        // setPhoneNumber('');
         // setName('')
-       console.log(name,phonenumber, email,password)
-     }
+       console.log(name,phoneNumber, email,password)
+}
 
-   
+//Validation
+const SignupSchema = Yup.object().shape({
+  name: Yup.string().required("Name is required"),
+  email: Yup.string()
+  .email("Invalid Email")
+  .required("Email is required"),
+  phoneNumber: Yup.number()
+  .required("Phone number is required"),
+  password: Yup.string()
+  .min(5,'Too short')
+  .max(9,'Okay')
+  .required("Password is required"),
+})
+
     
         return (
-          <Stack m='20'>
-              
+          <Container maxW='container.lg'>
+          <Box p='50' m='36' boxSizing='border-box' borderWidth='1px' borderRadius='0px 21px 21px 21px' m='20' borderRadius='lg' overflow='hidden'>
         <Center>
         <Stack>
         <Image mb='15' src={logo}  alt="logo" />
@@ -72,34 +86,34 @@ const handleClick = () => setShow(!show)
         </Center>
         <Center>
         <Stack >
-        <Text fontSize='36px' mt='10' fontWeight='bold' lineHeight='5'>Create Accounts</Text>
+        <Text fontSize='36px' mt='20px' fontWeight='bold' lineHeight='5'>Create Accounts</Text>
         </Stack> 
         </Center>
          <Center>
-           <Stack>
+           <Stack mt={3}>
              <Text color='gray'>Use your personal information</Text>
            </Stack>
-           <Stack>
-          
-          <Stack>
-           {users && <Text color='green'>User Registered</Text>}
-             {!users && <Text color='red'>{error}</Text>}
-           </Stack>
-           </Stack>
          </Center>
-          <Formik>
+          <Formik 
+          initialValues={{
+            name:'',
+            phoneNumber:'',
+            email:''
+          }} 
+          onSubmit={handleSubmit}
+          validationSchema={SignupSchema}>
             {() => (
                 <Center>
-              <Form onSubmit={handleSubmit}>
-                <Field name='name'  >
+              <Form>
+                <Field name='name'>
                   {({ field, form }) => (
                       
-                    <FormControl isInvalid={form.errors.name && form.touched.name}>
+                    <FormControl isInvalid={form.errors.name && form.touched.name} mt={4}>
                       <FormLabel htmlFor='name'>Name</FormLabel>
                    <InputGroup>
                       <InputLeftElement
                       pointerEvents='none'
-                      m='25px 1px'
+                      m='15px 1px'
                       fontSize='20px'
                       color='yellow.500'
                     children={<FaUser/>}
@@ -108,7 +122,7 @@ const handleClick = () => setShow(!show)
                value={name}  
                onChange={(e) => setName(e.target.value)}
                placeholder='Jumoke Adetola' 
-               width='500px' h='80px' 
+               width='400px' h='70px' 
                borderRadius='0px 11px 11px 11px'/>
                </InputGroup>   
                       <FormErrorMessage>{form.errors.name}</FormErrorMessage>
@@ -117,12 +131,12 @@ const handleClick = () => setShow(!show)
                 </Field>
                 <Field name='email' >
                   {({ field, form }) => (
-                    <FormControl isInvalid={form.errors.name && form.touched.name}>
+                    <FormControl isInvalid={form.errors.email && form.touched.email} mt={4}>
                       <FormLabel htmlFor='name'>Email</FormLabel>
                       <InputGroup>
                       <InputLeftElement
                       pointerEvents='none'
-                      m='25px 1px'
+                      m='15px 1px'
                       fontSize='20px'
                       color='yellow.500'
                     children={<MdEmail />}
@@ -130,49 +144,50 @@ const handleClick = () => setShow(!show)
                       <Input {...field} 
                       value={email} 
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder='Email Address' width='500px' h='80px' borderRadius='0px 11px 11px 11px'/>
+                      placeholder='Email Address' width='400px' h='70px' borderRadius='0px 11px 11px 11px'/>
                     </InputGroup>
-                      <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+                      <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                       
                     </FormControl>
                   )}
                 </Field>
-                <Field name='number'>
+                <Field name='phoneNumber'>
                   {({ field, form }) => (
-                    <FormControl isInvalid={form.errors.name && form.touched.name}>
+                    <FormControl isInvalid={form.errors.phoneNumber && form.touched.phoneNumber} mt={4}>
                       <FormLabel htmlFor='name'>Phone number</FormLabel>
                       <InputGroup>
                       <InputLeftElement
                       pointerEvents='none'
-                      m='25px 1px'
+                      m='15px 1px'
                       fontSize='20px'
                       color='yellow.500'
                     children={<MdWifiCalling3 />}
                    />
-               <Input {...field} value={phonenumber}
-                 onChange={(e) => setPhonenumber(e.target.value)}
-               placeholder='08012345678' width='500px' h='80px' borderRadius='0px 11px 11px 11px'/>
+               <Input {...field} value={phoneNumber}
+                 onChange={(e) => setPhoneNumber(e.target.value)}
+               placeholder='08012345678' width='400px' h='70px' borderRadius='0px 11px 11px 11px'/>
                </InputGroup>   
-                      <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+                      <FormErrorMessage>{form.errors.phoneNumber}</FormErrorMessage>
                     </FormControl>
                   )}
                 </Field>
                 <Field name='password' >
                   {({ field, form }) => (
-                    <FormControl isInvalid={form.errors.name && form.touched.name}>
+                    <FormControl isInvalid={form.errors.password && form.touched.password} mt={4}>
                       <FormLabel  htmlFor='password'>Password</FormLabel>
                       <InputGroup>
                       <InputLeftElement
-                      m='20px 1px'
+                      m='15px 1px'
                       fontSize='18px'
                       color='yellow.500'
                       children={<FaLock/>}
                       />
 
                       <InputRightElement
-                      pointerEvents='none'
-                      m='25px 15px'
-                      color='yellow.500'  
+                      pointerEvents='visible'
+                      m='20px 15px'
+                      color='yellow.500' 
+                       
                    >
                        
                        <Button onClick={handleClick} fontSize='25px' size='sm' b='transparent' cursor='pointer'>
@@ -184,16 +199,16 @@ const handleClick = () => setShow(!show)
                onClick={handleClick}  
                onChange={(e) => setPassword(e.target.value)} 
                value={password} 
-               placeholder='*********' width='500px' h='80px' borderRadius='0px 11px 11px 11px'/>
+               placeholder='*********' width='400px' h='70px' borderRadius='0px 11px 11px 11px'/>
                </InputGroup>   
-                      <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+                      <FormErrorMessage>{form.errors.password}</FormErrorMessage>
                     </FormControl>
                   )}
                 </Field>
               {  users  ? <Redirect to='/verify-number'/> : <Button
                   mt={4}
                   bg={yellowbtn}
-                  width='500px' h='80px'
+                  width='400px' h='70px'
                   borderRadius='0px 11px 11px 11px'
                   type='submit'
                   color='white'
@@ -214,7 +229,8 @@ const handleClick = () => setShow(!show)
         </Text>
         </Stack> 
          </Center>
-          </Stack>
+          </Box>
+          </Container>
         )
       }
       

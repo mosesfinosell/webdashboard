@@ -41,26 +41,26 @@ export default function AddAirtimeModal() {
               finalFocusRef={finalRef}
               isOpen={isOpen}
               onClose={onClose}
-              size='xl'
+              size='md'
               borderRadius='0px 11px 11px 11px'
             >
                
               <ModalOverlay />
               <ModalContent>
               <Center>
-               <Text fontSize='24px' p='35px' fontWeight='bold'>Buy Airtime</Text>
+               <Text fontSize='24px' pt='35px' fontWeight='bold'>Buy Airtime</Text>
                </Center>
                 <ModalCloseButton />
               
                 <ModalBody>
                   <FormControl>
                     <FormLabel>Amount</FormLabel>
-                    <Input ref={initialRef} placeholder='#0.00' w='500px' h='80px' borderRadius='0px 11px 11px 11px'/>
+                    <Input ref={initialRef} placeholder='#0.00' w='400px' h='70px' borderRadius='0px 11px 11px 11px'/>
                   </FormControl>
       
                   <FormControl mt={4}>
                     <FormLabel>Select Beneficiary Number</FormLabel>
-                    <Input ref={initialRef} placeholder='0801 234 5678' w='500px' h='80px' borderRadius='0px 11px 11px 11px'/>
+                    <Input ref={initialRef} placeholder='0801 234 5678' w='400px' h='70px' borderRadius='0px 11px 11px 11px'/>
                   </FormControl>
 
                   <FormControl mt={4}>
@@ -68,11 +68,11 @@ export default function AddAirtimeModal() {
                     <InputGroup>
                     <InputRightElement
                       color='gray.500'  
-                      m='24px 25px'
+                      m='15px 25px'
                       fontSize='24px'
                       children={ <FaAngleDown/>}
                    />
-                    <Input ref={initialRef} placeholder='0801 234 5678' w='500px' h='80px' borderRadius='0px 11px 11px 11px'/>
+                    <Input ref={initialRef} placeholder='0801 234 5678' w='400px' h='70px' borderRadius='0px 11px 11px 11px'/>
                     </InputGroup>
                   </FormControl>
                   </ModalBody>
@@ -80,7 +80,7 @@ export default function AddAirtimeModal() {
                 <Button
                   mt={4}
                   bg={yellowbtn}
-                  width='500px' h='80px'
+                  width='400px' h='70px'
                   borderRadius='0px 11px 11px 11px'
                   type='submit'
                   color='white'

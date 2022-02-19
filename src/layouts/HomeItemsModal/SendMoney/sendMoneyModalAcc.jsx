@@ -41,19 +41,19 @@ export default function SendMoneyAcountModal() {
               <ModalOverlay />
               <ModalContent>
                <Center>
-               <Text fontSize='24px' p='35px' fontWeight='bold'>Send Money</Text>
+               <Text fontSize='24px' pt='35px' fontWeight='bold'>Send Money</Text>
                </Center>
                 <ModalCloseButton />
               
                 <ModalBody>
                   <FormControl>
                     <FormLabel>Amount</FormLabel>
-                    <Input ref={initialRef} placeholder='₦0.00' w='500px' h='80px' borderRadius='0px 11px 11px 11px'/>
+                    <Input ref={initialRef} placeholder='₦0.00' w='400px' h='70px' borderRadius='0px 11px 11px 11px'/>
                   </FormControl>
 
                   <FormControl mt={4}>
                     <FormLabel>Description</FormLabel>
-                    <Input ref={initialRef} placeholder='What is this for?' w='500px' h='80px' borderRadius='0px 11px 11px 11px'/>
+                    <Input ref={initialRef} placeholder='What is this for?' w='400px' h='70px' borderRadius='0px 11px 11px 11px'/>
                   </FormControl>
                  <Text>+ ₦50 transaction charge</Text>
                   </ModalBody>
@@ -61,7 +61,7 @@ export default function SendMoneyAcountModal() {
                 <Button
                   mt={4}
                   bg={yellowbtn}
-                  width='500px' h='80px'
+                  width='400px' h='70px'
                   borderRadius='0px 11px 11px 11px'
                   type='submit'
                   color='white'

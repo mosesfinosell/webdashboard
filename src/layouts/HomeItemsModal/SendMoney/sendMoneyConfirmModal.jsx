@@ -47,7 +47,7 @@ export default function SendMoneyConfirmModal() {
               <ModalOverlay />
               <ModalContent>
                <Center>
-               <Text fontSize='24px' p='35px' fontWeight='bold'>Confirm</Text>
+               <Text fontSize='24px' pt='35px' fontWeight='bold'>Confirm</Text>
                </Center>
                 <ModalCloseButton />
               

@@ -32,16 +32,7 @@ import {
 export default function AddBusinessPage() {
     const yellowbtn = useColorModeValue('yellow.500')
 
-        function validateName(value) {
-            let error
-           if (!value) {
-            error = 'Name is required'
-          } else if (value.toLowerCase() !== 'naruto') {
-            error = "Jeez! You're not a fan 😱"
-          }
-          return error
-        }
-      
+    
         return (
 
         <Container maxW='container.lg'>
@@ -67,7 +58,7 @@ export default function AddBusinessPage() {
                 <Center>
               <Form>
                   <Flex direction='row' justifyContent='space-between'>
-                <Field name='name' validate={validateName} >
+                <Field name='name'>
                   {({ field, form }) => (
                       
                     <FormControl isInvalid={form.errors.name && form.touched.name}>
@@ -86,7 +77,7 @@ export default function AddBusinessPage() {
                     </FormControl>
                   )}
                 </Field>
-                <Field name='name' validate={validateName} pl='40px'>
+                <Field name='name' pl='40px'>
                   {({ field, form }) => (
                     <FormControl isInvalid={form.errors.name && form.touched.name}>
                       <FormLabel  htmlFor='name'>Business Category*</FormLabel>
@@ -113,7 +104,7 @@ export default function AddBusinessPage() {
                   )}
                 </Field>
                 </Flex>
-                <Field name='name' validate={validateName}>
+                <Field name='name'>
                   {({ field, form }) => (
                     <FormControl isInvalid={form.errors.name && form.touched.name}>
                       <FormLabel htmlFor='name'>Business Address*</FormLabel>

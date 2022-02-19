@@ -207,7 +207,7 @@ export default function AccountUserProfile() {
                       />
 
                       <InputRightElement
-                      pointerEvents='none'
+                      pointerEvents='visible'
                       m='15px 590px'
                       color='yellow.500'  
                    >
@@ -240,7 +240,7 @@ export default function AccountUserProfile() {
                       />
 
                       <InputRightElement
-                      pointerEvents='none'
+                      pointerEvents='visible'
                       m='15px 590px'
                       color='yellow.500'  
                    >
@@ -273,7 +273,7 @@ export default function AccountUserProfile() {
                       />
 
                       <InputRightElement
-                      pointerEvents='none'
+                      pointerEvents='visible'
                       m='15px 590px'
                       color='yellow.500'  
                    >
