@@ -221,7 +221,7 @@ export default function AccountUserProfile() {
                onClick={handleClick}  
               //  onChange={(e) => setPassword(e.target.value)} 
                value={oldpassword} 
-               placeholder='*********' width='400px' h='70px' borderRadius='0px 11px 11px 11px'/>
+               placeholder='********' width='400px' h='70px' borderRadius='0px 11px 11px 11px'/>
                </InputGroup>   
                       <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                     </FormControl>

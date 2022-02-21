@@ -64,7 +64,7 @@ export default function AddMoneyModal() {
                   </FormControl>
                  <Flex direction='row' align='center' mt={4} justifyContent='space-between'>
                  <Text>Save your Card</Text>
-                 <Stack onClick={handleClick} fontSize='30px' cursor='pointer' px='30px'>
+                 <Stack onClick={handleClick} fontSize='35px' cursor='pointer' px='30px' color='gray.300'>
                      {show ? <BsToggleOn/> : <BsToggleOff/>}
                  </Stack>
                  </Flex>

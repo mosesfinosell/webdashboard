@@ -15,6 +15,11 @@ import InputOtp from "./layouts/SignUp/PersonalSignUpPage/VerifyOtp";
 import PasswordPage from "./layouts/SignUp/PasswordPage";
 import DashboardPage from "./layouts/Dashboard/DashoardContianer";
 import BusinessDashboard from "./layouts/Dashboard/BusinessDashboard/BusinessDashboard";
+import AddProduct from "./layouts/Dashboard/BusinessDashboard/HomeBusiness/addProduct";
+import ProductModal from "./layouts/Dashboard/BusinessDashboard/HomeBusiness/addProductModal";
+import DeliveryRequest from "./layouts/Dashboard/BusinessDashboard/HomeBusiness/delivery";
+import InvoiceBoard from "./layouts/Dashboard/BusinessDashboard/HomeBusiness/InvoiceBoard";
+import AddInvoice from "./layouts/Dashboard/BusinessDashboard/HomeBusiness/addInvoice";
 
 
 
@@ -66,6 +71,18 @@ function App() {
         </Route>
         <Route path='/store-inventory'>
         <StoreInventory/>
+        </Route>
+        <Route path='/add-product'>
+        <AddProduct/>
+        </Route>
+        <Route path='/delivery'>
+        <DeliveryRequest/>
+        </Route>
+        <Route path='/invoice'>
+        <InvoiceBoard/>
+        </Route>
+        <Route path='/add-invoice'>
+        <AddInvoice/>
         </Route>
         </Switch>
     </Router>

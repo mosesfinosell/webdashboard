@@ -12,6 +12,7 @@ import {
   import {MdAddchart} from 'react-icons/md'
   import {GiBanknote} from 'react-icons/gi'
   import HomeBusiness from '../BusinessDashboard/HomeBusiness/HomeBusiness'
+import AddUrlPage from './StoreLink/addUrlPage';
   
   
   export default function BusinessDashboard() {
@@ -82,6 +83,9 @@ import {
     <TabPanels>
     <TabPanel>
      <HomeBusiness/>
+    </TabPanel>
+    <TabPanel>
+     <AddUrlPage/>
     </TabPanel>
     </TabPanels>
     </GridItem>
