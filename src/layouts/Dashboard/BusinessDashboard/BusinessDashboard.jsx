@@ -23,6 +23,7 @@ import AccountBusinessProfile from './Account/AccountBusinessProfile';
       return(
        <Grid
       //  maxH='100%'
+      h='100%'
     templateRows='repeat(6, 1fr)'
     templateColumns='repeat(12, 1fr)'
    display='flex'

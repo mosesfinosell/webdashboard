@@ -30,7 +30,7 @@ import { BiShoppingBag} from "react-icons/bi";
 
 
 
-export default function SaveCustomerModal() {
+export default function EditCustomerModal() {
     // const yellowbtn = useColorModeValue('yellow.500')
         const { isOpen, onOpen, onClose } = useDisclosure()
 
