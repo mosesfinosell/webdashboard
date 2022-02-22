@@ -35,8 +35,9 @@ export default function SendMoneyModal() {
       
         return (
           <>
-           <Stack color='yellow.500' bg='yellow.100' borderRadius='0px 8px 8px 8px' border='0.2px solid yellow.100'  p='12px' fontSize='24px' onClick={onOpen}>
-           <VscRocket /> 
+          
+          <Stack fontSize='34px' color='yellow.500' px='32px' onClick={onOpen}>  
+            <VscRocket /> 
            </Stack>
             <Modal
               initialFocusRef={initialRef}

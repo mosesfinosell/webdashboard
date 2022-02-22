@@ -3,13 +3,18 @@ import {Link as RLink} from 'react-router-dom'
 import {BsJournalText} from 'react-icons/bs'
 import {FaStore} from "react-icons/fa";
 import {MdOutlineContentCopy,MdDeliveryDining} from 'react-icons/md'
+import {BsPlusSquare,BsArrowDownLeftSquare,BsPhone} from 'react-icons/bs'
+import {BiStore} from 'react-icons/bi'
+import {RiTeamLine} from 'react-icons/ri'
+import AddMoneyBusinessModal from './addMoneyModal'
+import SendMoneyModal from './SendMoney/sendMoneyModal'
 
 export default function HomeBusiness() {
  
     return(
        <Container m='40px' maxW='container.lg'>
 <Grid
-  h='800px'
+  h='100%'
   
   templateColumns='repeat(5, 1fr)'
   
@@ -34,12 +39,12 @@ export default function HomeBusiness() {
  </Center>
 <TabPanels>
 <TabPanel>
-<Stack>
+<Stack pl={25}>
      <Heading as='h6'>₦4,867,479.76</Heading>
  </Stack>
 </TabPanel>
 <TabPanel>
-<Stack>
+<Stack pl={25}>
      <Heading as='h6'>₦6,745,563.09</Heading>
  </Stack>
 </TabPanel>
@@ -109,6 +114,48 @@ export default function HomeBusiness() {
          <Stack>
          <Text textAlign='left'>Invoicing</Text> 
          <Text color='gray' fontSize='14px'>Space for subtitle text</Text>
+         </Stack>
+     </Box>
+     <Box as='button' h='90px' w='350px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center'>
+      <AddMoneyBusinessModal/>
+      <Stack>
+      <Text textAlign='left'>Add Money</Text>
+           <Text color='gray' fontSize='14px'>Space for subtitle text</Text> 
+      </Stack>  
+</Box>
+
+     <Box as='button' h='90px' w='350px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center'>
+     <SendMoneyModal/>
+           <Stack>
+           <Text>Send Money</Text>
+             <Text color='gray' fontSize='14px'>Space for subtitle text</Text>
+           </Stack>      
+</Box>
+     <Box as='button' h='90px' w='350px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center'>
+            <Stack fontSize='34px' color='yellow.500' px='32px'>
+            <BsArrowDownLeftSquare/> 
+            </Stack>
+         <Stack>
+         <Text textAlign='left'>Request Money</Text>
+             <Text color='gray' fontSize='14px'>Space for subtitle text</Text>
+         </Stack>
+     </Box>
+     <Box as='button' h='90px' w='350px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center'>
+     <Stack fontSize='34px' color='yellow.500' px='32px'>
+     <BiStore/>
+    </Stack>
+    <Stack>
+         <Text textAlign='left'>Store Profile</Text>
+             <Text color='gray' fontSize='14px'>Space for subtitle text</Text>
+         </Stack>
+     </Box>
+     <Box as='button' h='90px' w='350px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center'>
+     <Stack fontSize='34px' color='yellow.500' px='32px'>
+     <RiTeamLine/>
+    </Stack>
+    <Stack>
+         <Text textAlign='left'>Team Management</Text>
+             <Text color='gray' fontSize='14px'>Space for subtitle text</Text>
          </Stack>
      </Box>
      </Stack>

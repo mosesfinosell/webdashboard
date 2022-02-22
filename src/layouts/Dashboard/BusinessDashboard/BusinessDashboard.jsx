@@ -13,13 +13,16 @@ import {
   import {GiBanknote} from 'react-icons/gi'
   import HomeBusiness from '../BusinessDashboard/HomeBusiness/HomeBusiness'
 import AddUrlPage from './StoreLink/addUrlPage';
+import OrderHistory from './Order/orderHistory';
+import PaymentDashboard from './Payment/paymentDashboard';
+import AccountBusinessProfile from './Account/AccountBusinessProfile';
   
   
   export default function BusinessDashboard() {
      
       return(
        <Grid
-       h='100vh'
+      //  maxH='100%'
     templateRows='repeat(6, 1fr)'
     templateColumns='repeat(12, 1fr)'
    display='flex'
@@ -62,7 +65,7 @@ import AddUrlPage from './StoreLink/addUrlPage';
       <Stack px='20px' fontSize='20px'>
               <GiBanknote/>
           </Stack>
-        Finance
+        Payment
       </Tab>
       <Tab fontSize='16px'  color='black'>
       <Stack px='20px' fontSize='20px'>
@@ -86,6 +89,15 @@ import AddUrlPage from './StoreLink/addUrlPage';
     </TabPanel>
     <TabPanel>
      <AddUrlPage/>
+    </TabPanel>
+    <TabPanel>
+     <OrderHistory/>
+    </TabPanel>
+    <TabPanel>
+     <PaymentDashboard/>
+    </TabPanel>
+    <TabPanel>
+     <AccountBusinessProfile/>
     </TabPanel>
     </TabPanels>
     </GridItem>

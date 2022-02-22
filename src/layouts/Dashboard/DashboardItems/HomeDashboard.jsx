@@ -2,7 +2,7 @@ import { Grid,Box,GridItem,Container,Text,Stack,Center, Heading,Tabs, TabList, T
 import {BsPlusSquare,BsArrowDownLeftSquare,BsPhone} from 'react-icons/bs'
 import {VscRocket} from "react-icons/vsc";
 import AddMoneyModal from '../../HomeItemsModal/AddMoney/addMoneyModal'
-import SendMoneyModal from '../../HomeItemsModal/SendMoney/sendMoneyModal'
+// import SendMoneyModal from '../../HomeItemsModal/SendMoney/sendMoneyModal'
 import  BuyAirtimeModal from '../../HomeItemsModal/BuyAirtime/BuyAirtimeModal'
 
 
@@ -61,14 +61,6 @@ export default function HomeDash() {
       <Text>Add Money</Text>
            <Text>Space for subtitle text</Text> 
       </Stack>  
-</Box>
-
-     <Box as='button' h='100px' w='301px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
-     <SendMoneyModal/>
-           <Stack>
-           <Text>Send Money</Text>
-             <Text>Space for subtitle text</Text>
-           </Stack>      
 </Box>
      <Box as='button' h='100px' w='301px' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9' display='flex' alignItems='center' justifyContent='space-evenly'>
             <Stack color='yellow.500' bg='yellow.100' borderRadius='0px 8px 8px 8px' border='0.2px solid yellow.100'  p='12px' fontSize='24px'>

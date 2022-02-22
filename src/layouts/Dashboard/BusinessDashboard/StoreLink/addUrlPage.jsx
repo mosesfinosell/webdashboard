@@ -1,7 +1,6 @@
 import { Grid,Box,GridItem,Container,Text,Stack,Center,Flex,Heading,Textarea,Image,
     Input,
-    InputLeftElement,
-    InputRightElement,
+    Checkbox,
     InputGroup,
     FormControl,
     FormLabel,
@@ -26,17 +25,23 @@ import { Grid,Box,GridItem,Container,Text,Stack,Center,Flex,Heading,Textarea,Ima
    
       return(
          <Container m='20px' maxW='container.lg'>
+
+            <Box maxW='xlg' m='36'  overflow='hidden'>
   <Grid
-    h='100vh'
-    
+  
     templateColumns='repeat(7, 1fr)'
     templateRows='repeat(5, 1fr)'
   >
     <GridItem rowStart={1} colSpan={3}  bg='white'>
-   
+    
    <Center>
-   <Heading>Add Url</Heading>
+  <Stack>
+  <Heading fontSize='38px'>Add Url</Heading>
+  </Stack>
    </Center>
+  
+  <Center mt='80px' ml='380px'>
+  <Stack>
    <Formik>
               {() => (
                 <Form>
@@ -46,19 +51,31 @@ import { Grid,Box,GridItem,Container,Text,Stack,Center,Flex,Heading,Textarea,Ima
                       <FormControl isInvalid={form.errors.name && form.touched.name}>
                         <FormLabel htmlFor='name'>Add a name for your store link</FormLabel>
                      <InputGroup>
+                     <Box width='100px' h='70px' display='flex' alignItems='center' px='20px'
+                        borderRadius='0px 0px 0px 11px' 
+                        border='0.5px solid #D9D9D9' >
+                            <Text fontSize='16px'>https://</Text>
+                         </Box>
                  <Input {...field} mb='20px'
                  value={name}  
                 //  onChange={(e) => setName(e.target.value)}
                  placeholder='Add a URL' 
-                 width='400px' h='60px' 
-                 borderRadius='0px 11px 11px 11px'/>
-                 </InputGroup>   
-                 <InputLeftElement
-                      pointerEvents='none'
-                      m='35px 1px'
-                      fontSize='20px'
-                      color='yellow.500'
-                   >hello</InputLeftElement>
+                 width='300px' h='70px' bg='#FAFAFA'
+                 borderRadius='0px'
+                 />
+                  <Box width='150px' h='70px' display='flex' alignItems='center'  px='20px'
+                        borderRadius='0px 11px 11px 0px' 
+                        border='0.5px solid #D9D9D9' >
+                            <Text fontSize='16px'>.finosell.com</Text> 
+                         </Box>
+                         <Stack direction='row' alignItems='center'  w='30%' px='30px'>
+                         <Checkbox colorScheme='green' defaultChecked>
+                          Url Available
+                         </Checkbox>
+                         </Stack>
+                 </InputGroup> 
+                 
+               
                         <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                       </FormControl>
                     )}
@@ -66,7 +83,7 @@ import { Grid,Box,GridItem,Container,Text,Stack,Center,Flex,Heading,Textarea,Ima
                   <Button
                   mt={4}
                   bg={yellowbtn}
-                  width='400px' h='70px'
+                  width='550px' h='70px'
                   borderRadius='0px 11px 11px 11px'
                   type='submit'
                   color='white'
@@ -77,8 +94,12 @@ import { Grid,Box,GridItem,Container,Text,Stack,Center,Flex,Heading,Textarea,Ima
                 </Form>      
               )}
             </Formik>
+
+   </Stack>
+  </Center>
   </GridItem>
   </Grid>
+  </Box>
   </Container>
       )
       }

@@ -1,4 +1,4 @@
-import { Grid,Box,GridItem,Container,Text,Stack,Center,Flex,Heading,Textarea,Image,
+import { Grid,Box,GridItem,Container,Text,Stack,Center,Flex,Heading,
     Input,
     InputLeftElement,
     InputRightElement,
@@ -12,9 +12,8 @@ import { Grid,Box,GridItem,Container,Text,Stack,Center,Flex,Heading,Textarea,Ima
   } from "@chakra-ui/react";
   import {Formik,Form,Field} from 'formik'
   import {useState} from 'react'
-  import {BsToggleOn, BsToggleOff} from 'react-icons/bs'
   import { useColorModeValue } from "@chakra-ui/color-mode";
-  import {MdEmail,MdWifiCalling3,MdKeyboardArrowDown} from 'react-icons/md'
+  import {MdEmail,MdWifiCalling3} from 'react-icons/md'
 
   export default function AddInvoice() {
     const yellowbtn = useColorModeValue('yellow.500')
