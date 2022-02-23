@@ -11,33 +11,20 @@ import {
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import { verifyNumberSms } from '../../../ReduxContianer/PersonalRedux/PersonalAction';
 import {useDispatch} from 'react-redux'
-import Countdown from "react-countdown";
-import {useHistory,Redirect} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 
-export default function VerifyOtp() {
+
+
+export default function ResendOtp() {
     const yellowbtn = useColorModeValue('yellow.500')
    
     const dispatch = useDispatch()
-    // const history = useHistory()
-
+ 
     
     function handleClick(){
       dispatch(verifyNumberSms(localStorage.getItem('phoneNumber')))
  }
  
-
-
-  const renderer = ({minutes, seconds, completed }) => {
-    if (!completed) {
-      return (
-        <span>
-          {minutes}:{seconds}
-        </span>
-      );
-    } 
-  };
-
-
 
     return (
        
@@ -70,41 +57,20 @@ export default function VerifyOtp() {
                    </PinInput>
                    </HStack>
                </Center>
-      
-                 <HStack pt='9' direction='row' color='gray'>
-                 <Text>Resend SMS</Text>
-                 <Stack>
-                    <Countdown date={Date.now() + 25000} renderer={renderer} autoStart/>
-                    </Stack>
-                   </HStack>
-             <HStack direction='row'>
-            <Center>
-              <Button
-                  mr={6}
+<Center>       
+<Stack>
+<Box
                   mt={4}
-                  bg={yellowbtn}
                   width='150px' h='90px' 
                   borderRadius='0px 11px 11px 11px'
                   type='submit'
-                  color='white'
-                  _hover={{bg: '#1A202C'}}
+                  color='yellow.500'
                   onClick={handleClick}
                 >
-                  Send SMS
-                </Button>
-                <Button
-                  mt={4}
-                  bg={yellowbtn}
-                  width='150px' h='90px' 
-                  borderRadius='0px 11px 11px 11px'
-                  type='submit'
-                  color='white'
-                  _hover={{bg: '#1A202C'}}
-                >
-                  Verify Number
-                </Button>
-              </Center>
-            </HStack>
+                  Resend SMS
+                </Box>
+</Stack>            
+</Center>
         </Box>
     );
 }

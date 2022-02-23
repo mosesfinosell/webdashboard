@@ -20,6 +20,7 @@ import ProductModal from "./layouts/Dashboard/BusinessDashboard/HomeBusiness/add
 import DeliveryRequest from "./layouts/Dashboard/BusinessDashboard/HomeBusiness/delivery";
 import InvoiceBoard from "./layouts/Dashboard/BusinessDashboard/HomeBusiness/InvoiceBoard";
 import AddInvoice from "./layouts/Dashboard/BusinessDashboard/HomeBusiness/addInvoice";
+import ResendOtp from "./layouts/SignUp/PersonalSignUpPage/resendOtpPage";
 
 
 
@@ -53,6 +54,9 @@ function App() {
         </Route>
         <Route path='/dashboard'>
           <DashboardPage/>
+        </Route>
+        <Route path='/resend-otp'>
+          <ResendOtp/>
         </Route>
         
        {/* Bussiness Account  */}

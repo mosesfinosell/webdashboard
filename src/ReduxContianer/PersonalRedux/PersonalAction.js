@@ -14,10 +14,15 @@ export const personalUserSignUp = (name,phone_number, email,password) => async(d
             type: PersonalActionType.SIGN_UP_SUCCESS,
             payload: data
         })
+
+    //    localStorage.setItem("users", JSON.stringify(data)) 
+
    }catch(error) {
         dispatch({
           type: PersonalActionType.SIGN_UP_ERROR,
-          payload: error.error 
+          payload:  error.response && error.response.data.message
+        //   ? error.response.data.message
+        //   : error.message,
         })
    }
 }
@@ -33,10 +38,28 @@ export const peronalUserLogin = (phonenumber,password) => async(dispatch) =>{
             payload : data
     })
 
+    // localStorage.setItem("users", JSON.stringify(data)) 
     }catch (error){
         dispatch({
             type: PersonalActionType.SIGN_IN_ERROR,
-            payload: error.error
+            payload:  error.response && error.response.data.message
           })
+    }
+}
+
+export const verifyNumberSms = (user) => async (dispatch) => {
+    try{
+        const {data} = await axios.post(baseUrl + `/sms/sendsms`,{user})
+        dispatch({
+            type: PersonalActionType.SEND_SMS_SUCCESS,
+            payload: data
+         })
+  
+    //    localStorage.setItem("users", JSON.stringify(data)) 
+    } catch (error) {
+        dispatch({
+            type: PersonalActionType.SEND_SMS_ERROR,
+            payload:  error.response && error.response.data.message
+         })
     }
 }

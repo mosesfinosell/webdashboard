@@ -38,6 +38,18 @@ const personalReducer = (state = INITIAL_STATE, action) => {
              ...state,
              error: action.payload
             }
+
+            case PersonalActionType.SEND_SMS_SUCCESS:
+            return {
+             ...state,
+             users: action.payload,
+            }
+
+            case PersonalActionType.SEND_SMS_ERROR: 
+            return {
+             ...state,
+             error: action.payload
+            }
             
        default:
            return state

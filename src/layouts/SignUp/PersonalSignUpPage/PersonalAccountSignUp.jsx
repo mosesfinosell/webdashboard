@@ -22,9 +22,9 @@ import {
   import { useColorModeValue } from "@chakra-ui/color-mode";
   import logo from '../../../assets/Logomark.png'
   import {Link as RLink} from 'react-router-dom'
-  import {useState} from 'react'
+  import {useState,useEffect} from 'react'
   import {useSelector, useDispatch} from 'react-redux'
-  import {Redirect} from 'react-router-dom'
+  import {useHistory} from 'react-router-dom'
   import { Spinner } from '@chakra-ui/react'
   import {personalUserSignUp} from '../../../ReduxContianer/PersonalRedux/PersonalAction'
 
@@ -39,7 +39,7 @@ const {error,loading,users} = personal
 
 
 // //router
-// const history = useHistory()
+const history = useHistory()
 
  // useState
     const [name ,setName] = useState('')
@@ -55,11 +55,25 @@ const handleClick = () => setShow(!show)
 function handleSubmit (e) {
          dispatch(personalUserSignUp(name,phoneNumber, email,password))
         e.preventDefault()
+        localStorage.setItem('phoneNumber', phoneNumber)
+        // console.log(localStorage.getItem('phoneNumber'))
         // setEmail('');
         // setPhoneNumber('');
         // setName('')
-       console.log(name,phoneNumber, email,password)
+      //  console.log(name,phoneNumber, email,password)
 }
+
+
+
+function handleButton () {
+  if(!users) {
+    return error
+  }else {
+    return history.push('/verify-otp') 
+  }
+}
+
+
 
 //Validation
 const SignupSchema = Yup.object().shape({
@@ -98,13 +112,14 @@ const SignupSchema = Yup.object().shape({
           initialValues={{
             name:'',
             phoneNumber:'',
-            email:''
+            email:'',
+            password: ''
           }} 
-          onSubmit={handleSubmit}
-          validationSchema={SignupSchema}>
+          >
             {() => (
                 <Center>
-              <Form>
+              <Form onSubmit={handleSubmit}
+          validationSchema={SignupSchema}>
                 <Field name='name'>
                   {({ field, form }) => (
                       
@@ -119,6 +134,7 @@ const SignupSchema = Yup.object().shape({
                     children={<FaUser/>}
                    />
                <Input {...field} 
+               type='name'
                value={name}  
                onChange={(e) => setName(e.target.value)}
                placeholder='Jumoke Adetola' 
@@ -132,7 +148,7 @@ const SignupSchema = Yup.object().shape({
                 <Field name='email' >
                   {({ field, form }) => (
                     <FormControl isInvalid={form.errors.email && form.touched.email} mt={4}>
-                      <FormLabel htmlFor='name'>Email</FormLabel>
+                      <FormLabel htmlFor='email'>Email</FormLabel>
                       <InputGroup>
                       <InputLeftElement
                       pointerEvents='none'
@@ -142,6 +158,7 @@ const SignupSchema = Yup.object().shape({
                     children={<MdEmail />}
                    />
                       <Input {...field} 
+                      type='email'
                       value={email} 
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder='Email Address' width='400px' h='70px' borderRadius='0px 11px 11px 11px'/>
@@ -163,7 +180,7 @@ const SignupSchema = Yup.object().shape({
                       color='yellow.500'
                     children={<MdWifiCalling3 />}
                    />
-               <Input {...field} value={phoneNumber}
+               <Input {...field} value={phoneNumber} type='phoneNumber'
                  onChange={(e) => setPhoneNumber(e.target.value)}
                placeholder='08012345678' width='400px' h='70px' borderRadius='0px 11px 11px 11px'/>
                </InputGroup>   
@@ -205,7 +222,7 @@ const SignupSchema = Yup.object().shape({
                     </FormControl>
                   )}
                 </Field>
-              {  users  ? <Redirect to='/verify-number'/> : <Button
+              <Button
                   mt={4}
                   bg={yellowbtn}
                   width='400px' h='70px'
@@ -213,9 +230,10 @@ const SignupSchema = Yup.object().shape({
                   type='submit'
                   color='white'
                   _hover={{bg: '#1A202C'}}
+                  onClick={handleButton}
                 >
                   Continue
-                </Button> } 
+                </Button> 
               </Form>
               </Center>
             )}
@@ -223,7 +241,7 @@ const SignupSchema = Yup.object().shape({
          <Center>
          <Stack mt='5'>
         <Text  fontSize='18px' lineHeight='5'>Already have an account? 
-       <Text as={RLink} pl='2' to='/login' color='yellow.500'>
+       <Text as={RLink} pl='2' to='/personal-signin' color='yellow.500'>
        Login
        </Text>
         </Text>

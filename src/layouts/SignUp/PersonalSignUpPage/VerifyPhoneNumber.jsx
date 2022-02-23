@@ -15,16 +15,28 @@ import {
   } from '@chakra-ui/react'
   import logo from '../../../assets/Logomark.png'
 import { useColorModeValue } from "@chakra-ui/color-mode";
-import {useSelector} from 'react-redux'
+import {useSelector,useDispatch} from 'react-redux'
+import { useState } from 'react';
+import { verifyNumberSms } from '../../../ReduxContianer/PersonalRedux/PersonalAction';
+
+
 
 export default function VerifyPhoneNumber() {
     const yellowbtn = useColorModeValue('yellow.500')
 
-    const personal = useSelector((state) => state.personal)
-    const {users} = personal
+  const [phoneNumber, setPhoneNumber] = useState('')
+ 
+  const dispatch = useDispatch()
+  const personal = useSelector((state) => state.personal)
+  const {error,loading,users} = personal
+  
+ function handleSubmit (e) {
+   e.preventDefault();
+    // console.log(localStorage.getItem("users")[0])
+  //  dispatch(verifyNumberSms(phoneNumber))
 
-
-
+  //  console.log(phoneNumber)
+ }
 
     return (
       <Container maxW='container.lg'>
@@ -51,14 +63,17 @@ export default function VerifyPhoneNumber() {
           >
             {() => (
                 <Center>
-              <Form mt='9'>
+              <Form mt='9' onSubmit={handleSubmit}>
               <Field name='number' >
                   {({ field, form }) => (
                     <FormControl isInvalid={form.errors.name && form.touched.name}>
                       <FormLabel htmlFor=''>Phone Number</FormLabel>
                       <InputGroup>
                       
-                      <Input {...field} type='number' placeholder='08012345678'  width='690px' h='90px' borderRadius='0px 11px 11px 11px'/>
+                      <Input {...field} type='phoneNumber' 
+                      value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)} 
+                      placeholder='08012345678'  width='400px' h='90px' borderRadius='0px 11px 11px 11px'/>
                     </InputGroup>
                       <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                     </FormControl>
@@ -67,7 +82,7 @@ export default function VerifyPhoneNumber() {
                 <Button
                   mt={4}
                   bg={yellowbtn}
-                  width='690px' h='90px' 
+                  width='400px' h='90px' 
                   borderRadius='0px 11px 11px 11px'
                   type='submit'
                   color='white'

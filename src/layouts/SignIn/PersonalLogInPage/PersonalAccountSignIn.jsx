@@ -24,7 +24,7 @@ import {FaLock} from 'react-icons/fa'
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import {useSelector, useDispatch} from 'react-redux'
 import * as Yup from 'yup'
-import {Redirect} from 'react-router-dom'
+import {Redirect,useHistory} from 'react-router-dom'
 import {peronalUserLogin} from '../../../ReduxContianer/PersonalRedux/PersonalAction';
 
 
@@ -53,15 +53,26 @@ const SignInSchema = Yup.object().shape({
   .required("Password is required"),
 })
 
+const history = useHistory()
+
 // Function
 const handleClick = () => setShow(!show)
 
     const handleSubmit = (e) => {
-      dispatch(peronalUserLogin(phoneNumber,password))
       e.preventDefault()
-      console.log(phoneNumber,password)
+      dispatch(peronalUserLogin(phoneNumber,password))
+      localStorage.setItem('phoneNumber', phoneNumber)
+      // console.log(phoneNumber,password)
       }
 
+      function handleButton () {
+        if(!users) {
+          return error
+        }else {
+          return history.push('/verify-otp') 
+        }
+      }
+      
      
       
         return (
@@ -76,7 +87,7 @@ const handleClick = () => setShow(!show)
         </Center>
         <Center>
         <Stack >
-        <Text fontSize='36px' mt='10' fontWeight='bold' lineHeight='5'>Welcome back</Text>
+        <Text fontSize='36px' mt='10' fontWeight='bold' lineHeight='5'>Welcome back{error}</Text>
         </Stack> 
         </Center>
          <Center>
@@ -87,14 +98,16 @@ const handleClick = () => setShow(!show)
          <Formik 
           initialValues={{
             phoneNumber:'',
-            email:''
+            password:''
           }} 
-          onSubmit={handleSubmit}
           validationSchema={SignInSchema}
           >
             {() => (
                 <Center>
-              <Form >
+              <Form 
+               onSubmit={handleSubmit}
+              
+              >
               <Field name='phoneNumber'>
                   {({ field, form }) => (
                     <FormControl isInvalid={form.errors.phoneNumber && form.touched.phoneNumber} mt={4}>
@@ -107,7 +120,7 @@ const handleClick = () => setShow(!show)
                       color='yellow.500'
                     children={<MdWifiCalling3 />}
                    />
-               <Input {...field} value={phoneNumber}
+               <Input {...field} value={phoneNumber} type='phoneNumber'
                  onChange={(e) => setPhoneNumber(e.target.value)}
                placeholder='08012345678' width='400px' h='70px' borderRadius='0px 11px 11px 11px'/>
                </InputGroup>   
@@ -157,6 +170,7 @@ const handleClick = () => setShow(!show)
                   type='submit'
                   color='white'
                   _hover={{bg: '#1A202C'}}
+                  onClick={handleButton}
                 >
                   Login
                 </Button> 
