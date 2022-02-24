@@ -10,7 +10,7 @@ import { RiHomeSmile2Line } from "react-icons/ri";
 import {IoCardOutline,IoExitOutline} from "react-icons/io5"
 import {BiUser} from 'react-icons/bi'
 import delicon from '../../assets/DealIcon.svg'
-
+import {useState} from 'react'
 import {useSelector} from 'react-redux'
 
 
@@ -18,11 +18,10 @@ import {useSelector} from 'react-redux'
 
 export default function DashboardPage() {
     const personal = useSelector((state) => state.personal)
-    const {users} = personal
+    const {userDetails} = personal
+      
 
     return(
-
-     
      <Grid
      pl='25'
   templateRows='repeat(6, 1fr)'
@@ -37,7 +36,7 @@ export default function DashboardPage() {
         <Flex display='flex' direction='row' alignItems='center'>
         <Image mr='15px' src={user1} alt='user'/>
         <Stack>
-        {/* <Text>Hello {users[0variant='unstyled']}</Text> */}
+       {userDetails ? null : <Text>Hello {userDetails.meassege.name[0]}</Text>}
         </Stack>
        <Stack>
        <FaAngleDown/>

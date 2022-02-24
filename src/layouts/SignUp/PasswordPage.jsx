@@ -42,11 +42,11 @@ export default function PasswordPage() {
         </Center>
         <Center>
         <Stack >
-        <Text fontSize='36px' mt='10' fontWeight='bold' lineHeight='5'>Choose a password</Text>
+        <Text fontSize='36px' mt='10' mb='20px' fontWeight='bold' lineHeight='5'>Choose a password</Text>
         </Stack> 
         </Center>
          <Center>
-           <Stack mt='8'>
+           <Stack mb='20px'>
              <Text color='gray'>At least 8 characters and one special character or number</Text>
            </Stack>
          </Center>
@@ -61,7 +61,7 @@ export default function PasswordPage() {
                      <FormLabel  htmlFor='password'>Password</FormLabel>
                      <InputGroup>
                      <InputLeftElement
-                     m='20px 1px'
+                     m='15px 1px'
                      fontSize='18px'
                      color='yellow.500'
                      children={<FaLock/>}
@@ -75,9 +75,9 @@ export default function PasswordPage() {
                    </InputRightElement>
               <Input {...field} 
               type='password' 
-              onChange={(e) => setPassword(e.target.value)} 
+              onChange={(e) => setPassword(e.target.value)} mb='20px'
               value={password} 
-               placeholder='Password' width='500px' h='80px' borderRadius='0px 11px 11px 11px'/>
+               placeholder='Password' width='400px' h='70px' borderRadius='0px 11px 11px 11px'/>
               </InputGroup>   
                      <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                    </FormControl>
@@ -86,10 +86,10 @@ export default function PasswordPage() {
                 <Field name='password' >
                   {({ field, form }) => (
                     <FormControl isInvalid={form.errors.name && form.touched.name}>
-                      <FormLabel  htmlFor='password'>Password</FormLabel>
+                      <FormLabel  htmlFor='password'>Confirm Password</FormLabel>
                       <InputGroup>
                       <InputLeftElement
-                      m='20px 1px'
+                      m='15px 1px'
                       fontSize='18px'
                       color='yellow.500'
                       children={<FaLock/>}
@@ -105,7 +105,7 @@ export default function PasswordPage() {
               type='password'
               onChange={(e) => setConfirmPassword(e.target.value)} 
               value={confirmPassword}  
-               placeholder='Confirm Password' width='500px' h='80px' h='90px' borderRadius='0px 11px 11px 11px'/>
+               placeholder='Confirm Password' width='400px' h='70px' borderRadius='0px 11px 11px 11px'/>
                </InputGroup>   
                       <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                     </FormControl>
@@ -114,7 +114,7 @@ export default function PasswordPage() {
                 <Button
                   mt={4}
                   bg={yellowbtn}
-                  width='500px' h='80px'
+                  width='400px' h='70px'
                   borderRadius='0px 11px 11px 11px'
                   type='submit'
                   color='white'

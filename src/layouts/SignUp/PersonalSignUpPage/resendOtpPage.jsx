@@ -1,6 +1,6 @@
 import {
     Center,
-    Button,
+    Container,
     Box,
     Stack,
     Image,
@@ -9,7 +9,7 @@ import {
   } from '@chakra-ui/react'
   import logo from '../../../assets/Logomark.png'
 import { useColorModeValue } from "@chakra-ui/color-mode";
-import { verifyNumberSms } from '../../../ReduxContianer/PersonalRedux/PersonalAction';
+import { SendOtpSms } from '../../../ReduxContianer/PersonalRedux/PersonalAction';
 import {useDispatch} from 'react-redux'
 import {useHistory} from 'react-router-dom'
 
@@ -22,13 +22,15 @@ export default function ResendOtp() {
  
     
     function handleClick(){
-      dispatch(verifyNumberSms(localStorage.getItem('phoneNumber')))
+      dispatch(SendOtpSms(localStorage.getItem('phoneNumber')))
  }
  
 
     return (
        
-        <Box maxW='lg' p='50' m='36'  boxSizing='border-box' borderWidth='1px' borderRadius='0px 21px 21px 21px' borderRadius='lg' overflow='hidden'>
+      <Container maxW='container.lg'>
+      <Box  p='50' m='36' boxSizing='border-box' borderWidth='1px' borderRadius='0px 21px 21px 21px' m='20' borderRadius='lg' overflow='hidden'>
+        
            <Center>
         <Stack>
         <Image mt='35' src={logo}  alt="logo" />
@@ -72,6 +74,7 @@ export default function ResendOtp() {
 </Stack>            
 </Center>
         </Box>
+        </Container>
     );
 }
 

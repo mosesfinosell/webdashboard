@@ -52,7 +52,7 @@ function App() {
         <Route path='/forget-password'>
           <PersonalForgetPassword/>
         </Route>
-        <Route path='/dashboard'>
+        <Route path='/personal-dashboard'>
           <DashboardPage/>
         </Route>
         <Route path='/resend-otp'>

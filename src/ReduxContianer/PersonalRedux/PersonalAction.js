@@ -15,7 +15,7 @@ export const personalUserSignUp = (name,phone_number, email,password) => async(d
             payload: data
         })
 
-    //    localStorage.setItem("users", JSON.stringify(data)) 
+       localStorage.setItem("userDeatails", JSON.stringify(data)) 
 
    }catch(error) {
         dispatch({
@@ -38,7 +38,8 @@ export const peronalUserLogin = (phonenumber,password) => async(dispatch) =>{
             payload : data
     })
 
-    // localStorage.setItem("users", JSON.stringify(data)) 
+    localStorage.setItem("userDeatails", JSON.stringify(data)) 
+
     }catch (error){
         dispatch({
             type: PersonalActionType.SIGN_IN_ERROR,
@@ -47,19 +48,55 @@ export const peronalUserLogin = (phonenumber,password) => async(dispatch) =>{
     }
 }
 
-export const verifyNumberSms = (user) => async (dispatch) => {
+export const SendOtpSms = (user) => async (dispatch) => {
     try{
         const {data} = await axios.post(baseUrl + `/sms/sendsms`,{user})
         dispatch({
             type: PersonalActionType.SEND_SMS_SUCCESS,
             payload: data
          })
-  
-    //    localStorage.setItem("users", JSON.stringify(data)) 
+
+         localStorage.setItem("userDeatails", JSON.stringify(data)) 
+
     } catch (error) {
         dispatch({
             type: PersonalActionType.SEND_SMS_ERROR,
             payload:  error.response && error.response.data.message
+         })
+    }
+}
+
+export const verifyNumberSms = (user,code) => async(dispatch) => {
+    try {
+        const {data} = await axios.post(baseUrl + `/sms/verifysms`,{user,code})
+        dispatch({
+            type: PersonalActionType.VERIFY_NUMBRER_SUCCESS,
+            payload: data
+         })
+
+         localStorage.setItem("userDeatails", JSON.stringify(data)) 
+
+    }catch(error){
+        dispatch({
+            type: PersonalActionType.VERIFY_NUMBRER_ERROR,
+            payload: error.response && error.response.data
+         })
+    }
+}
+
+
+export const getUserDetails = (id) => async(dispatch) => {
+    try{
+          const {data} = await axios.get(baseUrl + `/auths/signin`,{id})
+          dispatch({
+            type: PersonalActionType.GET_USER_DETAIL_SUCCESS,
+            payload: data
+         })
+
+    }catch(error){
+        dispatch({
+            type: PersonalActionType.GET_USER_DETAIL_ERROR,
+            payload: error.response && error.response.data
          })
     }
 }

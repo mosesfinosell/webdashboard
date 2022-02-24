@@ -56,6 +56,7 @@ function handleSubmit (e) {
          dispatch(personalUserSignUp(name,phoneNumber, email,password))
         e.preventDefault()
         localStorage.setItem('phoneNumber', phoneNumber)
+        // localStorage.setItem('name', name)
         // console.log(localStorage.getItem('phoneNumber'))
         // setEmail('');
         // setPhoneNumber('');

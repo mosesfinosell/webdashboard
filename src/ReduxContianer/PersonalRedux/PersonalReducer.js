@@ -2,6 +2,7 @@ import PersonalActionType from "../constants/PersonalActionType";
 
 const INITIAL_STATE = {
     users: null,
+    user: { userDetails: localStorage.getItem('userDetails') ? JSON.parse(localStorage.getItem('userDetails')) : null},
     error: null,
     loading: true
 }
@@ -19,6 +20,7 @@ const personalReducer = (state = INITIAL_STATE, action) => {
            return {
             ...state,
             users: action.payload,
+            userDetails: action.payload.message
            
            }
         case PersonalActionType.SIGN_UP_ERROR: 
@@ -31,6 +33,7 @@ const personalReducer = (state = INITIAL_STATE, action) => {
             return {
              ...state,
              users: action.payload,
+             userDetails: action.payload.message
             }
 
             case PersonalActionType.SIGN_IN_ERROR: 
@@ -43,6 +46,7 @@ const personalReducer = (state = INITIAL_STATE, action) => {
             return {
              ...state,
              users: action.payload,
+             userDetails: action.payload.message
             }
 
             case PersonalActionType.SEND_SMS_ERROR: 
@@ -50,7 +54,31 @@ const personalReducer = (state = INITIAL_STATE, action) => {
              ...state,
              error: action.payload
             }
-            
+
+            case PersonalActionType.VERIFY_NUMBRER_SUCCESS:
+                return {
+                 ...state,
+                 users: action.payload,
+                 userDetails: action.payload.message
+                }
+    
+                case PersonalActionType.VERIFY_NUMBRER_ERROR: 
+                return {
+                 ...state,
+                 error: action.payload
+                }
+                case PersonalActionType.GET_USER_DETAIL_SUCCESS:
+                    return {
+                     ...state,
+                     users: action.payload,
+                     userDetails: action.payload.message
+                    }
+        
+                    case PersonalActionType.GET_USER_DETAIL_ERROR: 
+                    return {
+                     ...state,
+                     error: action.payload
+                    }
        default:
            return state
     }

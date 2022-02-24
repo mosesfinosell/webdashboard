@@ -5,43 +5,63 @@ import {
     Stack,
     Image,
     Text,
-    PinInput, PinInputField,HStack
+    PinInput, PinInputField,HStack,Container
   } from '@chakra-ui/react'
   import logo from '../../../assets/Logomark.png'
 import { useColorModeValue } from "@chakra-ui/color-mode";
-import { verifyNumberSms } from '../../../ReduxContianer/PersonalRedux/PersonalAction';
-import {useDispatch} from 'react-redux'
+import { SendOtpSms,verifyNumberSms } from '../../../ReduxContianer/PersonalRedux/PersonalAction';
+import {useDispatch,useSelector} from 'react-redux'
 import Countdown from "react-countdown";
 import {useHistory,Redirect} from 'react-router-dom'
+import {useState} from 'react'
+
 
 export default function VerifyOtp() {
     const yellowbtn = useColorModeValue('yellow.500')
-   
+    const [valuePin, setValuePin] = useState("")
+    const[phoneNumber] = useState(localStorage.getItem('phoneNumber'))
     const dispatch = useDispatch()
-    // const history = useHistory()
+    const history = useHistory()
 
-    
+    const personal = useSelector((state) => state.personal)
+    const {error,loading,users} = personal
+
+
     function handleClick(){
-      dispatch(verifyNumberSms(localStorage.getItem('phoneNumber')))
+      dispatch(SendOtpSms(phoneNumber))
  }
  
+ const handleChange = (valuePin) => {
+  setValuePin(valuePin)
+}
 
+const handleComplete = () => {
+  dispatch(verifyNumberSms(phoneNumber,valuePin))
+    setValuePin("")
+
+    if(!users) {
+      return error
+    }else {
+      return history.push('/personal-dashboard') 
+    }
+}
 
   const renderer = ({minutes, seconds, completed }) => {
-    if (!completed) {
+    if (!completed){
       return (
         <span>
           {minutes}:{seconds}
         </span>
       );
-    } 
+    } else{
+       return (history.push('/resend-otp'))
+    }
   };
 
-
-
     return (
-       
-        <Box maxW='lg' p='50' m='36'  boxSizing='border-box' borderWidth='1px' borderRadius='0px 21px 21px 21px' borderRadius='lg' overflow='hidden'>
+       <Container maxW='container.lg'>
+      <Box  p='50' m='36' boxSizing='border-box' borderWidth='1px' borderRadius='0px 21px 21px 21px' m='20' borderRadius='lg' overflow='hidden'>
+          
            <Center>
         <Stack>
         <Image mt='35' src={logo}  alt="logo" />
@@ -59,10 +79,12 @@ export default function VerifyOtp() {
              >Enter the OTP sent to your phone number</Text>
            </Stack>
          </Center>
-         
                <Center>
                <HStack mt='8'>
-              <PinInput size='lg' otp>
+              <PinInput size='lg' type='alphanumeric' 
+              valuePin={valuePin} 
+              onChange={handleChange}
+              >
                  <PinInputField  />
                   <PinInputField />
                   <PinInputField />
@@ -70,20 +92,19 @@ export default function VerifyOtp() {
                    </PinInput>
                    </HStack>
                </Center>
-      
-                 <HStack pt='9' direction='row' color='gray'>
+                <Center>
+                <HStack pt='9' direction='row' color='gray'>
                  <Text>Resend SMS</Text>
                  <Stack>
-                    <Countdown date={Date.now() + 25000} renderer={renderer} autoStart/>
+                    <Countdown date={Date.now() + 300000} renderer={renderer} autoStart/>
                     </Stack>
                    </HStack>
-             <HStack direction='row'>
-            <Center>
+                </Center>
+                <Center>
+             <HStack direction='row' mt={8}>
               <Button
-                  mr={6}
-                  mt={4}
                   bg={yellowbtn}
-                  width='150px' h='90px' 
+                  width='150px' h='50px' 
                   borderRadius='0px 11px 11px 11px'
                   type='submit'
                   color='white'
@@ -95,17 +116,28 @@ export default function VerifyOtp() {
                 <Button
                   mt={4}
                   bg={yellowbtn}
-                  width='150px' h='90px' 
+                  width='150px' h='50px' 
                   borderRadius='0px 11px 11px 11px'
                   type='submit'
                   color='white'
                   _hover={{bg: '#1A202C'}}
+                  onClick={handleComplete}
                 >
-                  Verify Number
+                  Verify Code
                 </Button>
-              </Center>
+             
             </HStack>
+            </Center>
+            
         </Box>
+        </Container>
     );
 }
 
+
+
+
+
+  
+ 
+ 
