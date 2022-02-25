@@ -62,7 +62,6 @@ const handleClick = () => setShow(!show)
       e.preventDefault()
       dispatch(peronalUserLogin(phoneNumber,password))
       localStorage.setItem('phoneNumber', phoneNumber)
-      // console.log(phoneNumber,password)
       }
 
       function handleButton () {

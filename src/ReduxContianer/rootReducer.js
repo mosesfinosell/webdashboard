@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
-// import { persistReducer } from 'redux-persist';
+import { persistReducer } from 'redux-persist';
 import personalReducer from './PersonalRedux/PersonalReducer';
-import storage from 'redux-persist/lib/storage/session';
+// import storage from 'redux-persist/lib/storage/session';
+import businessReducer from './BussinessRedux/BusinessReducer';
 
 
 // const persistConfig = {
@@ -12,7 +13,8 @@ import storage from 'redux-persist/lib/storage/session';
 
 
 const rootReducer = combineReducers({
-   personal: personalReducer
+   personal: personalReducer,
+   business : businessReducer
 })
 
 // export default persistReducer(persistConfig, rootReducer);

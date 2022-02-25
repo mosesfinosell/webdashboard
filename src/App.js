@@ -21,6 +21,7 @@ import DeliveryRequest from "./layouts/Dashboard/BusinessDashboard/HomeBusiness/
 import InvoiceBoard from "./layouts/Dashboard/BusinessDashboard/HomeBusiness/InvoiceBoard";
 import AddInvoice from "./layouts/Dashboard/BusinessDashboard/HomeBusiness/addInvoice";
 import ResendOtp from "./layouts/SignUp/PersonalSignUpPage/resendOtpPage";
+import BusinessVerifyOtp from "./layouts/SignUp/PersonalSignUpPage/BusinessVerifyOtp";
 
 
 
@@ -87,6 +88,9 @@ function App() {
         </Route>
         <Route path='/add-invoice'>
         <AddInvoice/>
+        </Route>
+        <Route path='/verify-otp-business'>
+          <BusinessVerifyOtp/>
         </Route>
         </Switch>
     </Router>

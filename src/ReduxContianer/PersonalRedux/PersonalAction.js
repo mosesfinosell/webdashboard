@@ -1,17 +1,17 @@
 import axios from 'axios'
-import PersonalActionType from '../constants/PersonalActionType'
-
+import UserActionType from '../constants/UserActionType'
 
 const baseUrl = `https://finosell.link/api/v2`;
 
-export const personalUserSignUp = (name,phone_number, email,password) => async(dispatch) => {
+
+export const personalUserSignUp = (name,phone_number, email,password,account_type) => async(dispatch) => {
     dispatch({
-        type: PersonalActionType.DATA_REQUEST
+        type: UserActionType.DATA_REQUEST
     })
    try {
-         const {data} = await axios.post(baseUrl + `/auths/firststage`,{name,phone_number, email,password})    
+         const {data} = await axios.post(baseUrl + `/auths/firststage`,{name,phone_number, email,password,account_type})    
         dispatch({
-            type: PersonalActionType.SIGN_UP_SUCCESS,
+            type: UserActionType.SIGN_UP_SUCCESS,
             payload: data
         })
 
@@ -19,7 +19,7 @@ export const personalUserSignUp = (name,phone_number, email,password) => async(d
 
    }catch(error) {
         dispatch({
-          type: PersonalActionType.SIGN_UP_ERROR,
+          type: UserActionType.SIGN_UP_ERROR,
           payload:  error.response && error.response.data.message
         //   ? error.response.data.message
         //   : error.message,
@@ -29,12 +29,12 @@ export const personalUserSignUp = (name,phone_number, email,password) => async(d
 
 export const peronalUserLogin = (phonenumber,password) => async(dispatch) =>{
     dispatch({
-        type: PersonalActionType.DATA_REQUEST
+        type: UserActionType.DATA_REQUEST
     })
     try {
         const {data} = await axios.post(baseUrl + `/auths/login`,{phonenumber,password})
     dispatch({
-            type: PersonalActionType.SIGN_IN_SUCCESS,
+            type: UserActionType.SIGN_IN_SUCCESS,
             payload : data
     })
 
@@ -42,7 +42,7 @@ export const peronalUserLogin = (phonenumber,password) => async(dispatch) =>{
 
     }catch (error){
         dispatch({
-            type: PersonalActionType.SIGN_IN_ERROR,
+            type: UserActionType.SIGN_IN_ERROR,
             payload:  error.response && error.response.data.message
           })
     }
@@ -52,7 +52,7 @@ export const SendOtpSms = (user) => async (dispatch) => {
     try{
         const {data} = await axios.post(baseUrl + `/sms/sendsms`,{user})
         dispatch({
-            type: PersonalActionType.SEND_SMS_SUCCESS,
+            type: UserActionType.SEND_SMS_SUCCESS,
             payload: data
          })
 
@@ -60,7 +60,7 @@ export const SendOtpSms = (user) => async (dispatch) => {
 
     } catch (error) {
         dispatch({
-            type: PersonalActionType.SEND_SMS_ERROR,
+            type: UserActionType.SEND_SMS_ERROR,
             payload:  error.response && error.response.data.message
          })
     }
@@ -70,7 +70,7 @@ export const verifyNumberSms = (user,code) => async(dispatch) => {
     try {
         const {data} = await axios.post(baseUrl + `/sms/verifysms`,{user,code})
         dispatch({
-            type: PersonalActionType.VERIFY_NUMBRER_SUCCESS,
+            type: UserActionType.VERIFY_NUMBRER_SUCCESS,
             payload: data
          })
 
@@ -78,24 +78,24 @@ export const verifyNumberSms = (user,code) => async(dispatch) => {
 
     }catch(error){
         dispatch({
-            type: PersonalActionType.VERIFY_NUMBRER_ERROR,
+            type: UserActionType.VERIFY_NUMBRER_ERROR,
             payload: error.response && error.response.data
          })
     }
 }
 
 
-export const getUserDetails = (id) => async(dispatch) => {
+export const getUserDetail = (user_id) => async(dispatch) => {
     try{
-          const {data} = await axios.get(baseUrl + `/auths/signin`,{id})
+          const {data} = await axios.get(baseUrl + `/auths/signin?${user_id}`)
           dispatch({
-            type: PersonalActionType.GET_USER_DETAIL_SUCCESS,
+            type: UserActionType.GET_USER_DETAIL_SUCCESS,
             payload: data
          })
 
     }catch(error){
         dispatch({
-            type: PersonalActionType.GET_USER_DETAIL_ERROR,
+            type: UserActionType.GET_USER_DETAIL_ERROR,
             payload: error.response && error.response.data
          })
     }

@@ -26,7 +26,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import {useHistory} from 'react-router-dom'
 import {Redirect} from 'react-router-dom'
 import * as Yup from 'yup'
-// import {peronalUserLogin} from '../../ReduxContianer/PersonalRedux/PersonalAction';
+import {businessUserLogin} from '../../../ReduxContianer/BussinessRedux/BusinessAction';
 
 
 export default function BusinessAccountSignIn() {
@@ -37,12 +37,11 @@ export default function BusinessAccountSignIn() {
 
 
     // Redux 
-  //   const dispatch = useDispatch()
-  //   const personal = useSelector((state) => state.personal)
-  //  const {error,loading,users} = personal
+    const dispatch = useDispatch()
+    const business = useSelector((state) => state.business)
+   const {error,user,loading} = business
    
-
-    
+  
     // const toast = useToast({error})
 
 //Validation
@@ -58,12 +57,23 @@ const SignInSchema = Yup.object().shape({
 const handleClick = () => setShow(!show)
 
     const handleSubmit = (e) => {
-      // dispatch(peronalUserLogin(phonenumber,password))
+      dispatch(businessUserLogin(phoneNumber,password))
       e.preventDefault()
       console.log(phoneNumber,password)
       }
 
-     
+
+      const history = useHistory()
+
+
+      function handleButton () {
+        if(!user) {
+          return error
+        }else {
+          return history.push('/verify-otp-business') 
+        }
+      }
+         
       
         return (
           <Container maxW='container.lg'>
@@ -90,12 +100,12 @@ const handleClick = () => setShow(!show)
             phoneNumber:'',
             email:''
           }} 
-          onSubmit={handleSubmit}
-          validationSchema={SignInSchema}
           >
             {() => (
                 <Center>
-              <Form >
+              <Form 
+               onSubmit={handleSubmit}
+              >
               <Field name='phoneNumber'>
                   {({ field, form }) => (
                     <FormControl isInvalid={form.errors.phoneNumber && form.touched.phoneNumber} mt={4}>
@@ -162,6 +172,7 @@ const handleClick = () => setShow(!show)
                   type='submit'
                   color='white'
                   _hover={{bg: '#1A202C'}}
+                  onClick={handleButton}
                 >
                   Login
                 </Button> 

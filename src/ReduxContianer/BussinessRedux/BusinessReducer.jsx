@@ -1,14 +1,14 @@
-import UserActionType from "../constants/UserActionType";
+import UserActionType from '../constants/UserActionType'
+
 
 const INITIAL_STATE = {
-    users: null,
-    user : {userDeatails: localStorage.getItem('userDeatails') ? JSON.parse(localStorage.getItem('userDeatails')) : null},
+    user : {businessDeatails: localStorage.getItem('businessDeatails') ? JSON.parse(localStorage.getItem('businessDeatails')) : null},
     error: null,
     loading: true
 }
 
 
-const personalReducer = (state = INITIAL_STATE, action) => {
+const businessReducer = (state = INITIAL_STATE, action) => {
     switch(action.type) {
         
         case UserActionType.DATA_REQUEST:
@@ -19,8 +19,7 @@ const personalReducer = (state = INITIAL_STATE, action) => {
         case UserActionType.SIGN_UP_SUCCESS:
            return {
             ...state,
-            users: action.payload,
-            userDeatails: action.payload.user
+            businessDeatails: action.payload.user
            
            }
         case UserActionType.SIGN_UP_ERROR: 
@@ -32,8 +31,7 @@ const personalReducer = (state = INITIAL_STATE, action) => {
         case UserActionType.SIGN_IN_SUCCESS:
             return {
              ...state,
-             users: action.payload,
-             userDeatails: action.payload.user
+             businessDeatails: action.payload.user
             }
 
             case UserActionType.SIGN_IN_ERROR: 
@@ -45,8 +43,7 @@ const personalReducer = (state = INITIAL_STATE, action) => {
             case UserActionType.SEND_SMS_SUCCESS:
             return {
              ...state,
-             users: action.payload,
-             userDeatails: action.payload.user
+             businessDeatails: action.payload.user
             }
 
             case UserActionType.SEND_SMS_ERROR: 
@@ -58,8 +55,8 @@ const personalReducer = (state = INITIAL_STATE, action) => {
             case UserActionType.VERIFY_NUMBRER_SUCCESS:
                 return {
                  ...state,
-                 users: action.payload,
-                 userDeatails: action.payload.user
+
+                 businessDeatails: action.payload.user
                 }
     
                 case UserActionType.VERIFY_NUMBRER_ERROR: 
@@ -70,8 +67,8 @@ const personalReducer = (state = INITIAL_STATE, action) => {
                 case UserActionType.GET_USER_DETAIL_SUCCESS:
                     return {
                      ...state,
-                     users: action.payload,
-                     userDeatails: action.payload.user
+    
+                     businessDeatails: action.payload.user
                     }
         
                     case UserActionType.GET_USER_DETAIL_ERROR: 
@@ -86,5 +83,4 @@ const personalReducer = (state = INITIAL_STATE, action) => {
 }
 
 
-
-export default personalReducer
+export default businessReducer

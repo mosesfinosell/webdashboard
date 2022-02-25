@@ -39,6 +39,7 @@ const {error,loading,users} = personal
 
 
 // //router
+
 const history = useHistory()
 
  // useState
@@ -46,6 +47,7 @@ const history = useHistory()
     const [phoneNumber ,setPhoneNumber] = useState('')
     const [email ,setEmail] = useState('')
     const [password, setPassword] = useState('')
+    // const [personal] = useState('')
     const [show, setShow] = useState(false)
 
     
@@ -53,7 +55,7 @@ const history = useHistory()
 const handleClick = () => setShow(!show)
 
 function handleSubmit (e) {
-         dispatch(personalUserSignUp(name,phoneNumber, email,password))
+         dispatch(personalUserSignUp(name,phoneNumber,email,password,'personal'))
         e.preventDefault()
         localStorage.setItem('phoneNumber', phoneNumber)
         // localStorage.setItem('name', name)
@@ -61,7 +63,7 @@ function handleSubmit (e) {
         // setEmail('');
         // setPhoneNumber('');
         // setName('')
-      //  console.log(name,phoneNumber, email,password)
+       console.log(name,phoneNumber,email,password,personal)
 }
 
 
@@ -110,6 +112,7 @@ const SignupSchema = Yup.object().shape({
            </Stack>
          </Center>
           <Formik 
+          //  validationSchema={SignupSchema}
           initialValues={{
             name:'',
             phoneNumber:'',
@@ -119,8 +122,7 @@ const SignupSchema = Yup.object().shape({
           >
             {() => (
                 <Center>
-              <Form onSubmit={handleSubmit}
-          validationSchema={SignupSchema}>
+              <Form onSubmit={handleSubmit}>
                 <Field name='name'>
                   {({ field, form }) => (
                       

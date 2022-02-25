@@ -20,14 +20,38 @@ import {
 import React, {useState} from 'react'
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import {BsToggleOn, BsToggleOff,BsPlusSquare} from 'react-icons/bs'
+import {PaystackButton} from 'react-paystack'
+import {useSelector} from 'react-redux'
+import {useForm} from 'react-hook-form'
+
 
 export default function AddMoneyModal() {
     const yellowbtn = useColorModeValue('yellow.500')
         const { isOpen, onOpen, onClose } = useDisclosure()
-
         const [show, setShow] = useState(false)
         const handleClick = () => setShow(!show)
-    
+        const { errors, register, watch } = useForm();
+
+        const personal = useSelector((state) => state.personal)
+        const{user}= personal
+        const {userDeatails} = user
+        const {message} = userDeatails
+        console.log(message)
+         const amount = watch("amount")
+        // const componentProps = {
+        //   email,
+        //   amount,
+        //   metadata: {
+        //     name,
+        //     phone
+        //   },
+        //   publicKey,
+        //   text: "Pay Now",
+        //   onSuccess: () =>
+        //     alert("Thanks for doing business with us! Come back soon!!"),
+        //   onClose: () => alert("Wait! Don't leave :(")
+        // };
+      
     
         const initialRef = React.useRef()
         const finalRef = React.useRef()
@@ -55,13 +79,13 @@ export default function AddMoneyModal() {
                 <ModalBody>
                   <FormControl>
                     <FormLabel>Amount</FormLabel>
-                    <Input ref={initialRef} placeholder='₦0.00' w='400px' h='70px' borderRadius='0px 11px 11px 11px'/>
+                    <Input name="amount" type="text" placeholder='₦0.00' w='400px' h='70px' borderRadius='0px 11px 11px 11px'/>
                   </FormControl>
       
-              <FormControl mt={4}>
+              {/* <FormControl mt={4}>
                     <FormLabel>Card number</FormLabel>
                     <Input ref={initialRef} placeholder='0000 0000 00000 0000' w='400px' h='70px' borderRadius='0px 11px 11px 11px'/>
-                  </FormControl>
+                  </FormControl> */}
                  <Flex direction='row' align='center' mt={4} justifyContent='space-between'>
                  <Text>Save your Card</Text>
                  <Stack onClick={handleClick} fontSize='35px' cursor='pointer' px='30px' color='gray.300'>
@@ -70,7 +94,7 @@ export default function AddMoneyModal() {
                  </Flex>
                   </ModalBody>
                 <ModalFooter>
-                <Button
+                <Box
                   mt={4}
                   bg={yellowbtn}
                   width='400px' h='70px'
@@ -79,8 +103,8 @@ export default function AddMoneyModal() {
                   color='white'
                   _hover={{bg: '#1A202C'}}
                 >
-                  Add Money
-                </Button>
+                  
+                </Box>
                
                 </ModalFooter>
               </ModalContent>

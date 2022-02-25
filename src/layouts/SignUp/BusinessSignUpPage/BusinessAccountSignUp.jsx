@@ -3,6 +3,7 @@ import {
     Center,
     Input,
     InputLeftElement,
+    InputRightElement,
     InputGroup,
     FormControl,
     FormLabel,
@@ -13,17 +14,21 @@ import {
     Link,
     Image,
     Box,
-    Container
+    Container,
+    Flex
   } from '@chakra-ui/react'
 
   import {Link as RLink} from 'react-router-dom'
   import {MdEmail,MdWifiCalling3} from 'react-icons/md'
   import {AiOutlineShop} from 'react-icons/ai'
   import { useColorModeValue } from "@chakra-ui/color-mode";
-  import logo from '../../../assets/Logomark.png'
+  import {useSelector, useDispatch} from 'react-redux';
+  import {useHistory} from 'react-router-dom'
+  import logo from '../../../assets/Logomark.png';
   import * as Yup from 'yup'
   import {useState} from 'react'
-
+  import {FaLock,FaEyeSlash,FaEye,FaRegAddressBook,FaIndustry} from 'react-icons/fa'
+  import  {businessUserSignUp} from '../../../ReduxContianer/BussinessRedux/BusinessAction'
 
 export default function BusinessAccountSignUp() {
     const yellowbtn = useColorModeValue('yellow.500')
@@ -32,14 +37,31 @@ export default function BusinessAccountSignUp() {
     const [name ,setName] = useState('')
     const [phoneNumber ,setPhoneNumber] = useState('')
     const [email ,setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [address, setAddress] = useState('')
+    const [industry, setIndustry] = useState('')
+    const [show, setShow] = useState(false)
+
+
+    const dispatch = useDispatch()
+    const business = useSelector((state) => state.business)
+   const {error,loading,user} = business
+   
+   
   
-//Function
-function handleSubmit (e) {
+
+// Function
+const handleClick = () => setShow(!show)
+
+ function handleSubmit (e) {
  e.preventDefault()
+ dispatch(businessUserSignUp(name,phoneNumber,email,'business'))
+ localStorage.setItem('phoneNumber', phoneNumber)
  // setEmail('');
  // setPhoneNumber('');
  // setName('')
 console.log(name,phoneNumber, email)
+
 }
 
 
@@ -52,6 +74,17 @@ const SignupSchema = Yup.object().shape({
   phoneNumber: Yup.number()
   .required("Phone number is required"),
 })
+
+const history = useHistory()
+
+
+function handleButton () {
+  if(!user) {
+    return error
+  }else {
+    return history.push('/verify-otp-business') 
+  }
+}
 
       
         return (
@@ -79,11 +112,13 @@ const SignupSchema = Yup.object().shape({
             phoneNumber:'',
             email:''
           }} 
-          onSubmit={handleSubmit}
-          validate={SignupSchema}>
+     
+          // validate={SignupSchema}
+          >
             {() => (
                 <Center>
-              <Form>
+              <Form      
+              onSubmit={handleSubmit}>
                 <Field name='name'  >
                   {({ field, form }) => (
                       
@@ -157,6 +192,90 @@ const SignupSchema = Yup.object().shape({
                     </FormControl>
                   )}
                 </Field>
+               <Flex direction='row' justifyContent='space-between'>
+               <Field name='address'>
+                  {({ field, form }) => (
+                    <FormControl isInvalid={form.errors.phoneNumber && form.touched.phoneNumber} mt={4}>
+                      <FormLabel htmlFor='name'>Address</FormLabel>
+                      <InputGroup>
+                      <InputLeftElement
+                      pointerEvents='none'
+                      m='15px 1px'
+                      fontSize='20px'
+                      color='yellow.500'
+                    children={<FaRegAddressBook/>}
+                   />
+               <Input {...field} 
+               value={address}
+               onChange={(e) => setAddress(e.target.value)}
+                placeholder='Ibadan' 
+                width='180px' 
+                h='70px' 
+                borderRadius='0px 11px 11px 11px'/>
+               </InputGroup>   
+                      <FormErrorMessage>{form.errors.phoneNumber}</FormErrorMessage>
+                    </FormControl>
+                  )}
+                </Field>
+                <Field name='industry'>
+                  {({ field, form }) => (
+                    <FormControl isInvalid={form.errors.phoneNumber && form.touched.phoneNumber} mt={4}>
+                      <FormLabel htmlFor='name'>Industry</FormLabel>
+                      <InputGroup>
+                      <InputLeftElement
+                      pointerEvents='none'
+                      m='15px 1px'
+                      fontSize='20px'
+                      color='yellow.500'
+                    children={<FaIndustry />}
+                   />
+               <Input {...field} 
+               value={industry}
+               onChange={(e) => setIndustry(e.target.value)}
+                placeholder='Food' 
+                width='195px' 
+                h='70px' 
+                borderRadius='0px 11px 11px 11px'/>
+               </InputGroup>   
+                      <FormErrorMessage>{form.errors.phoneNumber}</FormErrorMessage>
+                    </FormControl>
+                  )}
+                </Field>
+               </Flex>
+                <Field name='password' >
+                  {({ field, form }) => (
+                    <FormControl isInvalid={form.errors.password && form.touched.password} mt={4}>
+                      <FormLabel  htmlFor='password'>Password</FormLabel>
+                      <InputGroup>
+                      <InputLeftElement
+                      m='15px 1px'
+                      fontSize='18px'
+                      color='yellow.500'
+                      children={<FaLock/>}
+                      />
+
+                      <InputRightElement
+                      pointerEvents='visible'
+                      m='20px 15px'
+                      color='yellow.500' 
+                       
+                   >
+                       
+                       <Button onClick={handleClick} fontSize='25px' size='sm' b='transparent' cursor='pointer'>
+                      {show ? <FaEyeSlash/> : <FaEye/>}
+                      </Button>
+                    </InputRightElement>
+               <Input {...field} 
+               type={!show ? 'password' : 'text'} 
+               onClick={handleClick}  
+               onChange={(e) => setPassword(e.target.value)} 
+               value={password} 
+               placeholder='*********' width='400px' h='70px' borderRadius='0px 11px 11px 11px'/>
+               </InputGroup>   
+                      <FormErrorMessage>{form.errors.password}</FormErrorMessage>
+                    </FormControl>
+                  )}
+                </Field>
                 <Button
                   mt={4}
                   bg={yellowbtn}
@@ -165,6 +284,7 @@ const SignupSchema = Yup.object().shape({
                   type='submit'
                   color='white'
                   _hover={{bg: '#1A202C'}}
+                  onClick={handleButton}
                 >
                   Continue
                 </Button>

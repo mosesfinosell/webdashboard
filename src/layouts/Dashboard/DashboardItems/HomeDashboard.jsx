@@ -4,9 +4,17 @@ import {VscRocket} from "react-icons/vsc";
 import AddMoneyModal from '../../HomeItemsModal/AddMoney/addMoneyModal'
 // import SendMoneyModal from '../../HomeItemsModal/SendMoney/sendMoneyModal'
 import  BuyAirtimeModal from '../../HomeItemsModal/BuyAirtime/BuyAirtimeModal'
+import {useSelector} from 'react-redux'
 
 
 export default function HomeDash() {
+
+  const personal = useSelector((state) => state.personal)
+  const{user}= personal
+   console.log(user)
+
+
+
  
     return(
        <Container m='40px' maxW='container.lg'>
@@ -37,12 +45,12 @@ export default function HomeDash() {
 <TabPanels>
 <TabPanel>
 <Stack>
-     <Heading as='h6'>₦4,867,479.76</Heading>
+    {user &&  <Heading as='h6'>₦ {user.userDeatails.message.p_balance}</Heading>}
  </Stack>
 </TabPanel>
 <TabPanel>
 <Stack>
-     <Heading as='h6'>₦6,745,563.09</Heading>
+    {user && <Heading as='h6'>₦ {user.userDeatails.message.transfer_bal}</Heading>}
  </Stack>
 </TabPanel>
 </TabPanels>

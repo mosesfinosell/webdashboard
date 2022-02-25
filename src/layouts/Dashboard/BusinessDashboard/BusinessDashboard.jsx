@@ -1,6 +1,6 @@
 import {
     Tabs, TabList, TabPanels, Tab, TabPanel,
-    Grid, GridItem,Box,Center,Text, Image, Flex,Stack,Avatar
+    Grid, GridItem,Box,Center,Text,Flex,Stack,Avatar
   } from '@chakra-ui/react'
 
 
@@ -16,10 +16,15 @@ import AddUrlPage from './StoreLink/addUrlPage';
 import OrderHistory from './Order/orderHistory';
 import PaymentDashboard from './Payment/paymentDashboard';
 import AccountBusinessProfile from './Account/AccountBusinessProfile';
-  
+import {useSelector} from 'react-redux'
+ 
   
   export default function BusinessDashboard() {
+
+    const business = useSelector((state) => state.business)
+    const {user} = business
      
+
       return(
        <Grid
       //  maxH='100%'
@@ -30,13 +35,15 @@ import AccountBusinessProfile from './Account/AccountBusinessProfile';
   >
   <Tabs orientation='vertical' variant='unstyled'>
     <GridItem rowSpan={7} colSpan={2} bg='white'  py='25'>
-     <Box bg='white' w='250px' h='100%' border='0.5px solid #D9D9D9'>
+     <Box bg='white' w='300px' h='100vh' border='0.5px solid #D9D9D9'>
     
           <Center p='45px'>
           <Flex display='flex' direction='row' alignItems='center'>
-          <Avatar name='user' src={user1}/>
-          <Stack>
-          {/* <Text>Hello {users[0variant='unstyled']}</Text> */}
+         <Stack pr='15px'>
+         <Avatar name='user' src={user1} />
+         </Stack>
+          <Stack pr='15px'>
+          {user && <Text>Hello {user.businessDeatails.message.name}</Text>}
           </Stack>
          <Stack>
          <FaAngleDown/>

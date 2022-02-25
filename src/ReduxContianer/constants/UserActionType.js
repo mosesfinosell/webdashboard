@@ -1,4 +1,4 @@
-const PersonalActionType = {
+const UserActionType = {
     'SIGN_OUT_SUCCESS': 'SIGN_OUT_SUCCESS',
     'SIGN_UP_SUCCESS' : 'SIGN_UP_SUCCESS',
     'SIGN_UP_ERROR': 'SIGN_UP_ERROR',
@@ -13,4 +13,4 @@ const PersonalActionType = {
     'GET_USER_DETAIL_ERROR' : 'GET_USER_DETAIL_ERROR' 
 }
 
-export default PersonalActionType;
+export default UserActionType;
