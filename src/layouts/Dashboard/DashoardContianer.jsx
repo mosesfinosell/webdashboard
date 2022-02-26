@@ -30,7 +30,10 @@ import { useSelector } from 'react-redux';
 export default function DashboardPage() {
 	const personal = useSelector((state) => state.personal);
 	const { user } = personal;
-	console.log(user);
+		const { user } = personal;
+		const { userDeatails } = user;
+		const { message } = userDeatails;
+	
 
 	return (
 		<Grid
@@ -45,7 +48,7 @@ export default function DashboardPage() {
 							<Flex display='flex' direction='row' alignItems='center'>
 								<Image mr='15px' src={user1} alt='user' />
 								<Stack>
-									{user && <Text>Hello {user.userDeatails.message.name}</Text>}
+									{user && <Text>Hello {message.name}</Text>}
 								</Stack>
 								<Stack>
 									<FaAngleDown />

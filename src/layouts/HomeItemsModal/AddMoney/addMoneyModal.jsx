@@ -20,7 +20,7 @@ import {
 import React, { useState } from 'react';
 import { useColorModeValue } from '@chakra-ui/color-mode';
 import { BsToggleOn, BsToggleOff, BsPlusSquare } from 'react-icons/bs';
-import { PaystackButton } from 'react-paystack';
+import { PaystackButton,PaystackConsumer } from 'react-paystack';
 import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 
@@ -28,28 +28,34 @@ export default function AddMoneyModal() {
 	const yellowbtn = useColorModeValue('yellow.500');
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [show, setShow] = useState(false);
+	const [amount, setAmount] = useState('');
 	const handleClick = () => setShow(!show);
-	const { errors, register, watch } = useForm();
-
+	
 	const personal = useSelector((state) => state.personal);
 	const { user } = personal;
 	const { userDeatails } = user;
 	const { message } = userDeatails;
-	console.log(message);
-	const amount = watch('amount');
-	// const componentProps = {
-	//   email,
-	//   amount,
-	//   metadata: {
-	//     name,
-	//     phone
-	//   },
-	//   publicKey,
-	//   text: "Pay Now",
-	//   onSuccess: () =>
-	//     alert("Thanks for doing business with us! Come back soon!!"),
-	//   onClose: () => alert("Wait! Don't leave :(")
-	// };
+	
+	const config = {
+		reference: new Date().getTime().toString(),
+		email: message.email,
+		amount: amount,
+		publicKey: message.public_key
+	};
+	
+	 const handleSuccess = (reference) => {
+			// Implementation for whatever you want to do with reference and after success call.
+			console.log(reference);
+		};
+
+
+	 const componentProps = {
+			...config,
+			text: 'Add Money',
+			onSuccess: (reference) => handleSuccess(reference),
+			onClose: onClose,
+		};
+  
 
 	const initialRef = React.useRef();
 	const finalRef = React.useRef();
@@ -93,6 +99,8 @@ export default function AddMoneyModal() {
 								w='400px'
 								h='70px'
 								borderRadius='0px 11px 11px 11px'
+								value={amount}
+								onChange={(e) =>setAmount(e.target.value)}
 							/>
 						</FormControl>
 
@@ -117,15 +125,22 @@ export default function AddMoneyModal() {
 						</Flex>
 					</ModalBody>
 					<ModalFooter>
-						<Box
-							mt={4}
-							bg={yellowbtn}
-							width='400px'
-							h='70px'
-							borderRadius='0px 11px 11px 11px'
-							type='submit'
-							color='white'
-							_hover={{ bg: '#1A202C' }}></Box>
+						<PaystackConsumer {...componentProps}>
+							{({ initializePayment }) => (
+								<Button
+									mt={4}
+									bg={yellowbtn}
+									width='400px'
+									h='70px'
+									borderRadius='0px 11px 11px 11px'
+									type='submit'
+									color='white'
+									_hover={{ bg: '#1A202C' }}
+									onClick={() =>
+										initializePayment(handleSuccess, onClose)
+									}>Add Money</Button>
+							)}
+						</PaystackConsumer>
 					</ModalFooter>
 				</ModalContent>
 			</Modal>
