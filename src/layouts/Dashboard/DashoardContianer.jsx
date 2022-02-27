@@ -28,12 +28,9 @@ import delicon from '../../assets/DealIcon.svg';
 import { useSelector } from 'react-redux';
 
 export default function DashboardPage() {
-	const personal = useSelector((state) => state.personal);
-	const { user } = personal;
-		const { user } = personal;
-		const { userDeatails } = user;
-		const { message } = userDeatails;
-	
+	const personalSignIn = useSelector((state) => state.personalSignIn);
+	const { userDetails } = personalSignIn;
+
 
 	return (
 		<Grid
@@ -48,7 +45,7 @@ export default function DashboardPage() {
 							<Flex display='flex' direction='row' alignItems='center'>
 								<Image mr='15px' src={user1} alt='user' />
 								<Stack>
-									{user && <Text>Hello {message.name}</Text>}
+									{userDetails && <Text>Hello {userDetails.name}</Text>}
 								</Stack>
 								<Stack>
 									<FaAngleDown />

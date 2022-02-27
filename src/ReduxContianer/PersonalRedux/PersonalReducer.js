@@ -1,17 +1,16 @@
 import UserActionType from '../constants/UserActionType';
 
 const INITIAL_STATE = {
-	users: null,
 	user: {
-		userDeatails: localStorage.getItem('userDeatails')
-			? JSON.parse(localStorage.getItem('userDeatails'))
+		userDetails: localStorage.getItem('userDetails')
+			? JSON.parse(localStorage.getItem('userDetails'))
 			: null,
 	},
 	error: null,
 	loading: true,
 };
 
-const personalReducer = (state = INITIAL_STATE, action) => {
+export const personalSignUpReducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case UserActionType.DATA_REQUEST:
 			return {
@@ -21,20 +20,24 @@ const personalReducer = (state = INITIAL_STATE, action) => {
 		case UserActionType.SIGN_UP_SUCCESS:
 			return {
 				...state,
-				users: action.payload,
-				userDeatails: action.payload.user,
+				userDetails: action.payload.user,
 			};
 		case UserActionType.SIGN_UP_ERROR:
 			return {
 				...state,
 				error: action.payload,
 			};
+			default:
+			return state;
+	}
+}
 
+export const personalSignInReducer = (state = INITIAL_STATE, action) => {
+	switch (action.type) {
 		case UserActionType.SIGN_IN_SUCCESS:
 			return {
 				...state,
-				users: action.payload,
-				userDeatails: action.payload.user,
+				userDetails: action.payload.user,
 			};
 
 		case UserActionType.SIGN_IN_ERROR:
@@ -42,47 +45,39 @@ const personalReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				error: action.payload,
 			};
+			default:
+			return state;
+	}
+}
 
+export const personalOtpRedcuer = (state = INITIAL_STATE, action) => {
+	switch (action.type) {
+		case UserActionType.DATA_REQUEST:
 		case UserActionType.SEND_SMS_SUCCESS:
-			return {
-				...state,
-				users: action.payload,
-				userDeatails: action.payload.user,
-			};
-
 		case UserActionType.SEND_SMS_ERROR:
 			return {
 				...state,
-				error: action.payload,
+				loading: true,
+				userDetails: action.payload.user,
+				error: action.payload
 			};
+		default:
+			return state;
+	}
+}
 
+export const personalVerifyOtpRedcuer = (state = INITIAL_STATE, action) => {
+	switch (action.type) {
+		case UserActionType.DATA_REQUEST:
 		case UserActionType.VERIFY_NUMBRER_SUCCESS:
-			return {
-				...state,
-				users: action.payload,
-				userDeatails: action.payload.user,
-			};
-
 		case UserActionType.VERIFY_NUMBRER_ERROR:
 			return {
 				...state,
-				error: action.payload,
-			};
-		case UserActionType.GET_USER_DETAIL_SUCCESS:
-			return {
-				...state,
-				users: action.payload,
-				userDeatails: action.payload.user,
-			};
-
-		case UserActionType.GET_USER_DETAIL_ERROR:
-			return {
-				...state,
+				loading: true,
+				userDetails: action.payload.user,
 				error: action.payload,
 			};
 		default:
 			return state;
 	}
 };
-
-export default personalReducer;

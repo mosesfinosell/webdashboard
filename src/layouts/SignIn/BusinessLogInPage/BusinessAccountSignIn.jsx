@@ -36,8 +36,8 @@ export default function BusinessAccountSignIn() {
 
 	// Redux
 	const dispatch = useDispatch();
-	const business = useSelector((state) => state.business);
-	const { error, user, loading } = business;
+	const businessSignIn = useSelector((state) => state.businessSignIn);
+	const { error, businessDetails, loading } = businessSignIn;
 
 	// const toast = useToast({error})
 
@@ -59,7 +59,7 @@ export default function BusinessAccountSignIn() {
 	const history = useHistory();
 
 	function handleButton() {
-		if (!user) {
+		if (!businessDetails) {
 			return error;
 		} else {
 			return history.push('/verify-otp-business');

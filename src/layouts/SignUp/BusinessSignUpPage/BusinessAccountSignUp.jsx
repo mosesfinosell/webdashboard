@@ -49,8 +49,8 @@ export default function BusinessAccountSignUp() {
 	const [show, setShow] = useState(false);
 
 	const dispatch = useDispatch();
-	const business = useSelector((state) => state.business);
-	const { error, loading, user } = business;
+	const businessSignUp = useSelector((state) => state.businessSignUp);
+	const { error, loading, businessDetails } = businessSignUp;
 
 	// Function
 	const handleClick = () => setShow(!show);
@@ -75,7 +75,7 @@ export default function BusinessAccountSignUp() {
 	const history = useHistory();
 
 	function handleButton() {
-		if (!user) {
+		if (!businessDetails) {
 			return error;
 		} else {
 			return history.push('/verify-otp-business');

@@ -2,7 +2,6 @@ import {
 	Modal,
 	ModalOverlay,
 	ModalContent,
-	Box,
 	ModalFooter,
 	ModalBody,
 	ModalCloseButton,
@@ -20,9 +19,9 @@ import {
 import React, { useState } from 'react';
 import { useColorModeValue } from '@chakra-ui/color-mode';
 import { BsToggleOn, BsToggleOff, BsPlusSquare } from 'react-icons/bs';
-import { PaystackButton,PaystackConsumer } from 'react-paystack';
+import { PaystackConsumer } from 'react-paystack';
 import { useSelector } from 'react-redux';
-import { useForm } from 'react-hook-form';
+// import { useForm } from 'react-hook-form';
 
 export default function AddMoneyModal() {
 	const yellowbtn = useColorModeValue('yellow.500');
@@ -31,16 +30,15 @@ export default function AddMoneyModal() {
 	const [amount, setAmount] = useState('');
 	const handleClick = () => setShow(!show);
 	
-	const personal = useSelector((state) => state.personal);
-	const { user } = personal;
-	const { userDeatails } = user;
-	const { message } = userDeatails;
+	const personalSignIn = useSelector((state) => state.personalSignIn);
+	const { userDetails } = personalSignIn;
+
 	
 	const config = {
 		reference: new Date().getTime().toString(),
-		email: message.email,
+		email: userDetails.email,
 		amount: amount,
-		publicKey: message.public_key
+		publicKey: userDetails.public_key
 	};
 	
 	 const handleSuccess = (reference) => {
@@ -56,10 +54,6 @@ export default function AddMoneyModal() {
 			onClose: onClose,
 		};
   
-
-	const initialRef = React.useRef();
-	const finalRef = React.useRef();
-
 	return (
 		<>
 			<Stack
@@ -74,8 +68,6 @@ export default function AddMoneyModal() {
 				<BsPlusSquare />
 			</Stack>
 			<Modal
-				initialFocusRef={initialRef}
-				finalFocusRef={finalRef}
 				isOpen={isOpen}
 				onClose={onClose}
 				size='md'
@@ -103,11 +95,6 @@ export default function AddMoneyModal() {
 								onChange={(e) =>setAmount(e.target.value)}
 							/>
 						</FormControl>
-
-						{/* <FormControl mt={4}>
-                    <FormLabel>Card number</FormLabel>
-                    <Input ref={initialRef} placeholder='0000 0000 00000 0000' w='400px' h='70px' borderRadius='0px 11px 11px 11px'/>
-                  </FormControl> */}
 						<Flex
 							direction='row'
 							align='center'

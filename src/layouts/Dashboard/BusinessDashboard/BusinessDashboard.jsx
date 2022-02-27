@@ -29,8 +29,8 @@ import AccountBusinessProfile from './Account/AccountBusinessProfile';
 import { useSelector } from 'react-redux';
 
 export default function BusinessDashboard() {
-	const business = useSelector((state) => state.business);
-	const { user } = business;
+	const businessSignIn = useSelector((state) => state.businessSignIn);
+	const { businessDetails } = businessSignIn;
 
 	return (
 		<Grid
@@ -48,8 +48,8 @@ export default function BusinessDashboard() {
 									<Avatar name='user' src={user1} />
 								</Stack>
 								<Stack pr='15px'>
-									{user && (
-										<Text>Hello {user.businessDeatails.message.name}</Text>
+									{businessDetails && (
+										<Text>Hello {businessDetails.name}</Text>
 									)}
 								</Stack>
 								<Stack>

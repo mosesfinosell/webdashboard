@@ -1,8 +1,18 @@
 import { combineReducers } from 'redux';
-import { persistReducer } from 'redux-persist';
-import personalReducer from './PersonalRedux/PersonalReducer';
+// import { persistReducer } from 'redux-persist';
+import {
+	personalSignInReducer,
+	personalSignUpReducer,
+	personalOtpRedcuer,
+	personalVerifyOtpRedcuer
+} from './PersonalRedux/PersonalReducer';
 // import storage from 'redux-persist/lib/storage/session';
-import businessReducer from './BussinessRedux/BusinessReducer';
+import {
+	businessSignUpReducer,
+	businessSignInReducer,
+	businessOtpReducer,
+	businessVerifyOtpReducer
+} from './BussinessRedux/BusinessReducer';
 
 // const persistConfig = {
 //    key: 'root',
@@ -11,8 +21,17 @@ import businessReducer from './BussinessRedux/BusinessReducer';
 // }
 
 const rootReducer = combineReducers({
-	personal: personalReducer,
-	business: businessReducer,
+	//Personal Reducer
+	personalSignIn: personalSignInReducer,
+	personalSignUp: personalSignUpReducer,
+	personalOtp: personalOtpRedcuer,
+	personalVerifyOtp: personalVerifyOtpRedcuer,
+
+	//Business Reducer
+	businessSignUp: businessSignUpReducer,
+	businessSignIn: businessSignInReducer,
+	businessOtp: businessOtpReducer,
+	businessVerifyOtp: businessVerifyOtpReducer
 });
 
 // export default persistReducer(persistConfig, rootReducer);

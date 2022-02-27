@@ -49,8 +49,8 @@ export default function PersonalForgetPassword() {
 				</Center>
 				<Center>
 					<Stack mt='8'>
-						<Text color='gray'>
-							Enter your email address and we’ll email <br /> you a code to use
+						<Text color='gray' textAlign='center' w='350px' mb='20px'>
+							Enter your email address and we’ll email you a code to use
 							to reset your passcode
 						</Text>
 					</Stack>
@@ -67,7 +67,7 @@ export default function PersonalForgetPassword() {
 											<InputGroup>
 												<InputLeftElement
 													pointerEvents='none'
-													m='25px 1px'
+													m='15px 1px'
 													fontSize='20px'
 													color='yellow.500'
 													children={<MdEmail />}
@@ -78,8 +78,9 @@ export default function PersonalForgetPassword() {
 													type='email'
 													placeholder='Email Address'
 													value={email}
-													width='500px'
-													h='80px'
+													width='400px'
+													h='70px'
+													mb='20px'
 													borderRadius='0px 11px 11px 11px'
 												/>
 											</InputGroup>
@@ -90,8 +91,8 @@ export default function PersonalForgetPassword() {
 								<Button
 									mt={4}
 									bg={yellowbtn}
-									width='500px'
-									h='80px'
+									width='400px'
+									h='70px'
 									borderRadius='0px 11px 11px 11px'
 									type='submit'
 									color='white'

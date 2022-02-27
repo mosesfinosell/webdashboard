@@ -36,8 +36,8 @@ export default function PersonalAccountSignIn() {
 
 	// Redux
 	const dispatch = useDispatch();
-	const personal = useSelector((state) => state.personal);
-	const { error, loading, users } = personal;
+	const personalSignIn = useSelector((state) => state.personalSignIn);
+	const { error, loading, userDetails } = personalSignIn;
 
 	// const toast = useToast({error})
 
@@ -59,7 +59,7 @@ export default function PersonalAccountSignIn() {
 	};
 
 	function handleButton() {
-		if (!users) {
+		if (!userDetails) {
 			return error;
 		} else {
 			return history.push('/verify-otp');

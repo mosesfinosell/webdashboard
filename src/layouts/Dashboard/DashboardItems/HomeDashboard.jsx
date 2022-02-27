@@ -21,13 +21,12 @@ import BuyAirtimeModal from '../../HomeItemsModal/BuyAirtime/BuyAirtimeModal';
 import { useSelector } from 'react-redux';
 
 export default function HomeDash() {
-	const personal = useSelector((state) => state.personal);
-	const { user } = personal;
-	console.log(user);
+	const personalSignIn = useSelector((state) => state.personalSignIn);
+       const {userDetails} = personalSignIn
 
 	return (
 		<Container m='40px' maxW='container.lg'>
-			<Grid h='800px' templateColumns='repeat(5, 1fr)'>
+			<Grid h='600px' templateColumns='repeat(5, 1fr)'>
 				<GridItem colSpan={4} rowSpan={6} bg='white'>
 					<Tabs variant='unstyled'>
 						<Center>
@@ -63,18 +62,18 @@ export default function HomeDash() {
 						<TabPanels>
 							<TabPanel>
 								<Stack>
-									{user && (
+									{userDetails && (
 										<Heading as='h6'>
-											₦ {user.userDeatails.message.p_balance}
+											₦ {userDetails.p_balance}
 										</Heading>
 									)}
 								</Stack>
 							</TabPanel>
 							<TabPanel>
 								<Stack>
-									{user && (
+									{userDetails && (
 										<Heading as='h6'>
-											₦ {user.userDeatails.message.transfer_bal}
+											₦ {userDetails.transfer_bal}
 										</Heading>
 									)}
 								</Stack>
@@ -152,7 +151,7 @@ export default function HomeDash() {
 						<Center>
 							<Box
 								h='100px'
-								w='480px'
+								w='400px'
 								borderRadius='0px 11px 0px 0px'
 								border='0.5px solid #D9D9D9'
 								display='flex'
@@ -173,7 +172,7 @@ export default function HomeDash() {
 								<TabPanel>
 									<Box
 										h='100px'
-										w='480px'
+										w='400px'
 										border='0.5px solid #D9D9D9'
 										display='flex'
 										alignItems='center'
@@ -205,7 +204,7 @@ export default function HomeDash() {
 									</Box>
 									<Box
 										h='100px'
-										w='480px'
+										w='400px'
 										border='0.5px solid #D9D9D9'
 										display='flex'
 										alignItems='center'
@@ -237,7 +236,7 @@ export default function HomeDash() {
 									</Box>
 									<Box
 										h='100px'
-										w='480px'
+										w='400px'
 										border='0.5px solid #D9D9D9'
 										display='flex'
 										alignItems='center'
@@ -271,7 +270,7 @@ export default function HomeDash() {
 								<TabPanel>
 									<Box
 										h='100px'
-										w='480px'
+										w='400px'
 										border='0.5px solid #D9D9D9'
 										display='flex'
 										alignItems='center'
@@ -297,7 +296,7 @@ export default function HomeDash() {
 									</Box>
 									<Box
 										h='100px'
-										w='480px'
+										w='400px'
 										border='0.5px solid #D9D9D9'
 										display='flex'
 										alignItems='center'
@@ -323,7 +322,7 @@ export default function HomeDash() {
 									</Box>
 									<Box
 										h='100px'
-										w='480px'
+										w='400px'
 										border='0.5px solid #D9D9D9'
 										display='flex'
 										alignItems='center'

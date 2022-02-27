@@ -26,15 +26,14 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Spinner } from '@chakra-ui/react';
-import { personalUserSignUp } from '../../../ReduxContianer/PersonalRedux/PersonalAction';
-
+import {personalUserSignUp} from '../../../ReduxContianer/PersonalRedux/PersonalAction'
 export default function PersonalAccountSignUp() {
 	const yellowbtn = useColorModeValue('yellow.500');
 
 	// Redux
 	const dispatch = useDispatch();
-	const personal = useSelector((state) => state.personal);
-	const { error, loading, users } = personal;
+	const personalSignUp = useSelector((state) => state.personalSignUp);
+	const {error, loading, userDetails } = personalSignUp;
 
 	// //router
 
@@ -62,11 +61,11 @@ export default function PersonalAccountSignUp() {
 		// setEmail('');
 		// setPhoneNumber('');
 		// setName('')
-		console.log(name, phoneNumber, email, password, personal);
+		console.log(name, phoneNumber, email, password, "personal");
 	}
 
 	function handleButton() {
-		if (!users) {
+		if (!userDetails) {
 			return error;
 		} else {
 			return history.push('/verify-otp');

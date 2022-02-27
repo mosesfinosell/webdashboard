@@ -2,78 +2,55 @@ import UserActionType from '../constants/UserActionType';
 
 const INITIAL_STATE = {
 	user: {
-		businessDeatails: localStorage.getItem('businessDeatails')
-			? JSON.parse(localStorage.getItem('businessDeatails'))
+		businessDetails: localStorage.getItem('businessDetails')
+			? JSON.parse(localStorage.getItem('businessDetails'))
 			: null,
 	},
 	error: null,
 	loading: true,
 };
 
-const businessReducer = (state = INITIAL_STATE, action) => {
+export const businessSignUpReducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case UserActionType.DATA_REQUEST:
-			return {
-				...state,
-				loading: true,
-			};
 		case UserActionType.SIGN_UP_SUCCESS:
-			return {
-				...state,
-				businessDeatails: action.payload.user,
-			};
 		case UserActionType.SIGN_UP_ERROR:
 			return {
 				...state,
-				error: action.payload,
+				loading: true,
+				businessDetails: action.payload.user,
 			};
+		default:
+			return state;
+	}
 
+}
+		
+export const businessSignInReducer = (state = INITIAL_STATE, action) => {
+	switch (action.type) {
+		case UserActionType.DATA_REQUEST:
 		case UserActionType.SIGN_IN_SUCCESS:
-			return {
-				...state,
-				businessDeatails: action.payload.user,
-			};
-
 		case UserActionType.SIGN_IN_ERROR:
 			return {
 				...state,
-				error: action.payload,
+				loading: true,
+				businessDetails: action.payload.user,
+				error: action.payload
 			};
-
+		default:
+			return state;
+	}		
+}
+	
+export const businessOtpReducer = (state = INITIAL_STATE, action) => {
+	switch (action.type) {
+		case UserActionType.DATA_REQUEST:
 		case UserActionType.SEND_SMS_SUCCESS:
-			return {
-				...state,
-				businessDeatails: action.payload.user,
-			};
-
 		case UserActionType.SEND_SMS_ERROR:
 			return {
 				...state,
-				error: action.payload,
-			};
-
-		case UserActionType.VERIFY_NUMBRER_SUCCESS:
-			return {
-				...state,
-
-				businessDeatails: action.payload.user,
-			};
-
-		case UserActionType.VERIFY_NUMBRER_ERROR:
-			return {
-				...state,
-				error: action.payload,
-			};
-		case UserActionType.GET_USER_DETAIL_SUCCESS:
-			return {
-				...state,
-
-				businessDeatails: action.payload.user,
-			};
-
-		case UserActionType.GET_USER_DETAIL_ERROR:
-			return {
-				...state,
+				loading: true,
+				businessDetails: action.payload.user,
 				error: action.payload,
 			};
 		default:
@@ -81,4 +58,21 @@ const businessReducer = (state = INITIAL_STATE, action) => {
 	}
 };
 
-export default businessReducer;
+	
+export const businessVerifyOtpReducer = (state = INITIAL_STATE, action) => {
+	switch (action.type) {
+		case UserActionType.DATA_REQUEST:
+		case UserActionType.VERIFY_NUMBRER_SUCCESS:
+		case UserActionType.VERIFY_NUMBRER_ERROR:
+			return {
+				...state,
+				loading: true,
+				businessDetails: action.payload.user,
+				error: action.payload,
+			};
+		default:
+			return state;
+	}
+};
+
+
