@@ -24,7 +24,7 @@ export const businessUserSignUp =
 				payload: data,
 			});
 
-			localStorage.setItem('businessDeatails', JSON.stringify(data));
+			localStorage.setItem('businessDetails', JSON.stringify(data));
 		} catch (error) {
 			dispatch({
 				type: UserActionType.SIGN_UP_ERROR,
@@ -48,7 +48,7 @@ export const businessUserLogin =
 				payload: data,
 			});
 
-			localStorage.setItem('businessDeatails', JSON.stringify(data));
+			localStorage.setItem('businessDetails', JSON.stringify(data));
 		} catch (error) {
 			dispatch({
 				type: UserActionType.SIGN_IN_ERROR,
@@ -56,3 +56,22 @@ export const businessUserLogin =
 			});
 		}
 	};
+
+
+	export const creditUserAccount = (amount,user_id,balance_type,ref,platform) => async(dispatch) => {
+		dispatch({
+			type: UserActionType.DATA_REQUEST
+		});
+		try {
+			const {data} = await axios.post(baseUrl + `/finance/credit`,{amount,user_id,balance_type,ref,platform})
+			dispatch({
+				type: UserActionType.CREDIT_USER_SUCCESS,
+				payload: data
+			});
+		}catch (error) {
+			dispatch({
+				type: UserActionType.CREDIT_USER_ERROR,
+				payload: error.response && error.response.data.message,
+			});
+		}
+	}

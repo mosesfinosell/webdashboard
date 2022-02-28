@@ -27,30 +27,33 @@ export default function AddMoneyModal() {
 	const yellowbtn = useColorModeValue('yellow.500');
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [show, setShow] = useState(false);
-	const [amount, setAmount] = useState('');
+	const [amount, setAmount] = useState("");
 	const handleClick = () => setShow(!show);
 	
 	const personalSignIn = useSelector((state) => state.personalSignIn);
-	const { userDetails } = personalSignIn;
+	const { user} = personalSignIn;
+    const {userDetails} = user
+	const {message} = userDetails
 
-	
+	// PAYSTACK CONFIG
+
 	const config = {
 		reference: new Date().getTime().toString(),
-		email: userDetails.email,
-		amount: amount,
-		publicKey: userDetails.public_key
+		email: message.email,
+		amount: amount * 100 ,
+		publicKey: message.public_key
 	};
 	
-	 const handleSuccess = (reference) => {
+	 const handleSuccess = (message) => {
 			// Implementation for whatever you want to do with reference and after success call.
-			console.log(reference);
+			console.log(message);
 		};
 
 
 	 const componentProps = {
 			...config,
 			text: 'Add Money',
-			onSuccess: (reference) => handleSuccess(reference),
+			onSuccess: (message) => handleSuccess(message),
 			onClose: onClose,
 		};
   

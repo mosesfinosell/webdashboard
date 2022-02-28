@@ -29,6 +29,8 @@ import { MdEmail, MdWifiCalling3, MdAddBusiness } from 'react-icons/md';
 import { BsWhatsapp, BsInstagram, BsTwitter } from 'react-icons/bs';
 import { FaLock, FaEyeSlash, FaEye } from 'react-icons/fa';
 import { useColorModeValue } from '@chakra-ui/color-mode';
+import { useSelector } from 'react-redux';
+
 import { BiPencil } from 'react-icons/bi';
 import accUser from '../../../../assets/accuser.svg';
 
@@ -45,6 +47,12 @@ export default function AccountBusinessProfile() {
 
 	// Function
 	const handleClick = () => setShow(!show);
+
+	// Redux
+	const businessSignIn = useSelector((state) => state.businessSignIn);
+	const { user } = businessSignIn;
+     const {businessDetails} = user
+      const {message} = businessDetails
 
 	return (
 		<Container m='40px' maxW='container.md'>
@@ -180,7 +188,7 @@ export default function AccountBusinessProfile() {
 																			mb='20px'
 																			value={name}
 																			//  onChange={(e) => setName(e.target.value)}
-																			placeholder='Business Name'
+																			placeholder={message.name}
 																			width='300px'
 																			h='60px'
 																			borderRadius='0px 11px 11px 11px'
@@ -218,7 +226,7 @@ export default function AccountBusinessProfile() {
 																			mb='20px'
 																			value={email}
 																			// onChange={(e) => setEmail(e.target.value)}
-																			placeholder='jummy2019@gmail.com'
+																			placeholder={message.email}
 																			width='300px'
 																			h='60px'
 																			borderRadius='0px 11px 11px 11px'
@@ -258,7 +266,7 @@ export default function AccountBusinessProfile() {
 																			value={phonenumber}
 																			mb='20px'
 																			//  onChange={(e) => setPhonenumber(e.target.value)}
-																			placeholder='08012345678'
+																			placeholder={message.phone_number}
 																			width='300px'
 																			h='60px'
 																			borderRadius='0px 11px 11px 11px'
@@ -296,7 +304,7 @@ export default function AccountBusinessProfile() {
 																			value={phonenumber}
 																			mb='20px'
 																			//  onChange={(e) => setPhonenumber(e.target.value)}
-																			placeholder='08012345678'
+																			placeholder={message.phone_number}
 																			width='300px'
 																			h='60px'
 																			borderRadius='0px 11px 11px 11px'

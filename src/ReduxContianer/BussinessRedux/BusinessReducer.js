@@ -8,6 +8,7 @@ const INITIAL_STATE = {
 	},
 	error: null,
 	loading: true,
+	amount: null
 };
 
 export const businessSignUpReducer = (state = INITIAL_STATE, action) => {
@@ -75,4 +76,16 @@ export const businessVerifyOtpReducer = (state = INITIAL_STATE, action) => {
 	}
 };
 
-
+export const creditUserRedux = (state = INITIAL_STATE, action) => {
+	switch(action.type) {
+		case UserActionType.DATA_REQUEST:
+		case UserActionType.CREDIT_USER_SUCCESS:
+		case UserActionType.CREDIT_USER_ERROR: 
+		return {
+			...state,
+			loading: true,
+			amount: action.payload,
+			error: action.payload
+		}
+	}
+}

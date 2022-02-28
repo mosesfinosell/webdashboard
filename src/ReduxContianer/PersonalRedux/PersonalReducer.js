@@ -37,7 +37,7 @@ export const personalSignInReducer = (state = INITIAL_STATE, action) => {
 		case UserActionType.SIGN_IN_SUCCESS:
 			return {
 				...state,
-				userDetails: action.payload,
+				userDetails: action.payload.user,
 			};
 
 		case UserActionType.SIGN_IN_ERROR:

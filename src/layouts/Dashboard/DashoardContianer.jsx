@@ -29,8 +29,9 @@ import { useSelector } from 'react-redux';
 
 export default function DashboardPage() {
 	const personalSignIn = useSelector((state) => state.personalSignIn);
-	const { userDetails } = personalSignIn;
-
+	const { user } = personalSignIn;
+      const {userDetails} = user
+	  const {message} = userDetails  
 
 	return (
 		<Grid
@@ -40,12 +41,12 @@ export default function DashboardPage() {
 			display='flex'>
 			<Tabs orientation='vertical' variant='unstyled'>
 				<GridItem rowSpan={7} colSpan={2} bg='white'>
-					<Box bg='white' w='250px' h='100%' border='0.5px solid #D9D9D9'>
+					<Box bg='white' w='300px' h='150vh' borderRight='0.3px solid #D9D9D9'>
 						<Center p='45px'>
 							<Flex display='flex' direction='row' alignItems='center'>
 								<Image mr='15px' src={user1} alt='user' />
 								<Stack>
-									{userDetails && <Text>Hello {userDetails.name}</Text>}
+									{userDetails && <Text>Hello {message.name}</Text>}
 								</Stack>
 								<Stack>
 									<FaAngleDown />

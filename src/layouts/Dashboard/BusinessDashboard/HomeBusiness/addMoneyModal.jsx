@@ -17,19 +17,55 @@ import {
 	Center,
 } from '@chakra-ui/react';
 
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { useColorModeValue } from '@chakra-ui/color-mode';
 import { BsToggleOn, BsToggleOff, BsPlusSquare } from 'react-icons/bs';
+import {PaystackConsumer} from "react-paystack"
+import {useSelector,useDispatch} from 'react-redux'
+import {creditUserAccount} from '../../../../ReduxContianer/BussinessRedux/BusinessAction'
 
 export default function AddMoneyBusinessModal() {
 	const yellowbtn = useColorModeValue('yellow.500');
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
+    const [amount, setAmount] = useState("")
 	const [show, setShow] = useState(false);
 	const handleClick = () => setShow(!show);
 
-	const initialRef = React.useRef();
-	const finalRef = React.useRef();
+const personalSignIn = useSelector((state) => state.personalSignIn);
+	const { user} = personalSignIn;
+    const {userDetails} = user
+	const {message} = userDetails
+
+const dispatch = useDispatch()
+
+// useEffect(() => {
+//      dispatch(creditUserAccount())
+// },[])
+
+	// PAYSTACK CONFIG
+
+	const config = {
+		reference: new Date().getTime().toString(),
+		email: message.email,
+		amount: amount * 100 ,
+		publicKey: message.public_key
+	};
+	
+	 const handleSuccess = (message,amount) => {
+			// Implementation for whatever you want to do with reference and after success call.
+			dispatch(creditUserAccount(amount,'dSX5pNJFZJ6OI711jWn3','p_balance','ref','paystack'))
+			// console.log(amount,user_id,balance_type,ref)
+		};
+
+
+	 const componentProps = {
+			...config,
+			text: 'Add Money',
+			onSuccess: (message) => handleSuccess(message,amount),
+			onClose: onClose,
+		};
+  
 
 	return (
 		<>
@@ -37,8 +73,7 @@ export default function AddMoneyBusinessModal() {
 				<BsPlusSquare />
 			</Stack>
 			<Modal
-				initialFocusRef={initialRef}
-				finalFocusRef={finalRef}
+
 				isOpen={isOpen}
 				onClose={onClose}
 				size='md'
@@ -56,22 +91,14 @@ export default function AddMoneyBusinessModal() {
 						<FormControl>
 							<FormLabel>Amount</FormLabel>
 							<Input
-								ref={initialRef}
+								name='amount'
+								type='text'
 								placeholder='₦0.00'
 								w='400px'
 								h='70px'
 								borderRadius='0px 11px 11px 11px'
-							/>
-						</FormControl>
-
-						<FormControl mt={4}>
-							<FormLabel>Card number</FormLabel>
-							<Input
-								ref={initialRef}
-								placeholder='0000 0000 00000 0000'
-								w='400px'
-								h='70px'
-								borderRadius='0px 11px 11px 11px'
+								value={amount}
+								onChange={(e) =>setAmount(e.target.value)}
 							/>
 						</FormControl>
 						<Flex
@@ -91,17 +118,22 @@ export default function AddMoneyBusinessModal() {
 						</Flex>
 					</ModalBody>
 					<ModalFooter>
-						<Button
-							mt={4}
-							bg={yellowbtn}
-							width='400px'
-							h='70px'
-							borderRadius='0px 11px 11px 11px'
-							type='submit'
-							color='white'
-							_hover={{ bg: '#1A202C' }}>
-							Add Money
-						</Button>
+						<PaystackConsumer {...componentProps}>
+							{({ initializePayment }) => (
+								<Button
+									mt={4}
+									bg={yellowbtn}
+									width='400px'
+									h='70px'
+									borderRadius='0px 11px 11px 11px'
+									type='submit'
+									color='white'
+									_hover={{ bg: '#1A202C' }}
+									onClick={() =>
+										initializePayment(handleSuccess, onClose)
+									}>Add Money</Button>
+							)}
+						</PaystackConsumer>
 					</ModalFooter>
 				</ModalContent>
 			</Modal>

@@ -27,14 +27,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Spinner } from '@chakra-ui/react';
 import {personalUserSignUp} from '../../../ReduxContianer/PersonalRedux/PersonalAction'
+
+
 export default function PersonalAccountSignUp() {
 	const yellowbtn = useColorModeValue('yellow.500');
 
 	// Redux
 	const dispatch = useDispatch();
 	const personalSignUp = useSelector((state) => state.personalSignUp);
-	const {error, loading, userDetails } = personalSignUp;
-
+	const {error, loading,user} = personalSignUp;
+      const {userDetails} = user
+	 
 	// //router
 
 	const history = useHistory();

@@ -30,6 +30,8 @@ import { FaUser, FaLock, FaEyeSlash, FaEye } from 'react-icons/fa';
 import { useColorModeValue } from '@chakra-ui/color-mode';
 import { BiPencil } from 'react-icons/bi';
 import accUser from '../../../assets/accuser.svg';
+import { useSelector } from 'react-redux';
+
 
 export default function AccountUserProfile() {
 	const yellowbtn = useColorModeValue('yellow.500');
@@ -44,6 +46,12 @@ export default function AccountUserProfile() {
 
 	// Function
 	const handleClick = () => setShow(!show);
+
+	// Redux
+	 const personalSignIn = useSelector((state) => state.personalSignIn);
+	const { user } = personalSignIn;
+      const {userDetails} = user
+	  const {message} = userDetails  
 
 	return (
 		<Container m='40px' maxW='container.lg'>
@@ -154,7 +162,7 @@ export default function AccountUserProfile() {
 																		<InputLeftElement
 																			pointerEvents='none'
 																			m='12px 1px'
-																			fontSize='20px'
+																			fontSize='18px'
 																			color='yellow.500'
 																			children={<FaUser />}
 																		/>
@@ -169,7 +177,7 @@ export default function AccountUserProfile() {
 																			mb='20px'
 																			value={name}
 																			//  onChange={(e) => setName(e.target.value)}
-																			placeholder='Jumoke Adetola'
+																			placeholder={message.name}
 																			width='300px'
 																			h='60px'
 																			borderRadius='0px 11px 11px 11px'
@@ -207,7 +215,7 @@ export default function AccountUserProfile() {
 																			mb='20px'
 																			value={email}
 																			// onChange={(e) => setEmail(e.target.value)}
-																			placeholder='jummy2019@gmail.com'
+																			placeholder={message.email}
 																			width='300px'
 																			h='60px'
 																			borderRadius='0px 11px 11px 11px'
@@ -247,7 +255,7 @@ export default function AccountUserProfile() {
 																			value={phonenumber}
 																			mb='20px'
 																			//  onChange={(e) => setPhonenumber(e.target.value)}
-																			placeholder='08012345678'
+																			placeholder={message.phone_number}
 																			width='300px'
 																			h='60px'
 																			borderRadius='0px 11px 11px 11px'

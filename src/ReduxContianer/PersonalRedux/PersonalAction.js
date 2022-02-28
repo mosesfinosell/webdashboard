@@ -21,7 +21,7 @@ export const personalUserSignUp =
 				payload: data,
 			});
 
-			localStorage.setItem('userDeatails', JSON.stringify(data));
+			localStorage.setItem('userDetails', JSON.stringify(data));
 		} catch (error) {
 			dispatch({
 				type: UserActionType.SIGN_UP_ERROR,
@@ -46,7 +46,7 @@ export const peronalUserLogin = (phonenumber, password) => async (dispatch) => {
 			payload: data,
 		});
 
-		localStorage.setItem('userDeatails', JSON.stringify(data));
+		localStorage.setItem('userDetails', JSON.stringify(data));
 	} catch (error) {
 		dispatch({
 			type: UserActionType.SIGN_IN_ERROR,
@@ -63,7 +63,7 @@ export const SendOtpSms = (user) => async (dispatch) => {
 			payload: data,
 		});
 
-		localStorage.setItem('userDeatails', JSON.stringify(data));
+		localStorage.setItem('userDetails', JSON.stringify(data));
 	} catch (error) {
 		dispatch({
 			type: UserActionType.SEND_SMS_ERROR,
@@ -83,7 +83,7 @@ export const verifyNumberSms = (user, code) => async (dispatch) => {
 			payload: data,
 		});
 
-		localStorage.setItem('userDeatails', JSON.stringify(data));
+		localStorage.setItem('userDetails', JSON.stringify(data));
 	} catch (error) {
 		dispatch({
 			type: UserActionType.VERIFY_NUMBRER_ERROR,

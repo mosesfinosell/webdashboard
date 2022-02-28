@@ -1,3 +1,4 @@
+import {Formik,Form,Field} from 'formik'
 import {
 	Grid,
 	Box,
@@ -9,17 +10,32 @@ import {
 	Flex,
 	Image,
 	Center,
+	Input,
+    InputLeftElement,
+    InputRightElement,
+    InputGroup,
+    FormControl,
+    FormLabel,
+    FormErrorMessage,
 	Tabs,
 	TabList,
 	TabPanels,
 	Tab,
 	TabPanel,
+	Select
 } from '@chakra-ui/react';
 import { BiShoppingBag } from 'react-icons/bi';
-// import { Link as RLink } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import box from '../../../assets/box.svg';
+import {BiSearchAlt2} from "react-icons/bi";
+import {FaAngleDown} from 'react-icons/fa'
+import {useState} from 'react'
 
 export default function DealDashboard() {
+	const [search,setSearch] = useState('')
+
+	
+	
 	return (
 		<Container m='40px' maxW='container.lg'>
 			<Grid h='800px' templateColumns='repeat(5, 1fr)'>
@@ -29,8 +45,77 @@ export default function DealDashboard() {
 							Action
 						</Text>
 					</Stack>
+                         <Box  w='400px' h='80%' borderRadius='0px 11px 11px 11px' border='0.5px solid #D9D9D9'>
+         <Flex direction='column' justifyContent='center' mt='80px'>
+    <Center>
+    <Stack mt='20px' mb='45px'>
+      <Text fontSize='30px' fontWeight='bold' w='250px' textAlign='center'>Find a Deal</Text>
+      </Stack>
+    </Center>
+    <Center>
+    <Formik>
+            {() => (
+                <Center>
+              <Form 
+            //   onSubmit={handleSubmit}
+              >
+			 
 
-					<Box
+                <Field name='name'  >
+                  {({ field, form }) => (
+                      
+                    <FormControl isInvalid={form.errors.name && form.touched.name}>
+                   <InputGroup>
+                      <InputLeftElement
+                      pointerEvents='none'
+                      m='18px 1px'
+                      fontSize='25px'
+                      color='gray.400'
+                    children={<BiSearchAlt2/>}
+                   />
+               <Input {...field} 
+			   mb='25px'
+               value={search}  
+               onChange={(e) => setSearch(e.target.value)}
+               placeholder='What are you looking for?' 
+               width='350px' h='75px' 
+               borderRadius='0px 11px 11px 11px'/>
+               </InputGroup>   
+                    </FormControl>
+                  )}
+                </Field>
+                <Select
+			   id='country'
+			   color='gray.400'
+				placeholder='Filter by location'
+				width='350px'
+				h='75px'
+				borderRadius='0px 11px 11px 11px'>
+				<option color='gray.400'>United Arab Emirates</option>
+				<option color='gray.400'>Nigeria</option>
+				</Select>
+                </Form>
+              </Center>
+            )}
+          </Formik>
+    </Center>
+  <Center>
+  <Stack mt='40px'>
+      <Button
+                  bg='yellow.500'
+                  width='350px' h='75px'
+                  borderRadius='0px 11px 11px 11px'
+                  type='submit'
+                  color='white'
+                  _hover={{bg: '#1A202C'}}
+                >
+                Search
+                </Button>
+      </Stack>
+  </Center>
+         </Flex>
+</Box>
+					{/* <Box
 						w='400px'
 						h='80%'
 						borderRadius='0px 11px 11px 11px'
@@ -66,6 +151,7 @@ export default function DealDashboard() {
 							</Center>
 						</Flex>
 					</Box>
+					 */}
 				</GridItem>
 				<GridItem colStart={6} colEnd={9} h='10' bg='white'>
 					<Stack m='10px'>

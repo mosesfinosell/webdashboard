@@ -19,8 +19,9 @@ import AddMoneyModal from '../../HomeItemsModal/AddMoney/addMoneyModal';
 // import SendMoneyModal from '../../HomeItemsModal/SendMoney/sendMoneyModal'
 import BuyAirtimeModal from '../../HomeItemsModal/BuyAirtime/BuyAirtimeModal';
 import { useSelector } from 'react-redux';
-
+import {useState} from 'react'
 export default function HomeDash() {
+	const [amount] = useState(localStorage.getItem('amount'));
 	const personalSignIn = useSelector((state) => state.personalSignIn);
        const {userDetails} = personalSignIn
 
@@ -64,7 +65,7 @@ export default function HomeDash() {
 								<Stack>
 									{userDetails && (
 										<Heading as='h6'>
-											₦ {userDetails.p_balance}
+											₦ {amount}
 										</Heading>
 									)}
 								</Stack>
@@ -73,7 +74,7 @@ export default function HomeDash() {
 								<Stack>
 									{userDetails && (
 										<Heading as='h6'>
-											₦ {userDetails.transfer_bal}
+											₦ {amount}
 										</Heading>
 									)}
 								</Stack>
