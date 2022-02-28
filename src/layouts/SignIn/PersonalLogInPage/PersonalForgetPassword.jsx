@@ -28,12 +28,10 @@ export default function PersonalForgetPassword() {
 		<Container maxW='container.lg'>
 			<Box
 				p='50'
-				m='36'
 				boxSizing='border-box'
 				borderWidth='1px'
 				borderRadius='0px 21px 21px 21px'
 				m='20'
-				borderRadius='lg'
 				overflow='hidden'>
 				<Center>
 					<Stack>

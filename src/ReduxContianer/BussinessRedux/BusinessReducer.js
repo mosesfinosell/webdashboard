@@ -18,7 +18,7 @@ export const businessSignUpReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				loading: true,
-				businessDetails: action.payload.user,
+				businessDetails: action.payload,
 			};
 		default:
 			return state;
@@ -34,7 +34,7 @@ export const businessSignInReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				loading: true,
-				businessDetails: action.payload.user,
+				businessDetails: action.payload,
 				error: action.payload
 			};
 		default:
@@ -50,7 +50,7 @@ export const businessOtpReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				loading: true,
-				businessDetails: action.payload.user,
+				businessDetails: action.payload,
 				error: action.payload,
 			};
 		default:
@@ -67,7 +67,7 @@ export const businessVerifyOtpReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				loading: true,
-				businessDetails: action.payload.user,
+				businessDetails: action.payload,
 				error: action.payload,
 			};
 		default:

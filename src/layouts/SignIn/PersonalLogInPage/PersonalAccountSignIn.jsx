@@ -58,13 +58,13 @@ export default function PersonalAccountSignIn() {
 		localStorage.setItem('phoneNumber', phoneNumber);
 	};
 
-	function handleButton() {
-		if (!userDetails) {
-			return error;
-		} else {
-			return history.push('/verify-otp');
-		}
-	}
+	// function handleButton() {
+	// 	if (!userDetails) {
+	// 		return error;
+	// 	} else {
+	// 		return history.push('/verify-otp');
+	// 	}
+	// }
 
 	return (
 		<Container maxW='container.lg'>
@@ -191,7 +191,8 @@ export default function PersonalAccountSignIn() {
 									type='submit'
 									color='white'
 									_hover={{ bg: '#1A202C' }}
-									onClick={handleButton}>
+									// onClick={handleButton}
+								>
 									Login
 								</Button>
 								{/* }  */}

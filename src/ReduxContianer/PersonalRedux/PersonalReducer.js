@@ -20,7 +20,7 @@ export const personalSignUpReducer = (state = INITIAL_STATE, action) => {
 		case UserActionType.SIGN_UP_SUCCESS:
 			return {
 				...state,
-				userDetails: action.payload.user,
+				userDetails: action.payload,
 			};
 		case UserActionType.SIGN_UP_ERROR:
 			return {
@@ -37,7 +37,7 @@ export const personalSignInReducer = (state = INITIAL_STATE, action) => {
 		case UserActionType.SIGN_IN_SUCCESS:
 			return {
 				...state,
-				userDetails: action.payload.user,
+				userDetails: action.payload,
 			};
 
 		case UserActionType.SIGN_IN_ERROR:
@@ -58,7 +58,7 @@ export const personalOtpRedcuer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				loading: true,
-				userDetails: action.payload.user,
+				userDetails: action.payload,
 				error: action.payload
 			};
 		default:
@@ -74,7 +74,7 @@ export const personalVerifyOtpRedcuer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				loading: true,
-				userDetails: action.payload.user,
+				userDetails: action.payload,
 				error: action.payload,
 			};
 		default:
