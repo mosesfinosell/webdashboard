@@ -1,3 +1,4 @@
+import OrderActionType from '../constants/OrderActionType';
 import UserActionType from '../constants/UserActionType';
 
 const INITIAL_STATE = {
@@ -8,7 +9,8 @@ const INITIAL_STATE = {
 	},
 	error: null,
 	loading: true,
-	amount: null
+	amount: null,
+	orders: []
 };
 
 export const businessSignUpReducer = (state = INITIAL_STATE, action) => {
@@ -89,3 +91,22 @@ export const creditUserRedux = (state = INITIAL_STATE, action) => {
 		}
 	}
 }
+
+export const getOrderReducer = (state= INITIAL_STATE ,action) => {
+	switch(action.type){
+		case OrderActionType.DATA_REQUEST:
+			case OrderActionType.GET_ORDER_SUCCESS:
+				case OrderActionType.GET_ORDER_ERROR: 
+				// const {business_id, data} = action.payload
+				return {
+					...state,
+					loading: true,
+					orders: action.payload,               
+					// state.orders.map(order => business_id === business_id ? order = data : null),
+					error: action.payload
+				}
+				default:
+					return state;
+	}
+}
+

@@ -36,9 +36,9 @@ export default function BusinessDashboard() {
       const {message} = businessDetails
   const dispatch = useDispatch()
 
-useEffect(() => {
+// useEffect(() => {
      
-},[])
+// },[])
 
 
 	return (

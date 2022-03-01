@@ -32,10 +32,10 @@ export default function AddMoneyBusinessModal() {
 	const [show, setShow] = useState(false);
 	const handleClick = () => setShow(!show);
 
-const personalSignIn = useSelector((state) => state.personalSignIn);
-	const { user} = personalSignIn;
-    const {userDetails} = user
-	const {message} = userDetails
+const businessSignIn = useSelector((state) => state.businessSignIn);
+	const { user} = businessSignIn;
+    const {businessDetails} = user
+	const {message} = businessDetails
 
 const dispatch = useDispatch()
 

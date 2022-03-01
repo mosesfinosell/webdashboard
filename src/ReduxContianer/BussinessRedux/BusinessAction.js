@@ -1,5 +1,6 @@
 import axios from 'axios';
 import UserActionType from '../constants/UserActionType';
+import OrderActionType from '../constants/OrderActionType';
 
 const baseUrl = `https://finosell.link/api/v2`;
 
@@ -75,3 +76,18 @@ export const businessUserLogin =
 			});
 		}
 	}
+
+	export const getOrders = (business_id) => async (dispath) => {
+		try{
+			const {data} = await axios.get(baseUrl + `/order/fetch?business_id=${business_id}`)
+			dispath({
+				type: OrderActionType.GET_ORDER_SUCCESS,
+				payload: data
+			})
+		}catch (error){
+			 dispath({
+				 type: OrderActionType.GET_ORDER_ERROR,
+				 payload:  error.response && error.response.data,
+			 })
+		}
+	} 

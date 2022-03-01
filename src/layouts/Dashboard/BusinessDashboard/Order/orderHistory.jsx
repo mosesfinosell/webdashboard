@@ -15,8 +15,28 @@ import {
 import OrderHistoryModal from '../../../Dashboard/BusinessDashboard/Order/orderHistoryModal';
 import { BiShoppingBag } from 'react-icons/bi';
 import OrderDeliveryModal from '../../../Dashboard/BusinessDashboard/Order/orderDeliveryModal';
+import {getOrders} from '../../../../ReduxContianer/BussinessRedux/BusinessAction'
+import {useDispatch,useSelector} from 'react-redux'
+import  {useEffect} from 'react'
+// import {useParams} from 'react-router-dom'
 
 export default function OrderHistory() {
+const dispatch = useDispatch()
+const getOrder = useSelector((state) => state.getOrder)
+const {orders} = getOrder
+console.log(orders)
+
+const businessSignIn = useSelector((state)=> state.businessSignIn);
+const {user} = businessSignIn
+const{businessDetails} = user
+const {message} = businessDetails
+
+useEffect(() => {
+	dispatch(getOrders(message.business_id))
+},[])
+
+
+
 	return (
 		<Container m='40px' maxW='container.lg'>
 			<Grid h='100vh' templateColumns='repeat(5, 1fr)'>
@@ -27,7 +47,8 @@ export default function OrderHistory() {
 						</Text>
 					</Stack>
 
-					<Box
+					{orders.map((order) => {
+					return	<Box
 						h='100px'
 						w='480px'
 						border='0.5px solid #D9D9D9'
@@ -37,10 +58,10 @@ export default function OrderHistory() {
 						<OrderDeliveryModal />
 						<Stack pr='120px'>
 							<Text color='#273B4A' w='200px'>
-								Adidas Core Sneakers{' '}
+								{order.title}
 							</Text>
 							<Text color='gray' fontSize='12px'>
-								Accepted
+								{order.order_status}
 							</Text>
 						</Stack>
 
@@ -53,7 +74,8 @@ export default function OrderHistory() {
 							</Text>
 						</Stack>
 					</Box>
-					<Box
+					})}
+					{/* <Box
 						h='100px'
 						w='480px'
 						border='0.5px solid #D9D9D9'
@@ -71,7 +93,7 @@ export default function OrderHistory() {
 						</Stack>
 						<Stack pr='120px'>
 							<Text color='#273B4A' w='200px'>
-								Adidas Core Sneakers{' '}
+								ooo
 							</Text>
 							<Text color='gray' fontSize='12px'>
 								Accepted
@@ -86,7 +108,7 @@ export default function OrderHistory() {
 								Jan 3, 2022
 							</Text>
 						</Stack>
-					</Box>
+					</Box> */}
 				</GridItem>
 				<GridItem colStart={6} colEnd={9} h='10' bg='white'>
 					<Stack m='10px'>

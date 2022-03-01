@@ -11,7 +11,8 @@ import {
 	businessSignUpReducer,
 	businessSignInReducer,
 	businessOtpReducer,
-	businessVerifyOtpReducer
+	businessVerifyOtpReducer,
+	getOrderReducer
 } from './BussinessRedux/BusinessReducer';
 
 // const persistConfig = {
@@ -31,7 +32,8 @@ const rootReducer = combineReducers({
 	businessSignUp: businessSignUpReducer,
 	businessSignIn: businessSignInReducer,
 	businessOtp: businessOtpReducer,
-	businessVerifyOtp: businessVerifyOtpReducer
+	businessVerifyOtp: businessVerifyOtpReducer,
+	getOrder: getOrderReducer
 });
 
 // export default persistReducer(persistConfig, rootReducer);

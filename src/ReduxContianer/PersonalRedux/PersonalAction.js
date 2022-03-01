@@ -1,5 +1,6 @@
 import axios from 'axios';
 import UserActionType from '../constants/UserActionType';
+import OrderActionType from '../constants/OrderActionType';
 
 const baseUrl = `https://finosell.link/api/v2`;
 
@@ -106,3 +107,6 @@ export const getUserDetail = (user_id) => async (dispatch) => {
 		});
 	}
 };
+
+
+
