@@ -89,6 +89,8 @@ export const creditUserRedux = (state = INITIAL_STATE, action) => {
 			amount: action.payload,
 			error: action.payload
 		}
+		default:
+					return state;
 	}
 }
 

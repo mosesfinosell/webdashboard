@@ -24,7 +24,7 @@ export default function OrderHistory() {
 const dispatch = useDispatch()
 const getOrder = useSelector((state) => state.getOrder)
 const {orders} = getOrder
-console.log(orders)
+console.log(orders.orders)
 
 const businessSignIn = useSelector((state)=> state.businessSignIn);
 const {user} = businessSignIn
@@ -33,7 +33,7 @@ const {message} = businessDetails
 
 useEffect(() => {
 	dispatch(getOrders(message.business_id))
-},[])
+},[dispatch,message.business_id])
 
 
 
@@ -47,8 +47,8 @@ useEffect(() => {
 						</Text>
 					</Stack>
 
-					{orders.map((order) => {
-					return	<Box
+					{/* {orders.orders.map((order) => {
+					return	<Box key={order.index}
 						h='100px'
 						w='480px'
 						border='0.5px solid #D9D9D9'
@@ -64,18 +64,17 @@ useEffect(() => {
 								{order.order_status}
 							</Text>
 						</Stack>
-
 						<Stack>
 							<Text fontSize='12px' color='gray'>
-								₦12,000
+								#{order.amount}
 							</Text>
 							<Text fontSize='12px' color='gray'>
-								Jan 3, 2022
+								hi
 							</Text>
 						</Stack>
 					</Box>
-					})}
-					{/* <Box
+					})}  */}
+					<Box
 						h='100px'
 						w='480px'
 						border='0.5px solid #D9D9D9'
@@ -108,7 +107,7 @@ useEffect(() => {
 								Jan 3, 2022
 							</Text>
 						</Stack>
-					</Box> */}
+					</Box>
 				</GridItem>
 				<GridItem colStart={6} colEnd={9} h='10' bg='white'>
 					<Stack m='10px'>
