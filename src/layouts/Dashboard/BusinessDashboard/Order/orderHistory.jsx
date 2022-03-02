@@ -18,13 +18,14 @@ import OrderDeliveryModal from '../../../Dashboard/BusinessDashboard/Order/order
 import {getOrders} from '../../../../ReduxContianer/BussinessRedux/BusinessAction'
 import {useDispatch,useSelector} from 'react-redux'
 import  {useEffect} from 'react'
-// import {useParams} from 'react-router-dom'
-
+import  dateformat from 'dateformat'
+	
+	
 export default function OrderHistory() {
 const dispatch = useDispatch()
 const getOrder = useSelector((state) => state.getOrder)
 const {orders} = getOrder
-console.log(orders.orders)
+// console.log(orders.orders)
 
 const businessSignIn = useSelector((state)=> state.businessSignIn);
 const {user} = businessSignIn
@@ -47,67 +48,37 @@ useEffect(() => {
 						</Text>
 					</Stack>
 
-					{/* {orders.orders.map((order) => {
-					return	<Box key={order.index}
-						h='100px'
-						w='480px'
-						border='0.5px solid #D9D9D9'
-						display='flex'
-						alignItems='center'
-						justifyContent='space-evenly'>
-						<OrderDeliveryModal />
-						<Stack pr='120px'>
-							<Text color='#273B4A' w='200px'>
-								{order.title}
-							</Text>
-							<Text color='gray' fontSize='12px'>
-								{order.order_status}
-							</Text>
-						</Stack>
-						<Stack>
-							<Text fontSize='12px' color='gray'>
-								#{order.amount}
-							</Text>
-							<Text fontSize='12px' color='gray'>
-								hi
-							</Text>
-						</Stack>
-					</Box>
-					})}  */}
-					<Box
-						h='100px'
-						w='480px'
-						border='0.5px solid #D9D9D9'
-						display='flex'
-						alignItems='center'
-						justifyContent='space-evenly'>
-						<Stack
-							color='gray'
-							bg='gray.100'
-							borderRadius='0px 8px 8px 8px'
-							border='0.2px solid red.100'
-							p='12px'
-							fontSize='22px'>
-							<BiShoppingBag />
-						</Stack>
-						<Stack pr='120px'>
-							<Text color='#273B4A' w='200px'>
-								ooo
-							</Text>
-							<Text color='gray' fontSize='12px'>
-								Accepted
-							</Text>
-						</Stack>
-
-						<Stack>
-							<Text fontSize='12px' color='gray'>
-								₦12,000
-							</Text>
-							<Text fontSize='12px' color='gray'>
-								Jan 3, 2022
-							</Text>
-						</Stack>
-					</Box>
+					{orders.orders?.map((order, index) => {
+						
+						return (
+							<Box
+								key={order.id}
+								h='100px'
+								w='400px'
+								border='0.5px solid #D9D9D9'
+								display='flex'
+								alignItems='center'
+								justifyContent='space-evenly'>
+								<OrderDeliveryModal orders={orders}/>
+								<Stack pr='10px'>
+									<Text color='#273B4A' w='200px'>
+										{order.title}
+									</Text>
+									<Text color='gray' fontSize='12px'>
+										{order.order_status}
+									</Text>
+								</Stack>
+								<Stack>
+									<Text fontSize='12px' color='gray'>
+										₦{order.amount}
+									</Text>
+									<Text fontSize='12px' color='gray'>
+										{dateformat(order.order_date, 'mediumDate')}
+									</Text>
+								</Stack>
+							</Box>
+						);
+					})} 
 				</GridItem>
 				<GridItem colStart={6} colEnd={9} h='10' bg='white'>
 					<Stack m='10px'>
@@ -119,7 +90,7 @@ useEffect(() => {
 						<Center>
 							<Box
 								h='100px'
-								w='480px'
+								w='400px'
 								borderRadius='0px 11px 0px 0px'
 								border='0.5px solid #D9D9D9'
 								display='flex'
@@ -140,7 +111,7 @@ useEffect(() => {
 								<TabPanel>
 									<Box
 										h='100px'
-										w='480px'
+										w='400px'
 										border='0.5px solid #D9D9D9'
 										display='flex'
 										alignItems='center'
@@ -154,7 +125,7 @@ useEffect(() => {
 											fontSize='22px'>
 											<BiShoppingBag />
 										</Stack>
-										<Stack pr='120px'>
+										<Stack pr='10px'>
 											<Text color='#273B4A' w='200px'>
 												Adidas Core Sneakers{' '}
 											</Text>
@@ -174,7 +145,7 @@ useEffect(() => {
 									</Box>
 									<Box
 										h='100px'
-										w='480px'
+										w='400px'
 										border='0.5px solid #D9D9D9'
 										display='flex'
 										alignItems='center'
@@ -188,7 +159,7 @@ useEffect(() => {
 											fontSize='22px'>
 											<BiShoppingBag />
 										</Stack>
-										<Stack pr='120px'>
+										<Stack pr='10px'>
 											<Text color='#273B4A' w='200px'>
 												Adidas Core Sneakers{' '}
 											</Text>
@@ -208,7 +179,7 @@ useEffect(() => {
 									</Box>
 									<Box
 										h='100px'
-										w='480px'
+										w='400px'
 										border='0.5px solid #D9D9D9'
 										display='flex'
 										alignItems='center'
@@ -222,7 +193,7 @@ useEffect(() => {
 											fontSize='22px'>
 											<BiShoppingBag />
 										</Stack>
-										<Stack pr='120px'>
+										<Stack pr='10px'>
 											<Text color='#273B4A' w='200px'>
 												Adidas Core Sneakers{' '}
 											</Text>
@@ -244,7 +215,7 @@ useEffect(() => {
 								<TabPanel>
 									<Box
 										h='100px'
-										w='480px'
+										w='400px'
 										border='0.5px solid #D9D9D9'
 										display='flex'
 										alignItems='center'
@@ -258,7 +229,7 @@ useEffect(() => {
 											fontSize='22px'>
 											<BiShoppingBag />
 										</Stack>
-										<Stack pr='120px'>
+										<Stack pr='10px'>
 											<Text color='#273B4A' w='200px'>
 												{' '}
 												Sneakers Adidas Core
@@ -279,7 +250,7 @@ useEffect(() => {
 									</Box>
 									<Box
 										h='100px'
-										w='480px'
+										w='400px'
 										border='0.5px solid #D9D9D9'
 										display='flex'
 										alignItems='center'
@@ -293,7 +264,7 @@ useEffect(() => {
 											fontSize='22px'>
 											<BiShoppingBag />
 										</Stack>
-										<Stack pr='120px'>
+										<Stack pr='10px'>
 											<Text color='#273B4A' w='200px'>
 												Adidas Core Sneakers{' '}
 											</Text>
@@ -313,7 +284,7 @@ useEffect(() => {
 									</Box>
 									<Box
 										h='100px'
-										w='480px'
+										w='400px'
 										border='0.5px solid #D9D9D9'
 										display='flex'
 										alignItems='center'
@@ -327,7 +298,7 @@ useEffect(() => {
 											fontSize='24px'>
 											<BiShoppingBag />
 										</Stack>
-										<Stack pr='120px'>
+										<Stack pr='10px'>
 											<Text color='#273B4A' w='200px'>
 												Adidas Core Sneakers{' '}
 											</Text>

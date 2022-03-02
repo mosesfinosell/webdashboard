@@ -17,16 +17,19 @@ import React, { useState } from 'react';
 // import { useColorModeValue } from "@chakra-ui/color-mode";
 import { BsToggleOn, BsToggleOff } from 'react-icons/bs';
 import { BiShoppingBag } from 'react-icons/bi';
+import { useSelector } from 'react-redux';
+import dateformat from 'dateformat';
 
-export default function OrderDeliveryModal() {
-	// const yellowbtn = useColorModeValue('yellow.500')
+
+
+export default function OrderDeliveryModal(props) {
+	
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
-	const [show, setShow] = useState(false);
-	const handleClick = () => setShow(!show);
 
-	const initialRef = React.useRef();
-	const finalRef = React.useRef();
+	const getOrder = useSelector((state) => state.getOrder);
+	const { orders } = getOrder;
+ 	
 
 	return (
 		<>
@@ -43,8 +46,6 @@ export default function OrderDeliveryModal() {
 			</Stack>
 
 			<Modal
-				initialFocusRef={initialRef}
-				finalFocusRef={finalRef}
 				isOpen={isOpen}
 				onClose={onClose}
 				// borderRadius='0px 11px 11px 11px'
@@ -54,111 +55,118 @@ export default function OrderDeliveryModal() {
 					<ModalCloseButton />
 					<ModalBody>
 						<Center>
-							<Box
-								h='560px'
-								w='400px'
-								border='0.5px solid #D9D9D9'
-								mt='30px'
-								borderRadius='0px 11px 11px 11px'>
-								<Stack
-									h='80px'
-									direction='row'
-									border='0.5px solid #D9D9D9'
-									alignItems='center'
-									justifyContent='space-between'
-									px='30px'>
-									<Text color='gray' fontSize='14px'>
-										Item
-									</Text>
-									<Text color='black' fontSize='20px'>
-										Marshmellow Shorts
-									</Text>
-								</Stack>
-								<Stack
-									h='80px'
-									direction='row'
-									border='0.5px solid #D9D9D9'
-									alignItems='center'
-									justifyContent='space-between'
-									px='30px'>
-									<Text color='gray' fontSize='14px'>
-										Date
-									</Text>
-									<Text color='black' fontSize='20px'>
-										Jan 2, 2022
-									</Text>
-								</Stack>
-								<Stack
-									h='80px'
-									direction='row'
-									border='0.5px solid #D9D9D9'
-									alignItems='center'
-									justifyContent='space-between'
-									px='30px'>
-									<Text color='gray' fontSize='14px'>
-										Amount
-									</Text>
-									<Text color='black' fontSize='20px'>
-										₦3,500.00
-									</Text>
-								</Stack>
-								<Stack
-									h='80px'
-									direction='row'
-									border='0.5px solid #D9D9D9'
-									alignItems='center'
-									justifyContent='space-between'
-									px='30px'>
-									<Text color='gray' fontSize='14px'>
-										Transaction ID
-									</Text>
-									<Text color='black' fontSize='20px'>
-										8WH58PWOITNOWN
-									</Text>
-								</Stack>
-								<Stack
-									h='80px'
-									direction='row'
-									border='0.5px solid #D9D9D9'
-									alignItems='center'
-									justifyContent='space-between'
-									px='30px'>
-									<Text color='gray' fontSize='14px'>
-										Customer Name
-									</Text>
-									<Text color='black' fontSize='20px'>
-										Jumoke Adetola
-									</Text>
-								</Stack>
-								<Stack
-									h='80px'
-									direction='row'
-									border='0.5px solid #D9D9D9'
-									alignItems='center'
-									justifyContent='space-between'
-									px='30px'>
-									<Text color='gray' fontSize='14px'>
-										Delivery Location
-									</Text>
-									<Text color='black' fontSize='20px'>
-										21 Oremeji St. Ibadan
-									</Text>
-								</Stack>
-								<Stack
-									h='80px'
-									direction='row'
-									border='0.5px solid #D9D9D9'
-									alignItems='center'
-									justifyContent='space-between'
-									px='30px'>
-									<Text color='gray' fontSize='14px'>
-										Type of Order
-									</Text>
-									<Text color='yellow.500' fontSize='20px'>
-										Escrow
-									</Text>
-								</Stack>
-							</Box>
+							{orders.orders.map((order, index) => {
+								console.log(orders.orders);
+							
+								return (
+									<Box
+										key={order.index}
+										h='560px'
+										w='400px'
+										border='0.5px solid #D9D9D9'
+										mt='30px'
+										borderRadius='0px 11px 11px 11px'>
+										<Stack
+											h='80px'
+											direction='row'
+											border='0.5px solid #D9D9D9'
+											alignItems='center'
+											justifyContent='space-between'
+											px='30px'>
+											<Text color='gray' fontSize='14px'>
+												Item
+											</Text>
+											<Text color='black' fontSize='20px'>
+												{order.title}
+											</Text>
+										</Stack>
+										<Stack
+											h='80px'
+											direction='row'
+											border='0.5px solid #D9D9D9'
+											alignItems='center'
+											justifyContent='space-between'
+											px='30px'>
+											<Text color='gray' fontSize='14px'>
+												Date
+											</Text>
+											<Text color='black' fontSize='20px'>
+												{dateformat(order.order_date, 'mediumDate')}
+											</Text>
+										</Stack>
+										<Stack
+											h='80px'
+											direction='row'
+											border='0.5px solid #D9D9D9'
+											alignItems='center'
+											justifyContent='space-between'
+											px='30px'>
+											<Text color='gray' fontSize='14px'>
+												Amount
+											</Text>
+											<Text color='black' fontSize='20px'>
+												₦{order.amount}
+											</Text>
+										</Stack>
+										<Stack
+											h='80px'
+											direction='row'
+											border='0.5px solid #D9D9D9'
+											alignItems='center'
+											justifyContent='space-between'
+											px='30px'>
+											<Text color='gray' fontSize='14px'>
+												Transaction ID
+											</Text>
+											<Text color='black' fontSize='20px'>
+												{order.order_id}
+											</Text>
+										</Stack>
+										<Stack
+											h='80px'
+											direction='row'
+											border='0.5px solid #D9D9D9'
+											alignItems='center'
+											justifyContent='space-between'
+											px='30px'>
+											<Text color='gray' fontSize='14px'>
+												Customer Name
+											</Text>
+											<Text color='black' fontSize='20px'>
+												Jumoke Adetola
+											</Text>
+										</Stack>
+										<Stack
+											h='80px'
+											direction='row'
+											border='0.5px solid #D9D9D9'
+											alignItems='center'
+											justifyContent='space-between'
+											px='30px'>
+											<Text color='gray' fontSize='14px'>
+												Delivery Location
+											</Text>
+											<Text color='black' fontSize='20px'>
+												{order.shipping_address}
+											</Text>
+										</Stack>
+										<Stack
+											h='80px'
+											direction='row'
+											border='0.5px solid #D9D9D9'
+											alignItems='center'
+											justifyContent='space-between'
+											px='30px'>
+											<Text color='gray' fontSize='14px'>
+												Type of Order
+											</Text>
+											<Text color='yellow.500' fontSize='20px'>
+												Escrow
+											</Text>
+										</Stack>
+									</Box>
+								);   
+							})}
 						</Center>
 						<Center>
 							<Checkbox

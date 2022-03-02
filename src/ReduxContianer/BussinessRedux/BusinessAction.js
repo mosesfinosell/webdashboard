@@ -77,17 +77,33 @@ export const businessUserLogin =
 		}
 	}
 
-	export const getOrders = (business_id) => async (dispath) => {
+	export const getOrders = (business_id) => async (dispatch) => {
 		try{
 			const {data} = await axios.get(baseUrl + `/order/fetch?business_id=${business_id}`)
-			dispath({
+			dispatch({
 				type: OrderActionType.GET_ORDER_SUCCESS,
 				payload: data
 			})
 		}catch (error){
-			 dispath({
+			 dispatch({
 				 type: OrderActionType.GET_ORDER_ERROR,
 				 payload:  error.response && error.response.data,
 			 })
 		}
-	} 
+} 
+	
+
+export const createCustomer = (customer_name,customer_email,customer_id,customer_phonenumber,customer_address,business_id) => async (dispatch) => {
+	try {
+		const { data } = await axios.post(baseUrl + `/customer/create`, { customer_name, customer_email, customer_id, customer_phonenumber, customer_address, business_id }) 
+			dispatch({
+				type: UserActionType.CREATE_CUSTOMER_SUCCESS,
+				payload: data
+			})
+	} catch (error) {
+		    dispatch({
+				 type: UserActionType.CREATE_CUSTOMER_ERROR,
+				 payload:  error.response && error.response.data,
+			 })
+		}
+}

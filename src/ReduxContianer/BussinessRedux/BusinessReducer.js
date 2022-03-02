@@ -10,7 +10,8 @@ const INITIAL_STATE = {
 	error: null,
 	loading: true,
 	amount: null,
-	orders: []
+	orders: [],
+	customer: null
 };
 
 export const businessSignUpReducer = (state = INITIAL_STATE, action) => {
@@ -78,21 +79,21 @@ export const businessVerifyOtpReducer = (state = INITIAL_STATE, action) => {
 	}
 };
 
-export const creditUserRedux = (state = INITIAL_STATE, action) => {
-	switch(action.type) {
-		case UserActionType.DATA_REQUEST:
-		case UserActionType.CREDIT_USER_SUCCESS:
-		case UserActionType.CREDIT_USER_ERROR: 
-		return {
-			...state,
-			loading: true,
-			amount: action.payload,
-			error: action.payload
-		}
-		default:
-					return state;
-	}
-}
+// export const creditUserRedux = (state = INITIAL_STATE, action) => {
+// 	switch(action.type) {
+// 		case UserActionType.DATA_REQUEST:
+// 		case UserActionType.CREDIT_USER_SUCCESS:
+// 		case UserActionType.CREDIT_USER_ERROR: 
+// 		return {
+// 			...state,
+// 			loading: true,
+// 			amount: action.payload,
+// 			error: action.payload
+// 		}
+// 		default:
+// 					return state;
+// 	}
+// }
 
 export const getOrderReducer = (state= INITIAL_STATE ,action) => {
 	switch(action.type){
@@ -112,3 +113,18 @@ export const getOrderReducer = (state= INITIAL_STATE ,action) => {
 	}
 }
 
+export const createCustomerReducer = (state = INITIAL_STATE, action) => {
+	switch (action.type) {
+		case UserActionType.DATA_REQUEST:
+		case UserActionType.CREATE_CUSTOMER_SUCCESS:
+		case UserActionType.CREATE_CUSTOMER_ERROR:
+			return {
+				...state,
+				loading: true,
+				customer: action.payload,
+				error: action.payload,
+			};
+		default:
+			return state;
+	}
+}
