@@ -13,11 +13,9 @@ import {
 	TabPanel,
 	Input,
 	InputLeftElement,
-	InputRightElement,
 	InputGroup,
 	FormControl,
 	FormLabel,
-	FormErrorMessage,
 	Button,
 	Select,
 } from '@chakra-ui/react';
@@ -25,9 +23,31 @@ import { BiShoppingBag } from 'react-icons/bi';
 import { MdEmail, MdWifiCalling3 } from 'react-icons/md';
 import { useState } from 'react';
 import { Formik, Form, Field } from 'formik';
-
+import { useDispatch,useSelector } from 'react-redux';
+import  {createCustomers} from '../../../../ReduxContianer/BussinessRedux/BusinessAction'
+	
+	
 export default function PaymentDashboard() {
-	const [name, setName] = useState('');
+const dispatch = useDispatch();
+  
+	  const businessSignIn = useSelector((state) => state.businessSignIn);
+		const { user } = businessSignIn;
+		const { businessDetails } = user;
+		const { message } = businessDetails;
+  	
+	const [customerName, setcustomerName] = useState('');
+    const [customerEmail, setcustomerEmail] = useState('');
+    const [customerPhonenumber, setcustomerPhonenumber] = useState('');
+	const [customerAddress, setcustomerAddress] = useState('');
+	const [businessId] = useState(message.business_id);
+	const [randomNumber] = useState('4575r46rt5')
+	
+
+	function handleSubmit(e) {
+		e.preventDefault();
+		dispatch(createCustomers(customerName,customerEmail,customerPhonenumber,customerAddress, businessId, randomNumber))
+		
+	}
 
 	return (
 		<Container m='40px' maxW='container.lg'>
@@ -41,41 +61,36 @@ export default function PaymentDashboard() {
 
 					<Box
 						h='700px'
-						w='480px'
+						w='400px'
 						borderRadius='0px 11px 11px 11px'
 						border='0.5px solid #D9D9D9'
 						px='40px'>
 						<Formik>
 							{() => (
-								<Form>
-									<Field name='text'>
+								<Form onSubmit={handleSubmit}>
+									<Field name='name'>
 										{({ field, form }) => (
-											<FormControl
-												isInvalid={form.errors.name && form.touched.name}
-												mt='30px'>
+											<FormControl mt='30px'>
 												<FormLabel htmlFor='name'>Billed to</FormLabel>
 												<InputGroup>
 													<Input
 														{...field}
 														mb='20px'
-														value={name}
-														//  onChange={(e) => setName(e.target.value)}
+														value={customerName}
+														onChange={(e) => setcustomerName(e.target.value)}
 														placeholder='Customer Name'
 														width='420px'
 														h='60px'
 														borderRadius='0px 11px 11px 11px'
 													/>
 												</InputGroup>
-												<FormErrorMessage>{form.errors.name}</FormErrorMessage>
 											</FormControl>
 										)}
 									</Field>
 									<Field name='email'>
 										{({ field, form }) => (
-											<FormControl
-												isInvalid={form.errors.email && form.touched.email}
-												mt={4}>
-												<FormLabel htmlFor='name'>Email</FormLabel>
+											<FormControl mt={4}>
+												<FormLabel htmlFor='email'>Email</FormLabel>
 												<InputGroup>
 													<InputLeftElement
 														pointerEvents='none'
@@ -87,26 +102,21 @@ export default function PaymentDashboard() {
 													<Input
 														{...field}
 														mb='20px'
-														//   value={email}
-														//   onChange={(e) => setEmail(e.target.value)}
+														value={customerEmail}
+														onChange={(e) => setcustomerEmail(e.target.value)}
 														placeholder='Email Address'
 														width='400px'
 														h='70px'
 														borderRadius='0px 11px 11px 11px'
 													/>
 												</InputGroup>
-												<FormErrorMessage>{form.errors.email}</FormErrorMessage>
 											</FormControl>
 										)}
 									</Field>
-									<Field name='phoneNumber'>
+									<Field name='number'>
 										{({ field, form }) => (
-											<FormControl
-												isInvalid={
-													form.errors.phoneNumber && form.touched.phoneNumber
-												}
-												mt={4}>
-												<FormLabel htmlFor='name'>Phone number</FormLabel>
+											<FormControl mt={4}>
+												<FormLabel htmlFor='number'>Phone number</FormLabel>
 												<InputGroup>
 													<InputLeftElement
 														pointerEvents='none'
@@ -118,59 +128,65 @@ export default function PaymentDashboard() {
 													<Input
 														{...field}
 														mb='20px'
-														//    value={phoneNumber}
-														//    onChange={(e) => setPhoneNumber(e.target.value)}
+														value={customerPhonenumber}
+														onChange={(e) =>
+															setcustomerPhonenumber(e.target.value)
+														}
 														placeholder='08012345678'
 														width='400px'
 														h='70px'
 														borderRadius='0px 11px 11px 11px'
 													/>
 												</InputGroup>
-												<FormErrorMessage>
-													{form.errors.phoneNumber}
-												</FormErrorMessage>
 											</FormControl>
 										)}
 									</Field>
-									<Field name='text'>
+									{/* <Field>
+										<FormControl>
+											<FormLabel htmlFor='billing date'>
+												Type of Transaction
+											</FormLabel>
+											<Select
+												id='country'
+												placeholder='Select a date'
+												width='400px'
+												h='70px'
+												borderRadius='0px 11px 11px 11px'>
+												<option>United Arab Emirates</option>
+												<option>Nigeria</option>
+											</Select>
+										</FormControl>
+									</Field> */}
+									<Field name='address'>
 										{({ field, form }) => (
-											<FormControl>
-												<FormLabel htmlFor='billing date'>
-													Type of Transaction
-												</FormLabel>
-												<Select
-													id='country'
-													placeholder='Select a date'
-													width='400px'
-													h='70px'
-													borderRadius='0px 11px 11px 11px'>
-													<option>United Arab Emirates</option>
-													<option>Nigeria</option>
-												</Select>
-											</FormControl>
-										)}
-									</Field>
-									<Field name='text'>
-										{({ field, form }) => (
-											<FormControl
-												isInvalid={form.errors.name && form.touched.name}
-												mt='20px'>
-												<FormLabel htmlFor='name'>Amount</FormLabel>
+											<FormControl mt='20px'>
+												<FormLabel htmlFor='address'>Address</FormLabel>
 												<InputGroup>
 													<Input
+														mb='20px'
 														{...field}
-														value={name}
-														//  onChange={(e) => setName(e.target.value)}
+														value={customerAddress}
+														onChange={(e) => setcustomerAddress(e.target.value)}
 														placeholder='Select product from inventory'
 														width='420px'
 														h='70px'
 														borderRadius='0px 11px 11px 11px'
 													/>
 												</InputGroup>
-												<FormErrorMessage>{form.errors.name}</FormErrorMessage>
 											</FormControl>
 										)}
 									</Field>
+									<Button
+										mt={4}
+										bg='yellow.500'
+										width='300px'
+										h='60px'
+										borderRadius='0px 11px 11px 11px'
+										type='submit'
+										color='white'
+										_hover={{ bg: '#1A202C' }}>
+										Add Customer
+									</Button>
 								</Form>
 							)}
 						</Formik>
@@ -186,10 +202,11 @@ export default function PaymentDashboard() {
 						<Center>
 							<Box
 								h='100px'
-								w='480px'
+								w='400px'
 								borderRadius='0px 11px 0px 0px'
 								border='0.5px solid #D9D9D9'
 								display='flex'
+								direction='column'
 								alignItems='center'
 								justifyContent='center'>
 								<TabList>
@@ -210,7 +227,7 @@ export default function PaymentDashboard() {
 								<TabPanel>
 									<Box
 										h='100px'
-										w='480px'
+										w='400px'
 										border='0.5px solid #D9D9D9'
 										display='flex'
 										alignItems='center'
@@ -224,7 +241,7 @@ export default function PaymentDashboard() {
 											fontSize='22px'>
 											<BiShoppingBag />
 										</Stack>
-										<Stack pr='120px'>
+										<Stack pr='10px'>
 											<Text color='#273B4A' w='200px'>
 												Adidas Core Sneakers{' '}
 											</Text>
@@ -244,7 +261,7 @@ export default function PaymentDashboard() {
 									</Box>
 									<Box
 										h='100px'
-										w='480px'
+										w='400px'
 										border='0.5px solid #D9D9D9'
 										display='flex'
 										alignItems='center'
@@ -258,7 +275,7 @@ export default function PaymentDashboard() {
 											fontSize='22px'>
 											<BiShoppingBag />
 										</Stack>
-										<Stack pr='120px'>
+										<Stack pr='10px'>
 											<Text color='#273B4A' w='200px'>
 												Adidas Core Sneakers{' '}
 											</Text>
@@ -278,7 +295,7 @@ export default function PaymentDashboard() {
 									</Box>
 									<Box
 										h='100px'
-										w='480px'
+										w='400px'
 										border='0.5px solid #D9D9D9'
 										display='flex'
 										alignItems='center'
@@ -292,7 +309,7 @@ export default function PaymentDashboard() {
 											fontSize='22px'>
 											<BiShoppingBag />
 										</Stack>
-										<Stack pr='120px'>
+										<Stack pr='10px'>
 											<Text color='#273B4A' w='200px'>
 												Adidas Core Sneakers{' '}
 											</Text>
@@ -314,7 +331,7 @@ export default function PaymentDashboard() {
 								<TabPanel>
 									<Box
 										h='100px'
-										w='480px'
+										w='400px'
 										border='0.5px solid #D9D9D9'
 										display='flex'
 										alignItems='center'
@@ -328,7 +345,7 @@ export default function PaymentDashboard() {
 											fontSize='22px'>
 											<BiShoppingBag />
 										</Stack>
-										<Stack pr='120px'>
+										<Stack pr='10px'>
 											<Text color='#273B4A' w='200px'>
 												{' '}
 												Sneakers Adidas Core
@@ -349,7 +366,7 @@ export default function PaymentDashboard() {
 									</Box>
 									<Box
 										h='100px'
-										w='480px'
+										w='400px'
 										border='0.5px solid #D9D9D9'
 										display='flex'
 										alignItems='center'
@@ -363,7 +380,7 @@ export default function PaymentDashboard() {
 											fontSize='22px'>
 											<BiShoppingBag />
 										</Stack>
-										<Stack pr='120px'>
+										<Stack pr='10px'>
 											<Text color='#273B4A' w='200px'>
 												Adidas Core Sneakers{' '}
 											</Text>
@@ -383,7 +400,7 @@ export default function PaymentDashboard() {
 									</Box>
 									<Box
 										h='100px'
-										w='480px'
+										w='400px'
 										border='0.5px solid #D9D9D9'
 										display='flex'
 										alignItems='center'
@@ -397,7 +414,7 @@ export default function PaymentDashboard() {
 											fontSize='24px'>
 											<BiShoppingBag />
 										</Stack>
-										<Stack pr='120px'>
+										<Stack pr='10px'>
 											<Text color='#273B4A' w='200px'>
 												Adidas Core Sneakers{' '}
 											</Text>
@@ -419,7 +436,7 @@ export default function PaymentDashboard() {
 								<TabPanel>
 									<Box
 										h='100px'
-										w='480px'
+										w='400px'
 										border='0.5px solid #D9D9D9'
 										display='flex'
 										alignItems='center'
@@ -433,7 +450,7 @@ export default function PaymentDashboard() {
 											fontSize='22px'>
 											<BiShoppingBag />
 										</Stack>
-										<Stack pr='120px'>
+										<Stack pr='10px'>
 											<Text color='#273B4A' w='200px'>
 												{' '}
 												Sneakers Adidas Core
@@ -454,7 +471,7 @@ export default function PaymentDashboard() {
 									</Box>
 									<Box
 										h='100px'
-										w='480px'
+										w='400px'
 										border='0.5px solid #D9D9D9'
 										display='flex'
 										alignItems='center'
@@ -468,7 +485,7 @@ export default function PaymentDashboard() {
 											fontSize='22px'>
 											<BiShoppingBag />
 										</Stack>
-										<Stack pr='120px'>
+										<Stack pr='10px'>
 											<Text color='#273B4A' w='200px'>
 												Adidas Core Sneakers{' '}
 											</Text>
@@ -488,7 +505,7 @@ export default function PaymentDashboard() {
 									</Box>
 									<Box
 										h='100px'
-										w='480px'
+										w='400px'
 										border='0.5px solid #D9D9D9'
 										display='flex'
 										alignItems='center'
@@ -502,7 +519,7 @@ export default function PaymentDashboard() {
 											fontSize='24px'>
 											<BiShoppingBag />
 										</Stack>
-										<Stack pr='120px'>
+										<Stack pr='10px'>
 											<Text color='#273B4A' w='200px'>
 												Adidas Core Sneakers{' '}
 											</Text>

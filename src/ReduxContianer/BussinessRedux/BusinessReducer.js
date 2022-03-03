@@ -11,7 +11,8 @@ const INITIAL_STATE = {
 	loading: true,
 	amount: null,
 	orders: [],
-	customer: null
+	customer: null,
+	// password :  localStorage.getItem('password')
 };
 
 export const businessSignUpReducer = (state = INITIAL_STATE, action) => {
@@ -19,6 +20,7 @@ export const businessSignUpReducer = (state = INITIAL_STATE, action) => {
 		case UserActionType.DATA_REQUEST:
 		case UserActionType.SIGN_UP_SUCCESS:
 		case UserActionType.SIGN_UP_ERROR:
+			// localStorage.setItem('password', action.payload.password);
 			return {
 				...state,
 				loading: true,
@@ -35,6 +37,7 @@ export const businessSignInReducer = (state = INITIAL_STATE, action) => {
 		case UserActionType.DATA_REQUEST:
 		case UserActionType.SIGN_IN_SUCCESS:
 		case UserActionType.SIGN_IN_ERROR:
+			//  localStorage.setItem('password',action.payload.password);
 			return {
 				...state,
 				loading: true,
@@ -79,21 +82,21 @@ export const businessVerifyOtpReducer = (state = INITIAL_STATE, action) => {
 	}
 };
 
-// export const creditUserRedux = (state = INITIAL_STATE, action) => {
-// 	switch(action.type) {
-// 		case UserActionType.DATA_REQUEST:
-// 		case UserActionType.CREDIT_USER_SUCCESS:
-// 		case UserActionType.CREDIT_USER_ERROR: 
-// 		return {
-// 			...state,
-// 			loading: true,
-// 			amount: action.payload,
-// 			error: action.payload
-// 		}
-// 		default:
-// 					return state;
-// 	}
-// }
+export const creditUserReducer = (state = INITIAL_STATE, action) => {
+	switch(action.type) {
+		case UserActionType.DATA_REQUEST:
+		case UserActionType.CREDIT_USER_SUCCESS:
+		case UserActionType.CREDIT_USER_ERROR: 
+		return {
+			...state,
+			loading: true,
+			amount: action.payload,
+			error: action.payload
+		}
+		default:
+					return state;
+	}
+}
 
 export const getOrderReducer = (state= INITIAL_STATE ,action) => {
 	switch(action.type){
@@ -105,7 +108,6 @@ export const getOrderReducer = (state= INITIAL_STATE ,action) => {
 					...state,
 					loading: true,
 					orders: action.payload,               
-					// state.orders.map(order => business_id === business_id ? order = data : null),
 					error: action.payload
 				}
 				default:

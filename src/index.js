@@ -6,15 +6,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { store } from './ReduxContianer/store';
-// import ErrorBoundary from './ErrorBoundary'
+import ErrorBoundary from './ErrorBoundary'
 
 ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>
 			<ChakraProvider>
-				{/* <ErrorBoundary> */}
+				<ErrorBoundary>
 				<App />
-				{/* </ErrorBoundary> */}
+				</ErrorBoundary>
 			</ChakraProvider>
 		</Provider>
 	</React.StrictMode>,

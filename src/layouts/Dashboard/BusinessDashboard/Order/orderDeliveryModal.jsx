@@ -56,7 +56,7 @@ export default function OrderDeliveryModal(props) {
 					<ModalBody>
 						<Center>
 							{orders.orders.map((order, index) => {
-								console.log(orders.orders);
+								
 							
 								return (
 									<Box

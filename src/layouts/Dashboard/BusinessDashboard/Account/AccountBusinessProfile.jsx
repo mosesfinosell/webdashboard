@@ -33,6 +33,8 @@ import { useSelector } from 'react-redux';
 
 import { BiPencil } from 'react-icons/bi';
 import accUser from '../../../../assets/accuser.svg';
+import uploadImageModal from './uploadModal'
+
 
 export default function AccountBusinessProfile() {
 	const yellowbtn = useColorModeValue('yellow.500');
@@ -142,7 +144,8 @@ export default function AccountBusinessProfile() {
 									<Box alignItems='start'>
 										<Stack alignItems='start' pb='30px'>
 											<Image src={accUser} alt='user' h='80px' />
-											<Box
+											<uploadImageModal />
+											{/* <Box
 												color='white'
 												fontSize='18px'
 												w='30px'
@@ -153,8 +156,8 @@ export default function AccountBusinessProfile() {
 												position='relative'
 												bottom='30px'
 												left='50px'>
-												<BiPencil />
-											</Box>
+												
+											</Box> */}
 										</Stack>
 										<Stack>
 											<Formik>

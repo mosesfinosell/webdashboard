@@ -33,7 +33,9 @@ const{businessDetails} = user
 const {message} = businessDetails
 
 useEffect(() => {
-	dispatch(getOrders(message.business_id))
+	if (orders) {
+		dispatch(getOrders(message.business_id));
+	} 
 },[dispatch,message.business_id])
 
 
@@ -59,7 +61,7 @@ useEffect(() => {
 								display='flex'
 								alignItems='center'
 								justifyContent='space-evenly'>
-								<OrderDeliveryModal orders={orders}/>
+								<OrderDeliveryModal/>
 								<Stack pr='10px'>
 									<Text color='#273B4A' w='200px'>
 										{order.title}

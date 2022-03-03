@@ -37,6 +37,9 @@ const businessSignIn = useSelector((state) => state.businessSignIn);
     const {businessDetails} = user
 	const {message} = businessDetails
 
+	// const creditUser = useSelector((state) => state.creditUser)
+	// const { amount } = creditUser
+	
 const dispatch = useDispatch()
 
 // useEffect(() => {
@@ -54,8 +57,17 @@ const dispatch = useDispatch()
 	
 	 const handleSuccess = (message,amount) => {
 			// Implementation for whatever you want to do with reference and after success call.
-			dispatch(creditUserAccount(amount,'dSX5pNJFZJ6OI711jWn3','p_balance','ref','paystack'))
-			// console.log(amount,user_id,balance_type,ref)
+		
+				dispatch(
+					creditUserAccount(
+						amount,
+						'dSX5pNJFZJ6OI711jWn3',
+						'p_balance',
+						'ref',
+						'paystack'
+					)
+				);
+			// console.log(amount,message)
 		};
 
 

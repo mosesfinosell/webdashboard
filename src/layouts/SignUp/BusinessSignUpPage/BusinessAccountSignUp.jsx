@@ -156,7 +156,7 @@ export default function BusinessAccountSignUp() {
 										<FormControl
 											isInvalid={form.errors.email && form.touched.email}
 											mt={4}>
-											<FormLabel htmlFor='name'>Email</FormLabel>
+											<FormLabel htmlFor='email'>Email</FormLabel>
 											<InputGroup>
 												<InputLeftElement
 													pointerEvents='none'
@@ -186,7 +186,7 @@ export default function BusinessAccountSignUp() {
 												form.errors.phoneNumber && form.touched.phoneNumber
 											}
 											mt={4}>
-											<FormLabel htmlFor='name'>Phone number</FormLabel>
+											<FormLabel htmlFor='number'>Phone number</FormLabel>
 											<InputGroup>
 												<InputLeftElement
 													pointerEvents='none'
@@ -219,7 +219,7 @@ export default function BusinessAccountSignUp() {
 													form.errors.phoneNumber && form.touched.phoneNumber
 												}
 												mt={4}>
-												<FormLabel htmlFor='name'>Address</FormLabel>
+												<FormLabel htmlFor='address'>Address</FormLabel>
 												<InputGroup>
 													<InputLeftElement
 														pointerEvents='none'
@@ -251,7 +251,7 @@ export default function BusinessAccountSignUp() {
 													form.errors.phoneNumber && form.touched.phoneNumber
 												}
 												mt={4}>
-												<FormLabel htmlFor='name'>Industry</FormLabel>
+												<FormLabel htmlFor='text'>Industry</FormLabel>
 												<InputGroup>
 													<InputLeftElement
 														pointerEvents='none'
@@ -301,7 +301,7 @@ export default function BusinessAccountSignUp() {
 														size='sm'
 														b='transparent'
 														cursor='pointer'>
-														{show ? <FaEyeSlash /> : <FaEye />}
+														{!show ? <FaEyeSlash /> : <FaEye />}
 													</Button>
 												</InputRightElement>
 												<Input
