@@ -54,14 +54,14 @@ useEffect(() => {
 						
 						return (
 							<Box
-								key={order.id}
+								key={index}
 								h='100px'
 								w='400px'
 								border='0.5px solid #D9D9D9'
 								display='flex'
 								alignItems='center'
 								justifyContent='space-evenly'>
-								<OrderDeliveryModal/>
+								<OrderHistoryModal/>
 								<Stack pr='10px'>
 									<Text color='#273B4A' w='200px'>
 										{order.title}

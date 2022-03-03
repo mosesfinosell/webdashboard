@@ -59,19 +59,35 @@ export const businessUserLogin =
 	};
 
 
-	export const creditUserAccount = (amount,user_id,balance_type,ref,platform) => async(dispatch,getState) => {
+	export const creditUserAccount = (amount,user_id,balancetype,ref,platform) => async(dispatch,getState) => {
 		dispatch({
 			type: UserActionType.DATA_REQUEST
 		});
 		try {
 			const {
-				businessUserSign: { businessDetails },
+				businessSignIn: {
+					user: {
+						businessDetails: { message },
+					},
+				},
 			} = getState();
-			const { data } = await axios.post(baseUrl + `/finance/credit`, amount, user_id, balance_type, ref, platform , {
+			const config = {
 				headers: {
-					Authorization: `Bearer ${businessDetails.password}`,
-				}
-			})
+					Authorization: `Bearer ${message.password}`,
+				},
+			};
+			const { data } = await axios.post(
+				baseUrl + `/finance/credit`,
+				{amount,
+				user_id,
+				balancetype,
+				ref,
+				platform,
+				},
+				
+				config
+				
+			);
 			dispatch({
 				type: UserActionType.CREDIT_USER_SUCCESS,
 				payload: data
@@ -103,25 +119,23 @@ export const businessUserLogin =
 export const createCustomers = (customer_name,customer_email,customer_id,customer_phonenumber,customer_address,business_id) => async (dispatch,getState) => {
 	try {
 		const {
-			businessSignIn: { user:
-				{ businessDetails: { message } },
-				},
+			businessSignIn: { user: { businessDetails: { message } } },
 		} = getState();
 		 const config = {
-				headers: {
-					Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIzNDgxNDQ4NjIwMDQiLCJpYXQiOjE2MTYyMzc4Mjc2NzN9.8QjRI7kI-jkhu7WOXEDSVGEdwp_03v9HEKVmBEvE1yU`,
+			 headers: {
+					Authorization: `Bearer ${message.password}`
 				},
 			};
 		const { data } = await axios.post(
 			baseUrl + `/customer/create`,
-			{
-				customer_name,
+			
+				{customer_name,
 				customer_email,
 				customer_id,
 				customer_phonenumber,
 				customer_address,
-				business_id,
-			},
+				business_id},
+			
 		 config
 		); 
 			dispatch({
