@@ -24,31 +24,36 @@ import {
 	Button,
 } from '@chakra-ui/react';
 import { Formik, Form, Field } from 'formik';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { MdEmail, MdWifiCalling3, MdAddBusiness } from 'react-icons/md';
 import { BsWhatsapp, BsInstagram, BsTwitter } from 'react-icons/bs';
-import { FaLock, FaEyeSlash, FaEye } from 'react-icons/fa';
+import { FaLock} from 'react-icons/fa';
 import { useColorModeValue } from '@chakra-ui/color-mode';
-import { useSelector } from 'react-redux';
-
+import { useSelector,useDispatch } from 'react-redux';
+import {updatePassword} from '../../../../ReduxContianer/BussinessRedux/BusinessAction'
 import { BiPencil } from 'react-icons/bi';
 import accUser from '../../../../assets/accuser.svg';
-import uploadImageModal from './uploadModal'
+// import uploadImageModal from './uploadModal'
 
 
 export default function AccountBusinessProfile() {
 	const yellowbtn = useColorModeValue('yellow.500');
-
+	const dispatch = useDispatch()
+	
 	const [name, setName] = useState('');
 	const [phonenumber, setPhonenumber] = useState('');
 	const [email, setEmail] = useState('');
-	const [oldpassword, setOldPassword] = useState('');
-	const [newpassword, setNewPassword] = useState('');
-	const [Confirmpassword, setConfirmPassword] = useState('');
-	const [show, setShow] = useState(false);
-
+	const [oldPassword, setOldPassword] = useState('');
+	const [newPassword, setNewPassword] = useState('');
+	const [confirmPassword, setConfirmPassword] = useState('');
+	
 	// Function
-	const handleClick = () => setShow(!show);
+	function handleSubmit(e) {
+		e.preventDefault();
+		dispatch(
+			updatePassword(message.user_id, oldPassword, newPassword, confirmPassword)
+		);
+	}
 
 	// Redux
 	const businessSignIn = useSelector((state) => state.businessSignIn);
@@ -56,6 +61,9 @@ export default function AccountBusinessProfile() {
      const {businessDetails} = user
       const {message} = businessDetails
 
+	
+
+	
 	return (
 		<Container m='40px' maxW='container.md'>
 			<Tabs variant='unstyled'>
@@ -144,7 +152,7 @@ export default function AccountBusinessProfile() {
 									<Box alignItems='start'>
 										<Stack alignItems='start' pb='30px'>
 											<Image src={accUser} alt='user' h='80px' />
-											<uploadImageModal />
+											{/* <uploadImageModal /> */}
 											{/* <Box
 												color='white'
 												fontSize='18px'
@@ -190,7 +198,7 @@ export default function AccountBusinessProfile() {
 																			{...field}
 																			mb='20px'
 																			value={name}
-																			//  onChange={(e) => setName(e.target.value)}
+																			 onChange={(e) => setName(e.target.value)}
 																			placeholder={message.name}
 																			width='300px'
 																			h='60px'
@@ -228,7 +236,7 @@ export default function AccountBusinessProfile() {
 																			{...field}
 																			mb='20px'
 																			value={email}
-																			// onChange={(e) => setEmail(e.target.value)}
+																			onChange={(e) => setEmail(e.target.value)}
 																			placeholder={message.email}
 																			width='300px'
 																			h='60px'
@@ -268,7 +276,7 @@ export default function AccountBusinessProfile() {
 																			{...field}
 																			value={phonenumber}
 																			mb='20px'
-																			//  onChange={(e) => setPhonenumber(e.target.value)}
+																			 onChange={(e) => setPhonenumber(e.target.value)}
 																			placeholder={message.phone_number}
 																			width='300px'
 																			h='60px'
@@ -306,7 +314,7 @@ export default function AccountBusinessProfile() {
 																			{...field}
 																			value={phonenumber}
 																			mb='20px'
-																			//  onChange={(e) => setPhonenumber(e.target.value)}
+																			 onChange={(e) => setPhonenumber(e.target.value)}
 																			placeholder={message.phone_number}
 																			width='300px'
 																			h='60px'
@@ -346,7 +354,7 @@ export default function AccountBusinessProfile() {
 																			{...field}
 																			value={phonenumber}
 																			mb='20px'
-																			//  onChange={(e) => setPhonenumber(e.target.value)}
+																			 onChange={(e) => setPhonenumber(e.target.value)}
 																			placeholder='08012345678'
 																			width='300px'
 																			h='60px'
@@ -384,7 +392,7 @@ export default function AccountBusinessProfile() {
 																			{...field}
 																			value={phonenumber}
 																			mb='20px'
-																			//  onChange={(e) => setPhonenumber(e.target.value)}
+																			 onChange={(e) => setPhonenumber(e.target.value)}
 																			placeholder='08012345678'
 																			width='300px'
 																			h='60px'
@@ -408,7 +416,7 @@ export default function AccountBusinessProfile() {
 								<Stack>
 									<Formik>
 										{() => (
-											<Form>
+											<Form onSubmit={handleSubmit}>
 												<Field name='password'>
 													{({ field, form }) => (
 														<FormControl
@@ -424,28 +432,15 @@ export default function AccountBusinessProfile() {
 																	children={<FaLock />}
 																/>
 
-																<InputRightElement
-																	pointerEvents='visible'
-																	m='15px 320px'
-																	color='yellow.500'>
-																	<Button
-																		onClick={handleClick}
-																		fontSize='25px'
-																		size='sm'
-																		b='transparent'
-																		cursor='pointer'>
-																		{show ? <FaEyeSlash /> : <FaEye />}
-																	</Button>
-																</InputRightElement>
+															
 																<Input
 																	{...field}
 																	mb='20px'
-																	type={!show ? 'password' : 'text'}
-																	onClick={handleClick}
-																	//  onChange={(e) => setPassword(e.target.value)}
-																	value={oldpassword}
+																	type="password"
+																	 onChange={(e) => setOldPassword(e.target.value)}
+																	value={oldPassword}
 																	placeholder='********'
-																	width='400px'
+																	width='350px'
 																	h='70px'
 																	borderRadius='0px 11px 11px 11px'
 																/>
@@ -471,28 +466,15 @@ export default function AccountBusinessProfile() {
 																	children={<FaLock />}
 																/>
 
-																<InputRightElement
-																	pointerEvents='visible'
-																	m='15px 320px'
-																	color='yellow.500'>
-																	<Button
-																		onClick={handleClick}
-																		fontSize='25px'
-																		size='sm'
-																		b='transparent'
-																		cursor='pointer'>
-																		{show ? <FaEyeSlash /> : <FaEye />}
-																	</Button>
-																</InputRightElement>
+															
 																<Input
 																	{...field}
 																	mb='20px'
-																	type={!show ? 'password' : 'text'}
-																	onClick={handleClick}
-																	//  onChange={(e) => setPassword(e.target.value)}
-																	value={newpassword}
+																	type="password"
+																	 onChange={(e) => setNewPassword(e.target.value)}
+																	value={newPassword}
 																	placeholder='*********'
-																	width='400px'
+																	width='350px'
 																	h='70px'
 																	borderRadius='0px 11px 11px 11px'
 																/>
@@ -518,28 +500,15 @@ export default function AccountBusinessProfile() {
 																	children={<FaLock />}
 																/>
 
-																<InputRightElement
-																	pointerEvents='visible'
-																	m='15px 320px'
-																	color='yellow.500'>
-																	<Button
-																		onClick={handleClick}
-																		fontSize='25px'
-																		size='sm'
-																		b='transparent'
-																		cursor='pointer'>
-																		{show ? <FaEyeSlash /> : <FaEye />}
-																	</Button>
-																</InputRightElement>
+															
 																<Input
 																	{...field}
 																	mb='20px'
-																	type={!show ? 'password' : 'text'}
-																	onClick={handleClick}
-																	//  onChange={(e) => setPassword(e.target.value)}
-																	value={Confirmpassword}
+																	type="password"
+																	 onChange={(e) => setConfirmPassword(e.target.value)}
+																	value={confirmPassword}
 																	placeholder='*********'
-																	width='400px'
+																	width='350px'
 																	h='70px'
 																	borderRadius='0px 11px 11px 11px'
 																/>
@@ -550,21 +519,20 @@ export default function AccountBusinessProfile() {
 														</FormControl>
 													)}
 												</Field>
-											</Form>
-										)}
-									</Formik>
-									<Stack>
-										<Button
+												<Button
 											mt={4}
 											bg={yellowbtn}
-											width='400px'
+											width='350px'
 											h='70px'
 											borderRadius='0px 11px 11px 11px'
 											type='submit'
 											color='white'
 											_hover={{ bg: '#1A202C' }}>
-											Save
 										</Button>
+											</Form>
+										)}
+									</Formik>
+									<Stack>
 									</Stack>
 								</Stack>
 							</TabPanel>

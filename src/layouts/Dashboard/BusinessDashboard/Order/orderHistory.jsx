@@ -50,7 +50,7 @@ useEffect(() => {
 						</Text>
 					</Stack>
 
-					{orders.orders?.map((order, index) => {
+					{orders && orders.orders?.map((order, index) => {
 						
 						return (
 							<Box

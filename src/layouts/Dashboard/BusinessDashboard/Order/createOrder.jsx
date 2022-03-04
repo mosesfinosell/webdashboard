@@ -26,26 +26,22 @@ import { Formik, Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { createCustomers } from '../../../../ReduxContianer/BussinessRedux/BusinessAction';
 
-export default function PaymentDashboard() {
+export default function createOrder() {
 	const dispatch = useDispatch();
 
 	const businessSignIn = useSelector((state) => state.businessSignIn);
 	const { user } = businessSignIn;
 	const { businessDetails } = user;
 	const { message } = businessDetails;
-
+    
+    const [title, setTitle] = useState('');
+    // const []
 	const [customerName, setcustomerName] = useState('');
-	const [details, setDetails] = useState('');
-	const [paymentDate, setpaymentDate] = useState('');
-	const [paymentId, setPaymentId] = useState('');
-    const [businessId] = useState(message.business_id);
-    const [customerId] = useState(message.customer_id);
-    const [paymentStatus, setPaymentStatus] = useState('');
-    const [paymentMethod, setPaymentMethod] = useState('');
-    const [paymentRef, setPaymentRef] = useState('');
-    const [transactionType, setTransactionType] = useState('');
-    const [amount, setAmount] = useState('');
-	const [product,setProduct] = useState('4575r46rt5');
+	const [customerEmail, setcustomerEmail] = useState('');
+	const [customerPhonenumber, setcustomerPhonenumber] = useState('');
+	const [customerAddress, setcustomerAddress] = useState('');
+	const [businessId] = useState(message.business_id);
+	const [randomNumber] = useState('4575r46rt5');
 
 	function handleSubmit(e) {
 		e.preventDefault();

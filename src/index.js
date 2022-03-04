@@ -12,9 +12,9 @@ ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>
 			<ChakraProvider>
-				<ErrorBoundary>
+				{/* <ErrorBoundary> */}
 				<App />
-				</ErrorBoundary>
+				{/* </ErrorBoundary> */}
 			</ChakraProvider>
 		</Provider>
 	</React.StrictMode>,

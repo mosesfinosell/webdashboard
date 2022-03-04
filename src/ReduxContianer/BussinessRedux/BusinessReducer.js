@@ -2,6 +2,7 @@ import OrderActionType from '../constants/OrderActionType';
 import UserActionType from '../constants/UserActionType';
 
 const INITIAL_STATE = {
+	users: [],
 	user: {
 		businessDetails: localStorage.getItem('businessDetails')
 			? JSON.parse(localStorage.getItem('businessDetails'))
@@ -9,7 +10,6 @@ const INITIAL_STATE = {
 	},
 	error: null,
 	loading: true,
-	amount: null,
 	orders: [],
 	customer: null,
 	// password :  localStorage.getItem('password')
@@ -82,15 +82,15 @@ export const businessVerifyOtpReducer = (state = INITIAL_STATE, action) => {
 	}
 };
 
-export const creditUserReducer = (state = INITIAL_STATE, action) => {
+export const getUserDetailsReducer = (state = INITIAL_STATE, action) => {
 	switch(action.type) {
 		case UserActionType.DATA_REQUEST:
-		case UserActionType.CREDIT_USER_SUCCESS:
-		case UserActionType.CREDIT_USER_ERROR: 
+		case UserActionType.GET_USER_DETAIL_SUCCESS:
+		case UserActionType.GET_USER_DETAIL_ERROR: 
 		return {
 			...state,
 			loading: true,
-			amount: action.payload,
+			users: action.payload?.message,
 			error: action.payload
 		}
 		default:
@@ -130,3 +130,19 @@ export const createCustomerReducer = (state = INITIAL_STATE, action) => {
 			return state;
 	}
 }
+
+export const updatePasswordReducer = (state = INITIAL_STATE, action) => {
+	switch (action.type) {
+		case UserActionType.DATA_REQUEST:
+		case UserActionType.UPDATE_PASSWORD_SUCCESS:
+		case UserActionType.UPDATE_PASSWORD_ERROR:
+			return {
+				...state,
+				loading: true,
+				users: action.payload,
+				error: action.payload,
+			};
+		default:
+			return state;
+	}
+};

@@ -59,7 +59,7 @@ export const businessUserLogin =
 	};
 
 
-	export const creditUserAccount = (amount,user_id,balancetype,ref,platform) => async(dispatch,getState) => {
+	export const getUserDetails = (user_id) => async(dispatch,getState) => {
 		dispatch({
 			type: UserActionType.DATA_REQUEST
 		});
@@ -76,26 +76,18 @@ export const businessUserLogin =
 					Authorization: `Bearer ${message.password}`,
 				},
 			};
-			const { data } = await axios.post(
-				baseUrl + `/finance/credit`,
-				{amount,
-				user_id,
-				balancetype,
-				ref,
-				platform,
-				},
-				
-				config
-				
-			);
+			const { data } = await axios.get(baseUrl + `/auths/signin?user=${user_id}`, config);
 			dispatch({
-				type: UserActionType.CREDIT_USER_SUCCESS,
-				payload: data
+				type: UserActionType.GET_USER_DETAIL_SUCCESS,
+				payload: data,
 			});
 		}catch (error) {
 			dispatch({
-				type: UserActionType.CREDIT_USER_ERROR,
-				payload: error.response && error.response.data.message,
+				type: UserActionType.GET_USER_DETAIL_ERROR,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.message,
 			});
 		}
 	}
@@ -110,7 +102,10 @@ export const businessUserLogin =
 		}catch (error){
 			 dispatch({
 					type: OrderActionType.GET_ORDER_ERROR,
-					payload: error.response && error.response.data.message,
+					payload:
+						error.response && error.response.data.message
+							? error.response.data.message
+							: error.message,
 				});
 		}
 } 
@@ -155,3 +150,20 @@ export const createCustomers = (customer_name,customer_email,customer_id,custome
 
 
 
+export const updatePassword = (user_id,new_password,retype_new_password,old_password) => async (dispatch) => {
+	try {
+		const { data } = await axios.post(baseUrl + `/api/user/updatepassword`, { user_id, new_password, retype_new_password, old_password });
+		dispatch({
+			type: UserActionType.UPDATE_PASSWORD_SUCCESS,
+			payload : data
+		});
+	} catch (error) {
+		 dispatch({
+				type: UserActionType.UPDATE_PASSWORD_ERROR,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.message,
+			});
+	}
+}

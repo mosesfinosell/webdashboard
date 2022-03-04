@@ -24,8 +24,26 @@ import { BiStore } from 'react-icons/bi';
 import { RiTeamLine } from 'react-icons/ri';
 import AddMoneyBusinessModal from './addMoneyModal';
 import SendMoneyModal from './SendMoney/sendMoneyModal';
+import { useEffect } from 'react';
+import { getUserDetails } from '../../../../ReduxContianer/BussinessRedux/BusinessAction';
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function HomeBusiness() {
+	const dispatch = useDispatch();
+
+ const businessSignIn = useSelector((state) => state.businessSignIn);
+ const { user } = businessSignIn;
+ const { businessDetails } = user;
+ const { message } = businessDetails;
+
+	const getUser = useSelector((state) => state.getUser);
+	const { users } = getUser;
+	// const { message } = users;
+
+	useEffect(() => {
+		dispatch(getUserDetails(message.user_id));
+	}, []);
+
 	return (
 		<Container m='40px' maxW='container.lg'>
 			<Grid h='100%' templateColumns='repeat(5, 1fr)'>
@@ -64,7 +82,7 @@ export default function HomeBusiness() {
 						<TabPanels>
 							<TabPanel>
 								<Stack pl={25}>
-									<Heading as='h6'>₦4,867,479.76</Heading>
+									<Heading as='h6'>₦{users?.p_balance}</Heading>
 								</Stack>
 							</TabPanel>
 							<TabPanel>

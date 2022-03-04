@@ -62,7 +62,7 @@ export default function BusinessAccountSignIn() {
 		if (!businessDetails) {
 			return error;
 		} else {
-			return history.push('/verify-otp-business');
+			return history.push('/business-dashboard');
 		}
 	}
 

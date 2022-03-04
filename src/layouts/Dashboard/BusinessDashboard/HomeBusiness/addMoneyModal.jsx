@@ -17,67 +17,47 @@ import {
 	Center,
 } from '@chakra-ui/react';
 
-import React, { useState ,useEffect} from 'react';
+import React, { useState} from 'react';
 import { useColorModeValue } from '@chakra-ui/color-mode';
 import { BsToggleOn, BsToggleOff, BsPlusSquare } from 'react-icons/bs';
 import {PaystackConsumer} from "react-paystack"
-import {useSelector,useDispatch} from 'react-redux'
-import {creditUserAccount} from '../../../../ReduxContianer/BussinessRedux/BusinessAction'
+import {useSelector} from 'react-redux'
+
 
 export default function AddMoneyBusinessModal() {
 	const yellowbtn = useColorModeValue('yellow.500');
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
-    const [amount, setAmount] = useState("")
+	const [amount, setAmount] = useState('');
 	const [show, setShow] = useState(false);
 	const handleClick = () => setShow(!show);
 
-const businessSignIn = useSelector((state) => state.businessSignIn);
-	const { user} = businessSignIn;
-    const {businessDetails} = user
-	const {message} = businessDetails
+	const businessSignIn = useSelector((state) => state.businessSignIn);
+	const { user } = businessSignIn;
+	const { businessDetails } = user;
+	const { message } = businessDetails;
 
-	// const creditUser = useSelector((state) => state.creditUser)
-	// const { amount } = creditUser
-	
-const dispatch = useDispatch()
 
-// useEffect(() => {
-//      dispatch(creditUserAccount())
-// },[])
-
-	// PAYSTACK CONFIG
+	// PAYSTACK CONFIG3
 
 	const config = {
 		reference: new Date().getTime().toString(),
 		email: message.email,
-		amount: amount * 100 ,
-		publicKey: message.public_key
+		amount: amount * 100,
+		publicKey: message.public_key,
 	};
+
+	const handleSuccess = (amount,reference) => {
+		console.log(amount, reference);
+	};
+
 	
-	 const handleSuccess = (message,amount) => {
-			// Implementation for whatever you want to do with reference and after success call.
-		
-				dispatch(
-					creditUserAccount(
-						amount,
-						'TbTdlLN9fbtHpqWY6yn9',
-						'p_balance',
-						'ref',
-						'paystack'
-					)
-				);
-			// console.log(amount,message)
-		};
-
-
-	 const componentProps = {
-			...config,
-			text: 'Add Money',
-			onSuccess: (message) => handleSuccess(message,amount),
-			onClose: onClose,
-		};
-  
+	const componentProps = {
+		...config,
+		text: 'Add Money',
+		onSuccess: (reference) => handleSuccess(reference, amount),
+		onClose: onClose,
+	};
 
 	return (
 		<>
@@ -85,7 +65,6 @@ const dispatch = useDispatch()
 				<BsPlusSquare />
 			</Stack>
 			<Modal
-
 				isOpen={isOpen}
 				onClose={onClose}
 				size='md'
@@ -110,7 +89,7 @@ const dispatch = useDispatch()
 								h='70px'
 								borderRadius='0px 11px 11px 11px'
 								value={amount}
-								onChange={(e) =>setAmount(e.target.value)}
+								onChange={(e) => setAmount(e.target.value)}
 							/>
 						</FormControl>
 						<Flex
@@ -141,9 +120,9 @@ const dispatch = useDispatch()
 									type='submit'
 									color='white'
 									_hover={{ bg: '#1A202C' }}
-									onClick={() =>
-										initializePayment(handleSuccess, onClose)
-									}>Add Money</Button>
+									onClick={() => initializePayment(handleSuccess, onClose)}>
+									Add Money
+								</Button>
 							)}
 						</PaystackConsumer>
 					</ModalFooter>
