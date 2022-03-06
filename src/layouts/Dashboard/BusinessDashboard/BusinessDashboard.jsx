@@ -118,7 +118,7 @@ export default function BusinessDashboard() {
 							<OrderHistory />
 						</TabPanel>
 						<TabPanel>
-							<PaymentDashboard />
+							{/* <PaymentDashboard /> */}
 						</TabPanel>
 						<TabPanel>
 							<AccountBusinessProfile />
