@@ -28,6 +28,8 @@ import PaymentDashboard from './Payment/paymentDashboard';
 import AccountBusinessProfile from './Account/AccountBusinessProfile';
 import { useSelector,useDispatch } from 'react-redux';
 import {useEffect} from 'react'
+import CreateCustomer from './Payment/createCustomer';
+import CreateOrder from './Order/createOrder';
 
 export default function BusinessDashboard() {
 	const businessSignIn = useSelector((state) => state.businessSignIn);
@@ -115,9 +117,11 @@ export default function BusinessDashboard() {
 							<AddUrlPage />
 						</TabPanel>
 						<TabPanel>
-							<OrderHistory />
+							{/* <OrderHistory /> */}
+							<CreateOrder/>
 						</TabPanel>
 						<TabPanel>
+							<CreateCustomer/>
 							{/* <PaymentDashboard /> */}
 						</TabPanel>
 						<TabPanel>

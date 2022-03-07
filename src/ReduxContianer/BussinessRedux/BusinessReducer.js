@@ -1,4 +1,5 @@
 import OrderActionType from '../constants/OrderActionType';
+import ProductActionType from '../constants/ProductActionType';
 import UserActionType from '../constants/UserActionType';
 
 const INITIAL_STATE = {
@@ -12,6 +13,7 @@ const INITIAL_STATE = {
 	loading: true,
 	orders: [],
 	customer: null,
+	products: []
 	// password :  localStorage.getItem('password')
 };
 
@@ -140,6 +142,22 @@ export const updatePasswordReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				loading: true,
 				users: action.payload,
+				error: action.payload,
+			};
+		default:
+			return state;
+	}
+};
+
+export const getProductReducer = (state = INITIAL_STATE, action) => {
+	switch (action.type) {
+		case ProductActionType.DATA_REQUEST:
+		case ProductActionType.GET_PRODUCT_SUCCESS:
+		case ProductActionType.GET_PRODUCT_ERROR:
+			return {
+				...state,
+				loading: true,
+				products: action.payload,
 				error: action.payload,
 			};
 		default:

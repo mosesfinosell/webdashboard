@@ -1,6 +1,7 @@
 import axios from 'axios';
 import UserActionType from '../constants/UserActionType';
 import OrderActionType from '../constants/OrderActionType';
+import ProductActionType from '../constants/ProductActionType';
 
 const baseUrl = `https://finosell.link/api/v2`;
 
@@ -167,3 +168,33 @@ export const updatePassword = (user_id,new_password,retype_new_password,old_pass
 			});
 	}
 }
+
+// export const getProduct = () => async (dispatch) => { 
+// 	try {
+         
+// 	}
+// }
+
+// PRODUCT
+
+export const getProduct = (businessid, limitno, pageno) => async (dispatch) => {
+	try {
+		const { data } = await axios.post(baseUrl + `/api/products/all`, {
+			businessid,
+			limitno,
+			pageno
+		});
+		dispatch({
+			type: ProductActionType.GET_PRODUCT_SUCCESS,
+			payload: data,
+		});
+	} catch (error) {
+		dispatch({
+			type: ProductActionType.GET_PRODUCT_ERROR,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message,
+		});
+	}
+};

@@ -15,7 +15,8 @@ import {
 	getOrderReducer,
 	createCustomerReducer,
 	getUserDetailsReducer,
-	updatePasswordReducer
+	updatePasswordReducer,
+	getProductReducer,
 } from './BussinessRedux/BusinessReducer';
 
 // const persistConfig = {
@@ -40,6 +41,7 @@ const rootReducer = combineReducers({
 	getUser: getUserDetailsReducer,
 	createCustomer: createCustomerReducer,
 	updateUserPassword: updatePasswordReducer,
+	getproduct: getProductReducer,
 });
 
 // export default persistReducer(persistConfig, rootReducer);

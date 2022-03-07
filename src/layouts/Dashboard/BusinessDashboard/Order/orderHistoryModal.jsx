@@ -48,7 +48,6 @@ export default function OrderHistoryModal() {
 				<Modal isOpen={isOpen} onClose={onClose} size='lg'>
 					<ModalOverlay />
 					{orders.orders.map((order, index) => {
-						console.log(order)
 						return (
 							<ModalContent>
 								<ModalCloseButton />

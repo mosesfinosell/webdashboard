@@ -27,7 +27,7 @@ import { useDispatch,useSelector } from 'react-redux';
 import  {createCustomers} from '../../../../ReduxContianer/BussinessRedux/BusinessAction'
 	
 	
-export default function createCustomer() {
+export default function CreateCustomer() {
 const dispatch = useDispatch();
   
 	  const businessSignIn = useSelector((state) => state.businessSignIn);
