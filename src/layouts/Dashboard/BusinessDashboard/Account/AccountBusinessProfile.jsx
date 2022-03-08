@@ -21,18 +21,16 @@ import {
 	FormControl,
 	FormLabel,
 	FormErrorMessage,
-	Button,
 } from '@chakra-ui/react';
 import { Formik, Form, Field } from 'formik';
-import { useState,useEffect } from 'react';
+import { useState} from 'react';
 import { MdEmail, MdWifiCalling3, MdAddBusiness } from 'react-icons/md';
 import { BsWhatsapp, BsInstagram, BsTwitter } from 'react-icons/bs';
-import { FaLock} from 'react-icons/fa';
 import { useColorModeValue } from '@chakra-ui/color-mode';
 import { useSelector,useDispatch } from 'react-redux';
-import {updatePassword} from '../../../../ReduxContianer/BussinessRedux/BusinessAction'
 import { BiPencil } from 'react-icons/bi';
 import accUser from '../../../../assets/accuser.svg';
+import UpdatePassword from '../Account/updatePassword'
 // import uploadImageModal from './uploadModal'
 
 
@@ -43,17 +41,6 @@ export default function AccountBusinessProfile() {
 	const [name, setName] = useState('');
 	const [phonenumber, setPhonenumber] = useState('');
 	const [email, setEmail] = useState('');
-	const [oldPassword, setOldPassword] = useState('');
-	const [newPassword, setNewPassword] = useState('');
-	const [confirmPassword, setConfirmPassword] = useState('');
-	
-	// Function
-	function handleSubmit(e) {
-		e.preventDefault();
-		dispatch(
-			updatePassword(message.user_id, oldPassword, newPassword, confirmPassword)
-		);
-	}
 
 	// Redux
 	const businessSignIn = useSelector((state) => state.businessSignIn);
@@ -82,8 +69,7 @@ export default function AccountBusinessProfile() {
 										w='150px'
 										color='white'
 										px={4}
-										h='35px'
-										borderRadius='0px 11px 11px 11px'>
+										h='35px'>
 										Profile
 									</Box>
 								</Tab>
@@ -198,7 +184,7 @@ export default function AccountBusinessProfile() {
 																			{...field}
 																			mb='20px'
 																			value={name}
-																			 onChange={(e) => setName(e.target.value)}
+																			onChange={(e) => setName(e.target.value)}
 																			placeholder={message.name}
 																			width='300px'
 																			h='60px'
@@ -276,7 +262,9 @@ export default function AccountBusinessProfile() {
 																			{...field}
 																			value={phonenumber}
 																			mb='20px'
-																			 onChange={(e) => setPhonenumber(e.target.value)}
+																			onChange={(e) =>
+																				setPhonenumber(e.target.value)
+																			}
 																			placeholder={message.phone_number}
 																			width='300px'
 																			h='60px'
@@ -314,7 +302,9 @@ export default function AccountBusinessProfile() {
 																			{...field}
 																			value={phonenumber}
 																			mb='20px'
-																			 onChange={(e) => setPhonenumber(e.target.value)}
+																			onChange={(e) =>
+																				setPhonenumber(e.target.value)
+																			}
 																			placeholder={message.phone_number}
 																			width='300px'
 																			h='60px'
@@ -354,7 +344,9 @@ export default function AccountBusinessProfile() {
 																			{...field}
 																			value={phonenumber}
 																			mb='20px'
-																			 onChange={(e) => setPhonenumber(e.target.value)}
+																			onChange={(e) =>
+																				setPhonenumber(e.target.value)
+																			}
 																			placeholder='08012345678'
 																			width='300px'
 																			h='60px'
@@ -392,7 +384,9 @@ export default function AccountBusinessProfile() {
 																			{...field}
 																			value={phonenumber}
 																			mb='20px'
-																			 onChange={(e) => setPhonenumber(e.target.value)}
+																			onChange={(e) =>
+																				setPhonenumber(e.target.value)
+																			}
 																			placeholder='08012345678'
 																			width='300px'
 																			h='60px'
@@ -413,128 +407,7 @@ export default function AccountBusinessProfile() {
 								</Flex>
 							</TabPanel>
 							<TabPanel>
-								<Stack>
-									<Formik>
-										{() => (
-											<Form onSubmit={handleSubmit}>
-												<Field name='password'>
-													{({ field, form }) => (
-														<FormControl
-															isInvalid={form.errors.name && form.touched.name}>
-															<FormLabel htmlFor='password'>
-																Old Password
-															</FormLabel>
-															<InputGroup>
-																<InputLeftElement
-																	m='10px 1px'
-																	fontSize='18px'
-																	color='yellow.500'
-																	children={<FaLock />}
-																/>
-
-															
-																<Input
-																	{...field}
-																	mb='20px'
-																	type="password"
-																	 onChange={(e) => setOldPassword(e.target.value)}
-																	value={oldPassword}
-																	placeholder='********'
-																	width='350px'
-																	h='70px'
-																	borderRadius='0px 11px 11px 11px'
-																/>
-															</InputGroup>
-															<FormErrorMessage>
-																{form.errors.name}
-															</FormErrorMessage>
-														</FormControl>
-													)}
-												</Field>
-												<Field name='password'>
-													{({ field, form }) => (
-														<FormControl
-															isInvalid={form.errors.name && form.touched.name}>
-															<FormLabel htmlFor='password'>
-																New Password
-															</FormLabel>
-															<InputGroup>
-																<InputLeftElement
-																	m='10px 1px'
-																	fontSize='18px'
-																	color='yellow.500'
-																	children={<FaLock />}
-																/>
-
-															
-																<Input
-																	{...field}
-																	mb='20px'
-																	type="password"
-																	 onChange={(e) => setNewPassword(e.target.value)}
-																	value={newPassword}
-																	placeholder='*********'
-																	width='350px'
-																	h='70px'
-																	borderRadius='0px 11px 11px 11px'
-																/>
-															</InputGroup>
-															<FormErrorMessage>
-																{form.errors.name}
-															</FormErrorMessage>
-														</FormControl>
-													)}
-												</Field>
-												<Field name='password'>
-													{({ field, form }) => (
-														<FormControl
-															isInvalid={form.errors.name && form.touched.name}>
-															<FormLabel htmlFor='password'>
-																Confirm Password
-															</FormLabel>
-															<InputGroup>
-																<InputLeftElement
-																	m='10px 1px'
-																	fontSize='18px'
-																	color='yellow.500'
-																	children={<FaLock />}
-																/>
-
-															
-																<Input
-																	{...field}
-																	mb='20px'
-																	type="password"
-																	 onChange={(e) => setConfirmPassword(e.target.value)}
-																	value={confirmPassword}
-																	placeholder='*********'
-																	width='350px'
-																	h='70px'
-																	borderRadius='0px 11px 11px 11px'
-																/>
-															</InputGroup>
-															<FormErrorMessage>
-																{form.errors.name}
-															</FormErrorMessage>
-														</FormControl>
-													)}
-												</Field>
-												<Button
-											mt={4}
-											bg={yellowbtn}
-											width='350px'
-											h='70px'
-											borderRadius='0px 11px 11px 11px'
-											type='submit'
-											color='white'
-											_hover={{ bg: '#1A202C' }}>
-										</Button>
-											</Form>
-										)}
-									</Formik>
-									<Stack>
-									</Stack>
-								</Stack>
+								<UpdatePassword/>
 							</TabPanel>
 						</TabPanels>
 					</GridItem>

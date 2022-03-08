@@ -151,23 +151,33 @@ export const createCustomers = (customer_name,customer_email,customer_id,custome
 
 
 
-export const updatePassword = (user_id,new_password,retype_new_password,old_password) => async (dispatch) => {
-	try {
-		const { data } = await axios.post(baseUrl + `/api/user/updatepassword`, { user_id, new_password, retype_new_password, old_password });
-		dispatch({
-			type: UserActionType.UPDATE_PASSWORD_SUCCESS,
-			payload : data
-		});
-	} catch (error) {
-		 dispatch({
+export const updatePassword =
+	(user_id, old_password, new_password, retype_new_password) =>
+	async (dispatch) => {
+		try {
+			const { data } = await axios.post(
+				`https://finosell.link/api/user/updatepassword`,
+				{
+					user_id,
+					old_password,
+					new_password,
+					retype_new_password,
+				}
+			);
+			dispatch({
+				type: UserActionType.UPDATE_PASSWORD_SUCCESS,
+				payload: data,
+			});
+		} catch (error) {
+			dispatch({
 				type: UserActionType.UPDATE_PASSWORD_ERROR,
 				payload:
 					error.response && error.response.data.message
 						? error.response.data.message
 						: error.message,
 			});
-	}
-}
+		}
+	};
 
 // export const getProduct = () => async (dispatch) => { 
 // 	try {
@@ -177,13 +187,28 @@ export const updatePassword = (user_id,new_password,retype_new_password,old_pass
 
 // PRODUCT
 
-export const getProduct = (businessid, limitno, pageno) => async (dispatch) => {
+export const getProduct = (businessid, limitno, pageno) => async (dispatch,getState) => {
 	try {
-		const { data } = await axios.post(baseUrl + `/api/products/all`, {
-			businessid,
-			limitno,
-			pageno
-		});
+		const {
+			businessSignIn: {
+				user: {
+					businessDetails: { message },
+				},
+			},
+		} = getState();
+		const config = {
+			headers: {
+				Authorization: `Bearer ${message.password}`,
+			},
+		};
+		const { data } = await axios.post(`https://finosell.link/api/products/all`,
+			{
+				businessid,
+				limitno,
+				pageno,
+			},
+			config
+		);
 		dispatch({
 			type: ProductActionType.GET_PRODUCT_SUCCESS,
 			payload: data,
