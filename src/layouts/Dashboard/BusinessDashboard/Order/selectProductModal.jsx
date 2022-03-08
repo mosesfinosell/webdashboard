@@ -27,12 +27,16 @@ const dispatch = useDispatch()
 	const { businessDetails } = user;
 	const { message } = businessDetails;
  
-	// const getProduct = useSelector((state) => state.getProduct);
+	const fetchProduct = useSelector((state) => state.fetchProduct);
+	const { product } = fetchProduct;
 
+	
+	// console.log(results)
+	
 		const [businessId] = useState(message.business_id);
 	
 	useEffect((limitno, pageno) => {
-		dispatch(getProduct('BusW5xmF', 5, 1));
+		dispatch(getProduct(businessId, 5, 1));
 	}, []);
 
 	return (
@@ -46,8 +50,7 @@ const dispatch = useDispatch()
 				borderRadius='0px 11px 11px 11px'
 				type='submit'
 				color='white'
-                _hover={{ bg: '#1A212C' }}
-            >
+				_hover={{ bg: '#1A212C' }}>
 				Select Product
 			</Button>
 			<Modal
@@ -67,20 +70,21 @@ const dispatch = useDispatch()
 							display='flex'
 							alignItems='center'
 							justifyContent='space-evenly'>
-						
-							<Stack mr='150px'>
-								<Text>Buy Airtime</Text>
+							{/* <Stack mr='150px'>
+								<Text>
+									{product.details.results[0].title}
+								</Text>
 							</Stack>
 							<Stack>
 								<Text fontSize='12px' color='red.500'>
-									₦12,000
+									
+									₦{product.details.results[0].price}
 								</Text>
 								<Text fontSize='12px' color='gray'>
 									Jan 3, 2022
 								</Text>
-							</Stack>
-                        </Box>
-                        
+							</Stack> */}
+						</Box>
 					</ModalBody>
 				</ModalContent>
 			</Modal>

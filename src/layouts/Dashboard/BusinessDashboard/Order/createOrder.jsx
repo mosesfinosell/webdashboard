@@ -211,7 +211,6 @@ export default function CreateOrder() {
 														placeholder='Add Shipping Address'
 														value={shippingAddress}
 														onChange={(e) => setShippingAddress(e.target.value)}
-														placeholder='Shipping Address'
 														width='400px'
 														h='60px'
 														borderRadius='0px 11px 11px 11px'

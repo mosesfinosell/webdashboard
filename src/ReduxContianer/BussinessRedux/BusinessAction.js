@@ -179,11 +179,26 @@ export const updatePassword =
 		}
 	};
 
-// export const getProduct = () => async (dispatch) => { 
-// 	try {
-         
-// 	}
-// }
+export const uploadImage = (businessid, image) => async (dispatch) => {
+	try {
+		const { data } = await axios.post(
+			`https://finosell.link/api/user/updateimg`,
+			{ businessid, image }
+		);
+		dispatch({
+			type: UserActionType.UPLOAD_IMAGE_SUCCESS,
+			payload: data,
+		});
+	} catch (error) {
+		dispatch({
+			type: UserActionType.UPLOAD_IMAGE_ERROR,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message,
+		});
+	}
+};
 
 // PRODUCT
 

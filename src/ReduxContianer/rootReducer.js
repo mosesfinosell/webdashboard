@@ -4,7 +4,8 @@ import {
 	personalSignInReducer,
 	personalSignUpReducer,
 	personalOtpRedcuer,
-	personalVerifyOtpRedcuer
+	personalVerifyOtpRedcuer,
+
 } from './PersonalRedux/PersonalReducer';
 // import storage from 'redux-persist/lib/storage/session';
 import {
@@ -17,6 +18,7 @@ import {
 	getUserDetailsReducer,
 	updatePasswordReducer,
 	getProductReducer,
+	uploadImageReducer,
 } from './BussinessRedux/BusinessReducer';
 
 // const persistConfig = {
@@ -41,7 +43,8 @@ const rootReducer = combineReducers({
 	getUser: getUserDetailsReducer,
 	createCustomer: createCustomerReducer,
 	updateUserPassword: updatePasswordReducer,
-	getproduct: getProductReducer,
+	fetchProduct: getProductReducer,
+	uploadImg: uploadImageReducer,
 });
 
 // export default persistReducer(persistConfig, rootReducer);

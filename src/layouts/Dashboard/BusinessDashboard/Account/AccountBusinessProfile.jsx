@@ -31,7 +31,7 @@ import { useSelector,useDispatch } from 'react-redux';
 import { BiPencil } from 'react-icons/bi';
 import accUser from '../../../../assets/accuser.svg';
 import UpdatePassword from '../Account/updatePassword'
-// import uploadImageModal from './uploadModal'
+// import ImageUploaded from './uploadImage';
 
 
 export default function AccountBusinessProfile() {
@@ -138,20 +138,8 @@ export default function AccountBusinessProfile() {
 									<Box alignItems='start'>
 										<Stack alignItems='start' pb='30px'>
 											<Image src={accUser} alt='user' h='80px' />
-											{/* <uploadImageModal /> */}
-											{/* <Box
-												color='white'
-												fontSize='18px'
-												w='30px'
-												border='0.5px solid yellow.500'
-												bg='yellow.500'
-												p='5px'
-												borderRadius='0px 8px 8px 8px'
-												position='relative'
-												bottom='30px'
-												left='50px'>
-												
-											</Box> */}
+
+											{/* <ImageUploaded/> */}
 										</Stack>
 										<Stack>
 											<Formik>
@@ -407,7 +395,7 @@ export default function AccountBusinessProfile() {
 								</Flex>
 							</TabPanel>
 							<TabPanel>
-								<UpdatePassword/>
+								<UpdatePassword />
 							</TabPanel>
 						</TabPanels>
 					</GridItem>

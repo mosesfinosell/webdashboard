@@ -13,7 +13,8 @@ const INITIAL_STATE = {
 	loading: true,
 	orders: [],
 	customer: null,
-	products: []
+	product: null,
+	picture: []
 	// password :  localStorage.getItem('password')
 };
 
@@ -157,7 +158,23 @@ export const getProductReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				loading: true,
-				products: action.payload,
+				product: action.payload,
+				error: action.payload,
+			};
+		default:
+			return state;
+	}
+};
+
+export const uploadImageReducer = (state = INITIAL_STATE, action) => {
+	switch (action.type) {
+		case UserActionType.DATA_REQUEST:
+		case UserActionType.UPLOAD_IMAGE_SUCCESS:
+		case UserActionType.UPLOAD_IMAGE_ERROR:
+			return {
+				...state,
+				loading: true,
+				picture: action.payload,
 				error: action.payload,
 			};
 		default:
