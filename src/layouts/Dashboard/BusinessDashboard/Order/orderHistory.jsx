@@ -22,7 +22,8 @@ import  dateformat from 'dateformat'
 	
 	
 export default function OrderHistory() {
-const dispatch = useDispatch()
+	const dispatch = useDispatch()
+	
 const getOrder = useSelector((state) => state.getOrder)
 const {orders} = getOrder
 // console.log(orders.orders)

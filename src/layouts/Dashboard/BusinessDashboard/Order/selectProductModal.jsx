@@ -35,8 +35,8 @@ const dispatch = useDispatch()
 	
 		const [businessId] = useState(message.business_id);
 	
-	useEffect((limitno, pageno) => {
-		dispatch(getProduct(businessId, 5, 1));
+	useEffect(() => {
+		dispatch(getProduct(businessId));
 	}, []);
 
 	return (

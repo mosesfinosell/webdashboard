@@ -93,7 +93,10 @@ export const businessUserLogin =
 		}
 	}
 
-	export const getOrders = (business_id) => async (dispatch) => {
+export const getOrders = (business_id) => async (dispatch) => {
+			dispatch({
+				type: UserActionType.DATA_REQUEST,
+			});
 		try{
 			const {data} = await axios.get(baseUrl + `/order/fetch?business_id=${business_id}`)
 			dispatch({
@@ -113,6 +116,9 @@ export const businessUserLogin =
 	
 
 export const createCustomers = (customer_name,customer_email,customer_id,customer_phonenumber,customer_address,business_id) => async (dispatch,getState) => {
+		dispatch({
+			type: UserActionType.DATA_REQUEST,
+		});
 	try {
 		const {
 			businessSignIn: { user: { businessDetails: { message } } },
@@ -153,7 +159,10 @@ export const createCustomers = (customer_name,customer_email,customer_id,custome
 
 export const updatePassword =
 	(user_id, old_password, new_password, retype_new_password) =>
-	async (dispatch) => {
+		async (dispatch) => {
+			dispatch({
+				type: UserActionType.DATA_REQUEST,
+			});
 		try {
 			const { data } = await axios.post(
 				`https://finosell.link/api/user/updatepassword`,
@@ -180,6 +189,9 @@ export const updatePassword =
 	};
 
 export const uploadImage = (businessid, image) => async (dispatch) => {
+		dispatch({
+			type: UserActionType.DATA_REQUEST,
+		});
 	try {
 		const { data } = await axios.post(
 			`https://finosell.link/api/user/updateimg`,
@@ -200,9 +212,94 @@ export const uploadImage = (businessid, image) => async (dispatch) => {
 	}
 };
 
+
+export const addTeamMember =
+	(account_id, phone, email, user_id, account_type, business_id) =>
+	async (dispatch, getState) => {
+		dispatch({
+			type: UserActionType.DATA_REQUEST,
+		});
+		const {
+			businessSignIn: {
+				user: {
+					businessDetails: { message },
+				},
+			},
+		} = getState();
+		const config = {
+			headers: {
+				Authorization: `Bearer ${message.password}`,
+			},
+		};
+		try {
+			const { data } = await axios.post(
+				baseUrl + `/team/create`,
+				{
+					account_id,
+					phone,
+					email,
+					user_id,
+					account_type,
+					business_id,
+				},
+				config
+			);
+			dispatch({
+				type: UserActionType.ADD_TEAM_SUCCESS,
+				payload: data,
+			});
+		} catch (error) {
+			dispatch({
+				type: UserActionType.ADD_TEAM_ERROR,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.message,
+			});
+		}
+	};
+	
+export const fetchTeamMember =
+		(business_id) =>
+		async (dispatch, getState) => {
+			dispatch({
+				type: UserActionType.DATA_REQUEST,
+			});
+			const {
+				businessSignIn: {
+					user: {
+						businessDetails: { message },
+					},
+				},
+			} = getState();
+			const config = {
+				headers: {
+					Authorization: `Bearer ${message.password}`,
+				},
+			};
+			try {
+				const { data } = await axios.get(
+					baseUrl + `/team/fetch?business_id=${business_id}`,config
+				);
+				dispatch({
+					type: UserActionType.GET_TEAM_SUCCESS,
+					payload: data,
+				});
+			} catch (error) {
+				dispatch({
+					type: UserActionType.GET_TEAM_ERROR,
+					payload:
+						error.response && error.response.data.message
+							? error.response.data.message
+							: error.message,
+				});
+			}
+			};
+		
+
 // PRODUCT
 
-export const getProduct = (businessid, limitno, pageno) => async (dispatch,getState) => {
+export const getProduct = (businessid) => async (dispatch,getState) => {
 	try {
 		const {
 			businessSignIn: {
@@ -216,12 +313,8 @@ export const getProduct = (businessid, limitno, pageno) => async (dispatch,getSt
 				Authorization: `Bearer ${message.password}`,
 			},
 		};
-		const { data } = await axios.post(`https://finosell.link/api/products/all`,
-			{
-				businessid,
-				limitno,
-				pageno,
-			},
+		const { data } = await axios.get(
+			`https://finosell.link/api/products/all?businessid=${businessid}`,
 			config
 		);
 		dispatch({

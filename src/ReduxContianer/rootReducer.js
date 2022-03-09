@@ -19,6 +19,8 @@ import {
 	updatePasswordReducer,
 	getProductReducer,
 	uploadImageReducer,
+	addTeamReducer,
+	fetchTeamReducer,
 } from './BussinessRedux/BusinessReducer';
 
 // const persistConfig = {
@@ -45,6 +47,8 @@ const rootReducer = combineReducers({
 	updateUserPassword: updatePasswordReducer,
 	fetchProduct: getProductReducer,
 	uploadImg: uploadImageReducer,
+	addTeams: addTeamReducer,
+	fetchTeam: fetchTeamReducer,
 });
 
 // export default persistReducer(persistConfig, rootReducer);

@@ -14,8 +14,8 @@ const INITIAL_STATE = {
 	orders: [],
 	customer: null,
 	product: null,
-	picture: []
-	// password :  localStorage.getItem('password')
+	picture: [],
+	team: null
 };
 
 export const businessSignUpReducer = (state = INITIAL_STATE, action) => {
@@ -175,6 +175,38 @@ export const uploadImageReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				loading: true,
 				picture: action.payload,
+				error: action.payload,
+			};
+		default:
+			return state;
+	}
+};
+
+export const addTeamReducer = (state = INITIAL_STATE, action) => {
+	switch (action.type) {
+		case UserActionType.DATA_REQUEST:
+		case UserActionType.ADD_TEAM_SUCCESS:
+		case UserActionType.ADD_TEAM_ERROR:
+			return {
+				...state,
+				loading: true,
+				team: action.payload,
+				error: action.payload,
+			};
+		default:
+			return state;
+	}
+};
+
+export const fetchTeamReducer = (state = INITIAL_STATE, action) => {
+	switch (action.type) {
+		case UserActionType.DATA_REQUEST:
+		case UserActionType.GET_TEAM_SUCCESS:
+		case UserActionType.GET_TEAM_ERROR:
+			return {
+				...state,
+				loading: true,
+				team: action.payload,
 				error: action.payload,
 			};
 		default:
