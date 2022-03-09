@@ -61,30 +61,31 @@ export default function AccountBusinessProfile() {
 					<GridItem rowStart={1} colSpan={3} bg='white'>
 						<Center>
 							<TabList>
-								<Tab>
-									<Box
-										as='button'
-										borderRadius='md'
-										bg='yellow.500'
-										w='150px'
-										color='white'
-										px={4}
-										h='35px'>
-										Profile
-									</Box>
+								<Tab
+									_selected={{
+										color: 'white',
+										px: '20px',
+										w: '100px',
+										h: '45px',
+										bg: 'yellow.500',
+										borderRadius: '0px 11px 11px 11px',
+									}}>
+									Profile
 								</Tab>
 							</TabList>
 							<TabList>
-								<Tab>
-									<Box
-										as='button'
-										bg='white.500'
-										w='200px'
-										h='35px'
-										color='gray'
-										px={34}>
+								<Tab
+									_selected={{
+										color: 'white',
+									
+										w: '100px',
+										h: '45px',
+										bg: 'yellow.500',
+										borderRadius: '0px 11px 11px 11px',
+									}}>
+									
 										Password
-									</Box>
+									
 								</Tab>
 							</TabList>
 						</Center>

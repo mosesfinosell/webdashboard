@@ -57,12 +57,12 @@ export default function BusinessAccountSignUp() {
 
 	function handleSubmit(e) {
 		e.preventDefault();
-		dispatch(businessUserSignUp(name, phoneNumber, email, 'business'));
+		dispatch(businessUserSignUp(name, phoneNumber, email, 'business',address,industry));
 		localStorage.setItem('phoneNumber', phoneNumber);
 		// setEmail('');
 		// setPhoneNumber('');
 		// setName('')
-		console.log(name, phoneNumber, email);
+		console.log(name, phoneNumber, email, address, industry);
 	}
 
 	//Validation
@@ -74,13 +74,13 @@ export default function BusinessAccountSignUp() {
 
 	const history = useHistory();
 
-	function handleButton() {
-		if (!businessDetails) {
-			return error;
-		} else {
-			return history.push('/verify-otp-business');
-		}
-	}
+	// function handleButton() {
+	// 	if (!businessDetails) {
+	// 		return error;
+	// 	} else {
+	// 		return history.push('/business');
+	// 	}
+	// }
 
 	return (
 		<Container maxW='container.lg'>
@@ -90,8 +90,6 @@ export default function BusinessAccountSignUp() {
 				boxSizing='border-box'
 				borderWidth='1px'
 				borderRadius='0px 21px 21px 21px'
-				m='20'
-				borderRadius='lg'
 				overflow='hidden'>
 				<Center>
 					<Stack>
@@ -156,7 +154,7 @@ export default function BusinessAccountSignUp() {
 										<FormControl
 											isInvalid={form.errors.email && form.touched.email}
 											mt={4}>
-											<FormLabel htmlFor='email'>Email</FormLabel>
+											<FormLabel htmlFor='name'>Email</FormLabel>
 											<InputGroup>
 												<InputLeftElement
 													pointerEvents='none'
@@ -186,7 +184,7 @@ export default function BusinessAccountSignUp() {
 												form.errors.phoneNumber && form.touched.phoneNumber
 											}
 											mt={4}>
-											<FormLabel htmlFor='number'>Phone number</FormLabel>
+											<FormLabel htmlFor='name'>Phone number</FormLabel>
 											<InputGroup>
 												<InputLeftElement
 													pointerEvents='none'
@@ -282,7 +280,7 @@ export default function BusinessAccountSignUp() {
 										<FormControl
 											isInvalid={form.errors.password && form.touched.password}
 											mt={4}>
-											<FormLabel htmlFor='password'>Password</FormLabel>
+											<FormLabel htmlFor='name'>Password</FormLabel>
 											<InputGroup>
 												<InputLeftElement
 													m='15px 1px'
@@ -331,7 +329,8 @@ export default function BusinessAccountSignUp() {
 									type='submit'
 									color='white'
 									_hover={{ bg: '#1A202C' }}
-									onClick={handleButton}>
+									// onClick={handleButton}
+								>
 									Continue
 								</Button>
 							</Form>

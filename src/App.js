@@ -21,6 +21,7 @@ import InvoiceBoard from './layouts/Dashboard/BusinessDashboard/HomeBusiness/Inv
 import AddInvoice from './layouts/Dashboard/BusinessDashboard/HomeBusiness/addInvoice';
 import ResendOtp from './layouts/SignUp/PersonalSignUpPage/resendOtpPage';
 import BusinessVerifyOtp from './layouts/SignUp/PersonalSignUpPage/BusinessVerifyOtp';
+import AddTeam from './layouts/Dashboard/BusinessDashboard/Account/addTeam';
 
 function App() {
 	return (
@@ -76,6 +77,9 @@ function App() {
 				</Route>
 				<Route path='/add-product'>
 					<AddProduct />
+				</Route>
+				<Route path='/add-business-team'>
+			      <AddTeam/>
 				</Route>
 				<Route path='/delivery'>
 					<DeliveryRequest />

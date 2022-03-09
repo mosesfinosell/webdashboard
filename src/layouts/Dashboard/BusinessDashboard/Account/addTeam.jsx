@@ -24,17 +24,35 @@ import { BiShoppingBag, BiPencil } from 'react-icons/bi';
 import { MdEmail } from 'react-icons/md';
 import { useState } from 'react';
 import { Formik, Form, Field } from 'formik';
+import { useSelector, useDispatch } from 'react-redux';
+import BusinessDashboardReuse from '../../../../component/BusinessDashboardReuse';
 
 export default function AddTeam() {
+	// Redux
+	const businessSignIn = useSelector((state) => state.businessSignIn);
+	const { user } = businessSignIn;
+	const { businessDetails } = user;
+	const { message } = businessDetails;
+
 	const [name, setName] = useState('');
+	const [email, setEmail] = useState('');
+	const [phoneNumber, setPhoneNumber] = useState('');
+	const [accountId] = useState('Fint393i4034');
+	const [accountType,setAccountType] = useState('');
+	const [businessId] = useState(message.business_id);
+	const [userId] = useState(message.user_id);
+
 
 	return (
 		<Container m='40px' maxW='container.lg'>
 			<Grid h='100vh' templateColumns='repeat(5, 1fr)'>
-				<GridItem colSpan={4} rowSpan={6} bg='white' gap='5'>
+				<Stack px='120px'>
+					<BusinessDashboardReuse />
+				</Stack>
+				<GridItem colSpan={4} rowSpan={6} bg='white' gap='9'>
 					<Stack pb='30px'>
 						<Text color='black' fontWeight='bold' fontSize='14px'>
-							Add a transaction
+							Add Team
 						</Text>
 					</Stack>
 
@@ -47,6 +65,35 @@ export default function AddTeam() {
 						<Formik>
 							{() => (
 								<Form>
+									<Field name='name'>
+										{({ field, form }) => (
+											<FormControl
+												isInvalid={form.errors.email && form.touched.email}
+												mt={4}>
+												<FormLabel htmlFor='name'>Name</FormLabel>
+												<InputGroup>
+													<InputLeftElement
+														pointerEvents='none'
+														m='15px 1px'
+														fontSize='20px'
+														color='gray.500'
+														children={<MdEmail />}
+													/>
+													<Input
+														{...field}
+														mb='20px'
+														value={name}
+														onChange={(e) => setName(e.target.value)}
+														placeholder='Name'
+														width='400px'
+														h='70px'
+														borderRadius='0px 11px 11px 11px'
+													/>
+												</InputGroup>
+												<FormErrorMessage>{form.errors.email}</FormErrorMessage>
+											</FormControl>
+										)}
+									</Field>
 									<Field name='email'>
 										{({ field, form }) => (
 											<FormControl
@@ -64,8 +111,8 @@ export default function AddTeam() {
 													<Input
 														{...field}
 														mb='20px'
-														//   value={email}
-														//   onChange={(e) => setEmail(e.target.value)}
+														value={email}
+														onChange={(e) => setEmail(e.target.value)}
 														placeholder='Email Address'
 														width='400px'
 														h='70px'
@@ -76,27 +123,60 @@ export default function AddTeam() {
 											</FormControl>
 										)}
 									</Field>
+									<Field name='phoneNumber'>
+										{({ field, form }) => (
+											<FormControl
+												isInvalid={form.errors.email && form.touched.email}
+												mt={4}>
+												<FormLabel htmlFor='number'>Phone Number</FormLabel>
+												<InputGroup>
+													<InputLeftElement
+														pointerEvents='none'
+														m='15px 1px'
+														fontSize='20px'
+														color='gray.500'
+														children={<MdEmail />}
+													/>
+													<Input
+														{...field}
+														mb='20px'
+														value={phoneNumber}
+														onChange={(e) => setPhoneNumber(e.target.value)}
+														placeholder='Phone Number'
+														width='400px'
+														h='70px'
+														borderRadius='0px 11px 11px 11px'
+													/>
+												</InputGroup>
+												<FormErrorMessage>{form.errors.email}</FormErrorMessage>
+											</FormControl>
+										)}
+									</Field>
+
 									<Field name='text'>
 										{({ field, form }) => (
 											<FormControl>
 												<FormLabel htmlFor='billing date'>
-													Type of Transaction
+													Add Team Role
 												</FormLabel>
 												<Select
-													id='country'
+													id='account type'
 													placeholder='Select a date'
 													width='400px'
 													h='70px'
+													value={accountType}
+													onChange={(e) => setAccountType(e.target.value)}
 													borderRadius='0px 11px 11px 11px'>
-													<option>United Arab Emirates</option>
-													<option>Nigeria</option>
+													<option>Manager</option>
+													<option>Sales</option>
+													<option>Attendant</option>
 												</Select>
 											</FormControl>
 										)}
 									</Field>
 									<Button
 										mt={4}
-										bg={yellowbtn}
+										bg='yellow.500'
 										width='400px'
 										h='70px'
 										borderRadius='0px 11px 11px 11px'
@@ -110,7 +190,7 @@ export default function AddTeam() {
 						</Formik>
 					</Box>
 				</GridItem>
-				<GridItem colStart={6} colEnd={9} h='10' bg='white'>
+				{/* <GridItem colStart={6} colEnd={9} h='10' bg='white'>
 					<Center>
 						<Box
 							h='100px'
@@ -186,7 +266,7 @@ export default function AddTeam() {
 							</Stack>
 						</Box>
 					</Center>
-				</GridItem>
+				</GridItem> */}
 			</Grid>
 		</Container>
 	);

@@ -51,31 +51,30 @@ export default function HomeBusiness() {
 					<Tabs variant='unstyled'>
 						<Center>
 							<TabList>
-								<Tab>
-									<Box
-										as='button'
-										borderRadius='md'
-										bg='yellow.500'
-										w='170px'
-										color='white'
-										px={4}
-										h='35px'
-										borderRadius='0px 11px 11px 11px'>
-										Savings Balance
-									</Box>
+								<Tab
+									_selected={{
+										color: 'white',
+										px: '4',
+										w: '170px',
+										h: '45px',
+										bg: 'yellow.500',
+										borderRadius: '0px 11px 11px 11px',
+									}}>
+				
+									Savings Balance
 								</Tab>
 							</TabList>
 							<TabList>
-								<Tab>
-									<Box
-										as='button'
-										bg='white.500'
-										w='210px'
-										h='35px'
-										color='gray'
-										px={34}>
+								<Tab _selected={{
+										color: 'white',
+										px: '4',
+										w: '170px',
+										h: '45px',
+										bg: 'yellow.500',
+										borderRadius: '0px 11px 11px 11px',
+									}}>
 										Payments Balance
-									</Box>
+		
 								</Tab>
 							</TabList>
 						</Center>

@@ -44,6 +44,7 @@ export default function CreateOrder() {
 	const [paymentStatus, setPaymentStatus] = useState('');
 	const [paymentMethod, setPaymentMethod] = useState('');
 	const [totalAmount, setTotalAmount] = useState('');
+		const [selectProduct, setSelectProduct] = useState('');
 	const [businessId] = useState(message.business_id);
 	const [randomNumber] = useState('4575r46rt5');
 
@@ -150,7 +151,6 @@ export default function CreateOrder() {
 													h='60px'
 													borderRadius='0px 11px 11px 11px'> */}
 												<DatePicker
-													
 													mb='20px'
 													selected={startDate}
 													onChange={(date) => setStartDate(date)}
@@ -263,6 +263,27 @@ export default function CreateOrder() {
 									<Stack>
 										<SelectProductModal/>
 									</Stack>
+									{/* <Field name='text'>
+										{({ field, form }) => (
+											<FormControl>
+												<FormLabel htmlFor='payment method'>
+													Select Product
+												</FormLabel>
+												<Select
+													mb='20px'
+													placeholder='Add Product'
+													value={selectProduct}
+													onChange={(e) => setSelectProduct(e.target.value)}
+													width='300px'
+													h='60px'
+													borderRadius='0px 11px 11px 11px'>
+													<option>Offline</option>
+													<option>Checkout</option>
+													<option>Transfer</option>
+												</Select>
+											</FormControl>
+										)}
+									</Field> */}
 									<Field name='number'>
 										{({ field, form }) => (
 											<FormControl mt={4}>
