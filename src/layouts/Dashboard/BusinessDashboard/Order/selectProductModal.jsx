@@ -11,6 +11,7 @@ import {
 	Flex,
 	Radio,
 	RadioGroup,
+	useCheckbox,
 } from '@chakra-ui/react';
 
 import React,{ useState,useEffect} from 'react';
@@ -28,101 +29,91 @@ const dispatch = useDispatch()
 	const { user } = businessSignIn;
 	const { businessDetails } = user;
 	const { message } = businessDetails;
-	
-	const [businessId] = useState(message.business_id);
-	const [value, setValue] = React.useState('');
 
-	
 	useEffect(() => {
 		dispatch(getProduct(businessId));
 	}, []);
 
 	const fetchProduct = useSelector((state) => state.fetchProduct);
 	let { products } = fetchProduct;
+	
+	const [businessId] = useState(message.business_id);
+	const [value, setValue] = React.useState('1');
+
+		// function handleSelect(e) {
+		// 	setValue(e);
+		// 	console.log(e);
+		// }
+	
+	
 	// console.log(products.details[1]);
 	// let productData = Object.keys(products);
 
 	// console.log(productData);
+	const CustomCheckbox = (props) => {
+		const { state, getCheckboxProps, getInputProps, getLabelProps, htmlProps } =
+			useCheckbox(props)
 
-	return (
-		<>
-			<Button
-				onClick={onOpen}
-				mt={4}
-				bg={bluebtn}
-				width='300px'
-				h='60px'
-				borderRadius='0px 11px 11px 11px'
-				type='submit'
-				color='white'
-				_hover={{ bg: '#1A212C' }}>
-				Select Product
-			</Button>
-			<Modal
-				isOpen={isOpen}
-				onClose={onClose}
-				size='lg'
-				isCentered
-				borderRadius='0px 11px 11px 11px'>
-				<ModalOverlay />
-				<ModalContent>
-					<ModalCloseButton />
-					<ModalBody>
-						<RadioGroup onChange={setValue} value={value}>
-							<Stack direction='column' mt='30px'>
+	}
+		return (
+			<>
+				<Button
+					onClick={onOpen}
+					mt={4}
+					bg={bluebtn}
+					width='300px'
+					h='60px'
+					borderRadius='0px 11px 11px 11px'
+					type='submit'
+					color='white'
+					_hover={{ bg: '#1A212C' }}>
+					Select Product
+				</Button>
+				<Modal
+					isOpen={isOpen}
+					onClose={onClose}
+					size='lg'
+					isCentered
+					borderRadius='0px 11px 11px 11px'>
+					<ModalOverlay />
+					<ModalContent>
+						<ModalCloseButton />
+						<ModalBody>
+							<chakra.label
+								display='flex'
+								flexDirection='row'
+								alignItems='center'
+								gridColumnGap={2}
+								maxW='36'
+								bg='green.50'
+								border='1px solid'
+								borderColor='green.500'
+								rounded='lg'
+								px={3}
+								py={1}
+								cursor='pointer'
+								{...htmlProps}
+							>
+								<input {...getInputProps()} hidden />
 								<Flex
-									direction='row'
-									// borderTop='0.5px solid #D9D9D9'
+									alignItems='center'
+									justifyContent='center'
+									border='2px solid'
+									borderColor='green.500'
+									w={4}
+									h={4}
+									{...getCheckboxProps()}
 								>
-									<Text px='30px'>Title</Text>
-									<Text px='80px'>Price</Text>
-									<Text px='90px'>Category</Text>
+									{state.isChecked && <Box w={2} h={2} bg='green.500' />}
 								</Flex>
-								{products?.details?.length > 0 && (
-									<Stack
-										borderTop='0.5px solid #D9D9D9'
-										// borderBottom='0.5px solid #D9D9D9'
-										w='470px'
-										h='50px'
-										display='flex'
-										justifyContent='center'>
-										{/* {Object.entries(products).map((product) => { */}
-										<Radio colorScheme='yellow' value={products.details[0]._id}>
-											<Flex direction='row'>
-												<Text px='10px'>{products.details[0].title}</Text>
-												<Text px='100px'>{products.details[0].price}</Text>
-												<Text px='70px'>{products.details[0].category}</Text>
-											</Flex>
-										</Radio>
-										;{/* })}  */}
-									</Stack>
-								)}
-								{products?.details?.length > 0 && (
-									<Stack
-										borderTop='0.5px solid #D9D9D9'
-										borderBottom='0.5px solid #D9D9D9'
-										w='470px'
-										h='50px'
-										display='flex'
-										justifyContent='center'>
-										{/* {Object.entries(products).map((product) => { */}
-										<Radio colorScheme='yellow' value={products.details[1]._id}>
-											<Flex direction='row'>
-												<Text px='10px'>{products.details[1].title}</Text>
-												<Text px='100px'>{products.details[1].price}</Text>
-												<Text px='70px'>{products.details[1].category}</Text>
-											</Flex>
-										</Radio>
-										{/* })}  */}
-									</Stack>
-								)}
-							</Stack>
-						</RadioGroup>
-					</ModalBody>
-				</ModalContent>
-			</Modal>
-		</>
-	);
-}
+								<Text {...getLabelProps()}>Click me</Text>
+							</chakra.label>
+						</ModalBody>
+					</ModalContent>
+				</Modal>
+			</>
+		);
+	}
+
 
 

@@ -19,13 +19,14 @@ import {
 	Select,
 } from '@chakra-ui/react';
 import { BiShoppingBag } from 'react-icons/bi';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import SelectProductModal from './selectProductModal';
 import SelectCustomerModal from './selectCustomerModal';
+import { getProduct } from '../../../../ReduxContianer/BussinessRedux/BusinessAction';
 
 export default function CreateOrder() {
 	const dispatch = useDispatch();
@@ -45,9 +46,16 @@ export default function CreateOrder() {
 	const [paymentStatus, setPaymentStatus] = useState('');
 	const [paymentMethod, setPaymentMethod] = useState('');
 	const [totalAmount, setTotalAmount] = useState('');
-		const [selectProduct, setSelectProduct] = useState('');
+	const [selectProduct, setSelectProduct] = useState('');
 	const [businessId] = useState(message.business_id);
 	const [randomNumber] = useState('4575r46rt5');
+
+useEffect(() => {
+	dispatch(getProduct(businessId));
+}, []);
+
+const fetchProduct = useSelector((state) => state.fetchProduct);
+let { products } = fetchProduct;
 
 	function handleSubmit(e) {
 		e.preventDefault();
@@ -61,6 +69,7 @@ export default function CreateOrder() {
 		// 		randomNumber
 		// 	)
 		// );
+
 		console.log(title, startDate, orderStatus,
 			orderType, saleStatus,
 			discount,
@@ -274,7 +283,43 @@ export default function CreateOrder() {
 									<Stack>
 										<SelectProductModal />
 									</Stack>
-									<Stack><SelectCustomerModal/></Stack>
+									{/* <Field name='text'>
+										{({ field, form }) => (
+											<FormControl>
+												<FormLabel htmlFor='payment method'>
+													Select Product
+												</FormLabel>
+												<Select
+													mb='20px'
+													// placeholder='Add Payment Method'
+													// value={selectProduct}
+													onSelect={handleSelect}
+													width='300px'
+													h='60px'
+													borderRadius='0px 11px 11px 11px'>
+													<option>{products?.details[1].title}</option>
+													<option>{products?.details[2].title}</option>
+													<option>{products?.details[3].title}</option>
+												</Select>
+											</FormControl>
+										)}
+									</Field>
+									<Stack>You Select {selectProduct}</Stack> */}
+									{/* <Field name='text'>
+										{({ field, form }) => (
+											<FormControl>
+												
+											</FormControl>
+										)}
+									</Field>
+									<Field name='text'>
+										{({ field, form }) => (
+											<FormControl>
+												<SelectCustomerModal />
+											</FormControl>
+										)}
+									</Field> */}
+
 									<Field name='number'>
 										{({ field, form }) => (
 											<FormControl mt={4}>

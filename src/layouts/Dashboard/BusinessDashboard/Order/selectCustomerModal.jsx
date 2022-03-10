@@ -41,7 +41,9 @@ export default function SelectCustomerModal() {
 	// let productData = Object.keys(products);
 
 	// console.log(productData);
-
+	function handleSubmit(e) {
+		e.preventDefault();
+	}
 	return (
 		<>
 			<Button
@@ -68,34 +70,30 @@ export default function SelectCustomerModal() {
 					<ModalBody>
 						<RadioGroup onChange={setValue} value={value}>
 							<Stack direction='column' mt='30px'>
-								<Flex
-									direction='row'
-									// borderTop='0.5px solid #D9D9D9'
-								>
-									<Text px='30px'>Title</Text>
-									<Text px='80px'>Price</Text>
-									<Text px='90px'>Category</Text>
-								</Flex>
-
 								{/* {products?.details?.length > 0 && ( */}
-									<Stack
-										borderTop='0.5px solid #D9D9D9'
-										borderBottom='0.5px solid #D9D9D9'
-										w='470px'
-										h='50px'
-										display='flex'
-										justifyContent='center'>
-										{/* {Object.entries(products).map((product) => { */}
-	
-										{/* <Radio  colorScheme='yellow' value={products.details[1]._id}>
-											<Flex direction='row'>
-												<Text px='10px'>{products.details[1].title}</Text>
-												<Text px='100px'>{products.details[1].price}</Text>
-												<Text px='70px'>{products.details[1].category}</Text>
-											</Flex>
-										</Radio> */}
-										{/* })}  */}
-									</Stack>
+								<Stack
+									borderTop='0.5px solid #D9D9D9'
+									borderBottom='0.5px solid #D9D9D9'
+									w='470px'
+									h='50px'
+									display='flex'
+									justifyContent='center'>
+									{/* {Object.entries(products).map((product) => { */}
+
+									<Radio
+										
+										colorScheme='yellow'
+										value={customer?.customers[0]._id}>
+										<Flex direction='row'>
+											<Text px='10px'>
+												{customer?.customers[0].customer_name}
+											</Text>
+											{/* <Text px='100px'>{products.details[0].price}</Text>
+												<Text px='70px'>{products.details[0].category}</Text> */}
+										</Flex>
+									</Radio>
+									{/* })}  */}
+								</Stack>
 								{/* )} */}
 							</Stack>
 						</RadioGroup>
