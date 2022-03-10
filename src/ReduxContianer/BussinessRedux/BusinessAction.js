@@ -113,7 +113,42 @@ export const getOrders = (business_id) => async (dispatch) => {
 				});
 		}
 } 
-	
+
+export const getCustomers = (business_id) => async (dispatch,getState) => {
+	dispatch({
+		type: UserActionType.DATA_REQUEST,
+	});
+	try {
+		const {
+			businessSignIn: {
+				user: {
+					businessDetails: { message },
+				},
+			},
+		} = getState();
+		const config = {
+			headers: {
+				Authorization: `Bearer ${message.password}`,
+			},
+		};
+		const { data } = await axios.get(
+			baseUrl + `/customer/fetch?business_id=${business_id}`,config
+		);
+		dispatch({
+			type: UserActionType.GET_CUSTOMER_SUCCESS,
+			payload: data,
+		});
+	} catch (error) {
+		dispatch({
+			type: UserActionType.GET_CUSTOMER_ERROR,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message,
+		});
+	}
+}; 
+
 
 export const createCustomers = (customer_name,customer_email,customer_id,customer_phonenumber,customer_address,business_id) => async (dispatch,getState) => {
 		dispatch({

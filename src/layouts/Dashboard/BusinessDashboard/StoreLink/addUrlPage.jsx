@@ -16,6 +16,8 @@ import {
 	FormControl,
 	FormLabel,
 	FormErrorMessage,
+	InputRightAddon,
+	InputLeftAddon,
 	Button,
 } from '@chakra-ui/react';
 import { Formik, Form, Field } from 'formik';
@@ -43,8 +45,37 @@ export default function AddUrlPage() {
 							</Stack>
 						</Center>
 
-						<Center mt='80px' ml='380px'>
-							<Stack>
+						{/* <Center mt='80px' ml='380px'> */}
+						<Box>
+							<FormLabel htmlFor='url'>Url</FormLabel>
+							<InputGroup>
+								<InputLeftAddon width='100px' h='70px'>
+									http://
+								</InputLeftAddon>
+								<Input
+									placeholder='Add a URL'
+									width='100vh'
+									h='70px'
+									bg='#FAFAFA'
+									type='url'
+									id='url'
+								/>
+								<InputRightAddon width='100px' h='70px'>
+									.com
+								</InputRightAddon>
+								<Button
+									bg={yellowbtn}
+									width='550px'
+									h='70px'
+									borderRadius='0px 0px 11px 0px'
+									type='submit'
+									color='white'
+									_hover={{ bg: '#1A202C' }}>
+									Add 
+								</Button>
+							</InputGroup>
+						</Box>
+						{/* <Stack>
 								<Formik>
 									{() => (
 										<Form>
@@ -118,8 +149,8 @@ export default function AddUrlPage() {
 										</Form>
 									)}
 								</Formik>
-							</Stack>
-						</Center>
+							</Stack> */}
+						{/* </Center> */}
 					</GridItem>
 				</Grid>
 			</Box>

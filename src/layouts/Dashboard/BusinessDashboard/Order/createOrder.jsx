@@ -25,6 +25,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import SelectProductModal from './selectProductModal';
+import SelectCustomerModal from './selectCustomerModal';
 
 export default function CreateOrder() {
 	const dispatch = useDispatch();
@@ -60,6 +61,16 @@ export default function CreateOrder() {
 		// 		randomNumber
 		// 	)
 		// );
+		console.log(title, startDate, orderStatus,
+			orderType, saleStatus,
+			discount,
+			shippingAddress,
+			paymentStatus,
+			paymentMethod,
+			totalAmount,
+			selectProduct,
+			businessId,
+		randomNumber);
 	}
 
 
@@ -261,29 +272,9 @@ export default function CreateOrder() {
 										)}
 									</Field>
 									<Stack>
-										<SelectProductModal/>
+										<SelectProductModal />
 									</Stack>
-									{/* <Field name='text'>
-										{({ field, form }) => (
-											<FormControl>
-												<FormLabel htmlFor='payment method'>
-													Select Product
-												</FormLabel>
-												<Select
-													mb='20px'
-													placeholder='Add Product'
-													value={selectProduct}
-													onChange={(e) => setSelectProduct(e.target.value)}
-													width='300px'
-													h='60px'
-													borderRadius='0px 11px 11px 11px'>
-													<option>Offline</option>
-													<option>Checkout</option>
-													<option>Transfer</option>
-												</Select>
-											</FormControl>
-										)}
-									</Field> */}
+									<Stack><SelectCustomerModal/></Stack>
 									<Field name='number'>
 										{({ field, form }) => (
 											<FormControl mt={4}>

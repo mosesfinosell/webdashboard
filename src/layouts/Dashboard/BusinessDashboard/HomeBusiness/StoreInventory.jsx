@@ -163,7 +163,7 @@ export default function StoreInventory() {
 							boxSizing='border-box'
 							borderWidth='1px'
 							borderRadius='0px 21px 21px 21px'
-							borderRadius='lg'
+							
 							overflow='hidden'
 							display='flex'
 							direction='row'
@@ -185,7 +185,7 @@ export default function StoreInventory() {
 										Sort
 									</Text>
 								</Stack>
-								<Stack direction='row' direction='row' alignItems='center'>
+								<Stack direction='row'  alignItems='center'>
 									<MdFilterAlt />
 									<Text color='black' fontSize='16px'>
 										Filter
@@ -199,7 +199,7 @@ export default function StoreInventory() {
 							boxSizing='border-box'
 							borderWidth='1px'
 							borderRadius='0px 21px 21px 21px'
-							borderRadius='lg'
+							
 							overflow='hidden'>
 							<Stack
 								h='10vh'

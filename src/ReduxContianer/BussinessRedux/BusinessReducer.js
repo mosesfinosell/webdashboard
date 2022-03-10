@@ -12,9 +12,9 @@ const INITIAL_STATE = {
 	error: null,
 	loading: true,
 	orders: [],
-	customer: null,
-	product: null,
-	picture: [],
+	customers: null,
+	products: [],
+	picture: null,
 	team: null
 };
 
@@ -158,7 +158,7 @@ export const getProductReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				loading: true,
-				product: action.payload,
+				products: action.payload,
 				error: action.payload,
 			};
 		default:
@@ -207,6 +207,22 @@ export const fetchTeamReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				loading: true,
 				team: action.payload,
+				error: action.payload,
+			};
+		default:
+			return state;
+	}
+};
+
+export const fetchCustomerReducer = (state = INITIAL_STATE, action) => {
+	switch (action.type) {
+		case UserActionType.DATA_REQUEST:
+		case UserActionType.GET_CUSTOMER_SUCCESS:
+		case UserActionType.GET_CUSTOMER_ERROR:
+			return {
+				...state,
+				loading: true,
+				customers: action.payload,
 				error: action.payload,
 			};
 		default:

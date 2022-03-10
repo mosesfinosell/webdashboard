@@ -13,32 +13,30 @@ import {
 	RadioGroup,
 } from '@chakra-ui/react';
 
-import React,{ useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useColorModeValue } from '@chakra-ui/color-mode';
-import { getProduct} from '../../../../ReduxContianer/BussinessRedux/BusinessAction' 
-import  {useSelector,useDispatch} from 'react-redux'
+import { getCustomers } from '../../../../ReduxContianer/BussinessRedux/BusinessAction';
+import { useSelector, useDispatch } from 'react-redux';
 
-
-export default function SelectProductModal() {
-const bluebtn = useColorModeValue('#1A202C');
-const { isOpen, onOpen, onClose } = useDisclosure();
-const dispatch = useDispatch()
+export default function SelectCustomerModal() {
+	const bluebtn = useColorModeValue('#1A202C');
+	const { isOpen, onOpen, onClose } = useDisclosure();
+	const dispatch = useDispatch();
 
 	const businessSignIn = useSelector((state) => state.businessSignIn);
 	const { user } = businessSignIn;
 	const { businessDetails } = user;
 	const { message } = businessDetails;
-	
+
 	const [businessId] = useState(message.business_id);
 	const [value, setValue] = React.useState('');
 
-	
 	useEffect(() => {
-		dispatch(getProduct(businessId));
+		dispatch(getCustomers(businessId));
 	}, []);
 
-	const fetchProduct = useSelector((state) => state.fetchProduct);
-	let { products } = fetchProduct;
+	const fetchCustomer = useSelector((state) => state.fetchCustomer);
+	let { customer } = fetchCustomer;
 	// console.log(products.details[1]);
 	// let productData = Object.keys(products);
 
@@ -56,7 +54,7 @@ const dispatch = useDispatch()
 				type='submit'
 				color='white'
 				_hover={{ bg: '#1A212C' }}>
-				Select Product
+				Select Customer
 			</Button>
 			<Modal
 				isOpen={isOpen}
@@ -78,26 +76,8 @@ const dispatch = useDispatch()
 									<Text px='80px'>Price</Text>
 									<Text px='90px'>Category</Text>
 								</Flex>
-								{products?.details?.length > 0 && (
-									<Stack
-										borderTop='0.5px solid #D9D9D9'
-										// borderBottom='0.5px solid #D9D9D9'
-										w='470px'
-										h='50px'
-										display='flex'
-										justifyContent='center'>
-										{/* {Object.entries(products).map((product) => { */}
-										<Radio colorScheme='yellow' value={products.details[0]._id}>
-											<Flex direction='row'>
-												<Text px='10px'>{products.details[0].title}</Text>
-												<Text px='100px'>{products.details[0].price}</Text>
-												<Text px='70px'>{products.details[0].category}</Text>
-											</Flex>
-										</Radio>
-										;{/* })}  */}
-									</Stack>
-								)}
-								{products?.details?.length > 0 && (
+
+								{/* {products?.details?.length > 0 && ( */}
 									<Stack
 										borderTop='0.5px solid #D9D9D9'
 										borderBottom='0.5px solid #D9D9D9'
@@ -106,16 +86,17 @@ const dispatch = useDispatch()
 										display='flex'
 										justifyContent='center'>
 										{/* {Object.entries(products).map((product) => { */}
-										<Radio colorScheme='yellow' value={products.details[1]._id}>
+	
+										{/* <Radio  colorScheme='yellow' value={products.details[1]._id}>
 											<Flex direction='row'>
 												<Text px='10px'>{products.details[1].title}</Text>
 												<Text px='100px'>{products.details[1].price}</Text>
 												<Text px='70px'>{products.details[1].category}</Text>
 											</Flex>
-										</Radio>
+										</Radio> */}
 										{/* })}  */}
 									</Stack>
-								)}
+								{/* )} */}
 							</Stack>
 						</RadioGroup>
 					</ModalBody>
@@ -124,5 +105,3 @@ const dispatch = useDispatch()
 		</>
 	);
 }
-
-
