@@ -16,16 +16,22 @@ import {
 	FormControl,
 	FormLabel,
 	Button,
-	Select,
+	Select 
 } from '@chakra-ui/react';
+// import {
+// 	AsyncCreatableSelect,
+// 	AsyncSelect,
+// 	CreatableSelect,
+// 	Select,
+// } from 'chakra-react-select';
 import { BiShoppingBag } from 'react-icons/bi';
 import { useState,useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import SelectProductModal from './selectProductModal';
-import SelectCustomerModal from './selectCustomerModal';
+import SelectProduct from './selectProduct';
+import SelectCustomer from './selectCustomer';
 import { getProduct } from '../../../../ReduxContianer/BussinessRedux/BusinessAction';
 
 export default function CreateOrder() {
@@ -82,6 +88,14 @@ let { products } = fetchProduct;
 		randomNumber);
 	}
 
+		// const productData = [
+		// 	...Array.from(Array(1).keys(products)).map((product) => ({
+		// 		title: `${products?.details?.length > 0 && product?.details?.title}`,
+		// 	})),
+		// ];
+		console.log(products);
+		// console.log(productData);
+
 
 	return (
 		<Container m='40px' maxW='container.lg'>
@@ -94,7 +108,7 @@ let { products } = fetchProduct;
 					</Stack>
 
 					<Box
-						h='1310px'
+						h='1500px'
 						w='400px'
 						borderRadius='0px 11px 11px 11px'
 						border='0.5px solid #D9D9D9'
@@ -280,46 +294,42 @@ let { products } = fetchProduct;
 											</FormControl>
 										)}
 									</Field>
-									<Stack>
-										<SelectProductModal />
-									</Stack>
 									{/* <Field name='text'>
 										{({ field, form }) => (
 											<FormControl>
-												<FormLabel htmlFor='payment method'>
-													Select Product
-												</FormLabel>
 												<Select
-													mb='20px'
-													// placeholder='Add Payment Method'
-													// value={selectProduct}
-													onSelect={handleSelect}
-													width='300px'
-													h='60px'
-													borderRadius='0px 11px 11px 11px'>
-													<option>{products?.details[1].title}</option>
-													<option>{products?.details[2].title}</option>
-													<option>{products?.details[3].title}</option>
-												</Select>
-											</FormControl>
-										)}
-									</Field>
-									<Stack>You Select {selectProduct}</Stack> */}
-									{/* <Field name='text'>
-										{({ field, form }) => (
-											<FormControl>
-												
-											</FormControl>
-										)}
-									</Field>
-									<Field name='text'>
-										{({ field, form }) => (
-											<FormControl>
-												<SelectCustomerModal />
+													isMulti
+													name='products'
+													placeholder='Add Products'
+													closeMenuOnSelect={false}
+													chakraStyles={{
+														input: (provided) => ({
+															...provided,
+															h: '50px',
+
+															borderRadius: '0px 11px 11px 11px',
+														}),
+													}}
+													options={[
+														...Array.from(Array(1).keys(products)).map(
+															(product) => ({
+																title: `${
+																	products?.details?.length > 0 &&
+																	product?.details?.title
+																}`,
+															})
+														),
+													]}
+												/>
 											</FormControl>
 										)}
 									</Field> */}
-
+									<Stack>
+										<SelectProduct/>
+									</Stack>
+									<Stack>
+										<SelectCustomer />
+									</Stack>
 									<Field name='number'>
 										{({ field, form }) => (
 											<FormControl mt={4}>
