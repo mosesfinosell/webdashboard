@@ -14,8 +14,13 @@ import {
 	Image,
 	Text,
 	Container,
+	Spinner,
+	// useToast,
+	Alert,
+	AlertIcon,
+	createStandaloneToast,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { Link as RLink } from 'react-router-dom';
 import logo from '../../../assets/Logomark.png';
 import { MdWifiCalling3 } from 'react-icons/md';
@@ -30,14 +35,16 @@ import { businessUserLogin } from '../../../ReduxContianer/BussinessRedux/Busine
 
 export default function BusinessAccountSignIn() {
 	const yellowbtn = useColorModeValue('yellow.500');
-	const [phoneNumber, setPhoneNumber] = useState('');
-	const [password, setPassword] = useState('');
-	const [show, setShow] = useState(false);
 
 	// Redux
 	const dispatch = useDispatch();
 	const businessSignIn = useSelector((state) => state.businessSignIn);
 	const { error, businessDetails, loading } = businessSignIn;
+
+	const [phoneNumber, setPhoneNumber] = useState('');
+	const [password, setPassword] = useState('');
+	const [show, setShow] = useState(false);
+	// const [errorMessage, setErrorMessage] = useState(true);
 
 	// const toast = useToast({error})
 
@@ -53,19 +60,43 @@ export default function BusinessAccountSignIn() {
 	const handleSubmit = (e) => {
 		dispatch(businessUserLogin(phoneNumber, password));
 		e.preventDefault();
+		
 		console.log(phoneNumber, password);
 	};
 
 	const history = useHistory();
+	//   const toast = useToast();
+	const toast = createStandaloneToast();
 
-	function handleButton() {
-		if (!businessDetails) {
-			return error;
-		} else {
+	useEffect(() => {
+		if (businessDetails) {
+			toast({
+				position: 'top',
+				title: `Welcome ${businessDetails.message.name}`,
+				description: 'You have successfully login',
+				status: 'success',
+				duration: 3000,
+				isClosable: true,
+			});
 			return history.push('/business-dashboard');
 		}
-	}
+		}, [businessDetails, history,error]);
 
+	
+	// function handleClicked() {
+	// 	if (error) {
+			
+	// 		toast({
+	// 			title: `${error}`,
+	// 			description: 'incorrect email or password',
+	// 			status: 'error',
+	// 			duration: 3000,
+	// 			isClosable: true,
+	// 		});
+	// 	}
+	// }
+			
+	
 	return (
 		<Container maxW='container.lg'>
 			<Box
@@ -158,12 +189,12 @@ export default function BusinessAccountSignIn() {
 														size='sm'
 														b='transparent'
 														cursor='pointer'>
-														{show ? <FaEyeSlash /> : <FaEye />}
+														{!show ? <FaEyeSlash /> : <FaEye />}
 													</Button>
 												</InputRightElement>
 												<Input
 													{...field}
-													type={!show ? 'password' : 'text'}
+													type={show ? 'text' : 'password'}
 													onClick={handleClick}
 													onChange={(e) => setPassword(e.target.value)}
 													value={password}
@@ -179,7 +210,6 @@ export default function BusinessAccountSignIn() {
 										</FormControl>
 									)}
 								</Field>
-								{/* {  users  ? <Redirect to='/dashboard'/> :  */}
 								<Button
 									mt={4}
 									bg={yellowbtn}
@@ -189,10 +219,10 @@ export default function BusinessAccountSignIn() {
 									type='submit'
 									color='white'
 									_hover={{ bg: '#1A202C' }}
-									onClick={handleButton}>
+								//    onClick={handleClicked}
+								>
 									Login
 								</Button>
-								{/* }  */}
 							</Form>
 						</Center>
 					)}

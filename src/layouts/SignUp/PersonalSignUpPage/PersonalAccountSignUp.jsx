@@ -67,13 +67,20 @@ export default function PersonalAccountSignUp() {
 		console.log(name, phoneNumber, email, password, "personal");
 	}
 
-	function handleButton() {
-		if (!userDetails) {
-			return error;
-		} else {
-			return history.push('/verify-otp');
-		}
-	}
+	useEffect(() => {
+		if (userDetails) {
+			toast({
+				position: 'top',
+				title: `Welcome ${userDetails.message.name}`,
+				description: 'You have successfully register',
+				status: 'success',
+				duration: 3000,
+				isClosable: true,
+			});
+			return history.push('/personal-dashboard');
+		}	
+	}, [userDetails, history]);
+
 
 	//Validation
 	const SignupSchema = Yup.object().shape({
@@ -94,8 +101,6 @@ export default function PersonalAccountSignUp() {
 				boxSizing='border-box'
 				borderWidth='1px'
 				borderRadius='0px 21px 21px 21px'
-				m='20'
-				borderRadius='lg'
 				overflow='hidden'>
 				<Center>
 					<Stack>
@@ -270,7 +275,8 @@ export default function PersonalAccountSignUp() {
 									type='submit'
 									color='white'
 									_hover={{ bg: '#1A202C' }}
-									onClick={handleButton}>
+									// onClick={handleButton}
+								>
 									Continue
 								</Button>
 							</Form>

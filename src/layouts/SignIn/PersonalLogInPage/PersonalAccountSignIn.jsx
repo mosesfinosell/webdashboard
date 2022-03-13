@@ -14,8 +14,9 @@ import {
 	Image,
 	Text,
 	Container,
+	createStandaloneToast,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { Link as RLink } from 'react-router-dom';
 import logo from '../../../assets/Logomark.png';
 import { MdWifiCalling3 } from 'react-icons/md';
@@ -24,7 +25,7 @@ import { FaLock } from 'react-icons/fa';
 import { useColorModeValue } from '@chakra-ui/color-mode';
 import { useSelector, useDispatch } from 'react-redux';
 import * as Yup from 'yup';
-import { Redirect, useHistory } from 'react-router-dom';
+import {useHistory } from 'react-router-dom';
 import { peronalUserLogin } from '../../../ReduxContianer/PersonalRedux/PersonalAction';
 
 export default function PersonalAccountSignIn() {
@@ -48,6 +49,7 @@ export default function PersonalAccountSignIn() {
 	});
 
 	const history = useHistory();
+const toast = createStandaloneToast();
 
 	// Function
 	const handleClick = () => setShow(!show);
@@ -55,16 +57,32 @@ export default function PersonalAccountSignIn() {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		dispatch(peronalUserLogin(phoneNumber, password));
+		// if (error) {
+		// 	toast({
+		// 		title: `${error}`,
+		// 		description: 'Unable to create user account.',
+		// 		status: 'error',
+		// 		duration: 2000,
+		// 		isClosable: true,
+		// 	});
+		// }
 		localStorage.setItem('phoneNumber', phoneNumber);
 	};
 
-	// function handleButton() {
-	// 	if (!userDetails) {
-	// 		return error;
-	// 	} else {
-	// 		return history.push('/verify-otp');
-	// 	}
-	// }
+	useEffect(() => {
+		if (userDetails) {
+			toast({
+				position: 'top',
+				title: `Welcome ${userDetails.message.name}`,
+				description: 'You have successfully login',
+				status: 'success',
+				duration: 3000,
+				isClosable: true,
+			});
+			return history.push('/personal-dashboard');
+		}		
+	}, [userDetails, history]);
+	
 
 	return (
 		<Container maxW='container.lg'>
@@ -165,7 +183,7 @@ export default function PersonalAccountSignIn() {
 												</InputRightElement>
 												<Input
 													{...field}
-													type={!show ? 'password' : 'text'}
+													type={show ? 'text' : 'password'}
 													onClick={handleClick}
 													onChange={(e) => setPassword(e.target.value)}
 													value={password}
@@ -181,7 +199,7 @@ export default function PersonalAccountSignIn() {
 										</FormControl>
 									)}
 								</Field>
-								{/* {  users  ? <Redirect to='/dashboard'/> :  */}
+								
 								<Button
 									mt={4}
 									bg={yellowbtn}
@@ -195,7 +213,7 @@ export default function PersonalAccountSignIn() {
 								>
 									Login
 								</Button>
-								{/* }  */}
+								
 							</Form>
 						</Center>
 					)}

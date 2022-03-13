@@ -26,7 +26,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import logo from '../../../assets/Logomark.png';
 import * as Yup from 'yup';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import {
 	FaLock,
 	FaEyeSlash,
@@ -74,13 +74,20 @@ export default function BusinessAccountSignUp() {
 
 	const history = useHistory();
 
-	// function handleButton() {
-	// 	if (!businessDetails) {
-	// 		return error;
-	// 	} else {
-	// 		return history.push('/business');
-	// 	}
-	// }
+	useEffect(() => {
+		if (businessDetails) {
+			toast({
+				position: 'top',
+				title: `Welcome ${businessDetails.message.name}`,
+				description: 'You have successfully register',
+				status: 'success',
+				duration: 3000,
+				isClosable: true,
+			});
+			return history.push('/business-dashboard');
+		}
+	}, [businessDetails, history]);
+	
 
 	return (
 		<Container maxW='container.lg'>

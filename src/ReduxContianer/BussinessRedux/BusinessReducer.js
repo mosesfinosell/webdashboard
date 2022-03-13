@@ -9,7 +9,7 @@ const INITIAL_STATE = {
 			? JSON.parse(localStorage.getItem('businessDetails'))
 			: null,
 	},
-	error: null,
+	error: {},
 	loading: true,
 	orders: [],
 	customers: null,
@@ -28,6 +28,7 @@ export const businessSignUpReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				loading: true,
 				businessDetails: action.payload,
+				error: action.payload,
 			};
 		default:
 			return state;

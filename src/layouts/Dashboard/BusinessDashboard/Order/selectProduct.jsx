@@ -37,16 +37,16 @@ export default function SelectProduct() {
 	let { products } = fetchProduct;
 
 	
-	const productData = [
-		products?.details?.length > 0 &&
-			products
-				.filter((product) => product.details.length)
-				.map((product) => ({
-					title: `${product?.details?.title}`,
-				})),
-	];
+	// const productData = [
+	// 	products?.details?.length > 0 &&
+	// 		products
+	// 			.filter((product) => product.details.length)
+	// 			.map((product) => ({
+	// 				title: `${product?.details?.title}`,
+	// 			})),
+	// ];
 // console.log(products)
-console.log(productData);
+// console.log(productData);
 
 
 const { isOpen, onOpen, onClose } = useDisclosure()
@@ -86,7 +86,9 @@ const { isOpen, onOpen, onClose } = useDisclosure()
 										borderRadius: '0px 11px 11px 11px',
 									}),
 								}}
-								options={productData}
+								// options={[
+
+								// ]}
 							/>
 						</FormControl>
 					</ModalBody>

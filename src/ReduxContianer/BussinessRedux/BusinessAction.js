@@ -30,7 +30,10 @@ export const businessUserSignUp =
 		} catch (error) {
 			dispatch({
 				type: UserActionType.SIGN_UP_ERROR,
-				payload: error.response && error.response.data.message,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.error,
 			});
 		}
 	};
@@ -54,7 +57,10 @@ export const businessUserLogin =
 		} catch (error) {
 			dispatch({
 				type: UserActionType.SIGN_IN_ERROR,
-				payload: error.response && error.response.data.message,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.error,
 			});
 		}
 	};
