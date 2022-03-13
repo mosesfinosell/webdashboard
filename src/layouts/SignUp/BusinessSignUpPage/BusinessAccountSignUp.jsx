@@ -16,6 +16,7 @@ import {
 	Box,
 	Container,
 	Flex,
+	createStandaloneToast,
 } from '@chakra-ui/react';
 
 import { Link as RLink } from 'react-router-dom';
