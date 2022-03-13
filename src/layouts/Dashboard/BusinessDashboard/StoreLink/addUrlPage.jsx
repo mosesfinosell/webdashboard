@@ -54,8 +54,6 @@ export default function AddUrlPage() {
 								</InputLeftAddon>
 								<Input
 									placeholder='Add a URL'
-									width='100vh'
-									h='70px'
 									bg='#FAFAFA'
 									type='url'
 									id='url'
@@ -71,7 +69,7 @@ export default function AddUrlPage() {
 									type='submit'
 									color='white'
 									_hover={{ bg: '#1A202C' }}>
-									Add 
+									Add
 								</Button>
 							</InputGroup>
 						</Box>

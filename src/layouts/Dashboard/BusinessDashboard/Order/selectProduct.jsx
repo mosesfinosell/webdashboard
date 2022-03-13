@@ -38,9 +38,12 @@ export default function SelectProduct() {
 
 	
 	const productData = [
-		...Array.from(Array(1)?.keys(products)).map((product) => ({
-		title: `${products?.details?.length > 0 && product?.details?.title}`,
-		})),
+		products?.details?.length > 0 &&
+			products
+				.filter((product) => product.details.length)
+				.map((product) => ({
+					title: `${product?.details?.title}`,
+				})),
 	];
 // console.log(products)
 console.log(productData);
