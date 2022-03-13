@@ -52,6 +52,7 @@ export default function PersonalAccountSignUp() {
 
 	// Function
 	const handleClick = () => setShow(!show);
+const toast = createStandaloneToast();
 
 	function handleSubmit(e) {
 		dispatch(

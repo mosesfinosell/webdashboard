@@ -73,6 +73,7 @@ export default function BusinessAccountSignUp() {
 	});
 
 	const history = useHistory();
+const toast = createStandaloneToast();
 
 	useEffect(() => {
 		if (businessDetails) {
