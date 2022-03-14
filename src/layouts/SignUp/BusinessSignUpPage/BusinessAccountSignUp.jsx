@@ -58,7 +58,16 @@ export default function BusinessAccountSignUp() {
 
 	function handleSubmit(e) {
 		e.preventDefault();
-		dispatch(businessUserSignUp(name, phoneNumber, email, 'business',address,industry));
+		dispatch(
+			businessUserSignUp(
+				name,
+				phoneNumber,
+				email,
+				address,
+				industry,
+				'business'
+			)
+		);
 		localStorage.setItem('phoneNumber', phoneNumber);
 		// setEmail('');
 		// setPhoneNumber('');
@@ -79,7 +88,7 @@ const toast = createStandaloneToast();
 	useEffect(() => {
 		if (businessDetails) {
 			toast({
-				position: 'top',
+				position: 'bottom',
 				title: `Welcome ${businessDetails.message.name}`,
 				description: 'You have successfully register',
 				status: 'success',

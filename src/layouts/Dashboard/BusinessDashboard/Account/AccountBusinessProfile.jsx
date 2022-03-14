@@ -21,6 +21,7 @@ import {
 	FormControl,
 	FormLabel,
 	FormErrorMessage,
+	Button
 } from '@chakra-ui/react';
 import { Formik, Form, Field } from 'formik';
 import { useState} from 'react';
@@ -32,25 +33,36 @@ import { BiPencil } from 'react-icons/bi';
 import accUser from '../../../../assets/accuser.svg';
 import UpdatePassword from '../Account/updatePassword'
 // import ImageUploaded from './uploadImage';
+import {updateProfile} from '../../../../ReduxContianer/BussinessRedux/BusinessAction'
+import {sendAuthCode} from '../../../../ReduxContianer/BussinessRedux/BusinessAction';
 
 
 export default function AccountBusinessProfile() {
 	const yellowbtn = useColorModeValue('yellow.500');
-	const dispatch = useDispatch()
-	
-	const [name, setName] = useState('');
-	const [phonenumber, setPhonenumber] = useState('');
-	const [email, setEmail] = useState('');
+	const dispatch = useDispatch();
 
 	// Redux
 	const businessSignIn = useSelector((state) => state.businessSignIn);
 	const { user } = businessSignIn;
-     const {businessDetails} = user
-      const {message} = businessDetails
+	const { businessDetails } = user;
+	const { message } = businessDetails;
 
-	
+	const [name, setName] = useState('');
+	const [phonenumber, setPhonenumber] = useState('');
+	const [email, setEmail] = useState('');
+	const [authCode, setAuthCode] = useState('');
+	const [userId] = useState(message.userId);
 
-	
+	//Function
+	function handleSubmit(e) {
+		e.preventDefault()
+		dispatch(updateProfile(userId,phonenumber,name,email,authCode))
+	}
+
+	function handleClick() {
+		dispatch(sendAuthCode(message.email))
+	}
+
 	return (
 		<Container m='40px' maxW='container.md'>
 			<Tabs variant='unstyled'>
@@ -77,15 +89,13 @@ export default function AccountBusinessProfile() {
 								<Tab
 									_selected={{
 										color: 'white',
-									
+
 										w: '100px',
 										h: '45px',
 										bg: 'yellow.500',
 										borderRadius: '0px 11px 11px 11px',
 									}}>
-									
-										Password
-									
+									Password
 								</Tab>
 							</TabList>
 						</Center>
@@ -145,7 +155,7 @@ export default function AccountBusinessProfile() {
 										<Stack>
 											<Formik>
 												{() => (
-													<Form>
+													<Form onSubmit={handleSubmit}>
 														<Field name='name'>
 															{({ field, form }) => (
 																<FormControl
@@ -266,7 +276,7 @@ export default function AccountBusinessProfile() {
 																</FormControl>
 															)}
 														</Field>
-														<Field name='number'>
+														{/* <Field name='number'>
 															{({ field, form }) => (
 																<FormControl
 																	isInvalid={
@@ -387,10 +397,65 @@ export default function AccountBusinessProfile() {
 																	</FormErrorMessage>
 																</FormControl>
 															)}
-														</Field>
+														</Field> */}
+														<Field name='number'>
+															{({ field, form }) => (
+																<FormControl
+																	isInvalid={
+																		form.errors.name && form.touched.name
+																	}>
+																	<FormLabel htmlFor='name'>
+																		Auth Code
+																	</FormLabel>
+																	<InputGroup>
+																		<Input
+																			{...field}
+																			value={authCode}
+																			mb='20px'
+																			onChange={(e) =>
+																				setAuthCode(e.target.value)
+																			}
+																			placeholder='1234'
+																			width='300px'
+																			h='60px'
+																			borderRadius='0px 11px 11px 11px'
+																		/>
+																	</InputGroup>
+																	<FormErrorMessage>
+																		{form.errors.name}
+																	</FormErrorMessage>
+																</FormControl>
+															)}
+														</Field>{' '}
+						
+															<Button
+																mt={4}
+																bg='white'
+																width='280px'
+																h='60px'
+																borderRadius='0px 11px 11px 11px'
+																type='submit'
+																border='1px solid #D6AA1B'
+																color='#1A202C'
+																_hover={{ bg: '#D6AA1B', color: 'white' }}>
+																Save
+															</Button>
+													
 													</Form>
 												)}
 											</Formik>
+											<Button
+												mt={4}
+												bg={yellowbtn}
+												width='280px'
+												h='60px'
+												borderRadius='0px 11px 11px 11px'
+												type='submit'
+												color='white'
+												_hover={{ bg: '#1A202C' }}
+												onClick={handleClick}>
+												Send Code
+											</Button>
 										</Stack>
 									</Box>
 								</Flex>

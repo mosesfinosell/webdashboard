@@ -227,7 +227,77 @@ export const updatePassword =
 						: error.message,
 			});
 		}
+		};
+	
+export const updateProfile =
+	(user_id, phonenumber, name, email, auth_code) => async (dispatch,getState) => {
+		dispatch({
+			type: UserActionType.DATA_REQUEST,
+		});
+		try {
+			const {
+				businessSignIn: {
+					user: {
+						businessDetails: { message },
+					},
+				},
+			} = getState();
+			const config = {
+				headers: {
+					Authorization: `Bearer ${message.password}`,
+				},
+			};
+			const { data } = await axios.post(
+				`https://finosell.link/api/user/updateinfo`,
+				{ user_id, phonenumber, name, email, auth_code },config
+			);
+			dispatch({
+				type: UserActionType.UPDATE_PROFILE_SUCCESS,
+				payload: data,
+			});
+		} catch (error) {
+			dispatch({
+				type: UserActionType.UPDATE_PROFILE_ERROR,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.message,
+			});
+		}
 	};
+
+export const sendAuthCode = (email) => async (dispatch,getState) => {
+    dispatch({
+			type: UserActionType.DATA_REQUEST,
+	});
+	try {
+		const {
+			businessSignIn: {
+				user: {
+					businessDetails: { message },
+				},
+			},
+		} = getState();
+		const config = {
+			headers: {
+				Authorization: `Bearer ${message.password}`,
+			},
+		};
+		const { data } = await axios.put(baseUrl + `/reset/vemail/${email}`);
+		dispatch({
+			type: UserActionType.SEND_AUTH_CODE_SUCCESS,
+			payload: data
+		})
+	} catch (error) {
+		dispatch({
+			type: UserActionType.SEND_AUTH_CODE_ERROR,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message,
+		});
+	}
+}
 
 export const uploadImage = (businessid, image) => async (dispatch) => {
 		dispatch({
@@ -372,3 +442,60 @@ export const getProduct = (businessid) => async (dispatch,getState) => {
 		});
 	}
 };
+
+export const createTransaction =
+	(
+		transaction_id,
+		details,
+		payement_date,
+		payment_id,
+		business_id,
+		customer_id,
+		payment_status,
+		payment_method,
+		payment_ref,
+		transaction_type,
+		amount,
+		product_id
+	) =>
+	async (dispatch, getState) => {
+		dispatch({
+			type: OrderActionType.DATA_REQUEST,
+		});
+		try {
+			const {
+				businessSignIn: {
+					user: {
+						businessDetails: { message },
+					},
+				},
+			} = getState();
+			const config = {
+				headers: {
+					Authorization: `Bearer ${message.password}`,
+				},
+			};
+			const { data } = await axios.post(baseUrl + `/history/record`, {
+				transaction_id,
+				details,
+				payement_date,
+				payment_id,
+				business_id,
+				customer_id,
+				payment_status,
+				payment_method,
+				payment_ref,
+				transaction_type,
+				amount,
+				product_id,
+			},config);
+		} catch (error) {
+			dispatch({
+				type: OrderActionType.GET_PRODUCT_ERROR,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.message,
+			});
+		}
+	};

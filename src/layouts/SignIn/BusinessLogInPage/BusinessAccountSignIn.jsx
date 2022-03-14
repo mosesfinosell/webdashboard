@@ -32,6 +32,7 @@ import { useHistory } from 'react-router-dom';
 // import {Redirect} from 'react-router-dom'
 import * as Yup from 'yup';
 import { businessUserLogin } from '../../../ReduxContianer/BussinessRedux/BusinessAction';
+// import {getUserDetails} from '../../../ReduxContianer/BussinessRedux/BusinessAction'
 
 export default function BusinessAccountSignIn() {
 	const yellowbtn = useColorModeValue('yellow.500');
@@ -41,8 +42,12 @@ export default function BusinessAccountSignIn() {
 	const businessSignIn = useSelector((state) => state.businessSignIn);
 	const { error, businessDetails, loading } = businessSignIn;
 
+    // const getUser = useSelector((state) => state.getUser);
+	// const { users } = getUser;
+    // console.log(users)
 	const [phoneNumber, setPhoneNumber] = useState('');
 	const [password, setPassword] = useState('');
+	
 	const [show, setShow] = useState(false);
 	// const [errorMessage, setErrorMessage] = useState(true);
 
@@ -69,6 +74,7 @@ export default function BusinessAccountSignIn() {
 	const toast = createStandaloneToast();
 
 	useEffect(() => {
+// dispatch(getUserDetails("user_id"));
 		if (businessDetails) {
 			toast({
 				position: 'top',
@@ -79,6 +85,7 @@ export default function BusinessAccountSignIn() {
 				isClosable: true,
 			});
 			return history.push('/business-dashboard');
+			
 		}
 		}, [businessDetails, history,error]);
 

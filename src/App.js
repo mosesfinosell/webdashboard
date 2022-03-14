@@ -1,4 +1,7 @@
 import { Switch, BrowserRouter as Router, Route } from 'react-router-dom';
+import { Suspense } from 'react'
+import {Text, Spinner} from '@chakra-ui/react';
+import ErrorBoundary from './ErrorBoundary'
 import AccountBox from './layouts/AccountBox/AccountBox';
 import PersonalAccountSignUp from './layouts/SignUp/PersonalSignUpPage/PersonalAccountSignUp';
 import PersonalAccountSignIn from './layouts/SignIn/PersonalLogInPage/PersonalAccountSignIn';
@@ -27,72 +30,81 @@ function App() {
 	return (
 		<Router>
 			<Switch>
-				<Route exact path='/'>
-					<AccountBox />
-				</Route>
+				<ErrorBoundary
+					fallback={
+						<Text m='30px' fontSize='35px' fontWeight='bold'>
+							Error!
+						</Text>
+					}>
+					<Suspense fallback={<Spinner />}>
+						<Route exact path='/'>
+							<AccountBox />
+						</Route>
 
-				{/* Personal Account  */}
+						{/* Personal Account  */}
 
-				<Route path='/personal-signup'>
-					<PersonalAccountSignUp />
-				</Route>
-				<Route path='/personal-signin'>
-					<PersonalAccountSignIn />
-				</Route>
-				<Route path='/verify-number'>
-					<VerifyPhoneNumber />
-				</Route>
-				<Route path='/verify-otp'>
-					<InputOtp />
-				</Route>
-				<Route path='/password'>
-					<PasswordPage />
-				</Route>
-				<Route path='/forget-password'>
-					<PersonalForgetPassword />
-				</Route>
-				<Route path='/personal-dashboard'>
-					<DashboardPage />
-				</Route>
-				<Route path='/resend-otp'>
-					<ResendOtp />
-				</Route>
+						<Route path='/personal-signup'>
+							<PersonalAccountSignUp />
+						</Route>
+						<Route path='/personal-signin'>
+							<PersonalAccountSignIn />
+						</Route>
+						<Route path='/verify-number'>
+							<VerifyPhoneNumber />
+						</Route>
+						<Route path='/verify-otp'>
+							<InputOtp />
+						</Route>
+						<Route path='/password'>
+							<PasswordPage />
+						</Route>
+						<Route path='/forget-password'>
+							<PersonalForgetPassword />
+						</Route>
+						<Route path='/personal-dashboard'>
+							<DashboardPage />
+						</Route>
+						<Route path='/resend-otp'>
+							<ResendOtp />
+						</Route>
 
-				{/* Bussiness Account  */}
+						{/* Bussiness Account  */}
 
-				<Route path='/business-signup'>
-					<BusinessAccountSignUp />
-				</Route>
-				<Route path='/business-signin'>
-					<BusinessAccountSignIn />
-				</Route>
-				<Route path='/addbusiness'>
-					<AddBusinessPage />
-				</Route>
-				<Route path='/business-dashboard'>
-					<BusinessDashboard />
-				</Route>
-				<Route path='/store-inventory'>
-					<StoreInventory />
-				</Route>
-				<Route path='/add-product'>
-					<AddProduct />
-				</Route>
-				<Route path='/add-business-team'>
-			      <AddTeam/>
-				</Route>
-				<Route path='/delivery'>
-					<DeliveryRequest />
-				</Route>
-				<Route path='/invoice'>
-					<InvoiceBoard />
-				</Route>
-				<Route path='/add-invoice'>
-					<AddInvoice />
-				</Route>
-				<Route path='/verify-otp-business'>
-					<BusinessVerifyOtp />
-				</Route>
+						<Route path='/business-signup'>
+							<BusinessAccountSignUp />
+						</Route>
+						<Route path='/business-signin'>
+							<BusinessAccountSignIn />
+						</Route>
+						<Route path='/addbusiness'>
+							<AddBusinessPage />
+						</Route>
+						<Route path='/business-dashboard'>
+							<BusinessDashboard />
+						</Route>
+						<Route path='/store-inventory'>
+							<StoreInventory />
+						</Route>
+						<Route path='/add-product'>
+							<AddProduct />
+						</Route>
+						<Route path='/add-business-team'>
+							<AddTeam />
+						</Route>
+						<Route path='/delivery'>
+							<DeliveryRequest />
+						</Route>
+						<Route path='/invoice'>
+							<InvoiceBoard />
+						</Route>
+						<Route path='/add-invoice'>
+							<AddInvoice />
+						</Route>
+						<Route path='/verify-otp-business'>
+							<BusinessVerifyOtp />
+						</Route>
+					</Suspense>
+				</ErrorBoundary>
 			</Switch>
 		</Router>
 	);

@@ -15,7 +15,9 @@ const INITIAL_STATE = {
 	customers: null,
 	products: [],
 	picture: null,
-	team: null
+	team: null,
+	authCode: null,
+	transaction: null
 };
 
 export const businessSignUpReducer = (state = INITIAL_STATE, action) => {
@@ -107,7 +109,6 @@ export const getOrderReducer = (state= INITIAL_STATE ,action) => {
 		case OrderActionType.DATA_REQUEST:
 			case OrderActionType.GET_ORDER_SUCCESS:
 				case OrderActionType.GET_ORDER_ERROR: 
-				// const {business_id, data} = action.payload
 				return {
 					...state,
 					loading: true,
@@ -230,3 +231,52 @@ export const fetchCustomerReducer = (state = INITIAL_STATE, action) => {
 			return state;
 	}
 };
+
+export const updateUserProfileReducer = (state = INITIAL_STATE, action) => {
+	switch (action.type) {
+		case UserActionType.DATA_REQUEST:
+		case UserActionType.GET_CUSTOMER_SUCCESS:
+		case UserActionType.GET_CUSTOMER_ERROR:
+			return {
+				...state,
+				loading: true,
+				users: action.payload,
+				businessDetails: action.payload,
+				error: action.payload,
+			};
+		default:
+			return state;
+	}
+};
+
+export const sendAuthCodeReducer = (state = INITIAL_STATE, action) => {
+	switch (action.type) {
+		case UserActionType.DATA_REQUEST:
+		case UserActionType.GET_CUSTOMER_SUCCESS:
+		case UserActionType.GET_CUSTOMER_ERROR:
+			return {
+				...state,
+				loading: true,
+				authCode: action.payload,
+				error: action.payload,
+			};
+		default:
+			return state;
+	}
+};
+
+export const createTransactionReducer = (state = INITIAL_STATE, action) => {
+	switch (action.type) {
+		case OrderActionType.DATA_REQUEST:
+		case OrderActionType.CREATE_TRANSACTION_SUCCESS:
+		case OrderActionType.CREATE_TRANSACTION_ERROR:
+			return {
+				...state,
+				loading: true,
+				transaction: action.payload,
+				error: action.payload
+			};
+		default:
+			return state;
+	}
+}

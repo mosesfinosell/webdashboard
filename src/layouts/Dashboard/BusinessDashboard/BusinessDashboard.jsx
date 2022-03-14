@@ -24,12 +24,12 @@ import { GiBanknote } from 'react-icons/gi';
 import HomeBusiness from '../BusinessDashboard/HomeBusiness/HomeBusiness';
 import AddUrlPage from './StoreLink/addUrlPage';
 import OrderHistory from './Order/orderHistory';
-import PaymentDashboard from './Payment/paymentDashboard';
 import AccountBusinessProfile from './Account/AccountBusinessProfile';
 import { useSelector,useDispatch } from 'react-redux';
 import {useEffect} from 'react'
 import CreateCustomer from './Payment/createCustomer';
 import CreateOrder from './Order/createOrder';
+import CreateTransaction from './Payment/createTransaction';
 
 export default function BusinessDashboard() {
 	const businessSignIn = useSelector((state) => state.businessSignIn);
@@ -121,8 +121,8 @@ export default function BusinessDashboard() {
 							<CreateOrder/>
 						</TabPanel>
 						<TabPanel>
-							<CreateCustomer/>
-							{/* <PaymentDashboard /> */}
+							{/* <CreateCustomer/> */}
+							<CreateTransaction/>
 						</TabPanel>
 						<TabPanel>
 							<AccountBusinessProfile />
