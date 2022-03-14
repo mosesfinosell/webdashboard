@@ -280,3 +280,19 @@ export const createTransactionReducer = (state = INITIAL_STATE, action) => {
 			return state;
 	}
 }
+
+export const getTransactionReducer = (state = INITIAL_STATE, action) => {
+	switch (action.type) {
+		case OrderActionType.DATA_REQUEST:
+		case OrderActionType.GET_TRANSACTION_SUCCESS:
+		case OrderActionType.GET_TRANSACTION_ERROR:
+			return {
+				...state,
+				loading: true,
+				transaction: action.payload,
+				error: action.payload,
+			};
+		default:
+			return state;
+	}
+};

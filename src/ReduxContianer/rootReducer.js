@@ -23,6 +23,7 @@ import {
 	fetchTeamReducer,
 	fetchCustomerReducer,
 	createTransactionReducer,
+	getTransactionReducer,
 } from './BussinessRedux/BusinessReducer';
 
 // const persistConfig = {
@@ -53,6 +54,7 @@ const rootReducer = combineReducers({
 	addTeams: addTeamReducer,
 	fetchTeam: fetchTeamReducer,
 	createPayment: createTransactionReducer,
+	getPayment: getTransactionReducer,
 });
 
 // export default persistReducer(persistConfig, rootReducer);

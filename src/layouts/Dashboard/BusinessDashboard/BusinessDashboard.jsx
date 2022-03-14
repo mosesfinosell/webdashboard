@@ -36,11 +36,6 @@ export default function BusinessDashboard() {
 	const { user } = businessSignIn;
      const {businessDetails} = user
       const {message} = businessDetails
-  const dispatch = useDispatch()
-
-// useEffect(() => {
-     
-// },[])
 
 
 	return (
@@ -117,11 +112,9 @@ export default function BusinessDashboard() {
 							<AddUrlPage />
 						</TabPanel>
 						<TabPanel>
-							{/* <OrderHistory /> */}
 							<CreateOrder/>
 						</TabPanel>
 						<TabPanel>
-							{/* <CreateCustomer/> */}
 							<CreateTransaction/>
 						</TabPanel>
 						<TabPanel>

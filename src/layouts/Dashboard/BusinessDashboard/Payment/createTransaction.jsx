@@ -25,6 +25,7 @@ import { useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import DatePicker from 'react-datepicker';
+import {createTransaction} from '../../../../ReduxContianer/BussinessRedux/BusinessAction'
 
 export default function CreateTransaction() {
 	const dispatch = useDispatch();
@@ -34,24 +35,35 @@ export default function CreateTransaction() {
 	const { businessDetails } = user;
 	const { message } = businessDetails;
 
-	const [customerName, setcustomerName] = useState('');
 	const [details, setDetails] = useState('');
 	const [paymentDate, setpaymentDate] = useState('');
-	const [paymentId, setPaymentId] = useState('');
+	const [paymentId] = useState('');
     const [businessId] = useState(message.business_id);
     const [customerId] = useState(message.customer_id);
     const [paymentStatus, setPaymentStatus] = useState('');
     const [paymentMethod, setPaymentMethod] = useState('');
-    const [paymentRef, setPaymentRef] = useState('');
+    const [paymentRef] = useState('');
     const [transactionType, setTransactionType] = useState('');
     const [amount, setAmount] = useState('');
-	const [product,setProduct] = useState('4575r46rt5');
+	const [productId] = useState('4575r46rt5');
 
 	function handleSubmit(e) {
 		e.preventDefault();
 		dispatch(
-		
-        )
+			createTransaction(
+				details,
+				paymentDate,
+				paymentId,
+				businessId,
+				customerId,
+				paymentStatus,
+				paymentMethod,
+				paymentRef,
+				transactionType,
+				amount,
+				productId
+			)
+		);
 	}
 
     return (

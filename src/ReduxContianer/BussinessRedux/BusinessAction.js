@@ -499,3 +499,36 @@ export const createTransaction =
 			});
 		}
 	};
+
+export const getTransaction = () => async (dispatch,getState) => {
+	dispatch({
+			type: OrderActionType.DATA_REQUEST
+	})
+	try {
+		const {
+			businessSignIn: {
+				user: {
+					businessDetails: { message },
+				},
+			},
+		} = getState();
+		const config = {
+			headers: {
+				Authorization: `Bearer ${message.password}`,
+			},
+		};
+		const { data } = axios.get(baseUrl + `history/fetch`);
+			dispatch({
+				type: OrderActionType.GET_TRANSACTION_SUCCESS,
+				payload: data
+			})
+	} catch (error) {
+		dispatch({
+			type: OrderActionType.GET_TRANSACTION_ERROR,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.message,
+		})
+		}
+}
