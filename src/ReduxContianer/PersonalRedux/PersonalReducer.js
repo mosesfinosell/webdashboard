@@ -1,6 +1,7 @@
 import UserActionType from '../constants/UserActionType';
 
 const INITIAL_STATE = {
+	users: [],
 	user: {
 		userDetails: localStorage.getItem('userDetails')
 			? JSON.parse(localStorage.getItem('userDetails'))
@@ -37,7 +38,7 @@ export const personalSignInReducer = (state = INITIAL_STATE, action) => {
 		case UserActionType.SIGN_IN_SUCCESS:
 			return {
 				...state,
-				userDetails: action.payload.user,
+				userDetails: action.payload,
 			};
 
 		case UserActionType.SIGN_IN_ERROR:
@@ -75,6 +76,22 @@ export const personalVerifyOtpRedcuer = (state = INITIAL_STATE, action) => {
 				...state,
 				loading: true,
 				userDetails: action.payload,
+				error: action.payload,
+			};
+		default:
+			return state;
+	}
+};
+
+export const getUserDetailsReducer = (state = INITIAL_STATE, action) => {
+	switch (action.type) {
+		case UserActionType.DATA_REQUEST:
+		case UserActionType.GET_USER_DETAIL_SUCCESS:
+		case UserActionType.GET_USER_DETAIL_ERROR:
+			return {
+				...state,
+				loading: true,
+				users: action.payload?.message,
 				error: action.payload,
 			};
 		default:

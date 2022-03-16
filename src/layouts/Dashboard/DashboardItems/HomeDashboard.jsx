@@ -15,15 +15,29 @@ import {
 } from '@chakra-ui/react';
 import { BsPlusSquare, BsArrowDownLeftSquare, BsPhone } from 'react-icons/bs';
 import { VscRocket } from 'react-icons/vsc';
+import {useSelector, useDispatch} from 'react-redux'
 import AddMoneyModal from '../../HomeItemsModal/AddMoney/addMoneyModal';
 // import SendMoneyModal from '../../HomeItemsModal/SendMoney/sendMoneyModal'
 import BuyAirtimeModal from '../../HomeItemsModal/BuyAirtime/BuyAirtimeModal';
-import { useSelector } from 'react-redux';
-import {useState} from 'react'
+import { getUserDetails } from '../../../ReduxContianer/BussinessRedux/BusinessAction'
+// import { useSelector } from 'react-redux';
+import { useState,useEffect } from 'react'
+
+
 export default function HomeDash() {
-	const [amount] = useState(localStorage.getItem('amount'));
+const dispatch = useDispatch()
 	const personalSignIn = useSelector((state) => state.personalSignIn);
-       const {userDetails} = personalSignIn
+	const { userDetails } = personalSignIn
+//   const {message} = userDetails
+// 		const getUser = useSelector((state) => state.getUser);
+// 		const { users } = getUser;
+// 		// const { message } = users;
+// 	console.log(users)
+        
+// 		useEffect(() => {
+// 			dispatch(getUserDetails(message.user_id));
+// 		}, []);
+
 
 	return (
 		<Container m='40px' maxW='container.lg'>
@@ -32,51 +46,43 @@ export default function HomeDash() {
 					<Tabs variant='unstyled'>
 						<Center>
 							<TabList>
-								<Tab>
-									<Box
-										as='button'
-										borderRadius='md'
-										bg='yellow.500'
-										w='150px'
-										color='white'
-										px={4}
-										h='35px'
-										borderRadius='0px 11px 11px 11px'>
-										Wallet Balance
-									</Box>
+								<Tab
+									_selected={{
+										color: 'white',
+										px: '4',
+										w: '170px',
+										h: '45px',
+										bg: 'yellow.500',
+										borderRadius: '0px 11px 11px 11px',
+									}}>
+									Wallet Balance
 								</Tab>
 							</TabList>
 							<TabList>
-								<Tab>
-									<Box
-										as='button'
-										bg='white.500'
-										w='200px'
-										h='35px'
-										color='gray'
-										px={34}>
-										Escrow Balance
-									</Box>
+								<Tab
+									_selected={{
+										color: 'white',
+										px: '4',
+										w: '170px',
+										h: '45px',
+										bg: 'yellow.500',
+										borderRadius: '0px 11px 11px 11px',
+									}}>
+									Escrow Balance
 								</Tab>
 							</TabList>
 						</Center>
 						<TabPanels>
 							<TabPanel>
 								<Stack>
-									{userDetails && (
-										<Heading as='h6'>
-											₦ {amount}
-										</Heading>
-									)}
+								
+										<Heading as='h6'>₦45000</Heading>
+									
 								</Stack>
 							</TabPanel>
 							<TabPanel>
 								<Stack>
-									{userDetails && (
-										<Heading as='h6'>
-											₦ {amount}
-										</Heading>
-									)}
+									<Heading as='h6'>₦34000</Heading>
 								</Stack>
 							</TabPanel>
 						</TabPanels>
