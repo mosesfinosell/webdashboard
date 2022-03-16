@@ -11,105 +11,188 @@ import {
 	Textarea,
 	Image,
 	Input,
-	InputLeftElement,
+	Drawer,
+	DrawerBody,
+	DrawerFooter,
+	DrawerHeader,
+	DrawerOverlay,
+	DrawerContent,
+	DrawerCloseButton,
 	InputRightElement,
 	InputGroup,
 	FormControl,
 	FormLabel,
 	FormErrorMessage,
 	Button,
+	useDisclosure,
 } from '@chakra-ui/react';
 import { Formik, Form, Field } from 'formik';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { FaUser, FaLock, FaEyeSlash, FaEye, FaAngleDown } from 'react-icons/fa';
 import { useColorModeValue } from '@chakra-ui/color-mode';
 import { BiPencil } from 'react-icons/bi';
 import shoe from '../../../../assets/shoe.svg';
 import ProductModal from './addProductModal';
+import { createProduct } from '../../../../ReduxContianer/BussinessRedux/BusinessAction';
+import { useSelector, useDispatch} from 'react-redux'
 //   import ProductModal from '../../../Dashboard/BusinessDashboard/BusinessDashboard'
 
 export default function AddProduct() {
+	 const { isOpen, onOpen, onClose } = useDisclosure();
+		const btnRef = useRef();
+const dispatch = useDispatch();
 	//   const {onOpen} = ProductModal
 	const yellowbtn = useColorModeValue('yellow.500');
 
-	const [name, setName] = useState('');
-	const [phonenumber, setPhonenumber] = useState('');
-	const [email, setEmail] = useState('');
+	const [title, setTitle] = useState('');
+	const [phoneNumber, setPhoneNumber] = useState('');
+	const [price, setPrice] = useState('');
+	const [color, setColor] = useState('');
+	const [description, setDescription] = useState('');
+	const [category, setCategory] = useState('');
+	const [size, setSize] = useState('');
+	const [image, setImage] = useState('');
 
+	function handleSubmit(e) {
+		e.preventDefault();
+       dispatch(
+					createProduct(
+						title,
+						phoneNumber,
+						price,
+						color,
+						description,
+						category,
+						size,
+						image
+					)
+				);
+		console.log(title,phoneNumber,price,color,description,category,size,image)
+	}
+
+    // const [businessId] = useState(message.business_id);
 	return (
 		<Container m='20px' maxW='container.lg'>
-			<Grid
-				h='100vh'
-				templateColumns='repeat(7, 1fr)'
-				templateRows='repeat(5, 1fr)'>
-				<GridItem rowStart={1} colSpan={3} bg='white'>
-					<Center>
-						<Heading>Add Product</Heading>
-					</Center>
-				</GridItem>
-				<GridItem rowStart={2} colSpan={7}>
-					<Flex direction='row' justifyContent='space-between' mt='20px'>
-						<Box>
-							<Box
-								w='150px'
-								h='350px'
-								border='0.5px solid white.500'
-								borderRadius='0px 8px 8px 8px'>
-								<Image src={shoe} alt='user' h='180px' />
+			<Stack>
+				<Button
+					bg={yellowbtn}
+					width='150px'
+					h='60px'
+					borderRadius='0px 11px 11px 11px'
+					type='submit'
+					color='white'
+					_hover={{ bg: '#1A202C' }}
+					ref={btnRef}
+					onClick={onOpen}>
+					+ Add Product
+				</Button>
+			</Stack>
+			<Drawer
+				isOpen={isOpen}
+				placement='right'
+				onClose={onClose}
+				finalFocusRef={btnRef}
+				size='lg'>
+				<DrawerOverlay />
+				<DrawerContent>
+					<DrawerCloseButton />
+					<DrawerHeader>Add Product</DrawerHeader>
+
+					<DrawerBody>
+						<Flex direction='row' justifyContent='space-between' mt='20px'>
+							<Box>
+								<Box
+									w='150px'
+									h='350px'
+									border='0.5px solid white.500'
+									borderRadius='0px 8px 8px 8px'>
+									<Image src={shoe} alt='user' h='180px' />
+								</Box>
+								<Box
+									color='white'
+									fontSize='18px'
+									w='70px'
+									border='0.5px solid yellow.500'
+									bg='yellow.500'
+									p='20px'
+									borderRadius='0px 8px 8px 8px'
+									position='relative'
+									bottom='120px'
+									left='90px'>
+									<BiPencil />
+								</Box>
+								<Stack mt='80px'>
+									<Heading fontSize='16px' as='h6'>
+										Product Specification
+									</Heading>
+								</Stack>
+								<Stack mt='50px'>
+									<Heading fontSize='16px' as='h6'>
+										Alternative Information
+									</Heading>
+								</Stack>
 							</Box>
-							<Box
-								color='white'
-								fontSize='18px'
-								w='70px'
-								border='0.5px solid yellow.500'
-								bg='yellow.500'
-								p='20px'
-								borderRadius='0px 8px 8px 8px'
-								position='relative'
-								bottom='120px'
-								left='90px'>
-								<BiPencil />
-							</Box>
-							<Stack mt='80px'>
-								<Heading fontSize='16px' as='h6'>
-									Product Specification
-								</Heading>
-							</Stack>
-							<Stack mt='50px'>
-								<Heading fontSize='16px' as='h6'>
-									Alternative Information
-								</Heading>
-							</Stack>
-						</Box>
-						<Box alignItems='start'>
-							<Stack>
-								<Formik>
-									{() => (
-										<Form>
-											<Field name='text'>
-												{({ field, form }) => (
-													<FormControl
-														isInvalid={form.errors.name && form.touched.name}>
-														<FormLabel htmlFor='name'>Product Name</FormLabel>
-														<InputGroup>
-															<Input
-																{...field}
-																mb='20px'
-																value={name}
-																//  onChange={(e) => setName(e.target.value)}
-																placeholder='Product Name'
-																width='420px'
-																h='60px'
-																borderRadius='0px 11px 11px 11px'
-															/>
-														</InputGroup>
-														<FormErrorMessage>
-															{form.errors.name}
-														</FormErrorMessage>
-													</FormControl>
-												)}
-											</Field>
-											<Flex direction='row' justifyContent='space-between'>
+							<Box alignItems='start'>
+								<Stack>
+									<Formik
+										initialValues={{image: ""}}
+										onSubmit={(values) => {
+											console.log(values)
+										}}
+									>
+										{() => (
+											<Form onSubmit={handleSubmit}>
+												<Field name='text'>
+													{({ field, form }) => (
+														<FormControl
+															isInvalid={form.errors.name && form.touched.name}>
+															<FormLabel htmlFor='name'>Product Name</FormLabel>
+															<InputGroup>
+																<Input
+																	{...field}
+																	mb='20px'
+																	value={title}
+																	onChange={(e) => setTitle(e.target.value)}
+																	placeholder='Product Title'
+																	width='300px'
+																	h='60px'
+																	borderRadius='0px 11px 11px 11px'
+																/>
+															</InputGroup>
+															<FormErrorMessage>
+																{form.errors.name}
+															</FormErrorMessage>
+														</FormControl>
+													)}
+												</Field>
+												<Field name='number'>
+													{({ field, form }) => (
+														<FormControl
+															isInvalid={form.errors.name && form.touched.name}>
+															<FormLabel htmlFor='phoneName'>
+																Seller Phone Number
+															</FormLabel>
+															<InputGroup>
+																<Input
+																	{...field}
+																	mb='20px'
+																	value={phoneNumber}
+																	onChange={(e) =>
+																		setPhoneNumber(e.target.value)
+																	}
+																	placeholder='08123456789'
+																	width='300px'
+																	h='60px'
+																	borderRadius='0px 11px 11px 11px'
+																/>
+															</InputGroup>
+															<FormErrorMessage>
+																{form.errors.name}
+															</FormErrorMessage>
+														</FormControl>
+													)}
+												</Field>
+												{/* <Flex direction='row' justifyContent='space-between'> */}
 												<Field name='text'>
 													{({ field, form }) => (
 														<FormControl
@@ -119,11 +202,11 @@ export default function AddProduct() {
 																<Input
 																	{...field}
 																	mb='20px'
-																	value={email}
-																	// onChange={(e) => setEmail(e.target.value)}
+																	value={price}
+																	onChange={(e) => setPrice(e.target.value)}
 																	placeholder='₦0.00'
-																	width='200px'
-																	h='70px'
+																	width='300px'
+																	h='60px'
 																	borderRadius='0px 11px 11px 11px'
 																/>
 															</InputGroup>
@@ -137,16 +220,16 @@ export default function AddProduct() {
 													{({ field, form }) => (
 														<FormControl
 															isInvalid={form.errors.name && form.touched.name}>
-															<FormLabel htmlFor='name'>Quantity</FormLabel>
+															<FormLabel htmlFor='name'>Color</FormLabel>
 															<InputGroup>
 																<Input
 																	{...field}
 																	mb='20px'
-																	value={email}
-																	// onChange={(e) => setEmail(e.target.value)}
-																	placeholder='1000'
-																	width='200px'
-																	h='70px'
+																	value={color}
+																	onChange={(e) => setColor(e.target.value)}
+																	placeholder='red'
+																	width='300px'
+																	h='60px'
 																	borderRadius='0px 11px 11px 11px'
 																/>
 															</InputGroup>
@@ -156,64 +239,60 @@ export default function AddProduct() {
 														</FormControl>
 													)}
 												</Field>
-											</Flex>
-											<Field name='number'>
-												{({ field, form }) => (
-													<FormControl
-														isInvalid={form.errors.name && form.touched.name}>
-														<FormLabel htmlFor='name'>
-															Product Description
-														</FormLabel>
-														<InputGroup>
-															<Textarea
-																{...field}
-																placeholder='Add a description'
-																mb='20px'
-																//  onChange={(e) => setPhonenumber(e.target.value)}
-																width='420px'
-																h='60px'
-																borderRadius='0px 11px 11px 11px'
-															/>
-														</InputGroup>
-														<FormErrorMessage>
-															{form.errors.name}
-														</FormErrorMessage>
-													</FormControl>
-												)}
-											</Field>
-											<Field name='text'>
-												{({ field, form }) => (
-													<FormControl
-														isInvalid={form.errors.name && form.touched.name}>
-														<FormLabel htmlFor='name'>
-															Product Category
-														</FormLabel>
-														<InputGroup>
-															<InputRightElement
-																pointerEvents='none'
-																color='gray.500'
-																m='15px 15px'
-																fontSize='24px'
-																children={<FaAngleDown />}
-															/>
-															<Input
-																{...field}
-																mb='20px'
-																value={name}
-																//  onChange={(e) => setName(e.target.value)}
-																placeholder='Select product category'
-																width='420px'
-																h='70px'
-																borderRadius='0px 11px 11px 11px'
-															/>
-														</InputGroup>
-														<FormErrorMessage>
-															{form.errors.name}
-														</FormErrorMessage>
-													</FormControl>
-												)}
-											</Field>
-											<Flex direction='row' justifyContent='space-between'>
+												{/* </Flex> */}
+												<Field name='number'>
+													{({ field, form }) => (
+														<FormControl
+															isInvalid={form.errors.name && form.touched.name}>
+															<FormLabel htmlFor='name'>
+																Product Description
+															</FormLabel>
+															<InputGroup>
+																<Textarea
+																	{...field}
+																	placeholder='Add a description'
+																	mb='20px'
+																	value={description}
+																	onChange={(e) =>
+																		setDescription(e.target.value)
+																	}
+																	width='300px'
+																	h='60px'
+																	borderRadius='0px 11px 11px 11px'
+																/>
+															</InputGroup>
+															<FormErrorMessage>
+																{form.errors.name}
+															</FormErrorMessage>
+														</FormControl>
+													)}
+												</Field>
+												<Field name='text'>
+													{({ field, form }) => (
+														<FormControl
+															isInvalid={form.errors.name && form.touched.name}>
+															<FormLabel htmlFor='name'>
+																Product Category
+															</FormLabel>
+															<InputGroup>
+																<Input
+																	{...field}
+																	mb='20px'
+																	value={category}
+																	onChange={(e) => setCategory(e.target.value)}
+																	placeholder='Select product category'
+																	width='300px'
+																	h='60px'
+																	borderRadius='0px 11px 11px 11px'
+																/>
+															</InputGroup>
+															<FormErrorMessage>
+																{form.errors.name}
+															</FormErrorMessage>
+														</FormControl>
+													)}
+												</Field>
+												{/* <Flex direction='row' justifyContent='space-between'> */}
 												<Field name='text'>
 													{({ field, form }) => (
 														<FormControl
@@ -225,11 +304,11 @@ export default function AddProduct() {
 																<Input
 																	{...field}
 																	mb='20px'
-																	value={email}
-																	// onChange={(e) => setEmail(e.target.value)}
+																	value={size}
+																	onChange={(e) => setSize(e.target.value)}
 																	placeholder='Select available sizes'
-																	width='200px'
-																	h='70px'
+																	width='300px'
+																	h='60px'
 																	borderRadius='0px 11px 11px 11px'
 																/>
 															</InputGroup>
@@ -244,17 +323,21 @@ export default function AddProduct() {
 														<FormControl
 															isInvalid={form.errors.name && form.touched.name}>
 															<FormLabel htmlFor='name'>
-																Available Colors
+																Product Image
 															</FormLabel>
 															<InputGroup>
 																<Input
 																	{...field}
 																	mb='20px'
-																	value={email}
-																	// onChange={(e) => setEmail(e.target.value)}
+																	type='file'
+																	name='image'
+																	onChange={(event) => 
+																		form.setFieldValue("image", event.target.files[0])
+																	
+																	}
 																	placeholder='Select available colors'
-																	width='200px'
-																	h='70px'
+																	width='300px'
+																	h='60px'
 																	borderRadius='0px 11px 11px 11px'
 																/>
 															</InputGroup>
@@ -264,105 +347,29 @@ export default function AddProduct() {
 														</FormControl>
 													)}
 												</Field>
-											</Flex>
-											<Flex direction='row' justifyContent='space-between'>
-												<Field name='text'>
-													{({ field, form }) => (
-														<FormControl
-															isInvalid={form.errors.name && form.touched.name}>
-															<FormLabel htmlFor='name'>
-																Discounted Price
-															</FormLabel>
-															<InputGroup>
-																<Input
-																	{...field}
-																	mb='20px'
-																	value={email}
-																	// onChange={(e) => setEmail(e.target.value)}
-																	placeholder='₦0.00'
-																	width='200px'
-																	h='70px'
-																	borderRadius='0px 11px 11px 11px'
-																/>
-															</InputGroup>
-															<FormErrorMessage>
-																{form.errors.name}
-															</FormErrorMessage>
-														</FormControl>
-													)}
-												</Field>
-												<Field name='text'>
-													{({ field, form }) => (
-														<FormControl
-															isInvalid={form.errors.name && form.touched.name}>
-															<FormLabel htmlFor='name'>
-																Discount Quantity
-															</FormLabel>
-															<InputGroup>
-																<Input
-																	{...field}
-																	mb='20px'
-																	value={email}
-																	// onChange={(e) => setEmail(e.target.value)}
-																	placeholder='1000'
-																	width='200px'
-																	h='70px'
-																	borderRadius='0px 11px 11px 11px'
-																/>
-															</InputGroup>
-															<FormErrorMessage>
-																{form.errors.name}
-															</FormErrorMessage>
-														</FormControl>
-													)}
-												</Field>
-											</Flex>
-											<Field name='number'>
-												{({ field, form }) => (
-													<FormControl
-														isInvalid={form.errors.name && form.touched.name}>
-														<FormLabel htmlFor='name'>Discount Code</FormLabel>
-														<InputGroup>
-															<Textarea
-																{...field}
-																placeholder='Discount Code'
-																mb='20px'
-																//  onChange={(e) => setPhonenumber(e.target.value)}
-																width='420px'
-																h='60px'
-																borderRadius='0px 11px 11px 11px'
-															/>
-														</InputGroup>
-														<FormErrorMessage>
-															{form.errors.name}
-														</FormErrorMessage>
-													</FormControl>
-												)}
-											</Field>
-										</Form>
-									)}
-								</Formik>
-							</Stack>
-							<Stack>
-								<Button
-									onClick={() => {
-										ProductModal();
-									}}
-									mt={4}
-									bg={yellowbtn}
-									width='400px'
-									h='70px'
-									borderRadius='0px 11px 11px 11px'
-									type='submit'
-									color='white'
-									_hover={{ bg: '#1A202C' }}>
-									Add Product
-								</Button>
-							</Stack>
-						</Box>
-					</Flex>
-				</GridItem>
-			</Grid>
+												{/* </Flex> */}
+												<DrawerFooter>
+													<Button
+														mt={4}
+														bg={yellowbtn}
+														width='300px'
+														h='60px'
+														borderRadius='0px 11px 11px 11px'
+														type='submit'
+														color='white'
+														_hover={{ bg: '#1A202C' }}>
+														Add Product
+													</Button>
+												</DrawerFooter>
+											</Form>
+										)}
+									</Formik>
+								</Stack>
+							</Box>
+						</Flex>
+					</DrawerBody>
+				</DrawerContent>
+			</Drawer>
 		</Container>
 	);
 }

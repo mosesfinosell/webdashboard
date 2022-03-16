@@ -30,7 +30,9 @@ export default function ProductModal() {
 
 	return (
 		<>
-			<Stack onClick={onOpen}></Stack>
+			<Stack onClick={onOpen}>
+				
+			</Stack>
 			<Modal
 				initialFocusRef={initialRef}
 				finalFocusRef={finalRef}

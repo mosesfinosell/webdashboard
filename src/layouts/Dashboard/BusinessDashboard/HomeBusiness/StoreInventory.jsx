@@ -20,10 +20,11 @@ import {
 	Center,
 	Box,
 	Avatar,
+	Heading
 } from '@chakra-ui/react';
 import { Formik, Form, Field } from 'formik';
 import { useColorModeValue } from '@chakra-ui/color-mode';
-import { useState } from 'react';
+import { useState }  from 'react';
 import { BsSortUp } from 'react-icons/bs';
 import { MdFilterAlt, MdAddchart } from 'react-icons/md';
 import user1 from '../../../../assets/user1.png';
@@ -32,11 +33,16 @@ import { RiHomeSmile2Line } from 'react-icons/ri';
 import { IoExitOutline, IoBusinessOutline } from 'react-icons/io5';
 import { BiStore } from 'react-icons/bi';
 import { GiBanknote } from 'react-icons/gi';
-
+import AddProduct from './addProduct'
+import { useSelector } from 'react-redux';
 export default function StoreInventory() {
 	const yellowbtn = useColorModeValue('yellow.500');
 	const [search, setSearch] = useState('');
 
+	const fetchProduct = useSelector((state) => state.fetchProduct);
+	const { products } = fetchProduct;
+	const { details } = products
+	
 	return (
 		<Grid templateRows='repeat(6, 1fr)' templateColumns='repeat(12, 1fr)'>
 			<Tabs orientation='vertical' variant='unstyled'>
@@ -106,56 +112,44 @@ export default function StoreInventory() {
 								Store Inventory
 							</Text>
 						</Stack>
-						<Flex direction='row'>
-							<Formik>
-								{() => (
-									<Form>
-										<Field name='text'>
-											{({ field, form }) => (
-												<FormControl
-													isInvalid={form.errors.name && form.touched.name}>
-													<InputGroup>
-														<InputLeftElement
-															pointerEvents='none'
-															m='25px 1px'
-															fontSize='20px'
-															color='yellow.500'
-															children=''
-														/>
-														<Input
-															{...field}
-															onChange={(e) => setSearch(e.target.value)}
-															type='text'
-															placeholder='Search'
-															value={search}
-															width='300px'
-															h='60px'
-															borderRadius='0px 11px 11px 11px'
-														/>
-													</InputGroup>
-													<FormErrorMessage>
-														{form.errors.name}
-													</FormErrorMessage>
-												</FormControl>
-											)}
-										</Field>
-									</Form>
-								)}
-							</Formik>
-							<Stack px='35px'>
-								<Button
-									bg={yellowbtn}
-									width='150px'
-									h='60px'
-									borderRadius='0px 11px 11px 11px'
-									type='submit'
-									color='white'
-									_hover={{ bg: '#1A202C' }}>
-									+ Add Product
-								</Button>
-							</Stack>
-						</Flex>
+						<Formik>
+							{() => (
+								<Form>
+									<Field name='text'>
+										{({ field, form }) => (
+											<FormControl
+												isInvalid={form.errors.name && form.touched.name}>
+												<InputGroup>
+													<InputLeftElement
+														pointerEvents='none'
+														m='25px 1px'
+														fontSize='20px'
+														color='yellow.500'
+														children=''
+													/>
+													<Input
+														{...field}
+														onChange={(e) => setSearch(e.target.value)}
+														type='text'
+														placeholder='Search'
+														value={search}
+														width='300px'
+														h='60px'
+														borderRadius='0px 11px 11px 11px'
+													/>
+												</InputGroup>
+												<FormErrorMessage>{form.errors.name}</FormErrorMessage>
+											</FormControl>
+										)}
+									</Field>
+								</Form>
+							)}
+						</Formik>
+						<Stack>
+							<AddProduct />
+						</Stack>
 					</Flex>
+
 					<Container maxW='container.lg' mt='40px'>
 						<Box
 							px='30px'
@@ -163,7 +157,6 @@ export default function StoreInventory() {
 							boxSizing='border-box'
 							borderWidth='1px'
 							borderRadius='0px 21px 21px 21px'
-							
 							overflow='hidden'
 							display='flex'
 							direction='row'
@@ -185,7 +178,7 @@ export default function StoreInventory() {
 										Sort
 									</Text>
 								</Stack>
-								<Stack direction='row'  alignItems='center'>
+								<Stack direction='row' alignItems='center'>
 									<MdFilterAlt />
 									<Text color='black' fontSize='16px'>
 										Filter
@@ -199,7 +192,6 @@ export default function StoreInventory() {
 							boxSizing='border-box'
 							borderWidth='1px'
 							borderRadius='0px 21px 21px 21px'
-							
 							overflow='hidden'>
 							<Stack
 								h='10vh'
@@ -221,7 +213,8 @@ export default function StoreInventory() {
 								</Text>
 							</Stack>
 						</Box>
-						<Box
+						{}
+						{/* <Box
 							px='25px'
 							h='100px'
 							w='60vw'
@@ -295,32 +288,7 @@ export default function StoreInventory() {
 							<Text fontSize='12px' color='gray'>
 								Jan 3, 2022
 							</Text>
-						</Box>
-						<Box
-							px='25px'
-							h='100px'
-							w='60vw'
-							border='0.5px solid #D9D9D9'
-							display='flex'
-							alignItems='center'
-							justifyContent='space-between'>
-							<Stack>
-								<Text>Buy Airtime</Text>
-								<Text color='gray' fontSize='12px'>
-									Success
-								</Text>
-							</Stack>
-
-							<Text fontSize='12px' color='red.500'>
-								₦12,000
-							</Text>
-							<Text fontSize='12px' color='gray'>
-								Jan 3, 2022
-							</Text>
-							<Text fontSize='12px' color='gray'>
-								Jan 3, 2022
-							</Text>
-						</Box>
+						</Box> */}
 					</Container>
 				</Container>
 			</GridItem>

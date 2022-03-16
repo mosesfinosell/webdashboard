@@ -33,7 +33,7 @@ function App() {
 				<ErrorBoundary
 					fallback={
 						<Text m='30px' fontSize='35px' fontWeight='bold'>
-							Error!
+						Network	Error!
 						</Text>
 					}>
 					<Suspense fallback={<Spinner />}>

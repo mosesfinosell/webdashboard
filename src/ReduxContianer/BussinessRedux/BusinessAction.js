@@ -410,6 +410,50 @@ export const fetchTeamMember =
 
 // PRODUCT
 
+export const createProduct = (description, title, seller, businessid, image, category, size, color,price) => async (dispatch, getState) => {
+	try {
+		const {
+			businessSignIn: {
+				user: {
+					businessDetails: { message },
+				},
+			},
+		} = getState();
+		const config = {
+			headers: {
+				Authorization: `Bearer ${message.password}`,
+			},
+		};
+		const { data } = await axios.post(
+			`https://finosell.link/api/seller/upload`,
+			{
+				description,
+				title,
+				seller,
+				businessid,
+				image,
+				category,
+				size,
+				color,
+				price,
+			},
+			config
+		);
+		dispatch({
+			type: ProductActionType.CREATE_PRODUCT_SUCCESS,
+			payload: data,
+		});
+	} catch (error) {
+		dispatch({
+			type: ProductActionType.CREATE_PRODUCT_ERROR,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message,
+		});
+	}
+};
+
 export const getProduct = (businessid) => async (dispatch,getState) => {
 	try {
 		const {
