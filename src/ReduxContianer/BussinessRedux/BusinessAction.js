@@ -576,3 +576,39 @@ export const getTransaction = () => async (dispatch,getState) => {
 		})
 		}
 }
+
+export const createStoreLink = (sub, user) => async (dispatch, getState) => {
+	dispatch({
+		type: OrderActionType.DATA_REQUEST,
+	});
+	try {
+		const {
+			businessSignIn: {
+				user: {
+					businessDetails: { message },
+				},
+			},
+		} = getState();
+		const config = {
+			headers: {
+				Authorization: `Bearer ${message.password}`,
+			},
+		};
+		const { data } = axios.post(`https://finosell.link/api/subdomain/create`, {
+			sub,
+			user,
+		},config);
+		dispatch({
+			type: UserActionType.CREATE_STORELINK_SUCCESS,
+			payload: data,
+		});
+	} catch (error) {
+		dispatch({
+			type: UserActionType.CREATE_STORELINK_ERROR,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message,
+		});
+	}
+};

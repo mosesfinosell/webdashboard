@@ -17,7 +17,8 @@ const INITIAL_STATE = {
 	picture: null,
 	team: null,
 	authCode: null,
-	transaction: null
+	transaction: null,
+	storeLink: null,
 };
 
 export const businessSignUpReducer = (state = INITIAL_STATE, action) => {
@@ -290,6 +291,22 @@ export const getTransactionReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				loading: true,
 				transaction: action.payload,
+				error: action.payload,
+			};
+		default:
+			return state;
+	}
+};
+
+export const createStoreReducer = (state = INITIAL_STATE, action) => {
+	switch (action.type) {
+		case UserActionType.DATA_REQUEST:
+		case UserActionType.CREATE_STORELINK_SUCCESS:
+		case UserActionType.CREATE_STORELINK_ERROR:
+			return {
+				...state,
+				loading: true,
+				storeLink: action.payload,
 				error: action.payload,
 			};
 		default:

@@ -24,7 +24,7 @@ import {
 } from '@chakra-ui/react';
 import { Formik, Form, Field } from 'formik';
 import { useColorModeValue } from '@chakra-ui/color-mode';
-import { useState }  from 'react';
+import { useState,useEffect }  from 'react';
 import { BsSortUp } from 'react-icons/bs';
 import { MdFilterAlt, MdAddchart } from 'react-icons/md';
 import user1 from '../../../../assets/user1.png';
@@ -34,14 +34,29 @@ import { IoExitOutline, IoBusinessOutline } from 'react-icons/io5';
 import { BiStore } from 'react-icons/bi';
 import { GiBanknote } from 'react-icons/gi';
 import AddProduct from './addProduct'
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
+import {getProduct} from '../../../../ReduxContianer/BussinessRedux/BusinessAction';
+
 export default function StoreInventory() {
 	const yellowbtn = useColorModeValue('yellow.500');
+    const dispatch = useDispatch();
+		const businessSignIn = useSelector((state) => state.businessSignIn);
+		const { user } = businessSignIn;
+		const { businessDetails } = user;
+		const { message } = businessDetails;
+    
 	const [search, setSearch] = useState('');
+    const [businessId] = useState(message.business_id);
+useEffect(() => {
+	dispatch(getProduct(businessId));
+}, []);
+
+
 
 	const fetchProduct = useSelector((state) => state.fetchProduct);
 	const { products } = fetchProduct;
-	const { details } = products
+	const theProducts = products || [];
+	console.log(products)
 	
 	return (
 		<Grid templateRows='repeat(6, 1fr)' templateColumns='repeat(12, 1fr)'>
@@ -213,82 +228,35 @@ export default function StoreInventory() {
 								</Text>
 							</Stack>
 						</Box>
-						{}
-						{/* <Box
-							px='25px'
-							h='100px'
-							w='60vw'
-							border='0.5px solid #D9D9D9'
-							display='flex'
-							alignItems='center'
-							justifyContent='space-between'>
-							<Stack>
-								<Text>Buy Airtime</Text>
-								<Text color='gray' fontSize='12px'>
-									Success
-								</Text>
-							</Stack>
 
-							<Text fontSize='12px' color='red.500'>
-								₦12,000
-							</Text>
-							<Text fontSize='12px' color='gray'>
-								Jan 3, 2022
-							</Text>
-							<Text fontSize='12px' color='gray'>
-								Jan 3, 2022
-							</Text>
-						</Box>
-						<Box
-							px='25px'
-							h='100px'
-							w='60vw'
-							border='0.5px solid #D9D9D9'
-							display='flex'
-							alignItems='center'
-							justifyContent='space-between'>
-							<Stack>
-								<Text>Buy Airtime</Text>
-								<Text color='gray' fontSize='12px'>
-									Success
-								</Text>
-							</Stack>
+						{products.length > 0 &&
+							theProducts.map((product) => {
+								<Box
+									px='25px'
+									h='100px'
+									w='60vw'
+									border='0.5px solid #D9D9D9'
+									display='flex'
+									alignItems='center'
+									justifyContent='space-between'>
+									<Stack>
+										<Text>{product.details?.title}</Text>
+										<Text color='gray' fontSize='12px'>
+											{product.details?.updateAt}
+										</Text>
+									</Stack>
 
-							<Text fontSize='12px' color='red.500'>
-								₦12,000
-							</Text>
-							<Text fontSize='12px' color='gray'>
-								Jan 3, 2022
-							</Text>
-							<Text fontSize='12px' color='gray'>
-								Jan 3, 2022
-							</Text>
-						</Box>
-						<Box
-							px='25px'
-							h='100px'
-							w='60vw'
-							border='0.5px solid #D9D9D9'
-							display='flex'
-							alignItems='center'
-							justifyContent='space-between'>
-							<Stack>
-								<Text>Buy Airtime</Text>
-								<Text color='gray' fontSize='12px'>
-									Success
-								</Text>
-							</Stack>
-
-							<Text fontSize='12px' color='red.500'>
-								₦12,000
-							</Text>
-							<Text fontSize='12px' color='gray'>
-								Jan 3, 2022
-							</Text>
-							<Text fontSize='12px' color='gray'>
-								Jan 3, 2022
-							</Text>
-						</Box> */}
+									<Text fontSize='12px' color='red.500'>
+										₦{product.details?.price}
+									</Text>
+									<Text fontSize='12px' color='gray'>
+										{product.details?.status}
+									</Text>
+									<Text fontSize='12px' color='gray'>
+										{product.details?.title}
+									</Text>
+								</Box>;
+							})}
 					</Container>
 				</Container>
 			</GridItem>

@@ -108,5 +108,43 @@ export const getUserDetail = (user_id) => async (dispatch) => {
 	}
 };
 
+export const updateProfile =
+	(user_id, phonenumber, name, email, auth_code) =>
+	async (dispatch, getState) => {
+		dispatch({
+			type: UserActionType.DATA_REQUEST,
+		});
+		try {
+			const {
+				businessSignIn: {
+					user: {
+						businessDetails: { message },
+					},
+				},
+			} = getState();
+			const config = {
+				headers: {
+					Authorization: `Bearer ${message.password}`,
+				},
+			};
+			const { data } = await axios.post(
+				`https://finosell.link/api/user/updateinfo`,
+				{ user_id, phonenumber, name, email, auth_code },
+				config
+			);
+			dispatch({
+				type: UserActionType.UPDATE_PROFILE_SUCCESS,
+				payload: data,
+			});
+		} catch (error) {
+			dispatch({
+				type: UserActionType.UPDATE_PROFILE_ERROR,
+				payload:
+					error.response && error.response.data.message
+						? error.response.data.message
+						: error.message,
+			});
+		}
+	};
 
 
