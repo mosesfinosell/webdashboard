@@ -34,9 +34,7 @@ const{businessDetails} = user
 const {message} = businessDetails
 
 useEffect(() => {
-	if (orders) {
 		dispatch(getOrders(message.business_id));
-	} 
 },[dispatch,message.business_id])
 
 

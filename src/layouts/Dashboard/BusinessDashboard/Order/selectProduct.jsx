@@ -34,17 +34,15 @@ export default function SelectProduct() {
 	}, []);
 
 	const fetchProduct = useSelector((state) => state.fetchProduct);
-	let { products } = fetchProduct;
+	let { products ,loading} = fetchProduct;
 
 	
 	// const productData = [
-	// 	products?.details?.length > 0 &&
-	// 		products
-	// 			.filter((product) => product.details.length)
-	// 			.map((product) => ({
-	// 				title: `${product?.details?.title}`,
-	// 			})),
-	// ];
+	// 	 !loading &&
+	// 	products?.details?.map((product) => ({
+	// 		title : `${product.title }`
+	// 	})
+	// ]
 // console.log(products)
 // console.log(productData);
 
@@ -86,9 +84,12 @@ const { isOpen, onOpen, onClose } = useDisclosure()
 										borderRadius: '0px 11px 11px 11px',
 									}),
 								}}
-								// options={[
-
-								// ]}
+								options={[
+									!loading &&
+										products?.details?.map((product) => ({
+											title: `${product.title}`,
+										})),
+								]}
 							/>
 						</FormControl>
 					</ModalBody>

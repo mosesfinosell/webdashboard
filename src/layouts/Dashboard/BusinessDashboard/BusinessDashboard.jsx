@@ -112,6 +112,7 @@ export default function BusinessDashboard() {
 							<AddUrlPage />
 						</TabPanel>
 						<TabPanel>
+							{/* <OrderHistory/> */}
 							<CreateOrder/>
 						</TabPanel>
 						<TabPanel>

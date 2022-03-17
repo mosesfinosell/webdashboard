@@ -37,7 +37,7 @@ const { isOpen, onOpen, onClose } = useDisclosure();
 	}, []);
 
 	const fetchCustomer = useSelector((state) => state.fetchCustomer);
-	let { customers } = fetchCustomer;
+	let { customers,loading } = fetchCustomer;
 	// console.log(products.details[1]);
 	// let productData = Object.keys(products);
 
@@ -87,7 +87,12 @@ const { isOpen, onOpen, onClose } = useDisclosure();
 										borderRadius: '0px 11px 11px 11px',
 									}),
 								}}
-								// options={customerData}
+								options={[
+									!loading &&
+										customers?.customers?.map((customer) => ({
+											title: `${customer.customer_name}`,
+										})),
+								]}
 							/>
 						</FormControl>
 					</ModalBody>

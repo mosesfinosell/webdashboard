@@ -10,9 +10,9 @@ const INITIAL_STATE = {
 			: null,
 	},
 	error: {},
-	loading: true,
+	loading: false,
 	orders: [],
-	customers: null,
+	customers: [],
 	products: [],
 	picture: null,
 	team: null,
@@ -121,6 +121,22 @@ export const getOrderReducer = (state= INITIAL_STATE ,action) => {
 	}
 }
 
+export const createOrderReducer = (state = INITIAL_STATE, action) => {
+	switch (action.type) {
+		case OrderActionType.DATA_REQUEST:
+		case OrderActionType.CREATE_ORDER_SUCCESS:
+		case OrderActionType.CREATE_ORDER_ERROR:
+			return {
+				...state,
+				loading: true,
+				orders: action.payload,
+				error: action.payload,
+			};
+		default:
+			return state;
+	}
+};
+
 export const createCustomerReducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case UserActionType.DATA_REQUEST:
@@ -129,7 +145,7 @@ export const createCustomerReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				loading: true,
-				customer: action.payload,
+				customers: action.payload,
 				error: action.payload,
 			};
 		default:
@@ -160,7 +176,7 @@ export const getProductReducer = (state = INITIAL_STATE, action) => {
 		case ProductActionType.GET_PRODUCT_ERROR:
 			return {
 				...state,
-				loading: true,
+				loading: false,
 				products: action.payload,
 				error: action.payload,
 			};

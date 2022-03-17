@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-// import { persistReducer } from 'redux-persist';
 import {
 	personalSignInReducer,
 	personalSignUpReducer,
@@ -7,7 +6,7 @@ import {
 	personalVerifyOtpRedcuer,
 
 } from './PersonalRedux/PersonalReducer';
-// import storage from 'redux-persist/lib/storage/session';
+
 import {
 	businessSignUpReducer,
 	businessSignInReducer,
@@ -24,13 +23,10 @@ import {
 	fetchCustomerReducer,
 	createTransactionReducer,
 	getTransactionReducer,
+	createOrderReducer,
 } from './BussinessRedux/BusinessReducer';
 
-// const persistConfig = {
-//    key: 'root',
-//    storage,
-//    whitelist: [ 'personal']
-// }
+
 
 const rootReducer = combineReducers({
 	//Personal Reducer
@@ -45,6 +41,7 @@ const rootReducer = combineReducers({
 	businessOtp: businessOtpReducer,
 	businessVerifyOtp: businessVerifyOtpReducer,
 	getOrder: getOrderReducer,
+	createOrder : createOrderReducer,
 	getUser: getUserDetailsReducer,
 	createCustomer: createCustomerReducer,
 	fetchCustomer: fetchCustomerReducer,
@@ -57,6 +54,6 @@ const rootReducer = combineReducers({
 	getPayment: getTransactionReducer,
 });
 
-// export default persistReducer(persistConfig, rootReducer);
+
 
 export default rootReducer;

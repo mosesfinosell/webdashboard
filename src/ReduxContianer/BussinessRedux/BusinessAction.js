@@ -120,6 +120,43 @@ export const getOrders = (business_id) => async (dispatch) => {
 		}
 } 
 
+export const createOrders = (title,buy_id,buyer_email,buyer_phone,order_status,order_type, order_id,order_date,sales_channel,discount,shipping_address,payment_status,payment_method,product_id,business_id) => async (dispatch,getState) => {
+	dispatch({
+		type: UserActionType.DATA_REQUEST,
+	});
+	const {
+		businessSignIn: {
+			user: {
+				businessDetails: { message },
+			},
+		},
+	} = getState();
+	const config = {
+		headers: {
+			Authorization: `Bearer ${message.password}`,
+		},
+	};
+	try {
+		const { data } = await axios.post(
+			baseUrl +
+				`/order/record`,{title,buy_id,buyer_email,buyer_phone,order_status,order_type, order_id,order_date,sales_channel,discount,shipping_address,payment_status,payment_method,product_id,business_id},config
+		);
+		dispatch({
+			type: OrderActionType.CREATE_ORDER_SUCCESS,
+			payload: data,
+		});
+	} catch (error) {
+		dispatch({
+			type: OrderActionType.CREATE_ORDER_ERROR,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message,
+		});
+	}
+}; 
+
+
 export const getCustomers = (business_id) => async (dispatch,getState) => {
 	dispatch({
 		type: UserActionType.DATA_REQUEST,
@@ -283,7 +320,7 @@ export const sendAuthCode = (email) => async (dispatch,getState) => {
 				Authorization: `Bearer ${message.password}`,
 			},
 		};
-		const { data } = await axios.put(baseUrl + `/reset/vemail/${email}`);
+		const { data } = await axios.put(baseUrl + `/reset/vemail/${email}`,config);
 		dispatch({
 			type: UserActionType.SEND_AUTH_CODE_SUCCESS,
 			payload: data
@@ -532,10 +569,15 @@ export const createTransaction =
 				transaction_type,
 				amount,
 				product_id,
-			},config);
+			}, config)
+			dispatch({
+				type: OrderActionType.CREATE_TRANSACTION_SUCCESS,
+				payload: data
+			})
+
 		} catch (error) {
 			dispatch({
-				type: OrderActionType.GET_PRODUCT_ERROR,
+				type: OrderActionType.CREATE_TRANSACTION_ERROR,
 				payload:
 					error.response && error.response.data.message
 						? error.response.data.message
@@ -561,7 +603,7 @@ export const getTransaction = () => async (dispatch,getState) => {
 				Authorization: `Bearer ${message.password}`,
 			},
 		};
-		const { data } = axios.get(baseUrl + `history/fetch`);
+		const { data } = axios.get(baseUrl + `history/fetch`, config);
 			dispatch({
 				type: OrderActionType.GET_TRANSACTION_SUCCESS,
 				payload: data
@@ -633,7 +675,6 @@ export const checkUserExist = (user) => async (dispatch, getState) => {
 		const { data } = axios.post(
 			`https://finosell.link/api/subdomain/create`,
 			{
-				sub,
 				user,
 			},
 			config

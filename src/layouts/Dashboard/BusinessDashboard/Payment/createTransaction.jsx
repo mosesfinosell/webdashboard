@@ -20,12 +20,11 @@ import {
 	Select,
 } from '@chakra-ui/react';
 import { BiShoppingBag } from 'react-icons/bi';
-import { MdEmail, MdWifiCalling3 } from 'react-icons/md';
 import { useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import DatePicker from 'react-datepicker';
-import {createTransaction} from '../../../../ReduxContianer/BussinessRedux/BusinessAction'
+import { createTransaction } from '../../../../ReduxContianer/BussinessRedux/BusinessAction'
 
 export default function CreateTransaction() {
 	const dispatch = useDispatch();
@@ -35,17 +34,26 @@ export default function CreateTransaction() {
 	const { businessDetails } = user;
 	const { message } = businessDetails;
 
+const fetchProduct = useSelector((state) => state.fetchProduct);
+const { products, loading } = fetchProduct
+
+const fetchCustomer = useSelector((state) => state.fetchCustomer);
+const { customers } = fetchCustomer;
+   
 	const [details, setDetails] = useState('');
 	const [paymentDate, setpaymentDate] = useState('');
-	const [paymentId] = useState('');
+	const [paymentId] = useState('ghg77gnkjn');
+	const [transcationId] = useState('jklg77gnkjn');
     const [businessId] = useState(message.business_id);
-    const [customerId] = useState(message.customer_id);
     const [paymentStatus, setPaymentStatus] = useState('');
     const [paymentMethod, setPaymentMethod] = useState('');
-    const [paymentRef] = useState('');
+    const [paymentRef] = useState('h7hiuljuji');
     const [transactionType, setTransactionType] = useState('');
-    const [amount, setAmount] = useState('');
-	const [productId] = useState('4575r46rt5');
+	const [amount, setAmount] = useState('');
+	const [selectProduct, setSelectProduct] = useState('');
+	const [selectCustomer, setSelectCustomer] = useState('');
+
+
 
 	function handleSubmit(e) {
 		e.preventDefault();
@@ -55,14 +63,27 @@ export default function CreateTransaction() {
 				paymentDate,
 				paymentId,
 				businessId,
-				customerId,
+				selectProduct,
+				selectCustomer,
 				paymentStatus,
 				paymentMethod,
 				paymentRef,
 				transactionType,
-				amount,
-				productId
+				amount
 			)
+		);
+		console.log(
+			details,
+			paymentDate,
+			paymentId,
+			businessId,
+			selectProduct,
+			selectCustomer,
+			paymentStatus,
+			paymentMethod,
+			paymentRef,
+			transactionType,
+			amount
 		);
 	}
 
@@ -77,7 +98,7 @@ export default function CreateTransaction() {
 						</Stack>
 
 						<Box
-							h='700px'
+							h='900px'
 							w='400px'
 							borderRadius='0px 11px 11px 11px'
 							border='0.5px solid #D9D9D9'
@@ -88,7 +109,9 @@ export default function CreateTransaction() {
 										<Field name='text'>
 											{({ field, form }) => (
 												<FormControl mt='30px'>
-													<FormLabel htmlFor='text'>Transaction Details</FormLabel>
+													<FormLabel htmlFor='text'>
+														Transaction Details
+													</FormLabel>
 
 													<Textarea
 														placeholder='Payment Details'
@@ -139,8 +162,8 @@ export default function CreateTransaction() {
 														width='300px'
 														h='60px'
 														borderRadius='0px 11px 11px 11px'>
-														<option>Full Payment</option>
-														<option>Half Payment</option>
+														<option>1</option>
+														<option>2</option>
 													</Select>
 												</FormControl>
 											)}
@@ -159,8 +182,28 @@ export default function CreateTransaction() {
 														width='300px'
 														h='60px'
 														borderRadius='0px 11px 11px 11px'>
-														<option></option>
-														<option></option>
+														<option>7</option>
+														<option>9</option>
+													</Select>
+												</FormControl>
+											)}
+										</Field>
+										<Field name='text'>
+											{({ field, form }) => (
+												<FormControl>
+													<FormLabel htmlFor='order type'>
+														Payment Method
+													</FormLabel>
+													<Select
+														mb='20px'
+														placeholder='Add Order Type'
+														value={paymentMethod}
+														onChange={(e) => setPaymentMethod(e.target.value)}
+														width='300px'
+														h='60px'
+														borderRadius='0px 11px 11px 11px'>
+														<option>Online</option>
+														<option>Offline</option>
 													</Select>
 												</FormControl>
 											)}
@@ -185,13 +228,52 @@ export default function CreateTransaction() {
 											)}
 										</Field>
 
-										
-										{/* <Stack>
-											<SelectProduct />
-										</Stack>
-										<Stack>
-											<SelectCustomer />
-										</Stack> */}
+										<Field name='text'>
+											{({ field, form }) => (
+												<FormControl>
+													<FormLabel htmlFor='payment method'>
+														Select Product
+													</FormLabel>
+													<Select
+														mb='20px'
+														placeholder='Select Product'
+														value={selectProduct}
+														onChange={(e) => setSelectProduct(e.target.value)}
+														width='300px'
+														h='60px'
+														borderRadius='0px 11px 11px 11px'>
+														{!loading &&
+															products?.details?.map((product) => {
+																return <option>{product.title}</option>;
+															})}
+													</Select>
+												</FormControl>
+											)}
+										</Field>
+										<Field name='text'>
+											{({ field, form }) => (
+												<FormControl>
+													<FormLabel htmlFor='payment method'>
+														Select Customers
+													</FormLabel>
+													<Select
+														mb='20px'
+														placeholder='Select Customer'
+														value={selectCustomer}
+														onChange={(e) => setSelectCustomer(e.target.value)}
+														width='300px'
+														h='60px'
+														borderRadius='0px 11px 11px 11px'>
+														{!loading &&
+															customers?.customers?.map((customer) => {
+																return (
+																	<option>{customer.customer_name}</option>
+																);
+															})}
+													</Select>
+												</FormControl>
+											)}
+										</Field>
 
 										<Button
 											mt={4}

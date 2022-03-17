@@ -16,7 +16,9 @@ import {
 	FormControl,
 	FormLabel,
 	Button,
-	Select 
+	Select,
+	InputLeftElement,
+	FormErrorMessage,
 } from '@chakra-ui/react';
 // import {
 // 	AsyncCreatableSelect,
@@ -25,14 +27,17 @@ import {
 // 	Select,
 // } from 'chakra-react-select';
 import { BiShoppingBag } from 'react-icons/bi';
+import {MdWifiCalling3,MdEmail} from 'react-icons/md'
 import { useState,useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import SelectProduct from './selectProduct';
-import SelectCustomer from './selectCustomer';
+// import SelectProduct from './selectProduct';
+// import SelectCustomer from './selectCustomer';
 import { getProduct } from '../../../../ReduxContianer/BussinessRedux/BusinessAction';
+import {getCustomers} from '../../../../ReduxContianer/BussinessRedux/BusinessAction'
+import {createOrders} from '../../../../ReduxContianer/BussinessRedux/BusinessAction'
 
 export default function CreateOrder() {
 	const dispatch = useDispatch();
@@ -43,6 +48,8 @@ export default function CreateOrder() {
 	const { message } = businessDetails;
     
 	const [title, setTitle] = useState('');
+	const [email, setEmail] = useState('');
+	const [phoneNumber, setPhoneNumber] = useState('');
 	const [startDate, setStartDate] = useState(null);
 	const [orderStatus, setOrderStatus] = useState('');
 	const [orderType, setOrderType] = useState('');
@@ -53,48 +60,66 @@ export default function CreateOrder() {
 	const [paymentMethod, setPaymentMethod] = useState('');
 	const [totalAmount, setTotalAmount] = useState('');
 	const [selectProduct, setSelectProduct] = useState('');
+	const [selectCustomer, setSelectCustomer] = useState('');
 	const [businessId] = useState(message.business_id);
-	const [randomNumber] = useState('4575r46rt5');
+	const [orderId] = useState('4575r46rt5');
 
 useEffect(() => {
 	dispatch(getProduct(businessId));
-}, []);
+}, [dispatch,businessId]);
+
+	useEffect(() => {
+		dispatch(getCustomers(businessId));
+	}, [dispatch,businessId]);
+
+	const fetchCustomer = useSelector((state) => state.fetchCustomer);
+	let { customers} = fetchCustomer;
 
 const fetchProduct = useSelector((state) => state.fetchProduct);
-let { products } = fetchProduct;
+let { products,loading } = fetchProduct;
 
 	function handleSubmit(e) {
 		e.preventDefault();
-		// dispatch(
-		// 	createCustomers(
-		// 		customerName,
-		// 		customerEmail,
-		// 		customerPhonenumber,
-		// 		customerAddress,
-		// 		businessId,
-		// 		randomNumber
-		// 	)
-		// );
+		dispatch(
+			createOrders(
+				title,
+				email,
+				phoneNumber,
+				startDate,
+				orderStatus,
+				orderType,
+				saleStatus,
+				discount,
+				shippingAddress,
+				paymentStatus,
+				paymentMethod,
+				totalAmount,
+				selectProduct,
+				selectCustomer,
+				businessId,
+				orderId
+			)
+		);
 
-		console.log(title, startDate, orderStatus,
-			orderType, saleStatus,
+		console.log(
+			title,
+			email,
+			phoneNumber,
+			startDate,
+			orderStatus,
+			orderType,
+			saleStatus,
 			discount,
 			shippingAddress,
 			paymentStatus,
 			paymentMethod,
 			totalAmount,
 			selectProduct,
+			selectCustomer,
 			businessId,
-		randomNumber);
+			orderId
+		);
 	}
-
-		// const productData = [
-		// 	...Array.from(Array(1).keys(products)).map((product) => ({
-		// 		title: `${products?.details?.length > 0 && product?.details?.title}`,
-		// 	})),
-		// ];
-		console.log(products);
-		// console.log(productData);
 
 
 	return (
@@ -108,7 +133,7 @@ let { products } = fetchProduct;
 					</Stack>
 
 					<Box
-						h='1500px'
+						h='1550px'
 						w='400px'
 						borderRadius='0px 11px 11px 11px'
 						border='0.5px solid #D9D9D9'
@@ -132,6 +157,55 @@ let { products } = fetchProduct;
 														borderRadius='0px 11px 11px 11px'
 													/>
 												</InputGroup>
+											</FormControl>
+										)}
+									</Field>
+									<Field name='phoneNumber'>
+										{({ field, form }) => (
+											<FormControl
+												isInvalid={
+													form.errors.phoneNumber && form.touched.phoneNumber
+												}
+												mt={4}>
+												<FormLabel htmlFor='name'>Phone Number</FormLabel>
+												<InputGroup>
+													
+													<Input
+														{...field}
+														value={phoneNumber}
+														type='phoneNumber'
+														onChange={(e) => setPhoneNumber(e.target.value)}
+														placeholder='08012345678'
+														width='400px'
+														h='70px'
+														borderRadius='0px 11px 11px 11px'
+													/>
+												</InputGroup>
+												<FormErrorMessage>
+													{form.errors.phoneNumber}
+												</FormErrorMessage>
+											</FormControl>
+										)}
+									</Field>
+									<Field name='email'>
+										{({ field, form }) => (
+											<FormControl
+												isInvalid={form.errors.email && form.touched.email}
+												mt={4}>
+												<FormLabel htmlFor='name'>Email</FormLabel>
+												<InputGroup>
+													
+													<Input
+														{...field}
+														value={email}
+														onChange={(e) => setEmail(e.target.value)}
+														placeholder='Email Address'
+														width='400px'
+														h='70px'
+														borderRadius='0px 11px 11px 11px'
+													/>
+												</InputGroup>
+												<FormErrorMessage>{form.errors.email}</FormErrorMessage>
 											</FormControl>
 										)}
 									</Field>
@@ -294,42 +368,50 @@ let { products } = fetchProduct;
 											</FormControl>
 										)}
 									</Field>
-									{/* <Field name='text'>
+									<Field name='text'>
 										{({ field, form }) => (
 											<FormControl>
+												<FormLabel htmlFor='payment method'>
+													Payment Method
+												</FormLabel>
 												<Select
-													isMulti
-													name='products'
-													placeholder='Add Products'
-													closeMenuOnSelect={false}
-													chakraStyles={{
-														input: (provided) => ({
-															...provided,
-															h: '50px',
-
-															borderRadius: '0px 11px 11px 11px',
-														}),
-													}}
-													options={[
-														...Array.from(Array(1).keys(products)).map(
-															(product) => ({
-																title: `${
-																	products?.details?.length > 0 &&
-																	product?.details?.title
-																}`,
-															})
-														),
-													]}
-												/>
+													mb='20px'
+													placeholder='Select Product'
+													value={selectProduct}
+													onChange={(e) => setSelectProduct(e.target.value)}
+													width='300px'
+													h='60px'
+													borderRadius='0px 11px 11px 11px'>
+													{!loading &&
+														products?.details?.map((product) => {
+															return <option>{product.title}</option>;
+														})}
+												</Select>
 											</FormControl>
 										)}
-									</Field> */}
-									<Stack>
-										<SelectProduct/>
-									</Stack>
-									<Stack>
-										<SelectCustomer />
-									</Stack>
+									</Field>
+									<Field name='text'>
+										{({ field, form }) => (
+											<FormControl>
+												<FormLabel htmlFor='payment method'>
+													Select Customers
+												</FormLabel>
+												<Select
+													mb='20px'
+													placeholder='Select Customer'
+													value={selectCustomer}
+													onChange={(e) => setSelectCustomer(e.target.value)}
+													width='300px'
+													h='60px'
+													borderRadius='0px 11px 11px 11px'>
+													{!loading &&
+														customers?.customers?.map((customer) => {
+															return <option>{customer.customer_name}</option>;
+														})}
+												</Select>
+											</FormControl>
+										)}
+									</Field>
 									<Field name='number'>
 										{({ field, form }) => (
 											<FormControl mt={4}>
@@ -368,7 +450,7 @@ let { products } = fetchProduct;
 				<GridItem colStart={6} colEnd={9} h='10' bg='white'>
 					<Stack m='10px'>
 						<Text color='gray' fontSize='14px'>
-							Deal History
+							Order History
 						</Text>
 					</Stack>
 					<Tabs variant='unstyled'>
