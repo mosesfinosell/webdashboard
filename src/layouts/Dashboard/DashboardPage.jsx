@@ -34,12 +34,8 @@ export default function DashboardPage() {
     localStorage.clear();
     window.location.href = "/";
   };
-  // const message= useSelector((state) => state.personalReducer.message);
-  // console.log(personalSignIn, "INNN");
-  // const { userInfo} = personalSignIn;
-  // const { message } = userInfo;
-
-  return (
+ 
+ return (
     <Grid
       pl="25"
       templateRows="repeat(6, 1fr)"

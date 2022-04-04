@@ -32,27 +32,33 @@ function App() {
     <Router>
       <div className="App">
         {/* <Switch> */}
-		<Route
-            exact
-            path="/"
-            component={AccountBox}
-          />
-          <Route
-            exact
-            path="/personal-signup"
-            component={PersonalAccountSignUp}
-          />
-		   <Route
-            exact
-            path="/personal-signin"
-            component={PersonalAccountSignIn}
-          />
-          <PrivateRoute
-            exact
-            path="/personal-dashboard"
-            component={DashboardPage}
-          />
-        {/* </Switch> */}
+        <Route exact path="/" component={AccountBox} />
+        <Route
+          exact
+          path="/personal-signup"
+          component={PersonalAccountSignUp}
+        />
+        <Route
+          exact
+          path="/personal-signin"
+          component={PersonalAccountSignIn}
+        />
+        <PrivateRoute
+          exact
+          path="/personal-dashboard"
+          component={DashboardPage}
+        />
+        {/* Bussiness Account  */}
+
+        <PrivateRoute
+          path="/business-signup"
+          component={BusinessAccountSignUp}
+        />
+
+        <PrivateRoute
+          path="/business-signin"
+          component={BusinessAccountSignIn}
+        />
       </div>
     </Router>
 

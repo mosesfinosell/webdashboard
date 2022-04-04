@@ -12,6 +12,7 @@ import {
   TabPanels,
   Tab,
   TabPanel,
+  useDisclosure
 } from "@chakra-ui/react";
 import { BsPlusSquare, BsArrowDownLeftSquare, BsPhone } from "react-icons/bs";
 import { VscRocket } from "react-icons/vsc";
@@ -26,10 +27,9 @@ import { useState, useEffect } from "react";
 export default function HomeDash() {
 
   const dispatch = useDispatch();
-  const personalSignIn = useSelector((state) => state.personalReducer);
-  const userInfo = useSelector((state) => state.personalReducer.userInfo);
-  console.log(useSelector((state) => state.personalReducer),'PERSONNN')
 
+  const userInfo = useSelector((state) => state.personalReducer.userInfo);
+const {isOpen, onOpen, onClose} = useDisclosure();
   // const personalSignIn = useSelector((state) => state.personalSignIn);
   // const { userDetails } = personalSignIn
   //   const {message} = userDetails
@@ -107,7 +107,7 @@ export default function HomeDash() {
               alignItems="center"
               justifyContent="space-evenly"
             >
-              {/* <AddMoneyModal /> */}
+              <AddMoneyModal />
               <Stack>
                 <Text>Add Money</Text>
                 <Text>Space for subtitle text</Text>
