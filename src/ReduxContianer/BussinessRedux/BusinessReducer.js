@@ -38,7 +38,7 @@
 // 	}
 
 // }
-		
+
 // export const businessSignInReducer = (state = INITIAL_STATE, action) => {
 // 	switch (action.type) {
 // 		case UserActionType.DATA_REQUEST:
@@ -53,9 +53,9 @@
 // 			};
 // 		default:
 // 			return state;
-// 	}		
+// 	}
 // }
-	
+
 // export const businessOtpReducer = (state = INITIAL_STATE, action) => {
 // 	switch (action.type) {
 // 		case UserActionType.DATA_REQUEST:
@@ -72,7 +72,6 @@
 // 	}
 // };
 
-	
 // export const businessVerifyOtpReducer = (state = INITIAL_STATE, action) => {
 // 	switch (action.type) {
 // 		case UserActionType.DATA_REQUEST:
@@ -93,7 +92,7 @@
 // 	switch(action.type) {
 // 		case UserActionType.DATA_REQUEST:
 // 		case UserActionType.GET_USER_DETAIL_SUCCESS:
-// 		case UserActionType.GET_USER_DETAIL_ERROR: 
+// 		case UserActionType.GET_USER_DETAIL_ERROR:
 // 		return {
 // 			...state,
 // 			loading: true,
@@ -109,11 +108,11 @@
 // 	switch(action.type){
 // 		case OrderActionType.DATA_REQUEST:
 // 			case OrderActionType.GET_ORDER_SUCCESS:
-// 				case OrderActionType.GET_ORDER_ERROR: 
+// 				case OrderActionType.GET_ORDER_ERROR:
 // 				return {
 // 					...state,
 // 					loading: true,
-// 					orders: action.payload,               
+// 					orders: action.payload,
 // 					error: action.payload
 // 				}
 // 				default:
@@ -329,3 +328,48 @@
 // 			return state;
 // 	}
 // };
+import {
+  GET_BUSINESS_USER_DETAIL,
+  FETCH_BUSINESS_USER_DETAIL_WITH_ID,
+  FETCH_BUSINESS_USER_DETAIL_WITH_ID_ERROR,
+  FETCH_BUSINESS_USER_DETAIL_WITH_ID_SUCCESS,
+} from "../constants/UserActionType.js";
+
+const initialState = {
+  isFetching: false,
+  error: "",
+  businessUserInfo: null,
+  businessUserIdDetails: null,
+};
+
+const BusinessReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case GET_BUSINESS_USER_DETAIL:
+      return {
+        ...state,
+        isFetching: false,
+        businessUserInfo: action.payload,
+      };
+    case FETCH_BUSINESS_USER_DETAIL_WITH_ID:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case FETCH_BUSINESS_USER_DETAIL_WITH_ID_ERROR:
+      return {
+        ...state,
+        isFetching: false,
+      };
+    case FETCH_BUSINESS_USER_DETAIL_WITH_ID_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        businessUserIdDetails: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export default BusinessReducer;

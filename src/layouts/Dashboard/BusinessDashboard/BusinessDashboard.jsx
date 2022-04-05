@@ -30,12 +30,14 @@ import {useEffect} from 'react'
 import CreateCustomer from './Payment/createCustomer';
 import CreateOrder from './Order/createOrder';
 import CreateTransaction from './Payment/createTransaction';
+import {getBusinessUserDetails} from "../../../ReduxContianer/BussinessRedux/BusinessAction"
 
 export default function BusinessDashboard() {
-	const businessSignIn = useSelector((state) => state.businessSignIn);
-	const { user } = businessSignIn;
-     const {businessDetails} = user
-      const {message} = businessDetails
+	const dispatch = useDispatch()
+	const businessInfo = useSelector((state) => state.businessReducer.businessUserInfo);
+	useEffect(() => {
+		dispatch(getBusinessUserDetails(businessInfo.user_id));
+	  }, [businessInfo.user_id, dispatch])
 
 
 	return (
@@ -54,8 +56,8 @@ export default function BusinessDashboard() {
 									<Avatar name='user' src={user1} />
 								</Stack>
 								<Stack pr='15px'>
-									{businessDetails && (
-										<Text>Hello {message.name}</Text>
+									{businessInfo && (
+										<Text>Hello {businessInfo.name}</Text>
 									)}
 								</Stack>
 								<Stack>
@@ -112,14 +114,14 @@ export default function BusinessDashboard() {
 							<AddUrlPage />
 						</TabPanel>
 						<TabPanel>
-							{/* <OrderHistory/> */}
+							<OrderHistory/>
 							<CreateOrder/>
 						</TabPanel>
 						<TabPanel>
 							<CreateTransaction/>
 						</TabPanel>
 						<TabPanel>
-							<AccountBusinessProfile />
+							{/* <AccountBusinessProfile /> */}
 						</TabPanel>
 					</TabPanels>
 				</GridItem>

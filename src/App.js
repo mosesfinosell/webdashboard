@@ -50,14 +50,13 @@ function App() {
         />
         {/* Bussiness Account  */}
 
-        <PrivateRoute
-          path="/business-signup"
-          component={BusinessAccountSignUp}
-        />
+        <Route path="/business-signup" component={BusinessAccountSignUp} />
 
+        <Route path="/business-signin" component={BusinessAccountSignIn} />
         <PrivateRoute
-          path="/business-signin"
-          component={BusinessAccountSignIn}
+          exact
+          path="/business-dashboard"
+          component={BusinessDashboard}
         />
       </div>
     </Router>

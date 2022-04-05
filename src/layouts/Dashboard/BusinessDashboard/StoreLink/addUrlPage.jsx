@@ -20,7 +20,7 @@ import { Formik, Form, Field } from 'formik';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useColorModeValue } from '@chakra-ui/color-mode';
-import { createStoreLink } from '../../../../ReduxContianer/BussinessRedux/BusinessAction'
+// import { createStoreLink } from '../../../../ReduxContianer/BussinessRedux/BusinessAction'
 
 
 export default function AddUrlPage() {
@@ -28,18 +28,18 @@ export default function AddUrlPage() {
 const yellowbtn = useColorModeValue('yellow.500');
 const dispatch = useDispatch();
 
-const businessSignIn = useSelector((state) => state.businessSignIn);
-const { user } = businessSignIn;
-const { businessDetails } = user;
-const { message } = businessDetails;
+const businessInfo = useSelector((state) => state.businessReducer.businessUserInfo);
+// const { user } = businessSignIn;
+// const { businessDetails } = user;
+// const { message } = businessDetails;
 	
 	
-	const [userId] = useState(message.user_id);
+	const [userId] = useState(businessInfo.user_id);
 	const [storeName, setStoreName] = useState('');
 
 	function handleSubmit(e) {
 		e.preventDefault();
-		dispatch(createStoreLink(storeName, userId));
+		// dispatch(createStoreLink(storeName, userId));
 		setStoreName('')
     }
 

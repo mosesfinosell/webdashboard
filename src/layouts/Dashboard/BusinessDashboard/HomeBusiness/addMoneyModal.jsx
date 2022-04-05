@@ -32,19 +32,19 @@ export default function AddMoneyBusinessModal() {
 	const [show, setShow] = useState(false);
 	const handleClick = () => setShow(!show);
 
-	const businessSignIn = useSelector((state) => state.businessSignIn);
-	const { user } = businessSignIn;
-	const { businessDetails } = user;
-	const { message } = businessDetails;
+	const businessInfo = useSelector((state) => state.businessReducer.businessUserInfo);
+	// const { user } = businessSignIn;
+	// const { businessDetails } = user;
+	// const { message } = businessDetails;
 
 
 	// PAYSTACK CONFIG3
 
 	const config = {
 		reference: new Date().getTime().toString(),
-		email: message.email,
+		email: businessInfo.email,
 		amount: amount * 100,
-		publicKey: message.public_key,
+		publicKey: businessInfo.public_key,
 	};
 
 	const handleSuccess = (amount,reference) => {

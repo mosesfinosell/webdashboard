@@ -41,7 +41,7 @@ import { BiStore } from 'react-icons/bi';
 import { GiBanknote } from 'react-icons/gi';
 import AddProduct from './addProduct'
 import { useSelector,useDispatch } from 'react-redux';
-import {getProduct} from '../../../../ReduxContianer/BussinessRedux/BusinessAction';
+// import {getProduct} from '../../../../ReduxContianer/BussinessRedux/BusinessAction';
 
 export default function StoreInventory() {
 	const yellowbtn = useColorModeValue('yellow.500');
@@ -53,9 +53,9 @@ export default function StoreInventory() {
     
 	const [search, setSearch] = useState('');
     const [businessId] = useState(message.business_id)
-useEffect(() => {
-	dispatch(getProduct(businessId));
-}, [dispatch,businessId]);
+// useEffect(() => {
+// 	dispatch(getProduct(businessId));
+// }, [dispatch,businessId]);
 
 
 

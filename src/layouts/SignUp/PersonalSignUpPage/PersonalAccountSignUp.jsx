@@ -33,14 +33,6 @@ import { useHistory } from "react-router-dom";
 export default function PersonalAccountSignUp() {
   const yellowbtn = useColorModeValue("yellow.500");
 
-  // Redux
-  //   const dispatch = useDispatch();
-  // const personalSignUp = useSelector((state) => state.personalSignUp);
-  // const {error, loading,user} = personalSignUp;
-  //   const {userDetails} = user
-
-  // //router
-
   const history = useHistory();
 
   // useState

@@ -167,14 +167,12 @@ export const getUserDetails = (user_id) => (dispatch) => {
   axiosWithAuth()
     .get(`/auths/signin?user=${user_id}`)
     .then((res) => {
-      console.log(res, "ID RES");
       dispatch({
         type: FETCH_USER_DETAIL_WITH_ID_SUCCESS,
         payload: res.data.message,
       });
     })
     .catch((err) => {
-      console.log(err, "ID ERR");
       dispatch({
         type: FETCH_USER_DETAIL_WITH_ID_ERROR,
         payload: err.response.data.error,

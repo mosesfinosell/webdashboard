@@ -105,7 +105,6 @@ import {
   FETCH_USER_DETAIL_WITH_ID_SUCCESS,
   FETCH_USER_DETAIL_WITH_ID_ERROR,
 } from "../constants/UserActionType";
-//   import UserActionType from '../constants/UserActionType';
 
 const initialState = {
   isFetching: false,

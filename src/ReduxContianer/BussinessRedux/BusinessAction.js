@@ -693,3 +693,37 @@
 // 		});
 // 	}
 // };
+
+import {
+	GET_BUSINESS_USER_DETAIL,
+	FETCH_BUSINESS_USER_DETAIL_WITH_ID,
+	FETCH_BUSINESS_USER_DETAIL_WITH_ID_SUCCESS,
+	FETCH_BUSINESS_USER_DETAIL_WITH_ID_ERROR,
+  } from "../constants/UserActionType";
+  import { axiosWithAuth } from "../../utils/axiosWithAuth";
+  
+  export const getBusinessUserInfo = (payload) => {
+	return {
+	  type: GET_BUSINESS_USER_DETAIL,
+	  payload,
+	};
+  };
+  
+  export const getBusinessUserDetails = (user_id) => (dispatch) => {
+	dispatch({ type: FETCH_BUSINESS_USER_DETAIL_WITH_ID });
+	axiosWithAuth()
+	  .get(`/auths/signin?user=${user_id}`)
+	  .then((res) => {
+		dispatch({
+		  type: FETCH_BUSINESS_USER_DETAIL_WITH_ID_SUCCESS,
+		  payload: res.data.message,
+		});
+	  })
+	  .catch((err) => {
+		dispatch({
+		  type: FETCH_BUSINESS_USER_DETAIL_WITH_ID_ERROR,
+		  payload: err.response.data.error,
+		});
+	  });
+  };
+  
