@@ -65,7 +65,6 @@
 // 		}
 // 	};
 
-
 // 	export const getUserDetails = (user_id) => async(dispatch,getState) => {
 // 		dispatch({
 // 			type: UserActionType.DATA_REQUEST
@@ -118,7 +117,7 @@
 // 							: error.message,
 // 				});
 // 		}
-// } 
+// }
 
 // export const createOrders = (title,buy_id,buyer_email,buyer_phone,order_status,order_type, order_id,order_date,sales_channel,discount,shipping_address,payment_status,payment_method,product_id,business_id) => async (dispatch,getState) => {
 // 	dispatch({
@@ -154,8 +153,7 @@
 // 					: error.message,
 // 		});
 // 	}
-// }; 
-
+// };
 
 // export const getCustomers = (business_id) => async (dispatch,getState) => {
 // 	dispatch({
@@ -190,8 +188,7 @@
 // 					: error.message,
 // 		});
 // 	}
-// }; 
-
+// };
 
 // export const createCustomers = (customer_name,customer_email,customer_id,customer_phonenumber,customer_address,business_id) => async (dispatch,getState) => {
 // 		dispatch({
@@ -208,16 +205,16 @@
 // 			};
 // 		const { data } = await axios.post(
 // 			baseUrl + `/customer/create`,
-			
+
 // 				{customer_name,
 // 				customer_email,
 // 				customer_id,
 // 				customer_phonenumber,
 // 				customer_address,
 // 				business_id},
-			
+
 // 		 config
-// 		); 
+// 		);
 // 			dispatch({
 // 				type: UserActionType.CREATE_CUSTOMER_SUCCESS,
 // 				payload: data
@@ -232,8 +229,6 @@
 // 				});
 // 		}
 // }
-
-
 
 // export const updatePassword =
 // 	(user_id, old_password, new_password, retype_new_password) =>
@@ -265,7 +260,7 @@
 // 			});
 // 		}
 // 		};
-	
+
 // export const updateProfile =
 // 	(user_id, phonenumber, name, email, auth_code) => async (dispatch,getState) => {
 // 		dispatch({
@@ -360,7 +355,6 @@
 // 	}
 // };
 
-
 // export const addTeamMember =
 // 	(account_id, phone, email, user_id, account_type, business_id) =>
 // 	async (dispatch, getState) => {
@@ -406,7 +400,7 @@
 // 			});
 // 		}
 // 	};
-	
+
 // export const fetchTeamMember =
 // 		(business_id) =>
 // 		async (dispatch, getState) => {
@@ -443,7 +437,6 @@
 // 				});
 // 			}
 // 			};
-		
 
 // // PRODUCT
 
@@ -695,35 +688,157 @@
 // };
 
 import {
-	GET_BUSINESS_USER_DETAIL,
-	FETCH_BUSINESS_USER_DETAIL_WITH_ID,
-	FETCH_BUSINESS_USER_DETAIL_WITH_ID_SUCCESS,
-	FETCH_BUSINESS_USER_DETAIL_WITH_ID_ERROR,
-  } from "../constants/UserActionType";
-  import { axiosWithAuth } from "../../utils/axiosWithAuth";
-  
-  export const getBusinessUserInfo = (payload) => {
-	return {
-	  type: GET_BUSINESS_USER_DETAIL,
-	  payload,
-	};
+  GET_BUSINESS_USER_DETAIL,
+  FETCH_BUSINESS_USER_DETAIL_WITH_ID,
+  FETCH_BUSINESS_USER_DETAIL_WITH_ID_SUCCESS,
+  FETCH_BUSINESS_USER_DETAIL_WITH_ID_ERROR,
+  CREATE_ORDER_START,
+  CREATE_ORDER_SUCCESS,
+  CREATE_ORDER_ERROR,
+  GET_ORDER_START,
+  GET_ORDER_SUCCESS,
+  GET_ORDER_ERROR,
+  GET_ORDER_PAGINATION,
+  GET_ORDER_PAGINATION_ERROR,
+  GET_CUSTOMERS_START,
+  GET_CUSTOMERS_SUCCESS,
+  GET_CUSTOMERS_ERROR,
+  GET_PRODUCTS_START,
+  GET_PRODUCTS_SUCCESS,
+  GET_PRODUCTS_ERROR,
+} from "../constants/UserActionType";
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
+
+export const getBusinessUserInfo = (payload) => {
+  return {
+    type: GET_BUSINESS_USER_DETAIL,
+    payload,
   };
-  
-  export const getBusinessUserDetails = (user_id) => (dispatch) => {
-	dispatch({ type: FETCH_BUSINESS_USER_DETAIL_WITH_ID });
-	axiosWithAuth()
-	  .get(`/auths/signin?user=${user_id}`)
-	  .then((res) => {
-		dispatch({
-		  type: FETCH_BUSINESS_USER_DETAIL_WITH_ID_SUCCESS,
-		  payload: res.data.message,
-		});
-	  })
-	  .catch((err) => {
-		dispatch({
-		  type: FETCH_BUSINESS_USER_DETAIL_WITH_ID_ERROR,
-		  payload: err.response.data.error,
-		});
-	  });
-  };
-  
+};
+
+export const getBusinessUserDetails = (user_id) => (dispatch) => {
+  dispatch({ type: FETCH_BUSINESS_USER_DETAIL_WITH_ID });
+  axiosWithAuth()
+    .get(`/auths/signin?user=${user_id}`)
+    .then((res) => {
+      dispatch({
+        type: FETCH_BUSINESS_USER_DETAIL_WITH_ID_SUCCESS,
+        payload: res.data.message,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: FETCH_BUSINESS_USER_DETAIL_WITH_ID_ERROR,
+        payload: err.response.data.error,
+      });
+    });
+};
+
+export const createOrders = (user_id) => (dispatch) => {
+  dispatch({ type: CREATE_ORDER_START });
+  axiosWithAuth()
+    .post(`/order/record`)
+    .then((res) => {
+      console.log(res, "ORDER");
+      dispatch({
+        type: CREATE_ORDER_SUCCESS,
+        payload: res.data.message,
+      });
+    })
+    .catch((err) => {
+      console.log(err, "ORDER ERROR");
+      dispatch({
+        type: CREATE_ORDER_ERROR,
+        payload: err.response.data.error,
+      });
+    });
+};
+export const getOrders = (business_id, page) => (dispatch) => {
+  dispatch({ type: GET_ORDER_START });
+  axiosWithAuth()
+    .get(`/order/getorders?bussiness_id=${business_id}&page=${page}`)
+    .then((res) => {
+      dispatch({
+        type: GET_ORDER_SUCCESS,
+        payload: res.data.orders,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: GET_ORDER_ERROR,
+        payload: err.response.data.error,
+      });
+    });
+};
+
+export const getOrderPagination = (business_id) => (dispatch) => {
+  dispatch({ type: GET_ORDER_START });
+  axiosWithAuth()
+    .get(`/order/getorders?bussiness_id=${business_id}`)
+    .then((res) => {
+      dispatch({ type: GET_ORDER_PAGINATION, payload: res.data });
+    })
+    .catch((err) => {
+      dispatch({
+        type: GET_ORDER_PAGINATION_ERROR,
+        payload: err.response.data.error,
+      });
+    });
+};
+
+export const getProduct = (business_id) => (dispatch) => {
+  dispatch({ type: GET_PRODUCTS_START });
+  axiosWithAuth()
+    .get(`/products/all?business_id=${business_id}`)
+    .then((res) => {
+      console.log(res.data, "PRODUCTS");
+      dispatch({
+        type: GET_PRODUCTS_SUCCESS,
+        payload: res.data.orders,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: GET_PRODUCTS_ERROR,
+        payload: err.response.data.error,
+      });
+    });
+};
+export const getCustomers = (business_id) => (dispatch) => {
+  dispatch({ type: GET_CUSTOMERS_START });
+  axiosWithAuth()
+    .get(`/customer/fetch?business_id=${business_id}`)
+    .then((res) => {
+		console.log(res.data, "CUSTOMERS")
+      dispatch({
+        type: GET_CUSTOMERS_SUCCESS,
+        payload: res.data.customers,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: GET_CUSTOMERS_ERROR,
+        payload: err.response.data.error,
+      });
+    });
+};
+
+// export const getPayments = (business_id) => (dispatch) => {
+// 	dispatch({ type: GET_ORDER_START });
+// 	axiosWithAuth()
+// 	  .get(`/history/fetch`)
+// 	  .then((res) => {
+// 		console.log(res, "GET ORDER");
+// 		dispatch({
+// 		  type: GET_ORDER_SUCCESS,
+// 		  payload: res.data.message,
+// 		});
+// 	  })
+// 	  .catch((err) => {
+// 		console.log(err, "GET ORDER ERROR");
+// 		dispatch({
+// 		  type: GET_ORDER_ERROR,
+// 		  payload: err.response.data.error,
+// 		});
+// 	  });
+//   }

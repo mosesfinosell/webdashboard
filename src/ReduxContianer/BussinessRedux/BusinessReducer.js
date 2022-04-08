@@ -333,6 +333,19 @@ import {
   FETCH_BUSINESS_USER_DETAIL_WITH_ID,
   FETCH_BUSINESS_USER_DETAIL_WITH_ID_ERROR,
   FETCH_BUSINESS_USER_DETAIL_WITH_ID_SUCCESS,
+  CREATE_ORDER_START,
+  CREATE_ORDER_SUCCESS,
+  CREATE_ORDER_ERROR,
+  GET_ORDER_START,
+  GET_ORDER_SUCCESS,
+  GET_ORDER_ERROR,
+  GET_ORDER_PAGINATION,
+  GET_CUSTOMERS_START,
+  GET_CUSTOMERS_SUCCESS,
+  GET_CUSTOMERS_ERROR,
+  GET_PRODUCTS_START,
+  GET_PRODUCTS_SUCCESS,
+  GET_PRODUCTS_ERROR,
 } from "../constants/UserActionType.js";
 
 const initialState = {
@@ -340,6 +353,10 @@ const initialState = {
   error: "",
   businessUserInfo: null,
   businessUserIdDetails: null,
+  order: [],
+  products: [],
+  customers: [],
+  paginatedOrderResponse: null,
 };
 
 const BusinessReducer = (state = initialState, action) => {
@@ -366,7 +383,75 @@ const BusinessReducer = (state = initialState, action) => {
         isFetching: false,
         businessUserIdDetails: action.payload,
       };
-
+    case CREATE_ORDER_START:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case CREATE_ORDER_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        order: action.payload,
+      };
+    case CREATE_ORDER_ERROR:
+      return {
+        ...state,
+        isFetching: false,
+      };
+    case GET_ORDER_START:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case GET_ORDER_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        order: action.payload,
+      };
+    case GET_ORDER_ERROR:
+      return {
+        ...state,
+        isFetching: false,
+      };
+    case GET_ORDER_PAGINATION:
+      return {
+        ...state,
+        paginatedOrderResponse: action.payload,
+      };
+    case GET_CUSTOMERS_START:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case GET_CUSTOMERS_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        customers: action.payload,
+      };
+    case GET_CUSTOMERS_ERROR:
+      return {
+        ...state,
+        isFetching: false,
+      };
+    case GET_PRODUCTS_START:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case GET_PRODUCTS_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        products: action.payload,
+      };
+    case GET_PRODUCTS_ERROR:
+      return {
+        ...state,
+        isFetching: false,
+      };
     default:
       return state;
   }

@@ -37,13 +37,44 @@ import "react-datepicker/dist/react-datepicker.css";
 // import SelectCustomer from './selectCustomer';
 // import { getProduct } from '../../../../ReduxContianer/BussinessRedux/BusinessAction';
 // import {getCustomers} from '../../../../ReduxContianer/BussinessRedux/BusinessAction'
-// import {createOrders} from '../../../../ReduxContianer/BussinessRedux/BusinessAction'
-
+import {
+  getOrders,
+  getOrderPagination,
+  getProduct,
+  getCustomers,
+} from "../../../../ReduxContianer/BussinessRedux/BusinessAction";
+import * as Yup from "yup";
+import { Spinner } from "@chakra-ui/react";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { Stepper, Step, StepLabel } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import StepOne from "./StepOne";
+import StepTwo from "./StepTwo";
+const useStyles = makeStyles({
+  root: {
+    "& .MuiStepIcon-rootMuiStepIcon-active": {
+      color: "red",
+    },
+  },
+});
 export default function CreateOrder() {
   const dispatch = useDispatch();
   const businessInfo = useSelector(
     (state) => state.businessReducer.businessUserInfo
   );
+  const orders = useSelector((state) => state.businessReducer.order);
+  const totalOrders = useSelector(
+    (state) => state.businessReducer.paginatedOrderResponse.allOrders
+  );
+  const perPage = useSelector(
+    (state) => state.businessReducer.paginatedOrderResponse.perPage
+  );
+  const orderPageNumber = useSelector(
+    (state) => state.businessReducer.paginatedOrderResponse.page
+  );
+  const totalPages = totalOrders / perPage;
+  const isFetching = useSelector((state) => state.businessReducer.isFetching);
+  const customers = useSelector((state) => state.businessReducer.customers);
   // const businessSignIn = useSelector((state) => state.businessSignIn);
   // const { user } = businessSignIn;
   // const { businessDetails } = user;
@@ -63,9 +94,27 @@ export default function CreateOrder() {
   const [totalAmount, setTotalAmount] = useState("");
   const [selectProduct, setSelectProduct] = useState("");
   const [selectCustomer, setSelectCustomer] = useState("");
-  const [businessId] = useState(businessInfo.user_id);
+  const [businessId] = useState(businessInfo.business_id);
+  const [page, setPage] = useState(1);
+  let [step, setStep] = useState(1);
   const [orderId] = useState("4575r46rt5");
+  const [activeStep, setActiveStep] = useState(0);
 
+  //Validate
+  const createOrderSchema = Yup.object().shape({
+    title: Yup.string().required("Title is required"),
+    // phoneNumber: Yup.number().required("Phone number is required"),
+    // email: Yup.string().email("Invalid email").required("Email is required"),
+    discount: Yup.string().required("Discount is required"),
+    // address: Yup.string().required("Address is required"),
+    // amount: Yup.string().required("Amount is required"),
+  });
+  useEffect(() => {
+    dispatch(getOrders(businessId, page));
+    dispatch(getOrderPagination(businessId));
+    dispatch(getProduct(businessId));
+    dispatch(getCustomers(businessId));
+  }, [dispatch, businessId, page]);
   // useEffect(() => {
   // 	dispatch(getProduct(businessId));
   // }, [dispatch,businessId]);
@@ -76,14 +125,22 @@ export default function CreateOrder() {
 
   // const fetchCustomer = useSelector((state) => state.fetchCustomer);
   // let { customers} = fetchCustomer;
-  let customers = [];
 
   // const fetchProduct = useSelector((state) => state.fetchProduct);
   // let { products,loading } = fetchProduct;
   let products = [];
-  let loading = false;
+  //   let loading = false;
   function handleSubmit(e) {
+    console.log(step);
+    setStep(step++);
     e.preventDefault();
+    if (step === 3) {
+      setStep(3);
+      console.log("SUBMIT");
+    } else {
+      return;
+    }
+
     // dispatch(
     // 	createOrders(
     // 		title,
@@ -104,27 +161,39 @@ export default function CreateOrder() {
     // 		orderId
     // 	)
     // );
-
-    console.log(
-      title,
-      email,
-      phoneNumber,
-      startDate,
-      orderStatus,
-      orderType,
-      saleStatus,
-      discount,
-      shippingAddress,
-      paymentStatus,
-      paymentMethod,
-      totalAmount,
-      selectProduct,
-      selectCustomer,
-      businessId,
-      orderId
-    );
   }
-
+  function getSteps() {
+    return ["SIGN UP", "CHOOSE PLAN", "CREATE ORDER"];
+  }
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+  const steppings = getSteps();
+  function getStepsContents(stepIndex) {
+    switch (stepIndex) {
+      case 0:
+        return (
+          <StepOne
+            handleNext={handleNext}
+            activeStep={activeStep}
+            steppings={steppings}
+          />
+        );
+      case 1:
+        return (
+          <StepTwo
+            handleNext={handleNext}
+            activeStep={activeStep}
+            steppings={steppings}
+          />
+        );
+      case 2:
+        return "Step Three (CREATE ORDER)";
+      default:
+        return "Unknown Step";
+    }
+  }
+  const classes = useStyles();
   return (
     <Container m="40px" maxW="container.lg">
       <Grid h="100vh" templateColumns="repeat(5, 1fr)">
@@ -134,21 +203,142 @@ export default function CreateOrder() {
               Add a order
             </Text>
           </Stack>
-
           <Box
+            h="1550px"
+            w="450px"
+            borderRadius="0px 11px 11px 11px"
+            border="0.5px solid #D9D9D9"
+            px="40px"
+          >
+            <Stepper
+              //   className={classes.root}
+              activeStep={activeStep}
+              alternativeLabel
+            >
+              {steppings.map((label) => (
+                <Step key={label}>
+                  <StepLabel>{label}</StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+            <>
+              {activeStep === steppings.length ? (
+                "Steps Complete"
+              ) : (
+                <>
+                  {getStepsContents(activeStep)}
+                  {/* <Button
+                    onClick={handleNext}
+                    mt={4}
+                    bg="yellow.500"
+                    width="300px"
+                    h="60px"
+                    borderRadius="0px 11px 11px 11px"
+                    type="submit"
+                    color="white"
+                    _hover={{ bg: "#1A202C" }}
+                  >
+                    {activeStep === steppings.length ? "Create Order" : "Next"}
+                  </Button> */}
+                </>
+              )}
+            </>
+
+            {/* <Formik
+              initialValues={{ title: "", discount: "" }}
+              onSubmit={(values) => {
+                console.log(values, "nnn");
+                alert("VALUES RE", values);
+              }}
+              validationSchema={createOrderSchema}
+            >
+              {(formik) => (
+                <form onSubmit={formik.handleSubmit}>
+                  <FormLabel htmlFor="title">Title</FormLabel>
+                  <InputGroup>
+                    <Input
+                      id="title"
+                      name="title"
+                      mb="20px"
+                      value={formik.values.title}
+                      onChange={formik.handleChange}
+                      placeholder="Add Order Title"
+                      width="300px"
+                      height="60px"
+                      borderRadius="0px 11px 11px 11px"
+                    />
+                  </InputGroup>
+                  {formik.touched.title && formik.errors.title ? (
+                    <span>{formik.errors.title}</span>
+                  ) : null}
+                  <FormLabel htmlFor="title">Discount</FormLabel>
+                  <InputGroup>
+                    <Input
+                      id="discount"
+                      name="discount"
+                      mb="20px"
+                      value={formik.values.discount}
+                      onChange={formik.handleChange}
+                      placeholder="Discount"
+                      width="300px"
+                      height="60px"
+                      borderRadius="0px 11px 11px 11px"
+                    />
+                  </InputGroup>
+                  {formik.touched.discount && formik.errors.discount ? (
+                    <span>{formik.errors.discount}</span>
+                  ) : null}
+                  <Button
+                    mt={4}
+                    bg="yellow.500"
+                    width="300px"
+                    h="60px"
+                    borderRadius="0px 11px 11px 11px"
+                    type="submit"
+                    color="white"
+                    _hover={{ bg: "#1A202C" }}
+                  >
+                    Add Order
+                  </Button>
+                </form>
+              )}
+            </Formik> */}
+          </Box>
+          {/* <Box
             h="1550px"
             w="400px"
             borderRadius="0px 11px 11px 11px"
             border="0.5px solid #D9D9D9"
             px="40px"
           >
-            <Formik>
+            <Formik
+              initialValues={{
+                title: "",
+                phoneNumber: "",
+                email: "",
+                orderStatus: "",
+                orderType: "",
+                orderDate: "",
+                salesStatus: "",
+                discount: "",
+                shippingAddress: "",
+                paymentStatus: "",
+                paymentMethod: "",
+                selectProduct: "",
+                selectCustomer: "",
+                totalAmount: "",
+              }}
+              validationSchema={createOrderSchema}
+            >
               {() => (
                 <Form onSubmit={handleSubmit}>
-                  <Field name="text">
+                  <Field name="title">
                     {({ field, form }) => (
-                      <FormControl mt="30px">
-                        <FormLabel htmlFor="text">Title</FormLabel>
+                      <FormControl
+                        isInvalid={form.errors.title && form.touched.title}
+                        mt={4}
+                      >
+                        <FormLabel htmlFor="title">Title</FormLabel>
                         <InputGroup>
                           <Input
                             {...field}
@@ -161,6 +351,7 @@ export default function CreateOrder() {
                             borderRadius="0px 11px 11px 11px"
                           />
                         </InputGroup>
+                        <FormErrorMessage>{form.errors.title}</FormErrorMessage>
                       </FormControl>
                     )}
                   </Field>
@@ -172,7 +363,9 @@ export default function CreateOrder() {
                         }
                         mt={4}
                       >
-                        <FormLabel htmlFor="name">Phone Number</FormLabel>
+                        <FormLabel htmlFor="phoneNumber">
+                          Phone Number
+                        </FormLabel>
                         <InputGroup>
                           <Input
                             {...field}
@@ -197,7 +390,7 @@ export default function CreateOrder() {
                         isInvalid={form.errors.email && form.touched.email}
                         mt={4}
                       >
-                        <FormLabel htmlFor="name">Email</FormLabel>
+                        <FormLabel htmlFor="email">Email</FormLabel>
                         <InputGroup>
                           <Input
                             {...field}
@@ -213,10 +406,11 @@ export default function CreateOrder() {
                       </FormControl>
                     )}
                   </Field>
-                  <Field name="text">
+
+                  <Field name="orderStatus">
                     {({ field, form }) => (
                       <FormControl>
-                        <FormLabel htmlFor="order status">
+                        <FormLabel htmlFor="orderStatus">
                           Order Status
                         </FormLabel>
                         <Select
@@ -234,10 +428,10 @@ export default function CreateOrder() {
                       </FormControl>
                     )}
                   </Field>
-                  <Field name="text">
+                  <Field name="orderType">
                     {({ field, form }) => (
                       <FormControl>
-                        <FormLabel htmlFor="order type">Order Type</FormLabel>
+                        <FormLabel htmlFor="orderType">Order Type</FormLabel>
                         <Select
                           mb="20px"
                           placeholder="Add Order Type"
@@ -254,34 +448,21 @@ export default function CreateOrder() {
                     )}
                   </Field>
 
-                  <Field name="text">
+                  <Field name="startDate">
                     {({ field, form }) => (
                       <FormControl>
-                        <FormLabel htmlFor="order type">Order Date</FormLabel>
-                        {/* <Input
-													{...field}
-													mb='20px'
-													width='300px'
-													h='60px'
-													borderRadius='0px 11px 11px 11px'> */}
-                        <DatePicker
-                          mb="20px"
-                          selected={startDate}
-                          onChange={(date) => setStartDate(date)}
-                        />
-                        {/* </Input> */}
+                        <FormLabel htmlFor="startDate">Order Date</FormLabel>
                       </FormControl>
                     )}
                   </Field>
-                  <Field name="text">
+
+                  <Field name="saleStatus">
                     {({ field, form }) => (
                       <FormControl>
-                        <FormLabel htmlFor="order type">
-                          Sales Channel
-                        </FormLabel>
+                        <FormLabel htmlFor="saleStatus">Sales Status</FormLabel>
                         <Select
                           mb="20px"
-                          placeholder="Add Sales Channel"
+                          placeholder="Add Sales Status"
                           value={saleStatus}
                           onChange={(e) => setSaleStatus(e.target.value)}
                           width="300px"
@@ -294,10 +475,15 @@ export default function CreateOrder() {
                       </FormControl>
                     )}
                   </Field>
-                  <Field name="number">
+                  <Field name="discount">
                     {({ field, form }) => (
-                      <FormControl mt="30px">
-                        <FormLabel htmlFor="number">Discount</FormLabel>
+                      <FormControl
+                        mt="30px"
+                        isInvalid={
+                          form.errors.discount && form.touched.discount
+                        }
+                      >
+                        <FormLabel htmlFor="discount">Discount</FormLabel>
                         <InputGroup>
                           <Input
                             {...field}
@@ -310,13 +496,22 @@ export default function CreateOrder() {
                             borderRadius="0px 11px 11px 11px"
                           />
                         </InputGroup>
+                        <FormErrorMessage>
+                          {form.errors.discount}
+                        </FormErrorMessage>
                       </FormControl>
                     )}
                   </Field>
-                  <Field name="address">
+                  <Field name="shippingAddress">
                     {({ field, form }) => (
-                      <FormControl mt={4}>
-                        <FormLabel htmlFor="address">
+                      <FormControl
+                        mt={4}
+                        isInvalid={
+                          form.errors.shippingAddress &&
+                          form.touched.shippingAddress
+                        }
+                      >
+                        <FormLabel htmlFor="shippingAddress">
                           Shipping Address
                         </FormLabel>
                         <InputGroup>
@@ -331,13 +526,16 @@ export default function CreateOrder() {
                             borderRadius="0px 11px 11px 11px"
                           />
                         </InputGroup>
+                        <FormErrorMessage>
+                          {form.errors.shippingAddress}
+                        </FormErrorMessage>
                       </FormControl>
                     )}
                   </Field>
-                  <Field name="text">
+                  <Field name="paymentStatus">
                     {({ field, form }) => (
                       <FormControl>
-                        <FormLabel htmlFor="payment status">
+                        <FormLabel htmlFor="paymentStatus">
                           Payment Status
                         </FormLabel>
                         <Select
@@ -355,10 +553,10 @@ export default function CreateOrder() {
                       </FormControl>
                     )}
                   </Field>
-                  <Field name="text">
+                  <Field name="paymentMethod">
                     {({ field, form }) => (
                       <FormControl>
-                        <FormLabel htmlFor="payment method">
+                        <FormLabel htmlFor="paymentMethod">
                           Payment Method
                         </FormLabel>
                         <Select
@@ -377,11 +575,11 @@ export default function CreateOrder() {
                       </FormControl>
                     )}
                   </Field>
-                  <Field name="text">
+                  <Field name="selectProduct">
                     {({ field, form }) => (
                       <FormControl>
-                        <FormLabel htmlFor="payment method">
-                          Payment Method
+                        <FormLabel htmlFor="selectProduct">
+                          Select Product
                         </FormLabel>
                         <Select
                           mb="20px"
@@ -392,7 +590,7 @@ export default function CreateOrder() {
                           h="60px"
                           borderRadius="0px 11px 11px 11px"
                         >
-                          {!loading &&
+                          {!isFetching &&
                             products?.details?.map((product) => {
                               return <option>{product.title}</option>;
                             })}
@@ -400,10 +598,10 @@ export default function CreateOrder() {
                       </FormControl>
                     )}
                   </Field>
-                  <Field name="text">
+                  <Field name="selectCustomer">
                     {({ field, form }) => (
                       <FormControl>
-                        <FormLabel htmlFor="payment method">
+                        <FormLabel htmlFor="selectCustomer">
                           Select Customers
                         </FormLabel>
                         <Select
@@ -415,18 +613,25 @@ export default function CreateOrder() {
                           h="60px"
                           borderRadius="0px 11px 11px 11px"
                         >
-                          {!loading &&
-                            customers?.customers?.map((customer) => {
+                          {!isFetching &&
+                            customers?.map((customer) => {
                               return <option>{customer.customer_name}</option>;
                             })}
                         </Select>
                       </FormControl>
                     )}
                   </Field>
-                  <Field name="number">
+                  <Field name="totalAmount">
                     {({ field, form }) => (
-                      <FormControl mt={4}>
-                        <FormLabel htmlFor="number">Total Amount</FormLabel>
+                      <FormControl
+                        mt={4}
+                        isInvalid={
+                          form.errors.totalAmount && form.touched.totalAmount
+                        }
+                      >
+                        <FormLabel htmlFor="totalAmount">
+                          Total Amount
+                        </FormLabel>
                         <InputGroup>
                           <Input
                             {...field}
@@ -439,9 +644,13 @@ export default function CreateOrder() {
                             borderRadius="0px 11px 11px 11px"
                           />
                         </InputGroup>
+                        <FormErrorMessage>
+                          {form.errors.totalAmount}
+                        </FormErrorMessage>
                       </FormControl>
                     )}
                   </Field>
+
                   <Button
                     mt={4}
                     bg="yellow.500"
@@ -452,12 +661,12 @@ export default function CreateOrder() {
                     color="white"
                     _hover={{ bg: "#1A202C" }}
                   >
-                    Add Order
+                    {step === 3 ? "Add Order" : "Next Step"}
                   </Button>
                 </Form>
               )}
             </Formik>
-          </Box>
+          </Box> */}
         </GridItem>
         <GridItem colStart={6} colEnd={9} h="10" bg="white">
           <Stack m="10px">
@@ -493,114 +702,74 @@ export default function CreateOrder() {
             <Center>
               <TabPanels>
                 <TabPanel>
-                  <Box
-                    h="100px"
-                    w="400px"
-                    border="0.5px solid #D9D9D9"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="space-evenly"
-                  >
-                    <Stack
-                      color="yellow.500"
-                      bg="yellow.100"
-                      borderRadius="0px 8px 8px 8px"
-                      border="0.2px solid yellow.100"
-                      p="12px"
-                      fontSize="22px"
+                  {isFetching ? (
+                    <Spinner />
+                  ) : orders.length === 0 ? (
+                    <h1>There are no orders</h1>
+                  ) : (
+                    <InfiniteScroll
+                      dataLength={orders.length}
+                      next={() => {
+                        setPage(page + 1);
+                      }}
+                      hasMore={orderPageNumber < totalPages}
+                      loader={<h4>Loading...</h4>}
+                      endMessage={
+                        <p
+                          style={{
+                            textAlign: "center",
+                            paddingTop: "7px",
+                            color: "#D6AA1B",
+                            fontFamily: "Circular Std",
+                          }}
+                        >
+                          <b>No more orders</b>
+                        </p>
+                      }
                     >
-                      <BiShoppingBag />
-                    </Stack>
-                    <Stack pr="10px">
-                      <Text color="#273B4A" w="200px">
-                        Adidas Core Sneakers{" "}
-                      </Text>
-                      <Text color="gray" fontSize="12px">
-                        Accepted
-                      </Text>
-                    </Stack>
+                      {orders.map((order) => (
+                        <Box
+                          key={order.id}
+                          h="100px"
+                          w="400px"
+                          border="0.5px solid #D9D9D9"
+                          display="flex"
+                          alignItems="center"
+                          justifyContent="space-evenly"
+                        >
+                          <Stack
+                            color="yellow.500"
+                            bg="yellow.100"
+                            borderRadius="0px 8px 8px 8px"
+                            border="0.2px solid yellow.100"
+                            p="12px"
+                            fontSize="22px"
+                          >
+                            <BiShoppingBag />
+                          </Stack>
+                          <Stack pr="10px">
+                            <Text color="#273B4A" w="200px">
+                              {order.title}
+                            </Text>
+                            <Text color="gray" fontSize="12px">
+                              {order.order_status}
+                            </Text>
+                          </Stack>
 
-                    <Stack>
-                      <Text fontSize="12px" color="yellow.500">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
-                    </Stack>
-                  </Box>
-                  <Box
-                    h="100px"
-                    w="400px"
-                    border="0.5px solid #D9D9D9"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="space-evenly"
-                  >
-                    <Stack
-                      color="red.500"
-                      bg="red.100"
-                      borderRadius="0px 8px 8px 8px"
-                      border="0.2px solid red.100"
-                      p="12px"
-                      fontSize="22px"
-                    >
-                      <BiShoppingBag />
-                    </Stack>
-                    <Stack pr="10px">
-                      <Text color="#273B4A" w="200px">
-                        Adidas Core Sneakers{" "}
-                      </Text>
-                      <Text color="gray" fontSize="12px">
-                        Accepted
-                      </Text>
-                    </Stack>
-
-                    <Stack>
-                      <Text fontSize="12px" color="red.500">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
-                    </Stack>
-                  </Box>
-                  <Box
-                    h="100px"
-                    w="400px"
-                    border="0.5px solid #D9D9D9"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="space-evenly"
-                  >
-                    <Stack
-                      color="green.500"
-                      bg="green.100"
-                      borderRadius="0px 8px 8px 8px"
-                      border="0.2px solid green.100"
-                      p="12px"
-                      fontSize="22px"
-                    >
-                      <BiShoppingBag />
-                    </Stack>
-                    <Stack pr="10px">
-                      <Text color="#273B4A" w="200px">
-                        Adidas Core Sneakers{" "}
-                      </Text>
-                      <Text color="gray" fontSize="12px">
-                        Accepted
-                      </Text>
-                    </Stack>
-
-                    <Stack>
-                      <Text fontSize="12px" color="green.500">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
-                    </Stack>
-                  </Box>
+                          <Stack>
+                            <Text fontSize="12px" color="yellow.500">
+                              ₦{order.amount}
+                            </Text>
+                            <Text fontSize="12px" color="gray">
+                              {new Date(order.createdAt).toLocaleDateString(
+                                "fr"
+                              )}
+                            </Text>
+                          </Stack>
+                        </Box>
+                      ))}
+                    </InfiniteScroll>
+                  )}
                 </TabPanel>
                 <TabPanel>
                   <Box
