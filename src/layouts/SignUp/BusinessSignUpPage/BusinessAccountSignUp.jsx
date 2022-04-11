@@ -59,6 +59,7 @@ export default function BusinessAccountSignUp() {
   const handleClick = () => setShow(!show);
 
   function handleSubmit(e) {
+	  console.log('UP SIGN',name,email,phoneNumber)
     setIsLoading(true);
     e.preventDefault();
     axios

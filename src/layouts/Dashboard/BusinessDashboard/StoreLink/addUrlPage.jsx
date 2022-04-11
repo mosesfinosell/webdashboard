@@ -20,7 +20,7 @@ import { Formik, Form, Field } from 'formik';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useColorModeValue } from '@chakra-ui/color-mode';
-// import { createStoreLink } from '../../../../ReduxContianer/BussinessRedux/BusinessAction'
+import { createStoreLink } from '../../../../ReduxContianer/BussinessRedux/BusinessAction'
 
 
 export default function AddUrlPage() {
@@ -38,8 +38,9 @@ const businessInfo = useSelector((state) => state.businessReducer.businessUserIn
 	const [storeName, setStoreName] = useState('');
 
 	function handleSubmit(e) {
+		console.log('PPPEEE')
 		e.preventDefault();
-		// dispatch(createStoreLink(storeName, userId));
+		dispatch(createStoreLink(storeName, userId));
 		setStoreName('')
     }
 

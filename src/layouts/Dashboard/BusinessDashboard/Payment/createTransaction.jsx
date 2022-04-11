@@ -24,7 +24,7 @@ import { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import DatePicker from "react-datepicker";
-// import { createTransaction } from '../../../../ReduxContianer/BussinessRedux/BusinessAction'
+import { createTransaction } from '../../../../ReduxContianer/BussinessRedux/BusinessAction'
 
 export default function CreateTransaction() {
   const dispatch = useDispatch();
@@ -61,21 +61,21 @@ export default function CreateTransaction() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // dispatch(
-    // 	createTransaction(
-    // 		details,
-    // 		paymentDate,
-    // 		paymentId,
-    // 		businessId,
-    // 		selectProduct,
-    // 		selectCustomer,
-    // 		paymentStatus,
-    // 		paymentMethod,
-    // 		paymentRef,
-    // 		transactionType,
-    // 		amount
-    // 	)
-    // );
+    dispatch(
+    	createTransaction(
+    		// details,
+    		// paymentDate,
+    		// paymentId,
+    		// businessId,
+    		// selectProduct,
+    		// selectCustomer,
+    		// paymentStatus,
+    		// paymentMethod,
+    		// paymentRef,
+    		// transactionType,
+    		// amount
+    	)
+    );
     console.log(
       details,
       paymentDate,
@@ -110,7 +110,7 @@ export default function CreateTransaction() {
           >
             <Formik>
               {() => (
-                <Form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                   <Field name="text">
                     {({ field, form }) => (
                       <FormControl mt="30px">
@@ -142,11 +142,15 @@ export default function CreateTransaction() {
 													width='300px'
 													h='60px'
 													borderRadius='0px 11px 11px 11px'> */}
-                        <DatePicker
-                          mb="20px"
-                          selected={paymentDate}
-                          onChange={(date) => setpaymentDate(date)}
-                        />
+                        <InputGroup>
+                          <Input
+                            type="date"
+                            mb="20px"
+                            selected={paymentDate}
+                            onChange={(date) => setpaymentDate(date)}
+                          />
+                        </InputGroup>
+
                         {/* </Input> */}
                       </FormControl>
                     )}
@@ -293,7 +297,7 @@ export default function CreateTransaction() {
                   >
                     Add Transaction
                   </Button>
-                </Form>
+                </form>
               )}
             </Formik>
           </Box>

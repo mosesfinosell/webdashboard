@@ -1,12 +1,17 @@
 import React from "react";
-import { FormLabel, Button, Select } from "@chakra-ui/react";
+import { FormLabel, Button, Select, Input, InputGroup } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useEffect, useState } from "react";
-import { getCustomers } from "../../../../ReduxContianer/BussinessRedux/BusinessAction";
+import {
+  getCustomers,
+  getStepTwoDetails,
+} from "../../../../ReduxContianer/BussinessRedux/BusinessAction";
 import { useDispatch, useSelector } from "react-redux";
+// import DatePicker from "react-datepicker";
 function StepTwo({ activeStep, steppings, handleNext }) {
   const isFetching = useSelector((state) => state.businessReducer.isFetching);
+  const stepOne = useSelector((state) => state.businessReducer.stepOne);
   const dispatch = useDispatch();
   const businessInfo = useSelector(
     (state) => state.businessReducer.businessUserInfo
@@ -15,41 +20,43 @@ function StepTwo({ activeStep, steppings, handleNext }) {
   const [businessId] = useState(businessInfo.business_id);
   const createStepTwoSchema = Yup.object().shape({
     orderType: Yup.string().required("Select type of order"),
-    orderStatus: Yup.string().required("Choose order status"),
-    selectCustomer: Yup.string().required("Select a customer"),
+    order_status: Yup.string().required("Choose order status"),
+    customer_id: Yup.string().required("Select a customer"),
     paymentStatus: Yup.string().required("Choose payment status"),
-    saleStatus: Yup.string().required("Choose Sales Status"),
-    paymentMethod: Yup.string().required("Select payment method")
+    sales_channel: Yup.string().required("Choose Sales Status"),
+    payment_Method: Yup.string().required("Select payment method"),
+    order_date: Yup.string().required("Choose Order Date"),
   });
   useEffect(() => {
     dispatch(getCustomers(businessId));
   }, [dispatch, businessId]);
   const formik = useFormik({
     initialValues: {
-      orderStatus: "",
+      order_status: "",
       orderType: "",
-      selectCustomer: "",
+      customer_id: "",
       paymentStatus: "",
-      saleStatus: "",
-      paymentMethod:""
+      sales_channel: "",
+      payment_Method: "",
+      order_date: "",
     },
 
     onSubmit: (values) => {
       handleNext();
-      console.log(values, "FORMIK 2");
+      dispatch(getStepTwoDetails(values));
     },
     validationSchema: createStepTwoSchema,
   });
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
-        <FormLabel htmlFor="orderStatus">Order Status</FormLabel>
+        <FormLabel htmlFor="order_status">Order Status</FormLabel>
         <Select
-          id="orderStatus"
-          name="orderStatus"
+          id="order_status"
+          name="order_status"
           mb="20px"
           placeholder="Add Order Status"
-          value={formik.values.orderStatus}
+          value={formik.values.order_status}
           onChange={formik.handleChange}
           width="300px"
           h="60px"
@@ -58,8 +65,8 @@ function StepTwo({ activeStep, steppings, handleNext }) {
           <option>Paid</option>
           <option>Unpaid</option>
         </Select>
-        {formik.touched.orderStatus && formik.errors.orderStatus ? (
-          <span>{formik.errors.orderStatus}</span>
+        {formik.touched.order_status && formik.errors.order_status ? (
+          <span>{formik.errors.order_status}</span>
         ) : null}
 
         <FormLabel htmlFor="orderType">Order Type</FormLabel>
@@ -90,6 +97,8 @@ function StepTwo({ activeStep, steppings, handleNext }) {
           width="300px"
           h="60px"
           borderRadius="0px 11px 11px 11px"
+          id="paymentStatus"
+          name="paymentStatus"
         >
           <option>Paid</option>
           <option>Unpaid</option>
@@ -97,17 +106,17 @@ function StepTwo({ activeStep, steppings, handleNext }) {
         {formik.touched.paymentStatus && formik.errors.paymentStatus ? (
           <span>{formik.errors.paymentStatus}</span>
         ) : null}
-        <FormLabel htmlFor="selectCustomer">Select Customers</FormLabel>
+        <FormLabel htmlFor="customer_id">Select Customers</FormLabel>
         <Select
           mb="20px"
           placeholder="Select Customer"
-          value={formik.values.selectCustomer}
+          value={formik.values.customer_id}
           onChange={formik.handleChange}
           width="300px"
           h="60px"
           borderRadius="0px 11px 11px 11px"
-          id="selectCustomer"
-          name="selectCustomer"
+          id="customer_id"
+          name="customer_id"
         >
           {!isFetching &&
             customers?.map((customer) => {
@@ -118,39 +127,59 @@ function StepTwo({ activeStep, steppings, handleNext }) {
               );
             })}
         </Select>
-        <FormLabel htmlFor="saleStatus">Sales Status</FormLabel>
+        <FormLabel htmlFor="sales_channel">Sales Status</FormLabel>
         <Select
           mb="20px"
           placeholder="Choose sales Status"
-          value={formik.values.saleStatus}
+          value={formik.values.sales_channel}
           onChange={formik.handleChange}
           width="300px"
           h="60px"
           borderRadius="0px 11px 11px 11px"
+          id="sales_channel"
+          name="sales_channel"
         >
           <option>Paid</option>
           <option>Unpaid</option>
         </Select>
-        {formik.touched.saleStatus && formik.errors.saleStatus ? (
-          <span>{formik.errors.saleStatus}</span>
+        {formik.touched.sales_channel && formik.errors.sales_channel ? (
+          <span>{formik.errors.sales_channel}</span>
         ) : null}
-       
-                        <FormLabel htmlFor="paymentMethod">
-                          Payment Method
-                        </FormLabel>
-                        <Select
-                          mb="20px"
-                          placeholder="Add Payment Method"
-                          value={formik.values.paymentMethod}
-                          onChange={formik.handleChange}
-                          width="300px"
-                          h="60px"
-                          borderRadius="0px 11px 11px 11px"
-                        >
-                          <option>Offline</option>
-                          <option>Checkout</option>
-                          <option>Transfer</option>
-                        </Select>
+
+        <FormLabel htmlFor="payment_Method">Payment Method</FormLabel>
+        <Select
+          mb="20px"
+          placeholder="Add Payment Method"
+          value={formik.values.payment_Method}
+          onChange={formik.handleChange}
+          width="300px"
+          h="60px"
+          borderRadius="0px 11px 11px 11px"
+          id="payment_Method"
+          name="payment_Method"
+        >
+          <option>Offline</option>
+          <option>Checkout</option>
+          <option>Transfer</option>
+        </Select>
+        <FormLabel htmlFor="order_date">Order Date</FormLabel>
+        <InputGroup>
+          <Input
+            type="date"
+            id="order_date"
+            name="order_date"
+            mb="20px"
+            value={formik.values.order_date}
+            onChange={formik.handleChange}
+            placeholder="Order Date"
+            width="300px"
+            height="60px"
+            borderRadius="0px 11px 11px 11px"
+          />
+        </InputGroup>
+        {formik.touched.order_date && formik.errors.order_date ? (
+          <span>{formik.errors.order_date}</span>
+        ) : null}
         <Button
           disabled={!formik.isValid}
           //   onClick={handleNext}
@@ -163,7 +192,7 @@ function StepTwo({ activeStep, steppings, handleNext }) {
           color="white"
           _hover={{ bg: "#1A202C" }}
         >
-          {activeStep === steppings.length ? "Create Order" : "Move"}
+          COMPLETE ORDER
         </Button>
       </form>
 

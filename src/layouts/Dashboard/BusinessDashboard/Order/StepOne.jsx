@@ -3,27 +3,30 @@ import { Input, InputGroup, FormLabel, Button } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { getStepOneDetails } from "../../../../ReduxContianer/BussinessRedux/BusinessAction";
 function StepOne({ activeStep, steppings, handleNext }) {
+  const dispatch = useDispatch();
   const createOrderSchema = Yup.object().shape({
     title: Yup.string().required("Title is required"),
-    phoneNumber: Yup.number().required("Phone number is required"),
-    email: Yup.string().email("Invalid email").required("Email is required"),
+    buyer_phone: Yup.number().required("Phone number is required"),
+    buyer_email: Yup.string().email("Invalid email").required("buyer_email is required"),
     discount: Yup.string().required("Discount is required"),
-    shippingAddress: Yup.string().required("Address is required"),
-    totalAmount: Yup.string().required("Amount is required"),
+    shipping_address: Yup.string().required("Address is required"),
+    totalamount: Yup.string().required("Amount is required"),
   });
   const formik = useFormik({
     initialValues: {
       title: "",
       discount: "",
-      phoneNumber: "",
-      email: "",
-      shippingAddress: "",
-      totalAmount: "",
+      buyer_phone: "",
+      buyer_email: "",
+      shipping_address: "",
+      totalamount: "",
     },
     onSubmit: (values) => {
       handleNext();
-      console.log(values, "FORMIK");
+      dispatch(getStepOneDetails(values));
     },
     validationSchema: createOrderSchema,
   });
@@ -65,13 +68,13 @@ function StepOne({ activeStep, steppings, handleNext }) {
           <span>{formik.errors.discount}</span>
         ) : null}
 
-        <FormLabel htmlFor="shippingAddress">Address</FormLabel>
+        <FormLabel htmlFor="shipping_address">Address</FormLabel>
         <InputGroup>
           <Input
-            id="shippingAddress"
-            name="shippingAddress"
+            id="shipping_address"
+            name="shipping_address"
             mb="20px"
-            value={formik.values.shippingAddress}
+            value={formik.values.shipping_address}
             onChange={formik.handleChange}
             placeholder="Address"
             width="300px"
@@ -79,16 +82,16 @@ function StepOne({ activeStep, steppings, handleNext }) {
             borderRadius="0px 11px 11px 11px"
           />
         </InputGroup>
-        {formik.touched.shippingAddress && formik.errors.shippingAddress ? (
-          <span>{formik.errors.shippingAddress}</span>
+        {formik.touched.shipping_address && formik.errors.shipping_address ? (
+          <span>{formik.errors.shipping_address}</span>
         ) : null}
-        <FormLabel htmlFor="totalAmount">Amount</FormLabel>
+        <FormLabel htmlFor="totalamount">Amount</FormLabel>
         <InputGroup>
           <Input
-            id="totalAmount"
-            name="totalAmount"
+            id="totalamount"
+            name="totalamount"
             mb="20px"
-            value={formik.values.totalAmount}
+            value={formik.values.totalamount}
             onChange={formik.handleChange}
             placeholder="Amount"
             width="300px"
@@ -96,16 +99,16 @@ function StepOne({ activeStep, steppings, handleNext }) {
             borderRadius="0px 11px 11px 11px"
           />
         </InputGroup>
-        {formik.touched.totalAmount && formik.errors.totalAmount ? (
-          <span>{formik.errors.totalAmount}</span>
+        {formik.touched.totalamount && formik.errors.totalamount ? (
+          <span>{formik.errors.totalamount}</span>
         ) : null}
-        <FormLabel htmlFor="phoneNumber">Phone Number</FormLabel>
+        <FormLabel htmlFor="buyer_phone">Phone Number</FormLabel>
         <InputGroup>
           <Input
-            id="phoneNumber"
-            name="phoneNumber"
+            id="buyer_phone"
+            name="buyer_phone"
             mb="20px"
-            value={formik.values.phoneNumber}
+            value={formik.values.buyer_phone}
             onChange={formik.handleChange}
             placeholder="Phone Number"
             width="300px"
@@ -113,25 +116,25 @@ function StepOne({ activeStep, steppings, handleNext }) {
             borderRadius="0px 11px 11px 11px"
           />
         </InputGroup>
-        {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
-          <span>{formik.errors.phoneNumber}</span>
+        {formik.touched.buyer_phone && formik.errors.buyer_phone ? (
+          <span>{formik.errors.buyer_phone}</span>
         ) : null}
-        <FormLabel htmlFor="email">Email</FormLabel>
+        <FormLabel htmlFor="buyer_email">buyer_email</FormLabel>
         <InputGroup>
           <Input
-            id="email"
-            name="email"
+            id="buyer_email"
+            name="buyer_email"
             mb="20px"
-            value={formik.values.email}
+            value={formik.values.buyer_email}
             onChange={formik.handleChange}
-            placeholder="Email"
+            placeholder="buyer_email"
             width="300px"
             height="60px"
             borderRadius="0px 11px 11px 11px"
           />
         </InputGroup>
-        {formik.touched.email && formik.errors.email ? (
-          <span>{formik.errors.email}</span>
+        {formik.touched.buyer_email && formik.errors.buyer_email ? (
+          <span>{formik.errors.buyer_email}</span>
         ) : null}
         <Button
           disabled={!formik.isValid}
@@ -145,7 +148,7 @@ function StepOne({ activeStep, steppings, handleNext }) {
           color="white"
           _hover={{ bg: "#1A202C" }}
         >
-          {activeStep === steppings.length ? "Create Order" : "Move"}
+          {activeStep === steppings.length ? "Create Order" : "Next"}
         </Button>
       </form>
 

@@ -706,6 +706,14 @@ import {
   GET_PRODUCTS_START,
   GET_PRODUCTS_SUCCESS,
   GET_PRODUCTS_ERROR,
+  GET_STEP_ONE_DETAIL,
+  GET_STEP_TWO_DETAIL,
+  CREATE_STORE_LINK_START,
+  CREATE_STORE_LINK_SUCCESS,
+  CREATE_STORE_LINK_ERROR,
+  CREATE_PAYMENT_START,
+  CREATE_PAYMENT_SUCCESS,
+  CREATE_PAYMENT_ERROR,
 } from "../constants/UserActionType";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
@@ -734,10 +742,29 @@ export const getBusinessUserDetails = (user_id) => (dispatch) => {
     });
 };
 
-export const createOrders = (user_id) => (dispatch) => {
+export const createOrders = (orderPayload) => (dispatch) => {
+  console.log(orderPayload.orderPayload, "ORDER PAYLOAD");
   dispatch({ type: CREATE_ORDER_START });
   axiosWithAuth()
-    .post(`/order/record`)
+    .post(`/order/createorder`, {
+      payment_method: orderPayload.orderPayload.payment_Method,
+      title: orderPayload.orderPayload.title,
+      buyer_id: "BusW5xmF",
+      business_id: orderPayload.orderPayload.business_id[0],
+      totalamount: orderPayload.orderPayload.totalamount,
+      buyer_email: orderPayload.orderPayload.buyer_email,
+      buyer_phone: orderPayload.orderPayload.buyer_phone,
+      order_status: orderPayload.orderPayload.order_status,
+      order_id: "ghfbdiwe48hu5i0d",
+      //   order_date: orderPayload.orderPayload.order_date,
+      order_date: "2022-02-28T23:00:00.000Z",
+      sales_channel: orderPayload.orderPayload.sales_channel,
+      customer_id: orderPayload.orderPayload.customer_id,
+      discount: orderPayload.orderPayload.discount,
+      shipping_address: orderPayload.orderPayload.shipping_address,
+      payment_status: orderPayload.orderPayload.paymentStatus,
+      product_ids: "P256795160",
+    })
     .then((res) => {
       console.log(res, "ORDER");
       dispatch({
@@ -753,38 +780,100 @@ export const createOrders = (user_id) => (dispatch) => {
       });
     });
 };
-export const getOrders = (business_id, page) => (dispatch) => {
-  dispatch({ type: GET_ORDER_START });
+
+export const createStoreLink = (user_id, storeName) => (dispatch) => {
+  dispatch({ type: CREATE_STORE_LINK_START });
   axiosWithAuth()
-    .get(`/order/getorders?bussiness_id=${business_id}&page=${page}`)
+    .post(`/subdomain/create`, {
+      sub: storeName,
+      user_id: user_id,
+    })
     .then((res) => {
+      console.log(res, "STORE LINK");
       dispatch({
-        type: GET_ORDER_SUCCESS,
-        payload: res.data.orders,
+        type: CREATE_STORE_LINK_SUCCESS,
+        payload: res.data,
       });
     })
     .catch((err) => {
+      console.log(err, "STORE ERR");
       dispatch({
-        type: GET_ORDER_ERROR,
+        type: CREATE_STORE_LINK_ERROR,
         payload: err.response.data.error,
       });
     });
 };
 
-export const getOrderPagination = (business_id) => (dispatch) => {
-  dispatch({ type: GET_ORDER_START });
+export const createTransaction = () => (dispatch) => {
+  dispatch({ type: CREATE_PAYMENT_START });
   axiosWithAuth()
-    .get(`/order/getorders?bussiness_id=${business_id}`)
+    .post(`/history/createpayment`, {
+      payment_status: 1,
+      payment_method: "offline",
+      payment_ref: "djhsjkamldad",
+      transtype: 7,
+      amount: 50000,
+      product_id: "343rf43f3",
+      customer_id: "868jdd5e4w4",
+      business_id: "39394934nnnsed",
+      payment_id: "fint4559444",
+      Itemtype: "The details about the product",
+      transaction_id: "t8e8394u9453434",
+    })
     .then((res) => {
-      dispatch({ type: GET_ORDER_PAGINATION, payload: res.data });
+      console.log(res, "PAYMENT LINK");
+      dispatch({
+        type: CREATE_PAYMENT_SUCCESS,
+        payload: res.data,
+      });
     })
     .catch((err) => {
+      console.log(err, "PAYMENT ERR");
       dispatch({
-        type: GET_ORDER_PAGINATION_ERROR,
+        type: CREATE_PAYMENT_ERROR,
         payload: err.response.data.error,
       });
     });
 };
+// export const getOrders = (business_id, page) => (dispatch) => {
+//   dispatch({ type: GET_ORDER_START });
+//   axiosWithAuth()
+//     .get(`/order/getorders?bussiness_id=${business_id}&page=${page}`)
+//     .then((res) => {
+// 		return res.data
+//     //   dispatch({
+//     //     type: GET_ORDER_SUCCESS,
+//     //     payload: res.data,
+//     //   });
+//     })
+//     .catch((err) => {
+//       dispatch({
+//         type: GET_ORDER_ERROR,
+//         payload: err.response.data.error,
+//       });
+//     });
+// };
+
+export const getOrders = (business_id, page) =>
+  axiosWithAuth().get(
+    `/order/getorders?bussiness_id=${business_id}&page=${page}`
+  );
+
+// export const getOrderPagination = (business_id) => (dispatch) => {
+//   dispatch({ type: GET_ORDER_START });
+//   axiosWithAuth()
+//     .get(`/order/getorders?bussiness_id=${business_id}`)
+//     .then((res) => {
+//       console.log("PAGINATE", res.data);
+//       dispatch({ type: GET_ORDER_PAGINATION, payload: res.data });
+//     })
+//     .catch((err) => {
+//       dispatch({
+//         type: GET_ORDER_PAGINATION_ERROR,
+//         payload: err.response.data.error,
+//       });
+//     });
+// };
 
 export const getProduct = (business_id) => (dispatch) => {
   dispatch({ type: GET_PRODUCTS_START });
@@ -794,7 +883,7 @@ export const getProduct = (business_id) => (dispatch) => {
       console.log(res.data, "PRODUCTS");
       dispatch({
         type: GET_PRODUCTS_SUCCESS,
-        payload: res.data.orders,
+        payload: res.data.details,
       });
     })
     .catch((err) => {
@@ -809,7 +898,7 @@ export const getCustomers = (business_id) => (dispatch) => {
   axiosWithAuth()
     .get(`/customer/fetch?business_id=${business_id}`)
     .then((res) => {
-		console.log(res.data, "CUSTOMERS")
+      console.log(res.data, "CUSTOMERS");
       dispatch({
         type: GET_CUSTOMERS_SUCCESS,
         payload: res.data.customers,
@@ -821,6 +910,19 @@ export const getCustomers = (business_id) => (dispatch) => {
         payload: err.response.data.error,
       });
     });
+};
+
+export const getStepOneDetails = (payload) => {
+  return {
+    type: GET_STEP_ONE_DETAIL,
+    payload,
+  };
+};
+export const getStepTwoDetails = (payload) => {
+  return {
+    type: GET_STEP_TWO_DETAIL,
+    payload,
+  };
 };
 
 // export const getPayments = (business_id) => (dispatch) => {

@@ -346,6 +346,8 @@ import {
   GET_PRODUCTS_START,
   GET_PRODUCTS_SUCCESS,
   GET_PRODUCTS_ERROR,
+  GET_STEP_ONE_DETAIL,
+  GET_STEP_TWO_DETAIL,
 } from "../constants/UserActionType.js";
 
 const initialState = {
@@ -357,10 +359,24 @@ const initialState = {
   products: [],
   customers: [],
   paginatedOrderResponse: null,
+  stepOne: null,
+  stepTwo: null,
 };
 
 const BusinessReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GET_STEP_TWO_DETAIL:
+      return {
+        ...state,
+        isFetching: false,
+        stepTwo: action.payload,
+      };
+    case GET_STEP_ONE_DETAIL:
+      return {
+        ...state,
+        isFetching: false,
+        stepOne: action.payload,
+      };
     case GET_BUSINESS_USER_DETAIL:
       return {
         ...state,
