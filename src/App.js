@@ -26,6 +26,8 @@ import AddInvoice from "./layouts/Dashboard/BusinessDashboard/HomeBusiness/addIn
 import ResendOtp from "./layouts/SignUp/PersonalSignUpPage/resendOtpPage";
 import BusinessVerifyOtp from "./layouts/SignUp/PersonalSignUpPage/BusinessVerifyOtp";
 import AddTeam from "./layouts/Dashboard/BusinessDashboard/Account/addTeam";
+import DealDashboard from "../src/layouts/Dashboard/DashboardItems/DealDashboard";
+import HomeDashboard from "../src/layouts/Dashboard/DashboardItems/HomeDashboard"
 
 function App() {
   return (
@@ -33,6 +35,7 @@ function App() {
       <div className="App">
         {/* <Switch> */}
         <Route exact path="/" component={AccountBox} />
+
         <Route
           exact
           path="/personal-signup"
@@ -43,21 +46,29 @@ function App() {
           path="/personal-signin"
           component={PersonalAccountSignIn}
         />
+        {/* <DashboardPage /> */}
         <PrivateRoute
           exact
           path="/personal-dashboard"
-          component={DashboardPage}
+          component={HomeDashboard}
         />
+       
+  <PrivateRoute path="/personal-deals" component={DealDashboard} />
+
+        {/* <PrivateRoute path="/personal-deals" component={DealDashboard} /> */}
+
+        {/* </Switch> */}
+
         {/* Bussiness Account  */}
 
-        <Route path="/business-signup" component={BusinessAccountSignUp} />
+        {/* <Route path="/business-signup" component={BusinessAccountSignUp} />
 
         <Route path="/business-signin" component={BusinessAccountSignIn} />
         <PrivateRoute
           exact
           path="/business-dashboard"
           component={BusinessDashboard}
-        />
+        /> */}
       </div>
     </Router>
 

@@ -30,6 +30,7 @@ import box from '../../../assets/box.svg';
 import {BiSearchAlt2} from "react-icons/bi";
 import {FaAngleDown} from 'react-icons/fa'
 import {useState} from 'react'
+import Layout from "../../../component/Layout/Layout"
 
 export default function DealDashboard() {
 	const [search,setSearch] = useState('')
@@ -37,6 +38,7 @@ export default function DealDashboard() {
 	
 	
 	return (
+		<Layout>
 		<Container m='40px' maxW='container.lg'>
 			<Grid h='800px' templateColumns='repeat(5, 1fr)'>
 				<GridItem colSpan={4} rowSpan={6} bg='white' gap='5'>
@@ -396,5 +398,6 @@ export default function DealDashboard() {
 				</GridItem>
 			</Grid>
 		</Container>
+		</Layout>
 	);
 }

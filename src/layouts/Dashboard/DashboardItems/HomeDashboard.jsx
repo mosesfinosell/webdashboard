@@ -12,7 +12,7 @@ import {
   TabPanels,
   Tab,
   TabPanel,
-  useDisclosure
+  useDisclosure,
 } from "@chakra-ui/react";
 import { BsPlusSquare, BsArrowDownLeftSquare, BsPhone } from "react-icons/bs";
 import { VscRocket } from "react-icons/vsc";
@@ -23,13 +23,18 @@ import BuyAirtimeModal from "../../HomeItemsModal/BuyAirtime/BuyAirtimeModal";
 import { getUserDetails } from "../../../ReduxContianer/PersonalRedux/PersonalAction";
 // import { useSelector } from 'react-redux';
 import { useState, useEffect } from "react";
+import Layout from "../../../component/Layout/Layout";
+import "../../Dashboard/Dash.css";
+import plus from "../../../assets/plus.svg";
+import send from "../../../assets/send.svg";
+import arrow from "../../../assets/arrow-down.svg";
+import phone1 from "../../../assets/phone1.svg";
 
 export default function HomeDash() {
-
   const dispatch = useDispatch();
 
   const userInfo = useSelector((state) => state.personalReducer.userInfo);
-const {isOpen, onOpen, onClose} = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   // const personalSignIn = useSelector((state) => state.personalSignIn);
   // const { userDetails } = personalSignIn
   //   const {message} = userDetails
@@ -43,339 +48,344 @@ const {isOpen, onOpen, onClose} = useDisclosure();
   }, [userInfo.user_id, dispatch]);
 
   return (
-    <Container m="40px" maxW="container.lg">
-      <Grid h="600px" templateColumns="repeat(5, 1fr)">
-        <GridItem colSpan={4} rowSpan={6} bg="white">
-          <Tabs variant="unstyled">
-            <Center>
-              <TabList>
-                <Tab
-                  _selected={{
-                    color: "white",
-                    px: "4",
-                    w: "170px",
-                    h: "45px",
-                    bg: "yellow.500",
-                    borderRadius: "0px 11px 11px 11px",
-                  }}
-                >
-                  Wallet Balance
-                </Tab>
-              </TabList>
-              <TabList>
-                <Tab
-                  _selected={{
-                    color: "white",
-                    px: "4",
-                    w: "170px",
-                    h: "45px",
-                    bg: "yellow.500",
-                    borderRadius: "0px 11px 11px 11px",
-                  }}
-                >
-                  Escrow Balance
-                </Tab>
-              </TabList>
-            </Center>
-            <TabPanels>
-              <TabPanel>
-                <Stack>
-                  <Heading as="h6">₦45000</Heading>
-                </Stack>
-              </TabPanel>
-              <TabPanel>
-                <Stack>
-                  <Heading as="h6">₦34000</Heading>
-                </Stack>
-              </TabPanel>
-            </TabPanels>
-          </Tabs>
-          <Tabs />
-
-          <Stack pl="30">
-            <Stack pt="23">
-              <Text color="gray">Action</Text>
-            </Stack>
-
-            <Box
-              as="button"
-              h="100px"
-              w="301px"
-              borderRadius="0px 11px 11px 11px"
-              border="0.5px solid #D9D9D9"
-              display="flex"
-              alignItems="center"
-              justifyContent="space-evenly"
-            >
-              <AddMoneyModal />
-              <Stack>
-                <Text>Add Money</Text>
-                <Text>Space for subtitle text</Text>
-              </Stack>
-            </Box>
-            <Box
-              as="button"
-              h="100px"
-              w="301px"
-              borderRadius="0px 11px 11px 11px"
-              border="0.5px solid #D9D9D9"
-              display="flex"
-              alignItems="center"
-              justifyContent="space-evenly"
-            >
-              <Stack
-                color="yellow.500"
-                bg="yellow.100"
-                borderRadius="0px 8px 8px 8px"
-                border="0.2px solid yellow.100"
-                p="12px"
-                fontSize="24px"
-              >
-                <BsArrowDownLeftSquare />
-              </Stack>
-              <Stack>
-                <Text>Request Money</Text>
-                <Text>Space for subtitle text</Text>
-              </Stack>
-            </Box>
-            <Box
-              as="button"
-              h="100px"
-              w="301px"
-              borderRadius="0px 11px 11px 11px"
-              border="0.5px solid #D9D9D9"
-              display="flex"
-              alignItems="center"
-              justifyContent="space-evenly"
-            >
-              <BuyAirtimeModal />
-              <Stack>
-                <Text>Buy Airtime</Text>
-                <Text>Space for subtitle text</Text>
-              </Stack>
-            </Box>
-          </Stack>
-        </GridItem>
-        <GridItem colStart={6} colEnd={9} h="10" bg="white">
-          <Stack m="10px">
-            <Text color="gray">Transactions History</Text>
-          </Stack>
-
-          <Tabs variant="unstyled">
-            <Center>
-              <Box
-                h="100px"
-                w="400px"
-                borderRadius="0px 11px 0px 0px"
-                border="0.5px solid #D9D9D9"
-                display="flex"
-                alignItems="center"
-                justifyContent="space-evenly"
-              >
+    <Layout>
+      <div className="dash-cover">
+        <div className="left-dash">
+          <div className="left-dash-inner">
+            <Tabs variant="unstyled">
+              <div className="tab-div">
                 <TabList>
-                  <Tab fontSize="16px" fontWeight="bold" color="black">
-                    Payment
-                  </Tab>
-                  <Tab fontSize="16px" fontWeight="bold" color="black">
-                    Withdrawal
+                  <Tab
+                    _selected={{
+                      color: "white",
+                      px: "4",
+                      w: "170px",
+                      h: "45px",
+                      bg: "yellow.500",
+                      borderRadius: "0px 11px 11px 11px",
+                    }}
+                  >
+                    Wallet Balance
                   </Tab>
                 </TabList>
-              </Box>
-            </Center>
-            <Center>
+                <TabList>
+                  <Tab
+                    _selected={{
+                      color: "white",
+                      px: "4",
+                      w: "170px",
+                      h: "45px",
+                      bg: "yellow.500",
+                      borderRadius: "0px 11px 11px 11px",
+                    }}
+                  >
+                    Escrow Balance
+                  </Tab>
+                </TabList>
+              </div>
               <TabPanels>
                 <TabPanel>
-                  <Box
-                    h="100px"
-                    w="400px"
-                    border="0.5px solid #D9D9D9"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="space-evenly"
-                  >
-                    <Stack
-                      color="green.500"
-                      bg="green.100"
-                      borderRadius="0px 8px 8px 8px"
-                      border="0.2px solid green.100"
-                      p="12px"
-                      fontSize="22px"
-                    >
-                      <BsPlusSquare />
-                    </Stack>
-                    <Stack pr="150px">
+                  <Heading className="balance" as="h6">
+                    ₦45000
+                  </Heading>
+                </TabPanel>
+                <TabPanel>
+                  <Heading className="balance" as="h6">
+                    ₦34000
+                  </Heading>
+                </TabPanel>
+              </TabPanels>
+            </Tabs>{" "}
+            <Text className="text-act" color="gray">
+              Action
+            </Text>
+            <div className="act-box-holder">
+              <div className="act-box">
+                <div>
+                  <img src={plus} alt="plus" />
+                </div>
+                <div>
+                  <Text>Add Money</Text>
+                  <Text>Space for subtitle text</Text>
+                </div>
+              </div>
+              <div className="act-box">
+                <div>
+                  <img src={send} alt="send" />
+                </div>
+                <div>
+                  <Text>Send Money</Text>
+                  <Text>Space for subtitle text</Text>
+                </div>
+              </div>
+              <div className="act-box">
+                <div>
+                  <img src={arrow} alt="arrow-down" />
+                </div>
+                <div>
+                  <Text>Request Money</Text>
+                  <Text>Space for subtitle text</Text>
+                </div>
+              </div>
+              <div className="act-box">
+                <div>
+                  <img src={phone1} alt="phone" />
+                </div>
+                <div>
+                  <Text>Buy Airtime</Text>
+                  <Text>Space for subtitle text</Text>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="right-dash">
+          <Text className="history" color="gray">
+            Transaction History
+          </Text>
+
+          <Tabs variant="unstyled">
+            <div className="payment-div">
+              <TabList style={{ paddingLeft: "1.7rem" }}>
+                <Tab fontSize="16px" fontWeight="bold" color="black">
+                  Payment
+                </Tab>
+                <Tab fontSize="16px" fontWeight="bold" color="black">
+                  Withdrawal
+                </Tab>
+              </TabList>
+            </div>
+
+            <TabPanels>
+              <TabPanel className="trans-tab">
+                <div className="transactions">
+                  <div className="transactions-inner">
+                    <div>
+                      <img src={plus} alt="plus" />
+                    </div>
+                    <div style={{ paddingLeft: "2rem" }}>
                       <Text>Transfer Funds</Text>
                       <Text color="gray" fontSize="12px">
                         Success
                       </Text>
-                    </Stack>
+                    </div>
+                  </div>
 
-                    <Stack>
-                      <Text fontSize="12px" color="green.500">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
-                    </Stack>
-                  </Box>
-                  <Box
-                    h="100px"
-                    w="400px"
-                    border="0.5px solid #D9D9D9"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="space-evenly"
-                  >
-                    <Stack
-                      color="gray.500"
-                      bg="gray.100"
-                      borderRadius="0px 8px 8px 8px"
-                      border="0.2px solid gray.100"
-                      p="12px"
-                      fontSize="22px"
-                    >
-                      <VscRocket />
-                    </Stack>
-                    <Stack pr="150px">
-                      <Text>Send Airtime</Text>
-                      <Text color="gray" fontSize="12px">
-                        Pending
-                      </Text>
-                    </Stack>
-
-                    <Stack>
-                      <Text fontSize="12px" color="gray">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
-                    </Stack>
-                  </Box>
-                  <Box
-                    h="100px"
-                    w="400px"
-                    border="0.5px solid #D9D9D9"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="space-evenly"
-                  >
-                    <Stack
-                      color="red.500"
-                      bg="red.100"
-                      borderRadius="0px 8px 8px 8px"
-                      border="0.2px solid red.100"
-                      p="12px"
-                      fontSize="22px"
-                    >
-                      <BsPhone />
-                    </Stack>
-                    <Stack mr="150px">
-                      <Text>Buy Airtime</Text>
+                  <div style={{ paddingRight: "2rem" }}>
+                    <Text fontSize="12px" color="green.500">
+                      ₦12,000
+                    </Text>
+                    <Text fontSize="12px" color="gray">
+                      Jan 3, 2022
+                    </Text>
+                  </div>
+                </div>
+                <div className="transactions">
+                  <div className="transactions-inner">
+                    <div>
+                      <img src={plus} alt="plus" />
+                    </div>
+                    <div style={{ paddingLeft: "2rem" }}>
+                      <Text>Transfer Funds</Text>
                       <Text color="gray" fontSize="12px">
                         Success
                       </Text>
-                    </Stack>
+                    </div>
+                  </div>
 
-                    <Stack>
-                      <Text fontSize="12px" color="red.500">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
-                    </Stack>
-                  </Box>
-                </TabPanel>
-                <TabPanel>
-                  <Box
-                    h="100px"
-                    w="400px"
-                    border="0.5px solid #D9D9D9"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="space-evenly"
-                  >
-                    <Stack color="yellow.500" fontSize="24px">
-                      <BsPlusSquare />
-                    </Stack>
-                    <Stack pr="150px">
-                      <Text>Airtime</Text>
+                  <div style={{ paddingRight: "2rem" }}>
+                    <Text fontSize="12px" color="green.500">
+                      ₦12,000
+                    </Text>
+                    <Text fontSize="12px" color="gray">
+                      Jan 3, 2022
+                    </Text>
+                  </div>
+                </div>
+                <div className="transactions">
+                  <div className="transactions-inner">
+                    <div>
+                      <img src={plus} alt="plus" />
+                    </div>
+                    <div style={{ paddingLeft: "2rem" }}>
+                      <Text>Transfer Funds</Text>
                       <Text color="gray" fontSize="12px">
                         Success
                       </Text>
-                    </Stack>
+                    </div>
+                  </div>
 
-                    <Stack>
-                      <Text fontSize="12px" color="gray">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
-                    </Stack>
-                  </Box>
-                  <Box
-                    h="100px"
-                    w="400px"
-                    border="0.5px solid #D9D9D9"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="space-evenly"
-                  >
-                    <Stack color="yellow.500" fontSize="24px">
-                      <BsPlusSquare />
-                    </Stack>
-                    <Stack pr="150px">
-                      <Text>Airtime Buy</Text>
+                  <div style={{ paddingRight: "2rem" }}>
+                    <Text fontSize="12px" color="green.500">
+                      ₦12,000
+                    </Text>
+                    <Text fontSize="12px" color="gray">
+                      Jan 3, 2022
+                    </Text>
+                  </div>
+                </div>
+                <div className="transactions">
+                  <div className="transactions-inner">
+                    <div>
+                      <img src={plus} alt="plus" />
+                    </div>
+                    <div style={{ paddingLeft: "2rem" }}>
+                      <Text>Transfer Funds</Text>
                       <Text color="gray" fontSize="12px">
                         Success
                       </Text>
-                    </Stack>
+                    </div>
+                  </div>
 
-                    <Stack>
-                      <Text fontSize="12px" color="gray">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
-                    </Stack>
-                  </Box>
-                  <Box
-                    h="100px"
-                    w="400px"
-                    border="0.5px solid #D9D9D9"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="space-evenly"
-                  >
-                    <Stack color="yellow.500" fontSize="24px">
-                      <BsPlusSquare />
-                    </Stack>
-                    <Stack pr="150px">
-                      <Text>Buy Airtime</Text>
+                  <div style={{ paddingRight: "2rem" }}>
+                    <Text fontSize="12px" color="green.500">
+                      ₦12,000
+                    </Text>
+                    <Text fontSize="12px" color="gray">
+                      Jan 3, 2022
+                    </Text>
+                  </div>
+                </div>
+                <div className="transactions">
+                  <div className="transactions-inner">
+                    <div>
+                      <img src={plus} alt="plus" />
+                    </div>
+                    <div style={{ paddingLeft: "2rem" }}>
+                      <Text>Transfer Funds</Text>
                       <Text color="gray" fontSize="12px">
                         Success
                       </Text>
-                    </Stack>
+                    </div>
+                  </div>
 
-                    <Stack>
-                      <Text fontSize="12px" color="gray">
-                        ₦12,000
+                  <div style={{ paddingRight: "2rem" }}>
+                    <Text fontSize="12px" color="green.500">
+                      ₦12,000
+                    </Text>
+                    <Text fontSize="12px" color="gray">
+                      Jan 3, 2022
+                    </Text>
+                  </div>
+                </div>
+                <div className="transactions">
+                  <div className="transactions-inner">
+                    <div>
+                      <img src={plus} alt="plus" />
+                    </div>
+                    <div style={{ paddingLeft: "2rem" }}>
+                      <Text>Transfer Funds</Text>
+                      <Text color="gray" fontSize="12px">
+                        Success
                       </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
+                    </div>
+                  </div>
+
+                  <div style={{ paddingRight: "2rem" }}>
+                    <Text fontSize="12px" color="green.500">
+                      ₦12,000
+                    </Text>
+                    <Text fontSize="12px" color="gray">
+                      Jan 3, 2022
+                    </Text>
+                  </div>
+                </div>
+                <div className="transactions">
+                  <div className="transactions-inner">
+                    <div>
+                      <img src={plus} alt="plus" />
+                    </div>
+                    <div style={{ paddingLeft: "2rem" }}>
+                      <Text>Transfer Funds</Text>
+                      <Text color="gray" fontSize="12px">
+                        Success
                       </Text>
-                    </Stack>
-                  </Box>
-                </TabPanel>
-              </TabPanels>
-            </Center>
+                    </div>
+                  </div>
+
+                  <div style={{ paddingRight: "2rem" }}>
+                    <Text fontSize="12px" color="green.500">
+                      ₦12,000
+                    </Text>
+                    <Text fontSize="12px" color="gray">
+                      Jan 3, 2022
+                    </Text>
+                  </div>
+                </div>
+              </TabPanel>
+
+              <TabPanel className="trans-tab">
+                <div className="transactions">
+                  <div className="transactions-inner">
+                    <div>
+                      <img src={plus} alt="plus" />
+                    </div>
+                    <div style={{ paddingLeft: "2rem" }}>
+                      <Text>Transfer Funds</Text>
+                      <Text color="gray" fontSize="12px">
+                        Success
+                      </Text>
+                    </div>
+                  </div>
+
+                  <div style={{ paddingRight: "2rem" }}>
+                    <Text fontSize="12px" color="green.500">
+                      ₦12,000
+                    </Text>
+                    <Text fontSize="12px" color="gray">
+                      Jan 3, 2022
+                    </Text>
+                  </div>
+                </div>
+                <div className="transactions">
+                  <div className="transactions-inner">
+                    <div>
+                      <img src={plus} alt="plus" />
+                    </div>
+                    <div style={{ paddingLeft: "2rem" }}>
+                      <Text>Transfer Funds</Text>
+                      <Text color="gray" fontSize="12px">
+                        Success
+                      </Text>
+                    </div>
+                  </div>
+
+                  <div style={{ paddingRight: "2rem" }}>
+                    <Text fontSize="12px" color="green.500">
+                      ₦12,000
+                    </Text>
+                    <Text fontSize="12px" color="gray">
+                      Jan 3, 2022
+                    </Text>
+                  </div>
+                </div>
+                <div className="transactions">
+                  <div className="transactions-inner">
+                    <div>
+                      <img src={plus} alt="plus" />
+                    </div>
+                    <div style={{ paddingLeft: "2rem" }}>
+                      <Text>Transfer Funds</Text>
+                      <Text color="gray" fontSize="12px">
+                        Success
+                      </Text>
+                    </div>
+                  </div>
+
+                  <div style={{ paddingRight: "2rem" }}>
+                    <Text fontSize="12px" color="green.500">
+                      ₦12,000
+                    </Text>
+                    <Text fontSize="12px" color="gray">
+                      Jan 3, 2022
+                    </Text>
+                  </div>
+                </div>
+              </TabPanel>
+            </TabPanels>
           </Tabs>
-        </GridItem>
-      </Grid>
-    </Container>
+        </div>
+      </div>
+    </Layout>
   );
 }
