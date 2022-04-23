@@ -1,421 +1,99 @@
-/* .sidebar {
-  background: #273b4a;
-
-  height: 100vh;
-  width: 250px;
-}
-.sidebar-list {
-  height: auto;
-  width: 100%;
-  padding: 0;
-}
-.sidebar-list .sidebar-row {
-  width: 100%;
-  height: 60px;
-  list-style-type: none;
+/* NEW */
+.sidebar {
   margin: 0;
+  padding: 0;
+  width: 230px;
+  background-color: #ffffff;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
   display: flex;
-  flex-direction: row;
-  color: #fff;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 0.5px solid #d9d9d9;
+}
+#first-link {
+  padding-top: 11rem;
+}
+.sidebar-inner {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  font-family: "Courier New", Courier, monospace;
 }
-.sidebar-list .sidebar-row:hover {
-  cursor: pointer;
-  background-color: blue;
+.sidebar a {
+  display: block;
+  color: #bfbfbf;
+  padding: 28px 0px;
+  text-decoration: none;
+  text-align: center;
+  font-size: 18px;
+  width: 100%;
 }
-.sidebar-list #active {
-  background-color: yellow;
-}
-.sidebar-row #icon {
-  flex: 30%;
-  display: grid;
-  place-items: center;
-}
-.sidebar-row #title {
-  flex: 70%;
-} */
 
-/* Primary Styles */
-/* *, *::before, *::after {
-    box-sizing: border-box;
- }
- 
- body {
-    font-family: sans-serif;
-    font-size: 1em;
-    color: #333;
- }
- 
- h1 {
-   font-size: 1.4em;
- }
- 
- em {
-    font-style: normal;
- }
- 
- a {
-    text-decoration: none;
-    color: inherit;
- } 
- 
- 
- .s-layout {
-    display: flex;
+.sidebar a.active {
+  color: #273b4a;
+}
+
+.sidebar a:hover:not(.active) {
+  /* color: #273b4a; */
+}
+.icon-name {
+  padding-left: 1rem;
+  color: #bfbfbf;
+}
+
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+.logomark {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 2rem;
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
     width: 100%;
-    min-height: 100vh;
- }
- 
- .s-layout__content {
+    height: auto;
+    position: relative;
+    /* display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between; */
+  }
+  .sidebar a {
+    /* float: left; */
+  }
+  div.content {
+    margin-left: 0;
+  }
+  .logomark {
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex: 1;
- }
- 
- 
- .s-sidebar__trigger {
-    z-index: 2;
-    position: fixed;
-    top: 0;
-    left: 0;
+    padding-top: 2rem;
+    padding-bottom: 0rem;
+  }
+  .sidebar-inner {
+    padding-bottom: 1.3rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar {
     width: 100%;
-    height: 4em;
-    background: #192b3c;
- }
- 
- .s-sidebar__trigger > i {
-    display: inline-block;
-    margin: 1.5em 0 0 1.5em;
-    color: #f07ab0;
- }
- 
- .s-sidebar__nav {
-    position: fixed;
-    top: 0;
-    left: -15em;
-    overflow: hidden;
-    transition: all .3s ease-in;
-    width: 15em;
-    height: 100%;
-    background: #243e56;
-    color: rgba(255, 255, 255, 0.7);
- }
- 
- .s-sidebar__nav:hover,
- .s-sidebar__nav:focus,
- .s-sidebar__trigger:focus + .s-sidebar__nav,
- .s-sidebar__trigger:hover + .s-sidebar__nav {
-    left: 0;
- }
- 
- .s-sidebar__nav ul {
-    position: absolute;
-    top: 4em;
-    left: 0;
-    margin: 0;
-    padding: 0;
-    width: 15em;
- }
- 
- .s-sidebar__nav ul li {
-    width: 100%;
- }
- 
- .s-sidebar__nav-link {
+    height: auto;
     position: relative;
-    display: inline-block;
-    width: 100%;
-    height: 4em;
- }
- 
- .s-sidebar__nav-link em {
-    position: absolute;
-    top: 50%;
-    left: 4em;
-    transform: translateY(-50%);
- }
- 
- .s-sidebar__nav-link:hover {
-    background: #4d6276;
- }
- 
- .s-sidebar__nav-link > i {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: inline-block;
-    width: 4em;
-    height: 4em;
- }
- 
- .s-sidebar__nav-link > i::before {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
- }
- 
-
- @media (min-width: 42em) {
-    .s-layout__content {
-       margin-left: 4em;
-    }
-    
-    
-    .s-sidebar__trigger {
-       width: 4em;
-    }
-    
-    .s-sidebar__nav {
-       width: 4em;
-       left: 0;
-    }
-    
-    .s-sidebar__nav:hover,
-    .s-sidebar__nav:focus,
-    .s-sidebar__trigger:hover + .s-sidebar__nav,
-    .s-sidebar__trigger:focus + .s-sidebar__nav {
-       width: 15em;
-    }
- }
- 
- @media (min-width: 68em) {
-    .s-layout__content {
-       margin-left: 15em;
-    }
-    
-    .s-sidebar__trigger {
-       display: none
-    }
-    
-    .s-sidebar__nav {
-       width: 15em;
-    }
-    
-    .s-sidebar__nav ul {
-       top: 1.3em;
-    }
- } */
-/* SIDEBAR CSS */
-/* The side navigation menu */
-/* .sidebar {
-    margin: 0;
-    padding: 0;
-    width: 200px;
-    background-color: #f1f1f1;
-    position: fixed;
-    height: 100%;
-    overflow: auto;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
   }
-  
-
-  .sidebar .link{
-    display: block;
-    color: black;
-    padding: 16px;
-    text-decoration: none;
+  .sidebar a {
+    text-align: center;
+    float: none;
+    padding: 15px 0;
   }
-  
-  
-  .active{
-    background-color: #04AA6D;
-    color: white;
-  }
-  
-  
-  .sidebar a:hover:not(.active) {
-    background-color: #555;
-    color: white;
-  }
-  
-
-  div.content {
-    margin-left: 200px;
-    padding: 1px 16px;
-    height: 1000px;
-  }
-  
-
-  @media screen and (max-width: 700px) {
-    .sidebar {
-      width: 100%;
-      height: auto;
-      position: relative;
-    }
-    .sidebar a {float: left;}
-    div.content {margin-left: 0;}
-  }
-  
-
-  @media screen and (max-width: 400px) {
-    .sidebar a {
-      text-align: center;
-      float: none;
-    }
-  } */
-.sidebar-list {
-  height: auto;
-  width: 100%;
-  padding: 0;
-}
-.sidebar-list .sidebar-row {
-  width: 100%;
-  height: 60px;
-  list-style-type: none;
-  margin: 0;
-  display: flex;
-  flex-direction: row;
-  color: #fff;
-  justify-content: center;
-  align-items: center;
-  font-family: "Courier New", Courier, monospace;
-}
-.sidebar-list .sidebar-row:hover {
-  cursor: pointer;
-  background-color: blue;
-}
-.sidebar-row #icon {
-  flex: 30%;
-  display: grid;
-  place-items: center;
-}
-.sidebar-row #title {
-  flex: 70%;
-}
-.app {
-  display: flex;
-  min-height: 100vh;
-}
-
-.menu-toggle {
-  display: none;
-  position: fixed;
-  top: 2rem;
-  right: 2rem;
-  width: 60px;
-  height: 60px;
-  border-radius: 99px;
-  background-color: #2e3047;
-  cursor: pointer;
-}
-
-.hamburger {
-  position: relative;
-  top: calc(50% - 2px);
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 32px;
-}
-
-.hamburger > span,
-.hamburger > span::before,
-.hamburger > span::after {
-  display: block;
-  position: absolute;
-  width: 100%;
-  height: 4px;
-  border-radius: 99px;
-  background-color: #fff;
-  transition-duration: 0.25s;
-}
-
-.hamburger > span::before {
-  content: "";
-  top: -8px;
-}
-.hamburger > span::after {
-  content: "";
-  top: 8px;
-}
-.menu-toggle.is-active .hamburger > span {
-  transform: rotate(45deg);
-}
-.menu-toggle.is-active .hamburger > span::before {
-  top: 0;
-  transform: rotate(0deg);
-}
-.menu-toggle.is-active .hamburger > span::after {
-  top: 0;
-  transform: rotate(90deg);
-}
-
-.sidebar {
-  flex: 1 1 0;
-  max-width: 300px;
-  padding: 2rem 1rem;
-  background-color: #2e3047;
-}
-
-.sidebar h3 {
-  color: #707793;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  margin-bottom: 0.5em;
-}
-
-.sidebar .menu {
-  margin: 0 -1rem;
-}
-
-.sidebar .menu .menu-item {
-  display: block;
-  padding: 1em;
-  color: #fff;
-  text-decoration: none;
-  transition: 0.2s linear;
-}
-
-.sidebar .menu .menu-item:hover,
-.sidebar .menu .menu-item.is-active {
-  color: #3bba9c;
-  border-right: 5px solid #3bba9c;
-}
-
-.sidebar .menu .menu-item:hover {
-  border-right: 5px solid #3bba9c;
-}
-
-.content {
-  flex: 1 1 0;
-}
-
-/* .content h1 {
-  color: #3c3f58;
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-} */
-
-/* .content p {
-  color: #e5e5e5;
-} */
-
-@media (max-width: 1024px) {
-  .sidebar {
-    max-width: 200px;
-  }
-}
-
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: block;
-  }
-  .content {
-    padding-top: 8rem;
-  }
-  .sidebar {
-    position: fixed;
-    top: 0;
-    left: -300px;
-    height: 100vh;
-    width: 100%;
-    max-width: 300px;
-    transition: 0.2s linear;
-  }
-
-  .sidebar.is-active {
-    left: 0;
+  #first-link {
+    padding-top: 4rem;
   }
 }

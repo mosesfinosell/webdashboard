@@ -10,7 +10,9 @@ function StepOne({ activeStep, steppings, handleNext }) {
   const createOrderSchema = Yup.object().shape({
     title: Yup.string().required("Title is required"),
     buyer_phone: Yup.number().required("Phone number is required"),
-    buyer_email: Yup.string().email("Invalid email").required("buyer_email is required"),
+    buyer_email: Yup.string()
+      .email("Invalid email")
+      .required("buyer_email is required"),
     discount: Yup.string().required("Discount is required"),
     shipping_address: Yup.string().required("Address is required"),
     totalamount: Yup.string().required("Amount is required"),
@@ -32,7 +34,10 @@ function StepOne({ activeStep, steppings, handleNext }) {
   });
   return (
     <div>
-      <form onSubmit={formik.handleSubmit}>
+      <form
+        onSubmit={formik.handleSubmit}
+        style={{ width: "90%", border: "none" }}
+      >
         <FormLabel htmlFor="title">Title</FormLabel>
         <InputGroup>
           <Input
@@ -42,7 +47,7 @@ function StepOne({ activeStep, steppings, handleNext }) {
             value={formik.values.title}
             onChange={formik.handleChange}
             placeholder="Add Order Title"
-            width="300px"
+            width="100%"
             height="60px"
             borderRadius="0px 11px 11px 11px"
           />
@@ -59,7 +64,7 @@ function StepOne({ activeStep, steppings, handleNext }) {
             value={formik.values.discount}
             onChange={formik.handleChange}
             placeholder="Discount"
-            width="300px"
+            width="100%"
             height="60px"
             borderRadius="0px 11px 11px 11px"
           />
@@ -77,7 +82,7 @@ function StepOne({ activeStep, steppings, handleNext }) {
             value={formik.values.shipping_address}
             onChange={formik.handleChange}
             placeholder="Address"
-            width="300px"
+            width="100%"
             height="60px"
             borderRadius="0px 11px 11px 11px"
           />
@@ -94,7 +99,7 @@ function StepOne({ activeStep, steppings, handleNext }) {
             value={formik.values.totalamount}
             onChange={formik.handleChange}
             placeholder="Amount"
-            width="300px"
+            width="100%"
             height="60px"
             borderRadius="0px 11px 11px 11px"
           />
@@ -111,7 +116,7 @@ function StepOne({ activeStep, steppings, handleNext }) {
             value={formik.values.buyer_phone}
             onChange={formik.handleChange}
             placeholder="Phone Number"
-            width="300px"
+            width="100%"
             height="60px"
             borderRadius="0px 11px 11px 11px"
           />
@@ -119,7 +124,7 @@ function StepOne({ activeStep, steppings, handleNext }) {
         {formik.touched.buyer_phone && formik.errors.buyer_phone ? (
           <span>{formik.errors.buyer_phone}</span>
         ) : null}
-        <FormLabel htmlFor="buyer_email">buyer_email</FormLabel>
+        <FormLabel htmlFor="buyer_email">Buyer Email</FormLabel>
         <InputGroup>
           <Input
             id="buyer_email"
@@ -127,8 +132,8 @@ function StepOne({ activeStep, steppings, handleNext }) {
             mb="20px"
             value={formik.values.buyer_email}
             onChange={formik.handleChange}
-            placeholder="buyer_email"
-            width="300px"
+            placeholder="Email"
+            width="100%"
             height="60px"
             borderRadius="0px 11px 11px 11px"
           />
@@ -140,8 +145,9 @@ function StepOne({ activeStep, steppings, handleNext }) {
           disabled={!formik.isValid}
           //   onClick={handleNext}
           mt={4}
+          mb={6}
           bg="yellow.500"
-          width="300px"
+          width="100%"
           h="60px"
           borderRadius="0px 11px 11px 11px"
           type="submit"
@@ -151,8 +157,6 @@ function StepOne({ activeStep, steppings, handleNext }) {
           {activeStep === steppings.length ? "Create Order" : "Next"}
         </Button>
       </form>
-
-      {/* </Formik> */}
     </div>
   );
 }

@@ -17,7 +17,7 @@ import VerifyPhoneNumber from "./layouts/SignUp/PersonalSignUpPage/VerifyPhoneNu
 import InputOtp from "./layouts/SignUp/PersonalSignUpPage/VerifyOtp";
 import PasswordPage from "./layouts/SignUp/PasswordPage";
 import DashboardPage from "./layouts/Dashboard/DashboardPage";
-import BusinessDashboard from "./layouts/Dashboard/BusinessDashboard/BusinessDashboard";
+import BusinessDashboard from "./layouts/Dashboard/DashboardItems/BusinessDashboard";
 import AddProduct from "./layouts/Dashboard/BusinessDashboard/HomeBusiness/addProduct";
 import ProductModal from "./layouts/Dashboard/BusinessDashboard/HomeBusiness/addProductModal";
 import DeliveryRequest from "./layouts/Dashboard/BusinessDashboard/HomeBusiness/delivery";
@@ -27,7 +27,9 @@ import ResendOtp from "./layouts/SignUp/PersonalSignUpPage/resendOtpPage";
 import BusinessVerifyOtp from "./layouts/SignUp/PersonalSignUpPage/BusinessVerifyOtp";
 import AddTeam from "./layouts/Dashboard/BusinessDashboard/Account/addTeam";
 import DealDashboard from "../src/layouts/Dashboard/DashboardItems/DealDashboard";
-import HomeDashboard from "../src/layouts/Dashboard/DashboardItems/HomeDashboard"
+import HomeDashboard from "../src/layouts/Dashboard/DashboardItems/HomeDashboard";
+import AccountUserProfile from "./layouts/Dashboard/DashboardItems/AccountUserProfile";
+import BusinessOrders from "./layouts/Dashboard/DashboardItems/OrderHistory";
 
 function App() {
   return (
@@ -52,23 +54,28 @@ function App() {
           path="/personal-dashboard"
           component={HomeDashboard}
         />
-       
-  <PrivateRoute path="/personal-deals" component={DealDashboard} />
 
-        {/* <PrivateRoute path="/personal-deals" component={DealDashboard} /> */}
+        <PrivateRoute path="/personal-deals" component={DealDashboard} />
+
+        <PrivateRoute path="/personal-account" component={AccountUserProfile} />
 
         {/* </Switch> */}
 
         {/* Bussiness Account  */}
 
-        {/* <Route path="/business-signup" component={BusinessAccountSignUp} />
+        <Route path="/business-signup" component={BusinessAccountSignUp} />
 
         <Route path="/business-signin" component={BusinessAccountSignIn} />
         <PrivateRoute
           exact
           path="/business-dashboard"
           component={BusinessDashboard}
-        /> */}
+        /> 
+         <PrivateRoute
+          exact
+          path="/business/orders"
+          component={BusinessOrders}
+        />
       </div>
     </Router>
 

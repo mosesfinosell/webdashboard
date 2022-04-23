@@ -7,7 +7,7 @@ import { RiHomeSmile2Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import Logomark from "../../assets/Logomark.svg";
-function Layout({ children }) {
+function BusinessLayout({ children }) {
   const [sidebarActive, setSideBarActive] = useState(false);
   const toggleHamburger = () => {
     setSideBarActive(!sidebarActive);
@@ -16,20 +16,20 @@ function Layout({ children }) {
     <>
       <div className="sidebar">
         <div className="sidebar-inner">
-          <Link className="active" to="/personal-dashboard" id="first-link">
+          <Link className="active" to="/business-dashboard" id="first-link">
             {" "}
             <i className="fa fa-home" aria-hidden="true"></i>
             <span className="icon-name">Home</span>
           </Link>
-          <Link to="/personal-deals">
+          <Link to="/business/store">
             <i className="fa fa-user" aria-hidden="true"></i>{" "}
-            <span className="icon-name">Deals</span>
+            <span className="icon-name">Storelink</span>
           </Link>
-          <Link to="/personal-orders">
+          <Link to="/business/orders">
             <i className="fa fa-user" aria-hidden="true"></i>
             <span className="icon-name">Orders</span>
           </Link>
-          <Link to="/personal-account">
+          <Link to="/business/account">
             <i className="fa fa-user" aria-hidden="true"></i>
             <span className="icon-name">Account</span>
           </Link>
@@ -146,4 +146,4 @@ function Layout({ children }) {
   );
 }
 
-export default Layout;
+export default BusinessLayout;
