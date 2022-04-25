@@ -21,7 +21,7 @@ function BusinessLayout({ children }) {
             <i className="fa fa-home" aria-hidden="true"></i>
             <span className="icon-name">Home</span>
           </Link>
-          <Link to="/business/store">
+          <Link to="/business/storelink">
             <i className="fa fa-user" aria-hidden="true"></i>{" "}
             <span className="icon-name">Storelink</span>
           </Link>

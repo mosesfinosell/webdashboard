@@ -8,11 +8,12 @@ import reportWebVitals from "./reportWebVitals";
 import { persistedStore, store } from "./ReduxContianer/store";
 import ErrorBoundary from "./ErrorBoundary";
 import { PersistGate } from "redux-persist/integration/react";
+// import "antd/dist/antd.css";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <PersistGate  loading = {null} persistor={persistedStore}>
+      <PersistGate loading={null} persistor={persistedStore}>
         <ChakraProvider>
           {/* <ErrorBoundary> */}
           <App />
