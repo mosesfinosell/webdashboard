@@ -46,6 +46,7 @@ export default function OrderHistory() {
   const [page, setPage] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [isFetching, setFetching] = useState(false);
+  console.log(isFetching, "FETCHING");
   const orderCreation = async (businessId, page) => {
     setFetching(true);
     try {
@@ -65,17 +66,15 @@ export default function OrderHistory() {
   }, [businessId, page]);
 
   const fetchMore = async () => {
-    console.log('called')
     try {
       const nextPage = currentPage + 1;
       if (nextPage <= totalPages) {
         console.log("fetching", businessId, nextPage);
         const res = await getOrders(businessId, nextPage);
         console.log("responsss", res);
-        setOrders(res.data.orders);
-        // setOrders(orders.concat(res.data.orders));
+        setOrders(orders.concat(res.data.orders));
         setCurrentPage(nextPage);
-        console.log("res CONCAT",(res.data.orders));
+        console.log("res CONCAT", orders.concat(res.data.orders));
       }
     } catch (err) {
       return err;
