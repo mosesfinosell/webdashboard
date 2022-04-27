@@ -13,9 +13,13 @@ function StepOne({ activeStep, steppings, handleNext }) {
     buyer_email: Yup.string()
       .email("Invalid email")
       .required("buyer_email is required"),
-    discount: Yup.string().required("Discount is required"),
+    discount: Yup.number()
+      .typeError("Discount must be digits")
+      .required("Discount is required"),
     shipping_address: Yup.string().required("Address is required"),
-    totalamount: Yup.string().required("Amount is required"),
+    totalamount: Yup.number()
+      .typeError("Amount is required")
+      .required("Amount is required"),
   });
   const formik = useFormik({
     initialValues: {

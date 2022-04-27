@@ -22,6 +22,7 @@
 		"firebase": "^9.6.5",
 		"formik": "^2.2.9",
 		"framer-motion": "^5.6.0",
+		"multiselect-react-dropdown": "^2.0.21",
 		"react": "^17.0.2",
 		"react-bootstrap": "^2.1.2",
 		"react-chartjs-2": "^4.1.0",
@@ -46,6 +47,7 @@
 		"redux-persist": "^6.0.0",
 		"redux-thunk": "^2.4.1",
 		"url-crypt": "^1.2.1",
+		"uuid": "^8.3.2",
 		"web-vitals": "^2.1.4",
 		"yup": "^0.32.11"
 	},

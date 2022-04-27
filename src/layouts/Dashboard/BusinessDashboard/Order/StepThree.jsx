@@ -14,7 +14,12 @@ function StepThree() {
   const handleOrder = () => {
     console.log({ ...stepOne, ...stepTwo }, "GBA");
     let orderPayload = { ...stepOne, ...stepTwo };
-    orderPayload.business_id = businessId;
+    orderPayload.order_date = new Date(orderPayload.order_date).toISOString();
+    orderPayload.products = [
+      { product_id: orderPayload.productID, quantity: orderPayload.quantity },
+    ];
+    delete orderPayload.productID
+    console.log(orderPayload, "ORDER PAYLOAD THREE");
     dispatch(createOrders({ orderPayload }));
   };
   return (

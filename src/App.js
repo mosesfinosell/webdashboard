@@ -30,7 +30,8 @@ import DealDashboard from "../src/layouts/Dashboard/DashboardItems/DealDashboard
 import HomeDashboard from "../src/layouts/Dashboard/DashboardItems/HomeDashboard";
 import AccountUserProfile from "./layouts/Dashboard/DashboardItems/AccountUserProfile";
 import BusinessOrders from "./layouts/Dashboard/DashboardItems/OrderHistory";
-import StoreLink from "./layouts/Dashboard/BusinessDashboard/StoreLink/addUrlPage"
+import StoreLink from "./layouts/Dashboard/BusinessDashboard/StoreLink/addUrlPage";
+import CreateTransaction from "./layouts/Dashboard/BusinessDashboard/Payment/createTransaction";
 function App() {
   return (
     <Router>
@@ -70,21 +71,22 @@ function App() {
           exact
           path="/business-dashboard"
           component={BusinessDashboard}
-        /> 
-         <PrivateRoute
+        />
+        <PrivateRoute
           exact
           path="/business/orders"
           component={BusinessOrders}
         />
-         <PrivateRoute
+        <PrivateRoute
           exact
           path="/business/store-inventory"
           component={StoreInventory}
         />
-         <PrivateRoute
+        <PrivateRoute exact path="/business/storelink" component={StoreLink} />
+        <PrivateRoute
           exact
-          path="/business/storelink"
-          component={StoreLink}
+          path="/business/payment"
+          component={CreateTransaction}
         />
       </div>
     </Router>

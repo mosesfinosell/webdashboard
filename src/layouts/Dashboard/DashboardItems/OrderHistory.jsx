@@ -18,7 +18,7 @@ import { BiShoppingBag } from "react-icons/bi";
 import OrderDeliveryModal from "../BusinessDashboard/Order/orderDeliveryModal";
 // import {getOrders} from '../../../../ReduxContianer/BussinessRedux/BusinessAction'
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import dateformat from "dateformat";
 import BusinessLayout from "../../../component/Layout/BusinessLayout";
 import "../../Dashboard/Dash.css";
@@ -30,23 +30,74 @@ import StepOne from "../../Dashboard/BusinessDashboard/Order/StepOne";
 import StepTwo from "../../Dashboard/BusinessDashboard/Order/StepTwo";
 import StepThree from "../../Dashboard/BusinessDashboard/Order/StepThree";
 import { Stepper, Step, StepLabel } from "@material-ui/core";
-
+import { getOrders } from "../../../ReduxContianer/BussinessRedux/BusinessAction";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { Spinner } from "@chakra-ui/react";
 export default function OrderHistory() {
+  const businessInfo = useSelector(
+    (state) => state.businessReducer.businessUserInfo
+  );
+  const [businessId] = useState(businessInfo.business_id);
+  // const isFetching = useSelector((state) => state.businessReducer.isFetching);
+
+  const [orders, setOrders] = useState([]);
+  console.log(orders, "ORDERS");
+  const [totalPages, setTotalPages] = useState(0);
+  const [page, setPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isFetching, setFetching] = useState(false);
+  const orderCreation = async (businessId, page) => {
+    setFetching(true);
+    try {
+      const res = await getOrders(businessId, page);
+      const { allOrders, perPage, orders } = res.data;
+      setOrders(orders);
+      const total = Math.ceil(allOrders / perPage);
+      setTotalPages(total);
+      setFetching(false);
+    } catch (err) {
+      setFetching(false);
+      return err;
+    }
+  };
+  useEffect(() => {
+    orderCreation(businessId, page);
+  }, [businessId, page]);
+
+  const fetchMore = async () => {
+    console.log('called')
+    try {
+      const nextPage = currentPage + 1;
+      if (nextPage <= totalPages) {
+        console.log("fetching", businessId, nextPage);
+        const res = await getOrders(businessId, nextPage);
+        console.log("responsss", res);
+        setOrders(res.data.orders);
+        // setOrders(orders.concat(res.data.orders));
+        setCurrentPage(nextPage);
+        console.log("res CONCAT",(res.data.orders));
+      }
+    } catch (err) {
+      return err;
+    }
+  };
+
   const dispatch = useDispatch();
   // Remove this placeholder
-  const orders = [];
+  // const orders = [];
   const [activeStep, setActiveStep] = useState(0);
   // const getOrder = useSelector((state) => state.getOrder)
   // const {orders} = getOrder
   // console.log(orders.orders)
 
-  const businessInfo = useSelector(
-    (state) => state.businessReducer.businessUserInfo
-  );
+  // const businessInfo = useSelector(
+  //   (state) => state.businessReducer.businessUserInfo
+  // );
   function getSteps() {
     return ["STEP 1", "STEP 2", "CREATE ORDER"];
   }
   const handleNext = () => {
+    console.log("HANDLE NEXT CALLED", activeStep);
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
   const steppings = getSteps();
@@ -81,14 +132,10 @@ export default function OrderHistory() {
     }
   }
   return (
-    <>
+    <React.Fragment>
       <BusinessLayout>
         <div className="dash-cover">
           <div className="left-step-dash">
-            {/* <Text color="black" fontWeight="bold" fontSize="14px">
-              Add a order
-            </Text> */}
-
             <Stepper
               //   className={classes.root}
               activeStep={activeStep}
@@ -129,162 +176,235 @@ export default function OrderHistory() {
               </div>
 
               <TabPanels>
-                <TabPanel className="trans-tab">
-                  <div className="transactions">
-                    <div className="transactions-inner">
-                      <div>
-                        <img src={plus} alt="plus" />
-                      </div>
-                      <div style={{ paddingLeft: "2rem" }}>
-                        <Text>Transfer Funds</Text>
-                        <Text color="gray" fontSize="12px">
-                          Success
-                        </Text>
-                      </div>
+                <TabPanel className="trans-tab" id="scrollTarget">
+                  {isFetching ? (
+                    <div style={{ textAlign: "center" }}>
+                      <Spinner
+                        thickness="4px"
+                        speed="0.65s"
+                        emptyColor="yellow.200"
+                        color="yellow.500"
+                        size="xl"
+                      />
                     </div>
-
-                    <div style={{ paddingRight: "2rem" }}>
-                      <Text fontSize="12px" color="green.500">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
+                  ) : orders.length === 0 ? (
+                    <div>
+                      <h1
+                        style={{
+                          textAlign: "center",
+                          paddingTop: "7px",
+                          color: "#D6AA1B",
+                          fontWeight: "700",
+                        }}
+                      >
+                        There are no orders
+                      </h1>
                     </div>
-                  </div>
-                  <div className="transactions">
-                    <div className="transactions-inner">
-                      <div>
-                        <img src={plus} alt="plus" />
-                      </div>
-                      <div style={{ paddingLeft: "2rem" }}>
-                        <Text>Transfer Funds</Text>
-                        <Text color="gray" fontSize="12px">
-                          Success
-                        </Text>
-                      </div>
-                    </div>
-
-                    <div style={{ paddingRight: "2rem" }}>
-                      <Text fontSize="12px" color="green.500">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
-                    </div>
-                  </div>
-                  <div className="transactions">
-                    <div className="transactions-inner">
-                      <div>
-                        <img src={plus} alt="plus" />
-                      </div>
-                      <div style={{ paddingLeft: "2rem" }}>
-                        <Text>Transfer Funds</Text>
-                        <Text color="gray" fontSize="12px">
-                          Success
-                        </Text>
-                      </div>
-                    </div>
-
-                    <div style={{ paddingRight: "2rem" }}>
-                      <Text fontSize="12px" color="green.500">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
-                    </div>
-                  </div>
-                  <div className="transactions">
-                    <div className="transactions-inner">
-                      <div>
-                        <img src={plus} alt="plus" />
-                      </div>
-                      <div style={{ paddingLeft: "2rem" }}>
-                        <Text>Transfer Funds</Text>
-                        <Text color="gray" fontSize="12px">
-                          Success
-                        </Text>
-                      </div>
-                    </div>
-
-                    <div style={{ paddingRight: "2rem" }}>
-                      <Text fontSize="12px" color="green.500">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
-                    </div>
-                  </div>
-                  <div className="transactions">
-                    <div className="transactions-inner">
-                      <div>
-                        <img src={plus} alt="plus" />
-                      </div>
-                      <div style={{ paddingLeft: "2rem" }}>
-                        <Text>Transfer Funds</Text>
-                        <Text color="gray" fontSize="12px">
-                          Success
-                        </Text>
-                      </div>
-                    </div>
-
-                    <div style={{ paddingRight: "2rem" }}>
-                      <Text fontSize="12px" color="green.500">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
-                    </div>
-                  </div>
-                  <div className="transactions">
-                    <div className="transactions-inner">
-                      <div>
-                        <img src={plus} alt="plus" />
-                      </div>
-                      <div style={{ paddingLeft: "2rem" }}>
-                        <Text>Transfer Funds</Text>
-                        <Text color="gray" fontSize="12px">
-                          Success
-                        </Text>
-                      </div>
-                    </div>
-
-                    <div style={{ paddingRight: "2rem" }}>
-                      <Text fontSize="12px" color="green.500">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
-                    </div>
-                  </div>
-                  <div className="transactions">
-                    <div className="transactions-inner">
-                      <div>
-                        <img src={plus} alt="plus" />
-                      </div>
-                      <div style={{ paddingLeft: "2rem" }}>
-                        <Text>Transfer Funds</Text>
-                        <Text color="gray" fontSize="12px">
-                          Success
-                        </Text>
-                      </div>
-                    </div>
-
-                    <div style={{ paddingRight: "2rem" }}>
-                      <Text fontSize="12px" color="green.500">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
-                    </div>
-                  </div>
+                  ) : (
+                    <InfiniteScroll
+                      dataLength={orders.length}
+                      next={fetchMore}
+                      hasMore={Number(currentPage) !== Number(totalPages)}
+                      loader={
+                        <h4 style={{ textAlign: "center", color: "#D6AA1B" }}>
+                          Loading...
+                        </h4>
+                      }
+                      scrollableTarget="scrollTarget"
+                      endMessage={
+                        <p
+                          style={{
+                            textAlign: "center",
+                            paddingTop: "7px",
+                            color: "#D6AA1B",
+                          }}
+                        >
+                          <b>No more orders</b>
+                        </p>
+                      }
+                    >
+                      {orders.map((order) => (
+                        <div className="transactions" key={order.id}>
+                          <div className="transactions-inner">
+                            <div>
+                              <img src={plus} alt="plus" />
+                            </div>
+                            <div style={{ paddingLeft: "2rem" }}>
+                              <Text>{order.title}</Text>
+                              <Text color="gray" fontSize="12px">
+                                {order.order_status}
+                              </Text>
+                            </div>
+                          </div>
+                          <div style={{ paddingRight: "2rem" }}>
+                            <Text fontSize="12px" color="green.500">
+                              ₦{order.amount}
+                            </Text>
+                            <Text fontSize="12px" color="gray">
+                              {new Date(order.createdAt).toLocaleDateString(
+                                "fr"
+                              )}
+                            </Text>
+                          </div>
+                        </div>
+                      ))}
+                    </InfiniteScroll>
+                  )}
                 </TabPanel>
+                {/* <div className="transactions">
+                    <div className="transactions-inner">
+                      <div>
+                        <img src={plus} alt="plus" />
+                      </div>
+                      <div style={{ paddingLeft: "2rem" }}>
+                        <Text>Transfer Funds</Text>
+                        <Text color="gray" fontSize="12px">
+                          Success
+                        </Text>
+                      </div>
+                    </div>
+
+                    <div style={{ paddingRight: "2rem" }}>
+                      <Text fontSize="12px" color="green.500">
+                        ₦12,000
+                      </Text>
+                      <Text fontSize="12px" color="gray">
+                        Jan 3, 2022
+                      </Text>
+                    </div>
+                  </div> */}
+                {/* <div className="transactions">
+                    <div className="transactions-inner">
+                      <div>
+                        <img src={plus} alt="plus" />
+                      </div>
+                      <div style={{ paddingLeft: "2rem" }}>
+                        <Text>Transfer Funds</Text>
+                        <Text color="gray" fontSize="12px">
+                          Success
+                        </Text>
+                      </div>
+                    </div>
+
+                    <div style={{ paddingRight: "2rem" }}>
+                      <Text fontSize="12px" color="green.500">
+                        ₦12,000
+                      </Text>
+                      <Text fontSize="12px" color="gray">
+                        Jan 3, 2022
+                      </Text>
+                    </div>
+                  </div> */}
+                {/* <div className="transactions">
+                    <div className="transactions-inner">
+                      <div>
+                        <img src={plus} alt="plus" />
+                      </div>
+                      <div style={{ paddingLeft: "2rem" }}>
+                        <Text>Transfer Funds</Text>
+                        <Text color="gray" fontSize="12px">
+                          Success
+                        </Text>
+                      </div>
+                    </div>
+
+                    <div style={{ paddingRight: "2rem" }}>
+                      <Text fontSize="12px" color="green.500">
+                        ₦12,000
+                      </Text>
+                      <Text fontSize="12px" color="gray">
+                        Jan 3, 2022
+                      </Text>
+                    </div>
+                  </div> */}
+                {/* <div className="transactions">
+                    <div className="transactions-inner">
+                      <div>
+                        <img src={plus} alt="plus" />
+                      </div>
+                      <div style={{ paddingLeft: "2rem" }}>
+                        <Text>Transfer Funds</Text>
+                        <Text color="gray" fontSize="12px">
+                          Success
+                        </Text>
+                      </div>
+                    </div>
+
+                    <div style={{ paddingRight: "2rem" }}>
+                      <Text fontSize="12px" color="green.500">
+                        ₦12,000
+                      </Text>
+                      <Text fontSize="12px" color="gray">
+                        Jan 3, 2022
+                      </Text>
+                    </div>
+                  </div> */}
+                {/* <div className="transactions">
+                    <div className="transactions-inner">
+                      <div>
+                        <img src={plus} alt="plus" />
+                      </div>
+                      <div style={{ paddingLeft: "2rem" }}>
+                        <Text>Transfer Funds</Text>
+                        <Text color="gray" fontSize="12px">
+                          Success
+                        </Text>
+                      </div>
+                    </div>
+
+                    <div style={{ paddingRight: "2rem" }}>
+                      <Text fontSize="12px" color="green.500">
+                        ₦12,000
+                      </Text>
+                      <Text fontSize="12px" color="gray">
+                        Jan 3, 2022
+                      </Text>
+                    </div>
+                  </div> */}
+                {/* <div className="transactions">
+                    <div className="transactions-inner">
+                      <div>
+                        <img src={plus} alt="plus" />
+                      </div>
+                      <div style={{ paddingLeft: "2rem" }}>
+                        <Text>Transfer Funds</Text>
+                        <Text color="gray" fontSize="12px">
+                          Success
+                        </Text>
+                      </div>
+                    </div>
+
+                    <div style={{ paddingRight: "2rem" }}>
+                      <Text fontSize="12px" color="green.500">
+                        ₦12,000
+                      </Text>
+                      <Text fontSize="12px" color="gray">
+                        Jan 3, 2022
+                      </Text>
+                    </div>
+                  </div> */}
+                {/* <div className="transactions">
+                    <div className="transactions-inner">
+                      <div>
+                        <img src={plus} alt="plus" />
+                      </div>
+                      <div style={{ paddingLeft: "2rem" }}>
+                        <Text>Transfer Funds</Text>
+                        <Text color="gray" fontSize="12px">
+                          Success
+                        </Text>
+                      </div>
+                    </div>
+
+                    <div style={{ paddingRight: "2rem" }}>
+                      <Text fontSize="12px" color="green.500">
+                        ₦12,000
+                      </Text>
+                      <Text fontSize="12px" color="gray">
+                        Jan 3, 2022
+                      </Text>
+                    </div>
+                  </div> */}
 
                 <TabPanel className="trans-tab">
                   <div className="transactions">
@@ -359,305 +479,6 @@ export default function OrderHistory() {
           </div>
         </div>
       </BusinessLayout>
-    </>
-
-    // <Container m="40px" maxW="container.lg">
-    //   <Grid h="100vh" templateColumns="repeat(5, 1fr)">
-    //     <GridItem colSpan={4} rowSpan={6} bg="white" gap="5">
-    //       <Stack pb="30px">
-    //         <Text color="black" fontSize="14px">
-    //           New
-    //         </Text>
-    //       </Stack>
-
-    //       {orders &&
-    //         orders.orders?.map((order, index) => {
-    //           return (
-    //             <Box
-    //               key={index}
-    //               h="100px"
-    //               w="400px"
-    //               border="0.5px solid #D9D9D9"
-    //               display="flex"
-    //               alignItems="center"
-    //               justifyContent="space-evenly"
-    //             >
-    //               <OrderHistoryModal />
-    //               <Stack pr="10px">
-    //                 <Text color="#273B4A" w="200px">
-    //                   {order.title}
-    //                 </Text>
-    //                 <Text color="gray" fontSize="12px">
-    //                   {order.order_status}
-    //                 </Text>
-    //               </Stack>
-    //               <Stack>
-    //                 <Text fontSize="12px" color="gray">
-    //                   ₦{order.amount}
-    //                 </Text>
-    //                 <Text fontSize="12px" color="gray">
-    //                   {dateformat(order.order_date, "mediumDate")}
-    //                 </Text>
-    //               </Stack>
-    //             </Box>
-    //           );
-    //         })}
-    //     </GridItem>
-    //     <GridItem colStart={6} colEnd={9} h="10" bg="white">
-    //       <Stack m="10px">
-    //         <Text color="gray" fontSize="14px">
-    //           Deal History
-    //         </Text>
-    //       </Stack>
-    //       <Tabs variant="unstyled">
-    //         <Center>
-    //           <Box
-    //             h="100px"
-    //             w="400px"
-    //             borderRadius="0px 11px 0px 0px"
-    //             border="0.5px solid #D9D9D9"
-    //             display="flex"
-    //             alignItems="center"
-    //             justifyContent="center"
-    //           >
-    //             <TabList>
-    //               <Tab fontSize="16px" fontWeight="bold" color="black">
-    //                 Pending
-    //               </Tab>
-    //               <Tab fontSize="16px" fontWeight="bold" color="black">
-    //                 Delivery
-    //               </Tab>
-    //             </TabList>
-    //           </Box>
-    //         </Center>
-    //         <Center>
-    //           <TabPanels>
-    //             <TabPanel>
-    //               <Box
-    //                 h="100px"
-    //                 w="400px"
-    //                 border="0.5px solid #D9D9D9"
-    //                 display="flex"
-    //                 alignItems="center"
-    //                 justifyContent="space-evenly"
-    //               >
-    //                 <Stack
-    //                   color="yellow.500"
-    //                   bg="yellow.100"
-    //                   borderRadius="0px 8px 8px 8px"
-    //                   border="0.2px solid yellow.100"
-    //                   p="12px"
-    //                   fontSize="22px"
-    //                 >
-    //                   <BiShoppingBag />
-    //                 </Stack>
-    //                 <Stack pr="10px">
-    //                   <Text color="#273B4A" w="200px">
-    //                     Adidas Core Sneakers{" "}
-    //                   </Text>
-    //                   <Text color="gray" fontSize="12px">
-    //                     Accepted
-    //                   </Text>
-    //                 </Stack>
-
-    //                 <Stack>
-    //                   <Text fontSize="12px" color="yellow.500">
-    //                     ₦12,000
-    //                   </Text>
-    //                   <Text fontSize="12px" color="gray">
-    //                     Jan 3, 2022
-    //                   </Text>
-    //                 </Stack>
-    //               </Box>
-    //               <Box
-    //                 h="100px"
-    //                 w="400px"
-    //                 border="0.5px solid #D9D9D9"
-    //                 display="flex"
-    //                 alignItems="center"
-    //                 justifyContent="space-evenly"
-    //               >
-    //                 <Stack
-    //                   color="red.500"
-    //                   bg="red.100"
-    //                   borderRadius="0px 8px 8px 8px"
-    //                   border="0.2px solid red.100"
-    //                   p="12px"
-    //                   fontSize="22px"
-    //                 >
-    //                   <BiShoppingBag />
-    //                 </Stack>
-    //                 <Stack pr="10px">
-    //                   <Text color="#273B4A" w="200px">
-    //                     Adidas Core Sneakers{" "}
-    //                   </Text>
-    //                   <Text color="gray" fontSize="12px">
-    //                     Accepted
-    //                   </Text>
-    //                 </Stack>
-
-    //                 <Stack>
-    //                   <Text fontSize="12px" color="red.500">
-    //                     ₦12,000
-    //                   </Text>
-    //                   <Text fontSize="12px" color="gray">
-    //                     Jan 3, 2022
-    //                   </Text>
-    //                 </Stack>
-    //               </Box>
-    //               <Box
-    //                 h="100px"
-    //                 w="400px"
-    //                 border="0.5px solid #D9D9D9"
-    //                 display="flex"
-    //                 alignItems="center"
-    //                 justifyContent="space-evenly"
-    //               >
-    //                 <Stack
-    //                   color="green.500"
-    //                   bg="green.100"
-    //                   borderRadius="0px 8px 8px 8px"
-    //                   border="0.2px solid green.100"
-    //                   p="12px"
-    //                   fontSize="22px"
-    //                 >
-    //                   <BiShoppingBag />
-    //                 </Stack>
-    //                 <Stack pr="10px">
-    //                   <Text color="#273B4A" w="200px">
-    //                     Adidas Core Sneakers{" "}
-    //                   </Text>
-    //                   <Text color="gray" fontSize="12px">
-    //                     Accepted
-    //                   </Text>
-    //                 </Stack>
-
-    //                 <Stack>
-    //                   <Text fontSize="12px" color="green.500">
-    //                     ₦12,000
-    //                   </Text>
-    //                   <Text fontSize="12px" color="gray">
-    //                     Jan 3, 2022
-    //                   </Text>
-    //                 </Stack>
-    //               </Box>
-    //             </TabPanel>
-    //             <TabPanel>
-    //               <Box
-    //                 h="100px"
-    //                 w="400px"
-    //                 border="0.5px solid #D9D9D9"
-    //                 display="flex"
-    //                 alignItems="center"
-    //                 justifyContent="space-evenly"
-    //               >
-    //                 <Stack
-    //                   color="green.500"
-    //                   bg="green.100"
-    //                   borderRadius="0px 8px 8px 8px"
-    //                   border="0.2px solid green.100"
-    //                   p="12px"
-    //                   fontSize="22px"
-    //                 >
-    //                   <BiShoppingBag />
-    //                 </Stack>
-    //                 <Stack pr="10px">
-    //                   <Text color="#273B4A" w="200px">
-    //                     {" "}
-    //                     Sneakers Adidas Core
-    //                   </Text>
-    //                   <Text color="gray" fontSize="12px">
-    //                     Accepted
-    //                   </Text>
-    //                 </Stack>
-
-    //                 <Stack>
-    //                   <Text fontSize="12px" color="green.500">
-    //                     ₦12,000
-    //                   </Text>
-    //                   <Text fontSize="12px" color="gray">
-    //                     Jan 3, 2022
-    //                   </Text>
-    //                 </Stack>
-    //               </Box>
-    //               <Box
-    //                 h="100px"
-    //                 w="400px"
-    //                 border="0.5px solid #D9D9D9"
-    //                 display="flex"
-    //                 alignItems="center"
-    //                 justifyContent="space-evenly"
-    //               >
-    //                 <Stack
-    //                   color="yellow.500"
-    //                   bg="yellow.100"
-    //                   borderRadius="0px 8px 8px 8px"
-    //                   border="0.2px solid yellow.100"
-    //                   p="12px"
-    //                   fontSize="22px"
-    //                 >
-    //                   <BiShoppingBag />
-    //                 </Stack>
-    //                 <Stack pr="10px">
-    //                   <Text color="#273B4A" w="200px">
-    //                     Adidas Core Sneakers{" "}
-    //                   </Text>
-    //                   <Text color="gray" fontSize="12px">
-    //                     Accepted
-    //                   </Text>
-    //                 </Stack>
-
-    //                 <Stack>
-    //                   <Text fontSize="12px" color="yellow.500">
-    //                     ₦12,000
-    //                   </Text>
-    //                   <Text fontSize="12px" color="gray">
-    //                     Jan 3, 2022
-    //                   </Text>
-    //                 </Stack>
-    //               </Box>
-    //               <Box
-    //                 h="100px"
-    //                 w="400px"
-    //                 border="0.5px solid #D9D9D9"
-    //                 display="flex"
-    //                 alignItems="center"
-    //                 justifyContent="space-evenly"
-    //               >
-    //                 <Stack
-    //                   color="gray.500"
-    //                   bg="gray.100"
-    //                   borderRadius="0px 8px 8px 8px"
-    //                   border="0.2px solid gray.100"
-    //                   p="12px"
-    //                   fontSize="24px"
-    //                 >
-    //                   <BiShoppingBag />
-    //                 </Stack>
-    //                 <Stack pr="10px">
-    //                   <Text color="#273B4A" w="200px">
-    //                     Adidas Core Sneakers{" "}
-    //                   </Text>
-    //                   <Text color="gray" fontSize="12px">
-    //                     Accepted
-    //                   </Text>
-    //                 </Stack>
-
-    //                 <Stack>
-    //                   <Text fontSize="12px" color="gray.500">
-    //                     ₦12,000
-    //                   </Text>
-    //                   <Text fontSize="12px" color="gray">
-    //                     Jan 3, 2022
-    //                   </Text>
-    //                 </Stack>
-    //               </Box>
-    //             </TabPanel>
-    //           </TabPanels>
-    //         </Center>
-    //       </Tabs>
-    //     </GridItem>
-    //   </Grid>
-    // </Container>
+    </React.Fragment>
   );
 }

@@ -4,7 +4,6 @@
 // import ProductActionType from '../constants/ProductActionType';
 
 // const baseUrl = `https://finosell.link/api/v2`;
-
 // export const businessUserSignUp =
 // 	(name, phone_number, email, password, address, industry, account_type) =>
 // 	async (dispatch) => {
@@ -716,7 +715,8 @@ import {
   CREATE_PAYMENT_ERROR,
 } from "../constants/UserActionType";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
-
+import { createStandaloneToast } from "@chakra-ui/react";
+const toast = createStandaloneToast();
 export const getBusinessUserInfo = (payload) => {
   return {
     type: GET_BUSINESS_USER_DETAIL,
@@ -747,33 +747,47 @@ export const createOrders = (orderPayload) => (dispatch) => {
   dispatch({ type: CREATE_ORDER_START });
   axiosWithAuth()
     .post(`/order/createorder`, {
-      payment_method: orderPayload.orderPayload.payment_Method,
+      payment_method: orderPayload.orderPayload.payment_method,
       title: orderPayload.orderPayload.title,
-      buyer_id: "BusW5xmF",
+      // buyer_id: "BusW5xmF",
+      buyer_id: orderPayload.orderPayload.buyer_id,
       business_id: orderPayload.orderPayload.business_id[0],
       totalamount: orderPayload.orderPayload.totalamount,
       buyer_email: orderPayload.orderPayload.buyer_email,
       buyer_phone: orderPayload.orderPayload.buyer_phone,
       order_status: orderPayload.orderPayload.order_status,
-      order_id: "ghfbdiwe48hu5i0d",
-      //   order_date: orderPayload.orderPayload.order_date,
-      order_date: "2022-02-28T23:00:00.000Z",
+      order_id: orderPayload.orderPayload.order_id,
+      order_date: orderPayload.orderPayload.order_date,
       sales_channel: orderPayload.orderPayload.sales_channel,
       customer_id: orderPayload.orderPayload.customer_id,
       discount: orderPayload.orderPayload.discount,
       shipping_address: orderPayload.orderPayload.shipping_address,
-      payment_status: orderPayload.orderPayload.paymentStatus,
-      product_ids: "P256795160",
+      payment_status: orderPayload.orderPayload.payment_status,
+      products: orderPayload.orderPayload.products,
     })
     .then((res) => {
-      console.log(res, "ORDER");
+      toast({
+        position: "top",
+        title: `Order Creation`,
+        description: "Completed Succesfully",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
       dispatch({
         type: CREATE_ORDER_SUCCESS,
         payload: res.data.message,
       });
     })
     .catch((err) => {
-      console.log(err, "ORDER ERROR");
+      toast({
+        position: "top",
+        title: `Unsuccessful Attempt`,
+        description: `Error creating order`,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
       dispatch({
         type: CREATE_ORDER_ERROR,
         payload: err.response.data.error,
@@ -878,9 +892,8 @@ export const getOrders = (business_id, page) =>
 export const getProduct = (business_id) => (dispatch) => {
   dispatch({ type: GET_PRODUCTS_START });
   axiosWithAuth()
-    .get(`/products/all?business_id=${business_id}`)
+    .get(`/products/all?businessid=${business_id}`)
     .then((res) => {
-      console.log(res.data, "PRODUCTS");
       dispatch({
         type: GET_PRODUCTS_SUCCESS,
         payload: res.data.details,
@@ -896,12 +909,12 @@ export const getProduct = (business_id) => (dispatch) => {
 export const getCustomers = (business_id) => (dispatch) => {
   dispatch({ type: GET_CUSTOMERS_START });
   axiosWithAuth()
-    .get(`/customer/fetch?business_id=${business_id}`)
+    .get(`/customer/fetchAll?business_id=${business_id}`)
     .then((res) => {
-      console.log(res.data, "CUSTOMERS");
+      console.log(res, "CUSTOMERS");
       dispatch({
         type: GET_CUSTOMERS_SUCCESS,
-        payload: res.data.customers,
+        payload: res.data.customer,
       });
     })
     .catch((err) => {

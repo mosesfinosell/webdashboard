@@ -29,6 +29,10 @@ function BusinessLayout({ children }) {
             <i className="fa fa-user" aria-hidden="true"></i>
             <span className="icon-name">Orders</span>
           </Link>
+          <Link to="/business/payment">
+            <i className="fa fa-user" aria-hidden="true"></i>
+            <span className="icon-name">Payment</span>
+          </Link>
           <Link to="/business/account">
             <i className="fa fa-user" aria-hidden="true"></i>
             <span className="icon-name">Account</span>
