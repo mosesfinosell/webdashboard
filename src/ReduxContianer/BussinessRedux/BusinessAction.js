@@ -1,691 +1,3 @@
-// import axios from 'axios';
-// import UserActionType from '../constants/UserActionType';
-// import OrderActionType from '../constants/OrderActionType';
-// import ProductActionType from '../constants/ProductActionType';
-
-// const baseUrl = `https://finosell.link/api/v2`;
-// export const businessUserSignUp =
-// 	(name, phone_number, email, password, address, industry, account_type) =>
-// 	async (dispatch) => {
-// 		dispatch({
-// 			type: UserActionType.DATA_REQUEST,
-// 		});
-// 		try {
-// 			const { data } = await axios.post(baseUrl + `/auths/firststage`, {
-// 				name,
-// 				phone_number,
-// 				email,
-// 				password,
-// 				address,
-// 				industry,
-// 				account_type,
-// 			});
-// 			dispatch({
-// 				type: UserActionType.SIGN_UP_SUCCESS,
-// 				payload: data,
-// 			});
-
-// 			localStorage.setItem('businessDetails', JSON.stringify(data));
-// 		} catch (error) {
-// 			dispatch({
-// 				type: UserActionType.SIGN_UP_ERROR,
-// 				payload:
-// 					error.response && error.response.data.message
-// 						? error.response.data.message
-// 						: error.error,
-// 			});
-// 		}
-// 	};
-
-// export const businessUserLogin =
-// 	(phonenumber, password) => async (dispatch) => {
-// 		dispatch({
-// 			type: UserActionType.DATA_REQUEST,
-// 		});
-// 		try {
-// 			const { data } = await axios.post(baseUrl + `/auths/login`, {
-// 				phonenumber,
-// 				password,
-// 			});
-// 			dispatch({
-// 				type: UserActionType.SIGN_IN_SUCCESS,
-// 				payload: data,
-// 			});
-
-// 			localStorage.setItem('businessDetails', JSON.stringify(data));
-// 		} catch (error) {
-// 			dispatch({
-// 				type: UserActionType.SIGN_IN_ERROR,
-// 				payload:
-// 					error.response && error.response.data.message
-// 						? error.response.data.message
-// 						: error.error,
-// 			});
-// 		}
-// 	};
-
-// 	export const getUserDetails = (user_id) => async(dispatch,getState) => {
-// 		dispatch({
-// 			type: UserActionType.DATA_REQUEST
-// 		});
-// 		try {
-// 			const {
-// 				businessSignIn: {
-// 					user: {
-// 						businessDetails: { message },
-// 					},
-// 				},
-// 			} = getState();
-// 			const config = {
-// 				headers: {
-// 					Authorization: `Bearer ${message.password}`,
-// 				},
-// 			};
-// 			const { data } = await axios.get(baseUrl + `/auths/signin?user=${user_id}`, config);
-// 			dispatch({
-// 				type: UserActionType.GET_USER_DETAIL_SUCCESS,
-// 				payload: data,
-// 			});
-// 		}catch (error) {
-// 			dispatch({
-// 				type: UserActionType.GET_USER_DETAIL_ERROR,
-// 				payload:
-// 					error.response && error.response.data.message
-// 						? error.response.data.message
-// 						: error.message,
-// 			});
-// 		}
-// 	}
-
-// export const getOrders = (business_id) => async (dispatch) => {
-// 			dispatch({
-// 				type: UserActionType.DATA_REQUEST,
-// 			});
-// 		try{
-// 			const {data} = await axios.get(baseUrl + `/order/fetch?business_id=${business_id}`)
-// 			dispatch({
-// 				type: OrderActionType.GET_ORDER_SUCCESS,
-// 				payload: data
-// 			})
-// 		}catch (error){
-// 			 dispatch({
-// 					type: OrderActionType.GET_ORDER_ERROR,
-// 					payload:
-// 						error.response && error.response.data.message
-// 							? error.response.data.message
-// 							: error.message,
-// 				});
-// 		}
-// }
-
-// export const createOrders = (title,buy_id,buyer_email,buyer_phone,order_status,order_type, order_id,order_date,sales_channel,discount,shipping_address,payment_status,payment_method,product_id,business_id) => async (dispatch,getState) => {
-// 	dispatch({
-// 		type: UserActionType.DATA_REQUEST,
-// 	});
-// 	const {
-// 		businessSignIn: {
-// 			user: {
-// 				businessDetails: { message },
-// 			},
-// 		},
-// 	} = getState();
-// 	const config = {
-// 		headers: {
-// 			Authorization: `Bearer ${message.password}`,
-// 		},
-// 	};
-// 	try {
-// 		const { data } = await axios.post(
-// 			baseUrl +
-// 				`/order/record`,{title,buy_id,buyer_email,buyer_phone,order_status,order_type, order_id,order_date,sales_channel,discount,shipping_address,payment_status,payment_method,product_id,business_id},config
-// 		);
-// 		dispatch({
-// 			type: OrderActionType.CREATE_ORDER_SUCCESS,
-// 			payload: data,
-// 		});
-// 	} catch (error) {
-// 		dispatch({
-// 			type: OrderActionType.CREATE_ORDER_ERROR,
-// 			payload:
-// 				error.response && error.response.data.message
-// 					? error.response.data.message
-// 					: error.message,
-// 		});
-// 	}
-// };
-
-// export const getCustomers = (business_id) => async (dispatch,getState) => {
-// 	dispatch({
-// 		type: UserActionType.DATA_REQUEST,
-// 	});
-// 	try {
-// 		const {
-// 			businessSignIn: {
-// 				user: {
-// 					businessDetails: { message },
-// 				},
-// 			},
-// 		} = getState();
-// 		const config = {
-// 			headers: {
-// 				Authorization: `Bearer ${message.password}`,
-// 			},
-// 		};
-// 		const { data } = await axios.get(
-// 			baseUrl + `/customer/fetch?business_id=${business_id}`,config
-// 		);
-// 		dispatch({
-// 			type: UserActionType.GET_CUSTOMER_SUCCESS,
-// 			payload: data,
-// 		});
-// 	} catch (error) {
-// 		dispatch({
-// 			type: UserActionType.GET_CUSTOMER_ERROR,
-// 			payload:
-// 				error.response && error.response.data.message
-// 					? error.response.data.message
-// 					: error.message,
-// 		});
-// 	}
-// };
-
-// export const createCustomers = (customer_name,customer_email,customer_id,customer_phonenumber,customer_address,business_id) => async (dispatch,getState) => {
-// 		dispatch({
-// 			type: UserActionType.DATA_REQUEST,
-// 		});
-// 	try {
-// 		const {
-// 			businessSignIn: { user: { businessDetails: { message } } },
-// 		} = getState();
-// 		 const config = {
-// 			 headers: {
-// 					Authorization: `Bearer ${message.password}`
-// 				},
-// 			};
-// 		const { data } = await axios.post(
-// 			baseUrl + `/customer/create`,
-
-// 				{customer_name,
-// 				customer_email,
-// 				customer_id,
-// 				customer_phonenumber,
-// 				customer_address,
-// 				business_id},
-
-// 		 config
-// 		);
-// 			dispatch({
-// 				type: UserActionType.CREATE_CUSTOMER_SUCCESS,
-// 				payload: data
-// 			})
-// 	} catch (error) {
-// 		    dispatch({
-// 					type: UserActionType.CREATE_CUSTOMER_ERROR,
-// 					payload:
-// 						error.response && error.response.data.message
-// 							? error.response.data.message
-// 							: error.message,
-// 				});
-// 		}
-// }
-
-// export const updatePassword =
-// 	(user_id, old_password, new_password, retype_new_password) =>
-// 		async (dispatch) => {
-// 			dispatch({
-// 				type: UserActionType.DATA_REQUEST,
-// 			});
-// 		try {
-// 			const { data } = await axios.post(
-// 				`https://finosell.link/api/user/updatepassword`,
-// 				{
-// 					user_id,
-// 					old_password,
-// 					new_password,
-// 					retype_new_password,
-// 				}
-// 			);
-// 			dispatch({
-// 				type: UserActionType.UPDATE_PASSWORD_SUCCESS,
-// 				payload: data,
-// 			});
-// 		} catch (error) {
-// 			dispatch({
-// 				type: UserActionType.UPDATE_PASSWORD_ERROR,
-// 				payload:
-// 					error.response && error.response.data.message
-// 						? error.response.data.message
-// 						: error.message,
-// 			});
-// 		}
-// 		};
-
-// export const updateProfile =
-// 	(user_id, phonenumber, name, email, auth_code) => async (dispatch,getState) => {
-// 		dispatch({
-// 			type: UserActionType.DATA_REQUEST,
-// 		});
-// 		try {
-// 			const {
-// 				businessSignIn: {
-// 					user: {
-// 						businessDetails: { message },
-// 					},
-// 				},
-// 			} = getState();
-// 			const config = {
-// 				headers: {
-// 					Authorization: `Bearer ${message.password}`,
-// 				},
-// 			};
-// 			const { data } = await axios.post(
-// 				`https://finosell.link/api/user/updateinfo`,
-// 				{ user_id, phonenumber, name, email, auth_code },config
-// 			);
-// 			dispatch({
-// 				type: UserActionType.UPDATE_PROFILE_SUCCESS,
-// 				payload: data,
-// 			});
-// 		} catch (error) {
-// 			dispatch({
-// 				type: UserActionType.UPDATE_PROFILE_ERROR,
-// 				payload:
-// 					error.response && error.response.data.message
-// 						? error.response.data.message
-// 						: error.message,
-// 			});
-// 		}
-// 	};
-
-// export const sendAuthCode = (email) => async (dispatch,getState) => {
-//     dispatch({
-// 			type: UserActionType.DATA_REQUEST,
-// 	});
-// 	try {
-// 		const {
-// 			businessSignIn: {
-// 				user: {
-// 					businessDetails: { message },
-// 				},
-// 			},
-// 		} = getState();
-// 		const config = {
-// 			headers: {
-// 				Authorization: `Bearer ${message.password}`,
-// 			},
-// 		};
-// 		const { data } = await axios.put(baseUrl + `/reset/vemail/${email}`,config);
-// 		dispatch({
-// 			type: UserActionType.SEND_AUTH_CODE_SUCCESS,
-// 			payload: data
-// 		})
-// 	} catch (error) {
-// 		dispatch({
-// 			type: UserActionType.SEND_AUTH_CODE_ERROR,
-// 			payload:
-// 				error.response && error.response.data.message
-// 					? error.response.data.message
-// 					: error.message,
-// 		});
-// 	}
-// }
-
-// export const uploadImage = (businessid, image) => async (dispatch) => {
-// 		dispatch({
-// 			type: UserActionType.DATA_REQUEST,
-// 		});
-// 	try {
-// 		const { data } = await axios.post(
-// 			`https://finosell.link/api/user/updateimg`,
-// 			{ businessid, image }
-// 		);
-// 		dispatch({
-// 			type: UserActionType.UPLOAD_IMAGE_SUCCESS,
-// 			payload: data,
-// 		});
-// 	} catch (error) {
-// 		dispatch({
-// 			type: UserActionType.UPLOAD_IMAGE_ERROR,
-// 			payload:
-// 				error.response && error.response.data.message
-// 					? error.response.data.message
-// 					: error.message,
-// 		});
-// 	}
-// };
-
-// export const addTeamMember =
-// 	(account_id, phone, email, user_id, account_type, business_id) =>
-// 	async (dispatch, getState) => {
-// 		dispatch({
-// 			type: UserActionType.DATA_REQUEST,
-// 		});
-// 		const {
-// 			businessSignIn: {
-// 				user: {
-// 					businessDetails: { message },
-// 				},
-// 			},
-// 		} = getState();
-// 		const config = {
-// 			headers: {
-// 				Authorization: `Bearer ${message.password}`,
-// 			},
-// 		};
-// 		try {
-// 			const { data } = await axios.post(
-// 				baseUrl + `/team/create`,
-// 				{
-// 					account_id,
-// 					phone,
-// 					email,
-// 					user_id,
-// 					account_type,
-// 					business_id,
-// 				},
-// 				config
-// 			);
-// 			dispatch({
-// 				type: UserActionType.ADD_TEAM_SUCCESS,
-// 				payload: data,
-// 			});
-// 		} catch (error) {
-// 			dispatch({
-// 				type: UserActionType.ADD_TEAM_ERROR,
-// 				payload:
-// 					error.response && error.response.data.message
-// 						? error.response.data.message
-// 						: error.message,
-// 			});
-// 		}
-// 	};
-
-// export const fetchTeamMember =
-// 		(business_id) =>
-// 		async (dispatch, getState) => {
-// 			dispatch({
-// 				type: UserActionType.DATA_REQUEST,
-// 			});
-// 			const {
-// 				businessSignIn: {
-// 					user: {
-// 						businessDetails: { message },
-// 					},
-// 				},
-// 			} = getState();
-// 			const config = {
-// 				headers: {
-// 					Authorization: `Bearer ${message.password}`,
-// 				},
-// 			};
-// 			try {
-// 				const { data } = await axios.get(
-// 					baseUrl + `/team/fetch?business_id=${business_id}`,config
-// 				);
-// 				dispatch({
-// 					type: UserActionType.GET_TEAM_SUCCESS,
-// 					payload: data,
-// 				});
-// 			} catch (error) {
-// 				dispatch({
-// 					type: UserActionType.GET_TEAM_ERROR,
-// 					payload:
-// 						error.response && error.response.data.message
-// 							? error.response.data.message
-// 							: error.message,
-// 				});
-// 			}
-// 			};
-
-// // PRODUCT
-
-// export const createProduct = (description, title, seller, businessid, image, category, size, color,price) => async (dispatch, getState) => {
-// 	try {
-// 		const {
-// 			businessSignIn: {
-// 				user: {
-// 					businessDetails: { message },
-// 				},
-// 			},
-// 		} = getState();
-// 		const config = {
-// 			headers: {
-// 				Authorization: `Bearer ${message.password}`,
-// 			},
-// 		};
-// 		const { data } = await axios.post(
-// 			`https://finosell.link/api/seller/upload`,
-// 			{
-// 				description,
-// 				title,
-// 				seller,
-// 				businessid,
-// 				image,
-// 				category,
-// 				size,
-// 				color,
-// 				price,
-// 			},
-// 			config
-// 		);
-// 		dispatch({
-// 			type: ProductActionType.CREATE_PRODUCT_SUCCESS,
-// 			payload: data,
-// 		});
-// 	} catch (error) {
-// 		dispatch({
-// 			type: ProductActionType.CREATE_PRODUCT_ERROR,
-// 			payload:
-// 				error.response && error.response.data.message
-// 					? error.response.data.message
-// 					: error.message,
-// 		});
-// 	}
-// };
-
-// export const getProduct = (businessid) => async (dispatch,getState) => {
-// 	try {
-// 		const {
-// 			businessSignIn: {
-// 				user: {
-// 					businessDetails: { message },
-// 				},
-// 			},
-// 		} = getState();
-// 		const config = {
-// 			headers: {
-// 				Authorization: `Bearer ${message.password}`,
-// 			},
-// 		};
-// 		const { data } = await axios.get(
-// 			`https://finosell.link/api/products/all?businessid=${businessid}`,
-// 			config
-// 		);
-// 		dispatch({
-// 			type: ProductActionType.GET_PRODUCT_SUCCESS,
-// 			payload: data,
-// 		});
-// 	} catch (error) {
-// 		dispatch({
-// 			type: ProductActionType.GET_PRODUCT_ERROR,
-// 			payload:
-// 				error.response && error.response.data.message
-// 					? error.response.data.message
-// 					: error.message,
-// 		});
-// 	}
-// };
-
-// export const createTransaction =
-// 	(
-// 		transaction_id,
-// 		details,
-// 		payement_date,
-// 		payment_id,
-// 		business_id,
-// 		customer_id,
-// 		payment_status,
-// 		payment_method,
-// 		payment_ref,
-// 		transaction_type,
-// 		amount,
-// 		product_id
-// 	) =>
-// 	async (dispatch, getState) => {
-// 		dispatch({
-// 			type: OrderActionType.DATA_REQUEST,
-// 		});
-// 		try {
-// 			const {
-// 				businessSignIn: {
-// 					user: {
-// 						businessDetails: { message },
-// 					},
-// 				},
-// 			} = getState();
-// 			const config = {
-// 				headers: {
-// 					Authorization: `Bearer ${message.password}`,
-// 				},
-// 			};
-// 			const { data } = await axios.post(baseUrl + `/history/record`, {
-// 				transaction_id,
-// 				details,
-// 				payement_date,
-// 				payment_id,
-// 				business_id,
-// 				customer_id,
-// 				payment_status,
-// 				payment_method,
-// 				payment_ref,
-// 				transaction_type,
-// 				amount,
-// 				product_id,
-// 			}, config)
-// 			dispatch({
-// 				type: OrderActionType.CREATE_TRANSACTION_SUCCESS,
-// 				payload: data
-// 			})
-
-// 		} catch (error) {
-// 			dispatch({
-// 				type: OrderActionType.CREATE_TRANSACTION_ERROR,
-// 				payload:
-// 					error.response && error.response.data.message
-// 						? error.response.data.message
-// 						: error.message,
-// 			});
-// 		}
-// 	};
-
-// export const getTransaction = () => async (dispatch,getState) => {
-// 	dispatch({
-// 			type: OrderActionType.DATA_REQUEST
-// 	})
-// 	try {
-// 		const {
-// 			businessSignIn: {
-// 				user: {
-// 					businessDetails: { message },
-// 				},
-// 			},
-// 		} = getState();
-// 		const config = {
-// 			headers: {
-// 				Authorization: `Bearer ${message.password}`,
-// 			},
-// 		};
-// 		const { data } = axios.get(baseUrl + `history/fetch`, config);
-// 			dispatch({
-// 				type: OrderActionType.GET_TRANSACTION_SUCCESS,
-// 				payload: data
-// 			})
-// 	} catch (error) {
-// 		dispatch({
-// 			type: OrderActionType.GET_TRANSACTION_ERROR,
-// 				payload:
-// 					error.response && error.response.data.message
-// 						? error.response.data.message
-// 						: error.message,
-// 		})
-// 		}
-// }
-
-// export const createStoreLink = (sub, user) => async (dispatch, getState) => {
-// 	dispatch({
-// 		type: OrderActionType.DATA_REQUEST,
-// 	});
-// 	try {
-// 		const {
-// 			businessSignIn: {
-// 				user: {
-// 					businessDetails: { message },
-// 				},
-// 			},
-// 		} = getState();
-// 		const config = {
-// 			headers: {
-// 				Authorization: `Bearer ${message.password}`,
-// 			},
-// 		};
-// 		const { data } = axios.post(`https://finosell.link/api/subdomain/create`, {
-// 			sub,
-// 			user,
-// 		},config);
-// 		dispatch({
-// 			type: UserActionType.CREATE_STORELINK_SUCCESS,
-// 			payload: data,
-// 		});
-// 	} catch (error) {
-// 		dispatch({
-// 			type: UserActionType.CREATE_STORELINK_ERROR,
-// 			payload:
-// 				error.response && error.response.data.message
-// 					? error.response.data.message
-// 					: error.message,
-// 		});
-// 	}
-// };
-
-// export const checkUserExist = (user) => async (dispatch, getState) => {
-// 	dispatch({
-// 		type: OrderActionType.DATA_REQUEST,
-// 	});
-// 	try {
-// 		const {
-// 			businessSignIn: {
-// 				user: {
-// 					businessDetails: { message },
-// 				},
-// 			},
-// 		} = getState();
-// 		const config = {
-// 			headers: {
-// 				Authorization: `Bearer ${message.password}`,
-// 			},
-// 		};
-// 		const { data } = axios.post(
-// 			`https://finosell.link/api/subdomain/create`,
-// 			{
-// 				user,
-// 			},
-// 			config
-// 		);
-// 		dispatch({
-// 			type: UserActionType.CREATE_STORELINK_SUCCESS,
-// 			payload: data,
-// 		});
-// 	} catch (error) {
-// 		dispatch({
-// 			type: UserActionType.CREATE_STORELINK_ERROR,
-// 			payload:
-// 				error.response && error.response.data.message
-// 					? error.response.data.message
-// 					: error.message,
-// 		});
-// 	}
-// };
-
 import {
   GET_BUSINESS_USER_DETAIL,
   FETCH_BUSINESS_USER_DETAIL_WITH_ID,
@@ -713,6 +25,10 @@ import {
   CREATE_PAYMENT_START,
   CREATE_PAYMENT_SUCCESS,
   CREATE_PAYMENT_ERROR,
+  SAVE_TRANSACTION_DETAIL,
+  SET_MODAL,
+  GET_BUSINESS_STAT_SUCCESS,
+  GET_BUSINESS_STAT_ERROR,
 } from "../constants/UserActionType";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 import { createStandaloneToast } from "@chakra-ui/react";
@@ -743,7 +59,6 @@ export const getBusinessUserDetails = (user_id) => (dispatch) => {
 };
 
 export const createOrders = (orderPayload) => (dispatch) => {
-  console.log(orderPayload.orderPayload, "ORDER PAYLOAD");
   dispatch({ type: CREATE_ORDER_START });
   axiosWithAuth()
     .post(`/order/createorder`, {
@@ -751,7 +66,7 @@ export const createOrders = (orderPayload) => (dispatch) => {
       title: orderPayload.orderPayload.title,
       // buyer_id: "BusW5xmF",
       buyer_id: orderPayload.orderPayload.buyer_id,
-      business_id: orderPayload.orderPayload.business_id[0],
+      business_id: orderPayload.orderPayload.business_id,
       totalamount: orderPayload.orderPayload.totalamount,
       buyer_email: orderPayload.orderPayload.buyer_email,
       buyer_phone: orderPayload.orderPayload.buyer_phone,
@@ -766,6 +81,7 @@ export const createOrders = (orderPayload) => (dispatch) => {
       products: orderPayload.orderPayload.products,
     })
     .then((res) => {
+      console.log(res, "GT");
       toast({
         position: "top",
         title: `Order Creation`,
@@ -783,7 +99,7 @@ export const createOrders = (orderPayload) => (dispatch) => {
       toast({
         position: "top",
         title: `Unsuccessful Attempt`,
-        description: `Error creating order`,
+        description: `${err.response.data.message}`,
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -810,7 +126,6 @@ export const createStoreLink = (user_id, storeName) => (dispatch) => {
       });
     })
     .catch((err) => {
-      console.log(err, "STORE ERR");
       dispatch({
         type: CREATE_STORE_LINK_ERROR,
         payload: err.response.data.error,
@@ -818,34 +133,38 @@ export const createStoreLink = (user_id, storeName) => (dispatch) => {
     });
 };
 
-export const createTransaction = () => (dispatch) => {
+export const createTransaction = (values) => (dispatch) => {
   dispatch({ type: CREATE_PAYMENT_START });
   axiosWithAuth()
-    .post(`/history/createpayment`, {
-      payment_status: 1,
-      payment_method: "offline",
-      payment_ref: "djhsjkamldad",
-      transtype: 7,
-      amount: 50000,
-      product_id: "343rf43f3",
-      customer_id: "868jdd5e4w4",
-      business_id: "39394934nnnsed",
-      payment_id: "fint4559444",
-      Itemtype: "The details about the product",
-      transaction_id: "t8e8394u9453434",
-    })
+    .post(`/payment/createpayment`, values)
     .then((res) => {
-      console.log(res, "PAYMENT LINK");
+      toast({
+        position: "top",
+        title: `Payment Completed`,
+        description: "You have successfully made your payment",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
       dispatch({
         type: CREATE_PAYMENT_SUCCESS,
         payload: res.data,
       });
     })
     .catch((err) => {
-      console.log(err, "PAYMENT ERR");
+      console.log(err.response, "PAYMENT ERR");
+      console.log(err, "ert");
+      toast({
+        position: "top",
+        title: `Unsuccessful Attempt`,
+        description: `${err.response.data.message}`,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
       dispatch({
         type: CREATE_PAYMENT_ERROR,
-        payload: err.response.data.error,
+        payload: err.response.data.message,
       });
     });
 };
@@ -872,7 +191,27 @@ export const getOrders = (business_id, page) =>
   axiosWithAuth().get(
     `/order/getorders?bussiness_id=${business_id}&page=${page}`
   );
+export const getPendingOrders = (business_id, pendingPage) =>
+  axiosWithAuth().get(
+    `/order/getorderstatus?business_id=${business_id}&page=${pendingPage}&order_status=pending`
+  );
+export const getCompletedOrders = (business_id, completedPage) =>
+  axiosWithAuth().get(
+    `/order/getorderstatus?business_id=${business_id}&page=${completedPage}&order_status=completed`
+  );
+export const getCancelledOrders = (business_id, cancelledPage) =>
+  axiosWithAuth().get(
+    `/order/getorderstatus?business_id=${business_id}&page=${cancelledPage}&order_status=cancelled`
+  );
+export const getPayment = (businessId) =>
+  axiosWithAuth().get(`payment/getpayments?business_id=${businessId}`);
 
+export const setBusinessModal = (payload) => {
+  return {
+    type: SET_MODAL,
+    payload,
+  };
+};
 // export const getOrderPagination = (business_id) => (dispatch) => {
 //   dispatch({ type: GET_ORDER_START });
 //   axiosWithAuth()
@@ -924,7 +263,23 @@ export const getCustomers = (business_id) => (dispatch) => {
       });
     });
 };
-
+export const getBusinessStat = (seller) => (dispatch) => {
+  dispatch({ type: GET_CUSTOMERS_START });
+  axiosWithAuth()
+    .post(`/seller/fetchstore`, { seller })
+    .then((res) => {
+      dispatch({
+        type: GET_BUSINESS_STAT_SUCCESS,
+        payload: res.data.details,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: GET_BUSINESS_STAT_ERROR,
+        payload: err.response.data.error,
+      });
+    });
+};
 export const getStepOneDetails = (payload) => {
   return {
     type: GET_STEP_ONE_DETAIL,
@@ -938,6 +293,12 @@ export const getStepTwoDetails = (payload) => {
   };
 };
 
+export const saveTransactionRef = (payload) => {
+  return {
+    type: SAVE_TRANSACTION_DETAIL,
+    payload,
+  };
+};
 // export const getPayments = (business_id) => (dispatch) => {
 // 	dispatch({ type: GET_ORDER_START });
 // 	axiosWithAuth()

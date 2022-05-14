@@ -60,7 +60,7 @@ export default function AddMoneyModal() {
   
 	return (
 		<>
-			<Stack
+			{/* <Stack
 				pr='30px'
 				color='yellow.500'
 				bg='yellow.100'
@@ -70,7 +70,7 @@ export default function AddMoneyModal() {
 				fontSize='24px'
 				onClick={onOpen}>
 				<BsPlusSquare />
-			</Stack>
+			</Stack> */}
 			<Modal
 				isOpen={isOpen}
 				onClose={onClose}

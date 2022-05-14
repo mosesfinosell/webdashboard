@@ -12,7 +12,6 @@ import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 // import DatePicker from "react-datepicker";
 function StepTwo({ activeStep, steppings, handleNext }) {
-  console.log("Step Two", activeStep);
   const [orderDate, setOrderDate] = useState(null);
   const [orders, setOrders] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
@@ -25,9 +24,7 @@ function StepTwo({ activeStep, steppings, handleNext }) {
   );
   const customers = useSelector((state) => state.businessReducer.customers);
   const products = useSelector((state) => state.businessReducer.products);
-  console.log(customers, "CUSTOMERS");
   const [businessId] = useState(businessInfo.business_id);
-  console.log(products, "PRODUCTS");
   const createStepTwoSchema = Yup.object().shape({
     order_type: Yup.string().required("Select type of order"),
     order_status: Yup.string().required("Choose order status"),
@@ -55,7 +52,8 @@ function StepTwo({ activeStep, steppings, handleNext }) {
       order_date: "",
       productID: "",
       business_id: businessId,
-      buyer_id: businessId,
+      // buyer_id: businessId,
+      buyer_id: "BusW5xmF",
       order_id: uuidv4(),
       quantity: null,
     },
@@ -66,7 +64,6 @@ function StepTwo({ activeStep, steppings, handleNext }) {
     },
     validationSchema: createStepTwoSchema,
   });
-  console.log(formik, "FORMIK");
   return (
     <div>
       <form

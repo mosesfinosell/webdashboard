@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, Image } from "@chakra-ui/react";
+import { Text, Image, Avatar } from "@chakra-ui/react";
 import "../../component/sidebar.css";
 import { PrivateSidebarData } from "../../../src/component/PrivateSidebarData";
 import { FaAngleDown } from "react-icons/fa";
@@ -7,40 +7,80 @@ import { RiHomeSmile2Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import Logomark from "../../assets/Logomark.svg";
+import { MdAddchart } from "react-icons/md";
+import { BiStore } from "react-icons/bi";
+import { GiBanknote } from "react-icons/gi";
+import { IoExitOutline, IoBusinessOutline } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
+import user1 from "../../assets/user1.png";
 function BusinessLayout({ children }) {
   const [sidebarActive, setSideBarActive] = useState(false);
-  const toggleHamburger = () => {
-    setSideBarActive(!sidebarActive);
-  };
+  const businessInfo = useSelector(
+    (state) => state.businessReducer.businessUserInfo
+  );
+  const name = businessInfo.name;
   return (
     <>
       <div className="sidebar">
+        {/* <div
+            
+            style={{
+              display: "flex",
+              alignItems: "center",
+              // justifyContent: "spaceBetween",
+            }}
+          >
+            <Avatar name="user" src={user1} />
+            
+            <div style={{display: "flex",alignItems: "center",}}>
+            {<Text>Hello {name}</Text>}
+              <FaAngleDown />
+            </div>
+          </div> */}
         <div className="sidebar-inner">
-          <Link className="active" to="/business-dashboard" id="first-link">
+          <Link to="/business-dashboard" id="first-link">
             {" "}
-            <i className="fa fa-home" aria-hidden="true"></i>
-            <span className="icon-name">Home</span>
+            <div className="sidebar-icons">
+              {" "}
+              <RiHomeSmile2Line /> <p className="icon-name">Home</p>
+            </div>
           </Link>
           <Link to="/business/storelink">
-            <i className="fa fa-user" aria-hidden="true"></i>{" "}
-            <span className="icon-name">Storelink</span>
+            <div className="sidebar-icons">
+              {" "}
+              <BiStore /> <Text className="icon-name">Store</Text>
+            </div>
           </Link>
           <Link to="/business/orders">
-            <i className="fa fa-user" aria-hidden="true"></i>
-            <span className="icon-name">Orders</span>
+            <div className="sidebar-icons">
+              {" "}
+              <MdAddchart /> <Text className="icon-name">Orders</Text>
+            </div>
+            {/* <i className="fa fa-user" aria-hidden="true"></i>
+            <span className="icon-name">Orders</span> */}
           </Link>
           <Link to="/business/payment">
-            <i className="fa fa-user" aria-hidden="true"></i>
-            <span className="icon-name">Payment</span>
+            <div className="sidebar-icons">
+              {" "}
+              <GiBanknote /> <Text className="icon-name">Payments</Text>
+            </div>
+            {/* <i className="fa fa-user" aria-hidden="true"></i>
+            <span className="icon-name">Payment</span> */}
           </Link>
           <Link to="/business/account">
-            <i className="fa fa-user" aria-hidden="true"></i>
-            <span className="icon-name">Account</span>
+            <div className="sidebar-icons">
+              {" "}
+              <IoBusinessOutline /> <Text className="icon-name">Account</Text>
+            </div>
           </Link>
 
           <Link to="">
-            <i className="fa fa-sign-out"></i>
-            <span className="icon-name">Logout</span>
+            <div className="sidebar-icons">
+              {" "}
+              <IoExitOutline /> <Text className="icon-name">Logout</Text>
+            </div>
+            {/* <i className="fa fa-sign-out"></i>
+            <span className="icon-name">Logout</span> */}
           </Link>
         </div>
         <div className="logomark">

@@ -31,9 +31,13 @@ import { useEffect } from "react";
 import CreateCustomer from "../BusinessDashboard/Payment/createCustomer";
 import CreateOrder from "../BusinessDashboard/Order/createOrder";
 import CreateTransaction from "../BusinessDashboard/Payment/createTransaction";
-import { getBusinessUserDetails } from "../../../ReduxContianer/BussinessRedux/BusinessAction";
+import {
+  getBusinessUserDetails,
+  setBusinessModal,
+} from "../../../ReduxContianer/BussinessRedux/BusinessAction";
 import "../../Dashboard/Dash.css";
 import store from "../../../assets/store.svg";
+import plus from "../../../assets/plus.svg";
 import delivery from "../../../assets/delivery.svg";
 import invoice from "../../../assets/invoice.svg";
 import BusinessLayout from "../../../component/Layout/BusinessLayout";
@@ -41,8 +45,12 @@ import { Bar } from "react-chartjs-2";
 import chartData from "../../../component/ChartData";
 import { useState } from "react";
 import { Chart as ChartJS } from "chart.js/auto";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import AddMoneyBusinessModal from "../../../layouts/Dashboard/BusinessDashboard/HomeBusiness/addMoneyModal";
+import { useHistory } from "react-router-dom";
 export default function BusinessDashboard() {
+  const history = useHistory();
+  const { onOpen } = useDisclosure();
   const [userChart, setUserChart] = useState({
     labels: chartData.map((data) => data.year),
     datasets: [
@@ -62,10 +70,16 @@ export default function BusinessDashboard() {
   const businessInfo = useSelector(
     (state) => state.businessReducer.businessUserInfo
   );
+  const businessDetails = useSelector(
+    (state) => state.businessReducer.businessUserIdDetails
+  );
   useEffect(() => {
     dispatch(getBusinessUserDetails(businessInfo.user_id));
   }, [businessInfo.user_id, dispatch]);
-
+  // const toggleModal = () => {
+  //   console.log(isOpen, "DISCLOSE");
+  //   dispatch(setBusinessModal(isOpen));
+  // };
   return (
     <BusinessLayout>
       <div className="dash-cover">
@@ -105,12 +119,12 @@ export default function BusinessDashboard() {
               <TabPanels>
                 <TabPanel>
                   <Heading className="balance" as="h6">
-                    ₦45000
+                    ₦{businessDetails?.transfer_bal}
                   </Heading>
                 </TabPanel>
                 <TabPanel>
                   <Heading className="balance" as="h6">
-                    ₦34000
+                    ₦{businessDetails?.p_balance}
                   </Heading>
                 </TabPanel>
               </TabPanels>
@@ -125,7 +139,12 @@ export default function BusinessDashboard() {
                   <Text color="gray" fontSize="12px">
                     Account Number
                   </Text>
-                  <Text fontSize="16px">01234567890</Text>
+                  <Text fontSize="16px">
+                    {" "}
+                    {businessDetails?.account_number === "null"
+                      ? "NA"
+                      : businessDetails?.account_number}
+                  </Text>
                 </div>
                 <div className="copy-copy">
                   <Text fontSize="14px">Copy</Text>
@@ -138,13 +157,17 @@ export default function BusinessDashboard() {
                   <Text color="gray" fontSize="12px">
                     Bank
                   </Text>
-                  <Text fontSize="16px">Polaris Bank</Text>
+                  <Text fontSize="16px">
+                    {businessDetails?.bank === "null"
+                      ? "NA"
+                      : businessDetails?.bank}
+                  </Text>
                 </div>
                 <div>
                   <Text color="gray" fontSize="12px">
                     Account Name
                   </Text>
-                  <Text fontSize="16px">Oreofe Ventures</Text>
+                  <Text fontSize="16px">{businessDetails?.business_name}</Text>
                 </div>
               </div>
             </div>
@@ -152,17 +175,29 @@ export default function BusinessDashboard() {
               Action
             </Text>
             <div className="act-box-holder">
-              <Link to="/business/store-inventory">
-                <div className="act-box">
-                  <div>
-                    <img src={store} alt="store" />
-                  </div>
-                  <div>
-                    <Text>Store Inventory</Text>
-                    <Text>Space for subtitle text</Text>
-                  </div>
+              <div className="act-box" onClick={onOpen}>
+                <AddMoneyBusinessModal />
+                {/* <div>
+                  <img src={plus} alt="plus" />
+                </div> */}
+                <div>
+                  <Text>Add Money</Text>
+                  <Text>Space for subtitle text</Text>
                 </div>
-              </Link>
+              </div>
+
+              <div
+                className="act-box"
+                onClick={() => history.push("/business/store-inventory")}
+              >
+                <div>
+                  <img src={store} alt="store" />
+                </div>
+                <div>
+                  <Text>Store Inventory</Text>
+                  <Text>Space for subtitle text</Text>
+                </div>
+              </div>
 
               <div className="act-box">
                 <div>

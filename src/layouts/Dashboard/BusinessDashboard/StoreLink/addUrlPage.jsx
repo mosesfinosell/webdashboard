@@ -21,8 +21,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import { createStoreLink } from "../../../../ReduxContianer/BussinessRedux/BusinessAction";
 import BusinessLayout from "../../../../component/Layout/BusinessLayout";
+import { useHistory } from "react-router-dom";
 import "../../../Dashboard/Dash.css";
 export default function AddUrlPage() {
+  const history = useHistory();
   const yellowbtn = useColorModeValue("yellow.500");
   const dispatch = useDispatch();
 
@@ -50,7 +52,7 @@ export default function AddUrlPage() {
         <div className="url-form">
           <div className="store-form">
             <InputGroup>
-              <InputLeftAddon width="130px" h="60px">
+              <InputLeftAddon width="20%" h="60px">
                 http://
               </InputLeftAddon>
               <Input
@@ -60,16 +62,19 @@ export default function AddUrlPage() {
                 width="40%"
                 h="60px"
                 placeholder="Input your Store Name"
+                style={{backgroundColor:'#FAFAFA'}}
               />
-              <InputRightAddon width="150px" h="60px">
+              <InputRightAddon className="right-addon" width="22%" h="60px">
                 finosell.com
               </InputRightAddon>
             </InputGroup>
           </div>
           <Button
+          onClick={()=>history.push('/business/store-page')}
+          className="add-store"
             mt={4}
             bg={yellowbtn}
-            width="62%"
+            width="82%"
             h="60px"
             borderRadius="0px 11px 11px 11px"
             type="submit"

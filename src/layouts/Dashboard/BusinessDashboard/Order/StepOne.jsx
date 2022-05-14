@@ -2,7 +2,6 @@ import React from "react";
 import { Input, InputGroup, FormLabel, Button } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getStepOneDetails } from "../../../../ReduxContianer/BussinessRedux/BusinessAction";
 function StepOne({ activeStep, steppings, handleNext }) {

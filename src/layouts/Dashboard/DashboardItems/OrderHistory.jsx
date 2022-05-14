@@ -30,7 +30,12 @@ import StepOne from "../../Dashboard/BusinessDashboard/Order/StepOne";
 import StepTwo from "../../Dashboard/BusinessDashboard/Order/StepTwo";
 import StepThree from "../../Dashboard/BusinessDashboard/Order/StepThree";
 import { Stepper, Step, StepLabel } from "@material-ui/core";
-import { getOrders } from "../../../ReduxContianer/BussinessRedux/BusinessAction";
+import {
+  getOrders,
+  getPendingOrders,
+  getCompletedOrders,
+  getCancelledOrders,
+} from "../../../ReduxContianer/BussinessRedux/BusinessAction";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Spinner } from "@chakra-ui/react";
 export default function OrderHistory() {
@@ -38,16 +43,24 @@ export default function OrderHistory() {
     (state) => state.businessReducer.businessUserInfo
   );
   const [businessId] = useState(businessInfo.business_id);
-  // const isFetching = useSelector((state) => state.businessReducer.isFetching);
-
   const [orders, setOrders] = useState([]);
-  console.log(orders, "ORDERS");
+  const [pendingOrders, setPendingOrders] = useState([]);
+  const [completedOrders, setCompletedOrders] = useState([]);
+  const [cancelledOrders, setCancelledOrders] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
+  const [pendingTotalPages, setPendingTotalPages] = useState(0);
+  const [completedTotalPages, setCompletedTotalPages] = useState(0);
+  const [cancelledTotalPages, setCancelledTotalPages] = useState(0);
   const [page, setPage] = useState(1);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [pendingPage, setPendingPage] = useState(1);
+  const [completedPage, setCompletedPage] = useState(1);
+  const [cancelledPage, setCancelledPage] = useState(1);
+  // const [currentPage, setCurrentPage] = useState(1);
+  const [currentPendingPage, setCurrentPendingPage] = useState(1);
+  const [currentCompletedPage, setCurrentCompletedPage] = useState(1);
+  const [currentCancelledPage, setCurrentCancelledPage] = useState(1);
   const [isFetching, setFetching] = useState(false);
-  console.log(isFetching, "FETCHING");
-  const orderCreation = async (businessId, page) => {
+  const orderFetching = async (businessId, page) => {
     setFetching(true);
     try {
       const res = await getOrders(businessId, page);
@@ -61,27 +74,111 @@ export default function OrderHistory() {
       return err;
     }
   };
-  useEffect(() => {
-    orderCreation(businessId, page);
-  }, [businessId, page]);
-
-  const fetchMore = async () => {
+  const completedOrderFetching = async (businessId, completedPage) => {
+    setFetching(true);
     try {
-      const nextPage = currentPage + 1;
-      if (nextPage <= totalPages) {
-        console.log("fetching", businessId, nextPage);
-        const res = await getOrders(businessId, nextPage);
-        console.log("responsss", res);
-        setOrders(orders.concat(res.data.orders));
-        setCurrentPage(nextPage);
-        console.log("res CONCAT", orders.concat(res.data.orders));
+      const res = await getCompletedOrders(businessId, completedPage);
+      console.log(res, "COMPLETED ORDERS");
+      const { allOrders, perPage, orders } = res.data;
+      setCompletedOrders(orders);
+      const total = Math.ceil(allOrders / perPage);
+      setCompletedTotalPages(total);
+      setFetching(false);
+    } catch (err) {
+      setFetching(false);
+      return err;
+    }
+  };
+  const cancelledOrderFetching = async (businessId, cancelledPage) => {
+    setFetching(true);
+    try {
+      const res = await getCancelledOrders(businessId, cancelledPage);
+      console.log(res, "CANCELLED ORDERS");
+      const { allOrders, perPage, orders } = res.data;
+      setCancelledOrders(orders);
+      const total = Math.ceil(allOrders / perPage);
+      setCancelledTotalPages(total);
+      setFetching(false);
+    } catch (err) {
+      setFetching(false);
+      return err;
+    }
+  };
+  const pendingOrderFetching = async (businessId, pendingPage) => {
+    setFetching(true);
+    try {
+      const res = await getPendingOrders(businessId, pendingPage);
+      console.log(res, "PENDING ORDERS");
+      const { allOrders, perPage, orders } = res.data;
+      setPendingOrders(orders);
+      const total = Math.ceil(allOrders / perPage);
+      setPendingTotalPages(total);
+      setFetching(false);
+    } catch (err) {
+      setFetching(false);
+      return err;
+    }
+  };
+  const fetchMoreCancelledOrders = async () => {
+    try {
+      const nextPage = currentCancelledPage + 1;
+      if (nextPage <= cancelledTotalPages) {
+        const res = await getCancelledOrders(businessId, nextPage);
+        setCancelledOrders(cancelledOrders.concat(res.data.orders));
+        setCurrentCancelledPage(nextPage);
+      }
+    } catch (err) {
+      return err;
+    }
+  };
+  const fetchMoreCompletedOrders = async () => {
+    try {
+      const nextPage = currentCompletedPage + 1;
+      if (nextPage <= completedTotalPages) {
+        const res = await getCompletedOrders(businessId, nextPage);
+        setCompletedOrders(completedOrders.concat(res.data.orders));
+        setCurrentCompletedPage(nextPage);
       }
     } catch (err) {
       return err;
     }
   };
 
-  const dispatch = useDispatch();
+  const fetchMorePendingOrders = async () => {
+    try {
+      const nextPage = currentPendingPage + 1;
+      if (nextPage <= pendingTotalPages) {
+        const res = await getPendingOrders(businessId, nextPage);
+        setPendingOrders(pendingOrders.concat(res.data.orders));
+        setCurrentPendingPage(nextPage);
+      }
+    } catch (err) {
+      return err;
+    }
+  };
+
+  const fetchMore = async () => {
+    try {
+      const nextPage = page + 1;
+      // const nextPage = currentPage + 1;
+      if (nextPage <= totalPages) {
+        console.log("fetching", businessId, nextPage);
+        const res = await getOrders(businessId, nextPage);
+        setOrders(orders.concat(res.data.orders));
+        setPage(nextPage);
+      }
+    } catch (err) {
+      return err;
+    }
+  };
+  useEffect(() => {
+    orderFetching(businessId, page);
+    pendingOrderFetching(businessId, pendingPage);
+    completedOrderFetching(businessId, completedPage);
+    cancelledOrderFetching(businessId, cancelledPage);
+  }, [businessId]);
+
+  // const dispatch = useDispatch();
   // Remove this placeholder
   // const orders = [];
   const [activeStep, setActiveStep] = useState(0);
@@ -96,7 +193,6 @@ export default function OrderHistory() {
     return ["STEP 1", "STEP 2", "CREATE ORDER"];
   }
   const handleNext = () => {
-    console.log("HANDLE NEXT CALLED", activeStep);
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
   const steppings = getSteps();
@@ -124,6 +220,12 @@ export default function OrderHistory() {
             handleNext={handleNext}
             activeStep={activeStep}
             steppings={steppings}
+            orderFetching={orderFetching}
+            // currentPage={currentPage}
+            businessId={businessId}
+            setActiveStep={setActiveStep}
+            page={page}
+            setPage={setPage}
           />
         );
       default:
@@ -133,7 +235,7 @@ export default function OrderHistory() {
   return (
     <React.Fragment>
       <BusinessLayout>
-        <div className="dash-cover">
+        <div className="dashy-cover">
           <div className="left-step-dash">
             <Stepper
               //   className={classes.root}
@@ -146,335 +248,369 @@ export default function OrderHistory() {
                 </Step>
               ))}
             </Stepper>
-            <>
+            <div>
               {activeStep === steppings.length ? (
                 "Steps Complete"
               ) : (
-                <>{getStepsContents(activeStep)}</>
+                <React.Fragment>{getStepsContents(activeStep)}</React.Fragment>
               )}
-            </>
+            </div>
           </div>
-          <div className="right-dash">
-            <Text className="history" color="gray">
+          <div className="order-right">
+            {/* <Text className="history" color="gray">
               Order History
-            </Text>
+            </Text> */}
+            <p className="order-para">Order History</p>
+            <div className="right-step-dash">
+              <Tabs variant="unstyled">
+                <div className="payment-div">
+                  <TabList style={{ paddingLeft: "1.7rem" }}>
+                    <Tab fontSize="16px" fontWeight="bold" color="black">
+                      All
+                    </Tab>
+                    <Tab fontSize="16px" fontWeight="bold" color="black">
+                      Pending
+                    </Tab>
+                    <Tab fontSize="16px" fontWeight="bold" color="black">
+                      Completed
+                    </Tab>
+                    <Tab
+                      fontSize="16px"
+                      fontWeight="bold"
+                      color="black"
+                      id="tabs-1--tab-3"
+                    >
+                      Cancelled
+                    </Tab>
+                  </TabList>
+                </div>
 
-            <Tabs variant="unstyled">
-              <div className="payment-div">
-                <TabList style={{ paddingLeft: "1.7rem" }}>
-                  <Tab fontSize="16px" fontWeight="bold" color="black">
-                    All
-                  </Tab>
-                  <Tab fontSize="16px" fontWeight="bold" color="black">
-                    Payments
-                  </Tab>
-                  <Tab fontSize="16px" fontWeight="bold" color="black">
-                    Debit
-                  </Tab>
-                </TabList>
-              </div>
-
-              <TabPanels>
-                <TabPanel className="trans-tab" id="scrollTarget">
-                  {isFetching ? (
-                    <div style={{ textAlign: "center" }}>
-                      <Spinner
-                        thickness="4px"
-                        speed="0.65s"
-                        emptyColor="yellow.200"
-                        color="yellow.500"
-                        size="xl"
-                      />
-                    </div>
-                  ) : orders.length === 0 ? (
-                    <div>
-                      <h1
-                        style={{
-                          textAlign: "center",
-                          paddingTop: "7px",
-                          color: "#D6AA1B",
-                          fontWeight: "700",
-                        }}
-                      >
-                        There are no orders
-                      </h1>
-                    </div>
-                  ) : (
-                    <InfiniteScroll
-                      dataLength={orders.length}
-                      next={fetchMore}
-                      hasMore={Number(currentPage) !== Number(totalPages)}
-                      loader={
-                        <h4 style={{ textAlign: "center", color: "#D6AA1B" }}>
-                          Loading...
-                        </h4>
-                      }
-                      scrollableTarget="scrollTarget"
-                      endMessage={
-                        <p
+                <TabPanels>
+                  <TabPanel className="trans-tab" id="scrollTarget">
+                    {isFetching ? (
+                      <div style={{ textAlign: "center" }}>
+                        <Spinner
+                          thickness="4px"
+                          speed="0.65s"
+                          emptyColor="yellow.200"
+                          color="yellow.500"
+                          size="xl"
+                        />
+                      </div>
+                    ) : orders?.length === 0 ? (
+                      <div>
+                        <h1
                           style={{
                             textAlign: "center",
-                            paddingTop: "7px",
+                            paddingTop: "18px",
                             color: "#D6AA1B",
+                            fontWeight: "700",
+                            paddingBottom: "18px",
                           }}
                         >
-                          <b>No more orders</b>
-                        </p>
-                      }
-                    >
-                      {orders.map((order) => (
-                        <div className="transactions" key={order.id}>
-                          <div className="transactions-inner">
-                            <div>
-                              <img src={plus} alt="plus" />
+                          There are no orders
+                        </h1>
+                      </div>
+                    ) : (
+                      <InfiniteScroll
+                        dataLength={orders.length}
+                        next={fetchMore}
+                        hasMore={Number(page) !== Number(totalPages)}
+                        // hasMore={Number(currentPage) !== Number(totalPages)}
+                        loader={
+                          <h4
+                            style={{
+                              textAlign: "center",
+                              color: "#D6AA1B",
+                              paddingBottom: "0.8rem",
+                            }}
+                          >
+                            Loading...
+                          </h4>
+                        }
+                        scrollableTarget="scrollTarget"
+                        endMessage={
+                          <p
+                            style={{
+                              textAlign: "center",
+                              paddingTop: "5px",
+                              color: "#D6AA1B",
+                              paddingBottom: "0.7rem",
+                            }}
+                          >
+                            <b>No more orders</b>
+                          </p>
+                        }
+                      >
+                        {orders?.map((order) => (
+                          <div className="transactions" key={order.id}>
+                            <div className="transactions-inner">
+                              <div>
+                                <img src={plus} alt="plus" />
+                              </div>
+                              <div style={{ paddingLeft: "2rem" }}>
+                                <Text>{order.title}</Text>
+                                <Text color="gray" fontSize="12px">
+                                  {order.order_status}
+                                </Text>
+                              </div>
                             </div>
-                            <div style={{ paddingLeft: "2rem" }}>
-                              <Text>{order.title}</Text>
-                              <Text color="gray" fontSize="12px">
-                                {order.order_status}
+                            <div style={{ paddingRight: "2rem" }}>
+                              <Text fontSize="12px" color="green.500">
+                                ₦{order.amount}
+                              </Text>
+                              <Text fontSize="12px" color="gray">
+                                {new Date(order.createdAt).toLocaleDateString(
+                                  "fr"
+                                )}
                               </Text>
                             </div>
                           </div>
-                          <div style={{ paddingRight: "2rem" }}>
-                            <Text fontSize="12px" color="green.500">
-                              ₦{order.amount}
-                            </Text>
-                            <Text fontSize="12px" color="gray">
-                              {new Date(order.createdAt).toLocaleDateString(
-                                "fr"
-                              )}
-                            </Text>
+                        ))}
+                      </InfiniteScroll>
+                    )}
+                  </TabPanel>
+
+                  <TabPanel className="trans-tab">
+                    {isFetching ? (
+                      <div style={{ textAlign: "center" }}>
+                        <Spinner
+                          thickness="4px"
+                          speed="0.65s"
+                          emptyColor="yellow.200"
+                          color="yellow.500"
+                          size="xl"
+                        />
+                      </div>
+                    ) : pendingOrders.length === 0 ? (
+                      <div>
+                        <h1
+                          style={{
+                            textAlign: "center",
+                            paddingTop: "18px",
+                            color: "#D6AA1B",
+                            fontWeight: "700",
+                            paddingBottom: "18px",
+                          }}
+                        >
+                          There are no orders
+                        </h1>
+                      </div>
+                    ) : (
+                      <InfiniteScroll
+                        dataLength={pendingOrders.length}
+                        next={fetchMorePendingOrders}
+                        hasMore={
+                          Number(currentPendingPage) !==
+                          Number(pendingTotalPages)
+                        }
+                        loader={
+                          <h4 style={{ textAlign: "center", color: "#D6AA1B" }}>
+                            Loading...
+                          </h4>
+                        }
+                        scrollableTarget="scrollTarget"
+                        endMessage={
+                          <p
+                            style={{
+                              textAlign: "center",
+                              paddingTop: "7px",
+                              color: "#D6AA1B",
+                            }}
+                          >
+                            <b>No more orders</b>
+                          </p>
+                        }
+                      >
+                        {pendingOrders.map((order) => (
+                          <div className="transactions" key={order.id}>
+                            <div className="transactions-inner">
+                              <div>
+                                <img src={plus} alt="plus" />
+                              </div>
+                              <div style={{ paddingLeft: "2rem" }}>
+                                <Text>{order.title}</Text>
+                                <Text color="gray" fontSize="12px">
+                                  {order.order_status}
+                                </Text>
+                              </div>
+                            </div>
+                            <div style={{ paddingRight: "2rem" }}>
+                              <Text fontSize="12px" color="green.500">
+                                ₦{order.amount}
+                              </Text>
+                              <Text fontSize="12px" color="gray">
+                                {new Date(order.createdAt).toLocaleDateString(
+                                  "fr"
+                                )}
+                              </Text>
+                            </div>
                           </div>
-                        </div>
-                      ))}
-                    </InfiniteScroll>
-                  )}
-                </TabPanel>
-                {/* <div className="transactions">
-                    <div className="transactions-inner">
+                        ))}
+                      </InfiniteScroll>
+                    )}
+                  </TabPanel>
+                  <TabPanel className="trans-tab">
+                    {isFetching ? (
+                      <div style={{ textAlign: "center" }}>
+                        <Spinner
+                          thickness="4px"
+                          speed="0.65s"
+                          emptyColor="yellow.200"
+                          color="yellow.500"
+                          size="xl"
+                        />
+                      </div>
+                    ) : completedOrders.length === 0 ? (
                       <div>
-                        <img src={plus} alt="plus" />
+                        <h1
+                          style={{
+                            textAlign: "center",
+                            paddingTop: "18px",
+                            color: "#D6AA1B",
+                            fontWeight: "700",
+                            paddingBottom: "18px",
+                          }}
+                        >
+                          There are no orders
+                        </h1>
                       </div>
-                      <div style={{ paddingLeft: "2rem" }}>
-                        <Text>Transfer Funds</Text>
-                        <Text color="gray" fontSize="12px">
-                          Success
-                        </Text>
+                    ) : (
+                      <InfiniteScroll
+                        dataLength={completedOrders.length}
+                        next={fetchMoreCompletedOrders}
+                        hasMore={
+                          Number(currentCompletedPage) !==
+                          Number(completedTotalPages)
+                        }
+                        loader={
+                          <h4 style={{ textAlign: "center", color: "#D6AA1B" }}>
+                            Loading...
+                          </h4>
+                        }
+                        scrollableTarget="scrollTarget"
+                        endMessage={
+                          <p
+                            style={{
+                              textAlign: "center",
+                              paddingTop: "7px",
+                              color: "#D6AA1B",
+                            }}
+                          >
+                            <b>No more orders</b>
+                          </p>
+                        }
+                      >
+                        {completedOrders.map((order) => (
+                          <div className="transactions" key={order.id}>
+                            <div className="transactions-inner">
+                              <div>
+                                <img src={plus} alt="plus" />
+                              </div>
+                              <div style={{ paddingLeft: "2rem" }}>
+                                <Text>{order.title}</Text>
+                                <Text color="gray" fontSize="12px">
+                                  {order.order_status}
+                                </Text>
+                              </div>
+                            </div>
+                            <div style={{ paddingRight: "2rem" }}>
+                              <Text fontSize="12px" color="green.500">
+                                ₦{order.amount}
+                              </Text>
+                              <Text fontSize="12px" color="gray">
+                                {new Date(order.createdAt).toLocaleDateString(
+                                  "fr"
+                                )}
+                              </Text>
+                            </div>
+                          </div>
+                        ))}
+                      </InfiniteScroll>
+                    )}
+                  </TabPanel>
+                  <TabPanel className="trans-tab" id="cancelled-order">
+                    {isFetching ? (
+                      <div style={{ textAlign: "center" }}>
+                        <Spinner
+                          thickness="4px"
+                          speed="0.65s"
+                          emptyColor="yellow.200"
+                          color="yellow.500"
+                          size="xl"
+                        />
                       </div>
-                    </div>
-
-                    <div style={{ paddingRight: "2rem" }}>
-                      <Text fontSize="12px" color="green.500">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
-                    </div>
-                  </div> */}
-                {/* <div className="transactions">
-                    <div className="transactions-inner">
+                    ) : cancelledOrders.length === 0 ? (
                       <div>
-                        <img src={plus} alt="plus" />
+                        <h1
+                          style={{
+                            textAlign: "center",
+                            paddingTop: "18px",
+                            color: "#D6AA1B",
+                            fontWeight: "700",
+                            paddingBottom: "18px",
+                          }}
+                        >
+                          There are no orders
+                        </h1>
                       </div>
-                      <div style={{ paddingLeft: "2rem" }}>
-                        <Text>Transfer Funds</Text>
-                        <Text color="gray" fontSize="12px">
-                          Success
-                        </Text>
-                      </div>
-                    </div>
-
-                    <div style={{ paddingRight: "2rem" }}>
-                      <Text fontSize="12px" color="green.500">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
-                    </div>
-                  </div> */}
-                {/* <div className="transactions">
-                    <div className="transactions-inner">
-                      <div>
-                        <img src={plus} alt="plus" />
-                      </div>
-                      <div style={{ paddingLeft: "2rem" }}>
-                        <Text>Transfer Funds</Text>
-                        <Text color="gray" fontSize="12px">
-                          Success
-                        </Text>
-                      </div>
-                    </div>
-
-                    <div style={{ paddingRight: "2rem" }}>
-                      <Text fontSize="12px" color="green.500">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
-                    </div>
-                  </div> */}
-                {/* <div className="transactions">
-                    <div className="transactions-inner">
-                      <div>
-                        <img src={plus} alt="plus" />
-                      </div>
-                      <div style={{ paddingLeft: "2rem" }}>
-                        <Text>Transfer Funds</Text>
-                        <Text color="gray" fontSize="12px">
-                          Success
-                        </Text>
-                      </div>
-                    </div>
-
-                    <div style={{ paddingRight: "2rem" }}>
-                      <Text fontSize="12px" color="green.500">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
-                    </div>
-                  </div> */}
-                {/* <div className="transactions">
-                    <div className="transactions-inner">
-                      <div>
-                        <img src={plus} alt="plus" />
-                      </div>
-                      <div style={{ paddingLeft: "2rem" }}>
-                        <Text>Transfer Funds</Text>
-                        <Text color="gray" fontSize="12px">
-                          Success
-                        </Text>
-                      </div>
-                    </div>
-
-                    <div style={{ paddingRight: "2rem" }}>
-                      <Text fontSize="12px" color="green.500">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
-                    </div>
-                  </div> */}
-                {/* <div className="transactions">
-                    <div className="transactions-inner">
-                      <div>
-                        <img src={plus} alt="plus" />
-                      </div>
-                      <div style={{ paddingLeft: "2rem" }}>
-                        <Text>Transfer Funds</Text>
-                        <Text color="gray" fontSize="12px">
-                          Success
-                        </Text>
-                      </div>
-                    </div>
-
-                    <div style={{ paddingRight: "2rem" }}>
-                      <Text fontSize="12px" color="green.500">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
-                    </div>
-                  </div> */}
-                {/* <div className="transactions">
-                    <div className="transactions-inner">
-                      <div>
-                        <img src={plus} alt="plus" />
-                      </div>
-                      <div style={{ paddingLeft: "2rem" }}>
-                        <Text>Transfer Funds</Text>
-                        <Text color="gray" fontSize="12px">
-                          Success
-                        </Text>
-                      </div>
-                    </div>
-
-                    <div style={{ paddingRight: "2rem" }}>
-                      <Text fontSize="12px" color="green.500">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
-                    </div>
-                  </div> */}
-
-                <TabPanel className="trans-tab">
-                  <div className="transactions">
-                    <div className="transactions-inner">
-                      <div>
-                        <img src={plus} alt="plus" />
-                      </div>
-                      <div style={{ paddingLeft: "2rem" }}>
-                        <Text>Transfer Funds</Text>
-                        <Text color="gray" fontSize="12px">
-                          Success
-                        </Text>
-                      </div>
-                    </div>
-
-                    <div style={{ paddingRight: "2rem" }}>
-                      <Text fontSize="12px" color="green.500">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
-                    </div>
-                  </div>
-                  <div className="transactions">
-                    <div className="transactions-inner">
-                      <div>
-                        <img src={plus} alt="plus" />
-                      </div>
-                      <div style={{ paddingLeft: "2rem" }}>
-                        <Text>Transfer Funds</Text>
-                        <Text color="gray" fontSize="12px">
-                          Success
-                        </Text>
-                      </div>
-                    </div>
-
-                    <div style={{ paddingRight: "2rem" }}>
-                      <Text fontSize="12px" color="green.500">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
-                    </div>
-                  </div>
-                  <div className="transactions">
-                    <div className="transactions-inner">
-                      <div>
-                        <img src={plus} alt="plus" />
-                      </div>
-                      <div style={{ paddingLeft: "2rem" }}>
-                        <Text>Transfer Funds</Text>
-                        <Text color="gray" fontSize="12px">
-                          Success
-                        </Text>
-                      </div>
-                    </div>
-
-                    <div style={{ paddingRight: "2rem" }}>
-                      <Text fontSize="12px" color="green.500">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
-                    </div>
-                  </div>
-                </TabPanel>
-              </TabPanels>
-            </Tabs>
+                    ) : (
+                      <InfiniteScroll
+                        dataLength={cancelledOrders.length}
+                        next={fetchMoreCancelledOrders}
+                        hasMore={
+                          Number(currentCancelledPage) !==
+                          Number(cancelledTotalPages)
+                        }
+                        loader={
+                          <h4 style={{ textAlign: "center", color: "#D6AA1B" }}>
+                            Loading...
+                          </h4>
+                        }
+                        scrollableTarget="scrollTarget"
+                        endMessage={
+                          <p
+                            style={{
+                              textAlign: "center",
+                              paddingTop: "7px",
+                              color: "#D6AA1B",
+                            }}
+                          >
+                            <b>No more orders</b>
+                          </p>
+                        }
+                      >
+                        {cancelledOrders.map((order) => (
+                          <div className="transactions" key={order.id}>
+                            <div className="transactions-inner">
+                              <div>
+                                <img src={plus} alt="plus" />
+                              </div>
+                              <div style={{ paddingLeft: "2rem" }}>
+                                <Text>{order.title}</Text>
+                                <Text color="gray" fontSize="12px">
+                                  {order.order_status}
+                                </Text>
+                              </div>
+                            </div>
+                            <div style={{ paddingRight: "2rem" }}>
+                              <Text fontSize="12px" color="green.500">
+                                ₦{order.amount}
+                              </Text>
+                              <Text fontSize="12px" color="gray">
+                                {new Date(order.createdAt).toLocaleDateString(
+                                  "fr"
+                                )}
+                              </Text>
+                            </div>
+                          </div>
+                        ))}
+                      </InfiniteScroll>
+                    )}
+                  </TabPanel>
+                </TabPanels>
+              </Tabs>
+            </div>
           </div>
         </div>
       </BusinessLayout>

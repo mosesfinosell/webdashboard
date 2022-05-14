@@ -1,0 +1,215 @@
+.payment {
+  background: #e5e5e5;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.payment-holder {
+  width: 60%;
+  margin: 0 auto;
+}
+.payment-center {
+  height: 80%;
+  background: #ffffff;
+  border: 0.5px solid #d9d9d9;
+  box-sizing: border-box;
+  border-radius: 0px 21px 21px 21px;
+}
+.payment-logo {
+  padding-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+.payment-select {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 100%;
+  text-align: center;
+  letter-spacing: -0.025em;
+  color: #273b4a;
+  padding-top: 3.5rem;
+}
+.payment-change {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  text-align: center;
+  letter-spacing: -0.01em;
+  color: #d6aa1b;
+  padding-top: 0.9rem;
+  cursor: pointer;
+}
+.payment-divider {
+  width: 80%;
+  margin: 0 auto;
+  /* background: green; */
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.4rem;
+}
+.payment-divider-left {
+  width: 45%;
+  background: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  border: 0.5px solid #d9d9d9;
+  box-sizing: border-box;
+  border-radius: 0px 11px 11px 11px;
+  padding: 1.7rem 2.5rem;
+}
+.payment-divider-right {
+  width: 45%;
+  background: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  border: 0.5px solid #d9d9d9;
+  box-sizing: border-box;
+  border-radius: 0px 11px 11px 11px;
+  padding: 1.7rem 2.5rem;
+}
+.payment-name {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: -0.01em;
+  color: #8c8c8c;
+}
+.bank-right {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 100%;
+  text-align: right;
+  letter-spacing: -0.01em;
+  color: #273b4a;
+}
+.payment-amt {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 100%;
+  text-align: right;
+  letter-spacing: -0.01em;
+  color: #273b4a;
+}
+.paid {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 12px;
+  color: #273b4a;
+  padding-left: 0.9rem;
+}
+.paid-div {
+  border: 0.5px solid #d9d9d9;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 1rem 5rem;
+}
+.pay-div {
+  border: 0.5px solid #d9d9d9;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 1.6rem 5rem;
+  justify-content: space-between;
+}
+.payment-bottom {
+  background: #fafafa;
+  border-radius: 0px 21px 21px 21px;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 1.7rem;
+  padding: 6rem 0;
+}
+.ussd {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 100%;
+  text-align: center;
+  letter-spacing: -0.01em;
+  color: #273b4a;
+}
+.ussd-btn {
+  width: 80%;
+  margin: 0 auto;
+}
+.change-bank {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 100%;
+  text-align: center;
+  letter-spacing: -0.01em;
+  color: #d6aa1b;
+  padding-top: 1.4rem;
+  padding-bottom: 1.4rem;
+  cursor: pointer;
+}
+.dial {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  text-align: center;
+  letter-spacing: -0.01em;
+  padding-bottom: 1rem;
+
+  color: #8c8c8c;
+}
+.payment-base {
+  margin-top: 1.5rem;
+}
+.payment-bases {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 2rem;
+}
+
+.payment-bases form {
+  width: 100%;
+  border: none;
+}
+.form-split {
+  display: flex;
+  justify-content: space-between;
+}
+.form-split-base {
+  width: 45%;
+}
+.card-save {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.card-toggle {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 23px;
+  color: #273b4a;
+}
+.toggle-div {
+  /* background: #D9D9D9; */
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 36px;
+  color: #d9d9d9;
+}
+.mono {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}

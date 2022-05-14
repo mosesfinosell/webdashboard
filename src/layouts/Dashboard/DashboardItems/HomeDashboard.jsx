@@ -101,6 +101,7 @@ export default function HomeDash() {
             </Text>
             <div className="act-box-holder">
               <div className="act-box">
+      
                 <div>
                   <img src={plus} alt="plus" />
                 </div>
