@@ -40,6 +40,10 @@ import UssdConfirmation from "../src/layouts/Dashboard/DashboardItems/UssdConfir
 import PayWithTransfer from "../src/layouts/Dashboard/DashboardItems/PayWithTransfer";
 import BankPayment from "../src/layouts/Dashboard/DashboardItems/BankPayment";
 import Home from "../src/layouts/Home";
+import Individual from "./layouts/Individual";
+import Business from "./layouts/Business";
+import Terms from "./layouts/Terms";
+import Pricing from "./layouts/Pricing";
 function App() {
   return (
     <Router>
@@ -50,6 +54,26 @@ function App() {
           exact
           path="/home"
           component={Home}
+        />
+         <Route
+          exact
+          path="/individual"
+          component={Individual}
+        />
+         <Route
+          exact
+          path="/business-home"
+          component={Business}
+        />
+        <Route
+          exact
+          path="/terms"
+          component={Terms}
+        />
+ <Route
+          exact
+          path="/pricing"
+          component={Pricing}
         />
         <Route
           exact
