@@ -29,23 +29,24 @@ export default function AddMoneyModal() {
 	const [show, setShow] = useState(false);
 	const [amount, setAmount] = useState("");
 	const handleClick = () => setShow(!show);
+	const userInfo = useSelector((state) => state.personalReducer.userInfo)	
+
 	
-	const personalSignIn = useSelector((state) => state.personalSignIn);
-	const { user} = personalSignIn;
-    const {userDetails} = user
-	const {message} = userDetails
+	// const personalSignIn = useSelector((state) => state.personalSignIn);
+	// const { user} = personalSignIn;
+    // const {userDetails} = user
+	// const {message} = userDetails
 
 	// PAYSTACK CONFIG
-
 	const config = {
 		reference: new Date().getTime().toString(),
-		email: message.email,
+		email: userInfo.email,
 		amount: amount * 100 ,
-		publicKey: message.public_key
+		publicKey: userInfo.public_key
 	};
 	
 	 const handleSuccess = (message) => {
-			// Implementation for whatever you want to do with reference and after success call.
+	// Implementation for whatever you want to do with reference and after success call.
 			console.log(message);
 		};
 
@@ -59,7 +60,7 @@ export default function AddMoneyModal() {
   
 	return (
 		<>
-			<Stack
+			{/* <Stack
 				pr='30px'
 				color='yellow.500'
 				bg='yellow.100'
@@ -69,7 +70,7 @@ export default function AddMoneyModal() {
 				fontSize='24px'
 				onClick={onOpen}>
 				<BsPlusSquare />
-			</Stack>
+			</Stack> */}
 			<Modal
 				isOpen={isOpen}
 				onClose={onClose}

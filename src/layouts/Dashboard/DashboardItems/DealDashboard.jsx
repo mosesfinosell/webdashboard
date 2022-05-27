@@ -1,43 +1,356 @@
-import {Formik,Form,Field} from 'formik'
+import { Formik, Form, Field } from "formik";
 import {
-	Grid,
-	Box,
-	GridItem,
-	Container,
-	Text,
-	Stack,
-	Button,
-	Flex,
-	Image,
-	Center,
-	Input,
-    InputLeftElement,
-    InputRightElement,
-    InputGroup,
-    FormControl,
-    FormLabel,
-    FormErrorMessage,
-	Tabs,
-	TabList,
-	TabPanels,
-	Tab,
-	TabPanel,
-	Select
-} from '@chakra-ui/react';
-import { BiShoppingBag } from 'react-icons/bi';
-import { Redirect } from 'react-router-dom';
-import box from '../../../assets/box.svg';
-import {BiSearchAlt2} from "react-icons/bi";
-import {FaAngleDown} from 'react-icons/fa'
-import {useState} from 'react'
+  Grid,
+  Box,
+  GridItem,
+  Container,
+  Text,
+  Stack,
+  Button,
+  Flex,
+  Image,
+  Center,
+  Input,
+  InputLeftElement,
+  InputRightElement,
+  InputGroup,
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  Select,
+} from "@chakra-ui/react";
+import { BiShoppingBag } from "react-icons/bi";
+import { Redirect } from "react-router-dom";
+import box from "../../../assets/box.svg";
+import { BiSearchAlt2 } from "react-icons/bi";
+import { FaAngleDown } from "react-icons/fa";
+import { useState } from "react";
+import Layout from "../../../component/Layout/Layout";
+import "../../Dashboard/Dash.css";
+import plus from "../../../assets/plus.svg";
 
 export default function DealDashboard() {
-	const [search,setSearch] = useState('')
+  const [search, setSearch] = useState("");
 
-	
-	
-	return (
-		<Container m='40px' maxW='container.lg'>
+  return (
+    <Layout>
+      <div className="dash-cover">
+        <div className="left-deal-dash">
+          <Text className="history" color="gray">
+            Action
+          </Text>
+          <div className="deals-left">
+            <Text
+              fontSize="42px"
+              fontWeight="bold"
+            //   w="250px"
+              textAlign="center"
+			  paddingTop="6rem"
+            >
+              Find a Deal
+            </Text>
+            <div className="search-div">
+              <InputGroup>
+                <InputLeftElement
+                  pointerEvents="none"
+                  m="29px 3px"
+                  fontSize="25px"
+                  color="gray.400"
+                  children={<BiSearchAlt2 />}
+                />
+                <Input
+                  mb="25px"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="What are you looking for?"
+                //   width="8px"
+                  h="95px"
+                  borderRadius="0px 11px 11px 11px"
+				  backgroundColor="#FAFAFA"
+                />
+              </InputGroup>
+            </div>
+            <div className="select-div">
+              <Select
+                id="country"
+                color="gray.400"
+                placeholder="Filter by location"
+                // width="350px"
+                h="95px"
+                borderRadius="0px 11px 11px 11px"
+              >
+                <option color="gray.400">United Arab Emirates</option>
+                <option color="gray.400">Nigeria</option>
+              </Select>
+            </div>
+            <div className="btn-div">
+              <Button
+                bg="yellow.500"
+                width="90%"
+                h="95px"
+                borderRadius="0px 11px 11px 11px"
+                type="submit"
+                color="white"
+                _hover={{ bg: "#1A202C" }}
+              >
+                Search
+              </Button>
+            </div>
+          </div>
+        </div>
+        <div className="right-deal-dash">
+          <Text className="history" color="gray">
+            Deal History
+          </Text>
+
+          <Tabs variant="unstyled">
+            <div className="payment-div">
+              <TabList style={{ paddingLeft: "1.7rem" }}>
+                <Tab fontSize="16px" fontWeight="bold" color="black">
+                  Escrow
+                </Tab>
+                <Tab fontSize="16px" fontWeight="bold" color="black">
+                  Direct
+                </Tab>
+              </TabList>
+            </div>
+
+            <TabPanels>
+              <TabPanel className="trans-tab">
+                <div className="transactions">
+                  <div className="transactions-inner">
+                    <div>
+                      <img src={plus} alt="plus" />
+                    </div>
+                    <div style={{ paddingLeft: "2rem" }}>
+                      <Text>Transfer Funds</Text>
+                      <Text color="gray" fontSize="12px">
+                        Success
+                      </Text>
+                    </div>
+                  </div>
+
+                  <div style={{ paddingRight: "2rem" }}>
+                    <Text fontSize="12px" color="green.500">
+                      ₦12,000
+                    </Text>
+                    <Text fontSize="12px" color="gray">
+                      Jan 3, 2022
+                    </Text>
+                  </div>
+                </div>
+                <div className="transactions">
+                  <div className="transactions-inner">
+                    <div>
+                      <img src={plus} alt="plus" />
+                    </div>
+                    <div style={{ paddingLeft: "2rem" }}>
+                      <Text>Transfer Funds</Text>
+                      <Text color="gray" fontSize="12px">
+                        Success
+                      </Text>
+                    </div>
+                  </div>
+
+                  <div style={{ paddingRight: "2rem" }}>
+                    <Text fontSize="12px" color="green.500">
+                      ₦12,000
+                    </Text>
+                    <Text fontSize="12px" color="gray">
+                      Jan 3, 2022
+                    </Text>
+                  </div>
+                </div>
+                <div className="transactions">
+                  <div className="transactions-inner">
+                    <div>
+                      <img src={plus} alt="plus" />
+                    </div>
+                    <div style={{ paddingLeft: "2rem" }}>
+                      <Text>Transfer Funds</Text>
+                      <Text color="gray" fontSize="12px">
+                        Success
+                      </Text>
+                    </div>
+                  </div>
+
+                  <div style={{ paddingRight: "2rem" }}>
+                    <Text fontSize="12px" color="green.500">
+                      ₦12,000
+                    </Text>
+                    <Text fontSize="12px" color="gray">
+                      Jan 3, 2022
+                    </Text>
+                  </div>
+                </div>
+                <div className="transactions">
+                  <div className="transactions-inner">
+                    <div>
+                      <img src={plus} alt="plus" />
+                    </div>
+                    <div style={{ paddingLeft: "2rem" }}>
+                      <Text>Transfer Funds</Text>
+                      <Text color="gray" fontSize="12px">
+                        Success
+                      </Text>
+                    </div>
+                  </div>
+
+                  <div style={{ paddingRight: "2rem" }}>
+                    <Text fontSize="12px" color="green.500">
+                      ₦12,000
+                    </Text>
+                    <Text fontSize="12px" color="gray">
+                      Jan 3, 2022
+                    </Text>
+                  </div>
+                </div>
+                <div className="transactions">
+                  <div className="transactions-inner">
+                    <div>
+                      <img src={plus} alt="plus" />
+                    </div>
+                    <div style={{ paddingLeft: "2rem" }}>
+                      <Text>Transfer Funds</Text>
+                      <Text color="gray" fontSize="12px">
+                        Success
+                      </Text>
+                    </div>
+                  </div>
+
+                  <div style={{ paddingRight: "2rem" }}>
+                    <Text fontSize="12px" color="green.500">
+                      ₦12,000
+                    </Text>
+                    <Text fontSize="12px" color="gray">
+                      Jan 3, 2022
+                    </Text>
+                  </div>
+                </div>
+                <div className="transactions">
+                  <div className="transactions-inner">
+                    <div>
+                      <img src={plus} alt="plus" />
+                    </div>
+                    <div style={{ paddingLeft: "2rem" }}>
+                      <Text>Transfer Funds</Text>
+                      <Text color="gray" fontSize="12px">
+                        Success
+                      </Text>
+                    </div>
+                  </div>
+
+                  <div style={{ paddingRight: "2rem" }}>
+                    <Text fontSize="12px" color="green.500">
+                      ₦12,000
+                    </Text>
+                    <Text fontSize="12px" color="gray">
+                      Jan 3, 2022
+                    </Text>
+                  </div>
+                </div>
+                <div className="transactions">
+                  <div className="transactions-inner">
+                    <div>
+                      <img src={plus} alt="plus" />
+                    </div>
+                    <div style={{ paddingLeft: "2rem" }}>
+                      <Text>Transfer Funds</Text>
+                      <Text color="gray" fontSize="12px">
+                        Success
+                      </Text>
+                    </div>
+                  </div>
+
+                  <div style={{ paddingRight: "2rem" }}>
+                    <Text fontSize="12px" color="green.500">
+                      ₦12,000
+                    </Text>
+                    <Text fontSize="12px" color="gray">
+                      Jan 3, 2022
+                    </Text>
+                  </div>
+                </div>
+              </TabPanel>
+
+              <TabPanel className="trans-tab">
+                <div className="transactions">
+                  <div className="transactions-inner">
+                    <div>
+                      <img src={plus} alt="plus" />
+                    </div>
+                    <div style={{ paddingLeft: "2rem" }}>
+                      <Text>Transfer Funds</Text>
+                      <Text color="gray" fontSize="12px">
+                        Success
+                      </Text>
+                    </div>
+                  </div>
+
+                  <div style={{ paddingRight: "2rem" }}>
+                    <Text fontSize="12px" color="green.500">
+                      ₦12,000
+                    </Text>
+                    <Text fontSize="12px" color="gray">
+                      Jan 3, 2022
+                    </Text>
+                  </div>
+                </div>
+                <div className="transactions">
+                  <div className="transactions-inner">
+                    <div>
+                      <img src={plus} alt="plus" />
+                    </div>
+                    <div style={{ paddingLeft: "2rem" }}>
+                      <Text>Transfer Funds</Text>
+                      <Text color="gray" fontSize="12px">
+                        Success
+                      </Text>
+                    </div>
+                  </div>
+
+                  <div style={{ paddingRight: "2rem" }}>
+                    <Text fontSize="12px" color="green.500">
+                      ₦12,000
+                    </Text>
+                    <Text fontSize="12px" color="gray">
+                      Jan 3, 2022
+                    </Text>
+                  </div>
+                </div>
+                <div className="transactions">
+                  <div className="transactions-inner">
+                    <div>
+                      <img src={plus} alt="plus" />
+                    </div>
+                    <div style={{ paddingLeft: "2rem" }}>
+                      <Text>Transfer Funds</Text>
+                      <Text color="gray" fontSize="12px">
+                        Success
+                      </Text>
+                    </div>
+                  </div>
+
+                  <div style={{ paddingRight: "2rem" }}>
+                    <Text fontSize="12px" color="green.500">
+                      ₦12,000
+                    </Text>
+                    <Text fontSize="12px" color="gray">
+                      Jan 3, 2022
+                    </Text>
+                  </div>
+                </div>
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
+        </div>
+      </div>
+      {/* <Container m='40px' maxW='container.lg'>
 			<Grid h='800px' templateColumns='repeat(5, 1fr)'>
 				<GridItem colSpan={4} rowSpan={6} bg='white' gap='5'>
 					<Stack pt='23'>
@@ -115,7 +428,7 @@ export default function DealDashboard() {
   </Center>
          </Flex>
 </Box>
-					{/* <Box
+					<Box
 						w='400px'
 						h='80%'
 						borderRadius='0px 11px 11px 11px'
@@ -151,7 +464,7 @@ export default function DealDashboard() {
 							</Center>
 						</Flex>
 					</Box>
-					 */}
+					
 				</GridItem>
 				<GridItem colStart={6} colEnd={9} h='10' bg='white'>
 					<Stack m='10px'>
@@ -395,6 +708,7 @@ export default function DealDashboard() {
 					</Tabs>
 				</GridItem>
 			</Grid>
-		</Container>
-	);
+		</Container> */}
+    </Layout>
+  );
 }

@@ -24,7 +24,7 @@ import { MdEmail, MdWifiCalling3 } from 'react-icons/md';
 import { useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useDispatch,useSelector } from 'react-redux';
-import  {createCustomers} from '../../../../ReduxContianer/BussinessRedux/BusinessAction'
+// import  {createCustomers} from '../../../../ReduxContianer/BussinessRedux/BusinessAction'
 	
 	
 export default function CreateCustomer() {
@@ -45,7 +45,7 @@ const dispatch = useDispatch();
 
 	function handleSubmit(e) {
 		e.preventDefault();
-		dispatch(createCustomers(customerName,customerEmail,customerPhonenumber,customerAddress, businessId, randomNumber))
+		// dispatch(createCustomers(customerName,customerEmail,customerPhonenumber,customerAddress, businessId, randomNumber))
 		
 	}
 

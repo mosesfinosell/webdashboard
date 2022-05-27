@@ -33,7 +33,7 @@ import { useColorModeValue } from '@chakra-ui/color-mode';
 import { BiPencil } from 'react-icons/bi';
 import shoe from '../../../../assets/shoe.svg';
 import ProductModal from './addProductModal';
-import { createProduct } from '../../../../ReduxContianer/BussinessRedux/BusinessAction';
+// import { createProduct } from '../../../../ReduxContianer/BussinessRedux/BusinessAction';
 import { useSelector, useDispatch} from 'react-redux'
 //   import ProductModal from '../../../Dashboard/BusinessDashboard/BusinessDashboard'
 
@@ -55,18 +55,18 @@ const dispatch = useDispatch();
 
 	function handleSubmit(e) {
 		e.preventDefault();
-       dispatch(
-					createProduct(
-						title,
-						phoneNumber,
-						price,
-						color,
-						description,
-						category,
-						size,
-						image
-					)
-				);
+    //    dispatch(
+	// 				createProduct(
+	// 					title,
+	// 					phoneNumber,
+	// 					price,
+	// 					color,
+	// 					description,
+	// 					category,
+	// 					size,
+	// 					image
+	// 				)
+	// 			);
 		console.log(title,phoneNumber,price,color,description,category,size,image)
 	}
 
