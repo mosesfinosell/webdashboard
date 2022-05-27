@@ -49,7 +49,7 @@ function App() {
     <Router>
       <div className="App">
         {/* <Switch> */}
-        <Route exact path="/" component={AccountBox} />
+        <Route exact path="/account" component={AccountBox} />
         <Route
           exact
           path="/home"

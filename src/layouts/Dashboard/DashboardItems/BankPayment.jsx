@@ -4,11 +4,26 @@ import "./payment.css";
 import Logomark from "../../../assets/Logomark.svg";
 import mono from "../../../assets/mono.svg";
 import { useHistory } from "react-router-dom";
-
+import { MonoButton, useMono } from 'react-mono-js';
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
 function PayWithCard() {
+    const config = {
+        public_key: 'test_pk_UTSE2b9lxLYx7usd2mHn ',
+        onClose: () => {},
+        onSuccess: (response) => {
+          console.log(response.code);
+    
+          /**
+            response : { "code": "code_xyz" }
+            you can send this code back to your server to get this
+            authenticated account and start making requests.
+          */
+        },
+      };
+    
+      const handleMono = useMono({ public_key: 'test_pk_UTSE2b9lxLYx7usd2mHn ' });
   const history = useHistory();
   const initialValues = {
     bank: "",
@@ -72,6 +87,7 @@ function PayWithCard() {
             >
               Proceed
             </Button>
+            <MonoButton {...config} text="Connect bank with Mono!" />
           </div>
         </div>
       </div>

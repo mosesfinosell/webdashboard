@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Logomark from "../assets/Logomark.svg";
 import "./home.css";
 import webapp from "../assets/webapp.svg";
@@ -12,34 +12,62 @@ import {
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import { Text, Image } from "@chakra-ui/react";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBars,
+  faCaretUp,
+  faCaretDown,
+} from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 function Pricing() {
+  const [products, setProducts] = useState(false);
   return (
     <React.Fragment>
       <header>
-        <a href="#" className="logos">
+        <Link to="/home" className="logos">
           <Image src={Logomark} alt="logo" />
-        </a>
+        </Link>
         <input id="menu-bar" type="checkbox" />
 
         <label for="menu-bar" class="checkbtn">
-        <FontAwesomeIcon
-            icon={faBars}
-            className="socials"
-          />
+          <FontAwesomeIcon icon={faBars} className="socials" />
         </label>
-        <nav className="navcheck">
-          <a href="#features">About</a>
-          <a href="#latest">Products</a>
-          <a href="#review">Pricing</a>
-          <a href="#contact">Help</a>
-          <a href="#contact">Blog</a>
-          <a id="login" href="#login">
-            Log in
-          </a>
-          <a id="register" href="#register">
-            Create Account
-          </a>
+        <nav className="navbar">
+          <ul>
+            <li>
+              <Link to="/terms">About</Link>
+            </li>
+            <li onClick={() => setProducts(!products)}>
+              <a href="#!">
+                Products{" "}
+                <FontAwesomeIcon
+                  icon={products ? faCaretUp : faCaretDown}
+                  style={{ paddingLeft: "3px", paddingTop: "3px" }}
+                />
+              </a>
+              <ul className={products ? "navbar-dropdown" : "navbar-none"}>
+                <li className="dropdown-list">
+                  <Link to="/individual">Individual</Link>
+                </li>
+                <li className="dropdown-list">
+                  <Link to="business-home">Business</Link>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <Link to="/pricing">Pricing</Link>
+            </li>
+            <li>
+              <a href="#!">Help</a>
+            </li>
+            <li>
+              <a href="#!">Login</a>
+            </li>
+            <li>
+              <Link to="/account" id="register">
+                Create Account
+              </Link>
+            </li>
+          </ul>
         </nav>
       </header>
       <section className="terms">

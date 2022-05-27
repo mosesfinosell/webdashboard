@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./home.css";
 import Logomark from "../assets/Logomark.svg";
 import { Text, Image, Button } from "@chakra-ui/react";
@@ -30,56 +30,88 @@ import produp from "../assets/produp.svg";
 import payment from "../assets/payment.svg";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPhone } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPhone,
+  faCaretDown,
+  faBars,
+  faCaretUp,
+} from "@fortawesome/free-solid-svg-icons";
 import {
   faInstagram,
   faFacebook,
   faLinkedin,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+// import { faBars } from "@fortawesome/free-regular-svg-icons";
 function Home() {
+  const [products, setProducts] = useState(false);
   const yellowbtn = useColorModeValue("yellow.500");
   return (
     <React.Fragment>
       <header>
-        <a href="#" className="logos">
+        <Link to="/home" className="logos">
           <Image src={Logomark} alt="logo" />
-        </a>
+        </Link>
         <input id="menu-bar" type="checkbox" />
 
         <label for="menu-bar" class="checkbtn">
           <FontAwesomeIcon icon={faBars} className="socials" />
         </label>
-        <nav className="navcheck">
-          <a href="#features">About</a>
-          <a href="#latest">Products</a>
-          <a href="#review">Pricing</a>
-          <a href="#contact">Help</a>
-          <a href="#contact">Blog</a>
-          <a id="login" href="#login">
-            Log in
-          </a>
-          <a id="register" href="#register">
-            Create Account
-          </a>
+        <nav className="navbar">
+          <ul>
+            <li>
+              <Link to="/terms">About</Link>
+            </li>
+            <li onClick={() => setProducts(!products)}>
+              <a href="#!">
+                Products{" "}
+                <FontAwesomeIcon
+                  icon={products ? faCaretUp : faCaretDown}
+                  style={{ paddingLeft: "3px", paddingTop: "3px" }}
+                />
+              </a>
+              <ul className={products ? "navbar-dropdown" : "navbar-none"}>
+                <li className="dropdown-list">
+                  <Link to="/individual">Individual</Link>
+                </li>
+                <li className="dropdown-list">
+                  <Link to="business-home">Business</Link>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <Link to="/pricing">Pricing</Link>
+            </li>
+            <li>
+              <a href="#!">Help</a>
+            </li>
+            <li>
+              <a href="#!">Login</a>
+            </li>
+            <li>
+              <Link to="/account" id="register">
+                Create Account
+              </Link>
+            </li>
+          </ul>
         </nav>
       </header>
 
       <section className="banner">
         <div className="inner-bckground">
           <div class="banner-1">
-              <div className="banner-holder">
+            <div className="banner-holder">
               <Text className="bold-desc">
-              Manage all your <br />
-              finance and business in one place
-            </Text>
-            <Text className="abt-fin">
-              A financial and business management App for business owners and
-              individuals.
-            </Text>
-              </div>
-        
+                Manage all your <br />
+                finance and business in one place
+              </Text>
+              <Text className="abt-fin">
+                A financial and business management App for business owners and
+                individuals.
+              </Text>
+            </div>
+
             <div class="save">
               <Text id="free">Try Finosell for free</Text>
             </div>
@@ -97,10 +129,10 @@ function Home() {
               </div>
             </div>
             <div className="downloads">
-              <div>
+              <div className="goog-img">
                 <Image src={google} alt="google" />
               </div>
-              <div>
+              <div className="goog-imgs">
                 <Image src={apple} alt="apple" className="apps" />
               </div>
             </div>
