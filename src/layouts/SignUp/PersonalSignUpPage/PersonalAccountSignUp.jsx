@@ -119,8 +119,10 @@ export default function PersonalAccountSignUp() {
           Use your personal information
         </Text>
         <div className="cont">
-          <FormLabel htmlFor="name">Name</FormLabel>
-          <InputGroup>
+          <FormLabel htmlFor="name" className="lab">
+            Name
+          </FormLabel>
+          <InputGroup className="int-grp">
             <InputLeftElement
               pointerEvents="none"
               m="15px 1px"
@@ -132,20 +134,23 @@ export default function PersonalAccountSignUp() {
               type="name"
               placeholder="John Doe"
               width="100%"
-              h="73px"
+              // h="73px"
               borderRadius="0px 11px 11px 11px"
               name="name"
               id="name"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.name}
+              className="inp-ht"
             />
           </InputGroup>
           {formik.touched.name && formik.errors.name ? (
             <span className="error-message">{formik.errors.name}</span>
           ) : null}
-          <FormLabel htmlFor="email">Email</FormLabel>
-          <InputGroup>
+          <FormLabel htmlFor="email" className="lab">
+            Email
+          </FormLabel>
+          <InputGroup className="int-grp">
             <InputLeftElement
               pointerEvents="none"
               m="15px 1px"
@@ -157,21 +162,24 @@ export default function PersonalAccountSignUp() {
               type="name"
               placeholder="hello@example.com"
               width="100%"
-              h="73px"
+              // h="73px"
               borderRadius="0px 11px 11px 11px"
               name="email"
               id="email"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
+              className="inp-ht"
             />
           </InputGroup>
           {formik.touched.email && formik.errors.email ? (
             <span className="error-message">{formik.errors.email}</span>
           ) : null}
 
-          <FormLabel htmlFor="phone_number">Phone Number</FormLabel>
-          <InputGroup>
+          <FormLabel htmlFor="phone_number" className="lab">
+            Phone Number
+          </FormLabel>
+          <InputGroup className="int-grp">
             <InputLeftElement
               pointerEvents="none"
               m="15px 1px"
@@ -183,21 +191,24 @@ export default function PersonalAccountSignUp() {
               type="name"
               placeholder="08012345678"
               width="100%"
-              h="73px"
+              // h="73px"
               borderRadius="0px 11px 11px 11px"
               name="phone_number"
               id="phone_number"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.phone_number}
+              className="inp-ht"
             />
           </InputGroup>
           {formik.touched.phone_number && formik.errors.phone_number ? (
             <span className="error-message">{formik.errors.phone_number}</span>
           ) : null}
 
-          <FormLabel htmlFor="password">Password</FormLabel>
-          <InputGroup>
+          <FormLabel htmlFor="password" className="lab">
+            Password
+          </FormLabel>
+          <InputGroup className="int-grp">
             <div>
               <InputLeftElement
                 pointerEvents="none"
@@ -226,7 +237,7 @@ export default function PersonalAccountSignUp() {
               type={show ? "name" : "password"}
               placeholder="*******"
               width="100%"
-              h="73px"
+              // h="73px"
               borderRadius="0px 11px 11px 11px"
               style={{ paddingLeft: "40px" }}
               id="password"
@@ -234,34 +245,39 @@ export default function PersonalAccountSignUp() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.password}
+              className="inp-ht"
             />
           </InputGroup>
           {formik.touched.password && formik.errors.password ? (
             <span className="error-message">{formik.errors.password}</span>
           ) : null}
-          <Button
-            mt={4}
-            bg={yellowbtn}
-            width="100%"
-            h="70px"
-            borderRadius="0px 11px 11px 11px"
-            type="submit"
-            color="white"
-            _hover={{ bg: "#1A202C" }}
-            isLoading={isLoading}
-            loadingText="Sign Up..."
-            spinnerPlacement="end"
-          >
-            Continue
-          </Button>
+          <div className="btn-cent">
+            <Button
+              mt={3}
+              mb={1}
+              bg={yellowbtn}
+              width="95%"
+              h="55px"
+              borderRadius="0px 11px 11px 11px"
+              type="submit"
+              color="white"
+              _hover={{ bg: "#1A202C" }}
+              isLoading={isLoading}
+              loadingText="Sign Up..."
+              spinnerPlacement="end"
+            >
+              Continue
+            </Button>
+          </div>
         </div>
         <Text
-          fontSize="18px"
-          lineHeight="5"
+          fontSize="16px"
+          // lineHeight="5"
           style={{
             justifyContent: "center",
             display: "flex",
-            paddingBottom: "2rem",
+            paddingTop: "0.2rem",
+            paddingBottom: "0.4rem",
           }}
         >
           Already have an account?
@@ -271,217 +287,5 @@ export default function PersonalAccountSignUp() {
         </Text>
       </form>
     </div>
-    // <Container maxW="container.lg">
-    //   <Box
-    //     p="50"
-    //     m="36"
-    //     boxSizing="border-box"
-    //     borderWidth="1px"
-    //     borderRadius="0px 21px 21px 21px"
-    //     overflow="hidden"
-    //   >
-    //     <Center>
-    //       <Stack>
-    //         <Image mb="15" src={logo} alt="logo" />
-    //       </Stack>
-    //     </Center>
-    //     <Center>
-    //       <Stack>
-    //         <Text fontSize="36px" mt="20px" fontWeight="bold" lineHeight="5">
-    //           Create Accounts
-    //         </Text>
-    //       </Stack>
-    //     </Center>
-    //     <Center>
-    //       <Stack mt={3}>
-    //         <Text color="gray">Use your personal information</Text>
-    //       </Stack>
-    //     </Center>
-    //     <Formik
-    //       validationSchema={SignupSchema}
-    //       initialValues={{
-    //         name: "",
-    //         phoneNumber: "",
-    //         email: "",
-    //         password: "",
-    //       }}
-    //     >
-    //       {() => (
-    //         <Center>
-    //           <Form onSubmit={handleSubmit}>
-    //             <Field name="name">
-    //               {({ field, form }) => (
-    //                 <FormControl
-    //                   isInvalid={form.errors.name && form.touched.name}
-    //                   mt={4}
-    //                 >
-    //                   <FormLabel htmlFor="name">Name</FormLabel>
-    //                   <InputGroup>
-    //                     <InputLeftElement
-    //                       pointerEvents="none"
-    //                       m="15px 1px"
-    //                       fontSize="20px"
-    //                       color="yellow.500"
-    //                       children={<FaUser />}
-    //                     />
-    //                     <Input
-    //                       {...field}
-    //                       type="name"
-    //                       value={name}
-    //                       onChange={(e) => setName(e.target.value)}
-    //                       placeholder="Jumoke Adetola"
-    //                       width="400px"
-    //                       h="70px"
-    //                       borderRadius="0px 11px 11px 11px"
-    //                     />
-    //                   </InputGroup>
-    //                   <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-    //                 </FormControl>
-    //               )}
-    //             </Field>
-    //             <Field name="email">
-    //               {({ field, form }) => (
-    //                 <FormControl
-    //                   isInvalid={form.errors.email && form.touched.email}
-    //                   mt={4}
-    //                 >
-    //                   <FormLabel htmlFor="email">Email</FormLabel>
-    //                   <InputGroup>
-    //                     <InputLeftElement
-    //                       pointerEvents="none"
-    //                       m="15px 1px"
-    //                       fontSize="20px"
-    //                       color="yellow.500"
-    //                       children={<MdEmail />}
-    //                     />
-    //                     <Input
-    //                       {...field}
-    //                       type="email"
-    //                       value={email}
-    //                       onChange={(e) => setEmail(e.target.value)}
-    //                       placeholder="Email Address"
-    //                       width="400px"
-    //                       h="70px"
-    //                       borderRadius="0px 11px 11px 11px"
-    //                     />
-    //                   </InputGroup>
-    //                   <FormErrorMessage>{form.errors.email}</FormErrorMessage>
-    //                 </FormControl>
-    //               )}
-    //             </Field>
-    //             <Field name="phoneNumber">
-    //               {({ field, form }) => (
-    //                 <FormControl
-    //                   isInvalid={
-    //                     form.errors.phoneNumber && form.touched.phoneNumber
-    //                   }
-    //                   mt={4}
-    //                 >
-    //                   <FormLabel htmlFor="name">Phone number</FormLabel>
-    //                   <InputGroup>
-    //                     <InputLeftElement
-    //                       pointerEvents="none"
-    //                       m="15px 1px"
-    //                       fontSize="20px"
-    //                       color="yellow.500"
-    //                       children={<MdWifiCalling3 />}
-    //                     />
-    //                     <Input
-    //                       {...field}
-    //                       value={phoneNumber}
-    //                       type="phoneNumber"
-    //                       onChange={(e) => setPhoneNumber(e.target.value)}
-    //                       placeholder="08012345678"
-    //                       width="400px"
-    //                       h="70px"
-    //                       borderRadius="0px 11px 11px 11px"
-    //                     />
-    //                   </InputGroup>
-    //                   <FormErrorMessage>
-    //                     {form.errors.phoneNumber}
-    //                   </FormErrorMessage>
-    //                 </FormControl>
-    //               )}
-    //             </Field>
-    //             <Field name="password">
-    //               {({ field, form }) => (
-    //                 <FormControl
-    //                   isInvalid={form.errors.password && form.touched.password}
-    //                   mt={4}
-    //                 >
-    //                   <FormLabel htmlFor="password">Password</FormLabel>
-    //                   <InputGroup>
-    //                     <InputLeftElement
-    //                       m="15px 1px"
-    //                       fontSize="18px"
-    //                       color="yellow.500"
-    //                       children={<FaLock />}
-    //                     />
-
-    //                     <InputRightElement
-    //                       pointerEvents="visible"
-    //                       m="20px 15px"
-    //                       color="yellow.500"
-    //                     >
-    //                       <Button
-    //                         onClick={handleClick}
-    //                         fontSize="25px"
-    //                         size="sm"
-    //                         b="transparent"
-    //                         cursor="pointer"
-    //                       >
-    //                         {show ? <FaEyeSlash /> : <FaEye />}
-    //                       </Button>
-    //                     </InputRightElement>
-    //                     <Input
-    //                       {...field}
-    //                       type={!show ? "password" : "text"}
-    //                       onClick={handleClick}
-    //                       onChange={(e) => setPassword(e.target.value)}
-    //                       value={password}
-    //                       placeholder="*********"
-    //                       width="400px"
-    //                       h="70px"
-    //                       borderRadius="0px 11px 11px 11px"
-    //                     />
-    //                   </InputGroup>
-    //                   <FormErrorMessage>
-    //                     {form.errors.password}
-    //                   </FormErrorMessage>
-    //                 </FormControl>
-    //               )}
-    //             </Field>
-    //             <Button
-    //               mt={4}
-    //               bg={yellowbtn}
-    //               width="400px"
-    //               h="70px"
-    //               borderRadius="0px 11px 11px 11px"
-    //               type="submit"
-    //               color="white"
-    //               _hover={{ bg: "#1A202C" }}
-    //               isLoading={isLoading}
-    //               loadingText="Sign Up..."
-    //               spinnerPlacement="end"
-    //               // onClick={handleButton}
-    //             >
-    //               Continue
-    //             </Button>
-    //           </Form>
-    //         </Center>
-    //       )}
-    //     </Formik>
-    //     <Center>
-    //       <Stack mt="5">
-    //         <Text fontSize="18px" lineHeight="5">
-    //           Already have an account?
-    //           <Text as={RLink} pl="2" to="/personal-signin" color="yellow.500">
-    //             Login
-    //           </Text>
-    //         </Text>
-    //       </Stack>
-    //     </Center>
-    //   </Box>
-    // </Container>
   );
 }
