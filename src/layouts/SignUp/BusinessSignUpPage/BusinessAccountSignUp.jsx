@@ -134,7 +134,7 @@ export default function BusinessAccountSignUp() {
         </div>
         <Text
           fontSize="36px"
-          mt="2"
+          mt="1"
           fontWeight="bold"
           lineHeight="3"
           className="welcome"
@@ -145,8 +145,10 @@ export default function BusinessAccountSignUp() {
           Use information about your business
         </Text>
         <div className="cont">
-          <FormLabel htmlFor="name">Name</FormLabel>
-          <InputGroup>
+          <FormLabel htmlFor="name" className="lab">
+            Name
+          </FormLabel>
+          <InputGroup className="int-grp">
             <InputLeftElement
               pointerEvents="none"
               m="15px 1px"
@@ -158,20 +160,23 @@ export default function BusinessAccountSignUp() {
               type="name"
               placeholder="John Doe"
               width="100%"
-              h="73px"
+              // h="73px"
               borderRadius="0px 11px 11px 11px"
               name="name"
               id="name"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.name}
+              className="input-ht"
             />
           </InputGroup>
           {formik.touched.name && formik.errors.name ? (
             <span className="error-message">{formik.errors.name}</span>
           ) : null}
-          <FormLabel htmlFor="email">Business Email</FormLabel>
-          <InputGroup>
+          <FormLabel htmlFor="email" className="lab">
+            Business Email
+          </FormLabel>
+          <InputGroup className="int-grp">
             <InputLeftElement
               pointerEvents="none"
               m="15px 1px"
@@ -183,21 +188,24 @@ export default function BusinessAccountSignUp() {
               type="name"
               placeholder="hello@business.com"
               width="100%"
-              h="73px"
+              // h="73px"
               borderRadius="0px 11px 11px 11px"
               name="email"
               id="email"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
+              className="input-ht"
             />
           </InputGroup>
           {formik.touched.email && formik.errors.email ? (
             <span className="error-message">{formik.errors.email}</span>
           ) : null}
 
-          <FormLabel htmlFor="phone_number">Phone Number</FormLabel>
-          <InputGroup>
+          <FormLabel htmlFor="phone_number" className="lab">
+            Phone Number
+          </FormLabel>
+          <InputGroup className="int-grp">
             <InputLeftElement
               pointerEvents="none"
               m="15px 1px"
@@ -209,23 +217,33 @@ export default function BusinessAccountSignUp() {
               type="name"
               placeholder="08012345678"
               width="100%"
-              h="73px"
+              // h="73px"
               borderRadius="0px 11px 11px 11px"
               name="phone_number"
               id="phone_number"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.phone_number}
+              className="input-ht"
             />
           </InputGroup>
           {formik.touched.phone_number && formik.errors.phone_number ? (
             <span className="error-message">{formik.errors.phone_number}</span>
           ) : null}
 
-          <div style={{ display: "flex", justifyContent: "spaceBetween" }}>
-            <div>
-              <FormLabel htmlFor="address">Address</FormLabel>
-              <InputGroup>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "spaceBetween",
+              width: "97%",
+              margin: "0 auto",
+            }}
+          >
+            <div style={{ width: "49%" }}>
+              <FormLabel htmlFor="address" className="lab">
+                Address
+              </FormLabel>
+              <InputGroup className="int-grp">
                 <InputLeftElement
                   pointerEvents="none"
                   m="15px 1px"
@@ -237,13 +255,14 @@ export default function BusinessAccountSignUp() {
                   type="name"
                   placeholder="Ibadan"
                   width="100%"
-                  h="73px"
+                  // h="73px"
                   borderRadius="0px 11px 11px 11px"
                   name="address"
                   id="address"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.address}
+                  className="input-ht"
                 />
               </InputGroup>
               {formik.touched.address && formik.errors.address ? (
@@ -251,9 +270,11 @@ export default function BusinessAccountSignUp() {
               ) : null}
             </div>
 
-            <div>
-              <FormLabel htmlFor="industry">Industry</FormLabel>
-              <InputGroup>
+            <div style={{ width: "49%" }}>
+              <FormLabel htmlFor="industry" className="">
+                Industry
+              </FormLabel>
+              <InputGroup className="int-grp">
                 <InputLeftElement
                   pointerEvents="none"
                   m="15px 1px"
@@ -265,13 +286,14 @@ export default function BusinessAccountSignUp() {
                   type="name"
                   placeholder="08012345678"
                   width="100%"
-                  h="73px"
+                  // h="73px"
                   borderRadius="0px 11px 11px 11px"
                   name="industry"
                   id="industry"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.industry}
+                  className="input-ht"
                 />
               </InputGroup>
               {formik.touched.industry && formik.errors.industry ? (
@@ -280,8 +302,10 @@ export default function BusinessAccountSignUp() {
             </div>
           </div>
 
-          <FormLabel htmlFor="password">Password</FormLabel>
-          <InputGroup>
+          <FormLabel htmlFor="password" className="lab">
+            Password
+          </FormLabel>
+          <InputGroup className="int-grp">
             <div>
               <InputLeftElement
                 pointerEvents="none"
@@ -310,7 +334,7 @@ export default function BusinessAccountSignUp() {
               type={show ? "name" : "password"}
               placeholder="*******"
               width="100%"
-              h="73px"
+              // h="73px"
               borderRadius="0px 11px 11px 11px"
               style={{ paddingLeft: "40px" }}
               id="password"
@@ -318,305 +342,46 @@ export default function BusinessAccountSignUp() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.password}
+              className="input-ht"
             />
           </InputGroup>
           {formik.touched.password && formik.errors.password ? (
             <span className="error-message">{formik.errors.password}</span>
           ) : null}
-          <Button
-            mt={4}
-            bg={yellowbtn}
-            width="100%"
-            h="70px"
-            borderRadius="0px 11px 11px 11px"
-            type="submit"
-            color="white"
-            _hover={{ bg: "#1A202C" }}
-            isLoading={isLoading}
-            loadingText="Sign Up..."
-            spinnerPlacement="end"
-          >
-            Continue
-          </Button>
+          <div className="btn-cent" style={{ paddingBottom:'3rem'}}>
+            <Button
+              mt={3}
+              bg={yellowbtn}
+              width="95%"
+              h="55px"
+              borderRadius="0px 11px 11px 11px"
+              type="submit"
+              color="white"
+              _hover={{ bg: "#1A202C" }}
+              isLoading={isLoading}
+              loadingText="Sign Up..."
+              spinnerPlacement="end"
+            >
+              Continue
+            </Button>
+          </div>
         </div>
+        <Text
+          fontSize="16px"
+          // lineHeight="5"
+          style={{
+            justifyContent: "center",
+            display: "flex",
+            paddingTop: "0.2rem",
+            paddingBottom: "0.4rem",
+          }}
+        >
+          Already have an account?
+          <Text as={RLink} pl="2" to="/business-signin" color="yellow.500">
+            Login
+          </Text>
+        </Text>
       </form>
     </div>
-    // <Container maxW="container.lg">
-    //   <Box
-    //     p="50"
-    //     m="36"
-    //     boxSizing="border-box"
-    //     borderWidth="1px"
-    //     borderRadius="0px 21px 21px 21px"
-    //     overflow="hidden"
-    //   >
-    //     <Center>
-    //       <Stack>
-    //         <Image mb="15" src={logo} alt="logo" />
-    //       </Stack>
-    //     </Center>
-
-    //     <Center>
-    //       <Stack>
-    //         <Text fontSize="36px" mt="20px" fontWeight="bold" lineHeight="5">
-    //           Create Accounts
-    //         </Text>
-    //       </Stack>
-    //     </Center>
-    //     <Center>
-    //       <Stack mt={2}>
-    //         <Text color="gray">Use your personal information</Text>
-    //       </Stack>
-    //     </Center>
-    //     <Formik
-    //       initialValues={{
-    //         name: "",
-    //         phone_number: "",
-    //         email: "",
-    //         address: "",
-    //         industry: "",
-    //         password: "",
-    //       }}
-    //       validationSchema={SignupSchema}
-    //     >
-    //       {() => (
-    //         <Center>
-    //           <Form onSubmit={handleSubmit}>
-    //             <Field name="name">
-    //               {({ field, form }) => (
-    //                 <FormControl
-    //                   isInvalid={form.errors.name && form.touched.name}
-    //                   mt={4}
-    //                 >
-    //                   <FormLabel htmlFor="name">Name</FormLabel>
-    //                   <InputGroup>
-    //                     <InputLeftElement
-    //                       pointerEvents="none"
-    //                       m="15px 1px"
-    //                       fontSize="20px"
-    //                       color="yellow.500"
-    //                       children={<AiOutlineShop />}
-    //                     />
-    //                     <Input
-    //                       {...field}
-    //                       value={name}
-    //                       onChange={(e) => setName(e.target.value)}
-    //                       placeholder="Jumoke Adetola"
-    //                       width="400px"
-    //                       h="70px"
-    //                       borderRadius="0px 11px 11px 11px"
-    //                     />
-    //                   </InputGroup>
-    //                   <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-    //                 </FormControl>
-    //               )}
-    //             </Field>
-    //             <Field name="email">
-    //               {({ field, form }) => (
-    //                 <FormControl
-    //                   isInvalid={form.errors.email && form.touched.email}
-    //                   mt={4}
-    //                 >
-    //                   <FormLabel htmlFor="name">Email</FormLabel>
-    //                   <InputGroup>
-    //                     <InputLeftElement
-    //                       pointerEvents="none"
-    //                       m="15px 1px"
-    //                       fontSize="20px"
-    //                       color="yellow.500"
-    //                       children={<MdEmail />}
-    //                     />
-    //                     <Input
-    //                       {...field}
-    //                       value={email}
-    //                       onChange={(e) => setEmail(e.target.value)}
-    //                       placeholder="Email Address"
-    //                       width="400px"
-    //                       h="70px"
-    //                       borderRadius="0px 11px 11px 11px"
-    //                     />
-    //                   </InputGroup>
-    //                   <FormErrorMessage>{form.errors.email}</FormErrorMessage>
-    //                 </FormControl>
-    //               )}
-    //             </Field>
-    //             <Field name="phone_number">
-    //               {({ field, form }) => (
-    //                 <FormControl
-    //                   isInvalid={
-    //                     form.errors.phone_number && form.touched.phone_number
-    //                   }
-    //                   mt={4}
-    //                 >
-    //                   <FormLabel htmlFor="name">Phone number</FormLabel>
-    //                   <InputGroup>
-    //                     <InputLeftElement
-    //                       pointerEvents="none"
-    //                       m="15px 1px"
-    //                       fontSize="20px"
-    //                       color="yellow.500"
-    //                       children={<MdWifiCalling3 />}
-    //                     />
-    //                     <Input
-    //                       {...field}
-    //                       value={phone_number}
-    //                       onChange={(e) => setPhoneNumber(e.target.value)}
-    //                       placeholder="08012345678"
-    //                       width="400px"
-    //                       h="70px"
-    //                       borderRadius="0px 11px 11px 11px"
-    //                     />
-    //                   </InputGroup>
-    //                   <FormErrorMessage>
-    //                     {form.errors.phone_number}
-    //                   </FormErrorMessage>
-    //                 </FormControl>
-    //               )}
-    //             </Field>
-    //             <Flex direction="row" justifyContent="space-between">
-    //               <Field name="address">
-    //                 {({ field, form }) => (
-    //                   <FormControl
-    //                     isInvalid={form.errors.address && form.touched.address}
-    //                     mt={4}
-    //                   >
-    //                     <FormLabel htmlFor="address">Address</FormLabel>
-    //                     <InputGroup>
-    //                       <InputLeftElement
-    //                         pointerEvents="none"
-    //                         m="15px 1px"
-    //                         fontSize="20px"
-    //                         color="yellow.500"
-    //                         children={<FaRegAddressBook />}
-    //                       />
-    //                       <Input
-    //                         {...field}
-    //                         value={address}
-    //                         onChange={(e) => setAddress(e.target.value)}
-    //                         placeholder="Ibadan"
-    //                         width="180px"
-    //                         h="70px"
-    //                         borderRadius="0px 11px 11px 11px"
-    //                       />
-    //                     </InputGroup>
-    //                     <FormErrorMessage>
-    //                       {form.errors.address}
-    //                     </FormErrorMessage>
-    //                   </FormControl>
-    //                 )}
-    //               </Field>
-    //               <Field name="industry">
-    //                 {({ field, form }) => (
-    //                   <FormControl
-    //                     isInvalid={
-    //                       form.errors.industry && form.touched.industry
-    //                     }
-    //                     mt={4}
-    //                   >
-    //                     <FormLabel htmlFor="text">Industry</FormLabel>
-    //                     <InputGroup>
-    //                       <InputLeftElement
-    //                         pointerEvents="none"
-    //                         m="15px 1px"
-    //                         fontSize="20px"
-    //                         color="yellow.500"
-    //                         children={<FaIndustry />}
-    //                       />
-    //                       <Input
-    //                         {...field}
-    //                         value={industry}
-    //                         onChange={(e) => setIndustry(e.target.value)}
-    //                         placeholder="Food"
-    //                         width="195px"
-    //                         h="70px"
-    //                         borderRadius="0px 11px 11px 11px"
-    //                       />
-    //                     </InputGroup>
-    //                     <FormErrorMessage>
-    //                       {form.errors.industry}
-    //                     </FormErrorMessage>
-    //                   </FormControl>
-    //                 )}
-    //               </Field>
-    //             </Flex>
-    //             <Field name="password">
-    //               {({ field, form }) => (
-    //                 <FormControl
-    //                   isInvalid={form.errors.password && form.touched.password}
-    //                   mt={4}
-    //                 >
-    //                   <FormLabel htmlFor="name">Password</FormLabel>
-    //                   <InputGroup>
-    //                     <InputLeftElement
-    //                       m="15px 1px"
-    //                       fontSize="18px"
-    //                       color="yellow.500"
-    //                       children={<FaLock />}
-    //                     />
-
-    //                     <InputRightElement
-    //                       pointerEvents="visible"
-    //                       m="20px 15px"
-    //                       color="yellow.500"
-    //                     >
-    //                       <Button
-    //                         onClick={handleClick}
-    //                         fontSize="25px"
-    //                         size="sm"
-    //                         b="transparent"
-    //                         cursor="pointer"
-    //                       >
-    //                         {!show ? <FaEyeSlash /> : <FaEye />}
-    //                       </Button>
-    //                     </InputRightElement>
-    //                     <Input
-    //                       {...field}
-    //                       type={!show ? "password" : "text"}
-    //                       onClick={handleClick}
-    //                       onChange={(e) => setPassword(e.target.value)}
-    //                       value={password}
-    //                       placeholder="*********"
-    //                       width="400px"
-    //                       h="70px"
-    //                       borderRadius="0px 11px 11px 11px"
-    //                     />
-    //                   </InputGroup>
-    //                   <FormErrorMessage>
-    //                     {form.errors.password}
-    //                   </FormErrorMessage>
-    //                 </FormControl>
-    //               )}
-    //             </Field>
-    //             <Button
-    //               mt={4}
-    //               bg={yellowbtn}
-    //               width="400px"
-    //               h="70px"
-    //               borderRadius="0px 11px 11px 11px"
-    //               type="submit"
-    //               color="white"
-    //               _hover={{ bg: "#1A202C" }}
-    //               isLoading={isLoading}
-    //               loadingText="Sign Up..."
-    //               // onClick={handleButton}
-    //             >
-    //               Continue
-    //             </Button>
-    //           </Form>
-    //         </Center>
-    //       )}
-    //     </Formik>
-    //     <Center>
-    //       <Stack mt="5">
-    //         <Text fontSize="18px" lineHeight="5">
-    //           Already have an account?
-    //           <Link as={RLink} pl="2" to="/business-signin" color="yellow.500">
-    //             Login
-    //           </Link>
-    //         </Text>
-    //       </Stack>
-    //     </Center>
-    //   </Box>
-    // </Container>
   );
 }

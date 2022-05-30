@@ -19,7 +19,7 @@ form {
 input[type="text"] {
   width: 100%;
   padding: 25px 20px;
-  margin: 0.6rem 0 1.8rem 0;
+  /* margin: 0.6rem 0 1.8rem 0; */
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
@@ -40,7 +40,7 @@ input::placeholder {
 input[type="password"] {
   width: 100%;
   padding: 25px 20px;
-  margin: 0rem 0 1.8rem 0;
+  /* margin: 0rem 0 1.1rem 0; */
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
@@ -53,6 +53,19 @@ input[type="password"] {
   width: 100%;
   /* margin-bottom: 15px; */
 }
+.lab {
+  padding-left: 1.3rem;
+}
+.int-grp {
+  width: 95% !important;
+  margin: 0 auto;
+  padding-bottom: 0.5rem;
+}
+.btn-cent {
+  margin: 0 auto;
+  width: 90%;
+}
+
 .phone {
   padding-top: 35px;
   margin-right: 25px;
@@ -91,9 +104,6 @@ img.avatar {
 .container {
   padding: 50px;
 }
-.cont{
-    padding: 20px 50px;
-}
 
 span.psw {
   float: right;
@@ -101,8 +111,16 @@ span.psw {
 }
 .error-message {
   color: red;
-  font-size: 14px;
-  padding-top: 2rem;
+  font-size: 13px;
+  padding-top: 1rem;
+  font-weight: 700;
+  padding-left: 0.7rem;
+}
+.inp-ht {
+  height: 73px !important;
+}
+.input-ht {
+  height: 65px !important;
 }
 .acct-cover {
   background: #fafafa;
@@ -142,7 +160,6 @@ span.psw {
   padding: 0.8rem 3rem 1.5rem 1rem;
 }
 
-
 @media screen and (max-width: 768px) {
   form {
     width: 90%;
@@ -152,5 +169,11 @@ span.psw {
   }
   .acct-types {
     flex-direction: column;
+  }
+  .inp-ht {
+    height: 60px !important;
+  }
+  .input-ht {
+    height: 50px !important;
   }
 }

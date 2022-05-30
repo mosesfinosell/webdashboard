@@ -130,13 +130,14 @@ export default function PersonalAccountSignIn() {
               type="name"
               placeholder="08012345678"
               width="100%"
-              h="73px"
+              // h="73px"
               borderRadius="0px 11px 11px 11px"
               name="phonenumber"
               id="phonenumber"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.phonenumber}
+              className="inp-ht"
             />
           </InputGroup>
           {formik.touched.phonenumber && formik.errors.phonenumber ? (
@@ -173,7 +174,7 @@ export default function PersonalAccountSignIn() {
               type={show ? "name" : "password"}
               placeholder="*******"
               width="100%"
-              h="73px"
+              // h="73px"
               borderRadius="0px 11px 11px 11px"
               style={{ paddingLeft: "40px" }}
               onChange={formik.handleChange}
@@ -181,10 +182,11 @@ export default function PersonalAccountSignIn() {
               value={formik.values.password}
               id="password"
               name="password"
+              className="inp-ht"
             />
           </InputGroup>
-          {formik.touched.password && formik.errors.password ? (
-            <span className="error-message">{formik.errors.password}</span>
+          {formik.touched.phone_number && formik.errors.phone_number ? (
+            <span className="error-message">{formik.errors.phone_number}</span>
           ) : null}
 
           <Button

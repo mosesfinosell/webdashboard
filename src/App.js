@@ -52,7 +52,7 @@ function App() {
         <Route exact path="/account" component={AccountBox} />
         <Route
           exact
-          path="/home"
+          path="/"
           component={Home}
         />
          <Route
