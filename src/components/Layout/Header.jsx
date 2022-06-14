@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import {Link} from "react-router-dom"
-import {Image} from "@chakra-ui/react"
+import styled from "styled-components"
 import LogoMark from "../SVG/LogoMark"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,14 +9,16 @@ import {
     faBars,
     faCaretUp,
   } from "@fortawesome/free-solid-svg-icons";
+import {marginMobile} from "../../utils/styles"
 
 const Header = () => {
     const [products, setProducts] = useState(false);
   return (
     <header>
-        <Link to="/" className="logos">
+        <HeadContent>
+        <Logo to="/" >
           <LogoMark  />
-        </Link>
+        </Logo>
         <input id="menu-bar" type="checkbox" />
 
         <label htmlFor="menu-bar" className="checkbtn">
@@ -60,8 +62,33 @@ const Header = () => {
             </li>
           </ul>
         </nav>
+        </HeadContent>
     </header>
   )
 }
+
+const Logo = styled(Link)`
+  font-size: 2rem;
+  color: #273b4a;
+  text-decoration: none;
+`
+
+const Head = styled.header`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  padding: 1rem 4%;
+  z-index: 1000;
+`
+const HeadContent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 ${marginMobile};
+`
 
 export default Header

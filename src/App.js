@@ -51,7 +51,7 @@ function App() {
   return (
     <>
     <Router>
-    <Header />
+      <Header />
       <div className="App">
         {/* <Switch> */}
         <Route exact path="/account" component={AccountBox} />
@@ -145,7 +145,7 @@ function App() {
           component={CreateTransaction}
         />
       </div>
-    <Footer />
+      <Footer />
     </Router>
     </>
   );
