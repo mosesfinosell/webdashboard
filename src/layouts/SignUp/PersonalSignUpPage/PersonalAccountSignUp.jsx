@@ -31,7 +31,7 @@ import { useHistory } from "react-router-dom";
 // import { Spinner } from "@chakra-ui/react";
 // import { personalUserSignUp } from "../../../ReduxContianer/PersonalRedux/PersonalAction";
 
-import "../../../component/auth.css";
+import "../../../components/auth.css";
 export default function PersonalAccountSignUp() {
   const [isLoading, setIsLoading] = useState(false);
   const validationSchema = Yup.object().shape({

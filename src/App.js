@@ -44,9 +44,14 @@ import Individual from "./layouts/Individual";
 import Business from "./layouts/Business";
 import Terms from "./layouts/Terms";
 import Pricing from "./layouts/Pricing";
+
+import Header from "./components/Layout/Header"
+import Footer from "./components/Layout/Footer"
 function App() {
   return (
+    <>
     <Router>
+    <Header />
       <div className="App">
         {/* <Switch> */}
         <Route exact path="/account" component={AccountBox} />
@@ -140,7 +145,9 @@ function App() {
           component={CreateTransaction}
         />
       </div>
+    <Footer />
     </Router>
+    </>
   );
 }
 

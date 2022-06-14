@@ -39,7 +39,7 @@ import { BiStore } from "react-icons/bi";
 import { GiBanknote } from "react-icons/gi";
 import AddProduct from "./addProduct";
 import { useSelector, useDispatch } from "react-redux";
-import BusinessLayout from "../../../../component/Layout/BusinessLayout";
+import BusinessLayout from "../../../../components/Layout/BusinessLayout";
 // import {getProduct} from '../../../../ReduxContianer/BussinessRedux/BusinessAction';
 export default function StoreInventory() {
   const yellowbtn = useColorModeValue("yellow.500");

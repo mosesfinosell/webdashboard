@@ -27,7 +27,7 @@ import { useSelector, useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
 import { getUserInfo } from "../../../ReduxContianer/PersonalRedux/PersonalAction";
-import "../../../component/auth.css";
+import "../../../components/auth.css";
 import axios from "axios";
 
 export default function PersonalAccountSignIn() {

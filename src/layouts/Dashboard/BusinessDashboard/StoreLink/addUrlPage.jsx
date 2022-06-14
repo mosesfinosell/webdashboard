@@ -20,7 +20,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import { createStoreLink } from "../../../../ReduxContianer/BussinessRedux/BusinessAction";
-import BusinessLayout from "../../../../component/Layout/BusinessLayout";
+import BusinessLayout from "../../../../components/Layout/BusinessLayout";
 import { useHistory } from "react-router-dom";
 import "../../../Dashboard/Dash.css";
 export default function AddUrlPage() {

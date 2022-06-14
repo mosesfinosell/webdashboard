@@ -37,7 +37,7 @@ import {
 } from "react-icons/fa";
 import { businessUserSignUp } from "../../../ReduxContianer/BussinessRedux/BusinessAction";
 import axios from "axios";
-import "../../../component/auth.css";
+import "../../../components/auth.css";
 import { useFormik } from "formik";
 export default function BusinessAccountSignUp() {
   const yellowbtn = useColorModeValue("yellow.500");

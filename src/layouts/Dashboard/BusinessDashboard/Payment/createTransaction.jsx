@@ -29,7 +29,7 @@ import {
   createTransaction,
   getPayment,
 } from "../../../../ReduxContianer/BussinessRedux/BusinessAction";
-import BusinessLayout from "../../../../component/Layout/BusinessLayout";
+import BusinessLayout from "../../../../components/Layout/BusinessLayout";
 import "../../../Dashboard/Dash.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";

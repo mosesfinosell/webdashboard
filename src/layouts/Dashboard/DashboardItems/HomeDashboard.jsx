@@ -23,7 +23,7 @@ import BuyAirtimeModal from "../../HomeItemsModal/BuyAirtime/BuyAirtimeModal";
 import { getUserDetails } from "../../../ReduxContianer/PersonalRedux/PersonalAction";
 // import { useSelector } from 'react-redux';
 import { useState, useEffect } from "react";
-import Layout from "../../../component/Layout/Layout";
+import Layout from "../../../components/Layout/Layout";
 import "../../Dashboard/Dash.css";
 import plus from "../../../assets/plus.svg";
 import send from "../../../assets/send.svg";

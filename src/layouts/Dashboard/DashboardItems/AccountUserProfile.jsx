@@ -31,7 +31,7 @@ import { useColorModeValue } from "@chakra-ui/color-mode";
 import { BiPencil } from "react-icons/bi";
 import accUser from "../../../assets/accuser.svg";
 import { useSelector } from "react-redux";
-import Layout from "../../../component/Layout/Layout";
+import Layout from "../../../components/Layout/Layout";
 import "../../Dashboard/Dash.css";
 
 export default function AccountUserProfile() {

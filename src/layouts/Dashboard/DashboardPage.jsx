@@ -26,8 +26,8 @@ import { BiUser } from "react-icons/bi";
 import delicon from "../../assets/DealIcon.svg";
 // import {useState,useEffect} from 'react'
 import { useSelector } from "react-redux";
-import "../../component/sidebar.css";
-import { PrivateSidebarData } from "../../../src/component/PrivateSidebarData";
+import "../../components/sidebar.css";
+import { PrivateSidebarData } from "../../components/PrivateSidebarData";
 import { Link } from "react-router-dom";
 
 const  DashboardPage =({children})=> {

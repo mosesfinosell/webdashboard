@@ -20,7 +20,7 @@ import OrderDeliveryModal from "../BusinessDashboard/Order/orderDeliveryModal";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import dateformat from "dateformat";
-import BusinessLayout from "../../../component/Layout/BusinessLayout";
+import BusinessLayout from "../../../components/Layout/BusinessLayout";
 import "../../Dashboard/Dash.css";
 import plus from "../../../assets/plus.svg";
 import send from "../../../assets/send.svg";
