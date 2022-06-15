@@ -1,4 +1,4 @@
-header {
+/* header {
   position: fixed;
   top: 0;
   left: 0;
@@ -10,7 +10,7 @@ header {
   align-items: center;
   justify-content: space-between;
   z-index: 1000;
-}
+} */
 header .logos {
   font-size: 2rem;
   color: #273b4a;
@@ -85,7 +85,7 @@ header label {
 /* #menu-bar {
   display: none;
 } */
-.navbar-dropdown {
+/* .navbar-dropdown {
   position: absolute;
   left: 0;
   width: 132px;
@@ -94,15 +94,16 @@ header label {
   /* display: none;
     z-index: 1;
     background: #fff;
-    box-shadow: 0 0 35px 0 rgba(0,0,0,0.25); */
+    box-shadow: 0 0 35px 0 rgba(0,0,0,0.25);
 }
+ */
 .navbar-none {
   display: none;
 }
-.dropdown-list {
+/* .dropdown-list {
   width: 100%;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
+} */
 .socially {
   display: flex;
   justify-content: space-between;
@@ -126,7 +127,7 @@ header label {
     visibility: visible;
     opacity: 1;
   }
-  header .navbar {
+  /* header .navbar {
     position: absolute;
     top: 100%;
     width: 100%;
@@ -141,8 +142,8 @@ header label {
     transform-origin: top;
     transform: scaleY(0);
     opacity: 0;
-    /* display:none; */
-  }
+    
+  } */
   header .navbar ul li {
     width: 100%;
   }
@@ -171,11 +172,11 @@ header label {
     margin: 1.5rem 0;
     font-size: 1.4rem;
   }
-  header input:checked ~ .navcheck {
+  /* header input:checked ~ .navcheck {
     transform: scaleY(1);
     opacity: 1;
-    /* left: 0; */
-  }
+    left: 0; 
+  } */
   header input:checked ~ .label::before {
     content: "\f00d";
   }
@@ -184,11 +185,11 @@ header label {
     margin: 1.5rem 0;
     font-size: 1.4rem;
   }
-  header input:checked ~ .navbar {
+  /* header input:checked ~ .navbar {
     transform: scaleY(1);
     opacity: 1;
-    /* left: 0; */
-  }
+    
+  } */
   header input:checked ~ .label::before {
     content: "\f00d";
   }
@@ -1784,9 +1785,9 @@ table th {
     margin: 0 auto;
     padding-left: 0;
   }
-  .navbar-dropdown {
+  /* .navbar-dropdown {
     position: static;
-  }
+  } */
   .flutter {
     display: flex;
     justify-content: center;

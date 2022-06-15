@@ -28,21 +28,23 @@ import produp from "../assets/produp.svg";
 import payment from "../assets/payment.svg";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 
+import styled from "styled-components"
+import {primaryTitle} from '../utils/styles'
+
 // import { faBars } from "@fortawesome/free-regular-svg-icons";
 function Home() {
   
   const yellowbtn = useColorModeValue("yellow.500");
   return (
     <React.Fragment>
-
       <section className="banner">
         <div className="inner-bckground">
-          <div class="banner-1">
+          <div className="banner-1">
             <div className="banner-holder">
-              <Text className="bold-desc">
-                Manage all your <br />
+              <DarkHeader>
+                Manage all your
                 finance and business in one place
-              </Text>
+              </DarkHeader>
               <Text className="abt-fin">
                 A financial and business management App for business owners and
                 individuals.
@@ -278,3 +280,13 @@ function Home() {
 }
 
 export default Home;
+
+const DarkHeader = styled(primaryTitle)`
+  color: #273B4A;
+  width: 100%;
+  margin-bottom: ${10*0.063}rem;
+  @media only screen and (min-width: 768px){
+    width: ${554 * 0.063}rem;
+    margin-bottom: ${20*0.063}rem
+  }
+`

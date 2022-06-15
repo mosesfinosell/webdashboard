@@ -75,7 +75,7 @@ const Footer = () => {
           <div class="foot-2">
             <div class="box">
               <div className="footer-social">
-                {" "}
+                <a href="https://facebook.com">
                 <FontAwesomeIcon
                   icon={faFacebook}
                   style={{
@@ -83,6 +83,8 @@ const Footer = () => {
                     borderRadius: "0px 11px 11px 11px",
                   }}
                 />
+                </a>
+                <a href="https://instagram.com">
                 <FontAwesomeIcon
                   icon={faInstagram}
                   style={{
@@ -90,6 +92,8 @@ const Footer = () => {
                     borderRadius: "0px 11px 11px 11px",
                   }}
                 />
+                </a>
+                <a href="https://linkedin.com">
                 <FontAwesomeIcon
                   icon={faLinkedin}
                   style={{
@@ -97,13 +101,16 @@ const Footer = () => {
                     borderRadius: "0px 11px 11px 11px",
                   }}
                 />
-                <FontAwesomeIcon
-                  icon={faTwitter}
-                  style={{
-                    background: "#FDF9ED",
-                    borderRadius: "0px 11px 11px 11px",
-                  }}
-                />
+                </a>
+                <a href="https://twitter.com">
+                  <FontAwesomeIcon
+                    icon={faTwitter}
+                    style={{
+                      background: "#FDF9ED",
+                      borderRadius: "0px 11px 11px 11px",
+                    }}
+                  />
+                </a>
               </div>
               <Text className="abt">support@finosell.com</Text>
               <Text className="abt">+234 - XXXX - XXXX</Text>
