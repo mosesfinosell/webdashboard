@@ -38,11 +38,11 @@ export const AppContainer = styled.div`
     @media only screen and (min-width: 768px){
         margin: 0 ${margin};
         margin-top: ${90*0.063}rem;
-        max-width: ${1512*0.063}rem;
         
     }
-    @media only screen and (min-width: 1600px){
-        margin: unset auto;
+    @media only screen and (min-width: 1800px){
+        margin: 0 auto;
+        margin-top: ${90*0.063}rem;
     }
 `
 export const baseLayout = `

@@ -768,12 +768,11 @@ footer {
   margin-bottom: 1.2rem;
   margin-top: 0.9rem;
 }
-.terms {
+/* .terms {
   width: 90%;
   margin: 0 auto;
-  /* background: green; */
   margin-top: 8rem;
-}
+} */
 .terms-text {
   /* font-family: 'Duplicate Sans'; */
   font-style: normal;

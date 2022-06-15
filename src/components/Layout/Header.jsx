@@ -56,7 +56,7 @@ const Header = () => {
                           icon={faUser}
                         />
                       </div>
-                      <a>Individual</a>
+                      <p>Individual</p>
                   </DropDownItem>
                 </Link>
                 <div className="vl"></div>
@@ -67,7 +67,7 @@ const Header = () => {
                           icon={faUniversity}
                         />
                       </div>
-                      <a>Business</a>
+                      <p>Business</p>
                     </DropDownItem>
                   </Link>
               </div>
@@ -83,9 +83,7 @@ const Header = () => {
             </li>
           </ul>
           <Account>
-            <a className="login">
-              <Link to="">Log in</Link>
-            </a>
+            <Link to="">Log in</Link>
             <PrimaryButton>
               <Link to="/account">
                 Create Account
@@ -148,6 +146,7 @@ const NavBar = styled.nav`
 `
 
 const HeadContent = styled.div`
+  max-width: ${1512*0.063}rem;
   flex-grow: 1;
   display: flex;
   align-items: center;
@@ -158,10 +157,10 @@ const HeadContent = styled.div`
     opacity: 1;
   }
   @media only screen and (min-width: 768px){
-    max-width: ${1512*0.063}rem;
+    
     margin: 0 ${margin};
   }
-  @media only screen and (min-width: 1600px){
+  @media only screen and (min-width: 1800px){
     margin: 0 auto;
   }
 `

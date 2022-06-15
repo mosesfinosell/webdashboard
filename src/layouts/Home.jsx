@@ -37,8 +37,8 @@ function Home() {
   const yellowbtn = useColorModeValue("yellow.500");
   return (
     <React.Fragment>
-      <section className="banner">
-        <div className="inner-bckground">
+      <Banner>
+        
           <div className="banner-1">
             <div className="banner-holder">
               <DarkHeader>
@@ -56,10 +56,8 @@ function Home() {
             </div>
             <div className="socially">
               <div className="flutter">
-                {" "}
                 <Image src={flutter} alt="flutter" />
               </div>
-
               <div className="paystack">
                 <Image src={paystack} alt="paystack" />
               </div>
@@ -67,11 +65,11 @@ function Home() {
                 <Image src={mono} alt="mono" />
               </div>
             </div>
-            <div className="downloads">
-              <div className="goog-img">
+            <div className="download">
+              <div className="download__btn">
                 <Image src={google} alt="google" />
               </div>
-              <div className="goog-imgs">
+              <div className="download__btn">
                 <Image src={apple} alt="apple" className="apps" />
               </div>
             </div>
@@ -79,12 +77,11 @@ function Home() {
           <div className="banner-2">
             <Image src={Buffer} alt="buffer" />
           </div>
-        </div>
-      </section>
-      <section className="section-2">
+        
+      </Banner>
+      <Section2 className="section-2">
         <div className="business">
           <div>
-            {" "}
             <Text className="business-text">
               Run and grow a business you’re proud of
             </Text>
@@ -131,7 +128,7 @@ function Home() {
         <div className="business-pic">
           <Image src={woman} alt="woman" className="woman" />
         </div>
-      </section>
+      </Section2>
       <section className="section-3">
         <div className="hanger">
           <Image src={hanger} alt="hanger" />
@@ -288,5 +285,43 @@ const DarkHeader = styled(primaryTitle)`
   @media only screen and (min-width: 768px){
     width: ${554 * 0.063}rem;
     margin-bottom: ${20*0.063}rem
+  }
+`
+
+const Banner = styled.section`
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  flex-direction: column;
+  .download{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: ${22*0.063}rem;
+  }
+  .download__btn{
+    margin: ${8*0.063}rem;
+  }
+  @media only screen and (min-width: 768px){
+    flex-direction: row;
+    justify-content: space-between;
+    .download{
+      flex-direction: row;
+      justify-content: flex-start;
+      margin-top: ${44*0.063}rem;
+    }
+  }
+`
+
+const Section2 = styled(Banner)`
+  flex-direction: column-reverse;
+  background-color: #273b4a;
+  justify-content: space-between;
+  margin-top: ${0.063*91}rem;
+  @media only screen and (min-width: 768px){
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: ${0.063*142}rem;
   }
 `

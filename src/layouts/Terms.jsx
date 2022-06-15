@@ -1,14 +1,15 @@
 
 import { Text } from "@chakra-ui/react";
 import "./home.css";
+import styled from "styled-components";
 
 function Terms() {
   
   return (
-      <section className="terms">
-        <div className="terms-div">
-          <Text className="terms-text">1. Terms and Conditions</Text>
-          <Text className="terms-para">
+      <>
+        <Term>
+          <h3 className="term__title">1. Terms and Conditions</h3>
+          <Text className="term__para">
             Please be aware that the Website Terms and Conditions contained on
             this webpage will apply to your access and use of every page on this
             website. By using this Website, you expressly agree to be bound by
@@ -19,8 +20,8 @@ function Terms() {
               CAREFULLY READ THE TERMS.
             </Text>
           </Text>
-        </div>
-        <div className="terms-2">
+        </Term>
+        <Term>
           <Text className="terms-text">
             2. Description of Finosell escrow service
           </Text>
@@ -99,8 +100,8 @@ function Terms() {
             Finosell retains the escrow funds pending resolution of the dispute
             or take other action as authorized.
           </Text>
-        </div>
-        <div className="terms-2">
+        </Term>
+        <Term>
           <Text className="terms-text">3. Sellers' obligations</Text>
 
           <ul className="list">
@@ -123,8 +124,8 @@ function Terms() {
               with buyers
             </li>
           </ul>
-        </div>
-        <div className="terms-2">
+        </Term>
+        <Term>
           <Text className="terms-text">4. Buyers' obligations</Text>
 
           <ul className="list">
@@ -146,7 +147,7 @@ function Terms() {
               notification.
             </li>
           </ul>
-        </div>
+        </Term>
         <div className="terms-2">
           <Text className="terms-text">5. How are disputes resolved?</Text>
           <Text className="terms-para">
@@ -315,8 +316,31 @@ function Terms() {
           </Text>
           <Text className="terms-para">Seller delivers product</Text>
         </div>
-      </section>
+      </>
   );
 }
 
 export default Terms;
+
+const Term = styled.section`
+  margin-bottom: ${50*0.063}rem;
+  font-family: "DM Sans";
+  .terms__title{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 50px;
+    line-height: 65px;
+    color: #131618;
+  }
+  .term__para{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 23px;
+    color: #8c8c8c;
+    padding-top: 2rem;
+  }
+  @media screen only and (min-width: 768px){
+    margin-bototm: ${100*0.063}rem;
+  }
+`
