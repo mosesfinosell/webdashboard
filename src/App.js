@@ -47,12 +47,13 @@ import Pricing from "./layouts/Pricing";
 
 import Header from "./components/Layout/Header"
 import Footer from "./components/Layout/Footer"
+import {AppContainer} from "./utils/styles"
 function App() {
   return (
     <>
     <Router>
       <Header />
-      <div className="App">
+      <AppContainer>
         {/* <Switch> */}
         <Route exact path="/account" component={AccountBox} />
         <Route
@@ -144,7 +145,7 @@ function App() {
           path="/business/payment"
           component={CreateTransaction}
         />
-      </div>
+      </AppContainer>
       <Footer />
     </Router>
     </>

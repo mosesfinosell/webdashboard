@@ -12,7 +12,7 @@ import {
     faUniversity,
     faUser
   } from "@fortawesome/free-solid-svg-icons";
-import {marginMobile, headerHeight, headerHeightMobile, PrimaryButton } from "../../utils/styles"
+import {marginMobile, headerHeight, headerHeightMobile, PrimaryButton, margin } from "../../utils/styles"
 
 const Header = () => {
     
@@ -157,11 +157,17 @@ const HeadContent = styled.div`
     transform: scaleY(1);
     opacity: 1;
   }
-  
+  @media only screen and (min-width: 768px){
+    max-width: ${1512*0.063}rem;
+    margin: 0 ${margin};
+  }
+  @media only screen and (min-width: 1600px){
+    margin: 0 auto;
+  }
 `
 
 const Head = styled.header`
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   width: 100%;
@@ -250,8 +256,11 @@ const Products = styled.li`
 const DropDownItem = styled.div`
   display: flex;
   align-items: center;
-  
-
+  padding-right: ${18*0.063}rem;
+  &:hover{
+    background: #F5F5F5;
+    border-radius: ${10*0.063}rem;
+  }
   .icon{
     background: #F5F5F5;
     border-radius: 100%;

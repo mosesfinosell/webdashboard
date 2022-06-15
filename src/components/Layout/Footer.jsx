@@ -67,7 +67,9 @@ const Footer = () => {
           <div class="foot-2">
             <div class="box">
               <Text className="company">Legal</Text>
-              <Text className="abt">Terms and Conditions</Text>
+              <Link to="/terms">
+                <Text className="abt">Terms and Conditions</Text>
+              </Link>
               <Text className="abt">Privacy Policy</Text>
             </div>
           </div>
