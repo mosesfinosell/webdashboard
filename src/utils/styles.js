@@ -12,12 +12,13 @@ export const margin = `${75 * 0.063}rem`;
 export const headerHeightMobile = `${60 * 0.063}rem`
 
 
-export const primaryTitle = styled.h1`
+export const PrimaryTitle = styled.h1`
     font-size:${35 * 0.062}rem;
-    line-height:${64*0.063}rem;
+    line-height:${38*0.063}rem;
     font-weight: 500;
     @media only screen and (min-width: 768px){
         font-size: ${60 * 0.062}rem;
+        line-height: ${64*0.063}rem;
     }
 `
 
@@ -29,10 +30,21 @@ export const PrimaryButton = styled.button`
     font-size: 20px;
     margin-top: 0.2rem;
 `
+export const PrimaryParagraph = styled.p`
+    color:#8C8C8C;
+    line-height: ${18*0.063}rem;
+    font-size:${14*0.063}rem;
+    font-weight: 500;
+    font-family: "DM sans", sans-serif;
+    @media only screen and (min-width: 768px){
+        line-height: ${24*0.063}rem;
+        font-size:${20*0.063}rem;
+    }
+`
 
 export const AppContainer = styled.div`
     max-width: ${1512*0.063}rem;
-    margin: 0 ${marginMobile};
+    /* margin: 0 ${marginMobile}; */
     margin-top: ${81*0.063}rem;
     
     @media only screen and (min-width: 768px){

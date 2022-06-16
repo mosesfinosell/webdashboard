@@ -29,7 +29,7 @@ import payment from "../assets/payment.svg";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 
 import styled from "styled-components"
-import {primaryTitle} from '../utils/styles'
+import {PrimaryTitle} from '../utils/styles'
 
 // import { faBars } from "@fortawesome/free-regular-svg-icons";
 function Home() {
@@ -278,7 +278,7 @@ function Home() {
 
 export default Home;
 
-const DarkHeader = styled(primaryTitle)`
+const DarkHeader = styled(PrimaryTitle)`
   color: #273B4A;
   width: 100%;
   margin-bottom: ${10*0.063}rem;

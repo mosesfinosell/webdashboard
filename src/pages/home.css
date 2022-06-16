@@ -636,7 +636,7 @@ header label {
 footer {
   margin: 0 auto;
   width: 95%;
-  background: green;
+  
 }
 .footer-bottom {
   display: flex;
