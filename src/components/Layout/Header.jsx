@@ -38,7 +38,7 @@ const Header = () => {
         <NavBar>
           <ul>
             <li>
-              <Link to="/terms">About</Link>
+              <Link to="/about">About</Link>
             </li>
             <Products >
               <a>

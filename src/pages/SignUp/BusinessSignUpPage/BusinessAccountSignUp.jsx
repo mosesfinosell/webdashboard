@@ -1,6 +1,4 @@
-import { useFormik } from "formik";
 import { Formik, Form, Field } from "formik";
-import axios from "axios";
 import {
   Center,
   Input,
@@ -13,48 +11,57 @@ import {
   Button,
   Text,
   Stack,
+  Link,
   Image,
   Box,
-  createStandaloneToast,
   Container,
+  Flex,
+  createStandaloneToast,
 } from "@chakra-ui/react";
 
-import * as Yup from "yup";
-import { MdEmail, MdWifiCalling3 } from "react-icons/md";
-import { FaUser, FaLock, FaEyeSlash, FaEye } from "react-icons/fa";
-import { useColorModeValue } from "@chakra-ui/color-mode";
-import logo from "../../../assets/Logomark.png";
 import { Link as RLink } from "react-router-dom";
-import { useState } from "react";
-// import {useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-// import { Spinner } from "@chakra-ui/react";
-// import { personalUserSignUp } from "../../../ReduxContianer/PersonalRedux/PersonalAction";
-
+import { MdEmail, MdWifiCalling3 } from "react-icons/md";
+import { AiOutlineShop } from "react-icons/ai";
+import { useColorModeValue } from "@chakra-ui/color-mode";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import logo from "../../../assets/Logomark.png";
+import * as Yup from "yup";
+import { useState, useEffect } from "react";
+import {
+  FaLock,
+  FaEyeSlash,
+  FaEye,
+  FaRegAddressBook,
+  FaIndustry,
+} from "react-icons/fa";
+import { businessUserSignUp } from "../../../ReduxContianer/BussinessRedux/BusinessAction";
+import axios from "axios";
 import "../../../components/auth.css";
-export default function PersonalAccountSignUp() {
+import { useFormik } from "formik";
+export default function BusinessAccountSignUp() {
+  const yellowbtn = useColorModeValue("yellow.500");
+
+  //State
+  const [name, setName] = useState("");
+  const [phone_number, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [address, setAddress] = useState("");
+  const [industry, setIndustry] = useState("");
+  const [show, setShow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const validationSchema = Yup.object().shape({
-    name: Yup.string().required("Please enter your name"),
-    phone_number: Yup.number()
-      .typeError("Phone number must be digits")
-      .required("Phone number is required"),
-    email: Yup.string().email("Invalid Email").required("Email is required"),
-    password: Yup.string()
-      .min(5, "Too short")
-      .max(9, "Okay")
-      .required("Password is required"),
-  });
-  const initialValues = {
-    name: "",
-    phone_number: "",
-    email: "",
-    password: "",
-    account_type: "personal",
-  };
+
+  const dispatch = useDispatch();
+  //   const businessSignUp = useSelector((state) => state.businessSignUp);
+  //   const { error, loading, businessDetails } = businessSignUp;
+
+  // Function
+  const handleClick = (values, tools) => setShow(!show);
 
   const onSubmit = (values, tools) => {
     setIsLoading(true);
+
     axios
       .post("https://finosell.link/api/v2/auths/firststage", values)
       .then((response) => {
@@ -69,14 +76,16 @@ export default function PersonalAccountSignUp() {
           isClosable: true,
         });
         tools.resetForm();
-        return history.push("/personal-signin");
+        localStorage.setItem("password", response.data.message.password);
+        return history("/business-signin");
       })
       .catch((error) => {
+        console.log(error, "ERROR");
         setIsLoading(false);
         toast({
           position: "top",
           title: `Unsuccessful Attempt`,
-          description: `${error.response.data.error}`,
+          description: `${error.response.data.message}`,
           status: "error",
           duration: 3000,
           isClosable: true,
@@ -85,19 +94,36 @@ export default function PersonalAccountSignUp() {
         return error;
       });
   };
+
+  //Validation
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required("Name is required"),
+    email: Yup.string().email("Invalid Email").required("Email is required"),
+    phone_number: Yup.number()
+      .typeError("Phone number must be digits")
+      .required("Phone number is required"),
+    address: Yup.string().required("Address is required"),
+    industry: Yup.string().required("Industry is required"),
+    password: Yup.string()
+      .min(5, "Too short")
+      .max(9, "Okay")
+      .required("Password is required"),
+  });
+  const initialValues = {
+    name: "",
+    email: "",
+    phone_number: "",
+    address: "",
+    industry: "",
+    password: "",
+    account_type: "business",
+  };
   const formik = useFormik({
     initialValues,
     onSubmit,
     validationSchema,
   });
-  const yellowbtn = useColorModeValue("yellow.500");
-
-  const history = useHistory();
-
-  const [show, setShow] = useState(false);
-
-  // Function
-  const handleClick = () => setShow(!show);
+  const history = useNavigate();
   const toast = createStandaloneToast();
 
   return (
@@ -108,7 +134,7 @@ export default function PersonalAccountSignUp() {
         </div>
         <Text
           fontSize="36px"
-          mt="2"
+          mt="1"
           fontWeight="bold"
           lineHeight="3"
           className="welcome"
@@ -116,7 +142,7 @@ export default function PersonalAccountSignUp() {
           Create Account
         </Text>
         <Text color="gray" className="details">
-          Use your personal information
+          Use information about your business
         </Text>
         <div className="cont">
           <FormLabel htmlFor="name" className="lab">
@@ -128,7 +154,7 @@ export default function PersonalAccountSignUp() {
               m="15px 1px"
               fontSize="20px"
               color="yellow.500"
-              children={<FaUser />}
+              children={<AiOutlineShop />}
             />
             <Input
               type="name"
@@ -141,14 +167,14 @@ export default function PersonalAccountSignUp() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.name}
-              className="inp-ht"
+              className="input-ht"
             />
           </InputGroup>
           {formik.touched.name && formik.errors.name ? (
             <span className="error-message">{formik.errors.name}</span>
           ) : null}
           <FormLabel htmlFor="email" className="lab">
-            Email
+            Business Email
           </FormLabel>
           <InputGroup className="int-grp">
             <InputLeftElement
@@ -160,7 +186,7 @@ export default function PersonalAccountSignUp() {
             />
             <Input
               type="name"
-              placeholder="hello@example.com"
+              placeholder="hello@business.com"
               width="100%"
               // h="73px"
               borderRadius="0px 11px 11px 11px"
@@ -169,7 +195,7 @@ export default function PersonalAccountSignUp() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
-              className="inp-ht"
+              className="input-ht"
             />
           </InputGroup>
           {formik.touched.email && formik.errors.email ? (
@@ -198,12 +224,83 @@ export default function PersonalAccountSignUp() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.phone_number}
-              className="inp-ht"
+              className="input-ht"
             />
           </InputGroup>
           {formik.touched.phone_number && formik.errors.phone_number ? (
             <span className="error-message">{formik.errors.phone_number}</span>
           ) : null}
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "spaceBetween",
+              width: "97%",
+              margin: "0 auto",
+            }}
+          >
+            <div style={{ width: "49%" }}>
+              <FormLabel htmlFor="address" className="lab">
+                Address
+              </FormLabel>
+              <InputGroup className="int-grp">
+                <InputLeftElement
+                  pointerEvents="none"
+                  m="15px 1px"
+                  fontSize="20px"
+                  color="yellow.500"
+                  children={<FaRegAddressBook />}
+                />
+                <Input
+                  type="name"
+                  placeholder="Ibadan"
+                  width="100%"
+                  // h="73px"
+                  borderRadius="0px 11px 11px 11px"
+                  name="address"
+                  id="address"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.address}
+                  className="input-ht"
+                />
+              </InputGroup>
+              {formik.touched.address && formik.errors.address ? (
+                <span className="error-message">{formik.errors.address}</span>
+              ) : null}
+            </div>
+
+            <div style={{ width: "49%" }}>
+              <FormLabel htmlFor="industry" className="">
+                Industry
+              </FormLabel>
+              <InputGroup className="int-grp">
+                <InputLeftElement
+                  pointerEvents="none"
+                  m="15px 1px"
+                  fontSize="20px"
+                  color="yellow.500"
+                  children={<FaIndustry />}
+                />
+                <Input
+                  type="name"
+                  placeholder="08012345678"
+                  width="100%"
+                  // h="73px"
+                  borderRadius="0px 11px 11px 11px"
+                  name="industry"
+                  id="industry"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.industry}
+                  className="input-ht"
+                />
+              </InputGroup>
+              {formik.touched.industry && formik.errors.industry ? (
+                <span className="error-message">{formik.errors.industry}</span>
+              ) : null}
+            </div>
+          </div>
 
           <FormLabel htmlFor="password" className="lab">
             Password
@@ -245,16 +342,15 @@ export default function PersonalAccountSignUp() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.password}
-              className="inp-ht"
+              className="input-ht"
             />
           </InputGroup>
           {formik.touched.password && formik.errors.password ? (
             <span className="error-message">{formik.errors.password}</span>
           ) : null}
-          <div className="btn-cent">
+          <div className="btn-cent" style={{ paddingBottom:'3rem'}}>
             <Button
               mt={3}
-              mb={1}
               bg={yellowbtn}
               width="95%"
               h="55px"
@@ -281,7 +377,7 @@ export default function PersonalAccountSignUp() {
           }}
         >
           Already have an account?
-          <Text as={RLink} pl="2" to="/personal-signin" color="yellow.500">
+          <Text as={RLink} pl="2" to="/business-signin" color="yellow.500">
             Login
           </Text>
         </Text>

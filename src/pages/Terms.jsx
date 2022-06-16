@@ -15,24 +15,24 @@ function Terms() {
             website. By using this Website, you expressly agree to be bound by
             each and every one of these Terms.
             <br />{" "}
-            <Text className="terms-paras">
+            <Text className="term__para">
               BEFORE AGREEING TO BE BOUND BY THE TERMS OF THE AGREEMENT, PLEASE
               CAREFULLY READ THE TERMS.
             </Text>
           </Text>
         </Term>
         <Term>
-          <Text className="terms-text">
+          <h3 className="term__title">
             2. Description of Finosell escrow service
-          </Text>
-          <Text className="terms-para">
+          </h3>
+          <Text className="term__para">
             The goal of FINOSELL ESCROW SERVICE is to reduce fraud, “What I
             ordered VS What I got” by acting as a trusted third-party that,
             through an escrow agreement, collects, holds, and distributes funds
             only when both Buyers and Sellers are satisfied with the service
             delivered and rendered.
             <br />{" "}
-            <Text className="terms-paras">
+            <Text className="term__para">
               Finosell Escrow Service operates as follows:
             </Text>
           </Text>
@@ -102,7 +102,7 @@ function Terms() {
           </Text>
         </Term>
         <Term>
-          <Text className="terms-text">3. Sellers' obligations</Text>
+          <h3 className="term__title">3. Sellers' obligations</h3>
 
           <ul className="list">
             <li className="ease">
@@ -126,7 +126,7 @@ function Terms() {
           </ul>
         </Term>
         <Term>
-          <Text className="terms-text">4. Buyers' obligations</Text>
+          <h3 className="term__title">4. Buyers' obligations</h3>
 
           <ul className="list">
             <li className="ease">
@@ -148,9 +148,9 @@ function Terms() {
             </li>
           </ul>
         </Term>
-        <div className="terms-2">
-          <Text className="terms-text">5. How are disputes resolved?</Text>
-          <Text className="terms-para">
+        <Term>
+          <h3 className="term__title">5. How are disputes resolved?</h3>
+          <Text className="term__para">
             During the process of initiating a transaction on the Finosell App,
             users are prompted to determine how disputes or misunderstandings
             will be resolved during the transaction. When a dispute is initiated
@@ -161,7 +161,7 @@ function Terms() {
           <ul className="list">
             <li className="resolution">A Mutual resolution</li>
           </ul>
-          <Text className="terms-para">
+          <Text className="term__para">
             If the user selects this option when initiating a transaction, in
             the case of dispute, the transaction is considered "In Dispute" and
             funds are locked until both parties agree and mark the transaction
@@ -171,13 +171,13 @@ function Terms() {
           <ul className="list">
             <li className="resolution">Finosell Mediator</li>
           </ul>
-          <Text className="terms-para">
+          <Text className="term__para">
             Third party alternative dispute resolution procedures may be
             required for certain transactions. However, this option may be made
             available (at the discretion of Finosell) only for transactions
             above a stated value threshold.
           </Text>
-          <Text className="terms-para">
+          <Text className="term__para">
             If users agree to this option when initiating a transaction, should
             the event of a dispute arise, if the transaction is in the “In
             Dispute” state, the details of the transaction will be forwarded to
@@ -197,48 +197,47 @@ function Terms() {
             achieved, the transaction funds are released according to this
             decision, after which the transaction is closed.
           </Text>
-          <Text className="terms-para">
+          <Text className="term__para">
             While the transaction is in the “In Dispute” state, the transaction
             funds will remain securely held in the transactional escrow account.
           </Text>
-        </div>
-        <div className="terms-2">
-          <Text className="terms-text">6. Cancelling an order</Text>
-          <Text className="terms-para">
+        </Term>
+        <Term>
+          <h3 className="term__title">6. Cancelling an order</h3>
+          <Text className="term__para">
             Finosell may cancel an order if any user fails to agree on the
             terms, or if the seller does not deliver after 3 days from the due
             delivery date.
           </Text>
-          <Text className="terms-pard">
+          <Text className="term__para">
             Buyers can't cancel an order after agreeing to the terms and
             conditions of a sale and payments have been made OR Buyers can only
             get 70% of payment made after cancelling an order.
           </Text>
-        </div>
-        <div className="terms-2" style={{ paddingBottom: "9rem" }}>
-          <Text className="terms-text">7. Transaction Chain</Text>
+        </Term>
+        <Term>
+          <Text className="term__title">7. Transaction Chain</Text>
           <ul className="list">
             <li className="resolution">STATUS is PENDING</li>
           </ul>
-          <Text className="terms-para">Buyer can still cancel transaction</Text>
-          <Text className="terms-para">
-            {" "}
+          <Text className="term__para">Buyer can still cancel transaction</Text>
+          <Text className="term__para">
             The money leaves the account of the buyer
           </Text>
           <ul className="list">
             <li className="resolution"> STATUS becomes - TAKEN</li>
           </ul>
-          <Text className="terms-para">
+          <Text className="term__para">
             {" "}
             Seller to accept the escrow transaction(seller views the
             transaction)
           </Text>
-          <Text className="terms-para"> No one can cancel the transaction</Text>
+          <Text className="term__para"> No one can cancel the transaction</Text>
 
           <ul className="list">
             <li className="resolution"> STATUS becomes -DECLINED/CANCELLED</li>
           </ul>
-          <Text className="terms-para">
+          <Text className="term__para">
             {" "}
             The money return money to the account of the buyer
           </Text>
@@ -246,30 +245,30 @@ function Terms() {
           <ul className="list">
             <li className="resolution"> STATUS is SENT</li>
           </ul>
-          <Text className="terms-para"> Upload images of the product</Text>
-          <Text className="terms-para">
+          <Text className="term__para"> Upload images of the product</Text>
+          <Text className="term__para">
             {" "}
             Finosell Agent will be assigned to this transaction
           </Text>
-          <Text className="terms-para"> No one can cancel the transaction</Text>
+          <Text className="term__para"> No one can cancel the transaction</Text>
 
           <ul className="list">
             <li className="resolution"> STATUS is In-Transit</li>
           </ul>
-          <Text className="terms-para">
+          <Text className="term__para">
             Finosell Agent will call to confirm from the delivery agent
           </Text>
-          <Text className="terms-para">
+          <Text className="term__para">
             {" "}
             Seller will update delivery status
           </Text>
-          <Text className="terms-para"> No one will be paid</Text>
+          <Text className="term__para"> No one will be paid</Text>
 
           <ul className="list">
             <li className="resolution">Finosell Agent: Delivered</li>
           </ul>
-          <Text className="terms-para">24 hours countdown</Text>
-          <Text className="terms-para">
+          <Text className="term__para">24 hours countdown</Text>
+          <Text className="term__para">
             {" "}
             The system will get notification for auto-accept
           </Text>
@@ -277,45 +276,45 @@ function Terms() {
           <ul className="list">
             <li className="resolution"> STATUS is ACCEPTED</li>
           </ul>
-          <Text className="terms-para">
+          <Text className="term__para">
             The money will be released to the seller
           </Text>
 
           <ul className="list">
             <li className="resolution"> REJECTED</li>
           </ul>
-          <Text className="terms-para">
+          <Text className="term__para">
             The buyer will to upload proof of delivered product
           </Text>
-          <Text className="terms-para">
+          <Text className="term__para">
             {" "}
             Finosell Agent then verifies and if true, seller will pick the
             product
           </Text>
-          <Text className="terms-para">
+          <Text className="term__para">
             Provide pick up PIN, guarantee that the product has been picked up
           </Text>
-          <Text className="terms-para">Pick PIN from the SELLER</Text>
+          <Text className="term__para">Pick PIN from the SELLER</Text>
 
           <ul className="list">
             <li className="resolution">COMPLETED</li>
           </ul>
-          <Text className="terms-para">Once you input the PIN</Text>
-          <Text className="terms-para"> Money goes back to the buyer</Text>
+          <Text className="term__para">Once you input the PIN</Text>
+          <Text className="term__para"> Money goes back to the buyer</Text>
 
           <ul className="list">
             <li className="resolution">STATUS is RECEIVED</li>
           </ul>
-          <Text className="terms-para">Buyer receives product</Text>
+          <Text className="term__para">Buyer receives product</Text>
 
           <ul className="list">
             <li className="resolution">STATUS is DELIVERED</li>
           </ul>
-          <Text className="terms-para">
+          <Text className="term__para">
             Agent will confirm from the delivery agent
           </Text>
-          <Text className="terms-para">Seller delivers product</Text>
-        </div>
+          <Text className="term__para">Seller delivers product</Text>
+        </Term>
       </>
   );
 }
@@ -325,12 +324,12 @@ export default Terms;
 const Term = styled.section`
   margin-bottom: ${50*0.063}rem;
   font-family: "DM Sans";
-  .terms__title{
+  .term__title{
     font-style: normal;
-    font-weight: 600;
-    font-size: 50px;
+    font-weight: 500;
     line-height: 65px;
     color: #131618;
+    font-size: ${35*0.063}rem;
   }
   .term__para{
     font-style: normal;
@@ -339,8 +338,16 @@ const Term = styled.section`
     line-height: 23px;
     color: #8c8c8c;
     padding-top: 2rem;
+    margin-top: ${0.063*20}rem
   }
   @media screen only and (min-width: 768px){
     margin-bototm: ${100*0.063}rem;
+
+    .terms__title{
+      font-size: ${60*0.063}rem;
+    }
+    .term__para{
+      margin-top: ${0.063*30}rem
+    }
   }
 `

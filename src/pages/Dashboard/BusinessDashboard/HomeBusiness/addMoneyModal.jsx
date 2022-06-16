@@ -23,7 +23,7 @@ import { BsToggleOn, BsToggleOff, BsPlusSquare } from "react-icons/bs";
 import { PaystackConsumer } from "react-paystack";
 import { useSelector, useDispatch } from "react-redux";
 import { saveTransactionRef } from "../../../../ReduxContianer/BussinessRedux/BusinessAction";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 export default function AddMoneyBusinessModal() {
   const dispatch = useDispatch();
   const yellowbtn = useColorModeValue("yellow.500");
@@ -32,7 +32,7 @@ export default function AddMoneyBusinessModal() {
   const [amount, setAmount] = useState("");
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
-  const history = useHistory();
+  const history = useNavigate();
   const businessInfo = useSelector(
     (state) => state.businessReducer.businessUserInfo
   );
@@ -54,7 +54,7 @@ export default function AddMoneyBusinessModal() {
     transactionDetails.amount = reference;
     dispatch(saveTransactionRef(transactionDetails));
     console.log(transactionDetails, "AMOUNT");
-    return history.push("/business/payment");
+    return history("/business/payment");
   };
 
   const componentProps = {

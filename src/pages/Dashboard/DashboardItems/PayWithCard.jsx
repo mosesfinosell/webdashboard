@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import "./payment.css";
 import Logomark from "../../../assets/Logomark.svg";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MdEmail } from "react-icons/md";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -18,7 +18,7 @@ import { BsToggleOn, BsToggleOff } from "react-icons/bs";
 function PayWithCard() {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
-  const history = useHistory();
+  const history = useNavigate();
   const initialValues = {
     card_number: "",
     valid: "",
@@ -48,7 +48,7 @@ function PayWithCard() {
           <Text className="payment-select">Pay with Card</Text>
           <Text
             className="payment-change"
-            onClick={() => history.push("/choose-payment")}
+            onClick={() => history("/choose-payment")}
           >
             Change payment method
           </Text>

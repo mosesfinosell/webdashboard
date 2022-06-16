@@ -1,21 +1,30 @@
 import React, { useState } from "react";
-import {
-  Text,
-  Image,
-  Select,
-  FormLabel,
-  InputGroup,
-  Button,
-} from "@chakra-ui/react";
+import { Text, Image, Button } from "@chakra-ui/react";
 import "./payment.css";
 import Logomark from "../../../assets/Logomark.svg";
-import { useHistory } from "react-router-dom";
-
+import mono from "../../../assets/mono.svg";
+import { useNavigate } from "react-router-dom";
+import { MonoButton, useMono } from 'react-mono-js';
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
 function PayWithCard() {
-  const history = useHistory();
+    const config = {
+        public_key: 'test_pk_UTSE2b9lxLYx7usd2mHn ',
+        onClose: () => {},
+        onSuccess: (response) => {
+          console.log(response.code);
+    
+          /**
+            response : { "code": "code_xyz" }
+            you can send this code back to your server to get this
+            authenticated account and start making requests.
+          */
+        },
+      };
+    
+      const handleMono = useMono({ public_key: 'test_pk_UTSE2b9lxLYx7usd2mHn ' });
+  const history = useNavigate();
   const initialValues = {
     bank: "",
   };
@@ -38,10 +47,10 @@ function PayWithCard() {
         </div>
 
         <div className="payment-center">
-          <Text className="payment-select">Pay with USSD</Text>
+          <Text className="payment-select">Pay with Bank</Text>
           <Text
             className="payment-change"
-            onClick={() => history.push("/choose-payment")}
+            onClick={() => history("/choose-payment")}
           >
             Change payment method
           </Text>
@@ -57,19 +66,16 @@ function PayWithCard() {
           </div>
           <div className="payment-bottom">
             <Text className="dial">
-              Dial the code below on your mobile phone to complete the payment
+              You will be redirected to Mono to complete this payment
             </Text>
-            <Text className="ussd">*737*000*9643#</Text>
+            <div className="mono">
+              <Image src={mono} alt="mono-logo" />
+            </div>
           </div>
-          <Text
-            className="change-bank"
-            onClick={() => history.push("/pay-with-ussd")}
-          >
-            Change Bank
-          </Text>
+
           <div className="ussd-btn">
             <Button
-              mt={4}
+              mt={6}
               mb={10}
               bg="yellow.500"
               width="100%"
@@ -79,8 +85,9 @@ function PayWithCard() {
               color="white"
               _hover={{ bg: "#1A202C" }}
             >
-              Continue
+              Proceed
             </Button>
+            <MonoButton {...config} text="Connect bank with Mono!" />
           </div>
         </div>
       </div>

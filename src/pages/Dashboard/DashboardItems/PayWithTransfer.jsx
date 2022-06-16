@@ -2,9 +2,9 @@ import React from "react";
 import { Text, Image, Button } from "@chakra-ui/react";
 import "./payment.css";
 import Logomark from "../../../assets/Logomark.svg";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 function PaymentPage() {
-  const history = useHistory();
+  const history = useNavigate();
   return (
     <div className="payment">
       <div className="payment-holder">
@@ -16,7 +16,7 @@ function PaymentPage() {
           <Text className="payment-select">Pay with Bank Transfer</Text>
           <Text
             className="payment-change"
-            onClick={() => history.push("/choose-payment")}
+            onClick={() => history("/choose-payment")}
           >
             Change payment method
           </Text>
@@ -46,7 +46,7 @@ function PaymentPage() {
           </div>
           <div className="ussd-btn">
             <Button
-              onClick={() => history.push("/bank-payment")}
+              onClick={() => history("/bank-payment")}
               mt={5}
               mb={12}
               bg="yellow.500"

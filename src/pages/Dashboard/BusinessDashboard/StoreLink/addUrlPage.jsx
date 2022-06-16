@@ -21,10 +21,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import { createStoreLink } from "../../../../ReduxContianer/BussinessRedux/BusinessAction";
 import BusinessLayout from "../../../../components/Layout/BusinessLayout";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../../../Dashboard/Dash.css";
 export default function AddUrlPage() {
-  const history = useHistory();
+  const history = useNavigate();
   const yellowbtn = useColorModeValue("yellow.500");
   const dispatch = useDispatch();
 
@@ -70,7 +70,7 @@ export default function AddUrlPage() {
             </InputGroup>
           </div>
           <Button
-          onClick={()=>history.push('/business/store-page')}
+          onClick={()=>history('/business/store-page')}
           className="add-store"
             mt={4}
             bg={yellowbtn}

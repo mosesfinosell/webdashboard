@@ -1,49 +1,50 @@
-import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
+import { Routes, BrowserRouter as Router, Route } from "react-router-dom";
 import PrivateRoute from "./utils/PrivateRoute";
 import { Suspense } from "react";
 import { Text, Spinner } from "@chakra-ui/react";
 import ErrorBoundary from "./ErrorBoundary";
-import AccountBox from "./layouts/AccountBox/AccountBox";
-import PersonalAccountSignUp from "./layouts/SignUp/PersonalSignUpPage/PersonalAccountSignUp";
-import PersonalAccountSignIn from "./layouts/SignIn/PersonalLogInPage/PersonalAccountSignIn";
-import PersonalForgetPassword from "./layouts/SignIn/PersonalLogInPage/PersonalForgetPassword";
+import AccountBox from "./pages/AccountBox/AccountBox"
+import PersonalAccountSignUp from "./pages/SignUp/PersonalSignUpPage/PersonalAccountSignUp";
+import PersonalAccountSignIn from "./pages/SignIn/PersonalLogInPage/PersonalAccountSignIn";
+import PersonalForgetPassword from "./pages/SignIn/PersonalLogInPage/PersonalForgetPassword";
 
-import BusinessAccountSignUp from "./layouts/SignUp/BusinessSignUpPage/BusinessAccountSignUp";
-import BusinessAccountSignIn from "./layouts/SignIn/BusinessLogInPage/BusinessAccountSignIn";
-import AddBusinessPage from "./layouts/SignUp/BusinessSignUpPage/AddBusinessPage";
-import StoreInventory from "./layouts/Dashboard/BusinessDashboard/HomeBusiness/StoreInventory";
-import StorePage from "./layouts/Dashboard/BusinessDashboard/HomeBusiness/StorePage";
-import Cart from "./layouts/Dashboard/BusinessDashboard/HomeBusiness/Cart";
-import VerifyPhoneNumber from "./layouts/SignUp/PersonalSignUpPage/VerifyPhoneNumber";
-import InputOtp from "./layouts/SignUp/PersonalSignUpPage/VerifyOtp";
-import PasswordPage from "./layouts/SignUp/PasswordPage";
-import DashboardPage from "./layouts/Dashboard/DashboardPage";
-import BusinessDashboard from "./layouts/Dashboard/DashboardItems/BusinessDashboard";
-import AddProduct from "./layouts/Dashboard/BusinessDashboard/HomeBusiness/addProduct";
-import ProductModal from "./layouts/Dashboard/BusinessDashboard/HomeBusiness/addProductModal";
-import DeliveryRequest from "./layouts/Dashboard/BusinessDashboard/HomeBusiness/delivery";
-import InvoiceBoard from "./layouts/Dashboard/BusinessDashboard/HomeBusiness/InvoiceBoard";
-import AddInvoice from "./layouts/Dashboard/BusinessDashboard/HomeBusiness/addInvoice";
-import ResendOtp from "./layouts/SignUp/PersonalSignUpPage/resendOtpPage";
-import BusinessVerifyOtp from "./layouts/SignUp/PersonalSignUpPage/BusinessVerifyOtp";
-import AddTeam from "./layouts/Dashboard/BusinessDashboard/Account/addTeam";
-import DealDashboard from "../src/layouts/Dashboard/DashboardItems/DealDashboard";
-import HomeDashboard from "../src/layouts/Dashboard/DashboardItems/HomeDashboard";
-import PaymentPage from "../src/layouts/Dashboard/DashboardItems/PaymentPage";
-import AccountUserProfile from "./layouts/Dashboard/DashboardItems/AccountUserProfile";
-import BusinessOrders from "./layouts/Dashboard/DashboardItems/OrderHistory";
-import StoreLink from "./layouts/Dashboard/BusinessDashboard/StoreLink/addUrlPage";
-import CreateTransaction from "./layouts/Dashboard/BusinessDashboard/Payment/createTransaction";
-import PayWithCard from "../src/layouts/Dashboard/DashboardItems/PayWithCard";
-import PayWithUssd from "../src/layouts/Dashboard/DashboardItems/PayWithUssd";
-import UssdConfirmation from "../src/layouts/Dashboard/DashboardItems/UssdConfirmation";
-import PayWithTransfer from "../src/layouts/Dashboard/DashboardItems/PayWithTransfer";
-import BankPayment from "../src/layouts/Dashboard/DashboardItems/BankPayment";
-import Home from "../src/layouts/Home";
-import Individual from "./layouts/Individual";
-import Business from "./layouts/Business";
-import Terms from "./layouts/Terms";
-import Pricing from "./layouts/Pricing";
+import BusinessAccountSignUp from "./pages/SignUp/BusinessSignUpPage/BusinessAccountSignUp";
+import BusinessAccountSignIn from "./pages/SignIn/BusinessLogInPage/BusinessAccountSignIn";
+import AddBusinessPage from "./pages/SignUp/BusinessSignUpPage/AddBusinessPage";
+import StoreInventory from "./pages/Dashboard/BusinessDashboard/HomeBusiness/StoreInventory";
+import StorePage from "./pages/Dashboard/BusinessDashboard/HomeBusiness/StorePage";
+import Cart from "./pages/Dashboard/BusinessDashboard/HomeBusiness/Cart";
+import VerifyPhoneNumber from "./pages/SignUp/PersonalSignUpPage/VerifyPhoneNumber";
+import InputOtp from "./pages/SignUp/PersonalSignUpPage/VerifyOtp";
+import PasswordPage from "./pages/SignUp/PasswordPage";
+import DashboardPage from "./pages/Dashboard/DashboardPage";
+import BusinessDashboard from "./pages/Dashboard/DashboardItems/BusinessDashboard";
+import AddProduct from "./pages/Dashboard/BusinessDashboard/HomeBusiness/addProduct";
+import ProductModal from "./pages/Dashboard/BusinessDashboard/HomeBusiness/addProductModal";
+import DeliveryRequest from "./pages/Dashboard/BusinessDashboard/HomeBusiness/delivery";
+import InvoiceBoard from "./pages/Dashboard/BusinessDashboard/HomeBusiness/InvoiceBoard";
+import AddInvoice from "./pages/Dashboard/BusinessDashboard/HomeBusiness/addInvoice";
+import ResendOtp from "./pages/SignUp/PersonalSignUpPage/resendOtpPage";
+import BusinessVerifyOtp from "./pages/SignUp/PersonalSignUpPage/BusinessVerifyOtp";
+import AddTeam from "./pages/Dashboard/BusinessDashboard/Account/addTeam";
+import DealDashboard from "./pages/Dashboard/DashboardItems/DealDashboard";
+import HomeDashboard from "./pages/Dashboard/DashboardItems/HomeDashboard";
+import PaymentPage from "./pages/Dashboard/DashboardItems/PaymentPage";
+import AccountUserProfile from "./pages/Dashboard/DashboardItems/AccountUserProfile";
+import BusinessOrders from "./pages/Dashboard/DashboardItems/OrderHistory";
+import StoreLink from "./pages/Dashboard/BusinessDashboard/StoreLink/addUrlPage";
+import CreateTransaction from "./pages/Dashboard/BusinessDashboard/Payment/createTransaction";
+import PayWithCard from "./pages/Dashboard/DashboardItems/PayWithCard";
+import PayWithUssd from "./pages/Dashboard/DashboardItems/PayWithUssd";
+import UssdConfirmation from "./pages/Dashboard/DashboardItems/UssdConfirmation";
+import PayWithTransfer from "./pages/Dashboard/DashboardItems/PayWithTransfer";
+import BankPayment from "./pages/Dashboard/DashboardItems/BankPayment";
+import Home from "./pages/Home";
+import Individual from "./pages/Individual";
+import Business from "./pages/Business";
+import Terms from "./pages/Terms";
+import Pricing from "./pages/Pricing";
+import About from "./pages/About"
 
 import Header from "./components/Layout/Header"
 import Footer from "./components/Layout/Footer"
@@ -51,100 +52,106 @@ import {AppContainer} from "./utils/styles"
 function App() {
   return (
     <>
+   
     <Router>
-      <Header />
-      <AppContainer>
+    <Header />
+    <AppContainer>
+      <Routes>
+      
+      
         {/* <Switch> */}
-        <Route exact path="/account" component={AccountBox} />
+        <Route exact path="/account" element={<AccountBox />} />
         <Route
           exact
           path="/"
-          component={Home}
+          element={<Home />}
         />
          <Route
           exact
           path="/individual"
-          component={Individual}
+          element={<Individual />}
         />
+        <Route path="/about" element={<About />} />
          <Route
           exact
           path="/business-home"
-          component={Business}
+          element={<Business />}
         />
         <Route
           exact
           path="/terms"
-          component={Terms}
+          element={<Terms />}
         />
- <Route
+        <Route
           exact
           path="/pricing"
-          component={Pricing}
+          element={<Pricing />}
         />
         <Route
           exact
           path="/personal-signup"
-          component={PersonalAccountSignUp}
+          element={<PersonalAccountSignUp />}
         />
         <Route
           exact
           path="/personal-signin"
-          component={PersonalAccountSignIn}
+          element={<PersonalAccountSignIn />}
         />
         {/* <DashboardPage /> */}
-        <PrivateRoute
+        <Route
           exact
           path="/personal-dashboard"
-          component={HomeDashboard}
+          element={<PrivateRoute element={HomeDashboard}/>}
         />
-        <PrivateRoute exact path="/choose-payment" component={PaymentPage} />
-        <PrivateRoute exact path="/pay-with-card" component={PayWithCard} />
-        <PrivateRoute exact path="/pay-with-ussd" component={PayWithUssd} />
-        <PrivateRoute
+        <Route exact path="/choose-payment" element={<PrivateRoute element={PaymentPage}/>} />
+        <Route path="/pay-with-card" element={<PrivateRoute element={PayWithCard}/>} />
+        <Route path="/pay-with-ussd" element={<PrivateRoute element={PayWithUssd}/> } />
+        <Route
           exact
           path="/pay-with-transfer"
-          component={PayWithTransfer}
+          element={<PrivateRoute element={PayWithTransfer}/> }
         />
-        <PrivateRoute exact path="/bank-payment" component={BankPayment} />
-        <PrivateRoute
+        <Route path="/bank-payment" element={<PrivateRoute element={BankPayment} />} />
+        <Route
           exact
           path="/ussd-confirmation"
-          component={UssdConfirmation}
+          element={<PrivateRoute element={UssdConfirmation}/>}
         />
-        <PrivateRoute path="/personal-deals" component={DealDashboard} />
+        <Route path="/personal-deals" element={<PrivateRoute element={DealDashboard}/>} />
 
-        <PrivateRoute path="/personal-account" component={AccountUserProfile} />
+        <Route path="/personal-account" element={<PrivateRoute element={AccountUserProfile}/>} />
 
         {/* </Switch> */}
 
         {/* Bussiness Account  */}
 
-        <Route path="/business-signup" component={BusinessAccountSignUp} />
+        <Route path="/business-signup" element={<PrivateRoute element={BusinessAccountSignUp}/>} />
 
-        <Route path="/business-signin" component={BusinessAccountSignIn} />
-        <PrivateRoute
+        <Route path="/business-signin" element={<PrivateRoute element={BusinessAccountSignIn}/>} />
+        <Route
           exact
           path="/business-dashboard"
-          component={BusinessDashboard}
+          element={<PrivateRoute element={BusinessDashboard}/>}
         />
-        <PrivateRoute
+        <Route
           exact
           path="/business/orders"
-          component={BusinessOrders}
+          element={<PrivateRoute element={BusinessOrders}/>}
         />
-        <PrivateRoute
+        <Route
           exact
           path="/business/store-inventory"
-          component={StoreInventory}
+          element={StoreInventory}
         />
-        <PrivateRoute exact path="/business/store-page" component={StorePage} />
-        <PrivateRoute exact path="/business/storelink" component={StoreLink} />
-        <PrivateRoute exact path="/business/store-page/cart" component={Cart} />
-        <PrivateRoute
-          exact
+        <Route path="/business/store-page" element={<PrivateRoute element={StorePage}/>} />
+        <Route path="/business/storelink" element={<PrivateRoute element={StoreLink}/>} />
+        <Route path="/business/store-page/cart" element={<PrivateRoute element={Cart}/>} />
+        <Route
           path="/business/payment"
-          component={CreateTransaction}
+          element={CreateTransaction}
         />
+    
+      </Routes>
       </AppContainer>
       <Footer />
     </Router>

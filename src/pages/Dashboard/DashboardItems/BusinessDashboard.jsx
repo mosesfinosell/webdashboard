@@ -24,7 +24,7 @@ import { MdAddchart } from "react-icons/md";
 import { GiBanknote } from "react-icons/gi";
 import HomeBusiness from "../BusinessDashboard/HomeBusiness/HomeBusiness";
 import AddUrlPage from "../BusinessDashboard/StoreLink/addUrlPage";
-import OrderHistory from "../../../layouts/Dashboard/DashboardItems/OrderHistory";
+import OrderHistory from "../../../pages/Dashboard/DashboardItems/OrderHistory";
 import AccountBusinessProfile from "../BusinessDashboard/Account/AccountBusinessProfile";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
@@ -46,10 +46,10 @@ import chartData from "../../../components/ChartData";
 import { useState } from "react";
 import { Chart as ChartJS } from "chart.js/auto";
 import { Link } from "react-router-dom";
-import AddMoneyBusinessModal from "../../../layouts/Dashboard/BusinessDashboard/HomeBusiness/addMoneyModal";
-import { useHistory } from "react-router-dom";
+import AddMoneyBusinessModal from "../../../pages/Dashboard/BusinessDashboard/HomeBusiness/addMoneyModal";
+import { useNavigate } from "react-router-dom";
 export default function BusinessDashboard() {
-  const history = useHistory();
+  const history = useNavigate();
   const { onOpen } = useDisclosure();
   const [userChart, setUserChart] = useState({
     labels: chartData.map((data) => data.year),
@@ -188,7 +188,7 @@ export default function BusinessDashboard() {
 
               <div
                 className="act-box"
-                onClick={() => history.push("/business/store-inventory")}
+                onClick={() => history("/business/store-inventory")}
               >
                 <div>
                   <img src={store} alt="store" />

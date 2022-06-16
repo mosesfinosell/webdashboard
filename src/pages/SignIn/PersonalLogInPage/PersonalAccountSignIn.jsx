@@ -25,7 +25,7 @@ import { FaLock } from "react-icons/fa";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import { useSelector, useDispatch } from "react-redux";
 import * as Yup from "yup";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getUserInfo } from "../../../ReduxContianer/PersonalRedux/PersonalAction";
 import "../../../components/auth.css";
 import axios from "axios";
@@ -62,7 +62,7 @@ export default function PersonalAccountSignIn() {
         });
         localStorage.setItem("password", response.data.message.password);
         tools.resetForm();
-        return history.push("/personal-dashboard");
+        return history("/personal-dashboard");
       })
       .catch((error) => {
         setIsLoading(false);
@@ -91,7 +91,7 @@ export default function PersonalAccountSignIn() {
   // Redux
   const dispatch = useDispatch();
 
-  const history = useHistory();
+  const history = useNavigate();
   const toast = createStandaloneToast();
 
   // Function

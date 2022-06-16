@@ -48,7 +48,7 @@ const Footer = () => {
           <div class="foot-2">
             <div class="box">
               <Text className="company">Company</Text>
-              <Text className="abt">About</Text>
+              <Link className="abt" to="/about">About</Link>
               <Text className="abt">Blog</Text>
               <Text className="abt">FAQ</Text>
               <Text className="abt">Help</Text>
@@ -77,7 +77,7 @@ const Footer = () => {
           <div class="foot-2">
             <div class="box">
               <div className="footer-social">
-                <a href="https://facebook.com">
+                <a href="https://www.facebook.com/Finosell-112251447209343/" target="_blank" rel="noreferrer">
                 <FontAwesomeIcon
                   icon={faFacebook}
                   style={{
@@ -86,7 +86,7 @@ const Footer = () => {
                   }}
                 />
                 </a>
-                <a href="https://instagram.com">
+                <a href="https://instagram.com/finosellapp?igshid=YmMyMTA2M2Y=" target="_blank" rel="noreferrer">
                 <FontAwesomeIcon
                   icon={faInstagram}
                   style={{
@@ -95,7 +95,7 @@ const Footer = () => {
                   }}
                 />
                 </a>
-                <a href="https://linkedin.com">
+                <a href="https://www.linkedin.com/company/finosell-global-ltd/" target="_blank" rel="noreferrer">
                 <FontAwesomeIcon
                   icon={faLinkedin}
                   style={{
@@ -104,7 +104,7 @@ const Footer = () => {
                   }}
                 />
                 </a>
-                <a href="https://twitter.com">
+                <a href="https://twitter.com/finosell?t=6GZOF07oTPgFpRr_9yxSSg&s=09" target="_blank" rel="noreferrer">
                   <FontAwesomeIcon
                     icon={faTwitter}
                     style={{

@@ -9,13 +9,13 @@ import {
 } from "@chakra-ui/react";
 import "./payment.css";
 import Logomark from "../../../assets/Logomark.svg";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
 function PayWithCard() {
-  const history = useHistory();
+  const history = useNavigate();
   const initialValues = {
     bank: "",
   };
@@ -41,7 +41,7 @@ function PayWithCard() {
           <Text className="payment-select">Pay with USSD</Text>
           <Text
             className="payment-change"
-            onClick={() => history.push("/choose-payment")}
+            onClick={() => ("/choose-payment")}
           >
             Change payment method
           </Text>
@@ -55,45 +55,32 @@ function PayWithCard() {
               <Text className="payment-amt">#100,000,000</Text>
             </div>
           </div>
-          <div className="payment-bases">
-            <form>
-              <FormLabel htmlFor="bank">Select Bank</FormLabel>
-              <InputGroup>
-                <Select
-                  id="title"
-                  name="title"
-                  mb="20px"
-                  value={formik.values.bank}
-                  onChange={formik.handleChange}
-                  placeholder="Select Bank"
-                  width="100%"
-                  height="63px"
-                  borderRadius="0px 11px 11px 11px"
-                  bg="#fafafa"
-                >
-                  <option value="gtb">GTB</option>
-                  <option value="sterling">Sterling</option>
-                </Select>
-              </InputGroup>
-              {formik.touched.bank && formik.errors.card_bank ? (
-                <span>{formik.errors.bank}</span>
-              ) : null}
-
-              <Button
-                onClick={() => history.push("/ussd-confirmation")}
-                mt={4}
-                mb={10}
-                bg="yellow.500"
-                width="100%"
-                h="68px"
-                borderRadius="0px 11px 11px 11px"
-                type="submit"
-                color="white"
-                _hover={{ bg: "#1A202C" }}
-              >
-                Continue
-              </Button>
-            </form>
+          <div className="payment-bottom">
+            <Text className="dial">
+              Dial the code below on your mobile phone to complete the payment
+            </Text>
+            <Text className="ussd">*737*000*9643#</Text>
+          </div>
+          <Text
+            className="change-bank"
+            onClick={() => history("/pay-with-ussd")}
+          >
+            Change Bank
+          </Text>
+          <div className="ussd-btn">
+            <Button
+              mt={4}
+              mb={10}
+              bg="yellow.500"
+              width="100%"
+              h="68px"
+              borderRadius="0px 11px 11px 11px"
+              type="submit"
+              color="white"
+              _hover={{ bg: "#1A202C" }}
+            >
+              Continue
+            </Button>
           </div>
         </div>
       </div>

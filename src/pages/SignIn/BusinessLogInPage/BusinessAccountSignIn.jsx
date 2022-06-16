@@ -28,7 +28,7 @@ import { FaEyeSlash, FaEye } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import {Redirect} from 'react-router-dom'
 import * as Yup from "yup";
 import { getBusinessUserInfo } from "../../../ReduxContianer/BussinessRedux/BusinessAction";
@@ -87,7 +87,7 @@ export default function BusinessAccountSignIn() {
         });
         localStorage.setItem("password", response.data.message.password);
         tools.resetForm();
-        return history.push("/business-dashboard");
+        return history("/business-dashboard");
       })
       .catch((error) => {
         setIsLoading(false);
@@ -110,7 +110,7 @@ export default function BusinessAccountSignIn() {
     validationSchema,
   });
 
-  const history = useHistory();
+  const history = useNavigate();
   //   const toast = useToast();
   const toast = createStandaloneToast();
 

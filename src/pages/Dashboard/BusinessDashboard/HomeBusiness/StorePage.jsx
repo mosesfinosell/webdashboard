@@ -13,7 +13,7 @@ import bag from "../../../../assets/bag.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faInstagram, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getProduct,
@@ -24,7 +24,7 @@ function StorePage() {
   let businessId = `1a15f398-89dd-4e02-90c3-a7fe4ca2f806`;
   let seller = `2349044373868`;
   const dispatch = useDispatch();
-  const history = useHistory();
+  const history = useNavigate();
   useEffect(() => {
     dispatch(getProduct(businessId));
     dispatch(getBusinessStat(seller));
@@ -159,7 +159,7 @@ function StorePage() {
               <div
                 key={product?._id}
                 className="food-desc"
-                onClick={() => history.push("/business/store-page/cart")}
+                onClick={() => history("/business/store-page/cart")}
               >
                 {" "}
                 <img

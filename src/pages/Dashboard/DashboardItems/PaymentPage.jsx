@@ -6,9 +6,9 @@ import transfer from "../../../assets/transfer.svg";
 import ussd from "../../../assets/ussd.svg";
 import bank from "../../../assets/bank.svg";
 import Logomark from "../../../assets/Logomark.svg";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 function PaymentPage() {
-  const history = useHistory();
+  const history = useNavigate();
   return (
     <div className="payment">
       <div className="payment-holder">
@@ -31,14 +31,14 @@ function PaymentPage() {
           <div className="payment-base">
             <div
               className="paid-div"
-              onClick={() => history.push("/pay-with-card")}
+              onClick={() => history("/pay-with-card")}
             >
               <Image src={card} alt="card" />
               <Text className="paid">Pay with Card</Text>
             </div>
             <div
               className="paid-div"
-              onClick={() => history.push("/pay-with-transfer")}
+              onClick={() => history("/pay-with-transfer")}
             >
               {" "}
               <Image src={transfer} alt="transfer" />
@@ -46,7 +46,7 @@ function PaymentPage() {
             </div>
             <div
               className="paid-div"
-              onClick={() => history.push("/pay-with-ussd")}
+              onClick={() => history("/pay-with-ussd")}
             >
               <Image src={ussd} alt="ussd" />
               <Text className="paid">Pay with USSD</Text>
