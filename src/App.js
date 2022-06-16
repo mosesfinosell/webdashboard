@@ -45,6 +45,7 @@ import Business from "./pages/Business";
 import Terms from "./pages/Terms";
 import Pricing from "./pages/Pricing";
 import About from "./pages/About"
+import Blog from "./pages/Blog"
 
 import Header from "./components/Layout/Header"
 import Footer from "./components/Layout/Footer"
@@ -72,6 +73,7 @@ function App() {
           element={<Individual />}
         />
         <Route path="/about" element={<About />} />
+        <Route path="/blog" element={<Blog />} />
          <Route
           exact
           path="/business-home"

@@ -16,7 +16,7 @@ const About = () => {
             </div>
         </Section1>
         <Section2>
-            <Heading>The Finance and Business Control Centre</Heading>
+            <Heading className="section-header">The Finance and Business Control Centre</Heading>
             <DarkBg>
                 <Heading>Our vision</Heading>
                 <Paragraph className="para-1">As a company, we aim to create financial inclusion through enhanced & secured e-commerce & payment transactions in Africa.</Paragraph>
@@ -41,13 +41,13 @@ const About = () => {
             </DarkBg>
         </Section2>
         <Section>
-            <Heading>
+            <Heading className="section-header">
                 Become a member of our team
             </Heading>
             <PrimaryButton>See all open roles</PrimaryButton>
         </Section>
         <Section>
-            <Heading>
+            <Heading className="section-header">
                 Ready to take control of your finances and business?
             </Heading>
             <PrimaryButton>Get Finosell</PrimaryButton>
@@ -88,6 +88,7 @@ const Section1 = styled.section`
     @media only screen and (min-width: 768px){
         flex-direction: row-reverse;
         align-items: center;
+        padding: 0;
         img{
             margin-left: ${50*0.063}rem;
         }
@@ -99,12 +100,12 @@ const Section1 = styled.section`
 
 const Section2 = styled.section`
     margin-bottom: ${100*0.063}rem;
-    ${Heading}{
+    .section-header{
         margin-bottom: ${50*0.063}rem;
         padding: 0 ${marginMobile};
     }
     @media only screen and (min-width: 768px){
-        ${Heading}{
+        .section-header{
             padding: 0 ${margin};
         }
     }
@@ -158,7 +159,19 @@ const Section = styled.section`
     ${PrimaryButton}{
         padding: ${12*0.063}rem ${30*0.063}rem;
     }
+    .section-header{
+        margin-bottom: ${50*0.063}rem;
+        padding: 0 ${marginMobile};
+    }
+    
     @media only screen and (min-width: 768px){
         padding: 0 ${margin};
+        margin-bottom: ${183*0.063}rem;
+        ${PrimaryButton}{
+            font-size: ${28*0.063}rem;
+        }
+        .section-header{
+            padding: 0 ${margin};
+        }
     }
 `

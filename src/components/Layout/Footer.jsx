@@ -2,11 +2,7 @@ import React from 'react'
 import {Image, Text} from "@chakra-ui/react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-import {
-    faBars,
-    faCaretUp,
-    faCaretDown,
-  } from "@fortawesome/free-solid-svg-icons";
+import styled from "styled-components"
 import {
   faInstagram,
   faFacebook,
@@ -18,64 +14,63 @@ import webapp from "../../assets/webapp.svg";
 import googlesmall from "../../assets/googlesmall.svg";
 import applestore from "../../assets/applestore.svg";
 import Logomark from "../../assets/Logomark.svg";
-
+import {margin, marginMobile} from "../../utils/styles"
 
 
 
 const Footer = () => {
   return (
     <footer>
-        <div class="foot">
-        <div class="foot-divider">
-          <div class="foot-1">
-            <Image src={Logomark} alt="logo" />
+        
+      <FooterContent>
+        <div class="foot-1">
+          <Logo src={Logomark} alt="logo" />
+          <Apps>
             <div class="infos">
-              <div class="icon-desc">
                 <Image src={applestore} alt="logo" />
-              </div>
             </div>
             <div class="infos">
-              <div class="icon-desc">
-                <Image src={googlesmall} alt="logo" />
-              </div>
+              <Image src={googlesmall} alt="logo" />
             </div>
-            <div class="infos">
-              <div class="icon-desc">
-                <Image src={webapp} alt="logo" />
-              </div>
+            <div class="infos webapp">
+              <Image src={webapp} alt="logo" />
             </div>
-          </div>
+          </Apps>
+        </div>
+        <Columns>
           <div class="foot-2">
-            <div class="box">
-              <Text className="company">Company</Text>
-              <Link className="abt" to="/about">About</Link>
+            
+              <Text className="column-title">Company</Text>
+              <Link className="abt" to="/about">
+                <Text className="abt">About</Text>
+              </Link>
               <Text className="abt">Blog</Text>
               <Text className="abt">FAQ</Text>
               <Text className="abt">Help</Text>
               <Text className="abt">Handles</Text>
-            </div>
+          
           </div>
           <div class="foot-2">
-            <div class="box">
-              <Text className="company">Products</Text>
+            
+              <Text className="column-title">Products</Text>
               <Text className="abt">Business Management</Text>
               <Text className="abt">Payments</Text>
               <Text className="abt">Escrow</Text>
-            </div>
+          
           </div>
 
           <div class="foot-2">
-            <div class="box">
-              <Text className="company">Legal</Text>
-              <Link to="/terms">
-                <Text className="abt">Terms and Conditions</Text>
-              </Link>
-              <Text className="abt">Privacy Policy</Text>
-            </div>
+            
+            <Text className="column-title">Legal</Text>
+            <Link className="abt" to="/terms">
+              <Text className="abt">Terms and Conditions</Text>
+            </Link>
+            <Text className="abt">Privacy Policy</Text>
+            
           </div>
 
           <div class="foot-2">
-            <div class="box">
+            
               <div className="footer-social">
                 <a href="https://www.facebook.com/Finosell-112251447209343/" target="_blank" rel="noreferrer">
                 <FontAwesomeIcon
@@ -116,10 +111,11 @@ const Footer = () => {
               </div>
               <Text className="abt">support@finosell.com</Text>
               <Text className="abt">+234 - XXXX - XXXX</Text>
-            </div>
+            
           </div>
-        </div>
-      </div>
+        </Columns>
+      </FooterContent>
+
       <Text className="copyright-text">
         &copy;2022 Finosell Limited. All rights reserved
       </Text>
@@ -128,3 +124,84 @@ const Footer = () => {
 }
 
 export default Footer
+
+const Apps = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  .infos{
+    margin: ${0.063*15}rem;
+    
+  }
+  .webapp{
+    display: none;
+  }
+  @media only screen and (min-width: 768px){
+    flex-direction: column;
+    align-items: flex-start;
+    .webapp{
+      display: block;
+    }
+    .infos{
+      margin-left: 0;
+    }
+  }
+`
+const Logo = styled.img`
+  margin: 0 auto;
+  margin-bottom: ${24*0.063}rem;
+  @media only screen and (min-width: 768px){
+    margin: 0;
+    margin-bottom: ${30*0.063}rem;
+  }
+`
+const Columns = styled.div`
+  display: grid;
+  grid-template: auto / 1fr 1fr;
+  gap: 1rem;
+  flex-grow: 1;
+  .footer-social{
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .foot-2{
+
+  }
+  .column-title{
+    color:#273B4A;
+    font-weight: 700;
+    
+  }
+  .abt{
+    color: #8C8C8C;
+    font-weight: 500;
+  }
+  p, a{
+    margin-bottom: ${20*0.063}rem;
+    line-height: ${23*0.063}rem;
+    font-size: ${18*0.063}rem
+  }
+  @media only screen and (min-width: 768px){
+    display: flex;
+    
+    justify-content: space-evenly;
+  }
+`
+const FooterContent = styled.div`
+  margin: 0 ${marginMobile};
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 1rem;
+  font-family: "DM sans", sans-serif;
+  @media only screen and (min-width: 768px){
+    flex-direction: row;
+    margin: 0 ${margin};
+    align-items:flex-start;
+    justify-content:space-between;
+  }
+  @media only screen and (min-width: 1800px){
+    margin: 0 auto;
+  }
+`

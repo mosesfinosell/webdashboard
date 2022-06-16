@@ -239,7 +239,7 @@ header label {
   margin-top: 14rem !important;
   width: 100%;
   margin: 0 auto;
-  flex-direction: column;
+  flex-direction: column; 
 }
 .inner-bckground {
   display: flex;
@@ -614,18 +614,18 @@ header label {
   font-family: "DM Sans", sans-serif;
   background: #fff;
 }
-.company {
+/* .company {
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
   line-height: 23px;
   color: #273b4a;
-}
-.footer-social {
+} */
+/* .footer-social {
   justify-content: space-between;
   display: flex;
   padding-top: 1.2rem;
-}
+} */
 .abt {
   font-style: normal;
   font-weight: 500;
@@ -1190,7 +1190,7 @@ table th {
   background: #ffffff;
   margin-top: 3rem;
 }
-.foot-divider {
+/* .foot-divider {
   display: flex;
   justify-content: space-between;
   width: 95%;
@@ -1199,11 +1199,11 @@ table th {
   padding-top: 4rem;
   padding-left: 4rem;
   padding-right: 4rem;
-}
-.foot-1 {
+} */
+/* .foot-1 {
   padding-top: 1.2rem;
   width: 18%;
-}
+} */
 .foot-1 h3 {
   font-size: 18px;
   padding: 1rem 0;
@@ -1247,12 +1247,12 @@ table th {
   color: #fff;
   text-align: center;
 }
-.foot-2 {
+/* .foot-2 {
   width: 18%;
-  /* width: 65%;
+  width: 65%;
   display: flex;
-  justify-content: space-between; */
-}
+  justify-content: space-between;
+} */
 .foot-2 .box .company {
   padding: 1rem 0;
   font-style: normal;
@@ -1684,9 +1684,9 @@ table th {
     width: 100%;
     padding: 0;
   }
-  .banner-1 h1 {
+  /* .banner-1 h1 {
     font-size: 52px;
-  }
+  } */
   .banner-2 {
     width: 100%;
   }

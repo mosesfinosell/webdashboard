@@ -23,12 +23,18 @@ export const PrimaryTitle = styled.h1`
 `
 
 export const PrimaryButton = styled.button`
-     color: #ffffff;
+    color: #ffffff;
     padding: 0.9rem 0.8rem;
     background: #d6aa1b;
     border-radius: 3.5px 10px 10px 10px;
     font-size: 20px;
     margin-top: 0.2rem;
+    font-size: ${12*0.063}rem;
+    font-weight: 500;
+
+    @media only screen and (min-width: 768px){
+        font-size: ${18*0.063}rem;
+    }
 `
 export const PrimaryParagraph = styled.p`
     color:#8C8C8C;
@@ -39,6 +45,12 @@ export const PrimaryParagraph = styled.p`
     @media only screen and (min-width: 768px){
         line-height: ${24*0.063}rem;
         font-size:${20*0.063}rem;
+    }
+`
+export const PrimarySection = styled.section`
+    padding: 0 ${25*0.063}rem;
+    @media only screen and (min-width: 768px){
+        padding: 0 ${75*0.063}rem;
     }
 `
 

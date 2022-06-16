@@ -29,7 +29,7 @@ import payment from "../assets/payment.svg";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 
 import styled from "styled-components"
-import {PrimaryTitle} from '../utils/styles'
+import {PrimaryTitle, PrimaryButton, PrimaryParagraph} from '../utils/styles'
 
 // import { faBars } from "@fortawesome/free-regular-svg-icons";
 function Home() {
@@ -42,17 +42,17 @@ function Home() {
           <div className="banner-1">
             <div className="banner-holder">
               <DarkHeader>
-                Manage all your
+                Manage all your<br />
                 finance and business in one place
               </DarkHeader>
-              <Text className="abt-fin">
+              <PrimaryParagraph>
                 A financial and business management App for business owners and
                 individuals.
-              </Text>
+              </PrimaryParagraph>
             </div>
 
             <div class="save">
-              <Text id="free">Try Finosell for free</Text>
+              <Try >Try Finosell for free</Try>
             </div>
             <div className="socially">
               <div className="flutter">
@@ -296,18 +296,21 @@ const Banner = styled.section`
   .download{
     width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     margin-top: ${22*0.063}rem;
   }
   .download__btn{
     margin: ${8*0.063}rem;
   }
+  ${PrimaryParagraph}{
+    margin-bottom: ${32*0.063}rem;
+  }
   @media only screen and (min-width: 768px){
     flex-direction: row;
     justify-content: space-between;
     .download{
-      flex-direction: row;
+      
       justify-content: flex-start;
       margin-top: ${44*0.063}rem;
     }
@@ -323,5 +326,13 @@ const Section2 = styled(Banner)`
     flex-direction: row;
     justify-content: space-between;
     margin-top: ${0.063*142}rem;
+  }
+`
+
+const Try = styled(PrimaryButton)`
+  padding: ${12*0.063}rem ${24*0.063}rem;
+
+  @media only screen and (min-width: 768px){
+    padding: ${18*0.063}rem ${28*0.063}rem;
   }
 `
