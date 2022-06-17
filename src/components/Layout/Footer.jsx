@@ -178,14 +178,19 @@ const Columns = styled.div`
     font-weight: 500;
   }
   p{
-    margin-bottom: ${20*0.063}rem;
-    line-height: ${23*0.063}rem;
-    font-size: ${18*0.063}rem
+    margin-bottom: ${15*0.063}rem;
+    line-height: ${18*0.063}rem;
+    font-size: ${14*0.063}rem
   }
   @media only screen and (min-width: 768px){
     display: flex;
     
     justify-content: space-evenly;
+    p{
+      margin-bottom: ${20*0.063}rem;
+      line-height: ${23*0.063}rem;
+      font-size: ${18*0.063}rem
+    }
   }
 `
 const FooterContent = styled.div`
