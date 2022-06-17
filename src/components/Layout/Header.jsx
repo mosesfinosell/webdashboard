@@ -12,7 +12,7 @@ import {
     faUniversity,
     faUser
   } from "@fortawesome/free-solid-svg-icons";
-import {marginMobile, headerHeight, headerHeightMobile, PrimaryButton, margin } from "../../utils/styles"
+import {marginMobile, headerHeight, headerHeightMobile, PrimaryButton, margin } from "../../Styles"
 
 const Header = () => {
     
@@ -60,7 +60,7 @@ const Header = () => {
                   </DropDownItem>
                 </Link>
                 <div className="vl"></div>
-                  <Link to="business-home">
+                  <Link to="/business-home">
                     <DropDownItem >
                       <div className="icon">
                         <FontAwesomeIcon

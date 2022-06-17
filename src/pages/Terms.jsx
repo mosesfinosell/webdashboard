@@ -2,11 +2,16 @@
 import { Text } from "@chakra-ui/react";
 import "./home.css";
 import styled from "styled-components";
+import Header from "../components/Layout/Header"
+import Footer from "../components/Layout/Footer"
+import {AppContainer, marginMobile} from "../Styles"
 
 function Terms() {
   
   return (
       <>
+      <Header />
+      <AppContainer>
         <Term>
           <h3 className="term__title">1. Terms and Conditions</h3>
           <Text className="term__para">
@@ -315,6 +320,8 @@ function Terms() {
           </Text>
           <Text className="term__para">Seller delivers product</Text>
         </Term>
+        </AppContainer>
+        <Footer />
       </>
   );
 }
@@ -327,8 +334,8 @@ const Term = styled.section`
   .term__title{
     font-style: normal;
     font-weight: 500;
-    line-height: 65px;
-    color: #131618;
+    line-height: ${37*0.063}rem;
+    color: #273B4A;
     font-size: ${35*0.063}rem;
   }
   .term__para{
@@ -337,14 +344,14 @@ const Term = styled.section`
     font-size: 18px;
     line-height: 23px;
     color: #8c8c8c;
-    padding-top: 2rem;
     margin-top: ${0.063*20}rem
   }
   @media screen only and (min-width: 768px){
-    margin-bototm: ${100*0.063}rem;
+    margin-bottom: ${100*0.063}rem;
 
     .terms__title{
       font-size: ${60*0.063}rem;
+      line-height: ${65*0.063}rem;
     }
     .term__para{
       margin-top: ${0.063*30}rem

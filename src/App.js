@@ -47,20 +47,15 @@ import Pricing from "./pages/Pricing";
 import About from "./pages/About"
 import Blog from "./pages/Blog"
 
-import Header from "./components/Layout/Header"
-import Footer from "./components/Layout/Footer"
-import {AppContainer} from "./utils/styles"
+
 function App() {
   return (
     <>
    
     <Router>
-    <Header />
-    <AppContainer>
+    
       <Routes>
       
-      
-        {/* <Switch> */}
         <Route exact path="/account" element={<AccountBox />} />
         <Route
           exact
@@ -75,7 +70,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/blog" element={<Blog />} />
          <Route
-          exact
+          
           path="/business-home"
           element={<Business />}
         />
@@ -154,8 +149,7 @@ function App() {
         />
     
       </Routes>
-      </AppContainer>
-      <Footer />
+      
     </Router>
     </>
   );

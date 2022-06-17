@@ -1,14 +1,20 @@
 import React from 'react'
 import styled from "styled-components"
-import {PrimaryParagraph, PrimaryTitle, PrimarySection} from "../utils/styles"
+import {PrimaryParagraph, PrimaryTitle, PrimarySection, AppContainer} from "../Styles"
+import Header from "../components/Layout/Header"
+import Footer from "../components/Layout/Footer"
 
 const Blog = () => {
   return (
     <>
-        <Carousel>
-            <PrimaryTitle>Freshly curated for your growth</PrimaryTitle>
-            <PrimaryParagraph>No spams, just freshly curated business and finance pointers to help you scale.</PrimaryParagraph>
-        </Carousel>
+        <Header />
+        <AppContainer>
+            <Carousel>
+                <PrimaryTitle>Freshly curated for your growth</PrimaryTitle>
+                <PrimaryParagraph>No spams, just freshly curated business and finance pointers to help you scale.</PrimaryParagraph>
+            </Carousel>
+        </AppContainer>
+        <Footer />
     </>
   )
 }

@@ -14,7 +14,7 @@ import webapp from "../../assets/webapp.svg";
 import googlesmall from "../../assets/googlesmall.svg";
 import applestore from "../../assets/applestore.svg";
 import Logomark from "../../assets/Logomark.svg";
-import {margin, marginMobile} from "../../utils/styles"
+import {margin, marginMobile} from "../../Styles"
 
 
 
@@ -23,22 +23,22 @@ const Footer = () => {
     <footer>
         
       <FooterContent>
-        <div class="foot-1">
+        <div className="foot-1">
           <Logo src={Logomark} alt="logo" />
           <Apps>
-            <div class="infos">
+            <div className="infos">
                 <Image src={applestore} alt="logo" />
             </div>
-            <div class="infos">
+            <div className="infos">
               <Image src={googlesmall} alt="logo" />
             </div>
-            <div class="infos webapp">
+            <div className="infos webapp">
               <Image src={webapp} alt="logo" />
             </div>
           </Apps>
         </div>
         <Columns>
-          <div class="foot-2">
+          <div className="foot-2">
             
               <Text className="column-title">Company</Text>
               <Link className="abt" to="/about">
@@ -50,7 +50,7 @@ const Footer = () => {
               <Text className="abt">Handles</Text>
           
           </div>
-          <div class="foot-2">
+          <div className="foot-2">
             
               <Text className="column-title">Products</Text>
               <Text className="abt">Business Management</Text>
@@ -59,7 +59,7 @@ const Footer = () => {
           
           </div>
 
-          <div class="foot-2">
+          <div className="foot-2">
             
             <Text className="column-title">Legal</Text>
             <Link className="abt" to="/terms">
@@ -69,7 +69,7 @@ const Footer = () => {
             
           </div>
 
-          <div class="foot-2">
+          <div className="foot-2">
             
               <div className="footer-social">
                 <a href="https://www.facebook.com/Finosell-112251447209343/" target="_blank" rel="noreferrer">
@@ -177,7 +177,7 @@ const Columns = styled.div`
     color: #8C8C8C;
     font-weight: 500;
   }
-  p, a{
+  p{
     margin-bottom: ${20*0.063}rem;
     line-height: ${23*0.063}rem;
     font-size: ${18*0.063}rem
@@ -193,15 +193,17 @@ const FooterContent = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-top: 1rem;
+  margin-top: ${57*0.063}rem;
   font-family: "DM sans", sans-serif;
   @media only screen and (min-width: 768px){
     flex-direction: row;
     margin: 0 ${margin};
+    margin-top: ${57*0.063}rem;
     align-items:flex-start;
     justify-content:space-between;
   }
   @media only screen and (min-width: 1800px){
     margin: 0 auto;
+    margin-top: ${57*0.063}rem;
   }
 `

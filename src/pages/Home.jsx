@@ -29,249 +29,253 @@ import payment from "../assets/payment.svg";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 
 import styled from "styled-components"
-import {PrimaryTitle, PrimaryButton, PrimaryParagraph} from '../utils/styles'
-
+import {PrimaryTitle, PrimaryButton, PrimaryParagraph, AppContainer} from '../Styles'
+import Header from "../components/Layout/Header"
+import Footer from "../components/Layout/Footer"
 // import { faBars } from "@fortawesome/free-regular-svg-icons";
 function Home() {
   
   const yellowbtn = useColorModeValue("yellow.500");
   return (
     <React.Fragment>
-      <Banner>
-        
-          <div className="banner-1">
-            <div className="banner-holder">
-              <DarkHeader>
-                Manage all your<br />
-                finance and business in one place
-              </DarkHeader>
-              <PrimaryParagraph>
-                A financial and business management App for business owners and
-                individuals.
-              </PrimaryParagraph>
-            </div>
+      <Header />
+      <AppContainer>
+        <Banner>
+          
+            <div className="banner-1">
+              <div className="banner-holder">
+                <DarkHeader>
+                  Manage all your<br />
+                  finance and business in one place
+                </DarkHeader>
+                <PrimaryParagraph>
+                  A financial and business management App for business owners and
+                  individuals.
+                </PrimaryParagraph>
+              </div>
 
-            <div class="save">
-              <Try >Try Finosell for free</Try>
+              <div className="save">
+                <Try >Try Finosell for free</Try>
+              </div>
+              <div className="socially">
+                <div className="flutter">
+                  <Image src={flutter} alt="flutter" />
+                </div>
+                <div className="paystack">
+                  <Image src={paystack} alt="paystack" />
+                </div>
+                <div className="mono">
+                  <Image src={mono} alt="mono" />
+                </div>
+              </div>
+              <div className="download">
+                <div className="download__btn">
+                  <Image src={google} alt="google" />
+                </div>
+                <div className="download__btn">
+                  <Image src={apple} alt="apple" className="apps" />
+                </div>
+              </div>
             </div>
-            <div className="socially">
-              <div className="flutter">
-                <Image src={flutter} alt="flutter" />
-              </div>
-              <div className="paystack">
-                <Image src={paystack} alt="paystack" />
-              </div>
-              <div className="mono">
-                <Image src={mono} alt="mono" />
-              </div>
+            <div className="banner-2">
+              <Image src={Buffer} alt="buffer" />
             </div>
-            <div className="download">
-              <div className="download__btn">
-                <Image src={google} alt="google" />
-              </div>
-              <div className="download__btn">
-                <Image src={apple} alt="apple" className="apps" />
-              </div>
-            </div>
-          </div>
-          <div className="banner-2">
-            <Image src={Buffer} alt="buffer" />
-          </div>
-        
-      </Banner>
-      <Section2 className="section-2">
-        <div className="business">
-          <div>
-            <Text className="business-text">
-              Run and grow a business you’re proud of
-            </Text>
-          </div>
-          <div className="business-cover">
-            <div className="business-div">
-              <Image src={invoices} alt="invoice" />
-              <Text className="invoice">
-                Send invoices on the go and get paid
+          
+        </Banner>
+        <Section2 className="section-2">
+          <div className="business">
+            <div>
+              <Text className="business-text">
+                Run and grow a business you’re proud of
               </Text>
             </div>
-            <div className="business-div">
-              <Image src={virtual} alt="virtual" />
-              <Text className="invoice">
+            <div className="business-cover">
+              <div className="business-div">
+                <Image src={invoices} alt="invoice" />
+                <Text className="invoice">
+                  Send invoices on the go and get paid
+                </Text>
+              </div>
+              <div className="business-div">
+                <Image src={virtual} alt="virtual" />
+                <Text className="invoice">
+                  {" "}
+                  Virtual card to pay for shipping and ads promotion
+                </Text>
+              </div>
+              <div className="business-div">
+                <Image src={notification} alt="notification" />
+                <Text className="invoice">
+                  {" "}
+                  Real time payment notification for team members
+                </Text>
+              </div>
+              <div className="business-div">
+                <Image src={track} alt="track" />
+                <Text className="invoice">
+                  Easily manage products, customer orders, and track deliveries
+                </Text>
+              </div>
+              <div className="business-div">
+                <Image src={record} alt="record" />
+                <Text className="invoice">
+                  Record business transactions on a daily, weekly and monthly
+                  basis.
+                </Text>
+              </div>
+            </div>
+            <div id="saleDiv">
+              <Text className="sales">Increase sales with Finosell</Text>
+            </div>
+          </div>
+          <div className="business-pic">
+            <Image src={woman} alt="woman" className="woman" />
+          </div>
+        </Section2>
+        <section className="section-3">
+          <div className="hanger">
+            <Image src={hanger} alt="hanger" />
+          </div>
+
+          <div className="unique-div">
+            <Text className="unique">
+              One unique payment link, multiple payment options.
+            </Text>
+            <div className="paylink-div">
+              <Text className="paylink">Create a payment link</Text>
+            </div>
+          </div>
+        </section>
+        <section className="section-5">
+          <div className="section-5-hanger">
+            <div className="sell-holder">
+              <Text className="sell-more">
+                Sell more online with a free website
+              </Text>
+            </div>
+            <div>
+              <div className="clock">
                 {" "}
-                Virtual card to pay for shipping and ads promotion
-              </Text>
-            </div>
-            <div className="business-div">
-              <Image src={notification} alt="notification" />
-              <Text className="invoice">
-                {" "}
-                Real time payment notification for team members
-              </Text>
-            </div>
-            <div className="business-div">
-              <Image src={track} alt="track" />
-              <Text className="invoice">
-                Easily manage products, customer orders, and track deliveries
-              </Text>
-            </div>
-            <div className="business-div">
-              <Image src={record} alt="record" />
-              <Text className="invoice">
-                Record business transactions on a daily, weekly and monthly
-                basis.
-              </Text>
+                <Image src={clock} alt="clock" />
+                <Text className="website">
+                  Set up your own website in 5 minutes.
+                </Text>
+              </div>
+              <div className="produp">
+                <Image src={produp} alt="upload" />
+                <Text className="website">Upload products to store</Text>
+              </div>
+              <div className="produps">
+                <Image src={payment} alt="payment" />
+                <Text className="website">
+                  Receive orders & payments easily from website
+                </Text>
+              </div>
+              <div className="create-web">
+                <Text className="sales">Create website</Text>
+              </div>
             </div>
           </div>
-          <div id="saleDiv">
-            <Text className="sales">Increase sales with Finosell</Text>
-          </div>
-        </div>
-        <div className="business-pic">
-          <Image src={woman} alt="woman" className="woman" />
-        </div>
-      </Section2>
-      <section className="section-3">
-        <div className="hanger">
-          <Image src={hanger} alt="hanger" />
-        </div>
 
-        <div className="unique-div">
-          <Text className="unique">
-            One unique payment link, multiple payment options.
-          </Text>
-          <div className="paylink-div">
-            <Text className="paylink">Create a payment link</Text>
+          <div className="section5-right">
+            <Image src={mac} alt="mac" className="mac" />
           </div>
-        </div>
-      </section>
-      <section className="section-5">
-        <div className="section-5-hanger">
-          <div className="sell-holder">
-            <Text className="sell-more">
-              Sell more online with a free website
+        </section>
+        <section className="section-4">
+          <Text className="sellers">Find trusted sellers in your area.</Text>
+          <div className="locate-top">
+            <div className="locator">
+              <div className="rec">
+                <Image src={locator} alt="rec" />
+              </div>
+
+              <Text className="locate">
+                Securely locate and patronise your favourite social media business
+                via their business handles
+              </Text>
+            </div>
+            <div className="locator">
+              <div className="rec">
+                <Image src={tick} alt="rec" />
+              </div>
+
+              <Text className="locate">
+                Guaranteed payment and refund with Escrow
+              </Text>
+            </div>
+            <div className="locator">
+              <div className="rec">
+                <Image src={lock} alt="rec" />
+              </div>
+
+              <Text className="locate">Lock payment securely till delivery</Text>
+            </div>
+          </div>
+          <div className="locate-bottom">
+            <div className="locator" style={{ marginRight: "3rem" }}>
+              <div className="rec">
+                <Image src={circ} alt="rec" />
+              </div>
+
+              <Text className="locate">
+                Search for specific brands, product offerings and discounted
+                prices
+              </Text>
+            </div>
+            <div className="locator">
+              <div className="rec">
+                <Image src={trash} alt="rec" />
+              </div>
+
+              <Text className="locate">
+                Streamlined one page checkout for seamless shopping experience
+              </Text>
+            </div>
+          </div>
+          <div className="locator-btn">
+            <Button
+              className="add-store"
+              mt={4}
+              bg={yellowbtn}
+              width="40%"
+              h="60px"
+              borderRadius="0px 11px 11px 11px"
+              type="submit"
+              color="white"
+              _hover={{ bg: "#1A202C" }}
+            >
+              Create a free account in a minute
+            </Button>
+          </div>
+        </section>
+        <section className="section-6">
+          <div className="customers">
+            <Text className="love">
+              You will love us the same way our customers do
             </Text>
-          </div>
-          <div>
-            <div className="clock">
-              {" "}
-              <Image src={clock} alt="clock" />
-              <Text className="website">
-                Set up your own website in 5 minutes.
-              </Text>
-            </div>
-            <div className="produp">
-              <Image src={produp} alt="upload" />
-              <Text className="website">Upload products to store</Text>
-            </div>
-            <div className="produps">
-              <Image src={payment} alt="payment" />
-              <Text className="website">
-                Receive orders & payments easily from website
-              </Text>
-            </div>
-            <div className="create-web">
-              <Text className="sales">Create website</Text>
-            </div>
-          </div>
-        </div>
-
-        <div className="section5-right">
-          <Image src={mac} alt="mac" className="mac" />
-        </div>
-      </section>
-      <section className="section-4">
-        <Text className="sellers">Find trusted sellers in your area.</Text>
-        <div className="locate-top">
-          <div className="locator">
-            <div className="rec">
-              <Image src={locator} alt="rec" />
-            </div>
-
-            <Text className="locate">
-              Securely locate and patronise your favourite social media business
-              via their business handles
+            <Text className="updates">
+              Be the first to get our financial and business updates
             </Text>
-          </div>
-          <div className="locator">
-            <div className="rec">
-              <Image src={tick} alt="rec" />
+            <div>
+              <form>
+                <input type="email" placeholder="Enter your email" />
+                <input type="submit" value="Subscribe" />
+              </form>
             </div>
-
-            <Text className="locate">
-              Guaranteed payment and refund with Escrow
-            </Text>
           </div>
-          <div className="locator">
-            <div className="rec">
-              <Image src={lock} alt="rec" />
-            </div>
-
-            <Text className="locate">Lock payment securely till delivery</Text>
+          {/* <div></div> */}
+          <div className="case-div">
+            <Image src={cases} alt="case" />
           </div>
-        </div>
-        <div className="locate-bottom">
-          <div className="locator" style={{ marginRight: "3rem" }}>
-            <div className="rec">
-              <Image src={circ} alt="rec" />
-            </div>
-
-            <Text className="locate">
-              Search for specific brands, product offerings and discounted
-              prices
-            </Text>
-          </div>
-          <div className="locator">
-            <div className="rec">
-              <Image src={trash} alt="rec" />
-            </div>
-
-            <Text className="locate">
-              Streamlined one page checkout for seamless shopping experience
-            </Text>
-          </div>
-        </div>
-        <div className="locator-btn">
-          <Button
-            className="add-store"
-            mt={4}
-            bg={yellowbtn}
-            width="40%"
-            h="60px"
-            borderRadius="0px 11px 11px 11px"
-            type="submit"
-            color="white"
-            _hover={{ bg: "#1A202C" }}
-          >
-            Create a free account in a minute
-          </Button>
-        </div>
-      </section>
-      <section className="section-6">
-        <div className="customers">
-          <Text className="love">
-            You will love us the same way our customers do
-          </Text>
-          <Text className="updates">
-            Be the first to get our financial and business updates
-          </Text>
-          <div>
-            <form>
-              <input type="email" placeholder="Enter your email" />
-              <input type="submit" value="Subscribe" />
-            </form>
-          </div>
-        </div>
-        {/* <div></div> */}
-        <div className="case-div">
-          <Image src={cases} alt="case" />
-        </div>
-      </section>
-      <Text className="sellers" style={{ paddingTop: "5rem" }}>
-        Questions?
-      </Text>
-      <Text className="faq" style={{ paddingTop: "1rem" }}>
-        Check out our FAQ page
-      </Text>
-      
+        </section>
+        <Text className="sellers" style={{ paddingTop: "5rem" }}>
+          Questions?
+        </Text>
+        <Text className="faq" style={{ paddingTop: "1rem" }}>
+          Check out our FAQ page
+        </Text>
+      </AppContainer>
+      <Footer />
     </React.Fragment>
   );
 }

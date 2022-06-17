@@ -1,13 +1,16 @@
-import { useState } from "react";
-
 import "./home.css";
 
 import { Text, } from "@chakra-ui/react";
+import Header from "../components/Layout/Header"
+import Footer from "../components/Layout/Footer"
+import {AppContainer} from "../Styles"
 
 function Pricing() {
-  const [products, setProducts] = useState(false);
+  
   return (
     <>
+    <Header />
+    <AppContainer>
       <section className="terms">
         <div className="">
           {" "}
@@ -85,6 +88,8 @@ function Pricing() {
           </tr>
         </tbody>
       </table>
+    </AppContainer>
+    <Footer />
     </>
   );
 }

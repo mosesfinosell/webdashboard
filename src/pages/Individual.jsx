@@ -6,12 +6,16 @@ import jummy from "../assets/jummy.svg";
 import finance from "../assets/finance.svg";
 
 import { Text, Image } from "@chakra-ui/react";
+import Header from "../components/Layout/Header"
+import Footer from "../components/Layout/Footer"
+import {AppContainer} from "../Styles"
 
 function Individual() {
     
   return (
     <>
-     
+      <Header />
+      <AppContainer>
       <section className="ind">
         <Text className="fin-ind">Finosell for Individuals</Text>
       </section>
@@ -117,7 +121,8 @@ function Individual() {
           <Image src={finance} alt="finance" />
         </div>
       </section>
-     
+     </AppContainer>
+     <Footer />
     </>
   );
 }

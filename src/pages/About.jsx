@@ -1,13 +1,16 @@
 import React from 'react'
 import styled from "styled-components"
 import AboutImg from "../assets/about.png"
-import {PrimaryButton, PrimaryTitle, PrimaryParagraph, marginMobile, margin} from "../utils/styles"
-
+import {PrimaryButton, PrimaryTitle, PrimaryParagraph, marginMobile, margin, AppContainer} from "../Styles"
+import Header from "../components/Layout/Header"
+import Footer from "../components/Layout/Footer"
 
 
 const About = () => {
   return (
     <>
+    <Header />
+    <AppContainer>
         <Section1>
             <img  src={AboutImg} alt="Exchange of product and payment" />
             <div>
@@ -52,6 +55,8 @@ const About = () => {
             </Heading>
             <PrimaryButton>Get Finosell</PrimaryButton>
         </Section>
+    </AppContainer>
+    <Footer />
     </>
   )
 }
@@ -97,7 +102,6 @@ const Section1 = styled.section`
         }
     }
 `
-
 const Section2 = styled.section`
     margin-bottom: ${100*0.063}rem;
     .section-header{
