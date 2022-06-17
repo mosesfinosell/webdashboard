@@ -193,17 +193,17 @@ const FooterContent = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-top: ${57*0.063}rem;
+  margin-top: ${62*0.063}rem;
   font-family: "DM sans", sans-serif;
   @media only screen and (min-width: 768px){
     flex-direction: row;
     margin: 0 ${margin};
-    margin-top: ${57*0.063}rem;
+    margin-top: ${62*0.063}rem;
     align-items:flex-start;
     justify-content:space-between;
   }
   @media only screen and (min-width: 1800px){
     margin: 0 auto;
-    margin-top: ${57*0.063}rem;
+    margin-top: ${62*0.063}rem;
   }
 `
