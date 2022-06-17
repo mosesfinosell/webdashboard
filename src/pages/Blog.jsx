@@ -2,6 +2,10 @@ import React from 'react'
 import styled from "styled-components"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faAngleRight} from "@fortawesome/free-solid-svg-icons"
+
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel as CarouselSlider } from 'react-responsive-carousel';
+
 import {
     PrimaryParagraph, 
     PrimaryTitle, 
@@ -46,6 +50,11 @@ const Blog = () => {
             <CarouselSection>
                 <PrimaryTitle>Freshly curated for your growth</PrimaryTitle>
                 <PrimaryParagraph>No spams, just freshly curated business and finance pointers to help you scale.</PrimaryParagraph>
+                <CarouselSlider
+                    showThumbs={false}
+                    showArrows={false}
+                    showStatus={false}
+                >
                 <Carousel>
                     <img src={CarouselImg} alt="man operating a laptop" />
                     <p className="tags"><span className="tag">Product Tutorial</span></p>
@@ -59,6 +68,21 @@ const Blog = () => {
                         </a>
                     </CarouselContent>
                 </Carousel>
+
+                <Carousel>
+                    <img src={CarouselImg} alt="man operating a laptop" />
+                    <p className="tags"><span className="tag">Product Tutorial</span></p>
+                    <CarouselContent>
+                        <PrimaryTitle>How to integrate finosell into your business</PrimaryTitle>
+                        <PrimaryParagraph>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Natoque diam elit tempor risus. Pulvinar non vitae elementum scelerisque nascetur id nibh diam odio... </PrimaryParagraph>
+                        <a className="read-more">
+                            <span>Read more</span>
+                            <FontAwesomeIcon icon={faAngleRight} style={{margin:"0 0.2rem"}} />
+                            <FontAwesomeIcon icon={faAngleRight} />
+                        </a>
+                    </CarouselContent>
+                </Carousel>
+                </CarouselSlider>
             </CarouselSection>
             <ArticleSection>
                 <PrimaryTitle>Product Tutorials</PrimaryTitle>
@@ -100,9 +124,9 @@ export default Blog
 const CarouselSection = styled(PrimarySection)`
     display: flex;
     flex-direction: column;
-    
     overflow: hidden;
-    margin-bottom: ${0.063*100}rem;
+    padding-bottom: ${0.063*160}rem;
+    
     
     ${PrimaryTitle}{
         color: #273B4A;
@@ -121,15 +145,43 @@ const CarouselSection = styled(PrimarySection)`
         object-fit: cover;
         width: 100%;
     }
+    .carousel.carousel-slider{
+        overflow: visible;
+    }
+    .slider{
+        background: none;
+    }
+    .control-dots{
+        bottom: -${50 * 0.063}rem;
+    }
+    .control-dots .dot{
+        width: ${10 * 0.063}rem;
+        height: ${10 * 0.063}rem;
+        background: #D9D9D9;
+        box-shadow: none;
+        
+    }
+    .dot.selected{
+        background: #D6AA1B;
+    }
     @media only screen and (min-width: 768px){
+        padding-bottom: ${0.063 * 230}rem;
         ${PrimaryParagraph} {
             margin-bottom: ${93*0.063}rem
+        }
+        .control-dots{
+            bottom: -${80 * 0.063}rem;
+        }
+        .control-dots .dot{
+            width: ${15 * 0.063}rem;
+            height: ${15 * 0.063}rem;
         }
     }
 `
 const Carousel = styled.div`
     .tags{
         margin: ${10*0.063}rem 0;
+        text-align: left;
     }
     .tag{
         background: #F5F5F5;
@@ -169,6 +221,7 @@ const ArticleSection = styled(PrimarySection)`
         margin-bottom: ${25*0.063}rem;
         color: #273B4A;
     }
+    
 `
 const Articles = styled.div`
     display: flex;
