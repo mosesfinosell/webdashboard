@@ -30,4 +30,22 @@ const Card = styled.div`
         line-height: ${27*0.063}rem;
         color: #273B4A;
     }
+    ${PrimaryParagraph}{
+        color: #BFBFBF;
+        font-size: ${14 * 0.063}rem;
+        line-height: ${18 * 0.063}rem;
+    }
+    @media only screen and (min-width: 768px){
+        width: ${337 * 0.063}rem;
+
+        ${PrimaryTitle}{
+            font-size: ${30 * 0.063}rem;
+            line-height: ${32 * 0.063}rem;
+        }
+
+        ${PrimaryParagraph}{
+            font-size: ${20 * 0.063}rem;
+            line-height: ${26 * 0.063}rem;
+        }
+    }
 `

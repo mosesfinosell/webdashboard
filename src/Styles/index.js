@@ -28,7 +28,6 @@ export const PrimaryButton = styled.button`
     padding: 0.9rem 0.8rem;
     background: #d6aa1b;
     border-radius: 3.5px 10px 10px 10px;
-    font-size: 20px;
     margin-top: 0.2rem;
     font-size: ${12*0.063}rem;
     font-weight: 500;

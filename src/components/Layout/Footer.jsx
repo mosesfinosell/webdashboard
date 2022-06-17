@@ -68,7 +68,6 @@ const Footer = () => {
           </div>
 
           <div className="foot-2">
-            
               <div className="footer-social">
                 <a href="https://www.facebook.com/Finosell-112251447209343/" target="_blank" rel="noreferrer">
                 <FontAwesomeIcon
@@ -108,8 +107,6 @@ const Footer = () => {
                 </a>
               </div>
               <Text className="abt">support@finosell.com</Text>
-              <Text className="abt">+234 - XXXX - XXXX</Text>
-            
           </div>
         </Columns>
       </FooterContent>

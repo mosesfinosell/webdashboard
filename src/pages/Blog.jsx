@@ -2,7 +2,14 @@ import React from 'react'
 import styled from "styled-components"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faAngleRight} from "@fortawesome/free-solid-svg-icons"
-import {PrimaryParagraph, PrimaryTitle, PrimarySection, AppContainer} from "../Styles"
+import {
+    PrimaryParagraph, 
+    PrimaryTitle, 
+    PrimaryButton,
+    PrimarySection, 
+    AppContainer,
+    borderRadius
+} from "../Styles"
 import Header from "../components/Layout/Header"
 import Footer from "../components/Layout/Footer"
 import BlogCard from "../components/BlogCard"
@@ -71,7 +78,17 @@ const Blog = () => {
                     {blogs.map((blog, i)=><BlogCard key={i} blog={blog} />)}
                 </Articles>
             </ArticleSection>
-            <Subscribe></Subscribe>
+            <Subscribe>
+                <PrimaryTitle>Like what you see? Subscribe now!</PrimaryTitle>
+                <Email>
+                    <input placeholder="Enter your email address" type="email" />
+                    <PrimaryButton>Subscribe</PrimaryButton>
+                </Email>
+            </Subscribe>
+            <TakeControl>
+                <PrimaryTitle>Ready to take control of your finances and business?</PrimaryTitle>
+                <PrimaryButton>Take control</PrimaryButton>
+            </TakeControl>
         </AppContainer>
         <Footer />
     </>
@@ -83,22 +100,26 @@ export default Blog
 const CarouselSection = styled(PrimarySection)`
     display: flex;
     flex-direction: column;
-    align-items: center;
+    
     overflow: hidden;
     margin-bottom: ${0.063*100}rem;
+    
     ${PrimaryTitle}{
         color: #273B4A;
-        margin-bottom: ${20*0.063}rem
+        margin-bottom: ${20*0.063}rem;
+        text-align: left;
     }
     ${PrimaryParagraph} {
         margin-bottom: ${60*0.063}rem;
         height: ${72*0.063}rem;
         overflow: hidden;
         text-overflow: ellipsis;
+        text-align: left;
     }
     img{
         height: ${400*0.063}rem;
         object-fit: cover;
+        width: 100%;
     }
     @media only screen and (min-width: 768px){
         ${PrimaryParagraph} {
@@ -152,7 +173,98 @@ const ArticleSection = styled(PrimarySection)`
 const Articles = styled.div`
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+
+    @media only screen and (min-width: 768px){
+        flex-direction: row;
+    }
 `
 const Subscribe = styled(PrimarySection)`
+    margin-bottom: ${100 * 0.063}rem;
+
+    ${PrimaryTitle}{
+        font-weight: 500;
+        text-align: center;
+        font-size: ${35 * 0.063}rem;
+        line-height: ${38 * 0.063}rem;
+        color: #273B4A;
+        margin-bottom: ${40 * 0.063}rem;
+    }
     
+    @media only screen and (min-width: 768px){
+        margin-bottom: ${316 * 0.063}rem;
+
+        ${PrimaryTitle}{
+            font-size: ${50 * 0.063}rem;
+            line-height: ${53 * 0.063}rem;
+            
+        }
+    } 
+`
+
+const Email = styled.div`
+    display: flex;
+    flex-direction: column;
+    
+    input{
+        ${borderRadius};
+        width: 100%;
+        background: #F5F5F5;
+        font-size: ${14 * 0.063}rem;
+        line-height: ${18 * 0.063}rem;
+        padding: ${21 * 0.063}rem ${28 * 0.063}rem;
+        margin-bottom: ${11 * 0.063}rem;
+        outline: none;
+    }
+    ${PrimaryButton}{
+        font-size: ${14 * 0.063}rem;
+    }
+    
+    @media only screen and (min-width: 768px){
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        input{
+            width: ${483 * 0.063}rem;
+            padding: ${23 * 0.063}rem ${28 * 0.063}rem;
+            font-size: ${18 * 0.063}rem;
+            margin-right: ${20 * 0.063}rem;
+        }
+
+        ${PrimaryButton}{
+            padding: ${23 * 0.063}rem ${28 * 0.063}rem;
+            font-size: ${18 * 0.063}rem;
+        }
+    }
+`
+
+const TakeControl = styled(PrimarySection)`
+    margin-bottom: ${160 * 0.063}rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    ${PrimaryTitle}{
+        font-weight: 500;
+        text-align: center;
+        font-size: ${35 * 0.063}rem;
+        line-height: ${38 * 0.063}rem;
+        color: #273B4A;
+        margin-bottom: ${20 * 0.063}rem;
+    }
+    ${PrimaryButton}{
+        font-size: ${12 * 0.063}rem;
+        line-height: ${16 * 0.063}rem;
+        padding: ${12 * 0.063}rem ${29 * 0.063}rem;
+    }
+    @media only screen and (min-width: 768px){
+        ${PrimaryTitle}{
+            font-size: ${60 * 0.063}rem;
+            line-height: ${65 * 0.063}rem;
+        }
+        ${PrimaryButton}{
+            font-size: ${28 * 0.063}rem;
+            line-height: ${36 * 0.063}rem;
+            padding: ${32 * 0.063}rem ${67 * 0.063}rem;
+        }
+    }
 `
