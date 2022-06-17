@@ -29,7 +29,16 @@ import payment from "../assets/payment.svg";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 
 import styled from "styled-components"
-import {PrimaryTitle, PrimaryButton, PrimaryParagraph, AppContainer} from '../Styles'
+import {
+  PrimaryTitle, 
+  PrimaryButton, 
+  PrimaryParagraph, 
+  AppContainer, 
+  PrimarySection, 
+  borderRadius,
+  marginMobile,
+  
+} from '../Styles'
 import Header from "../components/Layout/Header"
 import Footer from "../components/Layout/Footer"
 // import { faBars } from "@fortawesome/free-regular-svg-icons";
@@ -155,7 +164,6 @@ function Home() {
             </div>
             <div>
               <div className="clock">
-                {" "}
                 <Image src={clock} alt="clock" />
                 <Text className="website">
                   Set up your own website in 5 minutes.
@@ -181,7 +189,7 @@ function Home() {
             <Image src={mac} alt="mac" className="mac" />
           </div>
         </section>
-        <section className="section-4">
+        <FindSeller>
           <Text className="sellers">Find trusted sellers in your area.</Text>
           <div className="locate-top">
             <div className="locator">
@@ -247,8 +255,8 @@ function Home() {
               Create a free account in a minute
             </Button>
           </div>
-        </section>
-        <section className="section-6">
+        </FindSeller>
+        <CollectEmail>
           <div className="customers">
             <Text className="love">
               You will love us the same way our customers do
@@ -263,11 +271,10 @@ function Home() {
               </form>
             </div>
           </div>
-          {/* <div></div> */}
           <div className="case-div">
             <Image src={cases} alt="case" />
           </div>
-        </section>
+        </CollectEmail>
         <Text className="sellers" style={{ paddingTop: "5rem" }}>
           Questions?
         </Text>
@@ -338,5 +345,44 @@ const Try = styled(PrimaryButton)`
 
   @media only screen and (min-width: 768px){
     padding: ${18*0.063}rem ${28*0.063}rem;
+  }
+`
+const FindSeller = styled(PrimarySection)`
+  margin-bottom: ${80 * 0.063}rem;
+  @media only screen and (min-width: 768px){
+    margin-bottom: ${250 * 0.063}rem;
+  }
+`
+const CollectEmail = styled(PrimarySection)`
+  background: #d6aa1b;
+  ${borderRadius};
+  margin: 0 ${marginMobile};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 13rem;
+  padding: ${31 * 0.063}rem ${17 * 0.063}rem;
+  align-items: center;
+  .customers{
+    width: 100%;
+  }
+  .love{
+    font-size: ${35 * 0.063}rem;
+    line-height: ${38 * 0.063}rem;
+    margin-bottom: ${9 * 0.063}rem;
+    font-weight: 500;
+    color: #fff;
+  }
+
+  @media only screen and (min-width: 768px){
+    flex-direction: row;
+    margin: 0;
+    padding: ${90 * 0.063}rem ${61 * 0.063}rem;
+    
+    .love{
+      font-size: ${50 * 0.063}rem;
+      line-height: ${54 * 0.063}rem;
+      margin-bottom: ${20 * 0.063}rem;
+    }
   }
 `

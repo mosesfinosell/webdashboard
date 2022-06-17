@@ -53,8 +53,6 @@ const Footer = () => {
           <div className="foot-2">
             
               <Text className="column-title">Products</Text>
-              <Text className="abt">Business Management</Text>
-              <Text className="abt">Payments</Text>
               <Text className="abt">Escrow</Text>
           
           </div>

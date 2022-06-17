@@ -10,6 +10,7 @@ export const GlobalStyle = createGlobalStyle`
 export const marginMobile = `${25 * 0.063}rem`;
 export const margin = `${75 * 0.063}rem`;
 export const headerHeightMobile = `${60 * 0.063}rem`
+export const borderRadius = `border-radius: ${0.063 * 20}rem ${0.063 * 50}rem ${0.063 * 50}rem ${0.063 * 50}rem`
 
 
 export const PrimaryTitle = styled.h1`
