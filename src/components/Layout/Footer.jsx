@@ -45,7 +45,9 @@ const Footer = () => {
                 <Text className="abt">About</Text>
               </Link>
               <Text className="abt">Blog</Text>
-              <Text className="abt">FAQ</Text>
+              <Link to="/faqs">
+                <Text className="abt">FAQ</Text>
+              </Link>
               <Text className="abt">Help</Text>
               <Text className="abt">Handles</Text>
           
@@ -159,6 +161,8 @@ const Columns = styled.div`
   .footer-social{
     display: flex;
     justify-content: space-evenly;
+    margin-bottom: ${15*0.063}rem;
+    color:#273B4A;
   }
   .foot-2{
 

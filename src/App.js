@@ -46,6 +46,7 @@ import Terms from "./pages/Terms";
 import Pricing from "./pages/Pricing";
 import About from "./pages/About"
 import Blog from "./pages/Blog"
+import FAQ from "./pages/FAQ"
 
 
 function App() {
@@ -69,6 +70,7 @@ function App() {
         />
         <Route path="/about" element={<About />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/faqs" element={<FAQ />} />
          <Route
           
           path="/business-home"
