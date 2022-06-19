@@ -264,12 +264,11 @@ function Home() {
             <Text className="updates">
               Be the first to get our financial and business updates
             </Text>
-            <div>
-              <form>
-                <input type="email" placeholder="Enter your email" />
-                <input type="submit" value="Subscribe" />
-              </form>
-            </div>
+            <form>
+              <input type="email" placeholder="Enter your email" />
+              <PrimaryButton type="submit">Subscribe</PrimaryButton>
+            </form>
+            
           </div>
           <div className="case-div">
             <Image src={cases} alt="case" />
@@ -365,6 +364,9 @@ const CollectEmail = styled(PrimarySection)`
   align-items: center;
   .customers{
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
   .love{
     font-size: ${35 * 0.063}rem;
@@ -373,7 +375,37 @@ const CollectEmail = styled(PrimarySection)`
     font-weight: 500;
     color: #fff;
   }
-
+  .updates{
+    color: #F5F5F5;
+    font-size: ${14 * 0.063}rem;
+    line-height: ${18 * 0.063}rem;
+    margin-bottom: ${0.063 * 33}rem;
+  }
+  form{
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: ${60 * 0.063}rem;
+  }
+  input{
+    ${borderRadius};
+    width: 100%;
+    height: 100%;
+    padding: ${23 * 0.063}rem ${28 * 0.063}rem;
+    
+    outline: none;
+  }
+  
+  ${PrimaryButton}{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: ${9 * 0.063}rem;
+    margin: auto;
+    padding: ${0.063 * 12}rem ${0.063 * 18}rem;
+    height: ${41 * 0.063}rem;
+    width: ${98 * 0.063}rem;
+  }
   @media only screen and (min-width: 768px){
     flex-direction: row;
     margin: 0;
@@ -383,6 +415,22 @@ const CollectEmail = styled(PrimarySection)`
       font-size: ${50 * 0.063}rem;
       line-height: ${54 * 0.063}rem;
       margin-bottom: ${20 * 0.063}rem;
+    }
+    .updates{
+      font-size: ${20 * 0.063}rem;
+      line-height: ${26 * 0.063}rem;
+      margin-bottom: ${0.063 * 47}rem;
+      color: #F7E8B5;
+    }
+    form{
+      width: ${483 * 0.063}rem;
+      height: ${70 * 0.063}rem;
+      margin: 0;
+    }
+    ${PrimaryButton}{
+      
+      height: ${59 * 0.063}rem;
+      width: ${142 * 0.063}rem;
     }
   }
 `

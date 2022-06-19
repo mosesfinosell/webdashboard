@@ -12,7 +12,8 @@ import {
     PrimaryButton,
     PrimarySection, 
     AppContainer,
-    borderRadius
+    borderRadius,
+    margin
 } from "../Styles"
 import Header from "../components/Layout/Header"
 import Footer from "../components/Layout/Footer"
@@ -165,6 +166,7 @@ const CarouselSection = styled(PrimarySection)`
         background: #D6AA1B;
     }
     @media only screen and (min-width: 768px){
+        padding: 0 ${margin};
         padding-bottom: ${0.063 * 230}rem;
         ${PrimaryParagraph} {
             margin-bottom: ${93*0.063}rem
@@ -221,7 +223,9 @@ const ArticleSection = styled(PrimarySection)`
         margin-bottom: ${25*0.063}rem;
         color: #273B4A;
     }
-    
+    @media only screen and (min-width: 768px){
+        padding: 0 ${margin};
+    }
 `
 const Articles = styled.div`
     display: flex;
@@ -266,7 +270,6 @@ const Email = styled.div`
         font-size: ${14 * 0.063}rem;
         line-height: ${18 * 0.063}rem;
         padding: ${21 * 0.063}rem ${28 * 0.063}rem;
-        margin-bottom: ${11 * 0.063}rem;
         outline: none;
     }
     ${PrimaryButton}{

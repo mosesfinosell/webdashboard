@@ -478,7 +478,7 @@ header label {
 /* .customers {
   padding: 3rem;
 } */
-.customers div form {
+/* .customers div form {
   display: flex;
   max-width: 70rem;
   border: 0.2rem solid #fff;
@@ -489,19 +489,19 @@ header label {
   margin-top: 2rem;
   margin-left: 0;
   margin-right: 0;
-}
-.customers div form input[type="email"] {
+} */
+/* .customers div form input[type="email"] {
   padding: 0 2rem;
   font-size: 1rem;
   background: none;
   width: 100%;
-  /* color: #fff; */
+  
   text-transform: none;
-  /* border: none; */
-}
-.customers div form input[type="email"]::placeholder {
+  border: none; 
+} */
+/* .customers div form input[type="email"]::placeholder {
   text-transform: capitalize;
-}
+} */
 .customers div form input[type="submit"] {
   background: #d6aa1b;
   border-radius: 2.5px 10px 10px 10px;
@@ -522,7 +522,7 @@ header label {
   padding: 1rem 2rem;
   /* width: 50%; */
 }
-.updates {
+/* .updates {
   font-family: "DM Sans";
   font-style: normal;
   font-weight: 600;
@@ -530,7 +530,7 @@ header label {
   line-height: 26px;
   color: #f7e8b5;
   padding-top: 2rem;
-}
+} */
 .sellers {
   font-style: normal;
   font-weight: 700;

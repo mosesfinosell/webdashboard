@@ -6,6 +6,12 @@ export const GlobalStyle = createGlobalStyle`
         margin:0;
         padding:0;
     }
+    ::placeholder{
+        color: black
+    }
+    ::-webkit-input-placeholder{
+        color: green
+    }
 `
 export const marginMobile = `${25 * 0.063}rem`;
 export const margin = `${75 * 0.063}rem`;
@@ -31,6 +37,9 @@ export const PrimaryButton = styled.button`
     margin-top: 0.2rem;
     font-size: ${12*0.063}rem;
     font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     @media only screen and (min-width: 768px){
         font-size: ${18*0.063}rem;
@@ -50,7 +59,8 @@ export const PrimaryParagraph = styled.p`
 export const PrimarySection = styled.section`
     padding: 0 ${25*0.063}rem;
     @media only screen and (min-width: 768px){
-        padding: 0 ${75*0.063}rem;
+        /* padding: 0 ${75*0.063}rem; */
+        padding: 0;
     }
 `
 

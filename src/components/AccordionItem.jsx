@@ -20,7 +20,10 @@ const index = ({faq}) => {
                 <Title>{title}</Title>
                 <AccordionIcon w={{base:"24px", md:"28px"}} h={{base:"24px", md:"28px"}} color="#273B4A" />
             </AccordionButton>
-            <AccordionPanel>
+            <AccordionPanel
+                px={{base:"17px", md:"38px"}} 
+                py="37px"
+            >
                 <Answer>
                 {content}
                 </Answer>

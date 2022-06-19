@@ -121,6 +121,8 @@ const GetSection = styled(PrimarySection)`
   }
   @media only screen and (min-width: 768px){
     display: block;
+    margin-bottom: ${122 * 0.063}rem;
+    padding; 0;
   }
 
 `
@@ -132,6 +134,7 @@ const FaqSection = styled(PrimarySection)`
 
   @media only screen and (min-width: 768px){
     margin-bottom: ${0.063 * 208}rem;
+    
     ${PrimaryTitle}{
       margin-bottom: ${0.063 * 88}rem
     }
