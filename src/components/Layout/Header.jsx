@@ -96,7 +96,7 @@ const Logo = styled(Link)`
   flex-grow: 1;
 `
 const NavBar = styled.nav`
-  flex-grow: 2;
+  flex-grow: 1.5;
   position: absolute;
   top: 100%;
   left: 0;
@@ -138,7 +138,7 @@ const NavBar = styled.nav`
   }
 `
 const HeadContent = styled.div`
-  max-width: ${1512*0.063}rem;
+  max-width: ${1212*0.063}rem;
   flex-grow: 1;
   display: flex;
   align-items: center;
@@ -152,7 +152,7 @@ const HeadContent = styled.div`
     
     margin: 0 ${margin};
   }
-  @media only screen and (min-width: 1800px){
+  @media only screen and (min-width: 1200px){
     margin: 0 auto;
   }
 `

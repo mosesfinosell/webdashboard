@@ -92,7 +92,7 @@ const Section1 = styled.section`
     }
     @media only screen and (min-width: 768px){
         flex-direction: row-reverse;
-        align-items: center;
+        align-items: flex-start;
         padding: 0;
         img{
             margin-left: ${50*0.063}rem;
@@ -175,7 +175,7 @@ const Section = styled.section`
             font-size: ${28*0.063}rem;
         }
         .section-header{
-            padding: 0 ${margin};
+            
         }
     }
 `

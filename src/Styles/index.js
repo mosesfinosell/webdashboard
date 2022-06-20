@@ -14,7 +14,7 @@ export const GlobalStyle = createGlobalStyle`
     }
 `
 export const marginMobile = `${25 * 0.063}rem`;
-export const margin = `${75 * 0.063}rem`;
+export const margin = `${165 * 0.063}rem`;
 export const headerHeightMobile = `${60 * 0.063}rem`
 export const borderRadius = `border-radius: ${0.063 * 20}rem ${0.063 * 50}rem ${0.063 * 50}rem ${0.063 * 50}rem`
 
@@ -71,18 +71,18 @@ export const PrimarySection = styled.section`
 `
 
 export const AppContainer = styled.div`
-    max-width: ${1512*0.063}rem;
+    max-width: ${1212*0.063}rem;
     /* margin: 0 ${marginMobile}; */
-    margin-top: ${81*0.063}rem;
+    margin-top: ${31*0.063}rem;
     
     @media only screen and (min-width: 768px){
         margin: 0 ${margin};
-        margin-top: ${90*0.063}rem;
+        margin-top: ${50*0.063}rem;
         
     }
-    @media only screen and (min-width: 1800px){
+    @media only screen and (min-width: 1200px){
         margin: 0 auto;
-        margin-top: ${90*0.063}rem;
+        margin-top: ${50*0.063}rem;
     }
 `
 export const baseLayout = `
