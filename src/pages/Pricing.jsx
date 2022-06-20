@@ -170,6 +170,7 @@ const Calculator = styled.div`
     font-weight: 700;
     font-size: 1.2rem;
     color: #273B4A;
+    width: 100%;
   }
   .ngn{
     margin-right: 1rem;
@@ -179,6 +180,7 @@ const Calculator = styled.div`
     background: none;
     outline: none;
     border: none;
+    width: 90%;
   }
   .total{
     font-size: 1.5rem;
@@ -188,6 +190,13 @@ const Calculator = styled.div`
 
   @media only screen and (min-width: 768px){
     padding:4.5rem 3.5rem;
+    .turn-over{
+      width: unset;
+    }
+
+    input{
+      width: unset;
+    }
   }
 `
 const Table = styled.table`
