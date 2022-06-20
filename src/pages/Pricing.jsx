@@ -1,12 +1,39 @@
 import "./home.css";
-
+import {useState, useEffect} from "react"
 import { Text, } from "@chakra-ui/react";
 import Header from "../components/Layout/Header"
 import Footer from "../components/Layout/Footer"
-import {AppContainer} from "../Styles"
+import {AppContainer, PrimarySection, borderRadius, PrimaryTitle, PrimaryParagraph} from "../Styles"
+import styled from "styled-components"
 
 function Pricing() {
-  
+  const [turnOver, setTurnOver] = useState(0);
+  const [charge, setCharge] = useState(0)
+
+  const handleChargeCalculation = (turnOver, setCharge)=>{
+    if(turnOver.toString() === "NaN" || turnOver < 100000){
+      setCharge(0)
+    }else if(turnOver < 500000){
+      setCharge(3000)
+    }else if(turnOver < 5000000){
+      setCharge(5000)
+    }else if (turnOver < 10000000){
+      setCharge(10000)
+    }else if (turnOver < 20000000){
+      setCharge(20000)
+    }else{
+      setCharge(Math.round(turnOver * 0.001))
+    }
+  }
+
+  useEffect(()=>{
+    handleChargeCalculation(parseInt(turnOver), setCharge)
+
+    // if(turnOver.length < 1){
+    //   setTurnOver(0)
+    // }
+  }, [turnOver, setTurnOver])
+
   return (
     <>
     <Header />
@@ -88,6 +115,19 @@ function Pricing() {
           </tr>
         </tbody>
       </table>
+      <CalculatorSection>
+        <PrimaryTitle>Calculate our charges</PrimaryTitle>
+        <Calculator>
+            <PrimaryParagraph>Please enter your monthly turnover</PrimaryParagraph>
+            <div className="turn-over">
+              <p class="ngn">NGN</p>
+              <input min={0} value={turnOver} onChange={(e)=>{
+                console.log(e.target.value.length)
+                setTurnOver(e.target.value)}} type="number" />
+            </div>
+          <p className="total">Total charges: NGN {charge.toLocaleString()}</p>
+        </Calculator>
+      </CalculatorSection>
     </AppContainer>
     <Footer />
     </>
@@ -95,3 +135,59 @@ function Pricing() {
 }
 
 export default Pricing;
+
+const CalculatorSection = styled(PrimarySection)`
+  ${PrimaryTitle}{
+    margin-bottom: ${20 * 0.063}rem;
+    color: #273B4A;
+    text-align: left;
+  }
+
+  @media only screen and (min-width: 768px){
+    ${PrimaryTitle}{
+      margin-bottom: ${30 * 0.063}rem;
+    }
+  }
+`
+
+const Calculator = styled.div`
+  ${borderRadius};
+  background: #d6aa1b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding:4.5rem 2.5rem;
+  ${PrimaryParagraph}{
+    color: #fff;
+    margin-bottom: ${30 * 0.063}rem;
+
+  }
+  .turn-over{
+    display: flex;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #273B4A;
+  }
+  .ngn{
+    margin-right: 1rem;
+  }
+  
+  input{
+    background: none;
+    outline: none;
+    border: none;
+  }
+  .total{
+    font-size: 1.5rem;
+    color: #fff;
+    font-weight: 500;
+  }
+
+  @media only screen and (min-width: 768px){
+    padding:4.5rem 3.5rem;
+  }
+`

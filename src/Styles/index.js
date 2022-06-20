@@ -52,7 +52,7 @@ export const PrimaryButton = styled.button`
     }
 `
 export const PrimaryParagraph = styled.p`
-    color:#8C8C8C;
+    color: #8C8C8C;
     line-height: ${18*0.063}rem;
     font-size:${14*0.063}rem;
     font-weight: 500;
