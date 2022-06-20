@@ -13,7 +13,7 @@ const index = ({faq}) => {
             <AccordionButton 
                 _focus={{boxShadow:"none"}} 
                 px={{base:"17px", md:"38px"}} 
-                py="37px"
+                py="27px"
                 display="flex" 
                 justifyContent="space-between"
             >

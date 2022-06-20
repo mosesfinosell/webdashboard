@@ -49,7 +49,7 @@ function Pricing() {
           </Text>
         </div>
       </section>
-      <table>
+      <Table>
         <thead>
           <tr>
             <th scope="col">MONTHLY TURNOVER</th>
@@ -114,7 +114,7 @@ function Pricing() {
             </td>
           </tr>
         </tbody>
-      </table>
+      </Table>
       <CalculatorSection>
         <PrimaryTitle>Calculate our charges</PrimaryTitle>
         <Calculator>
@@ -139,6 +139,7 @@ const CalculatorSection = styled(PrimarySection)`
     margin-bottom: ${20 * 0.063}rem;
     color: #273B4A;
     text-align: left;
+    font-size: 2.2rem;
   }
 
   @media only screen and (min-width: 768px){
@@ -202,9 +203,9 @@ const Calculator = styled.div`
 const Table = styled.table`
   border: 1px solid #ccc;
   border-collapse: collapse;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
-  width: 100%;
+  width: 90%;
   table-layout: fixed;
   margin-top: 6rem;
   margin-bottom: 17rem;

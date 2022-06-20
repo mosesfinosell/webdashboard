@@ -50,13 +50,14 @@ const Footer = () => {
               <Link to="/faqs">
                 <Text className="abt">FAQ</Text>
               </Link>
-              <Text className="abt">Handles</Text>
+              
           
           </div>
           <div className="foot-2">
             
               <Text className="column-title">Products</Text>
               <Text className="abt">Escrow</Text>
+              <Text className="abt">Handles</Text>
           
           </div>
 

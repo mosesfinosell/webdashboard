@@ -1015,7 +1015,7 @@ footer {
 
   color: #8c8c8c;
 }
-table {
+/* table {
   border: 1px solid #ccc;
   border-collapse: collapse;
   margin: 0;
@@ -1024,7 +1024,7 @@ table {
   table-layout: fixed;
   margin-top: 6rem;
   margin-bottom: 17rem;
-}
+} */
 
 table caption {
   font-size: 1.5em;
