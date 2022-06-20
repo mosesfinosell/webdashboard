@@ -2,6 +2,8 @@ import React from 'react'
 import styled from "styled-components"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faAngleRight} from "@fortawesome/free-solid-svg-icons"
+import {Formik, Form, Field} from "formik"
+import * as Yup from 'yup'
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel as CarouselSlider } from 'react-responsive-carousel';
@@ -24,6 +26,8 @@ import purse from "../assets/purse.png"
 import whiteBoard from "../assets/whiteboard.png"
 import grayShirt from "../assets/gray-shirt.png"
 
+import collectEmail from "../utils/collectEmail"
+
 const blogs = [
     {
         img: purse,
@@ -44,6 +48,10 @@ const blogs = [
 
 
 const Blog = () => {
+    const emailValidationSchema = Yup.object().shape({
+        email: Yup.string().email("Invalid email").required("Email required")
+    })
+
   return (
     <>
         <Header />
@@ -105,10 +113,27 @@ const Blog = () => {
             </ArticleSection>
             <Subscribe>
                 <PrimaryTitle>Like what you see? Subscribe now!</PrimaryTitle>
-                <Email>
-                    <input placeholder="Enter your email address" type="email" />
-                    <PrimaryButton>Subscribe</PrimaryButton>
-                </Email>
+                <Formik
+                    initialValues={{
+                        email:""
+                    }}
+                    validationSchema={emailValidationSchema}
+                    onSubmit={(value, {resetForm})=>{
+                       
+                        collectEmail(value)
+                        resetForm()
+                    }}
+                >
+                    {({errors, touched})=>(
+                    <Email>
+                        <div>
+                            <Field name="email" type="email" placeholder="Enter your email address" />
+                            {errors.email && touched.email ? (<p className="error">{errors.email}</p>) : null}
+                        </div>
+                        <PrimaryButton type="submit">Subscribe</PrimaryButton>
+                    </Email>
+                    )}
+                </Formik>
             </Subscribe>
             <TakeControl>
                 <PrimaryTitle>Ready to take control of your finances and business?</PrimaryTitle>
@@ -259,9 +284,10 @@ const Subscribe = styled(PrimarySection)`
     } 
 `
 
-const Email = styled.div`
+const Email = styled(Form)`
     display: flex;
     flex-direction: column;
+    border: none;
     
     input{
         ${borderRadius};

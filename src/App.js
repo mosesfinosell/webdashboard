@@ -49,6 +49,8 @@ import Blog from "./pages/Blog"
 import FAQ from "./pages/FAQ"
 import ComingSoon from "./pages/ComingSoon"
 
+import {Toaster} from "react-hot-toast"
+
 
 function App() {
   return (
@@ -155,6 +157,7 @@ function App() {
       </Routes>
       
     </Router>
+    <Toaster />
     </>
   );
 }

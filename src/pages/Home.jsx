@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import {Link} from "react-router-dom"
+import {Formik, Form, Field} from "formik"
+import * as Yup from "yup"
 import "./home.css";
 import Logomark from "../assets/Logomark.svg";
 import { Text, Image, Button } from "@chakra-ui/react";
@@ -43,10 +45,18 @@ import {
 import Header from "../components/Layout/Header"
 import Footer from "../components/Layout/Footer"
 import ArrowUpRight from "../components/SVG/ArrowUpRight"
+import collectEmail from "../utils/collectEmail"
 // import { faBars } from "@fortawesome/free-regular-svg-icons";
 function Home() {
-  
+ 
+  const emailValidationSchema = Yup.object().shape({
+    email: Yup.string().email("Invalid email").required("Email required")
+  })
   const yellowbtn = useColorModeValue("yellow.500");
+  // const handleEmailSubmit = (value)=>{
+  //   collectEmail
+  // }
+  
   return (
     <>
       <Header />
@@ -266,10 +276,33 @@ function Home() {
             <Text className="updates">
               Be the first to get our financial and business updates
             </Text>
-            <form>
+            <Formik
+              initialValues={{
+                email:""
+              }}
+              validationSchema={emailValidationSchema}
+              onSubmit={(value, {resetForm})=>{
+                collectEmail(value)
+                resetForm()
+              }}
+            >
+              {({errors, touched})=>(
+              <Form>
+                <Field  name="email" type="email" placeholder="Enter your email" />
+                {errors.email && touched.email ? (
+                  <p className="error">{errors.email}</p>)
+                  :
+                  null
+                  }
+                <PrimaryButton type="submit">Subscribe</PrimaryButton>
+                
+              </Form>
+              )}
+            </Formik>
+            {/* <form>
               <input type="email" placeholder="Enter your email" />
               <PrimaryButton type="submit">Subscribe</PrimaryButton>
-            </form>
+            </form> */}
             
           </div>
           <div className="case-div">
@@ -386,7 +419,6 @@ const CollectEmail = styled(PrimarySection)`
     margin-bottom: ${0.063 * 33}rem;
   }
   form{
-    display: flex;
     position: relative;
     width: 100%;
     height: ${60 * 0.063}rem;
@@ -398,6 +430,11 @@ const CollectEmail = styled(PrimarySection)`
     padding: ${23 * 0.063}rem ${28 * 0.063}rem;
     
     outline: none;
+  }
+  .error{
+    color: red;
+    font-weight: 500;
+    
   }
   
   ${PrimaryButton}{
