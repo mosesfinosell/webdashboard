@@ -313,7 +313,7 @@ function Home() {
           Questions?
         </Text>
         <Text className="faq" style={{ paddingTop: "1rem" }}>
-          <Link to="/faq">
+          <Link to="/faqs">
           Check out our FAQ page <ArrowUpRight />
           </Link>
         </Text>

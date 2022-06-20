@@ -121,7 +121,7 @@ function Pricing() {
             <PrimaryParagraph>Please enter your monthly turnover</PrimaryParagraph>
             <div className="turn-over">
               <p class="ngn">NGN</p>
-              <input min={0} value={turnOver} onChange={(e)=>setTurnOver(e.target.value)} type="number" />
+              <input placeholder="0" min={0} value={turnOver} onChange={(e)=>setTurnOver(e.target.value)} type="number" />
             </div>
           <p className="total">Total charges: NGN {charge.toLocaleString()}</p>
         </Calculator>
@@ -188,5 +188,23 @@ const Calculator = styled.div`
 
   @media only screen and (min-width: 768px){
     padding:4.5rem 3.5rem;
+  }
+`
+const Table = styled.table`
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+  margin-top: 6rem;
+  margin-bottom: 17rem;
+
+  @media only screen and (min-width: 768px){
+    
+    height: ${0.063 * 503}rem;
+    margin: 0 auto;
+    margin-top: ${60 * 0.063}rem;
+    margin-bottom: 17rem;
   }
 `
