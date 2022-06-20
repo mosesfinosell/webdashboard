@@ -290,7 +290,7 @@ function Home() {
               <Form>
                 <Field  name="email" type="email" placeholder="Enter your email" />
                 {errors.email && touched.email ? (
-                  <p className="error">{errors.email}</p>)
+                  <p className="form-error">{errors.email}</p>)
                   :
                   null
                   }
@@ -431,11 +431,7 @@ const CollectEmail = styled(PrimarySection)`
     
     outline: none;
   }
-  .error{
-    color: red;
-    font-weight: 500;
-    
-  }
+  
   
   ${PrimaryButton}{
     position: absolute;

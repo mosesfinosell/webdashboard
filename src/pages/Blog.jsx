@@ -128,7 +128,7 @@ const Blog = () => {
                     <Email>
                         <div>
                             <Field name="email" type="email" placeholder="Enter your email address" />
-                            {errors.email && touched.email ? (<p className="error">{errors.email}</p>) : null}
+                            {errors.email && touched.email ? (<p className="form-error">{errors.email}</p>) : null}
                         </div>
                         <PrimaryButton type="submit">Subscribe</PrimaryButton>
                     </Email>

@@ -41,6 +41,12 @@ export const PrimaryButton = styled.button`
     align-items: center;
     justify-content: center;
 
+    .form-error{
+    color: red;
+    font-weight: 500;
+
+  }
+
     @media only screen and (min-width: 768px){
         font-size: ${18*0.063}rem;
     }
