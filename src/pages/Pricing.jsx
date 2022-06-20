@@ -22,7 +22,7 @@ function Pricing() {
     }else if (turnOver < 20000000){
       setCharge(20000)
     }else{
-      setCharge(Math.round(turnOver * 0.001))
+      setCharge(parseFloat((turnOver * 0.001).toFixed(3)))
     }
   }
 
@@ -121,9 +121,7 @@ function Pricing() {
             <PrimaryParagraph>Please enter your monthly turnover</PrimaryParagraph>
             <div className="turn-over">
               <p class="ngn">NGN</p>
-              <input min={0} value={turnOver} onChange={(e)=>{
-                console.log(e.target.value.length)
-                setTurnOver(e.target.value)}} type="number" />
+              <input min={0} value={turnOver} onChange={(e)=>setTurnOver(e.target.value)} type="number" />
             </div>
           <p className="total">Total charges: NGN {charge.toLocaleString()}</p>
         </Calculator>
@@ -160,7 +158,8 @@ const Calculator = styled.div`
   ${PrimaryParagraph}{
     color: #fff;
     margin-bottom: ${30 * 0.063}rem;
-
+    font-weight: 500;
+    font-size: 1.2rem;
   }
   .turn-over{
     display: flex;
