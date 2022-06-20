@@ -16,23 +16,23 @@ const faqs = [
   },
   {
     title:"How does Finosell help my business?",
-    content:""
+    content:"Finosell brings your business closer to your ideal customers with our business development tools and Escrow services."
   },
   {
     title:"What tools are on Finosell?",
-    content:""
+    content:"Business and sales management tools are available on the app. Also, make payments and manage your finances on the app. Tools for managing an online store are also available for use."
   },
   {
     title:"How do I get started?",
-    content:"Download the iOS or Android app on www.finosell.com and Sign Up."
+    content:`Download the iOS or Android app on <a href="https://www.finosell.com" target="_blank" rel="noreferrer">www.finosell.com</a> and Sign Up.`
   },
   {
     title:"Can I sign up on the website?",
-    content:""
+    content:`Yes. Visit <a href="https://www.finosell.com" target="_blank" rel="noreferrer">www.finosell.com</a> to register.`
   },
   {
     title:"What payment methods can I use?",
-    content:""
+    content:" We offer the following payment methods:"
   },
   {
     title:"Who pays service charges?",
@@ -44,7 +44,7 @@ const faqs = [
   },
   {
     title:"Is Finosell secure?",
-    content:""
+    content:"Finosell ensures the security of your accounts and funds. "
   },
   {
     title:"How can I add products?",
@@ -52,7 +52,7 @@ const faqs = [
   },
   {
     title:"How can I record sales?",
-    content:""
+    content:"Keeping track of your business helps you monitor your business finances properly. You can record sales and expenses using this feature. Get access to detailed information and analysis for your business on a regular basis. "
   },
   {
     title:"How do I receive notifications?",
@@ -69,6 +69,12 @@ const faqs = [
   {
     title:"Am I eligible for a virtual dollar card?",
     content:""
+  },
+  {
+    title:"What is an escrow?",
+    content:`An escrow is an agreement between a buyer and a seller where a third party, in this case, Finosell holds the payments for the goods and services offered until both sides of the parties involved complete the agreement. 
+            This ensures funds are secure for the buyer and seller. Funds are monitored and ensure both parties reach a fair trade. This is a secure way to make payments for goods and services.
+            `
   }
 ]
 
@@ -80,7 +86,7 @@ const FAQ = () => {
         <FaqSection>
           <PrimaryTitle>Frequently Asked Questions</PrimaryTitle>
           <Accordion
-            allowMultiple={true}
+            allowMultiple={false}
             allowToggle
 
           >

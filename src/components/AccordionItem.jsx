@@ -24,8 +24,8 @@ const index = ({faq}) => {
                 px={{base:"17px", md:"38px"}} 
                 py="37px"
             >
-                <Answer>
-                {content}
+                <Answer dangerouslySetInnerHTML={{__html:content}}>
+                
                 </Answer>
             </AccordionPanel>
         </BG>
@@ -57,6 +57,9 @@ const Answer = styled.p`
     font-weight: 500;
     line-height: ${18 * 0.063}rem;
 
+    a{
+        color: #D6AA1B;
+    }
     @media only screen and (min-width: 768px){
         font-size: ${0.063 * 18}rem;
         line-height: ${23 * 0.063}rem;

@@ -1,18 +1,14 @@
-import {useState} from 'react'
 import {Link} from "react-router-dom"
 import styled from "styled-components"
 import LogoMark from "../SVG/LogoMark"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-    faPhone,
-    faCaretDown,
     faBars,
-    faCaretUp,
     faAngleDown,
     faUniversity,
     faUser
   } from "@fortawesome/free-solid-svg-icons";
-import {marginMobile, headerHeight, headerHeightMobile, PrimaryButton, margin } from "../../Styles"
+import {marginMobile, PrimaryButton, margin } from "../../Styles"
 
 const Header = () => {
     
@@ -42,7 +38,7 @@ const Header = () => {
             </li>
             <Products >
               <a>
-                Products{" "}
+                Products
                 <FontAwesomeIcon
                   icon={faAngleDown}
                   style={{ paddingLeft: "3px", paddingTop: "3px" }}
@@ -76,16 +72,13 @@ const Header = () => {
               <Link to="/pricing">Pricing</Link>
             </li>
             <li>
-              <Link to="/help">Help</Link>
-            </li>
-            <li>
               <Link to="/blog">Blog</Link>
             </li>
           </ul>
           <Account>
-            <Link to="">Log in</Link>
+            <Link to="/coming-soon">Log in</Link>
             <PrimaryButton>
-              <Link to="/account">
+              <Link to="/coming-soon">
                 Create Account
               </Link>
             </PrimaryButton>
@@ -144,7 +137,6 @@ const NavBar = styled.nav`
     }
   }
 `
-
 const HeadContent = styled.div`
   max-width: ${1512*0.063}rem;
   flex-grow: 1;
@@ -164,7 +156,6 @@ const HeadContent = styled.div`
     margin: 0 auto;
   }
 `
-
 const Head = styled.header`
   position: sticky;
   top: 0;
@@ -187,7 +178,6 @@ const Head = styled.header`
     font-size: ${0.063*22}rem;
   }
 `
-
 const Mobile = styled.div`
   display: flex;
   align-items: center;
@@ -218,7 +208,6 @@ const Account = styled.div`
     }
   }
 `
-
 const Products = styled.li`
   position: relative;
   .vl{

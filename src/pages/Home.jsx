@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {Link} from "react-router-dom"
 import "./home.css";
 import Logomark from "../assets/Logomark.svg";
 import { Text, Image, Button } from "@chakra-ui/react";
@@ -41,12 +42,13 @@ import {
 } from '../Styles'
 import Header from "../components/Layout/Header"
 import Footer from "../components/Layout/Footer"
+import ArrowUpRight from "../components/SVG/ArrowUpRight"
 // import { faBars } from "@fortawesome/free-regular-svg-icons";
 function Home() {
   
   const yellowbtn = useColorModeValue("yellow.500");
   return (
-    <React.Fragment>
+    <>
       <Header />
       <AppContainer>
         <Banner>
@@ -278,11 +280,13 @@ function Home() {
           Questions?
         </Text>
         <Text className="faq" style={{ paddingTop: "1rem" }}>
-          Check out our FAQ page
+          <Link to="/faq">
+          Check out our FAQ page <ArrowUpRight />
+          </Link>
         </Text>
       </AppContainer>
       <Footer />
-    </React.Fragment>
+    </>
   );
 }
 
