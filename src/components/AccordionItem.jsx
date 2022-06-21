@@ -42,6 +42,8 @@ const Title = styled.h3`
     line-height: ${0.063 * 21}rem;
     font-weight: 700;
     text-align: left;
+    
+
     @media only screen and (min-width: 768px){
         font-size: ${0.063 * 25}rem;
         line-height: ${0.063 * 33}rem;

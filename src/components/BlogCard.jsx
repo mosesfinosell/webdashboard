@@ -7,8 +7,8 @@ const BlogCard = ({blog}) => {
   return (
     <Card>
         <img src={img} alt="Blog thumbnail" />
-        <PrimaryTitle>{title}</PrimaryTitle>
-        <PrimaryParagraph>by {author}</PrimaryParagraph>
+        <PrimaryTitle title={title} >{title}</PrimaryTitle>
+        <PrimaryParagraph title={`written by ${author}`}>by {author}</PrimaryParagraph>
     </Card>
   )
 }
@@ -29,6 +29,10 @@ const Card = styled.div`
         font-size: ${25*0.063}rem;
         line-height: ${27*0.063}rem;
         color: #273B4A;
+        height: 3rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
     ${PrimaryParagraph}{
         color: #BFBFBF;

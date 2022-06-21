@@ -430,6 +430,9 @@ const CollectEmail = styled(PrimarySection)`
     padding: ${23 * 0.063}rem ${28 * 0.063}rem;
     
     outline: none;
+    &::placeholder{
+      color: #505050
+    }
   }
   
   

@@ -182,6 +182,9 @@ const Calculator = styled.div`
     outline: none;
     border: none;
     width: 90%;
+    &::placeholder{
+      color: #505050
+    }
   }
   .total{
     font-size: 1.5rem;
@@ -209,6 +212,7 @@ const Table = styled.table`
   table-layout: fixed;
   margin-top: 6rem;
   margin-bottom: 17rem;
+  box-shadow: 0px 1px 15px -2px rgba(0, 0, 0, 20%)
 
   @media only screen and (min-width: 768px){
     
