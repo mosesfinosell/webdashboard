@@ -82,7 +82,7 @@ const FAQ = () => {
   return (
     <>
       <Header />
-      <AppContainer>
+      <AppContainer >
         <FaqSection>
           <PrimaryTitle>Frequently Asked Questions</PrimaryTitle>
           <Accordion

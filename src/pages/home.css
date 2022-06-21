@@ -1878,7 +1878,6 @@ table th {
   .section-5 {
     display: flex;
     justify-content: space-between;
-    width: 90%;
     background: #273b4a;
     border-radius: 20px 50px 50px 50px;
     margin: 0 auto;

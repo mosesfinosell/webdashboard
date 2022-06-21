@@ -1,4 +1,5 @@
-import { Routes, BrowserRouter as Router, Route } from "react-router-dom";
+import { Routes, BrowserRouter as Router, Route} from "react-router-dom";
+
 import PrivateRoute from "./utils/PrivateRoute";
 import { Suspense } from "react";
 import { Text, Spinner } from "@chakra-ui/react";
@@ -48,16 +49,20 @@ import About from "./pages/About"
 import Blog from "./pages/Blog"
 import FAQ from "./pages/FAQ"
 import ComingSoon from "./pages/ComingSoon"
+import ScrollToTop from "./utils/scrollToTop"
 
 import {Toaster} from "react-hot-toast"
 
 
 function App() {
+  
+
+ 
   return (
     <>
    
     <Router>
-    
+      <ScrollToTop>
       <Routes>
       
         <Route exact path="/account" element={<AccountBox />} />
@@ -155,7 +160,7 @@ function App() {
         />
     
       </Routes>
-      
+      </ScrollToTop>
     </Router>
     <Toaster />
     </>

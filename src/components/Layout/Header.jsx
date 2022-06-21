@@ -13,7 +13,7 @@ import {marginMobile, PrimaryButton, margin } from "../../Styles"
 const Header = () => {
     
   return (
-    <Head>
+    <Head >
         <HeadContent>
         <Logo to="/" >
           <LogoMark  />
