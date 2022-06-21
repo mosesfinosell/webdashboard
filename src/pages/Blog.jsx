@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from "styled-components"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faAngleRight} from "@fortawesome/free-solid-svg-icons"
 import {Formik, Form, Field} from "formik"
 import * as Yup from 'yup'
+import {useQuery} from "react-query"
+import axios from "axios"
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel as CarouselSlider } from 'react-responsive-carousel';
@@ -51,6 +53,14 @@ const Blog = () => {
     const emailValidationSchema = Yup.object().shape({
         email: Yup.string().email("Invalid email").required("Email required")
     })
+    const {isLoading, error, data} = useQuery('blodPosts', async ()=>{
+        const data = await axios.get(`${process.env.REACT_APP_FINOSELL_BASE_URI}/blog`)
+            console.log(data.data)
+            //alert("data loaded 1")
+            return data.data
+        
+    })
+    
 
   return (
     <>
@@ -160,7 +170,7 @@ const CarouselSection = styled(PrimarySection)`
         text-align: left;
     }
     ${PrimaryParagraph} {
-        margin-bottom: ${60*0.063}rem;
+        margin-bottom: ${20*0.063}rem;
         height: ${72*0.063}rem;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -194,7 +204,7 @@ const CarouselSection = styled(PrimarySection)`
        
         padding-bottom: ${0.063 * 230}rem;
         ${PrimaryParagraph} {
-            margin-bottom: ${93*0.063}rem
+            margin-bottom: ${33*0.063}rem
         }
         .control-dots{
             bottom: -${80 * 0.063}rem;
@@ -281,7 +291,6 @@ const Subscribe = styled(PrimarySection)`
         }
     } 
 `
-
 const Email = styled(Form)`
     display: flex;
     flex-direction: column;
@@ -320,7 +329,6 @@ const Email = styled(Form)`
         }
     }
 `
-
 const TakeControl = styled(PrimarySection)`
     margin-bottom: ${160 * 0.063}rem;
     display: flex;
@@ -334,20 +342,20 @@ const TakeControl = styled(PrimarySection)`
         color: #273B4A;
         margin-bottom: ${20 * 0.063}rem;
     }
-    ${PrimaryButton}{
+    /* ${PrimaryButton}{
         font-size: ${12 * 0.063}rem;
         line-height: ${16 * 0.063}rem;
         padding: ${12 * 0.063}rem ${29 * 0.063}rem;
-    }
+    } */
     @media only screen and (min-width: 768px){
         ${PrimaryTitle}{
             font-size: ${60 * 0.063}rem;
             line-height: ${65 * 0.063}rem;
         }
-        ${PrimaryButton}{
+        /* ${PrimaryButton}{
             font-size: ${28 * 0.063}rem;
             line-height: ${36 * 0.063}rem;
             padding: ${32 * 0.063}rem ${67 * 0.063}rem;
-        }
+        } */
     }
 `

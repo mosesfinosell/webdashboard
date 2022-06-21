@@ -9,16 +9,20 @@ import { persistedStore, store } from "./ReduxContianer/store";
 import ErrorBoundary from "./ErrorBoundary";
 import { PersistGate } from "redux-persist/integration/react";
 // import "antd/dist/antd.css";
+import {QueryClient, QueryClientProvider} from "react-query"
 
+const queryClient = new QueryClient;
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistedStore}>
+        <QueryClientProvider client={queryClient}>
         <ChakraProvider>
-          {/* <ErrorBoundary> */}
+          
           <App />
-          {/* </ErrorBoundary> */}
+         
         </ChakraProvider>
+        </QueryClientProvider>
       </PersistGate>
     </Provider>
   </React.StrictMode>,
