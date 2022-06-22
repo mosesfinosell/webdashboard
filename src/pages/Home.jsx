@@ -334,7 +334,6 @@ const DarkHeader = styled(PrimaryTitle)`
     margin-bottom: ${20*0.063}rem
   }
 `
-
 const Banner = styled.section`
   display: flex;
   width: 100%;
@@ -363,7 +362,6 @@ const Banner = styled.section`
     }
   }
 `
-
 const Section2 = styled(Banner)`
   flex-direction: column-reverse;
   background-color: #273b4a;
@@ -375,7 +373,6 @@ const Section2 = styled(Banner)`
     margin-top: ${0.063*142}rem;
   }
 `
-
 const Try = styled(PrimaryButton)`
   padding: ${12*0.063}rem ${24*0.063}rem;
 

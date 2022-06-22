@@ -29,10 +29,16 @@ const Card = styled.div`
         font-size: ${25*0.063}rem;
         line-height: ${27*0.063}rem;
         color: #273B4A;
-        height: 3rem;
+        height: 4rem;
+        overflow: hidden;
+        text-align: left;
+        
+
         overflow: hidden;
         text-overflow: ellipsis;
-        white-space: nowrap;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
     }
     ${PrimaryParagraph}{
         color: #BFBFBF;

@@ -10,19 +10,19 @@ import {
   } from "@fortawesome/free-solid-svg-icons";
 import {marginMobile, PrimaryButton, margin } from "../../Styles"
 
-const Header = () => {
+const Header = ({LogoImg=LogoMark, link="/"}) => {
     
   return (
     <Head >
         <HeadContent>
-        <Logo to="/" >
-          <LogoMark  />
+        <Logo to={link} >
+          <LogoImg  />
         </Logo>
         <input id="menu-bar" type="checkbox" />
 
         <Mobile>
             <PrimaryButton>
-                <Link to="/account">
+                <Link to="/coming-soon">
                 Create Account
               </Link>
             </PrimaryButton>

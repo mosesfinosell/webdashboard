@@ -2,8 +2,7 @@ import React, { useEffect } from 'react'
 import styled from "styled-components"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faAngleRight} from "@fortawesome/free-solid-svg-icons"
-import {Formik, Form, Field} from "formik"
-import * as Yup from 'yup'
+
 import {useQuery} from "react-query"
 import axios from "axios"
 
@@ -16,19 +15,20 @@ import {
     PrimaryButton,
     PrimarySection, 
     AppContainer,
-    borderRadius,
-    margin
+    
 } from "../Styles"
 import Header from "../components/Layout/Header"
 import Footer from "../components/Layout/Footer"
+import Subscribe from "../components/Layout/BlogSubscribe"
 import BlogCard from "../components/BlogCard"
+import BlogLogo from "../components/SVG/BlogLogo" 
 
 import CarouselImg from "../assets/carousel-img.png"
 import purse from "../assets/purse.png"
 import whiteBoard from "../assets/whiteboard.png"
 import grayShirt from "../assets/gray-shirt.png"
 
-import collectEmail from "../utils/collectEmail"
+
 
 const blogs = [
     {
@@ -50,9 +50,7 @@ const blogs = [
 
 
 const Blog = () => {
-    const emailValidationSchema = Yup.object().shape({
-        email: Yup.string().email("Invalid email").required("Email required")
-    })
+   
     const {isLoading, error, data} = useQuery('blodPosts', async ()=>{
         const data = await axios.get(`${process.env.REACT_APP_FINOSELL_BASE_URI}/blog`)
             console.log(data.data)
@@ -64,7 +62,7 @@ const Blog = () => {
 
   return (
     <>
-        <Header />
+        <Header LogoImg={BlogLogo} />
         <AppContainer>
             <CarouselSection>
                 <PrimaryTitle>Freshly curated for your growth</PrimaryTitle>
@@ -121,30 +119,7 @@ const Blog = () => {
                     {blogs.map((blog, i)=><BlogCard key={i} blog={blog} />)}
                 </Articles>
             </ArticleSection>
-            <Subscribe>
-                <PrimaryTitle>Like what you see? Subscribe now!</PrimaryTitle>
-                <Formik
-                    initialValues={{
-                        email:""
-                    }}
-                    validationSchema={emailValidationSchema}
-                    onSubmit={(value, {resetForm})=>{
-                       
-                        collectEmail(value)
-                        resetForm()
-                    }}
-                >
-                    {({errors, touched})=>(
-                    <Email>
-                        <div>
-                            <Field name="email" type="email" placeholder="Enter your email address" />
-                            {errors.email && touched.email ? (<p className="form-error">{errors.email}</p>) : null}
-                        </div>
-                        <PrimaryButton type="submit">Subscribe</PrimaryButton>
-                    </Email>
-                    )}
-                </Formik>
-            </Subscribe>
+            <Subscribe />
             <TakeControl>
                 <PrimaryTitle>Ready to take control of your finances and business?</PrimaryTitle>
                 <PrimaryButton>Take control</PrimaryButton>
@@ -269,66 +244,8 @@ const Articles = styled.div`
         flex-direction: row;
     }
 `
-const Subscribe = styled(PrimarySection)`
-    margin-bottom: ${100 * 0.063}rem;
 
-    ${PrimaryTitle}{
-        font-weight: 500;
-        text-align: center;
-        font-size: ${35 * 0.063}rem;
-        line-height: ${38 * 0.063}rem;
-        color: #273B4A;
-        margin-bottom: ${40 * 0.063}rem;
-    }
-    
-    @media only screen and (min-width: 768px){
-        margin-bottom: ${316 * 0.063}rem;
 
-        ${PrimaryTitle}{
-            font-size: ${50 * 0.063}rem;
-            line-height: ${53 * 0.063}rem;
-            
-        }
-    } 
-`
-const Email = styled(Form)`
-    display: flex;
-    flex-direction: column;
-    border: none;
-    
-    input{
-        ${borderRadius};
-        width: 100%;
-        background: #F5F5F5;
-        font-size: ${14 * 0.063}rem;
-        line-height: ${18 * 0.063}rem;
-        padding: ${21 * 0.063}rem ${28 * 0.063}rem;
-        outline: none;
-        &::placeholder{
-        color: #505050
-        }
-    }
-    ${PrimaryButton}{
-        font-size: ${14 * 0.063}rem;
-    }
-    
-    @media only screen and (min-width: 768px){
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        input{
-            width: ${483 * 0.063}rem;
-            padding: ${23 * 0.063}rem ${28 * 0.063}rem;
-            font-size: ${18 * 0.063}rem;
-            margin-right: ${20 * 0.063}rem;
-        }
-
-        ${PrimaryButton}{
-            padding: ${23 * 0.063}rem ${28 * 0.063}rem;
-            font-size: ${18 * 0.063}rem;
-        }
-    }
-`
 const TakeControl = styled(PrimarySection)`
     margin-bottom: ${160 * 0.063}rem;
     display: flex;

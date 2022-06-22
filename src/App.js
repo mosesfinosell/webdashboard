@@ -49,6 +49,7 @@ import About from "./pages/About"
 import Blog from "./pages/Blog"
 import FAQ from "./pages/FAQ"
 import ComingSoon from "./pages/ComingSoon"
+import BlogPost from "./pages/BlogPost"
 import ScrollToTop from "./utils/scrollToTop"
 
 import {Toaster} from "react-hot-toast"
@@ -78,6 +79,8 @@ function App() {
         />
         <Route path="/about" element={<About />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:post" element={<BlogPost />} />
+        
         <Route path="/faqs" element={<FAQ />} />
         <Route path="/coming-soon" element={<ComingSoon />} />
          <Route
