@@ -1,15 +1,18 @@
 import React from 'react'
+import {Link} from "react-router-dom"
 import styled from "styled-components"
 import {PrimaryTitle, PrimaryParagraph} from "../Styles"
 
 const BlogCard = ({blog}) => {
     const {img, title, author} = blog
   return (
-    <Card>
-        <img src={img} alt="Blog thumbnail" />
-        <PrimaryTitle title={title} >{title}</PrimaryTitle>
-        <PrimaryParagraph title={`written by ${author}`}>by {author}</PrimaryParagraph>
-    </Card>
+    <Link to="/blog/id">
+        <Card>
+            <img src={img} alt="Blog thumbnail" />
+            <PrimaryTitle title={title} >{title}</PrimaryTitle>
+            <PrimaryParagraph title={`written by ${author}`}>by {author}</PrimaryParagraph>
+        </Card>
+    </Link>
   )
 }
 

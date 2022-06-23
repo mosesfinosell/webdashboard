@@ -165,7 +165,7 @@ const BlogSection = styled(PrimarySection)`
     img{
         height: ${400*0.063}rem;
         object-fit: cover;
-        width: 100%
+        width: 100%;
         margin-bottom : ${0.063 * 20}rem;
     }
     ${PrimaryTitle}{
@@ -174,6 +174,29 @@ const BlogSection = styled(PrimarySection)`
     }
     ${PrimaryParagraph}{
         margin-bottom: 1.5rem;
+    }
+`
+const PostInfo = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: ${0.063 * 10}rem;
+
+    ${PrimaryParagraph}{
+        color: #BFBFBF;
+        font-size: ${0.063 * 14}rem;
+        line-height: ${0.063 * 18}rem;
+        font-weight: 500;
+    }
+    @media only screen and (min-width: 768px){
+        flex-direction: row;
+        justify-content: space-between;
+
+        ${PrimaryParagraph}{
+            color: #BFBFBF;
+            font-size: ${0.063 * 20}rem;
+            line-height: ${0.063 * 26}rem;
+        }
     }
 `
 const SocialsHeading = styled.h1`
@@ -196,21 +219,19 @@ const Socials = styled(PrimarySection)`
     svg{
         margin: 1rem;
     }
-
-`
-
-const PostInfo = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: ${0.063 * 10}rem;
-
-    ${PrimaryParagraph}{
-        color: #BFBFBF;
-        font-size: ${0.063 * 14}rem;
-        line-height: ${0.063 * 18}rem;
+    @media only screen and (min-width: 768px){
+        
+        position: absolute;
+        left: -5rem;
+        top: 35rem;
+        .icons{
+            flex-direction: column;
+            align-items; center;
+        }
     }
 `
+
+
 const ArticleSection = styled(PrimarySection)`
     display: flex;
     flex-direction: column;

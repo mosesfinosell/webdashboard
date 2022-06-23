@@ -22,7 +22,9 @@ export const borderRadius = `border-radius: ${0.063 * 20}rem ${0.063 * 50}rem ${
 export const PrimaryTitle = styled.h1`
     font-size:${35 * 0.062}rem;
     line-height:${38*0.063}rem;
+    margin-bottom: ${20 * 0.063}rem;
     font-weight: 500;
+    color: #273B4A;
     @media only screen and (min-width: 768px){
         font-size: ${60 * 0.062}rem;
         line-height: ${64*0.063}rem;
@@ -74,6 +76,7 @@ export const AppContainer = styled.div`
     max-width: ${1212*0.063}rem;
     /* margin: 0 ${marginMobile}; */
     margin-top: ${31*0.063}rem;
+    position: relative;
     
     @media only screen and (min-width: 768px){
         margin: 0 ${margin};

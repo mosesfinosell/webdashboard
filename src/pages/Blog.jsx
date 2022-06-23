@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import {Link} from "react-router-dom"
 import styled from "styled-components"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faAngleRight} from "@fortawesome/free-solid-svg-icons"
@@ -78,11 +79,11 @@ const Blog = () => {
                     <CarouselContent>
                         <PrimaryTitle>How to integrate finosell into your business</PrimaryTitle>
                         <PrimaryParagraph>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Natoque diam elit tempor risus. Pulvinar non vitae elementum scelerisque nascetur id nibh diam odio... </PrimaryParagraph>
-                        <a className="read-more">
+                        <Link to="/blog/id" className="read-more">
                             <span>Read more</span>
                             <FontAwesomeIcon icon={faAngleRight} style={{margin:"0 0.2rem"}} />
                             <FontAwesomeIcon icon={faAngleRight} />
-                        </a>
+                        </Link>
                     </CarouselContent>
                 </Carousel>
 
