@@ -66,7 +66,7 @@ const ComingSoon = () => {
                 </div>
             
               </Socials>
-              <Subscribe header="Join the waitlist!" />
+              <Subscribe header="Join the waitlist." />
               
             </ComingSoonSection>
         </AppContainer>
@@ -112,6 +112,7 @@ const Socials = styled.div`
   
   svg{
     margin: 0.4rem;
+    color: #d6aa1b;
   }
 
   @media only screen and (min-width: 768px){
