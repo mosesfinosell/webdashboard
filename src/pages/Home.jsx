@@ -62,54 +62,51 @@ function Home() {
       <Header />
       <AppContainer>
         <Banner>
-          
-            <div className="banner-1">
-              <div className="banner-holder">
-                <DarkHeader>
-                  Manage all your<br />
-                  finance and business in one place
-                </DarkHeader>
-                <PrimaryParagraph>
-                  A financial and business management App for business owners and
-                  individuals.
-                </PrimaryParagraph>
-              </div>
+          <div className="banner-1">
+            <div className="banner-holder">
+              <DarkHeader>
+                Manage all your<br />
+                finance and business in one place
+              </DarkHeader>
+              <PrimaryParagraph>
+                A financial and business management App for business owners and
+                individuals.
+              </PrimaryParagraph>
+            </div>
 
-              <div className="save">
-                <Try >Try Finosell for free</Try>
+            <div className="save">
+              <Try >Try Finosell for free</Try>
+            </div>
+            <div className="socially">
+              <div className="flutter">
+                <Image src={flutter} alt="flutter" />
               </div>
-              <div className="socially">
-                <div className="flutter">
-                  <Image src={flutter} alt="flutter" />
-                </div>
-                <div className="paystack">
-                  <Image src={paystack} alt="paystack" />
-                </div>
-                <div className="mono">
-                  <Image src={mono} alt="mono" />
-                </div>
+              <div className="paystack">
+                <Image src={paystack} alt="paystack" />
               </div>
-              <div className="download">
-                <div className="download__btn">
-                  <Image src={google} alt="google" />
-                </div>
-                <div className="download__btn">
-                  <Image src={apple} alt="apple" className="apps" />
-                </div>
+              <div className="mono">
+                <Image src={mono} alt="mono" />
               </div>
             </div>
-            <div className="banner-2">
-              <Image src={Buffer} alt="buffer" />
+            <div className="download">
+              <div className="download__btn">
+                <Image src={google} alt="google" />
+              </div>
+              <div className="download__btn">
+                <Image src={apple} alt="apple" className="apps" />
+              </div>
             </div>
-          
+          </div>
+          <div className="banner-2">
+            <Image src={Buffer} alt="buffer" />
+          </div>
         </Banner>
-        <Section2 className="section-2">
+        <Section2 >
+          <Image src={woman} alt="woman" className="business-pic" />
           <div className="business">
-            <div>
-              <Text className="business-text">
+            <PrimaryTitle>
                 Run and grow a business you’re proud of
-              </Text>
-            </div>
+            </PrimaryTitle>
             <div className="business-cover">
               <div className="business-div">
                 <Image src={invoices} alt="invoice" />
@@ -120,14 +117,12 @@ function Home() {
               <div className="business-div">
                 <Image src={virtual} alt="virtual" />
                 <Text className="invoice">
-                  {" "}
                   Virtual card to pay for shipping and ads promotion
                 </Text>
               </div>
               <div className="business-div">
                 <Image src={notification} alt="notification" />
                 <Text className="invoice">
-                  {" "}
                   Real time payment notification for team members
                 </Text>
               </div>
@@ -145,64 +140,52 @@ function Home() {
                 </Text>
               </div>
             </div>
-            <div id="saleDiv">
-              <Text className="sales">Increase sales with Finosell</Text>
-            </div>
-          </div>
-          <div className="business-pic">
-            <Image src={woman} alt="woman" className="woman" />
+            <PrimaryButton>Increase sales with Finosell</PrimaryButton>
           </div>
         </Section2>
-        <section className="section-3">
-          <div className="hanger">
-            <Image src={hanger} alt="hanger" />
-          </div>
-
+        <UniqueLink>
           <div className="unique-div">
-            <Text className="unique">
+            <PrimaryTitle >
               One unique payment link, multiple payment options.
-            </Text>
-            <div className="paylink-div">
-              <Text className="paylink">Create a payment link</Text>
-            </div>
+            </PrimaryTitle>
+            <PrimaryButton className="desktop">Create a payment link</PrimaryButton>
           </div>
-        </section>
-        <section className="section-5">
+          
+          <Image src={hanger} alt="hanger" />
+          
+          <PrimaryButton className="mobile">Create a payment link</PrimaryButton>
+        </UniqueLink>
+        <SellOnline>
           <div className="section-5-hanger">
-            <div className="sell-holder">
-              <Text className="sell-more">
+              <PrimaryTitle>
                 Sell more online with a free website
-              </Text>
-            </div>
-            <div>
-              <div className="clock">
-                <Image src={clock} alt="clock" />
+              </PrimaryTitle>
+            <div className="points">
+              <div className="point">
+                <Image src={clock} alt="clock" className="icon" />
                 <Text className="website">
                   Set up your own website in 5 minutes.
                 </Text>
               </div>
-              <div className="produp">
-                <Image src={produp} alt="upload" />
+              <div className="point">
+                <Image src={produp} alt="upload" className="icon" />
                 <Text className="website">Upload products to store</Text>
               </div>
-              <div className="produps">
-                <Image src={payment} alt="payment" />
+              <div className="point">
+                <Image src={payment} alt="payment" className="icon" />
                 <Text className="website">
                   Receive orders & payments easily from website
                 </Text>
               </div>
-              <div className="create-web">
-                <Text className="sales">Create website</Text>
-              </div>
+              
+              <PrimaryButton>Create website</PrimaryButton>
             </div>
           </div>
-
-          <div className="section5-right">
-            <Image src={mac} alt="mac" className="mac" />
-          </div>
-        </section>
+          <Image src={mac} alt="mac" className="mac" />
+      
+        </SellOnline>
         <FindSeller>
-          <Text className="sellers">Find trusted sellers in your area.</Text>
+          <PrimaryTitle>Find trusted sellers in your area.</PrimaryTitle>
           <div className="locate-top">
             <div className="locator">
               <div className="rec">
@@ -252,21 +235,8 @@ function Home() {
               </Text>
             </div>
           </div>
-          <div className="locator-btn">
-            <Button
-              className="add-store"
-              mt={4}
-              bg={yellowbtn}
-              width="40%"
-              h="60px"
-              borderRadius="0px 11px 11px 11px"
-              type="submit"
-              color="white"
-              _hover={{ bg: "#1A202C" }}
-            >
-              Create a free account in a minute
-            </Button>
-          </div>
+          <PrimaryButton>Create a free account in a minute</PrimaryButton>
+    
         </FindSeller>
         <CollectEmail>
           <div className="customers">
@@ -339,6 +309,11 @@ const Banner = styled.section`
   width: 100%;
   margin: 0 auto;
   flex-direction: column;
+  margin-bottom: ${0.063 * 142}rem;
+
+  .banner-1{
+    margin-bottom: ${0.063 * 63}rem
+  }
   .download{
     width: 100%;
     display: flex;
@@ -355,6 +330,10 @@ const Banner = styled.section`
   @media only screen and (min-width: 768px){
     flex-direction: row;
     justify-content: space-between;
+    margin-bottom: ${0.063 * 91}rem;
+    .banner-1{
+      margin: 0;
+    }
     .download{
       
       justify-content: flex-start;
@@ -362,15 +341,65 @@ const Banner = styled.section`
     }
   }
 `
-const Section2 = styled(Banner)`
-  flex-direction: column-reverse;
+const Section2 = styled(PrimarySection)`
+  display: flex;
+  flex-direction: column;
   background-color: #273b4a;
   justify-content: space-between;
-  margin-top: ${0.063*91}rem;
+  margin-bottom: ${0.063*80}rem;
+  padding: 0 0 ${48 * 0.063}rem;
+  position: relative;
+
+  ${PrimaryTitle}{
+    color: #ffffff;
+    margin: ${0.063 * 24}rem auto ${0.063 * 18}rem;
+  }
+  .business-cover{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .invoice{
+    font-weight: 500;
+    font-size: ${0.063 * 14}rem;
+    line-height: ${0.063 * 18}rem;
+  }
+  .business{
+    margin: 0 ${0.063 * 25}rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .business-cover{
+    
+  }
+  .business-div {
+    ${borderRadius};
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    padding: ${0.063 * 23}rem ${0.063 * 18}rem;
+    margin-bottom: ${0.063 * 15}rem;
+  }
+
   @media only screen and (min-width: 768px){
     flex-direction: row;
-    justify-content: space-between;
-    margin-top: ${0.063*142}rem;
+    justify-content: flex-start;
+    margin-bottom: ${0.063*200}rem;
+    .business-pic{
+      width: 50%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .business{
+      align-items: flex-start;
+      margin-left: ${0.063 * 75}rem;
+      justify-content: center;
+      width: 45%;
+    }
   }
 `
 const Try = styled(PrimaryButton)`
@@ -380,10 +409,136 @@ const Try = styled(PrimaryButton)`
     padding: ${18*0.063}rem ${28*0.063}rem;
   }
 `
+const UniqueLink = styled(PrimarySection)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: ${45 * 0.063}rem;
+
+  ${PrimaryTitle}{
+    width: 100%
+    margin-bottom: ${0.063 * 50}rem;
+  }
+  img{
+    margin-bottom: ${0.063 * 34}rem;
+  }
+  .desktop{
+    display: none;
+  }
+  @media only screen and (min-width: 768px){
+    margin-bottom: ${175 * 0.063}rem;
+    flex-direction: row-reverse;
+    align-items: center;
+    .desktop{
+      display: unset;
+    }
+    .mobile{
+      display: none;
+    }
+    .unique-div{
+      margin-left: ${0.063 * 44}rem;
+      margin-bottom: ${0.063 * 21}rem;
+    }
+  }
+`
+const SellOnline = styled(PrimarySection)`
+  ${borderRadius};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: #273b4a;
+  position: relative;
+  padding: ${50*0.063}rem ${18*0.063}rem 0;
+  margin: 0 ${25*0.063}rem;
+  margin-bottom: ${46 * 0.063}rem;
+
+  ${PrimaryTitle}{
+    color: #ffffff;
+    margin-bottom: ${21 * 0.063}rem;
+  }
+  .points{
+    width: 100%;
+    margin-bottom: ${0.063 * 23}rem;
+  }
+  .point{
+    display: flex;
+    margin-bottom: ${0.063 * 20}rem;
+  }
+  .icon{
+    width: ${40 * 0.063}rem;
+    height: ${40 * 0.063}rem;
+  }
+  .website{
+    margin-left: ${0.063 * 5}rem;
+    font-size: ${14 * 0.063}rem;
+    line-height: ${18 * 0.063}rem;
+    font-weight: 500;
+  }
+  .mac{
+    position: relative;
+    bottom: 0.4rem;
+    right: 0.7rem;
+  }
+  @media only screen and (min-width: 768px){
+    padding: ${68*0.063}rem ${90*0.063}rem;
+    margin: 0;
+    margin-bottom: ${174 * 0.063}rem;
+    flex-direction: row;
+
+    ${PrimaryTitle}{
+      margin-bottom: ${34 * 0.063}rem;
+    }
+
+    .points{
+      margin-bottom: ${0.063 * 23}rem;
+    }
+    .icon{
+      width: ${70 * 0.063}rem;
+      height: ${70 * 0.063}rem;
+    }
+    .website{
+      width: ${382 * 0.063}rem;
+      margin-left: ${0.063 * 24}rem;
+      font-size: ${25 * 0.063}rem;
+      line-height: ${33 * 0.063}rem;
+    }
+    .mac{
+      position: absolute;
+      right: ${0*0.063}rem;
+      bottom: 0;
+      height: 70%;
+      
+    }
+  }
+`
 const FindSeller = styled(PrimarySection)`
   margin-bottom: ${80 * 0.063}rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .locator{
+    ${borderRadius};
+    border: solid #E0E0E0 ${5 * 0.063}rem;
+    width: 100%;
+    padding: 1rem 1.2rem 0.6rem 1.2rem;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
   @media only screen and (min-width: 768px){
     margin-bottom: ${250 * 0.063}rem;
+
+    .locate-bottom{
+      margin-bottom: ${0.063 * 78}rem;
+    }
+    .locator{
+      width: 30%;
+      padding: ${0.063 * 37}rem ${0.063 * 38}rem ${0.063 * 48}rem;
+    }
   }
 `
 const CollectEmail = styled(PrimarySection)`

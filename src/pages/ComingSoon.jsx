@@ -10,7 +10,7 @@ const ComingSoon = () => {
         <AppContainer>
             <ComingSoonSection>
               <Info>
-                <PrimaryTitle>We're coming soon.</PrimaryTitle>
+                <PrimaryTitle>Coming soon.</PrimaryTitle>
               </Info>
               <CollectEmail>
               </CollectEmail>

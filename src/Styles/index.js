@@ -26,7 +26,7 @@ export const PrimaryTitle = styled.h1`
     font-weight: 500;
     color: #273B4A;
     @media only screen and (min-width: 768px){
-        font-size: ${60 * 0.062}rem;
+        font-size: ${50 * 0.062}rem;
         line-height: ${64*0.063}rem;
     }
 `
