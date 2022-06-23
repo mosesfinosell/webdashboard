@@ -20,7 +20,7 @@ export const borderRadius = `border-radius: ${0.063 * 20}rem ${0.063 * 50}rem ${
 
 
 export const PrimaryTitle = styled.h1`
-    font-size:${35 * 0.062}rem;
+    font-size:${33 * 0.062}rem;
     line-height:${38*0.063}rem;
     margin-bottom: ${20 * 0.063}rem;
     font-weight: 500;

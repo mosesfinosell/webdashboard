@@ -11,7 +11,8 @@ import bless from "../assets/bless.svg";
 import { Text, Image, Button } from "@chakra-ui/react";
 import Header from "../components/Layout/Header"
 import Footer from "../components/Layout/Footer"
-import {AppContainer, PrimarySection, PrimaryTitle, PrimaryParagraph, PrimaryButton} from "../Styles"
+import {AppContainer, PrimaryTitle, PrimaryButton} from "../Styles"
+import {TopSection, ProductSection, ProductSectionImg, ProductSectionContent, YellowParagraph, List} from "../Styles/productStyles"
 
 
 function Business() {
@@ -20,14 +21,14 @@ function Business() {
     <>
       <Header />
       <AppContainer>
-        <BusinessTop>
+        <TopSection>
           <PrimaryTitle>Finosell for Business</PrimaryTitle>
-        </BusinessTop>
-        <ManageSection>
-          <div className="atm-div">
+        </TopSection>
+        <ManageSection className="reverse">
+          <ProductSectionImg>
             <Image src={greenSpring} alt="swing" />
-          </div>
-          <div className="manage__content">
+          </ProductSectionImg>
+          <ProductSectionContent>
             <PrimaryTitle>
               Manage and track your transactions on the go
             </PrimaryTitle>
@@ -35,7 +36,7 @@ function Business() {
               We provide sales management solutions that help you manage sales,
               expenses, debts, and invoices seamlessly.
             </YellowParagraph>
-            <ul className="list">
+            <List>
               <li className="easily">
                 Easily manage products, customer orders, and track deliveries
               </li>
@@ -44,18 +45,18 @@ function Business() {
               </li>
               <li className="easily"> Send invoices and get paid</li>
               <li className="easily"> Sell more online with a free website.</li>
-            </ul>
+            </List>
             
               <PrimaryButton>Sign up and track</PrimaryButton>
             
-          </div>
+          </ProductSectionContent>
           
         </ManageSection>
-        <DigitalCard>
-          <div className="atm-div">
+        <DigitalCard >
+          <ProductSectionImg>
             <Image src={atm} alt="atm" />
-          </div>
-          <div className="atm-right">
+          </ProductSectionImg>
+          <ProductSectionContent>
             <PrimaryTitle>
               A digital card for online payments at your fingertips
             </PrimaryTitle>
@@ -65,19 +66,22 @@ function Business() {
               your favorite channels such as online shopping, subscriptions, and
               bill payments across borders.
             </YellowParagraph>
-            <ul className="list">
+            <List>
               <li className="easily">Easily create a virtual card</li>
               <li className="easily"> Pay subscriptions and bills in seconds</li>
               <li className="easily"> Place thousands of Ads</li>
               <li className="easily"> No hidden transaction fees</li>
-            </ul>
+            </List>
             
               <PrimaryButton>Create an account</PrimaryButton>
             
-          </div>
+          </ProductSectionContent>
         </DigitalCard>
-        <RiskFree>
-          <div className="atm-right">
+        <RiskFree className="reverse">
+          <ProductSectionImg>
+            <Image src={jummy} alt="atm" />
+          </ProductSectionImg>
+          <ProductSectionContent>
             <PrimaryTitle>
               Enjoy risk-free transactions with Escrow
             </PrimaryTitle>
@@ -86,25 +90,23 @@ function Business() {
               trusted account and allows payment to be made after goods and
               services have been received in good condition.
             </YellowParagraph>
-            <ul className="list">
+            <List>
               <li className="easily">Buyer and seller agree on terms</li>
               <li className="easily">The buyer makes payment to escrow</li>
               <li className="easily">Buyer approves purchase</li>
               <li className="easily"> Escrow makes payment to the seller</li>
-            </ul>
+            </List>
             
               <PrimaryButton>Get started</PrimaryButton>
             
-          </div>
-          <div className="atm-div">
-            <Image src={jummy} alt="atm" />
-          </div>
+          </ProductSectionContent>
+          
         </RiskFree>
-        <PrimarySection>
-          <div className="atm-div">
+        <Unique >
+          <ProductSectionImg>
             <Image src={charge} alt="hanger" />
-          </div>
-          <div className="atm-right">
+          </ProductSectionImg>
+          <ProductSectionContent>
             <PrimaryTitle>
               One unique payment link, multiple payment options
             </PrimaryTitle>
@@ -112,7 +114,7 @@ function Business() {
               Accept payments, make transfers, and accelerate your business with
               Finosell
             </Text>
-            <ul className="list">
+            <List>
               <li className="easily">Generate a unique payment link</li>
               <li className="easily">
                 Provide multiple payment options for your customers
@@ -120,32 +122,31 @@ function Business() {
               <li className="easily">
                 Streamlined one page checkout for seamless shopping experience.
               </li>
-            </ul>
-            <div id="saleDiv">
-              <PrimaryButton>Create an account</PrimaryButton>
-            </div>
-          </div>
-        </PrimarySection>
-        <PrimarySection>
-          <div>
+            </List>
+            
+            <PrimaryButton>Create an account</PrimaryButton>
+          </ProductSectionContent>
+        </Unique>
+        <TeamSection className="reverse">
+          <ProductSectionImg>
+            <Image src={bless} alt="names" />
+          </ProductSectionImg>
+          <ProductSectionContent>
             <PrimaryTitle>Bring your team members on board</PrimaryTitle>
             <YellowParagraph>
               Team members can receive payment notifications and manage the
               business account and perform all sales operations.
             </YellowParagraph>
-            <ul className="list">
+            <List>
               <li className="easily">
                 Real time payment notification for team members
               </li>
-            </ul>
+            </List>
             
               <PrimaryButton>Get on board</PrimaryButton>
             
-          </div>
-          <div className="atm-div">
-            <Image src={bless} alt="names" />
-          </div>
-        </PrimarySection>
+          </ProductSectionContent>
+        </TeamSection>
       </AppContainer>
       <Footer />
     </>
@@ -154,14 +155,11 @@ function Business() {
 
 export default Business;
 
-const BusinessTop = styled(PrimarySection)`
-  margin-bottom: ${100 * 0.063}rem;
-  @media only screen and (min-width: 768px){
-    margin-bottom: ${178 * 0.063}rem;
-  }
-`
-const ManageSection = styled(PrimarySection)`
-  
+
+
+
+const ManageSection = styled(ProductSection)`
+   
   ul{
     margin-bottom: ${0.063 * 20}rem;
   }
@@ -175,12 +173,10 @@ const ManageSection = styled(PrimarySection)`
     .atm-div{
       flex-grow: 1;
     }
-    .manage__content{
-      width: ${736 * 0.063}rem;
-    }
+    
   }
 `
-const DigitalCard = styled(PrimarySection)`
+const DigitalCard = styled(ProductSection)`
   margin-bottom:${0.063 * 100}rem;
 
   @media only screen and (min-width: 768px){
@@ -188,19 +184,19 @@ const DigitalCard = styled(PrimarySection)`
   }
 `
 
-const RiskFree = styled(PrimarySection)`
-  margin-bottom: ${100 * 0.063}rem;
+const RiskFree = styled(ProductSection)`
+  
 
   @media only screen and (min-width:768){
     margin-bottom: ${0.063 * 257}rem;
   }
 `
-const unique = styled(PrimarySection)`
+const Unique = styled(ProductSection)`
 
+  @media only screen and (min-width: 768px){
+
+  }
 `
-const YellowParagraph = styled(PrimaryParagraph)`
-  font-weight: 700;
-  color: #D6AA1B;
-  line-height: ${23 * 0.063}rem;
-  font-size: ${18 * 0.063}rem;
+const TeamSection = styled(ProductSection)`
+
 `
