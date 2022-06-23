@@ -10,7 +10,7 @@ import {
 import BlogLogo from '../components/SVG/BlogLogo'
 import Header from "../components/Layout/Header"
 import Footer from "../components/Layout/Footer"
-import Subscribe from "../components/Layout/BlogSubscribe"
+import Subscribe from "../components/Layout/Subscribe"
 import BlogCard from "../components/BlogCard"
 import {AppContainer, PrimaryTitle, PrimaryParagraph, PrimarySection} from "../Styles"
 
@@ -143,7 +143,7 @@ const BlogPost = () => {
                 </div>
             
             </Socials>
-            <Subscribe />
+            <Subscribe header="Like what you see? Subscribe now!" />
             <ArticleSection>
                 <PrimaryTitle>You may also like</PrimaryTitle>
                 <Articles>

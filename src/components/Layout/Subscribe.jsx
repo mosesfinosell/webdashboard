@@ -7,13 +7,13 @@ import {PrimarySection, PrimaryTitle, borderRadius, PrimaryButton} from "../../S
 
 
 
-const BlogSubscribe = () => {
+const BlogSubscribe = ({header}) => {
     const emailValidationSchema = Yup.object().shape({
         email: Yup.string().email("Invalid email").required("Email required")
     })
   return (
     <Subscribe>
-                <PrimaryTitle>Like what you see? Subscribe now!</PrimaryTitle>
+                <PrimaryTitle>{header}</PrimaryTitle>
                 <Formik
                     initialValues={{
                         email:""
@@ -81,6 +81,11 @@ const Email = styled(Form)`
     }
     ${PrimaryButton}{
         font-size: ${14 * 0.063}rem;
+    }
+    .form-error{
+        color: rgb(245, 79, 79);
+        font-weight: 700;
+        font-size: 0.8rem;
     }
     
     @media only screen and (min-width: 768px){

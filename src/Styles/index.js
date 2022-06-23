@@ -12,6 +12,11 @@ export const GlobalStyle = createGlobalStyle`
     ::-webkit-input-placeholder{
         color: green
     }
+    .form-error{
+        color: rgb(245, 79, 79);
+        font-weight: 500;
+        font-size: 0.3rem;
+    }
 `
 export const marginMobile = `${25 * 0.063}rem`;
 export const margin = `${165 * 0.063}rem`;

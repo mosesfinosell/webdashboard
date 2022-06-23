@@ -20,7 +20,7 @@ import {
 } from "../Styles"
 import Header from "../components/Layout/Header"
 import Footer from "../components/Layout/Footer"
-import Subscribe from "../components/Layout/BlogSubscribe"
+import Subscribe from "../components/Layout/Subscribe"
 import BlogCard from "../components/BlogCard"
 import BlogLogo from "../components/SVG/BlogLogo" 
 
@@ -120,7 +120,7 @@ const Blog = () => {
                     {blogs.map((blog, i)=><BlogCard key={i} blog={blog} />)}
                 </Articles>
             </ArticleSection>
-            <Subscribe />
+            <Subscribe header="Like what you see? Subscribe now!" />
             <TakeControl>
                 <PrimaryTitle>Ready to take control of your finances and business?</PrimaryTitle>
                 <PrimaryButton>Take control</PrimaryButton>
