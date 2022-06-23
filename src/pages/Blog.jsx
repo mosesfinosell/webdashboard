@@ -63,7 +63,7 @@ const Blog = () => {
 
   return (
     <>
-        <Header LogoImg={BlogLogo} />
+        <Header />
         <AppContainer>
             <CarouselSection>
                 <PrimaryTitle>Freshly curated for your growth</PrimaryTitle>

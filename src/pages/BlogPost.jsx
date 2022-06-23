@@ -40,7 +40,7 @@ const blogs = [
 const BlogPost = () => {
   return (
     <>
-        <Header LogoImg={BlogLogo} />
+        <Header />
         <AppContainer>
             <BlogSection>
                 <img src={CarouselImg} alt="man operating a laptop" />
