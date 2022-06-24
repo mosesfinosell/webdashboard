@@ -1,16 +1,13 @@
 import React from 'react'
 import styled from "styled-components"
 import AboutImg from "../assets/about.png"
-import {PrimaryButton, PrimaryTitle, PrimaryParagraph, marginMobile, margin, AppContainer} from "../Styles"
-import Header from "../components/Layout/Header"
-import Footer from "../components/Layout/Footer"
+import {PrimaryButton, PrimaryTitle, PrimaryParagraph, marginMobile, margin} from "../Styles"
+
 
 
 const About = () => {
   return (
     <>
-    <Header />
-    <AppContainer>
         <Section1>
             <img  src={AboutImg} alt="Exchange of product and payment" />
             <div>
@@ -55,8 +52,6 @@ const About = () => {
             </Heading>
             <PrimaryButton>Get Finosell</PrimaryButton>
         </Section>
-    </AppContainer>
-    <Footer />
     </>
   )
 }
@@ -92,7 +87,7 @@ const Section1 = styled.section`
     }
     @media only screen and (min-width: 768px){
         flex-direction: row-reverse;
-        align-items: center;
+        align-items: flex-start;
         padding: 0;
         img{
             margin-left: ${50*0.063}rem;
@@ -175,7 +170,7 @@ const Section = styled.section`
             font-size: ${28*0.063}rem;
         }
         .section-header{
-            padding: 0 ${margin};
+            
         }
     }
 `

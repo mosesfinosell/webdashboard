@@ -2,16 +2,13 @@
 import { Text } from "@chakra-ui/react";
 import "./home.css";
 import styled from "styled-components";
-import Header from "../components/Layout/Header"
-import Footer from "../components/Layout/Footer"
-import {AppContainer, marginMobile} from "../Styles"
+
 
 function Terms() {
   
   return (
       <>
-      <Header />
-      <AppContainer>
+      
         <Term>
           <h3 className="term__title">1. Terms and Conditions</h3>
           <Text className="term__para">
@@ -320,8 +317,7 @@ function Terms() {
           </Text>
           <Text className="term__para">Seller delivers product</Text>
         </Term>
-        </AppContainer>
-        <Footer />
+        
       </>
   );
 }

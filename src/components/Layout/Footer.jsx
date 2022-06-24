@@ -44,18 +44,20 @@ const Footer = () => {
               <Link className="abt" to="/about">
                 <Text className="abt">About</Text>
               </Link>
-              <Text className="abt">Blog</Text>
-              <Text className="abt">FAQ</Text>
-              <Text className="abt">Help</Text>
-              <Text className="abt">Handles</Text>
+              <Link className="abt" to="/blog">
+                <Text className="abt">Blog</Text>
+              </Link>
+              <Link to="/faqs">
+                <Text className="abt">FAQ</Text>
+              </Link>
+              
           
           </div>
           <div className="foot-2">
             
               <Text className="column-title">Products</Text>
-              <Text className="abt">Business Management</Text>
-              <Text className="abt">Payments</Text>
               <Text className="abt">Escrow</Text>
+              <Text className="abt">Handles</Text>
           
           </div>
 
@@ -70,7 +72,6 @@ const Footer = () => {
           </div>
 
           <div className="foot-2">
-            
               <div className="footer-social">
                 <a href="https://www.facebook.com/Finosell-112251447209343/" target="_blank" rel="noreferrer">
                 <FontAwesomeIcon
@@ -110,8 +111,6 @@ const Footer = () => {
                 </a>
               </div>
               <Text className="abt">support@finosell.com</Text>
-              <Text className="abt">+234 - XXXX - XXXX</Text>
-            
           </div>
         </Columns>
       </FooterContent>
@@ -164,6 +163,8 @@ const Columns = styled.div`
   .footer-social{
     display: flex;
     justify-content: space-evenly;
+    margin-bottom: ${15*0.063}rem;
+    color:#273B4A;
   }
   .foot-2{
 
@@ -178,14 +179,19 @@ const Columns = styled.div`
     font-weight: 500;
   }
   p{
-    margin-bottom: ${20*0.063}rem;
-    line-height: ${23*0.063}rem;
-    font-size: ${18*0.063}rem
+    margin-bottom: ${15*0.063}rem;
+    line-height: ${18*0.063}rem;
+    font-size: ${14*0.063}rem
   }
   @media only screen and (min-width: 768px){
     display: flex;
     
     justify-content: space-evenly;
+    p{
+      margin-bottom: ${20*0.063}rem;
+      line-height: ${23*0.063}rem;
+      font-size: ${18*0.063}rem
+    }
   }
 `
 const FooterContent = styled.div`

@@ -1,16 +1,33 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import {Link} from "react-router-dom"
 import styled from "styled-components"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faAngleRight} from "@fortawesome/free-solid-svg-icons"
-import {PrimaryParagraph, PrimaryTitle, PrimarySection, AppContainer} from "../Styles"
-import Header from "../components/Layout/Header"
-import Footer from "../components/Layout/Footer"
+
+import {useQuery} from "react-query"
+import axios from "axios"
+
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel as CarouselSlider } from 'react-responsive-carousel';
+
+import {
+    PrimaryParagraph, 
+    PrimaryTitle, 
+    PrimaryButton,
+    PrimarySection, 
+    
+} from "../Styles"
+
+import Subscribe from "../components/Layout/Subscribe"
 import BlogCard from "../components/BlogCard"
+import BlogLogo from "../components/SVG/BlogLogo" 
 
 import CarouselImg from "../assets/carousel-img.png"
 import purse from "../assets/purse.png"
 import whiteBoard from "../assets/whiteboard.png"
 import grayShirt from "../assets/gray-shirt.png"
+
+
 
 const blogs = [
     {
@@ -32,48 +49,78 @@ const blogs = [
 
 
 const Blog = () => {
+   
+    const {isLoading, error, data} = useQuery('blodPosts', async ()=>{
+        const data = await axios.get(`${process.env.REACT_APP_FINOSELL_BASE_URI}/blog`)
+            console.log(data.data)
+            //alert("data loaded 1")
+            return data.data
+        
+    })
+    
+
   return (
     <>
-        <Header />
-        <AppContainer>
-            <CarouselSection>
-                <PrimaryTitle>Freshly curated for your growth</PrimaryTitle>
-                <PrimaryParagraph>No spams, just freshly curated business and finance pointers to help you scale.</PrimaryParagraph>
-                <Carousel>
-                    <img src={CarouselImg} alt="man operating a laptop" />
-                    <p className="tags"><span className="tag">Product Tutorial</span></p>
-                    <CarouselContent>
-                        <PrimaryTitle>How to integrate finosell into your business</PrimaryTitle>
-                        <PrimaryParagraph>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Natoque diam elit tempor risus. Pulvinar non vitae elementum scelerisque nascetur id nibh diam odio... </PrimaryParagraph>
-                        <a className="read-more">
-                            <span>Read more</span>
-                            <FontAwesomeIcon icon={faAngleRight} style={{margin:"0 0.2rem"}} />
-                            <FontAwesomeIcon icon={faAngleRight} />
-                        </a>
-                    </CarouselContent>
-                </Carousel>
-            </CarouselSection>
-            <ArticleSection>
-                <PrimaryTitle>Product Tutorials</PrimaryTitle>
-                <Articles>
-                    {blogs.map((blog, i)=><BlogCard key={i} blog={blog} />)}
-                </Articles>
-            </ArticleSection>
-            <ArticleSection>
-                <PrimaryTitle>Build with Finosell</PrimaryTitle>
-                <Articles>
-                    {blogs.map((blog, i)=><BlogCard key={i} blog={blog} />)}
-                </Articles>
-            </ArticleSection>
-            <ArticleSection>
-                <PrimaryTitle>Fresh and Notable</PrimaryTitle>
-                <Articles>
-                    {blogs.map((blog, i)=><BlogCard key={i} blog={blog} />)}
-                </Articles>
-            </ArticleSection>
-            <Subscribe></Subscribe>
-        </AppContainer>
-        <Footer />
+        <CarouselSection>
+            <PrimaryTitle>Freshly curated for your growth</PrimaryTitle>
+            <PrimaryParagraph>No spams, just freshly curated business and finance pointers to help you scale.</PrimaryParagraph>
+            <CarouselSlider
+                showThumbs={false}
+                showArrows={false}
+                showStatus={false}
+            >
+            <Carousel>
+                <img src={CarouselImg} alt="man operating a laptop" />
+                <p className="tags"><span className="tag">Product Tutorial</span></p>
+                <CarouselContent>
+                    <PrimaryTitle>How to integrate finosell into your business</PrimaryTitle>
+                    <PrimaryParagraph>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Natoque diam elit tempor risus. Pulvinar non vitae elementum scelerisque nascetur id nibh diam odio... </PrimaryParagraph>
+                    <Link to="/blog/id" className="read-more">
+                        <span>Read more</span>
+                        <FontAwesomeIcon icon={faAngleRight} style={{margin:"0 0.2rem"}} />
+                        <FontAwesomeIcon icon={faAngleRight} />
+                    </Link>
+                </CarouselContent>
+            </Carousel>
+
+            <Carousel>
+                <img src={CarouselImg} alt="man operating a laptop" />
+                <p className="tags"><span className="tag">Product Tutorial</span></p>
+                <CarouselContent>
+                    <PrimaryTitle>How to integrate finosell into your business</PrimaryTitle>
+                    <PrimaryParagraph>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Natoque diam elit tempor risus. Pulvinar non vitae elementum scelerisque nascetur id nibh diam odio... </PrimaryParagraph>
+                    <a className="read-more">
+                        <span>Read more</span>
+                        <FontAwesomeIcon icon={faAngleRight} style={{margin:"0 0.2rem"}} />
+                        <FontAwesomeIcon icon={faAngleRight} />
+                    </a>
+                </CarouselContent>
+            </Carousel>
+            </CarouselSlider>
+        </CarouselSection>
+        <ArticleSection>
+            <PrimaryTitle>Product Tutorials</PrimaryTitle>
+            <Articles>
+                {blogs.map((blog, i)=><BlogCard key={i} blog={blog} />)}
+            </Articles>
+        </ArticleSection>
+        <ArticleSection>
+            <PrimaryTitle>Build with Finosell</PrimaryTitle>
+            <Articles>
+                {blogs.map((blog, i)=><BlogCard key={i} blog={blog} />)}
+            </Articles>
+        </ArticleSection>
+        <ArticleSection>
+            <PrimaryTitle>Fresh and Notable</PrimaryTitle>
+            <Articles>
+                {blogs.map((blog, i)=><BlogCard key={i} blog={blog} />)}
+            </Articles>
+        </ArticleSection>
+        <Subscribe header="Like what you see? Subscribe now!" />
+        <TakeControl>
+            <PrimaryTitle>Ready to take control of your finances and business?</PrimaryTitle>
+            <PrimaryButton>Take control</PrimaryButton>
+        </TakeControl>
     </>
   )
 }
@@ -83,32 +130,65 @@ export default Blog
 const CarouselSection = styled(PrimarySection)`
     display: flex;
     flex-direction: column;
-    align-items: center;
     overflow: hidden;
-    margin-bottom: ${0.063*100}rem;
+    padding-bottom: ${0.063*160}rem;
+    
+    
     ${PrimaryTitle}{
         color: #273B4A;
-        margin-bottom: ${20*0.063}rem
+        margin-bottom: ${20*0.063}rem;
+        text-align: left;
     }
     ${PrimaryParagraph} {
-        margin-bottom: ${60*0.063}rem;
+        margin-bottom: ${20*0.063}rem;
         height: ${72*0.063}rem;
         overflow: hidden;
         text-overflow: ellipsis;
+        text-align: left;
     }
     img{
         height: ${400*0.063}rem;
         object-fit: cover;
+        width: 100%;
+    }
+    .carousel.carousel-slider{
+        overflow: visible;
+    }
+    .slider{
+        background: none;
+    }
+    .control-dots{
+        bottom: -${50 * 0.063}rem;
+    }
+    .control-dots .dot{
+        width: ${10 * 0.063}rem;
+        height: ${10 * 0.063}rem;
+        background: #D9D9D9;
+        box-shadow: none;
+        
+    }
+    .dot.selected{
+        background: #D6AA1B;
     }
     @media only screen and (min-width: 768px){
+       
+        padding-bottom: ${0.063 * 230}rem;
         ${PrimaryParagraph} {
-            margin-bottom: ${93*0.063}rem
+            margin-bottom: ${33*0.063}rem
+        }
+        .control-dots{
+            bottom: -${80 * 0.063}rem;
+        }
+        .control-dots .dot{
+            width: ${15 * 0.063}rem;
+            height: ${15 * 0.063}rem;
         }
     }
 `
 const Carousel = styled.div`
     .tags{
         margin: ${10*0.063}rem 0;
+        text-align: left;
     }
     .tag{
         background: #F5F5F5;
@@ -148,11 +228,46 @@ const ArticleSection = styled(PrimarySection)`
         margin-bottom: ${25*0.063}rem;
         color: #273B4A;
     }
+    
 `
 const Articles = styled.div`
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+
+    @media only screen and (min-width: 768px){
+        flex-direction: row;
+    }
 `
-const Subscribe = styled(PrimarySection)`
-    
+
+
+const TakeControl = styled(PrimarySection)`
+    margin-bottom: ${160 * 0.063}rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    ${PrimaryTitle}{
+        font-weight: 500;
+        text-align: center;
+        font-size: ${35 * 0.063}rem;
+        line-height: ${38 * 0.063}rem;
+        color: #273B4A;
+        margin-bottom: ${20 * 0.063}rem;
+    }
+    /* ${PrimaryButton}{
+        font-size: ${12 * 0.063}rem;
+        line-height: ${16 * 0.063}rem;
+        padding: ${12 * 0.063}rem ${29 * 0.063}rem;
+    } */
+    @media only screen and (min-width: 768px){
+        ${PrimaryTitle}{
+            font-size: ${60 * 0.063}rem;
+            line-height: ${65 * 0.063}rem;
+        }
+        /* ${PrimaryButton}{
+            font-size: ${28 * 0.063}rem;
+            line-height: ${36 * 0.063}rem;
+            padding: ${32 * 0.063}rem ${67 * 0.063}rem;
+        } */
+    }
 `
