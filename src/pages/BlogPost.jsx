@@ -8,11 +8,9 @@ import {
 } from "@fortawesome/free-brands-svg-icons"
 
 import BlogLogo from '../components/SVG/BlogLogo'
-import Header from "../components/Layout/Header"
-import Footer from "../components/Layout/Footer"
 import Subscribe from "../components/Layout/Subscribe"
 import BlogCard from "../components/BlogCard"
-import {AppContainer, PrimaryTitle, PrimaryParagraph, PrimarySection} from "../Styles"
+import {PrimaryTitle, PrimaryParagraph, PrimarySection} from "../Styles"
 
 import CarouselImg from "../assets/carousel-img.png"
 import purse from "../assets/purse.png"
@@ -40,8 +38,6 @@ const blogs = [
 const BlogPost = () => {
   return (
     <>
-        <Header />
-        <AppContainer>
             <BlogSection>
                 <img src={CarouselImg} alt="man operating a laptop" />
                 <PrimaryTitle>
@@ -150,8 +146,6 @@ const BlogPost = () => {
                     {blogs.map((blog, i)=><BlogCard key={i} blog={blog} />)}
                 </Articles>
             </ArticleSection>
-        </AppContainer>
-        <Footer />
     </>
   )
 }

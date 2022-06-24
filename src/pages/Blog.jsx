@@ -15,11 +15,9 @@ import {
     PrimaryTitle, 
     PrimaryButton,
     PrimarySection, 
-    AppContainer,
     
 } from "../Styles"
-import Header from "../components/Layout/Header"
-import Footer from "../components/Layout/Footer"
+
 import Subscribe from "../components/Layout/Subscribe"
 import BlogCard from "../components/BlogCard"
 import BlogLogo from "../components/SVG/BlogLogo" 
@@ -63,70 +61,66 @@ const Blog = () => {
 
   return (
     <>
-        <Header />
-        <AppContainer>
-            <CarouselSection>
-                <PrimaryTitle>Freshly curated for your growth</PrimaryTitle>
-                <PrimaryParagraph>No spams, just freshly curated business and finance pointers to help you scale.</PrimaryParagraph>
-                <CarouselSlider
-                    showThumbs={false}
-                    showArrows={false}
-                    showStatus={false}
-                >
-                <Carousel>
-                    <img src={CarouselImg} alt="man operating a laptop" />
-                    <p className="tags"><span className="tag">Product Tutorial</span></p>
-                    <CarouselContent>
-                        <PrimaryTitle>How to integrate finosell into your business</PrimaryTitle>
-                        <PrimaryParagraph>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Natoque diam elit tempor risus. Pulvinar non vitae elementum scelerisque nascetur id nibh diam odio... </PrimaryParagraph>
-                        <Link to="/blog/id" className="read-more">
-                            <span>Read more</span>
-                            <FontAwesomeIcon icon={faAngleRight} style={{margin:"0 0.2rem"}} />
-                            <FontAwesomeIcon icon={faAngleRight} />
-                        </Link>
-                    </CarouselContent>
-                </Carousel>
+        <CarouselSection>
+            <PrimaryTitle>Freshly curated for your growth</PrimaryTitle>
+            <PrimaryParagraph>No spams, just freshly curated business and finance pointers to help you scale.</PrimaryParagraph>
+            <CarouselSlider
+                showThumbs={false}
+                showArrows={false}
+                showStatus={false}
+            >
+            <Carousel>
+                <img src={CarouselImg} alt="man operating a laptop" />
+                <p className="tags"><span className="tag">Product Tutorial</span></p>
+                <CarouselContent>
+                    <PrimaryTitle>How to integrate finosell into your business</PrimaryTitle>
+                    <PrimaryParagraph>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Natoque diam elit tempor risus. Pulvinar non vitae elementum scelerisque nascetur id nibh diam odio... </PrimaryParagraph>
+                    <Link to="/blog/id" className="read-more">
+                        <span>Read more</span>
+                        <FontAwesomeIcon icon={faAngleRight} style={{margin:"0 0.2rem"}} />
+                        <FontAwesomeIcon icon={faAngleRight} />
+                    </Link>
+                </CarouselContent>
+            </Carousel>
 
-                <Carousel>
-                    <img src={CarouselImg} alt="man operating a laptop" />
-                    <p className="tags"><span className="tag">Product Tutorial</span></p>
-                    <CarouselContent>
-                        <PrimaryTitle>How to integrate finosell into your business</PrimaryTitle>
-                        <PrimaryParagraph>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Natoque diam elit tempor risus. Pulvinar non vitae elementum scelerisque nascetur id nibh diam odio... </PrimaryParagraph>
-                        <a className="read-more">
-                            <span>Read more</span>
-                            <FontAwesomeIcon icon={faAngleRight} style={{margin:"0 0.2rem"}} />
-                            <FontAwesomeIcon icon={faAngleRight} />
-                        </a>
-                    </CarouselContent>
-                </Carousel>
-                </CarouselSlider>
-            </CarouselSection>
-            <ArticleSection>
-                <PrimaryTitle>Product Tutorials</PrimaryTitle>
-                <Articles>
-                    {blogs.map((blog, i)=><BlogCard key={i} blog={blog} />)}
-                </Articles>
-            </ArticleSection>
-            <ArticleSection>
-                <PrimaryTitle>Build with Finosell</PrimaryTitle>
-                <Articles>
-                    {blogs.map((blog, i)=><BlogCard key={i} blog={blog} />)}
-                </Articles>
-            </ArticleSection>
-            <ArticleSection>
-                <PrimaryTitle>Fresh and Notable</PrimaryTitle>
-                <Articles>
-                    {blogs.map((blog, i)=><BlogCard key={i} blog={blog} />)}
-                </Articles>
-            </ArticleSection>
-            <Subscribe header="Like what you see? Subscribe now!" />
-            <TakeControl>
-                <PrimaryTitle>Ready to take control of your finances and business?</PrimaryTitle>
-                <PrimaryButton>Take control</PrimaryButton>
-            </TakeControl>
-        </AppContainer>
-        <Footer />
+            <Carousel>
+                <img src={CarouselImg} alt="man operating a laptop" />
+                <p className="tags"><span className="tag">Product Tutorial</span></p>
+                <CarouselContent>
+                    <PrimaryTitle>How to integrate finosell into your business</PrimaryTitle>
+                    <PrimaryParagraph>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Natoque diam elit tempor risus. Pulvinar non vitae elementum scelerisque nascetur id nibh diam odio... </PrimaryParagraph>
+                    <a className="read-more">
+                        <span>Read more</span>
+                        <FontAwesomeIcon icon={faAngleRight} style={{margin:"0 0.2rem"}} />
+                        <FontAwesomeIcon icon={faAngleRight} />
+                    </a>
+                </CarouselContent>
+            </Carousel>
+            </CarouselSlider>
+        </CarouselSection>
+        <ArticleSection>
+            <PrimaryTitle>Product Tutorials</PrimaryTitle>
+            <Articles>
+                {blogs.map((blog, i)=><BlogCard key={i} blog={blog} />)}
+            </Articles>
+        </ArticleSection>
+        <ArticleSection>
+            <PrimaryTitle>Build with Finosell</PrimaryTitle>
+            <Articles>
+                {blogs.map((blog, i)=><BlogCard key={i} blog={blog} />)}
+            </Articles>
+        </ArticleSection>
+        <ArticleSection>
+            <PrimaryTitle>Fresh and Notable</PrimaryTitle>
+            <Articles>
+                {blogs.map((blog, i)=><BlogCard key={i} blog={blog} />)}
+            </Articles>
+        </ArticleSection>
+        <Subscribe header="Like what you see? Subscribe now!" />
+        <TakeControl>
+            <PrimaryTitle>Ready to take control of your finances and business?</PrimaryTitle>
+            <PrimaryButton>Take control</PrimaryButton>
+        </TakeControl>
     </>
   )
 }

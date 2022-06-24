@@ -9,9 +9,7 @@ import charge from "../assets/charge.svg";
 import bless from "../assets/bless.svg";
 
 import { Text, Image, Button } from "@chakra-ui/react";
-import Header from "../components/Layout/Header"
-import Footer from "../components/Layout/Footer"
-import {AppContainer, PrimaryTitle, PrimaryButton} from "../Styles"
+import {PrimaryTitle, PrimaryButton} from "../Styles"
 import {TopSection, ProductSection, ProductSectionImg, ProductSectionContent, YellowParagraph, List} from "../Styles/productStyles"
 
 
@@ -19,8 +17,6 @@ function Business() {
     
   return (
     <>
-      <Header />
-      <AppContainer>
         <TopSection>
           <PrimaryTitle>Finosell for Business</PrimaryTitle>
         </TopSection>
@@ -147,8 +143,6 @@ function Business() {
             
           </ProductSectionContent>
         </TeamSection>
-      </AppContainer>
-      <Footer />
     </>
   );
 }

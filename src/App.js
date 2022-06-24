@@ -52,52 +52,41 @@ import ComingSoon from "./pages/ComingSoon"
 import BlogPost from "./pages/BlogPost"
 import ScrollToTop from "./utils/scrollToTop"
 
+import Website from "./components/Layout/Website"
+
 import {Toaster} from "react-hot-toast"
 
 
 function App() {
   
 
- 
   return (
     <>
    
     <Router>
       <ScrollToTop>
       <Routes>
-      
+        <Route path="/" element={<Website />}>
+          <Route index element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="/individual" element={<Individual />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:post" element={<BlogPost />} />
+          <Route path="/faqs" element={<FAQ />} />
+          <Route path="/coming-soon" element={<ComingSoon />} />
+          <Route path="/business-home" element={<Business />} />
+          <Route
+            path="/terms"
+            element={<Terms />}
+          />
+          <Route
+            exact
+            path="/pricing"
+            element={<Pricing />}
+          />
+        </Route>
         <Route exact path="/account" element={<AccountBox />} />
-        <Route
-          exact
-          path="/"
-          element={<Home />}
-        />
-         <Route
-          exact
-          path="/individual"
-          element={<Individual />}
-        />
-        <Route path="/about" element={<About />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/blog/:post" element={<BlogPost />} />
         
-        <Route path="/faqs" element={<FAQ />} />
-        <Route path="/coming-soon" element={<ComingSoon />} />
-         <Route
-          
-          path="/business-home"
-          element={<Business />}
-        />
-        <Route
-          exact
-          path="/terms"
-          element={<Terms />}
-        />
-        <Route
-          exact
-          path="/pricing"
-          element={<Pricing />}
-        />
         <Route
           exact
           path="/personal-signup"

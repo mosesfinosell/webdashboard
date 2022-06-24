@@ -1,16 +1,13 @@
 import React from 'react'
 import styled from "styled-components"
 import AboutImg from "../assets/about.png"
-import {PrimaryButton, PrimaryTitle, PrimaryParagraph, marginMobile, margin, AppContainer} from "../Styles"
-import Header from "../components/Layout/Header"
-import Footer from "../components/Layout/Footer"
+import {PrimaryButton, PrimaryTitle, PrimaryParagraph, marginMobile, margin} from "../Styles"
+
 
 
 const About = () => {
   return (
     <>
-    <Header />
-    <AppContainer>
         <Section1>
             <img  src={AboutImg} alt="Exchange of product and payment" />
             <div>
@@ -55,8 +52,6 @@ const About = () => {
             </Heading>
             <PrimaryButton>Get Finosell</PrimaryButton>
         </Section>
-    </AppContainer>
-    <Footer />
     </>
   )
 }

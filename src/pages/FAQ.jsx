@@ -1,8 +1,6 @@
 import styled from "styled-components"
 import {Accordion} from "@chakra-ui/react"
-import Header from "../components/Layout/Header"
-import Footer from "../components/Layout/Footer"
-import {AppContainer, PrimarySection, PrimaryTitle} from "../Styles"
+import {PrimarySection, PrimaryTitle} from "../Styles"
 import AccordionItem from "../components/AccordionItem"
 
 import webapp from "../assets/webapp.svg";
@@ -81,8 +79,6 @@ const faqs = [
 const FAQ = () => {
   return (
     <>
-      <Header />
-      <AppContainer >
         <FaqSection>
           <PrimaryTitle>Frequently Asked Questions</PrimaryTitle>
           <Accordion
@@ -101,8 +97,7 @@ const FAQ = () => {
             <img src={webapp} alt="Continue on web app" />
           </div>
         </GetSection>
-      </AppContainer>
-      <Footer />
+      
     </>
   )
 }

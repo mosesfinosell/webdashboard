@@ -6,18 +6,15 @@ import jummy from "../assets/jummy.svg";
 import finance from "../assets/finance.svg";
 
 import { Text, Image } from "@chakra-ui/react";
-import Header from "../components/Layout/Header"
-import Footer from "../components/Layout/Footer"
 
-import {AppContainer, PrimaryTitle, PrimaryButton} from "../Styles"
+import {PrimaryTitle, PrimaryButton} from "../Styles"
 import {TopSection, ProductSection, ProductSectionImg, ProductSectionContent, YellowParagraph, List} from "../Styles/productStyles"
 
 function Individual() {
     
   return (
     <>
-      <Header />
-      <AppContainer>
+
       <TopSection>
         <PrimaryTitle>Finosell for Individuals</PrimaryTitle>
       </TopSection>
@@ -122,8 +119,7 @@ function Individual() {
           
         </ProductSectionContent>
       </ProductSection>
-     </AppContainer>
-     <Footer />
+   
     </>
   );
 }

@@ -1,9 +1,7 @@
 import "./home.css";
 import {useState, useEffect} from "react"
 import { Text, } from "@chakra-ui/react";
-import Header from "../components/Layout/Header"
-import Footer from "../components/Layout/Footer"
-import {AppContainer, PrimarySection, borderRadius, PrimaryTitle, PrimaryParagraph} from "../Styles"
+import {PrimarySection, borderRadius, PrimaryTitle, PrimaryParagraph} from "../Styles"
 import styled from "styled-components"
 
 function Pricing() {
@@ -29,15 +27,11 @@ function Pricing() {
   useEffect(()=>{
     handleChargeCalculation(parseInt(turnOver), setCharge)
 
-    // if(turnOver.length < 1){
-    //   setTurnOver(0)
-    // }
+    
   }, [turnOver, setTurnOver])
 
   return (
     <>
-    <Header />
-    <AppContainer>
       <section className="terms">
         <div className="">
           {" "}
@@ -126,8 +120,6 @@ function Pricing() {
           <p className="total">Total charges: NGN {charge.toLocaleString()}</p>
         </Calculator>
       </CalculatorSection>
-    </AppContainer>
-    <Footer />
     </>
   );
 }
