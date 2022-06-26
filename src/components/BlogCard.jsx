@@ -2,13 +2,14 @@ import React from 'react'
 import {Link} from "react-router-dom"
 import styled from "styled-components"
 import {PrimaryTitle, PrimaryParagraph} from "../Styles"
+import CarouselImg from "../assets/carousel-img.png"
 
 const BlogCard = ({blog}) => {
-    const {img, title, author} = blog
+    const {img, title, author, _id} = blog
   return (
-    <Link to="/blog/id">
+    <Link to={`/blog/${_id ? _id : "id"}`}>
         <Card>
-            <img src={img} alt="Blog thumbnail" />
+            <img src={img ? img : CarouselImg} alt="Blog thumbnail" />
             <PrimaryTitle title={title} >{title}</PrimaryTitle>
             <PrimaryParagraph title={`written by ${author}`}>by {author}</PrimaryParagraph>
         </Card>

@@ -1,5 +1,7 @@
 import { Routes, BrowserRouter as Router, Route} from "react-router-dom";
 
+
+
 import PrivateRoute from "./utils/PrivateRoute";
 import { Suspense } from "react";
 import { Text, Spinner } from "@chakra-ui/react";
@@ -71,7 +73,7 @@ function App() {
           <Route path="about" element={<About />} />
           <Route path="/individual" element={<Individual />} />
           <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:post" element={<BlogPost />} />
+          <Route path="/blog/:id" element={<BlogPost />} />
           <Route path="/faqs" element={<FAQ />} />
           <Route path="/coming-soon" element={<ComingSoon />} />
           <Route path="/business-home" element={<Business />} />
