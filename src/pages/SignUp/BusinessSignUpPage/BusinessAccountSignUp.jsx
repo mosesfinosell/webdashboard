@@ -85,7 +85,7 @@ export default function BusinessAccountSignUp() {
         <CustomField type="name" Left={FaIndustry} formik={formik} label="Business Name" placeholder="Jumoke Adetola" />
         <CustomField type="email" Left={FaEnvelope} formik={formik} label="Business Email" placeholder="Email Address" />
         <CustomField type="tel" Left={FaPhone} formik={formik} label="Phone Number" placeholder="08012345678" />
-        <Submit >Continue</Submit>
+        <Submit type="submit" >Continue</Submit>
         
       </form>
       <Text

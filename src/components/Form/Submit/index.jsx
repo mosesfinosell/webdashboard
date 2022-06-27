@@ -1,8 +1,8 @@
 import {Submit} from "../style"
 
-const Index = ({children}) => {
+const Index = ({children, type}) => {
   return (
-    <Submit type="submit">{children}</Submit>
+    <Submit type={type}>{children}</Submit>
   )
 }
 
