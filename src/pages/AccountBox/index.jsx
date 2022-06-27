@@ -1,26 +1,21 @@
 import {
-  Box,
-  Center,
-  Stack,
+ 
   Text,
   Image,
-  Link,
-  SimpleGrid,
-  Container,
+  
 } from "@chakra-ui/react";
-import { Link as RLink } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import logo from "../../assets/Logomark.png";
 import store from "../../assets/store.png";
 import user from "../../assets/user.png";
-import "../../../src";
+// import "../../../src";
 import { NavLink } from "react-router-dom";
 
 export default function AccountBox() {
   const whitebg = useColorModeValue("white.400");
 
   return (
-    <div className="acct-cover">
       <div className="acct-div">
         <div className="imgcontainer">
           <Image mb="15" src={logo} alt="logo" />
@@ -36,26 +31,26 @@ export default function AccountBox() {
         </Text>
         <div className="acct-types">
           <div className="pers-acct">
-            <NavLink to="/personal-signup">
+            <Link to="/personal-signup">
               <Image h="24" m="5" src={user} alt="user" />
               <Text fontSize="18px">Personal Account</Text>
               <Text fontSize="13px" color="gray.500">
                 Manage your owner Account
               </Text>
-            </NavLink>
+            </Link>
           </div>
           <div className="bus-acct">
-            <NavLink to="/business-signup">
+            <Link to="/business-signup">
               <Image h="24" m="5" src={store} alt="store" />
               <Text fontSize="18px">Business Account</Text>
               <Text fontSize="13px" color="gray.500">
                 Manage your Business Account
               </Text>
-            </NavLink>
+            </Link>
           </div>
         </div>
       </div>
-    </div>
+
     // <Container maxW='container.lg'>
     // 	<Box
     // 		maxW='xlg'

@@ -1,17 +1,14 @@
 import { Routes, BrowserRouter as Router, Route} from "react-router-dom";
 
-
-
 import PrivateRoute from "./utils/PrivateRoute";
-import { Suspense } from "react";
-import { Text, Spinner } from "@chakra-ui/react";
 import ErrorBoundary from "./ErrorBoundary";
-import AccountBox from "./pages/AccountBox/AccountBox"
+import AccountBox from "./pages/AccountBox"
 import PersonalAccountSignUp from "./pages/SignUp/PersonalSignUpPage/PersonalAccountSignUp";
 import PersonalAccountSignIn from "./pages/SignIn/PersonalLogInPage/PersonalAccountSignIn";
 import PersonalForgetPassword from "./pages/SignIn/PersonalLogInPage/PersonalForgetPassword";
 
 import BusinessAccountSignUp from "./pages/SignUp/BusinessSignUpPage/BusinessAccountSignUp";
+import Verify from "./pages/SignUp/BusinessSignUpPage/Verify"
 import BusinessAccountSignIn from "./pages/SignIn/BusinessLogInPage/BusinessAccountSignIn";
 import AddBusinessPage from "./pages/SignUp/BusinessSignUpPage/AddBusinessPage";
 import StoreInventory from "./pages/Dashboard/BusinessDashboard/HomeBusiness/StoreInventory";
@@ -55,6 +52,7 @@ import BlogPost from "./pages/BlogPost"
 import ScrollToTop from "./utils/scrollToTop"
 
 import Website from "./components/Layout/Website"
+import AuthContainer from "./components/Layout/AuthContainer"
 
 import {Toaster} from "react-hot-toast"
 
@@ -77,17 +75,15 @@ function App() {
           <Route path="/faqs" element={<FAQ />} />
           <Route path="/coming-soon" element={<ComingSoon />} />
           <Route path="/business-home" element={<Business />} />
-          <Route
-            path="/terms"
-            element={<Terms />}
-          />
-          <Route
-            exact
-            path="/pricing"
-            element={<Pricing />}
-          />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/pricing" element={<Pricing />} />
         </Route>
-        <Route exact path="/account" element={<AccountBox />} />
+        <Route path="/" element={<AuthContainer />}>
+          <Route path="account" element={<AccountBox />} />
+          <Route path="business-signup" element={<BusinessAccountSignUp />} />
+          <Route path="verify-business" element={<Verify />} />
+        </Route>
+        
         
         <Route
           exact
@@ -127,26 +123,25 @@ function App() {
 
         {/* Bussiness Account  */}
 
-        <Route path="/business-signup" element={<PrivateRoute element={BusinessAccountSignUp}/>} />
 
-        <Route path="/business-signin" element={<PrivateRoute element={BusinessAccountSignIn}/>} />
+        <Route path="/business-signin" element={<PrivateRoute element={<BusinessAccountSignIn />}/>} />
         <Route
           exact
           path="/business-dashboard"
-          element={<PrivateRoute element={BusinessDashboard}/>}
+          element={<PrivateRoute element={<BusinessDashboard />}/>}
         />
         <Route
           exact
           path="/business/orders"
-          element={<PrivateRoute element={BusinessOrders}/>}
+          element={<PrivateRoute element={<BusinessOrders />}/>}
         />
         <Route
           exact
           path="/business/store-inventory"
-          element={StoreInventory}
+          element={<StoreInventory />}
         />
-        <Route path="/business/store-page" element={<PrivateRoute element={StorePage}/>} />
-        <Route path="/business/storelink" element={<PrivateRoute element={StoreLink}/>} />
+        <Route path="/business/store-page" element={<PrivateRoute element={<StorePage />}/>} />
+        <Route path="/business/storelink" element={<PrivateRoute element={<StoreLink />}/>} />
         <Route path="/business/store-page/cart" element={<PrivateRoute element={Cart}/>} />
         <Route
           path="/business/payment"

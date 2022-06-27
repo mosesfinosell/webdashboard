@@ -7,15 +7,7 @@
   align-items: center;
 }
 
-form {
-  width: 50%;
-  margin: 0 auto;
-  /* height: 90%; */
-  background: #ffffff;
-  border: 0.5px solid #d9d9d9;
-  box-sizing: border-box;
-  border-radius: 0px 21px 21px 21px;
-}
+
 input[type="text"] {
   width: 100%;
   padding: 25px 20px;
@@ -35,7 +27,7 @@ input[type="text"]:focus {
 }
 
 input::placeholder {
-  color: red;
+  
 }
 input[type="password"] {
   width: 100%;
@@ -122,14 +114,14 @@ span.psw {
 .input-ht {
   height: 65px !important;
 }
-.acct-cover {
+/* .acct-cover {
   background: #fafafa;
   background-size: cover;
   height: 100vh;
   display: flex;
   flex-direction: row;
   align-items: center;
-}
+} */
 .acct-div {
   width: 50%;
   margin: 0 auto;

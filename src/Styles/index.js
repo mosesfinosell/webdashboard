@@ -76,7 +76,6 @@ export const PrimarySection = styled.section`
         padding: 0;
     }
 `
-
 export const AppContainer = styled.div`
     max-width: ${1212*0.063}rem;
     /* margin: 0 ${marginMobile}; */
@@ -96,7 +95,6 @@ export const AppContainer = styled.div`
 export const baseLayout = `
 
 `
-
 export const headerHeight = `${75 * 0.063}rem`
 
 export const Section = styled.section`
