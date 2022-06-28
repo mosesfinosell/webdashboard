@@ -39,6 +39,9 @@ import PayWithUssd from "./pages/Dashboard/DashboardItems/PayWithUssd";
 import UssdConfirmation from "./pages/Dashboard/DashboardItems/UssdConfirmation";
 import PayWithTransfer from "./pages/Dashboard/DashboardItems/PayWithTransfer";
 import BankPayment from "./pages/Dashboard/DashboardItems/BankPayment";
+
+import Store from "./pages/Store/productList"
+
 import Home from "./pages/Home";
 import Individual from "./pages/Individual";
 import Business from "./pages/Business";
@@ -49,11 +52,14 @@ import Blog from "./pages/Blog"
 import FAQ from "./pages/FAQ"
 import ComingSoon from "./pages/ComingSoon"
 import BlogPost from "./pages/BlogPost"
-import ScrollToTop from "./utils/scrollToTop"
+
 
 import Website from "./components/Layout/Website"
 import AuthContainer from "./components/Layout/AuthContainer"
 import StoreContainer from "./components/Store/StoreContainer"
+
+import ScrollToTop from "./utils/scrollToTop"
+
 
 import {Toaster} from "react-hot-toast"
 
@@ -149,7 +155,7 @@ function App() {
           element={CreateTransaction}
         />
         <Route path="/store" element={<StoreContainer />}>
-
+          <Route index element={<Store />} />
         </Route>
       </Routes>
       </ScrollToTop>

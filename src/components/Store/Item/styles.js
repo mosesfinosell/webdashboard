@@ -8,13 +8,17 @@ export const Card = styled.div`
     text-align: left;
     width: ${158 *0.063}rem;
     margin-bottom: ${15 * 0.063}rem;
+
+    @media only screen and (min-width: 768px){
+        width: ${197 *0.063}rem;
+    }
 `
 
 export const Img = styled.img`
     width: 100%;
-    height: ${158 * 0.063}rem;
+    height: ${138 * 0.063}rem;
     border-radius: ${smallBorderRadius};
-    object-fit: cover;
+    object-fit: conver;
     margin-bottom: ${0.063 * 13}rem;
 
 `

@@ -1,5 +1,5 @@
 import {FaInstagram, FaPhone, FaWhatsapp, FaSearch} from "react-icons/fa"
-import {Head, Logo, FlexContainer, Top, Socials, Social, Search, SearchInput} from "./styles"
+import {Head, Logo, FlexContainer, Top, Socials, Social, Search, SearchInput, Cart} from "./styles"
 import logo from "../../../assets/storelinkLogo.png"
 import CartLogo from "../../SVG/CartLogo"
 
@@ -28,6 +28,10 @@ const Header = () => {
           <Social>
             <FaWhatsapp />
           </Social>
+          <Cart>
+            <CartLogo />
+            <span>Cart</span>
+          </Cart>
         </Socials>
         <Search>
           <FaSearch />

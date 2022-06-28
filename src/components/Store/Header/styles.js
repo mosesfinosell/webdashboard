@@ -2,9 +2,23 @@ import styled from "styled-components"
 import { smallBorderRadius } from "../../../Styles"
 
 export const Head = styled.header`
+    max-width: ${1212*0.063}rem;
     font-family: 'Circular Std', sans-serif;
-    padding: ${43 * 0.063}rem ${25 * 0.063}rem 0;
-    margin-bottom: ${25 * 0.063}rem;
+    padding: ${43 * 0.063}rem ${25 * 0.063}rem ${25 * 0.063}rem;
+    margin: 0 auto;
+    margin-bottom: ;
+    background: #fff;
+
+    @media only screen and (min-width: 768px){
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        position: sticky;
+        top: 0;
+        left: 0;
+        padding-bottom: ${46 * 0.063}rem
+    }
 `
 export const Top = styled.div`
     display: flex;
@@ -21,6 +35,8 @@ export const Top = styled.div`
         svg{
             display: none;
         }
+
+        flex-grow: 1;
     }
 `
 export const Logo = styled.div`
@@ -62,6 +78,10 @@ export const Search = styled.div`
         top: 0;
         margin: auto;
     }
+
+    @media only screen and (min-width: 768px){
+        width: ${0.063 * 426}rem;
+    }
 `
 export const SearchIcon = styled.div`
     
@@ -82,6 +102,11 @@ export const Socials = styled.div`
     justify-content: center;
     align-items: center;
     margin-bottom: ${0.063 * 25}rem;
+
+    @media only screen and (min-width: 768px){
+        margin: 0;
+        
+    }
 `
 export const Social = styled.a`
     background: #FDF9ED;
@@ -100,7 +125,43 @@ export const Social = styled.a`
         height: ${20 * 0.063}rem;
     }
     
+
+    @media only screen and (min-width: 768px) {
+        width: ${0.063 * 44}rem;
+        height: ${0.063 * 44}rem;
+        margin: 0;
+        margin-right: ${15 * 0.063}rem;
+    }
 `
 export const FlexContainer = styled.div`
 
+    @media only screen and (min-width: 768px){
+        display: flex;
+        flex-direction: row-reverse;
+        flex-grow: 1.2;
+        justify-content: space-between;
+    }
+`
+
+export const Cart = styled.button`
+    display: none;
+    background: #D6AA1B;
+    color: #fff;
+    border-radius: ${smallBorderRadius};
+    width: ${84 * 0.063}rem;
+    height: ${0.063 * 44}rem;
+
+    svg{
+        margin-right: ${10 * 0.063}rem;
+
+    }
+    path{
+        fill: #fff;
+    }
+
+    @media only screen and (min-width: 768px){
+        display: flex;
+        align-items: center;
+        justify-content: center
+    }
 `
