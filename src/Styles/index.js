@@ -22,7 +22,7 @@ export const marginMobile = `${25 * 0.063}rem`;
 export const margin = `${165 * 0.063}rem`;
 export const headerHeightMobile = `${60 * 0.063}rem`
 export const borderRadius = `border-radius: ${0.063 * 20}rem ${0.063 * 50}rem ${0.063 * 50}rem ${0.063 * 50}rem`
-
+export const smallBorderRadius = `0 ${0.063 * 11}rem ${0.063 * 11}rem ${0.063 * 11}rem`;
 
 export const PrimaryTitle = styled.h1`
     font-size:${33 * 0.062}rem;

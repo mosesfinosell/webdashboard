@@ -26,12 +26,15 @@ const Footer = () => {
         <div className="foot-1">
           <Logo src={Logomark} alt="logo" />
           <Apps>
+            
             <div className="infos">
                 <Image src={applestore} alt="logo" />
             </div>
+            
             <div className="infos">
               <Image src={googlesmall} alt="logo" />
             </div>
+            
             <div className="infos webapp">
               <Image src={webapp} alt="logo" />
             </div>

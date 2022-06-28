@@ -22,7 +22,7 @@ import { useColorModeValue } from "@chakra-ui/color-mode";
 import { createStoreLink } from "../../../../ReduxContianer/BussinessRedux/BusinessAction";
 import BusinessLayout from "../../../../components/Layout/BusinessLayout";
 import { useNavigate } from "react-router-dom";
-import "../../../Dashboard/Dash.css";
+import "../../Dash.css";
 export default function AddUrlPage() {
   const history = useNavigate();
   const yellowbtn = useColorModeValue("yellow.500");

@@ -53,6 +53,7 @@ import ScrollToTop from "./utils/scrollToTop"
 
 import Website from "./components/Layout/Website"
 import AuthContainer from "./components/Layout/AuthContainer"
+import StoreContainer from "./components/Store/StoreContainer"
 
 import {Toaster} from "react-hot-toast"
 
@@ -147,7 +148,9 @@ function App() {
           path="/business/payment"
           element={CreateTransaction}
         />
-    
+        <Route path="/store" element={<StoreContainer />}>
+
+        </Route>
       </Routes>
       </ScrollToTop>
     </Router>
