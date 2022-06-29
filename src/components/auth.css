@@ -153,9 +153,9 @@ span.psw {
 }
 
 @media screen and (max-width: 768px) {
-  form {
+  /* form {
     width: 90%;
-  }
+  } */
   .acct-div {
     width: 90%;
   }

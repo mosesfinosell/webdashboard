@@ -18,7 +18,7 @@ export const Cart = styled.div`
     background: #FAFAFA;
     width: 100%;
     height: 100%;
-    padding: ${58 * 0.063}rem ${41 * 0.063}rem ${38 * 0.063}rem;
+    padding: ${58 * 0.063}rem ${21 * 0.063}rem ${38 * 0.063}rem;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -63,7 +63,7 @@ export const CartItems = styled.div`
     height: ${410 * 0.063}rem;
     overflow-x: hidden;
     overflow-y: scroll;
-
+    border: solid #D9D9D9 0.063rem;
     margin-bottom: ${22 * 0.063}rem;
 
 `
@@ -78,6 +78,12 @@ export const BreakDown = styled.div`
         display: flex;
         justify-content: space-between;
         margin-bottom: ${18 * 0.063}rem;
+        font-size: ${14 * 0.063}rem;
+        line-height: ${18 * 0.063}rem;
+        color: #273B4A;
+    }
+    .total{
+        font-weight: 700;
     }
 `
 
@@ -85,7 +91,10 @@ export const Content = styled.div`
 
 
     @media only screen and (min-width: 768px){
-    
+        p{
+            font-size: ${18 * 0.063}rem;
+            line-height: ${22 * 0.063}rem;
+        }
     }
 `
 export const Button = styled.button`
@@ -106,4 +115,47 @@ export const Button = styled.button`
     line-height: ${22 * 0.063}rem;
     }
 
+`
+
+export const CartItem = styled.div`
+    height: ${103 * 0.063}rem;
+    width: 100%;
+    background: #fff;
+    border-bottom: solid 0.063rem #D9D9D9;
+    padding: ${0.063 * 31}rem ${25 * 0.063}rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`
+export const ItemDetails = styled.div`
+
+    .name{
+        font-size:${14 * 0.063}rem;
+        line-height: ${18 * 0.063}rem;
+        font-weight: 700;
+        color: #273B4A;
+    }
+
+    .price{
+        font-size:${12 * 0.063}rem;
+        line-height: ${16 * 0.063}rem;
+        color: #8C8C8C;
+    }
+
+    @media only screen and (min-width: 768px){
+        .name{
+        font-size:${18 * 0.063}rem;
+        line-height: ${22 * 0.063}rem;
+    }
+
+    .price{
+        font-size:${14 * 0.063}rem;
+        line-height: ${18 * 0.063}rem;
+
+    }
+    }
+`
+
+export const Form = styled.form`
+    width: 100%;
 `

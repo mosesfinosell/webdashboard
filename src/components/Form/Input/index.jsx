@@ -15,9 +15,14 @@ const Index = ({formik, type, Left, label, placeholder}) => {
                     onBlur={formik.handleBlur}
                     value={formik.values[type]}
                 />
-                <InputLeft>
+                {Left ?
+                  <InputLeft>
                     <Left />
-                </InputLeft>
+                  </InputLeft>
+                  :
+                  null
+                }
+                
             </FieldContainer>
             {formik.touched[type] && formik.errors[type] ? <p className="error-message">{formik.errors[type]}</p> : null}
           </Container>
