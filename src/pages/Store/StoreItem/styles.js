@@ -108,10 +108,12 @@ export const Button = styled.button`
     justify-content: center;
     background: #D6AA1B;
     color: #fff;
+    margin-bottom: ${15 * 0.063}rem;
 
     &.color{
         background: #FDF9ED;
         color: #273B4A;
+        border: solid ${1 * 0.063}rem #D6AA1B
     }
 `
 

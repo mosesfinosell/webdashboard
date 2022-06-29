@@ -18,6 +18,7 @@ export const Container = styled.div`
     background: #FAFAFA;
     width: ${prop=>prop.width * 0.063}rem;
     height: ${prop=>prop.height * 0.063}rem;
+    overflow: hidden;
 `
 
 export const Minus = styled.button`

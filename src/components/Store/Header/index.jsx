@@ -4,7 +4,10 @@ import logo from "../../../assets/storelinkLogo.png"
 import CartLogo from "../../SVG/CartLogo"
 
 
-const Header = () => {
+const Header = ({setCart}) => {
+  const handleCart = () => {
+    setCart(true)
+  }
   return (
     <Head>
       <Top>
@@ -15,7 +18,7 @@ const Header = () => {
             <p className="info__location">Location: Iwo Road</p>
           </div>
         </Logo>
-        <CartLogo />
+        <CartLogo onClick={()=>handleCart()} />
       </Top>
       <FlexContainer>
         <Socials>
@@ -28,7 +31,7 @@ const Header = () => {
           <Social>
             <FaWhatsapp />
           </Social>
-          <Cart>
+          <Cart onClick={()=>handleCart()}>
             <CartLogo />
             <span>Cart</span>
           </Cart>

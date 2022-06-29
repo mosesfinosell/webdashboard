@@ -1,8 +1,10 @@
+import {useState} from "react"
 import {Path, Image, Container, Content, Button} from "./styles"
 import Quantity from "../../../components/Quantity"
 import image from "../../../assets/food.png"
 
 const StoreItem = () => {
+  const [add, setAdd] = useState(false)
   return (
     <>
       <Path>Home / Ofada Rice and Sauce</Path>
@@ -16,7 +18,14 @@ const StoreItem = () => {
           <p className="desc">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in molestie enim. Sed eu urna tortor. Suspendisse vel arcu vel massa tempor interdum. Nulla id dolor volutpat, viverra purus non, egestas ante.
           </p>
-          <Button>Add to Cart</Button>
+          {!add ? 
+            <Button onClick={()=>setAdd(true)}>Add to Cart</Button>
+            :
+            <>
+              <Button>Continue Shopping</Button>
+              <Button className="color">Go to Check Out</Button>
+            </>
+          }
         </Content>
 
       </Container>
