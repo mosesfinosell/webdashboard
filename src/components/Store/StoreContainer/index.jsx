@@ -12,9 +12,10 @@ const StoreLinkContainer = () => {
     <Header setCart={setCart} />
     <Container>
       <Outlet />
+      <ShoppingCart visible={cart} setVisible={setCart} />
     </Container>
     <Footer />
-    <ShoppingCart visible={cart} setVisible={setCart} />
+    
     </>
   )
 }
