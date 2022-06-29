@@ -17,7 +17,7 @@ export const Head = styled.header`
         position: sticky;
         top: 0;
         left: 0;
-        padding-bottom: ${46 * 0.063}rem
+        padding-bottom: ${26 * 0.063}rem
     }
 `
 export const Top = styled.div`

@@ -172,6 +172,9 @@ const Head = styled.header`
   ul{
     list-style: none;
   }
+  #menu-bar{
+    display: none;
+  }
   @media screen only and (min-width: 768px){
     height: ${95 * 0.063}rem;
     line-height: ${22*0.063}rem;

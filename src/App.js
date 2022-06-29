@@ -41,6 +41,7 @@ import PayWithTransfer from "./pages/Dashboard/DashboardItems/PayWithTransfer";
 import BankPayment from "./pages/Dashboard/DashboardItems/BankPayment";
 
 import Store from "./pages/Store/productList"
+import StoreItem from "./pages/Store/StoreItem"
 
 import Home from "./pages/Home";
 import Individual from "./pages/Individual";
@@ -156,6 +157,7 @@ function App() {
         />
         <Route path="/store" element={<StoreContainer />}>
           <Route index element={<Store />} />
+          <Route path="item" element={<StoreItem />} />
         </Route>
       </Routes>
       </ScrollToTop>

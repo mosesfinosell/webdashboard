@@ -8,7 +8,7 @@ export const Container = styled.main`
     padding: ${43 * 0.063}rem ${25 * 0.063}rem 0;
     justify-content: center;
     gap: 0.8rem; 
-    margin: 0 auto;
+    margin: 1rem auto;
     
 `
 

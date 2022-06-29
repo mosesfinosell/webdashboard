@@ -6,13 +6,14 @@ import image from "../../assets/food.png"
 const data = {
   img:image,
   product:"Ofada Rice and Sauce",
-  price:"2,700.00"
+  price:"2,700.00",
+  link:"/store/item"
 }
 const productList = () => {
   const products = new Array(20).fill(data);
   return (
     <Products>
-      {products.map((product)=><Item item={product}  />)}
+      {products.map((product, i)=><Item key={i} item={product}  />)}
     </Products>
   )
 }

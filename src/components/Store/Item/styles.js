@@ -11,6 +11,7 @@ export const Card = styled.div`
 
     @media only screen and (min-width: 768px){
         width: ${197 *0.063}rem;
+        margin-bottom: ${30 * 0.063}rem;
     }
 `
 
@@ -18,7 +19,7 @@ export const Img = styled.img`
     width: 100%;
     height: ${138 * 0.063}rem;
     border-radius: ${smallBorderRadius};
-    object-fit: conver;
+    object-fit: cover;
     margin-bottom: ${0.063 * 13}rem;
 
 `
