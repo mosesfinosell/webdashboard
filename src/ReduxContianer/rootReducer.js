@@ -27,6 +27,7 @@ const rootReducer = combineReducers({
   personalReducer: PersonalReducer,
   businessReducer: BusinessReducer,
   businessSignup: BusinessSignupReducer,
+  
   // personalSignUp: personalSignUpReducer,
   // personalOtp: personalOtpRedcuer,
   // personalVerifyOtp: personalVerifyOtpRedcuer,

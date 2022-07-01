@@ -32,7 +32,9 @@ const ProductList = () => {
       {!isLoading && !isError ?
       data.products.map((product, i)=><Item key={i} item={product}  />)
     :
+      <SpinnerContainer>
         <Spinner />
+      </SpinnerContainer>
     }
     </Products>
   )
@@ -45,6 +47,7 @@ const Products = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 1rem;
+  min-height: 80vh;
   /* display: grid;
   grid-template: auto /1fr 1fr;
   gap: 0.8rem;
@@ -57,4 +60,10 @@ const Products = styled.div`
   @media only screen and (min-width: 768px){
     grid-template: auto / 1fr 1fr 1fr 1fr 1fr 1fr;
   } */
+`
+const SpinnerContainer = styled.div`
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
