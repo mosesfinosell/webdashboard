@@ -1,20 +1,54 @@
 import axios from "axios"
+import toast from "react-hot-toast"
 
 const finosellClient = axios.create({
     baseURL: process.env.REACT_APP_FINOSELL_BASE_URI
 })
 
 export const handleError = (error)=>{
+    console.log("Error", error)
+    if(typeof error === "string"){
+        toast.error(error)
+    }else{
+        toast.error("An error ocurred")
+    }
+    // } else if ("data" in error) {
+    //     toast.error()
+    // }
+}
 
+export class Blog {
+    async blogPage () {
+        const data = await finosellClient.get("/blog")
+        console.log("Blog page", data)
+        //alert("data loaded 1")
+        return data.data
+    }
 }
 
 export class Store {
 
-    async getStoreInfo () {
-        const data = await finosellClient.get("/seller/fetchstore?businessid=6b02cec5-cd35-4b93-8f47-3ba42a842b17");
-        console.log("store data", data)
+    async getStoreInfo (businessID) {
+        const data = await finosellClient.get(`/seller/fetchstore?businessid=${businessID}`);
+        console.log("store data", data.data)
         return data.data
     }
+
+    async products (businessID) {
+        const data = await finosellClient.get(`/products/all?businessid=${businessID}&page=1`)
+        console.log("Products", data.data);
+        return data.data
+    }
+
+    async product (productID) {
+        const data = await finosellClient.get(`/`)
+    }
+}
+
+export const getProducts = async ()=>{
+    const data = await finosellClient.get("/products/all?businessid=0d6573f2-e3e1-4342-9200-b144ed476b83&page=1")
+    console.log("Products", data.data);
+    return data.data
 }
 
 // axios

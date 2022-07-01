@@ -77,14 +77,14 @@ function App() {
         <Route path="/" element={<Website />}>
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
-          <Route path="/individual" element={<Individual />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:id" element={<BlogPost />} />
-          <Route path="/faqs" element={<FAQ />} />
-          <Route path="/coming-soon" element={<ComingSoon />} />
-          <Route path="/business-home" element={<Business />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/pricing" element={<Pricing />} />
+          <Route path="individual" element={<Individual />} />
+          <Route path="blog" element={<Blog />} />
+          <Route path="blog/:id" element={<BlogPost />} />
+          <Route path="faqs" element={<FAQ />} />
+          <Route path="coming-soon" element={<ComingSoon />} />
+          <Route path="business-home" element={<Business />} />
+          <Route path="terms" element={<Terms />} />
+          <Route path="pricing" element={<Pricing />} />
         </Route>
         <Route path="/" element={<AuthContainer />}>
           <Route path="account" element={<AccountBox />} />
@@ -155,16 +155,18 @@ function App() {
           path="/business/payment"
           element={CreateTransaction}
         />
-        <Route path="/store" element={<StoreContainer />}>
+        <Route path="/store/:businessID" element={<StoreContainer />}>
           <Route index element={<Store />} />
-          <Route path="item" element={<StoreItem />} />
+          <Route path="product/:productID" element={<StoreItem />} />
         </Route>
 
         <Route exact path="/choose-payment" element={<PaymentPage />} />
       </Routes>
       </ScrollToTop>
     </Router>
-    <Toaster />
+    <Toaster
+      position="bottom-right"
+    />
     </>
   );
 }

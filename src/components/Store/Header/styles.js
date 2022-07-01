@@ -59,6 +59,7 @@ export const Logo = styled.div`
         font-weight: 700;
         font-size: ${21 * 0.063}rem;
         line-height: ${21 * 0.063}rem;
+        text-transform: capitalize;
     }
     .info__location{
         font-size: ${10 * 0.063}rem;

@@ -4,7 +4,9 @@ import logo from "../../../assets/storelinkLogo.png"
 import CartLogo from "../../SVG/CartLogo"
 
 
-const Header = ({setCart}) => {
+const Header = ({setCart, data}) => {
+  console.log("Store", data.details)
+  const {name, address, imageurl} = data.details
   const handleCart = () => {
     setCart(true)
   }
@@ -12,10 +14,10 @@ const Header = ({setCart}) => {
     <Head>
       <Top>
         <Logo>
-          <img src={logo} alt="logo" />
+          <img src={`${process.env.REACT_APP_IMG_URI}${imageurl}`} alt="logo" />
           <div className="info">
-            <h3 className="info__name">Chef Food House</h3>
-            <p className="info__location">Location: Iwo Road</p>
+            <h3 className="info__name">{name}</h3>
+            <p className="info__location">Location: {address}</p>
           </div>
         </Logo>
         <CartLogo onClick={()=>handleCart()} />

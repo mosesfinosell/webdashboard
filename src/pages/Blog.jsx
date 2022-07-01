@@ -28,6 +28,7 @@ import purse from "../assets/purse.png"
 import whiteBoard from "../assets/whiteboard.png"
 import grayShirt from "../assets/gray-shirt.png"
 
+import {Blog, handleError} from "../utils/API"
 
 
 const blogs = [
@@ -49,24 +50,15 @@ const blogs = [
 ]
 
 
-const Blog = () => {
-   
-    const {isLoading, isError, error, data} = useQuery('blogPosts', async ()=>{
-        const data = await axios.get(`${process.env.REACT_APP_FINOSELL_BASE_URI}/blog`)
-            console.log(data.data)
-            //alert("data loaded 1")
-            return data.data
-        
-    })
-    
-console.log(data)
+const BlogPage = () => {
 
-if(isError){
-    console.log(error)
-    return(<div>
-            <p>Error occured while fetching blog posts</p>
-        </div>)
-}
+    const finosellBlog = new Blog();
+    const {isLoading, isError, error, data} = useQuery('blogPage', finosellBlog.blogPage)
+    
+
+    if(isError){
+        handleError(error)
+    }
 
   return (
     <>
@@ -147,7 +139,7 @@ if(isError){
   )
 }
 
-export default Blog
+export default BlogPage
 
 const CarouselSection = styled(PrimarySection)`
     display: flex;
