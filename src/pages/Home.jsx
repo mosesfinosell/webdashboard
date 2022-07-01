@@ -35,12 +35,11 @@ import styled from "styled-components"
 import {
   PrimaryTitle, 
   PrimaryButton, 
-  PrimaryParagraph, 
-  AppContainer, 
+  PrimaryParagraph,  
   PrimarySection, 
   borderRadius,
   marginMobile,
-  
+  smallBorderRadius
 } from '../Styles'
 
 import ArrowUpRight from "../components/SVG/ArrowUpRight"
@@ -569,7 +568,7 @@ const CollectEmail = styled(PrimarySection)`
     height: ${60 * 0.063}rem;
   }
   input{
-    ${borderRadius};
+    border-radius: ${smallBorderRadius};
     width: 100%;
     height: 100%;
     padding: ${23 * 0.063}rem ${28 * 0.063}rem;
