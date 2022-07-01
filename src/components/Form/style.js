@@ -27,7 +27,7 @@ export const FormTitleContainer = styled.div`
 `
 
 export const Container = styled.div`
-    width: ${649 * 0.063}rem;
+    width: ${prop=>typeof prop.width === 'number' ? `${prop.width * 0.063}rem` : prop.width};
     margin: 0 auto ${0.063 * 20}rem;
     transition: all 3s ease;
 

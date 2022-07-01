@@ -51,8 +51,8 @@ const blogs = [
 
 const Blog = () => {
    
-    const {isLoading, error, data} = useQuery('blodPosts', async ()=>{
-        const data = await axios.get(`${process.env.REACT_APP_FINOSELL_BASE_URI}/blog`)
+    const {isLoading, isError, error, data} = useQuery('blogPosts', async ()=>{
+        const data = await axios.get(`${process.env.REACT_APP_FINOSELL_BASE_URI}blog`)
             console.log(data.data)
             //alert("data loaded 1")
             return data.data
@@ -60,6 +60,11 @@ const Blog = () => {
     })
     
 console.log(data)
+
+if(isError){
+    console.log(error)
+    return(<div>Error occured</div>)
+}
   return (
     <>
     {!isLoading ? <>

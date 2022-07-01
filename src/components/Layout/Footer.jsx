@@ -61,6 +61,9 @@ const Footer = () => {
               <Text className="column-title">Products</Text>
               <Text className="abt">Escrow</Text>
               <Text className="abt">Handles</Text>
+              <Link to="/store">
+                <p className="abt">store</p>
+              </Link>
           
           </div>
 

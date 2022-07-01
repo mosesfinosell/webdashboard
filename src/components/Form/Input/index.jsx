@@ -1,19 +1,20 @@
 import React from 'react'
 import {FieldContainer, Field, Label, InputLeft, Container} from "../style"
 
-const Index = ({formik, type, Left, label, placeholder}) => {
-  return (<Container>
+const Index = ({formik, type, id, Left, label, placeholder, width=649}) => {
+  //id must be the same as the formik key used for validation
+  return (<Container width={width}>
             <Label htmlFor={type}>{label}</Label>
             <FieldContainer >
                 
                 <Field
                     type={type}
                     placeholder={placeholder}
-                    name={type}
-                    id={type}
+                    name={id}
+                    id={id}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    value={formik.values[type]}
+                    value={formik.values[id]}
                 />
                 {Left ?
                   <InputLeft>
@@ -24,7 +25,7 @@ const Index = ({formik, type, Left, label, placeholder}) => {
                 }
                 
             </FieldContainer>
-            {formik.touched[type] && formik.errors[type] ? <p className="error-message">{formik.errors[type]}</p> : null}
+            {formik.touched[id] && formik.errors[id] ? <p className="error-message">{formik.errors[id]}</p> : null}
           </Container>
   )
 }

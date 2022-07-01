@@ -109,7 +109,7 @@ function App() {
           path="/personal-dashboard"
           element={<PrivateRoute element={HomeDashboard}/>}
         />
-        <Route exact path="/choose-payment" element={<PrivateRoute element={PaymentPage}/>} />
+        
         <Route path="/pay-with-card" element={<PrivateRoute element={PayWithCard}/>} />
         <Route path="/pay-with-ussd" element={<PrivateRoute element={PayWithUssd}/> } />
         <Route
@@ -159,6 +159,8 @@ function App() {
           <Route index element={<Store />} />
           <Route path="item" element={<StoreItem />} />
         </Route>
+
+        <Route exact path="/choose-payment" element={<PaymentPage />} />
       </Routes>
       </ScrollToTop>
     </Router>

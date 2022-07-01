@@ -158,4 +158,14 @@ export const ItemDetails = styled.div`
 
 export const Form = styled.form`
     width: 100%;
+    
+
+    .scroll{
+        height: 60vh;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        padding-right: 0.3rem;
+        
+       
+    }
 `
