@@ -10,8 +10,11 @@ const Items = ({setCheckOut}) => {
                 .filter((business)=>business.businessID === businessID)
     
     const cartItems = cart.map((item)=>item.item)
-    console.log("cart", cart, cartItems)
-
+    const totalItems = cartItems.reduce((acc, item)=>{
+        return acc + (item.amount * parseFloat(item.price))
+    }, 0)
+    console.log("cart", cartItems, totalItems)
+    const delivery = 500
     
     const data = {
         name:"Ofada Rice and Sauce",
@@ -26,15 +29,15 @@ const Items = ({setCheckOut}) => {
         <BreakDown>
             <p>
                 <span>Items</span>
-                <span>₦7200.00</span>
+                <span>₦{totalItems.toFixed(2)}</span>
             </p>
             <p>
                 <span>Delivery</span>
-                <span>₦500.00</span>
+                <span>₦{delivery.toFixed(2)}</span>
             </p>
             <p className="total">
                 <span>Total</span>
-                <span>₦7700.00</span>
+                <span>₦{(totalItems + delivery).toFixed(2)}</span>
             </p>
         </BreakDown>
         <Button type="button" onClick={()=>setCheckOut(true)}>Finish</Button>
