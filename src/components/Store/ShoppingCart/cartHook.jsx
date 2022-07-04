@@ -11,10 +11,15 @@ const useCart = (productID) => {
     
     const count = product.item.amount
     const setCount = (n) =>{
-        const newStore = cart.map((product)=>product.item.productID === productID ? {...product, item:{...product.item, amount:n}} : product)
-        console.log("New store", newStore)
-
-        updateCart(dispatch, newStore)
+        if(n < 1){
+            const newStore = cart.filter((product)=>product.item.productID !== productID)
+            updateCart(dispatch, newStore)
+        }else{
+            const newStore = cart.map((product)=>product.item.productID === productID ? {...product, item:{...product.item, amount:n}} : product)
+            updateCart(dispatch, newStore)
+        }
+        
+        
     }   
     return [count, setCount]
 }
