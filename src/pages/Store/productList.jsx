@@ -29,12 +29,12 @@ const ProductList = () => {
   
   return (
     <Products>
-      {!isLoading && !isError ?
-      data.products.map((product, i)=><Item key={i} item={product}  />)
-    :
+      {/* {!isLoading && !isError ? */}
+      {products.map((product, i) => <Item key={i} item={product}  />)}
+    {/* :
       <SpinnerContainer>
         <Spinner />
-      </SpinnerContainer>
+      </SpinnerContainer> */
     }
     </Products>
   )

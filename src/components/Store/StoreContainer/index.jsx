@@ -22,7 +22,13 @@ const StoreLinkContainer = () => {
 
   return (
     <>
-    {!isLoading && !isError ?
+    <Header setCart={setCart} />
+      <Container>
+        <Outlet />
+        <ShoppingCart visible={cart} setVisible={setCart} />
+      </Container>
+    <Footer />
+    {/* {!isLoading && !isError ?
     <>
       <Header setCart={setCart} data={data} />
       <Container>
@@ -35,7 +41,7 @@ const StoreLinkContainer = () => {
     <SpinnerContainer>
       <Spinner />
     </SpinnerContainer>
-    }
+    } */}
     </>
   )
 }

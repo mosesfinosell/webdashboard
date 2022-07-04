@@ -109,6 +109,7 @@ export const Button = styled.button`
     background: #D6AA1B;
     color: #fff;
     margin-bottom: ${15 * 0.063}rem;
+    
 
     &.color{
         background: #FDF9ED;
