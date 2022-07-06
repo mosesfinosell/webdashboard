@@ -14,7 +14,7 @@ function PaymentPage() {
   const checkout = shoppingCart.checkout
   const total = shoppingCart.cart.filter((item)=>item.businessID === checkout.id)
                 .reduce((acc, i)=>{
-                    return acc + (i.item.price * i.item.amount)
+                    return acc + (i.price * i.amount)
                 }, 0)
   console.log("Checkout", checkout, total)
   return (
@@ -29,7 +29,7 @@ function PaymentPage() {
           <div className="payment-divider">
             <div className="payment-divider-left">
               <Text className="payment-name">Name</Text>
-              <Text className="payment-amt">{checkout.storeName}</Text>
+              <Text className="payment-amt">{checkout.storeName.trim()}</Text>
             </div>
             <div className="payment-divider-right">
               <Text className="payment-name">Amount</Text>

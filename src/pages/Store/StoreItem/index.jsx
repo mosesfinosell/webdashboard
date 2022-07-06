@@ -37,12 +37,10 @@ const StoreItem = () => {
       }else{
         const item = {
           businessID,
-          item:{
-            title: data.title,
-            amount: counter[0],
-            price: parseFloat(data.price),
-            productID,
-          }
+          title: data.title,
+          amount: counter[0],
+          price: parseFloat(data.price),
+          productID,
         } 
         addToCart(dispatch, item)
         setAdd(true)

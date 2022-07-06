@@ -9,8 +9,8 @@ const Items = ({setCheckOut}) => {
     const cart = useSelector((store)=>store.shoppingCart.cart)
                 .filter((business)=>business.businessID === businessID)
     
-    const cartItems = cart.map((item)=>item.item)
-    const totalItems = cartItems.reduce((acc, item)=>{
+    
+    const totalItems = cart.reduce((acc, item)=>{
         return acc + (item.amount * parseFloat(item.price))
     }, 0)
    
@@ -23,7 +23,7 @@ const Items = ({setCheckOut}) => {
     <>
         <Path>cart</Path>
         <CartItems>
-            {cartItems.map((data, i)=><CartItem key={i} item={data} />)}
+            {cart.map((data, i)=><CartItem key={i} item={data} />)}
         </CartItems>
         <BreakDown>
             

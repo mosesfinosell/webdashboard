@@ -7,21 +7,21 @@ const useCart = (productID) => {
     const {businessID} = useParams();
     const dispatch = useDispatch();
     const cart = useSelector((state=>state.shoppingCart.cart))
-    const product = cart.find((item)=>item.item.productID === productID)
+    const product = cart.find((item)=>item.productID === productID)
     
-    const count = product.item.amount
+    
     const setCount = (n) =>{
         if(n < 1){
-            const newStore = cart.filter((product)=>product.item.productID !== productID)
+            const newStore = cart.filter((product)=>product.productID !== productID)
             updateCart(dispatch, newStore)
         }else{
-            const newStore = cart.map((product)=>product.item.productID === productID ? {...product, item:{...product.item, amount:n}} : product)
+            const newStore = cart.map((product)=>product.productID === productID ? {...product, amount:n} : product)
             updateCart(dispatch, newStore)
         }
         
         
     }   
-    return [count, setCount]
+    return [product.amount, setCount]
 }
 
 export default useCart
