@@ -1,7 +1,9 @@
-import {useState} from "react"
+import {useState, useEffect} from "react"
 import {useParams} from "react-router-dom"
 import {useQuery} from "react-query"
 import {Outlet} from "react-router-dom"
+import {useDispatch} from "react-redux"
+import {setStore} from "../../../ReduxContianer/shoppingCart/shoppingCartActions"
 import Header from "../Header"
 import Footer from "../Footer"
 import ShoppingCart from "../ShoppingCart"
@@ -11,24 +13,40 @@ import {Store, handleError} from "../../../utils/API"
 
 const StoreLinkContainer = () => {
   const {businessID} = useParams()
-  console.log(businessID)
+  const dispatch = useDispatch()
+  
   const [cart, setCart] = useState(false)
   const seller = new Store()
-  const {data, error, isLoading, isError} = useQuery(["store", businessID], ()=>seller.getStoreInfo(businessID))
+  const {data, error, isLoading, isData, isError} = useQuery(["store", businessID], ()=>seller.getStoreInfo(businessID))
 
-  if(error){
-    handleError(error)
-  }
+  useEffect(()=>{
+    if(error){
+      handleError(error)
+    }
+  }, [error])
+//reset checkout
+  useEffect(()=>{
+    setStore(dispatch, {
+      storeName:"",
+      id:"",
+      name:"",
+      email:"",
+      tel:"",
+      address:"",
+      note:""
+  })
+  }, [])
+  
 
   return (
     <>
-    <Header setCart={setCart} />
+    {/* <Header setCart={setCart} />
       <Container>
         <Outlet />
         <ShoppingCart visible={cart} setVisible={setCart} />
       </Container>
-    <Footer />
-    {/* {!isLoading && !isError ?
+    <Footer /> */}
+    {!isLoading && !isError ?
     <>
       <Header setCart={setCart} data={data} />
       <Container>
@@ -41,7 +59,7 @@ const StoreLinkContainer = () => {
     <SpinnerContainer>
       <Spinner />
     </SpinnerContainer>
-    } */}
+    }
     </>
   )
 }

@@ -6,7 +6,7 @@ import cartHook from "./cartHook"
 
 const Item = (prop) => {
     const {title, price, productID} = prop.item
-    const cart = useSelector((state)=>state.shoppingCart)
+    const cart = useSelector((state)=>state.shoppingCart.cart)
     const counter = cartHook(productID)
     
   return (

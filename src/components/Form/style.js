@@ -41,10 +41,12 @@ export const Container = styled.div`
 
 export const FieldContainer = styled.div`
     width: 100%;
-    height: ${90 * 0.063}rem;
+    height: ${70 * 0.063}rem;
     position: relative;
     
-    
+    @media only screen and (min-width: 768px){
+        height: ${90 * 0.063}rem;
+    }
 `
 
 export const Field = styled.input`
@@ -53,7 +55,7 @@ export const Field = styled.input`
     height: 100%;
     border: solid ${0.063 * 1}rem #D9D9D9;
     background: #FAFAFA;
-    padding: ${0.063 * 34}rem ${0.063 * 74}rem;
+    padding: ${0.063 * 34}rem ${0.063 * 34}rem ${0.063 * 34}rem ${0.063 * 54}rem;
     font-size: ${0.063 * 18}rem;
     line-height: ${0.063 * 22}rem;
         &:focus{
@@ -65,6 +67,10 @@ export const Field = styled.input`
         & + div{
             color: #D6AA1B;
         }
+    }
+
+    @media only screen and (min-width: 768px){
+        padding: ${0.063 * 34}rem ${0.063 * 34}rem ${0.063 * 34}rem ${0.063 * 74}rem;
     }
 `
 

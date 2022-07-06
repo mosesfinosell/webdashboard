@@ -1,6 +1,5 @@
 import {useState} from "react"
 import {FaTimes} from "react-icons/fa"
-import {useSelector} from "react-redux"
 import CheckOut from "./CheckOut"
 import Items from "./Items"
 import {CartContainer, Cart } from "./styles"
@@ -8,7 +7,6 @@ import {CartContainer, Cart } from "./styles"
 
 const Index = ({visible, setVisible}) => {
     const [checkOut, setCheckOut] = useState(false)
-    const store = useSelector((state)=>state.shoppingCart)
     
     const handleVisibility = (e)=>{
       e.stopPropagation()

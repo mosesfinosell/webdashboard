@@ -1,4 +1,4 @@
-import {useState} from "react"
+import {useState, useEffect} from "react"
 import {useParams, useNavigate} from "react-router-dom"
 import {useQuery} from "react-query"
 import {useSelector, useDispatch} from "react-redux"
@@ -6,6 +6,8 @@ import {Store, handleError} from "../../../utils/API"
 import { addToCart } from "../../../ReduxContianer/shoppingCart/shoppingCartActions"
 import {Path, Image, Container, Content, Button} from "./styles"
 import Quantity from "../../../components/Quantity"
+import Spinner from "../../../components/Spinner"
+import {SpinnerContainer} from "../../../components/Spinner/style"
 
 import image from "../../../assets/food.png"
 import toast from "react-hot-toast"
@@ -15,27 +17,30 @@ const StoreItem = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const cart = useSelector((store)=>store.shoppingCart)
+  const cart = useSelector((store)=>store.shoppingCart.cart)
   const {businessID, productID} = useParams()
-  const {isLoading, isError, data, error} = useQuery("product", ()=>product.getProduct)
+  const {isLoading, isError, data, error} = useQuery("product", ()=>product.getProduct(productID))
   const [add, setAdd] = useState(false)
   const counter = useState(0)
 
+  useEffect(()=>{
+    console.log("Single product", data)
+  }, [error, data])
 
   const handleAddToCart = () =>{
     const storeCart = cart.filter((store)=> store.businessID === businessID)
-
+    
     if(counter[0] > 0){
       
-      if(storeCart && storeCart.find((item)=>item.productID)){
+      if(storeCart && storeCart.find((item)=>item.item.productID)){
         toast.error("Item already added to cart.")
       }else{
         const item = {
           businessID,
           item:{
-            title: "Ofada rice and sauce",
+            title: data.title,
             amount: counter[0],
-            price: 2500,
+            price: parseFloat(data.price),
             productID,
           }
         } 
@@ -50,16 +55,22 @@ const StoreItem = () => {
   }
   return (
     <>
-      <Path>Home / Ofada Rice and Sauce</Path>
+    {isLoading || isError ?
+      <SpinnerContainer>
+        <Spinner />
+      </SpinnerContainer>
+    :
+    <>
+      <Path>Home / {data.title}</Path>
       <Container>
-        <Image src={image} alt="Ofada rice and sauce" />
+        <Image src={`${process.env.REACT_APP_IMG_URI}${data.imageurl}`} alt={data.title} />
         <Content>
-          <h1 className="name">Ofada rice and sauce</h1>
-          <h3 className="price">₦2,700.00</h3>
+          <h1 className="name">{data.title}</h1>
+          <h3 className="price">₦{parseInt(data.price).toFixed(2)}</h3>
           <h3 className="quantity">Quantity</h3>
           <Quantity counter={counter} />
           <p className="desc">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in molestie enim. Sed eu urna tortor. Suspendisse vel arcu vel massa tempor interdum. Nulla id dolor volutpat, viverra purus non, egestas ante.
+          {data.description}
           </p>
           {!add ? 
             <Button onClick={()=>handleAddToCart()}>Add to Cart</Button>
@@ -72,6 +83,8 @@ const StoreItem = () => {
         </Content>
 
       </Container>
+    </>
+    }
     </>
   )
 }

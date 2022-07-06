@@ -165,7 +165,11 @@ export const Form = styled.form`
         overflow-y: scroll;
         overflow-x: hidden;
         padding-right: 0.3rem;
-        
-       
+        margin-bottom: 3rem;
+         
+    }
+
+    @media only screen and (min-width: 768px){
+
     }
 `

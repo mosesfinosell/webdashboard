@@ -30,7 +30,7 @@ export class Store {
 
     async getStoreInfo (businessID) {
         const data = await finosellClient.get(`/seller/fetchstore?businessid=${businessID}`);
-        console.log("store data", data.data)
+        
         return data.data
     }
 
@@ -40,8 +40,10 @@ export class Store {
         return data.data
     }
 
-    async product (productID) {
-        const data = await finosellClient.get(`/`)
+    async getProduct (productID) {
+        const data = await finosellClient.get(`/products/${productID}`)
+
+        return data.data.product
     }
 }
 

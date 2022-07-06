@@ -1,11 +1,21 @@
-import {useNavigate} from 'react-router-dom'
+import {useNavigate, useParams} from 'react-router-dom'
+import {useQuery} from "react-query"
+import {useDispatch} from "react-redux"
 import {useFormik} from "formik"
 import * as yup from 'yup'
 import Field from "../../Form/Input"
 import {Path, Button, Form} from "./styles"
+import {Store} from "../../../utils/API"
+import {setStore} from "../../../ReduxContianer/shoppingCart/shoppingCartActions"
+import toast from "react-hot-toast"
 
 const CheckOut = () => {
+  const store = new Store()
+  const dispatch = useDispatch()
   const navigate = useNavigate()
+  const {businessID} = useParams()
+
+  const {data, error, isData, isError, isLoading} = useQuery(["store", businessID], ()=>store.getStoreInfo(businessID))
 
   const validationSchema = yup.object().shape({
     name: yup.string().required("Please enter your name"),
@@ -23,8 +33,18 @@ const CheckOut = () => {
       note:""
     }
     const onSubmit = (values, formik) => {
-      console.log(values, formik)
-      navigate("/choose-payment")
+     
+      if(data){
+        console.log("store data", data)
+        const storeData = {
+          storeName: data.details.name,
+          id: data.details.businessid,
+          ...values
+        }
+        setStore(dispatch, storeData)
+        return navigate("/choose-payment")
+      }
+      toast.error("An error ocurred while placing your order. Try again later.")
     }
     const formik = useFormik({
       initialValues,

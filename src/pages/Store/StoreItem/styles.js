@@ -51,6 +51,7 @@ export const Content = styled.div`
         font-size: ${21 * 0.063}rem;
         line-height: ${26 * 0.063}rem;
         margin-bottom: ${7 * 0.063}rem;
+        text-transform: capitalize;
     }
     .price{
         font-size: ${14 * 0.063}rem;

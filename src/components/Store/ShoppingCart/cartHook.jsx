@@ -6,7 +6,7 @@ import {updateCart} from "../../../ReduxContianer/shoppingCart/shoppingCartActio
 const useCart = (productID) => {
     const {businessID} = useParams();
     const dispatch = useDispatch();
-    const cart = useSelector((state=>state.shoppingCart))
+    const cart = useSelector((state=>state.shoppingCart.cart))
     const product = cart.find((item)=>item.item.productID === productID)
     
     const count = product.item.amount

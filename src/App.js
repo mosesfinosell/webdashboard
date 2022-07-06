@@ -39,6 +39,7 @@ import PayWithUssd from "./pages/Dashboard/DashboardItems/PayWithUssd";
 import UssdConfirmation from "./pages/Dashboard/DashboardItems/UssdConfirmation";
 import PayWithTransfer from "./pages/Dashboard/DashboardItems/PayWithTransfer";
 import BankPayment from "./pages/Dashboard/DashboardItems/BankPayment";
+import Payment from "./pages/Payment"
 
 import Store from "./pages/Store/productList"
 import StoreItem from "./pages/Store/StoreItem"
@@ -160,7 +161,7 @@ function App() {
           <Route path="product/:productID" element={<StoreItem />} />
         </Route>
 
-        <Route exact path="/choose-payment" element={<PaymentPage />} />
+        <Route exact path="/choose-payment" element={<Payment />} />
       </Routes>
       </ScrollToTop>
     </Router>

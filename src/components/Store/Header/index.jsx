@@ -5,8 +5,8 @@ import CartLogo from "../../SVG/CartLogo"
 
 
 const Header = ({setCart, data}) => {
-  // console.log("Store", data.details)
-  // const {name, address, imageurl} = data.details
+  
+  const {name, address, imageurl, instagram, registrar} = data.details
   const handleCart = () => {
     setCart(true)
   }
@@ -14,21 +14,21 @@ const Header = ({setCart, data}) => {
     <Head>
       <Top>
         <Logo>
-          {/* <img src={`${process.env.REACT_APP_IMG_URI}${imageurl}`} alt="logo" /> */}
-          <img src={logo} alt="logo" />
+          <img src={`${process.env.REACT_APP_IMG_URI}${imageurl}`} alt="logo" />
+          
           <div className="info">
-            <h3 className="info__name">Chef Food House</h3>
-            <p className="info__location">Location: Iwo Road</p>
+            <h3 className="info__name">{name}</h3>
+            <p className="info__location">Location: {address}</p>
           </div>
         </Logo>
         <CartLogo onClick={()=>handleCart()} />
       </Top>
       <FlexContainer>
         <Socials>
-          <Social>
+          <Social href={instagram} target="_blank" rel="noreferrer">
             <FaInstagram />
           </Social>
-          <Social>
+          <Social href={`tel:${registrar}`}>
             <FaPhone />
           </Social>
           <Social>

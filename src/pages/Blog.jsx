@@ -55,10 +55,13 @@ const BlogPage = () => {
     const finosellBlog = new Blog();
     const {isLoading, isError, error, data} = useQuery('blogPage', finosellBlog.blogPage)
     
+    useEffect(()=>{
+        if(error){
+            handleError(error)
+        }
+    }, [error])
 
-    if(isError){
-        handleError(error)
-    }
+    
 
   return (
     <>
