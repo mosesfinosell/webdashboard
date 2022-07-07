@@ -19,7 +19,7 @@ const SearchProducts = () => {
   if(error){
     return(
       <Error>
-        <p>Error ocuured while fetching your search.</p>
+        <p>An error ocurred while fetching your search results.</p>
       </Error>
     )
   }
