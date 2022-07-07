@@ -9,7 +9,7 @@ const Index = ({item}) => {
       <Card>
           <Img src={`${process.env.REACT_APP_IMG_URI}${imageurl}`} />
           <Product>{title}</Product>
-          <Price>₦{price}</Price>
+          <Price>₦{parseInt(price).toLocaleString()}</Price>
       </Card>
     </Link>
   )

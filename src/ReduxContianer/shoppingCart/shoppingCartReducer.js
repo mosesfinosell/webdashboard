@@ -9,7 +9,11 @@ const initialState = {
         address:"",
         note:""
     },
-    cart:[]
+    cart:[],
+    cartUI:{
+        visible:false,
+        checkout:false,
+    }
 }
 
 const shoppingCartReducer = (state=initialState, action) => {

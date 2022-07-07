@@ -15,12 +15,20 @@ const dummy = {
 }
 const ProductList = () => {
   const {businessID} = useParams()
-  const getProducts = new Store()
-  const {isLoading, isError, data, error} = useInfiniteQuery("products", ()=>getProducts.products(businessID))
-  const products = new Array(20).fill(dummy);
+  const getProducts = new Store(businessID)
+  const {isLoading, isError, data, error, hasNextPage, fetchNextPage} = useInfiniteQuery("products", async ({pageParam = 0})=>getProducts.products(pageParam), {
+    getNextPageParam:(lastPage, pages)=>{
+      
+      if(lastPage.page < lastPage.maxPage){
+        return lastPage.page + 1
+      }
+    }
+  })
+  const productArray = data ? data.pages.map((page)=>page.products) : []
+  const products = [].concat.apply([], productArray)
+  console.log("Has next page", hasNextPage, products)
 
-
-  console.log("products", data)
+  
   useEffect(()=>{
     const options  = {
       root:null,
@@ -30,7 +38,8 @@ const ProductList = () => {
 
     const callBack = (entry, observer) => {
      if(entry[0].isIntersecting){
-      console.log(observer)
+      console.log("In view")
+      fetchNextPage()
      }
       
     }
@@ -43,13 +52,13 @@ const ProductList = () => {
       return ()=>observer.unobserve(target)
     }
     
-  }, [])
+  }, [data])
 
   useEffect(()=>{
     if(error){
       handleError(error)
     }
-  }, [error])
+  }, [error, hasNextPage])
   
   if(isError){
     
@@ -61,21 +70,25 @@ const ProductList = () => {
   }
   
   return (
-    <Products>
+    <>
       {!isLoading && !isError ? 
       <>
-      {data.pages[0].products.map((product, i) => <Item key={i} item={product}  />)}
-      <LoadMore id="more">
-        <Spinner size={30} border={7} />
-      </LoadMore>
+      <Products>
+      {products.map((product, i) => <Item key={i} item={product}  />)}
+      </Products>
+      {hasNextPage &&
+        <LoadMore id="more">
+          <Spinner size={30} border={7} />
+        </LoadMore>
+      }
       </>
-    :
+    : 
       <SpinnerContainer>
         <Spinner />
       </SpinnerContainer>
     }
-
-    </Products>
+  </>
+    
   )
 }
 
@@ -99,7 +112,7 @@ const Products = styled.div`
 
 const LoadMore = styled.div`
   width: 100%;
-  height: 5rem;
+  height: 2.2rem;
   display: flex;
   align-items: center;
   justify-content: center;  

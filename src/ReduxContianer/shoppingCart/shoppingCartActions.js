@@ -1,4 +1,4 @@
-import {ADD_TO_CART, UPDATE_CART, SET_CHECKOUT} from "../constants/shoppingCartActions"
+import {ADD_TO_CART, UPDATE_CART, SET_CHECKOUT, SET_CARTUI, SET_CHECKOUT_FORM} from "../constants/shoppingCartActions"
 export const addToCart = (dispatch, data) => {
 
     return dispatch({type:ADD_TO_CART, payload:data})

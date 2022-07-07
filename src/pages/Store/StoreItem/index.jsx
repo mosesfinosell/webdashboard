@@ -12,6 +12,7 @@ import {SpinnerContainer} from "../../../components/Spinner/style"
 import image from "../../../assets/food.png"
 import toast from "react-hot-toast"
 
+
 const StoreItem = () => {
   const product = new Store()
   const dispatch = useDispatch()

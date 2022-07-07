@@ -13,6 +13,12 @@ const Items = ({setCheckOut}) => {
     const totalItems = cart.reduce((acc, item)=>{
         return acc + (item.amount * parseFloat(item.price))
     }, 0)
+
+    const handleFinish = () =>{
+        if(cart.length > 0){
+            setCheckOut(true)
+        }
+    }
    
     
     const data = {
@@ -32,7 +38,7 @@ const Items = ({setCheckOut}) => {
                 <span>₦{totalItems.toFixed(2)}</span>
             </p>
         </BreakDown>
-        <Button type="button" onClick={()=>setCheckOut(true)}>Finish</Button>
+        <Button type="button" onClick={()=>handleFinish()}>Finish</Button>
     </>
   )
 }

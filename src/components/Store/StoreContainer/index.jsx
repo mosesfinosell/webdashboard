@@ -16,8 +16,8 @@ const StoreLinkContainer = () => {
   const dispatch = useDispatch()
   
   const [cart, setCart] = useState(false)
-  const seller = new Store()
-  const {data, error, isLoading, isData, isError} = useQuery(["store", businessID], ()=>seller.getStoreInfo(businessID))
+  const seller = new Store(businessID)
+  const {data, error, isLoading, isData, isError} = useQuery(["store", businessID], ()=>seller.getStoreInfo())
 
   useEffect(()=>{
     if(error){

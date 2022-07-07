@@ -28,14 +28,20 @@ export class Blog {
 
 export class Store {
 
-    async getStoreInfo (businessID) {
-        const data = await finosellClient.get(`/seller/fetchstore?businessid=${businessID}`);
+    constructor(businessID){
+        this.businessID = businessID
+    }
+
+    async getStoreInfo () {
         
+        const data = await finosellClient.get(`/seller/fetchstore?businessid=${this.businessID}`);
+        console.log("Store data", data)
         return data.data
     }
 
-    async products (businessID) {
-        const data = await finosellClient.get(`/products/all?businessid=${businessID}&page=1`)
+    async products (pageParam) {
+        
+        const data = await finosellClient.get(`/products/all?businessid=${this.businessID}&page=${pageParam}`)
         console.log("Products", data.data);
         return data.data
     }
