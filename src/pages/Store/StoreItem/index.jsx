@@ -33,7 +33,8 @@ const StoreItem = () => {
     
     if(counter[0] > 0){
       
-      if(storeCart && storeCart.find((item)=>item.item.productID)){
+      if(storeCart && storeCart.find((item)=>item.productID === productID)){
+        console.log(storeCart)
         toast.error("Item already added to cart.")
       }else{
         const item = {

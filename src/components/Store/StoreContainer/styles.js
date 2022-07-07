@@ -21,6 +21,21 @@ export const SpinnerContainer = styled.div`
     justify-content: center;
 `
 
+export const Error = styled.div`
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p{
+        font-weight: 700;
+        font-size: 2rem;
+        color: #8C8C8C;
+        text-align: center;
+    }
+`
+
 
 
 

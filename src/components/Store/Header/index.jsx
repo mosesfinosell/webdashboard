@@ -1,15 +1,29 @@
+import {useState, useCallback} from "react"
+import {useDispatch} from "react-redux"
 import {FaInstagram, FaPhone, FaWhatsapp, FaSearch} from "react-icons/fa"
+import {setSearch} from "../../../ReduxContianer/shoppingCart/shoppingCartActions"
 import {Head, Logo, FlexContainer, Top, Socials, Social, Search, SearchInput, Cart} from "./styles"
 import logo from "../../../assets/storelinkLogo.png"
 import CartLogo from "../../SVG/CartLogo"
+import debounce from "lodash/debounce"
+
 
 
 const Header = ({setCart, data}) => {
-  
+  const [input, setInput] = useState("")
+  const dispatch = useDispatch()
   const {name, address, imageurl, instagram, registrar} = data.details
   const handleCart = () => {
     setCart(true)
   }
+  const handleDebounce = (e)=>{
+    alert(e.target.value)
+    setSearch(dispatch, e.target.value)
+  }
+
+  let debouncer = useCallback(debounce(handleDebounce, 1200), [])
+  
+
   return (
     <Head>
       <Top>
@@ -41,8 +55,7 @@ const Header = ({setCart, data}) => {
         </Socials>
         <Search>
           <FaSearch />
-          
-          <SearchInput placeholder="What are you shopping for?" />
+          <SearchInput onChange={(e)=>{debouncer(e)}} placeholder="What are you shopping for?" />
         </Search>
       </FlexContainer>
     </Head>

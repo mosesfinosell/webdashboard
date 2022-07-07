@@ -39,6 +39,7 @@ const CheckOut = () => {
         const storeData = {
           storeName: data.details.name,
           id: data.details.businessid,
+          businessEmail: data.details.businessmail,
           ...values
         }
         setStore(dispatch, storeData)

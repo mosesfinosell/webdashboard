@@ -1,8 +1,9 @@
-import {ADD_TO_CART, UPDATE_CART, SET_CHECKOUT} from "../constants/shoppingCartActions"
+import {ADD_TO_CART, UPDATE_CART, SET_CHECKOUT, SET_SEARCH} from "../constants/shoppingCartActions"
 const initialState = {
     checkout:{
         storeName:"",
         id:"",
+        businessEmail:"",
         name:"",
         email:"",
         tel:"",
@@ -13,7 +14,8 @@ const initialState = {
     cartUI:{
         visible:false,
         checkout:false,
-    }
+    },
+    search:""
 }
 
 const shoppingCartReducer = (state=initialState, action) => {
@@ -34,6 +36,11 @@ const shoppingCartReducer = (state=initialState, action) => {
             return{
                 ...state,
                 checkout: action.payload
+            }
+        case SET_SEARCH:
+            return {
+                ...state,
+                search:action.payload
             }
         default:
             return state

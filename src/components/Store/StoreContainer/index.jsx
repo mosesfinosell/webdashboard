@@ -8,7 +8,7 @@ import Header from "../Header"
 import Footer from "../Footer"
 import ShoppingCart from "../ShoppingCart"
 import Spinner from "../../Spinner"
-import {Container, SpinnerContainer} from "./styles"
+import {Container, SpinnerContainer, Error} from "./styles"
 import {Store, handleError} from "../../../utils/API"
 
 const StoreLinkContainer = () => {
@@ -29,6 +29,7 @@ const StoreLinkContainer = () => {
     setStore(dispatch, {
       storeName:"",
       id:"",
+      businessEmail:"",
       name:"",
       email:"",
       tel:"",
@@ -36,7 +37,14 @@ const StoreLinkContainer = () => {
       note:""
   })
   }, [])
-  
+
+  if(error){
+    return (
+      <Error>
+        <p>Couldn't get store. Try again later.</p>
+      </Error>
+    )
+  }
 
   return (
     <>

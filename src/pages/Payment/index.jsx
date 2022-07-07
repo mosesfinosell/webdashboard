@@ -1,5 +1,5 @@
-import React from "react";
 import { Text, Image } from "@chakra-ui/react";
+import {FaAngleRight} from "react-icons/fa"
 import "../Dashboard/DashboardItems/payment.css";
 import card from "../../assets/card.svg";
 import transfer from "../../assets/transfer.svg";
@@ -8,7 +8,7 @@ import bank from "../../assets/bank.svg";
 import Logomark from "../../assets/Logomark.svg";
 import { useNavigate } from "react-router-dom";
 import {useSelector} from "react-redux"
-import {InfoContainer, Info, Title} from "./styles"
+import {InfoContainer, Info, Title, OptionsContainer, Option, Container, Payment} from "./styles"
 
 import PayStack from "./Paystack"
 
@@ -22,16 +22,20 @@ function PaymentPage() {
                 .reduce((acc, i)=>{
                     return acc + (i.price * i.amount)
                 }, 0)
+                console.log(total)
 
-  
+  const config ={
+    reference: (new Date()).getTime().toString(),
+    email: checkout.businessEmail,
+    amount: total * 100,
+    publicKey: process.env.REACT_APP_PAYSTACK_PUBLIC_KEY,
+  }
   return (
-    <div className="payment">
-      <div className="payment-holder">
+    <Payment>
         <div className="payment-logo">
           <Image src={Logomark} alt="logo" />
         </div>
-
-        <div className="payment-center">
+        <Container>
           <Title>Select a Payment Method</Title>
           <InfoContainer>
             <Info>
@@ -43,22 +47,25 @@ function PaymentPage() {
               <span className="info-content">₦{total.toLocaleString()}</span>
             </Info>
           </InfoContainer>
-          <div className="payment-base">
-            <PayStack>
-            <div
-              className="paid-div"
+          <OptionsContainer>
+            <PayStack config={config}>
+            <Option
             >
-              <Image src={card} alt="card" />
-              <Text className="paid">Pay with Card</Text>
-            </div>
+              <div className="left">
+                <Image src={card} alt="card" />
+                <Text className="paid">Pay with Card</Text>
+              </div>
+              <FaAngleRight />
+            </Option>
             </PayStack>
-            <div
-              className="paid-div"
-              onClick={() => history("/pay-with-transfer")}
+            <Option
             >
-              <Image src={transfer} alt="transfer" />
-              <Text className="paid">Pay with Bank Transfer</Text>
-            </div>
+              <div className="left">
+                <Image src={transfer} alt="transfer" />
+                <Text className="paid">Pay with Bank Transfer</Text>
+              </div>
+              <FaAngleRight />
+            </Option>
             {/* <div
               className="paid-div"
               onClick={() => history("/pay-with-ussd")}
@@ -70,10 +77,9 @@ function PaymentPage() {
               <Image src={bank} alt="bank" />
               <Text className="paid">Pay with Bank</Text>
             </div> */}
-          </div>
-        </div>
-      </div>
-    </div>
+          </OptionsContainer>
+        </Container>
+    </Payment>
   );
 }
 
