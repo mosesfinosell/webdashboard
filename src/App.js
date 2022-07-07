@@ -42,6 +42,7 @@ import BankPayment from "./pages/Dashboard/DashboardItems/BankPayment";
 import Payment from "./pages/Payment"
 
 import Store from "./pages/Store/productList"
+import Search from "./pages/Store/SearchProducts"
 import StoreItem from "./pages/Store/StoreItem"
 
 import Home from "./pages/Home";
@@ -159,6 +160,7 @@ function App() {
         <Route path="/store/:businessID" element={<StoreContainer />}>
           <Route index element={<Store />} />
           <Route path="product/:productID" element={<StoreItem />} />
+          <Route path="search" element={<Search />} />
         </Route>
 
         <Route exact path="/choose-payment" element={<Payment />} />

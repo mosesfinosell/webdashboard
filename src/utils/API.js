@@ -51,6 +51,12 @@ export class Store {
 
         return data.data.product
     }
+
+    async search (search) {
+        const data = await finosellClient.get(`/products/search?businessid=${this.businessID}&keyword=${search}`)
+        
+        return data.data
+    }
 }
 
 export const getProducts = async ()=>{

@@ -1,18 +1,47 @@
 import React from 'react'
+import {useParams} from "react-router-dom"
+import {useQuery } from "react-query"
 import Spinner from "../../components/Spinner"
-import {Products, LoadMore} from "./styles"
+import {Products, LoadMore, Error, SpinnerContainer} from "./styles"
+import {useSelector} from "react-redux"
+import {Store} from "../../utils/API"
+import Item from "../../components/Store/Item"
 
 const SearchProducts = () => {
+  
+  const store = useSelector((state)=>state.shoppingCart)
+  const {businessID} = useParams()
+  const api = new Store(businessID)
+  const search = store.search
+  const {data, error, isData, isError, isLoading} = useQuery(["search", search], ()=>api.search(search))
+
+
+  if(error){
+    return(
+      <Error>
+        <p>Error ocuured while fetching your search.</p>
+      </Error>
+    )
+  }
+
   return (
     <>
-    <Title>Search</Title>
-    <Products>
-      
-    </Products>
-    {/* {hasNextPage &&
-    <LoadMore id="more">
-        <Spinner size={30} border={7} />
-    </LoadMore> */
+    {isLoading ? 
+      <SpinnerContainer>
+        <Spinner />
+      </SpinnerContainer>
+    :
+    <>
+      {data && data.data.length > 0 ?
+        <Products>
+          {data.data.map((item, i)=><Item key={i} item={item} />)}
+        </Products>
+        :
+        <Error>
+          <p>No product matches your search</p>
+        </Error>
+      }
+    </>
     }
     </>
   )

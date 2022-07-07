@@ -1,5 +1,6 @@
 import {useState, useCallback} from "react"
 import {useDispatch} from "react-redux"
+import {useLocation, useNavigate, matchRoutes} from "react-router-dom"
 import {FaInstagram, FaPhone, FaWhatsapp, FaSearch} from "react-icons/fa"
 import {setSearch} from "../../../ReduxContianer/shoppingCart/shoppingCartActions"
 import {Head, Logo, FlexContainer, Top, Socials, Social, Search, SearchInput, Cart} from "./styles"
@@ -11,15 +12,23 @@ import debounce from "lodash/debounce"
 
 const Header = ({setCart, data}) => {
   const [input, setInput] = useState("")
+  const paths = [{path:"/store/:id/search"}]
+  const location = useLocation()
+  const navigate = useNavigate()
   const dispatch = useDispatch()
-  const {name, address, imageurl, instagram, registrar} = data.details
+  const {name, address, imageurl, instagram, registrar, businessid} = data.details
+  let match = matchRoutes(paths, location.pathname)
+  console.log("Location", location, match)
   const handleCart = () => {
     setCart(true)
   }
   const handleDebounce = (e)=>{
-    alert(e.target.value)
+    
     setSearch(dispatch, e.target.value)
-  }
+    if(!match){
+      navigate(`/store/${businessid}/search`)
+    }
+  } 
 
   let debouncer = useCallback(debounce(handleDebounce, 1200), [])
   
