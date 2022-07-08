@@ -105,3 +105,15 @@ export const Right = styled.p`
     font-size: ${18 * 0.063}rem;
     line-height: ${18 * 0.063}rem;
 `
+export const Error = styled.div`
+    width: 100%;
+    height: 100%;
+    padding: 4rem 0;
+
+    p{
+        color: #8C8C8C;
+        text-align: center;
+        font-weight: 700;
+        font-size: 1.4rem;
+    }
+`

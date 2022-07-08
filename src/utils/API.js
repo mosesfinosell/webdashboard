@@ -35,14 +35,14 @@ export class Store {
     async getStoreInfo () {
         
         const data = await finosellClient.get(`/seller/fetchstore?businessid=${this.businessID}`);
-        console.log("Store data", data)
+        
         return data.data
     }
 
     async products (pageParam) {
         
         const data = await finosellClient.get(`/products/all?businessid=${this.businessID}&page=${pageParam}`)
-        console.log("Products", data.data);
+        
         return data.data
     }
 
@@ -55,6 +55,11 @@ export class Store {
     async search (search) {
         const data = await finosellClient.get(`/products/search?businessid=${this.businessID}&keyword=${search}`)
         
+        return data.data
+    }
+    async getBusinessSubAccount () {
+        const data = await finosellClient.get(`/fincra/subaccount?businessid=${this.businessID}`)
+        console.log("Business sub account", data.data)
         return data.data
     }
 }
