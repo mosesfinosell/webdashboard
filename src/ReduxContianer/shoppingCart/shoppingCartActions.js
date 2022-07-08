@@ -15,3 +15,7 @@ export const setStore = (dispatch, data) => {
 export const setSearch = (dispatch, data) => {
     return dispatch({type:SET_SEARCH, payload:data})
 }
+
+export const setCartUI = (dispatch, data) =>{
+    return dispatch({type:SET_CARTUI, payload:data})
+}

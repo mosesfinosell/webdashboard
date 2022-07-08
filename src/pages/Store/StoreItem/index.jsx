@@ -3,7 +3,7 @@ import {useParams, useNavigate} from "react-router-dom"
 import {useQuery} from "react-query"
 import {useSelector, useDispatch} from "react-redux"
 import {Store, handleError} from "../../../utils/API"
-import { addToCart } from "../../../ReduxContianer/shoppingCart/shoppingCartActions"
+import { addToCart, setCartUI } from "../../../ReduxContianer/shoppingCart/shoppingCartActions"
 import {Path, Image, Container, Content, Button} from "./styles"
 import Quantity from "../../../components/Quantity"
 import Spinner from "../../../components/Spinner"
@@ -18,7 +18,9 @@ const StoreItem = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const cart = useSelector((store)=>store.shoppingCart.cart)
+  const cartInfo = useSelector((store)=>store.shoppingCart)
+  const cart = cartInfo.cart
+  const cartUI = cartInfo.cartUI
   const {businessID, productID} = useParams()
   const {isLoading, isError, data, error} = useQuery("product", ()=>product.getProduct(productID))
   const [add, setAdd] = useState(false)
@@ -53,6 +55,13 @@ const StoreItem = () => {
     }
     
   }
+  const handleCheckout = () =>{
+    const data = {
+      visible: true,
+      checkout: true,
+    }
+    setCartUI(dispatch, data)
+  }
   return (
     <>
     {isLoading || isError ?
@@ -77,7 +86,7 @@ const StoreItem = () => {
             :
             <>
               <Button onClick={()=>navigate(-1)}>Continue Shopping</Button>
-              <Button className="color" onClick={()=>navigate("/choose-payment")}>Go to Check Out</Button>
+              <Button className="color" onClick={()=>handleCheckout()}>Go to Check Out</Button>
             </>
           }
         </Content>

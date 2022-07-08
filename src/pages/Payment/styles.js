@@ -1,26 +1,7 @@
 import styled from "styled-components"
 import { smallBorderRadius } from "../../Styles"
 
-export const Container = styled.div`
-    background: #ffffff;
-    border: 0.5px solid #d9d9d9;
-    box-sizing: border-box;
-    border-radius: 0px 21px 21px 21px;
-    margin: 0 ${15 * 0.063}rem;
-    @media only screen and (min-width: 768px){
-        margin: 0;
-        width: ${813 * 0.063}rem;
-    }
-`
 
-export const Payment = styled.div`
-    display: flex;
-    flex-direction: column;
-    background: #e5e5e5;
-    height: 100vh;
-    align-items: center;
-    justify-content: center;
-`
 
 export const Title = styled.h1`
     color: #273B4A;
@@ -30,6 +11,12 @@ export const Title = styled.h1`
     margin-bottom: ${40 * 0.063}rem;
     text-align: center;
     padding-top: ${90 * 0.063}rem;
+`
+
+export const Method = styled.p`
+    color: #D6AA1B;
+    font-size: ${18 * 0.063}rem;
+    line-height: ${18 * 0.063}rem;
 `
 
 export const InfoContainer = styled.div`
@@ -105,4 +92,16 @@ export const Option = styled.div`
     @media only screen and (min-width: 768px){
         padding: 0 ${75 * 0.063}rem;
     }
+`
+export const Left = styled.p`
+    color: #8C8C8C;
+    font-size: ${14 * 0.063}rem;
+    line-height: ${14 * 0.063}rem;
+
+`
+
+export const Right = styled.p`
+    color: #273B4A;
+    font-size: ${18 * 0.063}rem;
+    line-height: ${18 * 0.063}rem;
 `

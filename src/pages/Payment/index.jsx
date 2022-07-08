@@ -6,9 +6,9 @@ import transfer from "../../assets/transfer.svg";
 import ussd from "../../assets/ussd.svg";
 import bank from "../../assets/bank.svg";
 import Logomark from "../../assets/Logomark.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import {useSelector} from "react-redux"
-import {InfoContainer, Info, Title, OptionsContainer, Option, Container, Payment} from "./styles"
+import {InfoContainer, Info, Title, OptionsContainer, Option} from "./styles"
 
 import PayStack from "./Paystack"
 
@@ -31,11 +31,7 @@ function PaymentPage() {
     publicKey: process.env.REACT_APP_PAYSTACK_PUBLIC_KEY,
   }
   return (
-    <Payment>
-        <div className="payment-logo">
-          <Image src={Logomark} alt="logo" />
-        </div>
-        <Container>
+        <>
           <Title>Select a Payment Method</Title>
           <InfoContainer>
             <Info>
@@ -58,28 +54,17 @@ function PaymentPage() {
               <FaAngleRight />
             </Option>
             </PayStack>
-            <Option
-            >
-              <div className="left">
-                <Image src={transfer} alt="transfer" />
-                <Text className="paid">Pay with Bank Transfer</Text>
-              </div>
-              <FaAngleRight />
-            </Option>
-            {/* <div
-              className="paid-div"
-              onClick={() => history("/pay-with-ussd")}
-            >
-              <Image src={ussd} alt="ussd" />
-              <Text className="paid">Pay with USSD</Text>
-            </div>
-            <div className="paid-div" style={{marginBottom:"4rem"}}>
-              <Image src={bank} alt="bank" />
-              <Text className="paid">Pay with Bank</Text>
-            </div> */}
+            <Link to="bank-transfer">
+              <Option>
+                <div className="left">
+                  <Image src={transfer} alt="transfer" />
+                  <Text className="paid">Pay with Bank Transfer</Text>
+                </div>
+                <FaAngleRight />
+              </Option>
+            </Link>
           </OptionsContainer>
-        </Container>
-    </Payment>
+        </>
   );
 }
 

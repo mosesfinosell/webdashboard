@@ -1,24 +1,34 @@
-import {useState} from "react"
 import {FaTimes} from "react-icons/fa"
 import CheckOut from "./CheckOut"
 import Items from "./Items"
 import {CartContainer, Cart } from "./styles"
+import {useDispatch, useSelector} from "react-redux"
+import {setCartUI} from "../../../ReduxContianer/shoppingCart/shoppingCartActions"
 
 
-const Index = ({visible, setVisible}) => {
-    const [checkOut, setCheckOut] = useState(false)
+const Index = () => {
     
-    const handleVisibility = (e)=>{
+    const cartUI = useSelector((state)=>state.shoppingCart).cartUI
+    const visible = cartUI.visible
+    const dispatch = useDispatch()
+    
+    const stopPropagation = (e)=>{
       e.stopPropagation()
-      
+    }
+    const handleVisibility = () =>{
+      const data = {
+        visible: false,
+        checkout: false
+      }
+      setCartUI(dispatch, data)
     }
   return (
-    <CartContainer onClick={()=>setVisible(false)} visible={visible}>
-        <Cart onClick={(e)=>handleVisibility(e)}>
-            <FaTimes onClick={()=>setVisible(false)} />
+    <CartContainer onClick={()=>handleVisibility()} visible={visible}>
+        <Cart onClick={(e)=>stopPropagation(e)}>
+            <FaTimes onClick={()=>handleVisibility()} />
             <h3 className="title">Cart</h3>
-            {!checkOut ? 
-             <Items setCheckOut={setCheckOut} />
+            {!cartUI.checkout ? 
+             <Items />
              :
              <CheckOut />
             }  

@@ -1,4 +1,4 @@
-import {ADD_TO_CART, UPDATE_CART, SET_CHECKOUT, SET_SEARCH} from "../constants/shoppingCartActions"
+import {ADD_TO_CART, UPDATE_CART, SET_CHECKOUT, SET_SEARCH, SET_CARTUI} from "../constants/shoppingCartActions"
 const initialState = {
     checkout:{
         storeName:"",
@@ -41,6 +41,11 @@ const shoppingCartReducer = (state=initialState, action) => {
             return {
                 ...state,
                 search:action.payload
+            }
+        case SET_CARTUI:
+            return {
+                ...state,
+                cartUI: action.payload
             }
         default:
             return state

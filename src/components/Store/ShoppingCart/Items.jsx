@@ -1,11 +1,13 @@
 import CartItem from "./CartItem"
-import {useSelector} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import {useParams} from "react-router-dom"
+import {setCartUI} from "../../../ReduxContianer/shoppingCart/shoppingCartActions"
 import {Path, CartItems, BreakDown, Button} from "./styles"
 
 
-const Items = ({setCheckOut}) => {
+const Items = () => {
     const {businessID} = useParams()
+    const dispatch = useDispatch()
     const cart = useSelector((store)=>store.shoppingCart.cart)
                 .filter((business)=>business.businessID === businessID)
     
@@ -15,8 +17,12 @@ const Items = ({setCheckOut}) => {
     }, 0)
 
     const handleFinish = () =>{
+        const data = {
+            visible: true,
+            checkout: true
+        }
         if(cart.length > 0){
-            setCheckOut(true)
+            setCartUI(dispatch, data)
         }
     }
    

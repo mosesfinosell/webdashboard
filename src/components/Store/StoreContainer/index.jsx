@@ -1,9 +1,9 @@
-import {useState, useEffect} from "react"
+import {useEffect} from "react"
 import {useParams} from "react-router-dom"
 import {useQuery} from "react-query"
 import {Outlet} from "react-router-dom"
-import {useDispatch} from "react-redux"
-import {setStore} from "../../../ReduxContianer/shoppingCart/shoppingCartActions"
+import {useDispatch, useSelector} from "react-redux"
+import {setStore, setCartUI} from "../../../ReduxContianer/shoppingCart/shoppingCartActions"
 import Header from "../Header"
 import Footer from "../Footer"
 import ShoppingCart from "../ShoppingCart"
@@ -11,11 +11,12 @@ import Spinner from "../../Spinner"
 import {Container, SpinnerContainer, Error} from "./styles"
 import {Store, handleError} from "../../../utils/API"
 
+
 const StoreLinkContainer = () => {
   const {businessID} = useParams()
   const dispatch = useDispatch()
   
-  const [cart, setCart] = useState(false)
+  
   const seller = new Store(businessID)
   const {data, error, isLoading, isData, isError} = useQuery(["store", businessID], ()=>seller.getStoreInfo())
 
@@ -48,18 +49,12 @@ const StoreLinkContainer = () => {
 
   return (
     <>
-    {/* <Header setCart={setCart} />
-      <Container>
-        <Outlet />
-        <ShoppingCart visible={cart} setVisible={setCart} />
-      </Container>
-    <Footer /> */}
     {!isLoading && !isError ?
     <>
-      <Header setCart={setCart} data={data} />
+      <Header data={data} />
       <Container>
         <Outlet />
-        <ShoppingCart visible={cart} setVisible={setCart} />
+        <ShoppingCart  />
       </Container>
       <Footer />
     </>

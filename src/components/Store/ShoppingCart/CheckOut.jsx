@@ -43,7 +43,7 @@ const CheckOut = () => {
           ...values
         }
         setStore(dispatch, storeData)
-        return navigate("/choose-payment")
+        return navigate("/payment")
       }
       toast.error("An error ocurred while placing your order. Try again later.")
     }

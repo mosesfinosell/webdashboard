@@ -40,6 +40,7 @@ import UssdConfirmation from "./pages/Dashboard/DashboardItems/UssdConfirmation"
 import PayWithTransfer from "./pages/Dashboard/DashboardItems/PayWithTransfer";
 import BankPayment from "./pages/Dashboard/DashboardItems/BankPayment";
 import Payment from "./pages/Payment"
+import BankTransfer from "./pages/Payment/BankTransfer"
 
 import Store from "./pages/Store/productList"
 import Search from "./pages/Store/SearchProducts"
@@ -60,6 +61,7 @@ import BlogPost from "./pages/BlogPost"
 import Website from "./components/Layout/Website"
 import AuthContainer from "./components/Layout/AuthContainer"
 import StoreContainer from "./components/Store/StoreContainer"
+import PaymentContainer from "./components/Payment/container"
 
 import ScrollToTop from "./utils/scrollToTop"
 
@@ -162,8 +164,11 @@ function App() {
           <Route path="product/:productID" element={<StoreItem />} />
           <Route path="search" element={<Search />} />
         </Route>
-
-        <Route exact path="/choose-payment" element={<Payment />} />
+        <Route path="/payment" element={<PaymentContainer />} >
+          <Route index element={<Payment />} />
+          <Route path="bank-transfer" element={<BankTransfer />} />
+        </Route>
+        
       </Routes>
       </ScrollToTop>
     </Router>
