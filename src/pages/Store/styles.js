@@ -11,8 +11,8 @@ export const SpinnerContainer = styled.div`
 export const Products = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
-  gap: 1rem;
+  justify-content: flex-start;
+  gap: 1.5rem;
   min-height: 60vh;
 `
 
