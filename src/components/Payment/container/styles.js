@@ -18,7 +18,7 @@ export const Page = styled.div`
     min-height: 100vh;
     align-items: center;
     justify-content: center;
-    font-family: 'Circular Std', sans-serif;
+    /* font-family: 'Circular Std', sans-serif; */
     .logo{
         margin-bottom: ${42 * 0.063}rem;
     }

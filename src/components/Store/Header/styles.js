@@ -3,7 +3,7 @@ import { smallBorderRadius } from "../../../Styles"
 
 export const Head = styled.header`
     max-width: ${1212*0.063}rem;
-    font-family: 'Circular Std', sans-serif;
+    /* font-family: 'Circular Std', sans-serif; */
     padding: ${43 * 0.063}rem ${25 * 0.063}rem ${25 * 0.063}rem;
     margin: 0 auto;
     margin-bottom: ;
