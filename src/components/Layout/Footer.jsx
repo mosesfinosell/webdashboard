@@ -53,6 +53,9 @@ const Footer = () => {
               <Link to="/faqs">
                 <Text className="abt">FAQ</Text>
               </Link>
+              <Link to="/account">
+                <Text className="abt">Account</Text>
+              </Link>
               
           
           </div>

@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import {borderRadius} from "../../Styles"
+import {borderRadius, smallBorderRadius} from "../../Styles"
 
 export const FormTitleContainer = styled.div`
     margin: 0 auto;
@@ -96,7 +96,7 @@ export const InputLeft = styled.div`
 `
 
 export const Submit = styled.button`
-    ${borderRadius};
+    border-radius: ${smallBorderRadius};
     background: #D6AA1B;
     border: none;
     outline: none;

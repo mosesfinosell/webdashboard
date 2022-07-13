@@ -64,11 +64,7 @@ export class Store {
     }
 }
 
-export const getProducts = async ()=>{
-    const data = await finosellClient.get("/products/all?businessid=0d6573f2-e3e1-4342-9200-b144ed476b83&page=1")
-    console.log("Products", data.data);
-    return data.data
-}
+
 
 // axios
     //   .post("https://finosell.link/api/v2/auths/firststage", values)

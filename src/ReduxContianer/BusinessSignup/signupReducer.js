@@ -5,7 +5,8 @@ const initialState = {
     name: "",
     tel:"",
     password:"",
-    verification:"tel"
+    verification:"tel",
+    type:undefined
 }
 const signupReducer = (state=initialState, action) => {
     switch(action.type) {

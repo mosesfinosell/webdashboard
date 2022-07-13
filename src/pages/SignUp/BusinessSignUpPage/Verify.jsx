@@ -1,13 +1,13 @@
 import {useEffect} from "react"
 import {useSelector, useDispatch} from "react-redux"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import styled from "styled-components"
 import {FaCheck, FaComment, FaEnvelope} from "react-icons/fa"
 
 import FormTitle from "../../../components/Form/FormTitle"
 import CustomField from "../../../components/Form/Input/UnControlled"
 import Button from "../../../components/Form/Submit"
-import Submit from "../../../components/Form/Submit"
+
 
 import {setVerification} from "../../../ReduxContianer/BusinessSignup/signupActions";
 
@@ -29,12 +29,13 @@ const Verify = () => {
     :
     "We need to verify an email with which you can recieve OTP for your card transactions."
     } />
-    {verification === "tel" ?
-    <CustomField type="tel" label="Phone Number" value={tel} /> 
-    :
-    <CustomField type="email" label="Email" value={email} /> 
-    }
     <Container>
+        {verification === "tel" ?
+        <CustomField type="tel" label="Phone Number" value={tel} /> 
+        :
+        <CustomField type="email" label="Email" value={email} /> 
+        }
+    
         <HowTitle>How would you like to receive the OTP?</HowTitle>
         <Select selected={verification === "tel"} onClick={()=>verification === "tel" ? null : setVerification(dispatch)}>
             <LeftIcon>
@@ -54,7 +55,7 @@ const Verify = () => {
                 <FaCheck />
             </Check>
         </Select>
-        <Button type="button" >Continue</Button>
+        <Button type="button" onClick={()=>navigate("otp")} >Continue</Button>
     </Container>
     </>
   )

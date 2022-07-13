@@ -1,7 +1,7 @@
 import {
  
   Text,
-  Image,
+  
   
 } from "@chakra-ui/react";
 import { Link} from "react-router-dom";
@@ -11,45 +11,36 @@ import store from "../../assets/store.png";
 import user from "../../assets/user.png";
 // import "../../../src";
 import { NavLink } from "react-router-dom";
+import FormTitle from "../../components/Form/FormTitle"
+import {Login, Option, Options, Image} from "./style"
 
 export default function AccountBox() {
   const whitebg = useColorModeValue("white.400");
 
   return (
-      <div className="acct-div">
-        <div className="imgcontainer">
-          <Image mb="15" src={logo} alt="logo" />
-        </div>
-        <Text
-          fontSize="36px"
-          mt="8"
-          fontWeight="bold"
-          lineHeight="5"
-          className="welcome"
-        >
-          Create an Account
-        </Text>
-        <div className="acct-types">
-          <div className="pers-acct">
-            <Link to="/personal-signup">
-              <Image h="24" m="5" src={user} alt="user" />
-              <Text fontSize="18px">Personal Account</Text>
-              <Text fontSize="13px" color="gray.500">
-                Manage your owner Account
-              </Text>
-            </Link>
-          </div>
-          <div className="bus-acct">
-            <Link to="/business-signup">
-              <Image h="24" m="5" src={store} alt="store" />
-              <Text fontSize="18px">Business Account</Text>
-              <Text fontSize="13px" color="gray.500">
-                Manage your Business Account
-              </Text>
-            </Link>
-          </div>
-        </div>
-      </div>
+      <>
+        
+        <FormTitle title="Create an account" text="" />
+        
+        <Options>
+          <Link to="/personal-signup">
+            <Option>
+              <Image src={user} alt="user" />
+              <h3>Personal Account</h3>
+              <p>Manage your owner Account</p>
+            </Option>
+          </Link>
+          <Link to="/business-signup">
+            <Option>
+              <Image src={store} alt="store" />
+              <h3>Business Account</h3>
+              <p >Manage your Business Account</p>
+            </Option>
+          </Link>
+        </Options>
+
+        <Login>Already have an account? <span>Login</span></Login>
+      </>
 
     // <Container maxW='container.lg'>
     // 	<Box

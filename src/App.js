@@ -9,6 +9,7 @@ import PersonalForgetPassword from "./pages/SignIn/PersonalLogInPage/PersonalFor
 
 import BusinessAccountSignUp from "./pages/SignUp/BusinessSignUpPage/BusinessAccountSignUp";
 import Verify from "./pages/SignUp/BusinessSignUpPage/Verify"
+import OTP from "./pages/SignUp/BusinessSignUpPage/OTP"
 import BusinessAccountSignIn from "./pages/SignIn/BusinessLogInPage/BusinessAccountSignIn";
 import AddBusinessPage from "./pages/SignUp/BusinessSignUpPage/AddBusinessPage";
 import StoreInventory from "./pages/Dashboard/BusinessDashboard/HomeBusiness/StoreInventory";
@@ -93,7 +94,8 @@ function App() {
         <Route path="/" element={<AuthContainer />}>
           <Route path="account" element={<AccountBox />} />
           <Route path="business-signup" element={<BusinessAccountSignUp />} />
-          <Route path="verify-business" element={<Verify />} />
+          <Route path="verify" element={<Verify />} />
+          <Route path="/verify/otp" element={<OTP />}/>
         </Route>
         
         
