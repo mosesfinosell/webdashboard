@@ -26,12 +26,15 @@ const Footer = () => {
         <div className="foot-1">
           <Logo src={Logomark} alt="logo" />
           <Apps>
+            
             <div className="infos">
                 <Image src={applestore} alt="logo" />
             </div>
+            
             <div className="infos">
               <Image src={googlesmall} alt="logo" />
             </div>
+            
             <div className="infos webapp">
               <Image src={webapp} alt="logo" />
             </div>
@@ -50,6 +53,9 @@ const Footer = () => {
               <Link to="/faqs">
                 <Text className="abt">FAQ</Text>
               </Link>
+              <Link to="/account">
+                <Text className="abt">Account</Text>
+              </Link>
               
           
           </div>
@@ -58,6 +64,9 @@ const Footer = () => {
               <Text className="column-title">Products</Text>
               <Text className="abt">Escrow</Text>
               <Text className="abt">Handles</Text>
+              <Link to="/store/42b07205-8834-4fd3-a3db-e49186d16276">
+                <p className="abt">store</p>
+              </Link>
           
           </div>
 

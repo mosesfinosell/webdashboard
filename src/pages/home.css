@@ -43,9 +43,7 @@ header .navcheck a:hover {
   color: #d6aa1b;
   border-bottom: 2px solid #d6aa1b;
 }
-header input {
-  display: none;
-}
+
 header label {
   font-size: 2.3rem;
   color: #d6aa1b;

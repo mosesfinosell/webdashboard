@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
 import PersonalReducer from "./PersonalRedux/PersonalReducer.js";
 import BusinessReducer from "./BussinessRedux/BusinessReducer"
+import BusinessSignupReducer from "./BusinessSignup/signupReducer"
+import ShoppingCartReducer from "./shoppingCart/shoppingCartReducer"
 // import {
 // 	businessSignUpReducer,
 // 	businessSignInReducer,
@@ -22,8 +24,11 @@ import BusinessReducer from "./BussinessRedux/BusinessReducer"
 
 const rootReducer = combineReducers({
   //Personal Reducer
+  
   personalReducer: PersonalReducer,
   businessReducer: BusinessReducer,
+  businessSignup: BusinessSignupReducer,
+  shoppingCart: ShoppingCartReducer,
   // personalSignUp: personalSignUpReducer,
   // personalOtp: personalOtpRedcuer,
   // personalVerifyOtp: personalVerifyOtpRedcuer,

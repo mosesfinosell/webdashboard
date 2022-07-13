@@ -3,6 +3,7 @@ import {Link} from "react-router-dom"
 import styled from "styled-components"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faAngleRight} from "@fortawesome/free-solid-svg-icons"
+import Spinner from "../components/Spinner"
 
 import {useQuery} from "react-query"
 import axios from "axios"
@@ -27,6 +28,7 @@ import purse from "../assets/purse.png"
 import whiteBoard from "../assets/whiteboard.png"
 import grayShirt from "../assets/gray-shirt.png"
 
+import {Blog, handleError} from "../utils/API"
 
 
 const blogs = [
@@ -48,19 +50,22 @@ const blogs = [
 ]
 
 
-const Blog = () => {
-   
-    const {isLoading, error, data} = useQuery('blodPosts', async ()=>{
-        const data = await axios.get(`${process.env.REACT_APP_FINOSELL_BASE_URI}/blog`)
-            console.log(data.data)
-            //alert("data loaded 1")
-            return data.data
-        
-    })
+const BlogPage = () => {
+
+    const finosellBlog = new Blog();
+    const {isLoading, isError, error, data} = useQuery('blogPage', finosellBlog.blogPage)
+    
+    useEffect(()=>{
+        if(error){
+            handleError(error)
+        }
+    }, [error])
+
     
 
   return (
     <>
+    {!isLoading && !isError ? <>
         <CarouselSection>
             <PrimaryTitle>Freshly curated for your growth</PrimaryTitle>
             <PrimaryParagraph>No spams, just freshly curated business and finance pointers to help you scale.</PrimaryParagraph>
@@ -116,16 +121,28 @@ const Blog = () => {
                 {blogs.map((blog, i)=><BlogCard key={i} blog={blog} />)}
             </Articles>
         </ArticleSection>
+        <ArticleSection>
+            <PrimaryTitle>Fresh and Notable</PrimaryTitle>
+            <Articles>
+                {data.data.posts.map((blog, i)=><BlogCard key={i} blog={blog} />)}
+            </Articles>
+        </ArticleSection>
         <Subscribe header="Like what you see? Subscribe now!" />
         <TakeControl>
             <PrimaryTitle>Ready to take control of your finances and business?</PrimaryTitle>
             <PrimaryButton>Take control</PrimaryButton>
         </TakeControl>
+    </> 
+    : 
+    <LoaderContainer>
+        <Spinner />
+    </LoaderContainer>}
+        
     </>
   )
 }
 
-export default Blog
+export default BlogPage
 
 const CarouselSection = styled(PrimarySection)`
     display: flex;
@@ -239,8 +256,6 @@ const Articles = styled.div`
         flex-direction: row;
     }
 `
-
-
 const TakeControl = styled(PrimarySection)`
     margin-bottom: ${160 * 0.063}rem;
     display: flex;
@@ -270,4 +285,11 @@ const TakeControl = styled(PrimarySection)`
             padding: ${32 * 0.063}rem ${67 * 0.063}rem;
         } */
     }
+`
+const LoaderContainer = styled.div`
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `
