@@ -5,7 +5,7 @@ export const InputContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: ${90 * 0.063}rem;
+    margin: ${90 * 0.063}rem auto ${25 * 0.063}rem;
 
     
 `
