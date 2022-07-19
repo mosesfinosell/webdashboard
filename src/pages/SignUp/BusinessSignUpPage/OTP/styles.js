@@ -49,4 +49,25 @@ export const Resend = styled.p`
     font-size: ${18 * 0.063}rem;
     line-height: ${23 * 0.063}rem;
     text-align: center;
+    margin-bottom: ${200 * 0.063}rem;
+`
+
+export const Change = styled.div`
+    border-radius:${smallBorderRadius};
+    text-align: center;
+    font-weight: 500;
+    font-size: ${14 * 0.063}rem;
+    line-height: ${18 * 0.063}rem;
+    color: #273B4A;
+    border: solid #D6AA1B 0.063rem;
+    width: ${650 * 0.063}rem;
+    height: ${90 * 0.063}rem;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    span{
+        color: #D6AA1B;
+    }
 `

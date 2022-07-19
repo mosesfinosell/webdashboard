@@ -1,4 +1,5 @@
 import { Routes, BrowserRouter as Router, Route} from "react-router-dom";
+import {useEffect} from "react"
 
 import PrivateRoute from "./utils/PrivateRoute";
 import ErrorBoundary from "./ErrorBoundary";
@@ -72,6 +73,7 @@ import {Toaster} from "react-hot-toast"
 
 function App() {
   
+  useEffect(()=>{}, [])
 
   return (
     <>
@@ -166,7 +168,7 @@ function App() {
           <Route path="product/:productID" element={<StoreItem />} />
           <Route path="search" element={<Search />} />
         </Route>
-        <Route path="/payment" element={<PaymentContainer />} >
+        <Route path="/paylink/:id" element={<PaymentContainer />} >
           <Route index element={<Payment />} />
           <Route path="bank-transfer" element={<BankTransfer />} />
         </Route>
@@ -175,7 +177,7 @@ function App() {
       </ScrollToTop>
     </Router>
     <Toaster
-      position="bottom-right"
+      position="top"
     />
     </>
   );

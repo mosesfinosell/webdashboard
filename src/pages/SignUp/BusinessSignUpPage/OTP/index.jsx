@@ -1,7 +1,7 @@
-import {useRef, useState, useEffect} from 'react'
+import {useRef, useState, useEffect, useCallback} from 'react'
 import {useSelector, useDispatch} from "react-redux"
 import FormTitle from "../../../../components/Form/FormTitle"
-import {InputContainer, Input, Hidden, Resend} from "./styles"
+import {InputContainer, Input, Hidden, Resend, Change} from "./styles"
 
 const OTP = () => {
   const hidden = useRef(null)
@@ -16,9 +16,19 @@ const OTP = () => {
       return part
   })
   .join("@")
-  const timer =()=> setInterval(()=>{}, 1000)
+
+  const timer = ()=>{ 
+    console.log("Timer")
+    return setInterval(()=>{
+      console.log(count)
+      setCount(count - 1)
+    }, 1000)
+}
+
+  
 
   useEffect(()=>{
+    console.log("Loaded")
     const interval = timer()
     
     return clearInterval(interval)
@@ -62,6 +72,9 @@ const OTP = () => {
           `Resend`
         }</Resend>
         <Hidden className="hidden" ref={hidden} type="text" maxLength="4" onKeyUp={(e)=>handleChange(e)} />
+        <Change>
+          <p>Having issues? <span>Try {verification === "tel" ? "Email" : "SMS"}</span></p>
+        </Change>
     </>
   )
 }

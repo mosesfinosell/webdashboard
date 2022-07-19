@@ -62,6 +62,11 @@ export class Store {
         console.log("Business sub account", data.data)
         return data.data
     }
+    async generatePaymentLink (amount) {
+        const data = await finosellClient.post(`/payment/create`, {business_id:this.businessID, amount, title:""})
+
+        return data.data
+    }
 }
 
 

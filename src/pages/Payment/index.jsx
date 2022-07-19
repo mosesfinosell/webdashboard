@@ -6,7 +6,7 @@ import transfer from "../../assets/transfer.svg";
 import ussd from "../../assets/ussd.svg";
 import bank from "../../assets/bank.svg";
 import Logomark from "../../assets/Logomark.svg";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useParams } from "react-router-dom";
 import {useSelector} from "react-redux"
 import {InfoContainer, Info, Title, OptionsContainer, Option} from "./styles"
 
@@ -15,6 +15,7 @@ import PayStack from "./Paystack"
 
 function PaymentPage() {
 
+  const {id} = useParams()
   const history = useNavigate();
   const shoppingCart = useSelector((state)=>state.shoppingCart)
   const checkout = shoppingCart.checkout
