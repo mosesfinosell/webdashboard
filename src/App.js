@@ -1,4 +1,5 @@
 import { Routes, BrowserRouter as Router, Route} from "react-router-dom";
+import {useEffect} from "react"
 
 import PrivateRoute from "./utils/PrivateRoute";
 import ErrorBoundary from "./ErrorBoundary";
@@ -9,6 +10,7 @@ import PersonalForgetPassword from "./pages/SignIn/PersonalLogInPage/PersonalFor
 
 import BusinessAccountSignUp from "./pages/SignUp/BusinessSignUpPage/BusinessAccountSignUp";
 import Verify from "./pages/SignUp/BusinessSignUpPage/Verify"
+import OTP from "./pages/SignUp/BusinessSignUpPage/OTP"
 import BusinessAccountSignIn from "./pages/SignIn/BusinessLogInPage/BusinessAccountSignIn";
 import AddBusinessPage from "./pages/SignUp/BusinessSignUpPage/AddBusinessPage";
 import StoreInventory from "./pages/Dashboard/BusinessDashboard/HomeBusiness/StoreInventory";
@@ -71,6 +73,7 @@ import {Toaster} from "react-hot-toast"
 
 function App() {
   
+  useEffect(()=>{}, [])
 
   return (
     <>
@@ -93,7 +96,8 @@ function App() {
         <Route path="/" element={<AuthContainer />}>
           <Route path="account" element={<AccountBox />} />
           <Route path="business-signup" element={<BusinessAccountSignUp />} />
-          <Route path="verify-business" element={<Verify />} />
+          <Route path="verify" element={<Verify />} />
+          <Route path="/verify/otp" element={<OTP />}/>
         </Route>
         
         
@@ -164,16 +168,16 @@ function App() {
           <Route path="product/:productID" element={<StoreItem />} />
           <Route path="search" element={<Search />} />
         </Route>
-        <Route path="/payment" element={<PaymentContainer />} >
-          <Route index element={<Payment />} />
-          <Route path="bank-transfer" element={<BankTransfer />} />
+        <Route path="/paylink" element={<PaymentContainer />} >
+          <Route path=":id" element={<Payment />} />
+          <Route path=":id/bank-transfer/:businessID" element={<BankTransfer />} />
         </Route>
         
       </Routes>
       </ScrollToTop>
     </Router>
     <Toaster
-      position="bottom-right"
+      position="top"
     />
     </>
   );

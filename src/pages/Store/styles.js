@@ -9,11 +9,20 @@ export const SpinnerContainer = styled.div`
 `
 
 export const Products = styled.div`
-  display: flex;
+  /* display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  gap: 1.5rem;
+  gap: 1.5rem; */
   min-height: 60vh;
+  display: grid;
+  grid-template: auto / 1fr 1fr;
+
+  @media only screen and (min-width: 768px){
+    grid-template: auto / 1fr 1fr 1fr 1fr;
+  }
+  @media only screen and (min-width: 968px){
+    grid-template: auto / 1fr 1fr 1fr 1fr 1fr;
+  }
 `
 
 export const LoadMore = styled.div`

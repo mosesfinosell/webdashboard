@@ -1,14 +1,26 @@
 import {ADD_TO_CART, UPDATE_CART, SET_CHECKOUT, SET_SEARCH, SET_CARTUI} from "../constants/shoppingCartActions"
 const initialState = {
     checkout:{
-        storeName:"",
-        id:"",
-        businessEmail:"",
-        name:"",
-        email:"",
-        tel:"",
-        address:"",
-        note:""
+        _id: "",
+        name: "",
+        address: "",
+        subdomain: "",
+        description: "",
+        businessmail: "",
+        registrar: "",
+        instagram: "",
+        Available: true,
+        imageurl: "",
+        industry: "",
+        businessid: "",
+        team_ids: [],
+        cacid: "",
+        createdAt: "",
+        updatedAt: "",
+        __v: 0,
+        subAccounts: [],
+        balance: 0,
+        amount: ""
     },
     cart:[],
     cartUI:{

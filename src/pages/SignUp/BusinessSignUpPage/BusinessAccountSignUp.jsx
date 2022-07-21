@@ -43,7 +43,7 @@ export default function BusinessAccountSignUp() {
     
     createAccount(dispatch, values)
     tools.resetForm()
-    history("/verify-business")
+    history("/verify")
     // setIsLoading(true);
 
     

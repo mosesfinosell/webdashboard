@@ -57,11 +57,31 @@ export class Store {
         
         return data.data
     }
+
     async getBusinessSubAccount () {
+
         const data = await finosellClient.get(`/fincra/subaccount?businessid=${this.businessID}`)
-        console.log("Business sub account", data.data)
-        return data.data
+        //response to be improved
+     
+        const account = data.data.data.account.find((acct)=>acct.businessid === this.businessID)
+        console.log("Business sub account", account)
+        return account
     }
+    
+}
+
+export class Payment {
+    
+    async getPaymentLinkInfo (id) {
+        const data = await finosellClient.get(`/paylink/fetchlink?payment_link_id=${id}`)
+        //api response can be better
+  
+        const details = data.data.paymentdata[0]
+        const business = data.data.business.find((bus)=>bus.businessid === details.business_id)
+
+        return {...business, amount:details.amount}
+    }
+
 }
 
 

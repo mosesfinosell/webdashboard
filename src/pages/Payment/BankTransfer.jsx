@@ -2,14 +2,17 @@ import {Title, Method, Option, OptionsContainer, Left, Right, Error} from "./sty
 import styled from "styled-components"
 import {Link} from "react-router-dom"
 import {useQuery} from "react-query"
+import {useParams} from "react-router-dom"
 import {useSelector} from "react-redux"
 import {Store} from "../../utils/API"
 import Spinner from "../../components/Spinner"
 import {SpinnerContainer} from "../../components/Spinner/style"
 
 const BankTransfer = () => {
-    const businessID = useSelector(state=>state.shoppingCart.checkout.id)
+    const {businessID} = useParams()
+    const checkout = useSelector((state)=>state.shoppingCart.checkout)
     const store = new Store(businessID)
+
 
     const {data, error, isLoading} = useQuery(["business-subaccount", businessID], ()=>store.getBusinessSubAccount())
     console.log("Data", data)
@@ -27,23 +30,23 @@ const BankTransfer = () => {
                 <Spinner />
             </SpinnerContainer>
             : 
-            (data.data.account.length > 0 ?
+            (data ?
             <OptionsContainer>
                 <Option>
                     <Left>Amount</Left>
-                    <Right>₦</Right>
+                    <Right>₦{checkout.amount}</Right>
                 </Option>
                 <Option>
                     <Left>Account Number</Left>
-                    <Right></Right>
+                    <Right>{data.virtualAccount.accountNumber}</Right>
                 </Option>
                 <Option>
                     <Left>Bank Name</Left>
-                    <Right></Right>
+                    <Right>{data.virtualAccount.bankName}</Right>
                 </Option>
                 <Option>
                     <Left>Beneficiary Name</Left>
-                    <Right></Right>
+                    <Right>{data.virtualAccount.accountName}</Right>
                 </Option>
             </OptionsContainer>
             :

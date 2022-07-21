@@ -23,23 +23,20 @@ export default function AccountBox() {
         <FormTitle title="Create an account" text="" />
         
         <Options>
-          <Option>
-            <Image src={user} alt="user" />
-            <h3>Personal Account</h3>
-            <p>Manage your owner Account</p>
-          </Option>
-            {/* <Link to="/personal-signup">
-             
-            </Link> */}
-          
-          <Option>
-            <Image src={store} alt="store" />
-            <h3>Business Account</h3>
-            <p >Manage your Business Account</p>
-          </Option>
-            {/* <Link to="/business-signup">
-              
-            </Link> */}
+          <Link to="/personal-signup">
+            <Option>
+              <Image src={user} alt="user" />
+              <h3>Personal Account</h3>
+              <p>Manage your owner Account</p>
+            </Option>
+          </Link>
+          <Link to="/business-signup">
+            <Option>
+              <Image src={store} alt="store" />
+              <h3>Business Account</h3>
+              <p >Manage your Business Account</p>
+            </Option>
+          </Link>
         </Options>
 
         <Login>Already have an account? <span>Login</span></Login>
