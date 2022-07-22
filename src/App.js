@@ -168,9 +168,9 @@ function App() {
           <Route path="product/:productID" element={<StoreItem />} />
           <Route path="search" element={<Search />} />
         </Route>
-        <Route path="/paylink/:id" element={<PaymentContainer />} >
-          <Route index element={<Payment />} />
-          <Route path="bank-transfer" element={<BankTransfer />} />
+        <Route path="/paylink" element={<PaymentContainer />} >
+          <Route path=":id" element={<Payment />} />
+          <Route path=":id/bank-transfer/:businessID" element={<BankTransfer />} />
         </Route>
         
       </Routes>
