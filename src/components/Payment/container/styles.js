@@ -20,7 +20,9 @@ export const Page = styled.div`
     min-height: 100vh;
     align-items: center;
     justify-content: center;
+
     padding: 0.1rem;
+
     /* font-family: 'Circular Std', sans-serif; */
     .logo{
         margin-bottom: ${42 * 0.063}rem;
