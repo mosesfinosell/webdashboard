@@ -60,12 +60,9 @@ const Footer = () => {
           
           </div>
           <div className="foot-2">
-            
-              <Text className="column-title">Products</Text>
-              <Text className="abt">Escrow</Text>
-              <Text className="abt">Handles</Text>
-              
-          
+            <Text className="column-title">Products</Text>
+            <Text className="abt">Escrow</Text>
+            <Text className="abt">Handles</Text>
           </div>
 
           <div className="foot-2">

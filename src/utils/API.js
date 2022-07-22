@@ -75,10 +75,11 @@ export class Payment {
     async getPaymentLinkInfo (id) {
         const data = await finosellClient.get(`/paylink/fetchlink?payment_link_id=${id}`)
         //api response can be better
-  
-        const details = data.data.paymentdata[0]
+        const payments = data.data.paymentdata
+        const details = payments[payments.length - 1]
         const business = data.data.business.find((bus)=>bus.businessid === details.business_id)
 
+        console.log("Business", business, payments)
         return {...business, amount:details.amount}
     }
 

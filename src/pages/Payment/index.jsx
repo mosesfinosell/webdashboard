@@ -27,7 +27,7 @@ function PaymentPage() {
   const history = useNavigate();
   const pay = new Payment()
 
-  const {isLoading, isData, isError, error, data} = useQuery(["payment", id], ()=>pay.getPaymentLinkInfo(testID))
+  const {isLoading, isData, isError, error, data} = useQuery(["payment", id], ()=>pay.getPaymentLinkInfo(id))
   // const shoppingCart = useSelector((state)=>state.shoppingCart)
   // const checkout = shoppingCart.checkout
   // const total = shoppingCart.cart.filter((item)=>item.businessID === checkout.id)
