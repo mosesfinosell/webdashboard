@@ -327,6 +327,7 @@ export default Terms;
 const Term = styled.section`
   margin-bottom: ${50*0.063}rem;
   font-family: "DM Sans";
+  margin: 80px;
   .term__title{
     font-style: normal;
     font-weight: 500;
