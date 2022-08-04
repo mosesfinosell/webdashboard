@@ -20,110 +20,121 @@ import {margin, marginMobile} from "../../Styles"
 
 const Footer = () => {
   return (
-    <footer>
-        
-      <FooterContent>
-        <div className="foot-1">
-          <Logo src={Logomark} alt="logo" />
-          <Apps>
-            
-            <div className="infos">
-                <Image src={applestore} alt="logo" />
-            </div>
-            
-            <div className="infos">
-              <Image src={googlesmall} alt="logo" />
-            </div>
-            
-            <div className="infos webapp">
-              <Image src={webapp} alt="logo" />
-            </div>
-          </Apps>
-        </div>
-        <Columns>
-          <div className="foot-2">
-            
-              <Text className="column-title">Company</Text>
-              <Link className="abt" to="/about">
-                <Text className="abt">About</Text>
-              </Link>
-              <Link className="abt" to="/blog">
-                <Text className="abt">Blog</Text>
-              </Link>
-              <Link to="/faqs">
-                <Text className="abt">FAQ</Text>
-              </Link>
-              <Link to="/account">
-                <Text className="abt">Account</Text>
-              </Link>
-              
-          
-          </div>
-          <div className="foot-2">
-            <Text className="column-title">Products</Text>
-            <Text className="abt">Escrow</Text>
-            <Text className="abt">Handles</Text>
-          </div>
+		<footer>
+			<FooterContent>
+				<div className='foot-1'>
+					<Logo src={Logomark} alt='logo' />
+					<Apps>
+						<div className='infos'>
+							<Image src={applestore} alt='logo' />
+						</div>
 
-          <div className="foot-2">
-            
-            <Text className="column-title">Legal</Text>
-            <Link className="abt" to="/terms">
-              <Text className="abt">Terms and Conditions</Text>
-            </Link>
-            <Text className="abt">Privacy Policy</Text>
-            
-          </div>
+						<div className='infos'>
+							<Image src={googlesmall} alt='logo' />
+						</div>
 
-          <div className="foot-2">
-              <div className="footer-social">
-                <a href="https://www.facebook.com/Finosell-112251447209343/" target="_blank" rel="noreferrer">
-                <FontAwesomeIcon
-                  icon={faFacebook}
-                  style={{
-                    background: "#FDF9ED",
-                    borderRadius: "0px 11px 11px 11px",
-                  }}
-                />
-                </a>
-                <a href="https://instagram.com/finosellapp?igshid=YmMyMTA2M2Y=" target="_blank" rel="noreferrer">
-                <FontAwesomeIcon
-                  icon={faInstagram}
-                  style={{
-                    background: "#FDF9ED",
-                    borderRadius: "0px 11px 11px 11px",
-                  }}
-                />
-                </a>
-                <a href="https://www.linkedin.com/company/finosell-global-ltd/" target="_blank" rel="noreferrer">
-                <FontAwesomeIcon
-                  icon={faLinkedin}
-                  style={{
-                    background: "#FDF9ED",
-                    borderRadius: "0px 11px 11px 11px",
-                  }}
-                />
-                </a>
-                <a href="https://twitter.com/finosell?t=6GZOF07oTPgFpRr_9yxSSg&s=09" target="_blank" rel="noreferrer">
-                  <FontAwesomeIcon
-                    icon={faTwitter}
-                    style={{
-                      background: "#FDF9ED",
-                      borderRadius: "0px 11px 11px 11px",
-                    }}
-                  />
-                </a>
-              </div>
-              <Text className="abt">support@finosell.com</Text>
-          </div>
-        </Columns>
-      </FooterContent>
+						<div className='infos webapp'>
+							<Image src={webapp} alt='logo' />
+						</div>
+					</Apps>
+				</div>
+				<Columns>
+					<div className='foot-2'>
+						<Text className='column-title'>Company</Text>
+						<Link className='abt' to='/about'>
+							<Text className='abt'>About</Text>
+						</Link>
+						<Link className='abt' to='/blog'>
+							<Text className='abt'>Blog</Text>
+						</Link>
+						<Link to='/faqs'>
+							<Text className='abt'>FAQ</Text>
+						</Link>
+						<Link to='/account'>
+							<Text className='abt'>Account</Text>
+						</Link>
+					</div>
+					<div className='foot-2'>
+						<Text className='column-title'>Products</Text>
+						<Link className='abt' to='/escrow'>
+							<Text className='abt'>Escrow</Text>
+						</Link>
 
-      <Text className="copyright-text">
-        &copy;2022 Finosell Limited. All rights reserved
-      </Text>
-    </footer>
-  )
+						<Text className='abt'>Handles</Text>
+					</div>
+
+					<div className='foot-2'>
+						<Text className='column-title'>Legal</Text>
+						<Link className='abt' to='/terms'>
+							<Text className='abt'>Terms and Conditions</Text>
+						</Link>
+
+						<Link className='abt' to='/privacy'>
+							<Text className='abt'>Privacy Policy</Text>
+						</Link>
+					</div>
+
+					<div className='foot-2'>
+						<div className='footer-social'>
+							<a
+								href='https://www.facebook.com/Finosell-112251447209343/'
+								target='_blank'
+								rel='noreferrer'>
+								<FontAwesomeIcon
+									icon={faFacebook}
+									style={{
+										background: '#FDF9ED',
+										borderRadius: '0px 11px 11px 11px',
+									}}
+								/>
+							</a>
+							<a
+								href='https://instagram.com/finosellapp?igshid=YmMyMTA2M2Y='
+								target='_blank'
+								rel='noreferrer'>
+								<FontAwesomeIcon
+									icon={faInstagram}
+									style={{
+										background: '#FDF9ED',
+										borderRadius: '0px 11px 11px 11px',
+									}}
+								/>
+							</a>
+							<a
+								href='https://www.linkedin.com/company/finosell-global-ltd/'
+								target='_blank'
+								rel='noreferrer'>
+								<FontAwesomeIcon
+									icon={faLinkedin}
+									style={{
+										background: '#FDF9ED',
+										borderRadius: '0px 11px 11px 11px',
+									}}
+								/>
+							</a>
+							<a
+								href='https://twitter.com/finosell?t=6GZOF07oTPgFpRr_9yxSSg&s=09'
+								target='_blank'
+								rel='noreferrer'>
+								<FontAwesomeIcon
+									icon={faTwitter}
+									style={{
+										background: '#FDF9ED',
+										borderRadius: '0px 11px 11px 11px',
+									}}
+								/>
+							</a>
+						</div>
+						<Text className='abt'>support@finosell.com</Text>
+					</div>
+				</Columns>
+			</FooterContent>
+
+			<Text className='copyright-text'>
+				&copy;2022 Finosell Limited. All rights reserved
+			</Text>
+		</footer>
+	);
 }
 
 export default Footer

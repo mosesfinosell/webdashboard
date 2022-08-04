@@ -58,6 +58,8 @@ import Blog from "./pages/Blog"
 import FAQ from "./pages/FAQ"
 import ComingSoon from "./pages/ComingSoon"
 import BlogPost from "./pages/BlogPost"
+import Privacy from "./pages/Privacy"
+import Escrow from "./pages/Escrow"
 
 
 import Website from "./components/Layout/Website"
@@ -76,111 +78,137 @@ function App() {
   useEffect(()=>{}, [])
 
   return (
-    <>
-   
-    <Router>
-      <ScrollToTop>
-      <Routes>
-        <Route path="/" element={<Website />}>
-          <Route index element={<Home />} />
-          <Route path="about" element={<About />} />
-          <Route path="individual" element={<Individual />} />
-          <Route path="blog" element={<Blog />} />
-          <Route path="blog/:id" element={<BlogPost />} />
-          <Route path="faqs" element={<FAQ />} />
-          <Route path="coming-soon" element={<ComingSoon />} />
-          <Route path="business-home" element={<Business />} />
-          <Route path="terms" element={<Terms />} />
-          <Route path="pricing" element={<Pricing />} />
-        </Route>
-        <Route path="/" element={<AuthContainer />}>
-          <Route path="account" element={<AccountBox />} />
-          <Route path="business-signup" element={<BusinessAccountSignUp />} />
-          <Route path="verify" element={<Verify />} />
-          <Route path="/verify/otp" element={<OTP />}/>
-        </Route>
-        
-        
-        <Route
-          exact
-          path="/personal-signup"
-          element={<PersonalAccountSignUp />}
-        />
-        <Route
-          exact
-          path="/personal-signin"
-          element={<PersonalAccountSignIn />}
-        />
-        {/* <DashboardPage /> */}
-        <Route
-          exact
-          path="/personal-dashboard"
-          element={<PrivateRoute element={HomeDashboard}/>}
-        />
-        
-        <Route path="/pay-with-card" element={<PrivateRoute element={PayWithCard}/>} />
-        <Route path="/pay-with-ussd" element={<PrivateRoute element={PayWithUssd}/> } />
-        <Route
-          exact
-          path="/pay-with-transfer"
-          element={<PrivateRoute element={PayWithTransfer}/> }
-        />
-        <Route path="/bank-payment" element={<PrivateRoute element={BankPayment} />} />
-        <Route
-          exact
-          path="/ussd-confirmation"
-          element={<PrivateRoute element={UssdConfirmation}/>}
-        />
-        <Route path="/personal-deals" element={<PrivateRoute element={DealDashboard}/>} />
+		<>
+			<Router>
+				<ScrollToTop>
+					<Routes>
+						<Route path='/' element={<Website />}>
+							<Route index element={<Home />} />
+							<Route path='about' element={<About />} />
+							<Route path='individual' element={<Individual />} />
+							<Route path='blog' element={<Blog />} />
+							<Route path='blog/:id' element={<BlogPost />} />
+							<Route path='faqs' element={<FAQ />} />
+							<Route path='coming-soon' element={<ComingSoon />} />
+							<Route path='business-home' element={<Business />} />
+							<Route path='terms' element={<Terms />} />
+							<Route path='pricing' element={<Pricing />} />
+							<Route path='privacy' element={<Privacy />} />
+							<Route path='escrow' element={<Escrow />} />
+						</Route>
+						<Route path='/' element={<AuthContainer />}>
+							<Route path='account' element={<AccountBox />} />
+							<Route
+								path='business-signup'
+								element={<BusinessAccountSignUp />}
+							/>
+							<Route path='verify' element={<Verify />} />
+							<Route path='/verify/otp' element={<OTP />} />
+						</Route>
 
-        <Route path="/personal-account" element={<PrivateRoute element={AccountUserProfile}/>} />
+						<Route
+							exact
+							path='/personal-signup'
+							element={<PersonalAccountSignUp />}
+						/>
+						<Route
+							exact
+							path='/personal-signin'
+							element={<PersonalAccountSignIn />}
+						/>
+						{/* <DashboardPage /> */}
+						<Route
+							exact
+							path='/personal-dashboard'
+							element={<PrivateRoute element={HomeDashboard} />}
+						/>
 
-        {/* </Switch> */}
+						<Route
+							path='/pay-with-card'
+							element={<PrivateRoute element={PayWithCard} />}
+						/>
+						<Route
+							path='/pay-with-ussd'
+							element={<PrivateRoute element={PayWithUssd} />}
+						/>
+						<Route
+							exact
+							path='/pay-with-transfer'
+							element={<PrivateRoute element={PayWithTransfer} />}
+						/>
+						<Route
+							path='/bank-payment'
+							element={<PrivateRoute element={BankPayment} />}
+						/>
+						<Route
+							exact
+							path='/ussd-confirmation'
+							element={<PrivateRoute element={UssdConfirmation} />}
+						/>
+						<Route
+							path='/personal-deals'
+							element={<PrivateRoute element={DealDashboard} />}
+						/>
 
-        {/* Bussiness Account  */}
+						<Route
+							path='/personal-account'
+							element={<PrivateRoute element={AccountUserProfile} />}
+						/>
 
+						{/* </Switch> */}
 
-        <Route path="/business-signin" element={<PrivateRoute element={<BusinessAccountSignIn />}/>} />
-        <Route
-          exact
-          path="/business-dashboard"
-          element={<PrivateRoute element={<BusinessDashboard />}/>}
-        />
-        <Route
-          exact
-          path="/business/orders"
-          element={<PrivateRoute element={<BusinessOrders />}/>}
-        />
-        <Route
-          exact
-          path="/business/store-inventory"
-          element={<StoreInventory />}
-        />
-        <Route path="/business/store-page" element={<PrivateRoute element={<StorePage />}/>} />
-        <Route path="/business/storelink" element={<PrivateRoute element={<StoreLink />}/>} />
-        <Route path="/business/store-page/cart" element={<PrivateRoute element={Cart}/>} />
-        <Route
-          path="/business/payment"
-          element={CreateTransaction}
-        />
-        <Route path="/store/:businessID" element={<StoreContainer />}>
-          <Route index element={<Store />} />
-          <Route path="product/:productID" element={<StoreItem />} />
-          <Route path="search" element={<Search />} />
-        </Route>
-        <Route path="/paylink" element={<PaymentContainer />} >
-          <Route path=":id" element={<Payment />} />
-          <Route path=":id/bank-transfer/:businessID" element={<BankTransfer />} />
-        </Route>
-        
-      </Routes>
-      </ScrollToTop>
-    </Router>
-    <Toaster
-      position="top"
-    />
-    </>
-  );
+						{/* Bussiness Account  */}
+
+						<Route
+							path='/business-signin'
+							element={<PrivateRoute element={<BusinessAccountSignIn />} />}
+						/>
+						<Route
+							exact
+							path='/business-dashboard'
+							element={<PrivateRoute element={<BusinessDashboard />} />}
+						/>
+						<Route
+							exact
+							path='/business/orders'
+							element={<PrivateRoute element={<BusinessOrders />} />}
+						/>
+						<Route
+							exact
+							path='/business/store-inventory'
+							element={<StoreInventory />}
+						/>
+						<Route
+							path='/business/store-page'
+							element={<PrivateRoute element={<StorePage />} />}
+						/>
+						<Route
+							path='/business/storelink'
+							element={<PrivateRoute element={<StoreLink />} />}
+						/>
+						<Route
+							path='/business/store-page/cart'
+							element={<PrivateRoute element={Cart} />}
+						/>
+						<Route path='/business/payment' element={CreateTransaction} />
+						<Route path='/store/:businessID' element={<StoreContainer />}>
+							<Route index element={<Store />} />
+							<Route path='product/:productID' element={<StoreItem />} />
+							<Route path='search' element={<Search />} />
+						</Route>
+						<Route path='/paylink' element={<PaymentContainer />}>
+							<Route path=':id' element={<Payment />} />
+							<Route
+								path=':id/bank-transfer/:businessID'
+								element={<BankTransfer />}
+							/>
+						</Route>
+					</Routes>
+				</ScrollToTop>
+			</Router>
+			<Toaster position='top' />
+		</>
+	);
 }
 
 export default App;
