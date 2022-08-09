@@ -6,10 +6,10 @@ import Spinner from "../../components/Spinner"
 import {SpinnerContainer} from "../../components/Spinner/style"
 import "../Dashboard/DashboardItems/payment.css";
 import card from "../../assets/card.svg";
-import transfer from "../../assets/transfer.svg";
-import ussd from "../../assets/ussd.svg";
-import bank from "../../assets/bank.svg";
-import Logomark from "../../assets/Logomark.svg";
+// import transfer from "../../assets/transfer.svg";
+// import ussd from "../../assets/ussd.svg";
+// import bank from "../../assets/bank.svg";
+// import Logomark from "../../assets/Logomark.svg";
 import { useNavigate, Link, useParams } from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux"
 import {InfoContainer, Info, Title, OptionsContainer, Option} from "./styles"
@@ -46,7 +46,7 @@ function PaymentPage() {
       })
       setStore(dispatch, data)
     }
-    console.log("Business", data)
+    // console.log("Business", data)
   }, [data])
 
 
@@ -59,7 +59,7 @@ function PaymentPage() {
           <InfoContainer>
             <Info>
               <span className="info-title">Name</span>
-              <span className="info-content">{data.name}</span>
+              <span className="info-content">{data.subdomain}</span>
             </Info>
             <Info>
               <span className="info-title">Amount</span>
@@ -72,20 +72,20 @@ function PaymentPage() {
             >
               <div className="left">
                 <Image src={card} alt="card" />
-                <Text className="paid">Pay with Card</Text>
+                <Text className="paid">Pay now</Text>
               </div>
               <FaAngleRight />
             </Option>
             </PayStack>
-            <Link to={`bank-transfer/${data.businessid}`}>
+            {/* <Link aria-disabled to={`bank-transfer/${data.businessid}`}>
               <Option>
                 <div className="left">
                   <Image src={transfer} alt="transfer" />
                   <Text className="paid">Pay with Bank Transfer</Text>
                 </div>
-                <FaAngleRight />
-              </Option>
-            </Link>
+              <FaAngleRight />
+            </Option>
+          </Link> */}
           </OptionsContainer>
           </>
           :
