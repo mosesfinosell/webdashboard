@@ -74,8 +74,8 @@ export default function BusinessDashboard() {
     (state) => state.businessReducer.businessUserIdDetails
   );
   useEffect(() => {
-    dispatch(getBusinessUserDetails(businessInfo.user_id));
-  }, [businessInfo.user_id, dispatch]);
+    dispatch(getBusinessUserDetails(businessInfo?.user_id));
+  }, [businessInfo?.user_id, dispatch]);
   // const toggleModal = () => {
   //   console.log(isOpen, "DISCLOSE");
   //   dispatch(setBusinessModal(isOpen));

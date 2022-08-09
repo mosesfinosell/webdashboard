@@ -1,39 +1,27 @@
-import { Formik, Form, Field } from "formik";
 import {
-  Center,
   Input,
   InputRightElement,
   InputLeftElement,
   InputGroup,
-  FormControl,
   FormLabel,
-  FormErrorMessage,
   Button,
-  Box,
-  Stack,
   Image,
   Text,
-  Container,
-  Spinner,
-  // useToast,
-  Alert,
-  AlertIcon,
   createStandaloneToast,
 } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { Link as RLink } from "react-router-dom";
 import logo from "../../../assets/Logomark.png";
 import { MdWifiCalling3 } from "react-icons/md";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
 import { useColorModeValue } from "@chakra-ui/color-mode";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 // import {Redirect} from 'react-router-dom'
 import * as Yup from "yup";
 import { getBusinessUserInfo } from "../../../ReduxContianer/BussinessRedux/BusinessAction";
 import axios from "axios";
-// import {getUserDetails} from '../../../ReduxContianer/BussinessRedux/BusinessAction'
 import { useFormik } from "formik";
 export default function BusinessAccountSignIn() {
   const yellowbtn = useColorModeValue("yellow.500");
@@ -46,8 +34,7 @@ export default function BusinessAccountSignIn() {
   // const getUser = useSelector((state) => state.getUser);
   // const { users } = getUser;
   // console.log(users)
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [password, setPassword] = useState("");
+
   const [isLoading, setIsLoading] = useState(false);
 
   const [show, setShow] = useState(false);
@@ -87,7 +74,7 @@ export default function BusinessAccountSignIn() {
         });
         localStorage.setItem("password", response.data.message.password);
         tools.resetForm();
-        return history("/business-dashboard");
+        return history('/download-app');
       })
       .catch((error) => {
         setIsLoading(false);

@@ -33,5 +33,5 @@ const Container = styled.div`
     background: #ffffff;
     border: 0.5px solid #d9d9d9;
     box-sizing: border-box;
-    padding: ${0.063 * 49}rem 0;
+    padding: ${0.063 * 39}rem 0;
 `
