@@ -1,92 +1,105 @@
-import {Link} from "react-router-dom"
+import { Link, useNavigate } from 'react-router-dom';
 import styled from "styled-components"
 import LogoMark from "../SVG/LogoMark"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {  Button, createStandaloneToast } from '@chakra-ui/react';
+
 import {
     faBars,
     faAngleDown,
     faUniversity,
     faUser
   } from "@fortawesome/free-solid-svg-icons";
-import {marginMobile, PrimaryButton, margin } from "../../Styles"
+import { marginMobile, PrimaryButton, margin } from "../../Styles"
+import { useColorModeValue } from '@chakra-ui/color-mode';
 
 const Header = ({LogoImg=LogoMark, link="/"}) => {
-    
+    const yellowbtn = useColorModeValue('yellow.500');
+ const history = useNavigate();
+	
+  const handleClick = () => history('/business-signup')
+  
   return (
-    <Head >
-        <HeadContent>
-        <Logo to={link} >
-          <LogoImg  />
-        </Logo>
-        <input id="menu-bar" type="checkbox" />
+		<Head>
+			<HeadContent>
+				<Logo to={link}>
+					<LogoImg />
+				</Logo>
+				<input id='menu-bar' type='checkbox' />
 
-        <Mobile>
-            <PrimaryButton>
-                <Link to="/coming-soon">
-                Create Account
-              </Link>
-            </PrimaryButton>
-            <label htmlFor="menu-bar" className="checkbtn">
-              <FontAwesomeIcon icon={faBars} className="socials" />
-            </label>
-        </Mobile>
-        
-        <NavBar>
-          <ul>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <Products >
-              <a>
-                Products
-                <FontAwesomeIcon
-                  icon={faAngleDown}
-                  style={{ paddingLeft: "3px", paddingTop: "3px" }}
-                />
-              </a>
-              <div className="navbar-dropdown">
-                <Link to="/individual">
-                  <DropDownItem>
-                      <div className="icon">
-                        <FontAwesomeIcon
-                          icon={faUser}
-                        />
-                      </div>
-                      <p>Individual</p>
-                  </DropDownItem>
-                </Link>
-                <div className="vl"></div>
-                  <Link to="/business-home">
-                    <DropDownItem >
-                      <div className="icon">
-                        <FontAwesomeIcon
-                          icon={faUniversity}
-                        />
-                      </div>
-                      <p>Business</p>
-                    </DropDownItem>
-                  </Link>
-              </div>
-            </Products>
-            <li>
-              <Link to="/pricing">Pricing</Link>
-            </li>
-            <li>
-              <Link to="/blog">Blog</Link>
-            </li>
-          </ul>
-          <Account>
-            <Link to="/coming-soon">Log in</Link>
-            <PrimaryButton>
+				<Mobile>
+					<PrimaryButton>
+						<Link to='/coming-soon'>Create Account</Link>
+					</PrimaryButton>
+					<label htmlFor='menu-bar' className='checkbtn'>
+						<FontAwesomeIcon icon={faBars} className='socials' />
+					</label>
+				</Mobile>
+
+				<NavBar>
+					<ul>
+						<li>
+							<Link to='/about'>About</Link>
+						</li>
+						<Products>
+							<a>
+								Products
+								<FontAwesomeIcon
+									icon={faAngleDown}
+									style={{ paddingLeft: '3px', paddingTop: '3px' }}
+								/>
+							</a>
+							<div className='navbar-dropdown'>
+								<Link to='/individual'>
+									<DropDownItem>
+										<div className='icon'>
+											<FontAwesomeIcon icon={faUser} />
+										</div>
+										<p>Individual</p>
+									</DropDownItem>
+								</Link>
+								<div className='vl'></div>
+								<Link to='/business-home'>
+									<DropDownItem>
+										<div className='icon'>
+											<FontAwesomeIcon icon={faUniversity} />
+										</div>
+										<p>Business</p>
+									</DropDownItem>
+								</Link>
+							</div>
+						</Products>
+						<li>
+							<Link to='/pricing'>Pricing</Link>
+						</li>
+						<li>
+							<Link to='/blog'>Blog</Link>
+						</li>
+					</ul>
+					<Account>
+						<Link to='/coming-soon'>Log in</Link>
+						{/* <PrimaryButton>
               <Link to="/coming-soon">
                 Create Account
               </Link>
-            </PrimaryButton>
-          </Account>
-        </NavBar>
-        </HeadContent>
-    </Head>
-  )
+            </PrimaryButton> */}
+						<Button
+              onClick={handleClick}
+							ml={3}
+							bg={yellowbtn}
+							width='150px'
+							h='50px'
+							borderRadius='0px 11px 11px 11px'
+							type='submit'
+							color='white'
+							_hover={{ bg: '#1A202C' }}>
+                    Create Account
+						</Button>
+					</Account>
+				</NavBar>
+			</HeadContent>
+		</Head>
+	);
 }
 
 const Logo = styled(Link)`

@@ -9,18 +9,18 @@ import CustomField from "../../../components/Form/Input/UnControlled"
 import Button from "../../../components/Form/Submit"
 
 
-import {setVerification} from "../../../ReduxContianer/BusinessSignup/signupActions";
+import {setVerification} from "../../../ReduxContianer/actions/auth/signupActions";
 
 const Verify = () => {
     const {email, tel, verification} = useSelector((state)=> state.businessSignup)
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    useEffect(()=>{
-        console.log(email, tel, verification)
-        if(!email || !tel){
-            navigate(-1)
-        }
-    }, [])
+    // useEffect(()=>{
+    //     console.log(email, tel, verification)
+    //     if(!email || !tel){
+    //         navigate(-1)
+    //     }
+    // }, [])
 
   return (
     <>

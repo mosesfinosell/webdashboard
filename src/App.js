@@ -1,83 +1,80 @@
-import { Routes, BrowserRouter as Router, Route} from "react-router-dom";
-import {useEffect} from "react"
+import { Routes, BrowserRouter as Router, Route } from 'react-router-dom';
+import { useEffect } from 'react';
 
-import PrivateRoute from "./utils/PrivateRoute";
-import ErrorBoundary from "./ErrorBoundary";
-import AccountBox from "./pages/AccountBox"
-import PersonalAccountSignUp from "./pages/SignUp/PersonalSignUpPage/PersonalAccountSignUp";
-import PersonalAccountSignIn from "./pages/SignIn/PersonalLogInPage/PersonalAccountSignIn";
-import PersonalForgetPassword from "./pages/SignIn/PersonalLogInPage/PersonalForgetPassword";
+import PrivateRoute from './utils/PrivateRoute';
+// import ErrorBoundary from './ErrorBoundary';
+import AccountBox from './pages/AccountBox';
+import PersonalAccountSignUp from './pages/SignUp/PersonalSignUpPage/PersonalAccountSignUp';
+import PersonalAccountSignIn from './pages/SignIn/PersonalLogInPage/PersonalAccountSignIn';
+// import PersonalForgetPassword from './pages/SignIn/PersonalLogInPage/PersonalForgetPassword';
 
-import BusinessAccountSignUp from "./pages/SignUp/BusinessSignUpPage/BusinessAccountSignUp";
-import Verify from "./pages/SignUp/BusinessSignUpPage/Verify"
-import OTP from "./pages/SignUp/BusinessSignUpPage/OTP"
-import BusinessAccountSignIn from "./pages/SignIn/BusinessLogInPage/BusinessAccountSignIn";
-import AddBusinessPage from "./pages/SignUp/BusinessSignUpPage/AddBusinessPage";
-import StoreInventory from "./pages/Dashboard/BusinessDashboard/HomeBusiness/StoreInventory";
-import StorePage from "./pages/Dashboard/BusinessDashboard/HomeBusiness/StorePage";
-import Cart from "./pages/Dashboard/BusinessDashboard/HomeBusiness/Cart";
-import VerifyPhoneNumber from "./pages/SignUp/PersonalSignUpPage/VerifyPhoneNumber";
-import InputOtp from "./pages/SignUp/PersonalSignUpPage/VerifyOtp";
-import PasswordPage from "./pages/SignUp/PasswordPage";
-import DashboardPage from "./pages/Dashboard/DashboardPage";
-import BusinessDashboard from "./pages/Dashboard/DashboardItems/BusinessDashboard";
-import AddProduct from "./pages/Dashboard/BusinessDashboard/HomeBusiness/addProduct";
-import ProductModal from "./pages/Dashboard/BusinessDashboard/HomeBusiness/addProductModal";
-import DeliveryRequest from "./pages/Dashboard/BusinessDashboard/HomeBusiness/delivery";
-import InvoiceBoard from "./pages/Dashboard/BusinessDashboard/HomeBusiness/InvoiceBoard";
-import AddInvoice from "./pages/Dashboard/BusinessDashboard/HomeBusiness/addInvoice";
-import ResendOtp from "./pages/SignUp/PersonalSignUpPage/resendOtpPage";
-import BusinessVerifyOtp from "./pages/SignUp/PersonalSignUpPage/BusinessVerifyOtp";
-import AddTeam from "./pages/Dashboard/BusinessDashboard/Account/addTeam";
-import DealDashboard from "./pages/Dashboard/DashboardItems/DealDashboard";
-import HomeDashboard from "./pages/Dashboard/DashboardItems/HomeDashboard";
-import PaymentPage from "./pages/Dashboard/DashboardItems/PaymentPage";
-import AccountUserProfile from "./pages/Dashboard/DashboardItems/AccountUserProfile";
-import BusinessOrders from "./pages/Dashboard/DashboardItems/OrderHistory";
-import StoreLink from "./pages/Dashboard/BusinessDashboard/StoreLink/addUrlPage";
-import CreateTransaction from "./pages/Dashboard/BusinessDashboard/Payment/createTransaction";
-import PayWithCard from "./pages/Dashboard/DashboardItems/PayWithCard";
-import PayWithUssd from "./pages/Dashboard/DashboardItems/PayWithUssd";
-import UssdConfirmation from "./pages/Dashboard/DashboardItems/UssdConfirmation";
-import PayWithTransfer from "./pages/Dashboard/DashboardItems/PayWithTransfer";
-import BankPayment from "./pages/Dashboard/DashboardItems/BankPayment";
-import Payment from "./pages/Payment"
-import BankTransfer from "./pages/Payment/BankTransfer"
+import BusinessAccountSignUp from './pages/SignUp/BusinessSignUpPage/BusinessAccountSignUp';
+import Verify from './pages/SignUp/BusinessSignUpPage/Verify';
+import OTP from './pages/SignUp/BusinessSignUpPage/OTP';
+import BusinessAccountSignIn from './pages/SignIn/BusinessLogInPage/BusinessAccountSignIn';
+// import AddBusinessPage from './pages/SignUp/BusinessSignUpPage/AddBusinessPage';
+import StoreInventory from './pages/Dashboard/BusinessDashboard/HomeBusiness/StoreInventory';
+import StorePage from './pages/Dashboard/BusinessDashboard/HomeBusiness/StorePage';
+import Cart from './pages/Dashboard/BusinessDashboard/HomeBusiness/Cart';
+// import VerifyPhoneNumber from './pages/SignUp/PersonalSignUpPage/VerifyPhoneNumber';
+// import InputOtp from './pages/SignUp/PersonalSignUpPage/VerifyOtp';
+// import PasswordPage from './pages/SignUp/PasswordPage';
+// import DashboardPage from './pages/Dashboard/DashboardPage';
+import BusinessDashboard from './pages/Dashboard/DashboardItems/BusinessDashboard';
+// import AddProduct from './pages/Dashboard/BusinessDashboard/HomeBusiness/addProduct';
+// import ProductModal from './pages/Dashboard/BusinessDashboard/HomeBusiness/addProductModal';
+// import DeliveryRequest from './pages/Dashboard/BusinessDashboard/HomeBusiness/delivery';
+// import InvoiceBoard from './pages/Dashboard/BusinessDashboard/HomeBusiness/InvoiceBoard';
+// import AddInvoice from './pages/Dashboard/BusinessDashboard/HomeBusiness/addInvoice';
+// import ResendOtp from './pages/SignUp/PersonalSignUpPage/resendOtpPage';
+// import BusinessVerifyOtp from './pages/SignUp/PersonalSignUpPage/BusinessVerifyOtp';
+// import AddTeam from './pages/Dashboard/BusinessDashboard/Account/addTeam';
+import DealDashboard from './pages/Dashboard/DashboardItems/DealDashboard';
+import HomeDashboard from './pages/Dashboard/DashboardItems/HomeDashboard';
+// import PaymentPage from './pages/Dashboard/DashboardItems/PaymentPage';
+import AccountUserProfile from './pages/Dashboard/DashboardItems/AccountUserProfile';
+import BusinessOrders from './pages/Dashboard/DashboardItems/OrderHistory';
+import StoreLink from './pages/Dashboard/BusinessDashboard/StoreLink/addUrlPage';
+import CreateTransaction from './pages/Dashboard/BusinessDashboard/Payment/createTransaction';
+import PayWithCard from './pages/Dashboard/DashboardItems/PayWithCard';
+import PayWithUssd from './pages/Dashboard/DashboardItems/PayWithUssd';
+import UssdConfirmation from './pages/Dashboard/DashboardItems/UssdConfirmation';
+import PayWithTransfer from './pages/Dashboard/DashboardItems/PayWithTransfer';
+import BankPayment from './pages/Dashboard/DashboardItems/BankPayment';
+import Payment from './pages/Payment';
+import BankTransfer from './pages/Payment/BankTransfer';
 
-import Store from "./pages/Store/productList"
-import Search from "./pages/Store/SearchProducts"
-import StoreItem from "./pages/Store/StoreItem"
+import Store from './pages/Store/productList';
+import Search from './pages/Store/SearchProducts';
+import StoreItem from './pages/Store/StoreItem';
 
-import Home from "./pages/Home";
-import Individual from "./pages/Individual";
-import Business from "./pages/Business";
-import Terms from "./pages/Terms";
-import Pricing from "./pages/Pricing";
-import About from "./pages/About"
-import Blog from "./pages/Blog"
-import FAQ from "./pages/FAQ"
-import ComingSoon from "./pages/ComingSoon"
-import BlogPost from "./pages/BlogPost"
-import Privacy from "./pages/Privacy"
-import Escrow from "./pages/Escrow"
+import Home from './pages/Home';
+import Individual from './pages/Individual';
+import Business from './pages/Business';
+import Terms from './pages/Terms';
+import Pricing from './pages/Pricing';
+import About from './pages/About';
+import Blog from './pages/Blog';
+import FAQ from './pages/FAQ';
+import ComingSoon from './pages/ComingSoon';
+import BlogPost from './pages/BlogPost';
+import Privacy from './pages/Privacy';
+import Escrow from './pages/Escrow';
+import AppDownload from './pages/appDownload.jsx';
 
+import Website from './components/Layout/Website';
+import AuthContainer from './components/Layout/AuthContainer';
+import StoreContainer from './components/Store/StoreContainer';
+import PaymentContainer from './components/Payment/container';
 
-import Website from "./components/Layout/Website"
-import AuthContainer from "./components/Layout/AuthContainer"
-import StoreContainer from "./components/Store/StoreContainer"
-import PaymentContainer from "./components/Payment/container"
+import ScrollToTop from './utils/scrollToTop';
 
-import ScrollToTop from "./utils/scrollToTop"
-
-
-import {Toaster} from "react-hot-toast"
-
+import { Toaster } from 'react-hot-toast';
 
 function App() {
-  
-  useEffect(()=>{}, [])
+	useEffect(() => {}, []);
 
-  return (
+	return (
 		<>
 			<Router>
 				<ScrollToTop>
@@ -95,17 +92,14 @@ function App() {
 							<Route path='pricing' element={<Pricing />} />
 							<Route path='privacy' element={<Privacy />} />
 							<Route path='escrow' element={<Escrow />} />
+							<Route path='download-app' element={<AppDownload/>} />
 						</Route>
 						<Route path='/' element={<AuthContainer />}>
 							<Route path='account' element={<AccountBox />} />
-							<Route
-								path='business-signup'
-								element={<BusinessAccountSignUp />}
-							/>
+
 							<Route path='verify' element={<Verify />} />
 							<Route path='/verify/otp' element={<OTP />} />
 						</Route>
-
 						<Route
 							exact
 							path='/personal-signup'
@@ -158,10 +152,15 @@ function App() {
 						{/* </Switch> */}
 
 						{/* Bussiness Account  */}
-
+						<Route
+							path='/business-signup'
+							element={<BusinessAccountSignUp />}
+							// element={<PrivateRoute />}
+						/>
 						<Route
 							path='/business-signin'
-							element={<PrivateRoute element={<BusinessAccountSignIn />} />}
+							element={<BusinessAccountSignIn />}
+							// element={<PrivateRoute />}
 						/>
 						<Route
 							exact

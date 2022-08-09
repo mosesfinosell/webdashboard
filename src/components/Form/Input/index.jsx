@@ -1,7 +1,7 @@
 import React from 'react'
 import {FieldContainer, Field, Label, InputLeft, Container} from "../style"
 
-const Index = ({formik, type, id, Left, label, placeholder, width=649}) => {
+const Index = ({formik, type, id, Left, label, placeholder, width=550}) => {
   //id must be the same as the formik key used for validation
   return (<Container width={width}>
             <Label htmlFor={type}>{label}</Label>
@@ -31,3 +31,5 @@ const Index = ({formik, type, id, Left, label, placeholder, width=649}) => {
 }
 
 export default Index
+
+

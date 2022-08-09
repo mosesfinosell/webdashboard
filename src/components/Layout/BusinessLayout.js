@@ -18,7 +18,7 @@ function BusinessLayout({ children }) {
   const businessInfo = useSelector(
     (state) => state.businessReducer.businessUserInfo
   );
-  const name = businessInfo.name;
+  // const name = businessInfo.name;
   return (
     <>
       <div className="sidebar">
