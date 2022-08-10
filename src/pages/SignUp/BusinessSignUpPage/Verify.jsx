@@ -1,18 +1,20 @@
 import {useEffect} from "react"
 import {useSelector, useDispatch} from "react-redux"
-import { useNavigate, Link } from "react-router-dom"
+import { useNavigate} from "react-router-dom"
 import styled from "styled-components"
 import {FaCheck, FaComment, FaEnvelope} from "react-icons/fa"
-
+import { useColorModeValue } from '@chakra-ui/color-mode';
 import FormTitle from "../../../components/Form/FormTitle"
 import CustomField from "../../../components/Form/Input/UnControlled"
-import Button from "../../../components/Form/Submit"
-
-
+import { Button } from "@chakra-ui/react"
 import {setVerification} from "../../../ReduxContianer/actions/auth/signupActions";
 
 const Verify = () => {
-    const {email, tel, verification} = useSelector((state)=> state.businessSignup)
+    const yellowbtn = useColorModeValue('yellow.500');
+
+    const { email, phoneNumber, verification } = useSelector(
+			(state) => state.businessSignup
+		);
     const navigate = useNavigate()
     const dispatch = useDispatch()
     // useEffect(()=>{
@@ -23,42 +25,66 @@ const Verify = () => {
     // }, [])
 
   return (
-    <>
-    <FormTitle title="Create a business account" text={verification === "tel" ?
-    "We need to verify a phone number with which you can recieve OTP for your card transactions."
-    :
-    "We need to verify an email with which you can recieve OTP for your card transactions."
-    } />
-    <Container>
-        {verification === "tel" ?
-        <CustomField type="tel" label="Phone Number" value={tel} /> 
-        :
-        <CustomField type="email" label="Email" value={email} /> 
-        }
-    
-        <HowTitle>How would you like to receive the OTP?</HowTitle>
-        <Select selected={verification === "tel"} onClick={()=>verification === "tel" ? null : setVerification(dispatch)}>
-            <LeftIcon>
-                <FaComment />
-            </LeftIcon>
-            <p>Via Message</p>
-            <Check>
-                <FaCheck />
-            </Check>
-        </Select>
-        <Select selected={verification === "email"} onClick={()=>verification === "email" ? null : setVerification(dispatch)}>
-            <LeftIcon>
-                <FaEnvelope />
-            </LeftIcon>
-            <p>Via Email</p>
-            <Check >
-                <FaCheck />
-            </Check>
-        </Select>
-        <Button type="button" onClick={()=>navigate("otp")} >Continue</Button>
-    </Container>
-    </>
-  )
+		<>
+			<FormTitle
+				title='Create a business account'
+				text={
+					verification === 'phoneNumber'
+						? 'We need to verify a phone number with which you can recieve OTP for your card transactions.'
+						: 'We need to verify an email with which you can recieve OTP for your card transactions.'
+				}
+			/>
+			<Container>
+				{verification === 'phoneNumber' ? (
+					<CustomField type='phoneNumber' label='Phone Number' value={phoneNumber} />
+				) : (
+					<CustomField type='email' label='Email' value={email} />
+				)}
+
+				<HowTitle>How would you like to receive the OTP?</HowTitle>
+				<Select
+					selected={verification === 'phoneNumber'}
+					onClick={() =>
+						verification === 'phoneNumber' ? null : setVerification(dispatch)
+					}>
+					<LeftIcon>
+						<FaComment />
+					</LeftIcon>
+					<p>Via Message</p>
+					<Check>
+						<FaCheck />
+					</Check>
+				</Select>
+				<Select
+					selected={verification === 'email'}
+					onClick={() =>
+						verification === 'email' ? null : setVerification(dispatch)
+					}>
+					<LeftIcon>
+						<FaEnvelope />
+					</LeftIcon>
+					<p>Via Email</p>
+					<Check>
+						<FaCheck />
+					</Check>
+				</Select>
+				<Button
+					onClick={() => navigate('otp')}
+					mt={4}
+					bg={yellowbtn}
+					width='500px'
+					h='75px'
+					borderRadius='0px 11px 11px 11px'
+					type='submit'
+					color='white'
+					_hover={{ bg: '#1A202C' }}
+					// loadingText='Sending Otp...'
+					spinnerPlacement='end'>
+					Continue
+				</Button>
+			</Container>
+		</>
+	);
 }
 
 export default Verify
@@ -90,11 +116,11 @@ const Check = styled.div`
 `
 
 const Select = styled.div`
-    width: 100%;
+    width: 500px;
     position: relative;
     border: #D9D9D9 solid ${1 * 0.063}rem;
     border-radius: 0px 11px 11px 11px;
-    height: ${90 * 0.063}rem;
+    height: 75px;
     margin-bottom: ${13 * 0.063}rem;
     background: ${prop => prop.selected ? "#FDF9ED" : "#FAFAFA"};
     border-color: ${prop => prop.selected ? "#F5D776" : "#D9D9D9"};
@@ -126,8 +152,9 @@ const Select = styled.div`
 `
 
 const Container = styled.div`
-    width: ${0.063 * 650}rem;
-    margin: 0 auto;
+   display:flex;
+   flex-direction: column;
+   align-items: center;
 
     button{
         margin-top: ${0.063 * 27}rem;

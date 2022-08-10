@@ -52,7 +52,7 @@ export const FieldContainer = styled.div`
 export const Field = styled.input`
 	border-radius: 0px 11px 11px 11px;
 	width: 500px;
-	height: 65px;
+	height: 75px;
 	border: solid ${0.063 * 1}rem #d9d9d9;
 	background: #fafafa;
 	padding: ${0.063 * 34}rem ${0.063 * 34}rem ${0.063 * 34}rem ${0.063 * 54}rem;

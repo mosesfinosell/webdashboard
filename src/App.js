@@ -67,6 +67,8 @@ import AuthContainer from './components/Layout/AuthContainer';
 import StoreContainer from './components/Store/StoreContainer';
 import PaymentContainer from './components/Payment/container';
 
+import BusinessLayout from './components/Layout/BusinessLayout'
+
 import ScrollToTop from './utils/scrollToTop';
 
 import { Toaster } from 'react-hot-toast';
@@ -92,7 +94,7 @@ function App() {
 							<Route path='pricing' element={<Pricing />} />
 							<Route path='privacy' element={<Privacy />} />
 							<Route path='escrow' element={<Escrow />} />
-							<Route path='download-app' element={<AppDownload/>} />
+							<Route path='download-app' element={<AppDownload />} />
 						</Route>
 						<Route path='/' element={<AuthContainer />}>
 							<Route path='account' element={<AccountBox />} />
@@ -164,13 +166,15 @@ function App() {
 						/>
 						<Route
 							exact
-							path='/business-dashboard'
-							element={<PrivateRoute element={<BusinessDashboard />} />}
+							path='/dashboard'
+							element={<BusinessLayout />}
+							// element={<PrivateRoute />}
 						/>
 						<Route
 							exact
 							path='/business/orders'
-							element={<PrivateRoute element={<BusinessOrders />} />}
+							element={<BusinessOrders />}
+							// element={<PrivateRoute  />}
 						/>
 						<Route
 							exact

@@ -1,27 +1,42 @@
-import { Text, Link, Button, createStandaloneToast } from '@chakra-ui/react';
-
+import {useState} from 'react'
+import { Formik, Form, Field } from 'formik';
+import {
+	Center,
+	Input,
+	InputLeftElement,
+	InputRightElement,
+	InputGroup,
+	FormControl,
+	FormLabel,
+	Button,
+	Text,
+	Stack,
+	Link,
+	Image,
+	Box,
+	Container,
+} from '@chakra-ui/react';
+import { Link as RLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
+import { FaEyeSlash, FaEye } from 'react-icons/fa';
 import * as Yup from 'yup';
-// import { useState } from 'react';
+
 import { FaPhone, FaEnvelope, FaIndustry,FaAddressCard,FaLock } from 'react-icons/fa';
 import { MdAddBusiness } from 'react-icons/md'
-// import createAccount  from '../../../ReduxContianer/actions/auth/signupActions';
+
 import axios from 'axios';
-// import Spinner from "../../../components/Spinner"
+import logo from "../../../assets/Logomark.png";
 import '../../../components/auth.css';
 import { useFormik } from 'formik';
 import { useColorModeValue } from '@chakra-ui/color-mode';
-import FormTitle from '../../../components/Form/FormTitle';
-import CustomField from '../../../components/Form/Input';
-import Submit from '../../../components/Form/Submit';
 import toast from 'react-hot-toast';
 import {
 	SIGN_UP_LOADING,
 	SIGN_UP_SUCCESS,
 	SIGN_UP_ERROR,
 } from '../../../ReduxContianer/constants/businessSignupActionType';
+
 
 const finosellClient = axios.create({
 	baseURL: process.env.REACT_APP_FINOSELL_BASE_URI
@@ -72,172 +87,371 @@ const createAccount =
 	};
 
  function BusinessAccountSignUp() {
-const yellowbtn = useColorModeValue('yellow.500');
+		const yellowbtn = useColorModeValue('yellow.500');
+ const [show, setShow] = useState(false);
+ 
+		const dispatch = useDispatch();
+		const history = useNavigate();
 
-	 const dispatch = useDispatch();
-	 const history = useNavigate();
-	
-	// Function
-	 const businessSign = useSelector((state) => state.businessSignup);
-		const {loading, success } = businessSign;
+		// Function
+		const businessSign = useSelector((state) => state.businessSignup);
+		const { loading, success } = businessSign;
 
-			
-
-	const validationSchema = Yup.object().shape({
-		name: Yup.string().required('Name is required'),
-		email: Yup.string().email('Invalid Email').required('Email is required'),
-		phoneNumber: Yup.number()
-			.typeError('Phone number must be digits')
-			.required('Phone number is required'),
-		address: Yup.string().required('Address is required'),
-		industry: Yup.string().required('Industry is required'),
-		password: Yup.string()
-			.min(5, 'Too short')
-			.max(9, 'Okay')
-			.required('Password is required'),
-	});
-	const initialValues = {
-		name: '',
-		email: '',
-		phoneNumber: '',
-		password: '',
-		address: '',
-		industry: '',
-	};
-
-	const onSubmit = (values, tools) => {
-		const formData = {
-			name: values.name,
-			email: values.email,
-			password: values.password,
-			phone_number: values.phoneNumber,
-			address: values.address,
-			industry: values.industry,
-			account_type: 'business',
+		const validationSchema = Yup.object().shape({
+			name: Yup.string().required('Name is required'),
+			email: Yup.string().email('Invalid Email').required('Email is required'),
+			phoneNumber: Yup.number()
+				.typeError('Phone number must be digits')
+				.required('Phone number is required'),
+			address: Yup.string().required('Address is required'),
+			industry: Yup.string().required('Industry is required'),
+			password: Yup.string()
+				.min(5, 'Too short')
+				.max(9, 'Okay')
+				.required('Password is required'),
+		});
+		const initialValues = {
+			name: '',
+			email: '',
+			phoneNumber: '',
+			password: '',
+			address: '',
+			industry: '',
 		};
-		dispatch(createAccount(formData));
-		tools.resetForm()
-		if (success) {
-			return history('/download-app');
-		}
-	};
-	
-	const formik = useFormik({
-		initialValues,
-		onSubmit,
-		validationSchema,
-	});
 
-	return (
-		<>
-			<FormTitle
-				title='Create a business account'
-				text='Use your business information'
-			/>
+		// Function
+		const handleClick = () => setShow(!show);
 
-			<form onSubmit={formik.handleSubmit}>
-				<CustomField
-					type='name'
-					id='name'
-					Left={MdAddBusiness}
-					formik={formik}
-					label='Business Name'
-					placeholder='Jumoke Adetola'
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					value={formik.values.name}
-				/>
-				<CustomField
-					type='email'
-					id='email'
-					Left={FaEnvelope}
-					formik={formik}
-					label='Business Email'
-					placeholder='Email Address'
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					value={formik.values.email}
-				/>
-				<CustomField
-					type='phoneNumber'
-					id='phoneNumber'
-					Left={FaPhone}
-					formik={formik}
-					label='Phone Number'
-					placeholder='08012345678'
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					value={formik.values.phoneNumber}
-				/>
-				<CustomField
-					type='address'
-					id='address'
-					Left={FaAddressCard}
-					formik={formik}
-					label='Address'
-					placeholder='Ibadan'
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					value={formik.values.address}
-				/>
-				<CustomField
-					type='industry'
-					id='industry'
-					Left={FaIndustry}
-					formik={formik}
-					label='Industry'
-					placeholder='Food'
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					value={formik.values.industry}
-				/>
-				<CustomField
-					type='password'
-					id='password'
-					Left={FaLock}
-					formik={formik}
-					label='Password'
-					placeholder='********'
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					value={formik.values.password}
-				/>
-				{/* <Submit type='submit'>
-					{!loading ? 'Continue' : <Spinner size={20} border={5} />}
-				</Submit> */}
-				<Submit>
-					<Button	
-						mt={3}
-						bg={yellowbtn}
-						width='500px'
-						h='70px'
-						borderRadius='0px 11px 11px 11px'
-						type='submit'
-						color='white'
-						_hover={{ bg: '#1A202C' }}
-						isLoading={loading}
-						loadingText='Sign Up...'
-						spinnerPlacement='end'>
-						Continue
-					</Button>
-				</Submit>
-			</form>
-			<Text
-				fontSize='16px'
-				// lineHeight="5"
-				style={{
-					justifyContent: 'center',
-					display: 'flex',
-					paddingTop: '0.2rem',
-					paddingBottom: '0.4rem',
-				}}>
-				Already have an account?
-				<Text as={Link} pl='2' to='/business-signin' color='yellow.500'>
-					Login
-				</Text>
-			</Text>
-		</>
-	);
-}
+		const onSubmit = (values, tools) => {
+			const formData = {
+				name: values.name,
+				email: values.email,
+				password: values.password,
+				phone_number: values.phoneNumber,
+				address: values.address,
+				industry: values.industry,
+				account_type: 'business',
+			};
+			dispatch(createAccount(formData));
+			tools.resetForm();
+			if (success) {
+				return history('/download-app');
+			}
+		};
+
+		const formik = useFormik({
+			initialValues,
+			onSubmit,
+			validationSchema,
+		});
+
+	 return (
+			<Container maxW='container.lg'>
+				<Box
+					p='50'
+					m='36'
+					boxSizing='border-box'
+					borderWidth='1px'
+					borderRadius='0px 21px 21px 21px'
+					overflow='hidden'>
+					<Center>
+						<Stack>
+							<Image mb='15' src={logo} alt='logo' />
+						</Stack>
+					</Center>
+
+					<Center>
+						<Stack>
+							<Text fontSize='36px' mt='20px' fontWeight='bold' lineHeight='5'>
+								Create Accounts
+							</Text>
+						</Stack>
+					</Center>
+					<Center>
+						<Stack mt={2}>
+							<Text color='gray'>Use your personal information</Text>
+						</Stack>
+					</Center>
+					<Formik
+						initialValues={{
+							name: '',
+							phoneNumber: '',
+							email: '',
+						}}>
+						{() => (
+							<Center mt={8}>
+								<Form onSubmit={formik.handleSubmit}>
+									<Field name='name'>
+										{() => (
+											<FormControl>
+												<FormLabel htmlFor='name'>Name</FormLabel>
+												<InputGroup>
+													<InputLeftElement
+														pointerEvents='none'
+														m='17px 1px'
+														ml={2}
+														fontSize='24px'
+														color='yellow.500'
+														children={<MdAddBusiness />}
+													/>
+
+													<Input
+														mb={4}
+														pl='60px'
+														type='name'
+														id='name'
+														placeholder='Jumoke Adetola'
+														onChange={formik.handleChange}
+														onBlur={formik.handleBlur}
+														value={formik.values.name}
+														width='500px'
+														h='75px'
+														borderRadius='0px 11px 11px 11px'
+														_focus={{ bg: '#fdf9ed', borderColor: '#f7e8b5' }}
+													/>
+												</InputGroup>
+												{formik.touched.name && formik.errors.name ? (
+													<span className='error-message'>
+														{formik.errors.name}
+													</span>
+												) : null}
+											</FormControl>
+										)}
+									</Field>
+									<Field name='email'>
+										{() => (
+											<FormControl>
+												<FormLabel htmlFor='name'>Email</FormLabel>
+												<InputGroup>
+													<InputLeftElement
+														pointerEvents='none'
+														m='17px 1px'
+														ml={2}
+														fontSize='20px'
+														color='yellow.500'
+														children={<FaEnvelope />}
+													/>
+													<Input
+														mb={4}
+														pl='60px'
+														type='email'
+														id='email'
+														onChange={formik.handleChange}
+														onBlur={formik.handleBlur}
+														value={formik.values.email}
+														placeholder='Email Address'
+														width='500px'
+														h='75px'
+														borderRadius='0px 11px 11px 11px'
+														_focus={{ bg: '#fdf9ed', borderColor: '#f7e8b5' }}
+													/>
+												</InputGroup>
+												{formik.touched.email && formik.errors.email ? (
+													<span className='error-message'>
+														{formik.errors.email}
+													</span>
+												) : null}
+											</FormControl>
+										)}
+									</Field>
+									<Field name='phoneNumber'>
+										{() => (
+											<FormControl>
+												<FormLabel htmlFor='phone Number'>
+													Phone number
+												</FormLabel>
+												<InputGroup>
+													<InputLeftElement
+														pointerEvents='none'
+														m='17px 1px'
+														ml={2}
+														fontSize='20px'
+														color='yellow.500'
+														children={<FaPhone />}
+													/>
+													<Input
+														mb={4}
+														pl='60px'
+														type='phoneNumber'
+														id='phoneNumber'
+														placeholder='08012345678'
+														onChange={formik.handleChange}
+														onBlur={formik.handleBlur}
+														value={formik.values.phoneNumber}
+														width='500px'
+														h='75px'
+														borderRadius='0px 11px 11px 11px'
+														_focus={{ bg: '#fdf9ed', borderColor: '#f7e8b5' }}
+													/>
+												</InputGroup>
+												{formik.touched.phoneNumber &&
+												formik.errors.phoneNumber ? (
+													<span className='error-message'>
+														{formik.errors.phoneNumber}
+													</span>
+												) : null}
+											</FormControl>
+										)}
+									</Field>
+									<Field name='address'>
+										{() => (
+											<FormControl>
+												<FormLabel htmlFor='address'>Address</FormLabel>
+												<InputGroup>
+													<InputLeftElement
+														pointerEvents='none'
+														m='18px 1px'
+														ml={2}
+														fontSize='20px'
+														color='yellow.500'
+														children={<FaAddressCard />}
+													/>
+													<Input
+														mb={4}
+														pl='60px'
+														type='address'
+														id='address'
+														onChange={formik.handleChange}
+														onBlur={formik.handleBlur}
+														value={formik.values.address}
+														placeholder='Ibadan'
+														width='500px'
+														h='75px'
+														borderRadius='0px 11px 11px 11px'
+														_focus={{ bg: '#fdf9ed', borderColor: '#f7e8b5' }}
+													/>
+												</InputGroup>
+												{formik.touched.address && formik.errors.address ? (
+													<span className='error-message'>
+														{formik.errors.address}
+													</span>
+												) : null}
+											</FormControl>
+										)}
+									</Field>
+									<Field name='industry'>
+										{() => (
+											<FormControl>
+												<FormLabel htmlFor='text'>Industry</FormLabel>
+												<InputGroup>
+													<InputLeftElement
+														pointerEvents='none'
+														m='17px 1px'
+														ml={2}
+														fontSize='20px'
+														color='yellow.500'
+														children={<FaIndustry />}
+													/>
+													<Input
+														mb={4}
+														pl='60px'
+														type='industry'
+														id='industry'
+														placeholder='Food'
+														onChange={formik.handleChange}
+														onBlur={formik.handleBlur}
+														value={formik.values.industry}
+														width='500px'
+														h='75px'
+														borderRadius='0px 11px 11px 11px'
+														_focus={{ bg: '#fdf9ed', borderColor: '#f7e8b5' }}
+													/>
+												</InputGroup>
+												{formik.touched.industry && formik.errors.industry ? (
+													<span className='error-message'>
+														{formik.errors.industry}
+													</span>
+												) : null}
+											</FormControl>
+										)}
+									</Field>
+
+									<Field name='password'>
+										{() => (
+											<FormControl>
+												<FormLabel htmlFor='name'>Password</FormLabel>
+												<InputGroup>
+													<InputLeftElement
+														m='15px 1px'
+														ml={2}
+														fontSize='18px'
+														color='yellow.500'
+														children={<FaLock />}
+													/>
+
+													<InputRightElement
+														pointerEvents='visible'
+													 m='15px 8px'
+													
+														color='yellow.500'>
+														<Button
+															onClick={handleClick}
+															fontSize='25px'
+															size='sm'
+															b='transparent'
+															cursor='pointer'>
+															{!show ? <FaEyeSlash /> : <FaEye />}
+														</Button>
+													</InputRightElement>
+													<Input
+														mb={4}
+														pl='60px'
+														type={show ? 'name' : 'password'}
+														placeholder='*******'
+														width='500px'
+														h='75px'
+														borderRadius='0px 11px 11px 11px'
+														onChange={formik.handleChange}
+														onBlur={formik.handleBlur}
+														value={formik.values.password}
+														id='password'
+														name='password'
+														_focus={{ bg: '#fdf9ed', borderColor: '#f7e8b5' }}
+													/>
+												</InputGroup>
+												{formik.touched.password && formik.errors.password ? (
+													<span className='error-message'>
+														{formik.errors.password}
+													</span>
+												) : null}
+											</FormControl>
+										)}
+									</Field>
+									<Button
+										mt={3}
+										bg={yellowbtn}
+										width='500px'
+										h='75px'
+										borderRadius='0px 11px 11px 11px'
+										type='submit'
+										color='white'
+										_hover={{ bg: '#1A202C' }}
+										isLoading={loading}
+										loadingText='Sign Up...'
+										spinnerPlacement='end'>
+										Continue
+									</Button>
+								</Form>
+							</Center>
+						)}
+					</Formik>
+					<Center>
+						<Stack mt='5'>
+							<Text fontSize='18px' lineHeight='5'>
+								Already have an account?
+								<Link
+									as={RLink}
+									pl='2'
+									to='/business-signin'
+									color='yellow.500'>
+									Login
+								</Link>
+							</Text>
+						</Stack>
+					</Center>
+				</Box>
+			</Container>
+		);
+ }
 
 export default BusinessAccountSignUp;

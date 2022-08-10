@@ -48,6 +48,8 @@ import { Chart as ChartJS } from "chart.js/auto";
 import { Link } from "react-router-dom";
 import AddMoneyBusinessModal from "../../../pages/Dashboard/BusinessDashboard/HomeBusiness/addMoneyModal";
 import { useNavigate } from "react-router-dom";
+
+
 export default function BusinessDashboard() {
   const history = useNavigate();
   const { onOpen } = useDisclosure();
@@ -81,7 +83,7 @@ export default function BusinessDashboard() {
   //   dispatch(setBusinessModal(isOpen));
   // };
   return (
-    <BusinessLayout>
+    // <BusinessLayout>
       <div className="dash-cover">
         <div className="left-dash">
           <div className="left-dash-inner">
@@ -229,92 +231,6 @@ export default function BusinessDashboard() {
           </div>
         </div>
       </div>
-    </BusinessLayout>
-    // <Grid
-    //    pl='25'
-    // 	templateRows='repeat(6, 1fr)'
-    // 	templateColumns='repeat(12, 1fr)'
-    // 	display='flex'
-    // 	>
-    // 	<Tabs orientation='vertical' variant='unstyled'>
-    // 		<GridItem rowSpan={7} colSpan={2} bg='white' py='25'>
-    // 			<Box bg='white' w='300px' h='150vh' borderRight='0.3px solid #D9D9D9'>
-    // 				<Center p='45px'>
-    // 					<Flex display='flex' direction='row' alignItems='center'>
-    // 						<Stack pr='15px'>
-    // 							<Avatar name='user' src={user1} />
-    // 						</Stack>
-    // 						<Stack pr='15px'>
-    // 							{businessInfo && (
-    // 								<Text>Hello {businessInfo.name}</Text>
-    // 							)}
-    // 						</Stack>
-    // 						<Stack>
-    // 							<FaAngleDown />
-    // 						</Stack>
-    // 					</Flex>
-    // 				</Center>
-    // 				<TabList>
-    // 					<Tab fontSize='16px' color='black'>
-    // 						<Stack px='20px' fontSize='20px'>
-    // 							<RiHomeSmile2Line />
-    // 						</Stack>
-    // 						Home
-    // 					</Tab>
-    // 					<Tab fontSize='16px' color='black'>
-    // 						<Stack px='20px' fontSize='20px'>
-    // 							<BiStore />
-    // 						</Stack>
-    // 						Storelink
-    // 					</Tab>
-    // 					<Tab fontSize='16px' color='black'>
-    // 						<Stack px='20px' fontSize='20px'>
-    // 							<MdAddchart />
-    // 						</Stack>
-    // 						Order
-    // 					</Tab>
-    // 					<Tab fontSize='16px' color='black'>
-    // 						<Stack px='20px' fontSize='20px'>
-    // 							<GiBanknote />
-    // 						</Stack>
-    // 						Payment
-    // 					</Tab>
-    // 					<Tab fontSize='16px' color='black'>
-    // 						<Stack px='20px' fontSize='20px'>
-    // 							<IoBusinessOutline />
-    // 						</Stack>
-    // 						Account
-    // 					</Tab>
-    // 					<Tab fontSize='16px' color='black'>
-    // 						<Stack px='20px' fontSize='20px'>
-    // 							<IoExitOutline />
-    // 						</Stack>
-    // 						LogOut
-    // 					</Tab>
-    // 				</TabList>
-    // 			</Box>
-    // 		</GridItem>
-    // 		<GridItem colSpan={9} rowSpan={9} bg='white'>
-    // 			<TabPanels>
-    // 				<TabPanel>
-    // 					<HomeBusiness />
-    // 				</TabPanel>
-    // 				<TabPanel>
-    // 					<AddUrlPage />
-    // 				</TabPanel>
-    // 				<TabPanel>
-    // 					{/* <OrderHistory/> */}
-    // 					<CreateOrder/>
-    // 				</TabPanel>
-    // 				<TabPanel>
-    // 					<CreateTransaction/>
-    // 				</TabPanel>
-    // 				<TabPanel>
-    // 					{/* <AccountBusinessProfile /> */}
-    // 				</TabPanel>
-    // 			</TabPanels>
-    // 		</GridItem>
-    // 	</Tabs>
-    // </Grid>
+    // </BusinessLayout>
   );
 }
