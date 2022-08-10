@@ -23,7 +23,9 @@ export default function AccountBox() {
         <FormTitle title="Create an account" text="" />
         
         <Options>
-          <Link to="/personal-signup">
+        <Link to='/coming-soon'
+          // to="/personal-signup"
+        >
             <Option>
               <Image src={user} alt="user" />
               <h3>Personal Account</h3>

@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import styled from "styled-components"
 import LogoMark from "../SVG/LogoMark"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {  Button, createStandaloneToast } from '@chakra-ui/react';
+import {  Button} from '@chakra-ui/react';
 
 import {
     faBars,
@@ -15,9 +15,9 @@ import { useColorModeValue } from '@chakra-ui/color-mode';
 
 const Header = ({LogoImg=LogoMark, link="/"}) => {
     const yellowbtn = useColorModeValue('yellow.500');
- const history = useNavigate();
+ const navigate = useNavigate();
 	
-  const handleClick = () => history('/business-signup')
+  // const handleClick = () => history('/account')
   
   return (
 		<Head>
@@ -84,7 +84,7 @@ const Header = ({LogoImg=LogoMark, link="/"}) => {
               </Link>
             </PrimaryButton> */}
 						<Button
-              onClick={handleClick}
+							onClick={() => navigate('/account')}
 							ml={3}
 							bg={yellowbtn}
 							width='150px'
@@ -93,7 +93,7 @@ const Header = ({LogoImg=LogoMark, link="/"}) => {
 							type='submit'
 							color='white'
 							_hover={{ bg: '#1A202C' }}>
-                    Create Account
+							Create Account
 						</Button>
 					</Account>
 				</NavBar>

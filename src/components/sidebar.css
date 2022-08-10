@@ -1,5 +1,5 @@
 /* NEW */
-.sidebar {
+/* .sidebar {
   margin: 0;
   padding: 0;
   width: 230px;
@@ -14,10 +14,10 @@
 }
 #first-link {
   padding-top: 11rem;
-  /* padding-bottom: 4rem; */
-}
+  padding-bottom: 4rem;
+} */
 
-.sidebar-icons {
+/* .sidebar-icons {
   display: flex;
   align-items: center;
 }
@@ -25,15 +25,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-.sidebar a {
-  /* display: block;
+} */
+/* .sidebar a {
+  display: block;
   color: #bfbfbf;
   padding: 28px 0px;
   text-decoration: none;
   text-align: center;
   font-size: 18px;
-  width: 100%; */
+  width: 100%;
   display: block;
   color: #bfbfbf;
   padding: 28px 0px;
@@ -52,8 +52,8 @@
 
 .sidebar a:hover:not(.active) {
   /* color: #273b4a; */
-}
-.icon-name {
+/* } */
+/* .icon-name {
   padding-left: 1rem;
   color: #bfbfbf;
 }
@@ -62,24 +62,24 @@ div.content {
   margin-left: 200px;
   padding: 1px 16px;
   /* background: #e5e5e5; */
-}
-.logomark {
+/* } */
+/* .logomark {
   display: flex;
   justify-content: center;
   padding-bottom: 2rem;
-}
+}  */
 
-@media screen and (max-width: 700px) {
+/* @media screen and (max-width: 700px) {
   .sidebar {
     width: 100%;
     height: auto;
     position: relative;
-    /* display: flex;
+    display: flex;
     flex-direction: column-reverse;
-    justify-content: space-between; */
+    justify-content: space-between;
   }
   .sidebar a {
-    /* float: left; */
+    float: left;
   }
   div.content {
     margin-left: 0;
@@ -93,9 +93,9 @@ div.content {
   .sidebar-inner {
     padding-bottom: 1.3rem;
   }
-}
+} */
 
-@media screen and (max-width: 400px) {
+/* @media screen and (max-width: 400px) {
   .sidebar {
     width: 100%;
     height: auto;
@@ -115,4 +115,38 @@ div.content {
   #first-link {
     padding-top: 4rem;
   }
+}  */
+
+.side-nav {
+  position: fixed;
+  height: 100%;
+  background-color: #FFF;
+  color: #000;
+  width: 260px;
+  z-index: 5;
+  padding-top: 10px;
+  overflow: hidden;
+
+  /* @media (max-width: 1000px) {
+    transform: translateX(-100%);
+    transition: transform 200ms;
+  } */
 }
+
+.active {
+  transform: translateX(0);
+}
+
+.circle {
+  position: absolute;
+  left: -120%;
+  bottom: -220px;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+}
+ .logo img {
+    height: 30px;
+  }
