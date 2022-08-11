@@ -9,7 +9,7 @@ const OTP = () => {
   const [count, setCount] = useState(90)
   const {verification, email, tel} = useSelector((state)=>state.businessSignup)
   
-  const formattedEmail = email.split("@").map((part, i)=>{
+  const formattedEmail = email?.split("@").map((part, i)=>{
       if(i === 0){
           return part.replace(/(.{1}).*(.{1})/, `$1${"*".repeat(part.length - 2)}$2`)
       }

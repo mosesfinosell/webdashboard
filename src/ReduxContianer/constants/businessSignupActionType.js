@@ -3,5 +3,9 @@ export const SIGN_UP_LOADING = "SIGN_UP_LOADING"
 export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS"
 export const SIGN_UP_ERROR = "SIGN_UP_ERROR"
 
+export const SEND_SMS_LOADING = 'SEND_SMS_LOADING';
+export const SEND_SMS_SUCCESS = 'SEND_SMS_SUCCESS';
+export const SEND_SMS_ERROR = 'SIGN_SMS_ERROR';
 
 export const VERIFICATION = "VERIFICATION"
+

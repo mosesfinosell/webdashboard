@@ -85,3 +85,14 @@ export class Payment {
 
 }
 
+// export class SmsVerification {
+// 	async sendSms(user) {
+// 		const data = await finosellClient.post(`sms/sendsms`,{user});
+// 		//api response can be better
+		
+// 		console.log(data, 'sent');
+
+// 	}
+// }
+
+
