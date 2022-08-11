@@ -7,7 +7,11 @@ import { useColorModeValue } from '@chakra-ui/color-mode';
 import FormTitle from "../../../components/Form/FormTitle"
 import CustomField from "../../../components/Form/Input/UnControlled"
 import { Button } from "@chakra-ui/react"
-import {setVerification} from "../../../ReduxContianer/actions/auth/signupActions";
+import {
+	setVerification,
+	SendOtpSms,
+} from '../../../ReduxContianer/actions/auth/signupActions';
+
 
 const Verify = () => {
     const yellowbtn = useColorModeValue('yellow.500');
@@ -24,6 +28,13 @@ const Verify = () => {
     //     }
     // }, [])
 
+    function handleClick() {
+        if (verification === 'phoneNumber') {
+            dispatch(SendOtpSms(phoneNumber));
+        }
+      return navigate('otp');
+    }		
+
   return (
 		<>
 			<FormTitle
@@ -36,7 +47,11 @@ const Verify = () => {
 			/>
 			<Container>
 				{verification === 'phoneNumber' ? (
-					<CustomField type='phoneNumber' label='Phone Number' value={phoneNumber} />
+					<CustomField
+						type='phoneNumber'
+						label='Phone Number'
+						value={phoneNumber}
+					/>
 				) : (
 					<CustomField type='email' label='Email' value={email} />
 				)}
@@ -45,7 +60,9 @@ const Verify = () => {
 				<Select
 					selected={verification === 'phoneNumber'}
 					onClick={() =>
-						verification === 'phoneNumber' ? null : setVerification(dispatch)
+						verification === 'phoneNumber'
+							? null
+							: setVerification(dispatch)
 					}>
 					<LeftIcon>
 						<FaComment />
@@ -69,7 +86,7 @@ const Verify = () => {
 					</Check>
 				</Select>
 				<Button
-					onClick={() => navigate('otp')}
+					onClick={handleClick}
 					mt={4}
 					bg={yellowbtn}
 					width='500px'

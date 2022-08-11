@@ -8,9 +8,6 @@ import {
 const initialState = {
 	users: null,
 	verification: 'phoneNumber',
-	// error: false,
-	// loading: false,
-	// success: false,
 	type: undefined,
 };
 const signupReducer = (state=initialState, action) => {

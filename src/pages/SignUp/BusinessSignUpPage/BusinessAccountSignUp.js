@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import { Formik, Form, Field } from 'formik';
 import {
 	Center,
@@ -11,13 +11,13 @@ import {
 	Button,
 	Text,
 	Stack,
+	createStandaloneToast,
 	Link,
 	Image,
 	Box,
 	Container,
 } from '@chakra-ui/react';
 import { Link as RLink } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { FaEyeSlash, FaEye } from 'react-icons/fa';
 import * as Yup from 'yup';
@@ -30,73 +30,17 @@ import logo from "../../../assets/Logomark.png";
 import '../../../components/auth.css';
 import { useFormik } from 'formik';
 import { useColorModeValue } from '@chakra-ui/color-mode';
-import toast from 'react-hot-toast';
-import {
-	SIGN_UP_LOADING,
-	SIGN_UP_SUCCESS,
-	SIGN_UP_ERROR,
-} from '../../../ReduxContianer/constants/businessSignupActionType';
 
-
-const finosellClient = axios.create({
-	baseURL: process.env.REACT_APP_FINOSELL_BASE_URI
-});
-
-const createAccount =
-	(signData) =>
-		async (dispatch) => {
-		const {name, phone_number, email, password, address, industry, account_type} = signData
-		dispatch({
-			type: SIGN_UP_LOADING,
-		});
-		await finosellClient
-			.post('auths/firststage', {
-				name,
-				phone_number,
-				email,
-				password,
-				address,
-				industry,
-				account_type,
-			})
-			.then((res) => {
-				const { status, message, data } = res.data;
-				if (status) {
-					dispatch({
-						type: SIGN_UP_SUCCESS,
-						payload: data,
-					});
-					toast.success('Sign up successfull !!!');
-				} else {
-					dispatch({
-						type: SIGN_UP_ERROR,
-						payload: message ? message : 'COULD NOT CONNECT',
-					});
-				}
-			})
-			.catch((error) => {
-				dispatch({
-					type: SIGN_UP_ERROR,
-					payload:
-						error.response && error.response.data.message
-							? error.response.data.message
-							: error.error,
-				});
-				toast.error(error.response?.data.message);
-			});
-	};
 
  function BusinessAccountSignUp() {
 		const yellowbtn = useColorModeValue('yellow.500');
  const [show, setShow] = useState(false);
  
-		const dispatch = useDispatch();
-		const history = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+const toast = createStandaloneToast();
 
-		// Function
-		const businessSign = useSelector((state) => state.businessSignup);
-		const { loading, success } = businessSign;
-
+	 const history = useNavigate();
+	
 		const validationSchema = Yup.object().shape({
 			name: Yup.string().required('Name is required'),
 			email: Yup.string().email('Invalid Email').required('Email is required'),
@@ -107,7 +51,7 @@ const createAccount =
 			industry: Yup.string().required('Industry is required'),
 			password: Yup.string()
 				.min(5, 'Too short')
-				.max(9, 'Okay')
+				.max(19, 'Okay')
 				.required('Password is required'),
 		});
 		const initialValues = {
@@ -120,30 +64,61 @@ const createAccount =
 		};
 
 		// Function
-		const handleClick = () => setShow(!show);
+	 const handleClick = () => setShow(!show);
 
-		const onSubmit = (values, tools) => {
-			const formData = {
-				name: values.name,
-				email: values.email,
-				password: values.password,
-				phone_number: values.phoneNumber,
-				address: values.address,
-				industry: values.industry,
-				account_type: 'business',
-			};
-			dispatch(createAccount(formData));
-			tools.resetForm();
-			if (success) {
-				return history('/download-app');
-			}
-		};
+	 const onSubmit = (values, tools) => {
+		  setIsLoading(true);
+		 const formData = {
+			 name: values.name,
+			 email: values.email,
+			 password: values.password,
+			 phone_number: values.phoneNumber,
+			 address: values.address,
+			 industry: values.industry,
+			 account_type: 'business',
+		 };
+		  axios
+      .post("https://finosell.link/api/v2/auths/firststage", formData)
+      .then((response) => {
+        setIsLoading(false);
+		  const userDetails = response?.data.message;
+		  console.log(userDetails)
+        toast({
+					position: 'top',
+					// title: `Welcome ${userDetails.business_name}`,
+					description: 'You have successfully signup',
+					status: 'success',
+					duration: 3000,
+					isClosable: true,
+				});
+        localStorage.setItem("password", response.data?.message.password);
+        tools.resetForm();
+        return history('/download-app');
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        toast({
+					position: 'top',
+					title: `Unsuccessful Attempt`,
+					description: `${error.response?.data.message}`,
+					status: 'error',
+					duration: 3000,
+					isClosable: true,
+				});
+        tools.resetForm();
+        return error;
+      });
+  };
+
 
 		const formik = useFormik({
 			initialValues,
 			onSubmit,
 			validationSchema,
 		});
+    
+
+	 
 
 	 return (
 			<Container maxW='container.lg'>
@@ -381,8 +356,7 @@ const createAccount =
 
 													<InputRightElement
 														pointerEvents='visible'
-													 m='15px 8px'
-													
+														m='15px 8px'
 														color='yellow.500'>
 														<Button
 															onClick={handleClick}
@@ -418,19 +392,20 @@ const createAccount =
 										)}
 									</Field>
 									<Button
-										mt={3}
-										bg={yellowbtn}
-										width='500px'
-										h='75px'
-										borderRadius='0px 11px 11px 11px'
-										type='submit'
-										color='white'
-										_hover={{ bg: '#1A202C' }}
-										isLoading={loading}
-										loadingText='Sign Up...'
-										spinnerPlacement='end'>
-										Continue
-									</Button>
+									mt={3}
+									bg={yellowbtn}
+									width='500px'
+									h='75px'
+									borderRadius='0px 11px 11px 11px'
+									type='submit'
+									color='white'
+									_hover={{ bg: '#1A202C' }}
+									isLoading={isLoading}
+									loadingText='SignUp...'
+									spinnerPlacement='end'>
+									Sign Up
+								</Button>
+									
 								</Form>
 							</Center>
 						)}
