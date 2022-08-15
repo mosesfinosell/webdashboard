@@ -1,11 +1,11 @@
 import {
-  Grid,
+//   Grid,
   Box,
-  GridItem,
+//   GridItem,
   Container,
   Text,
   Stack,
-  Center,
+//   Center,
   Link,
   Heading,
   Tabs,
@@ -19,7 +19,7 @@ import { Link as RLink } from "react-router-dom";
 // import { BsJournalText } from "react-icons/bs";
 import { FaStore } from "react-icons/fa";
 // import { MdOutlineContentCopy, MdDeliveryDining } from "react-icons/md";
-import { BsPlusSquare, BsArrowDownLeftSquare, BsPhone } from "react-icons/bs";
+// import { BsPlusSquare, BsArrowDownLeftSquare, BsPhone } from "react-icons/bs";
 import { BiStore } from "react-icons/bi";
 import { RiTeamLine } from "react-icons/ri";
 import AddMoneyBusinessModal from "./addMoneyModal";
@@ -53,19 +53,14 @@ export default function HomeBusiness() {
 const businessInfo = useSelector(
 	(state) => state.businessReducer.businessUserInfo
 );
-// const businessDetails = useSelector(
-// 	(state) => state.businessReducer.businessUserIdDetails
-// );
+
 useEffect(() => {
 	dispatch(getBusinessUserDetails(businessInfo?.user_id));
 }, [businessInfo?.user_id, dispatch]);
   useEffect(() => {
     dispatch(getBusinessUserDetails(businessInfo.user_id));
   }, [businessInfo.user_id, dispatch]);
-  //   useEffect(() => {
-  //     dispatch(getBusinessUserDetails(businessUserInfo.user_id));
-  //   }, [dispatch, businessUserInfo.user_id]);
-
+  
 const handleStore = () => {
 	
 }
@@ -104,13 +99,13 @@ const handleStore = () => {
 				<TabPanels>
 					<TabPanel>
 						<Stack pl={25}>
-							<Heading as='h6'>₦66,789,567</Heading>
+							<Heading className='balance' as='h6'>
+								₦{businessInfo?.transfer_bal}
+							</Heading>
 						</Stack>
 					</TabPanel>
 					<TabPanel>
-						<Stack pl={25}>
-							<Heading as='h6'>₦6,745,563.09</Heading>
-						</Stack>
+						<Stack pl={25}>₦{businessInfo?.p_balance}</Stack>
 					</TabPanel>
 				</TabPanels>
 			</Tabs>
