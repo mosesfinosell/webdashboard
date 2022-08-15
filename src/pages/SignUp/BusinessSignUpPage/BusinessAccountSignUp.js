@@ -93,7 +93,7 @@ const toast = createStandaloneToast();
 				});
         localStorage.setItem("password", response.data?.message.password);
         tools.resetForm();
-        return history('/verify');
+        return history('/dashboard');
       })
       .catch((error) => {
         setIsLoading(false);
