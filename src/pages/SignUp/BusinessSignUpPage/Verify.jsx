@@ -8,61 +8,121 @@ import FormTitle from "../../../components/Form/FormTitle"
 import CustomField from "../../../components/Form/Input/UnControlled"
 import { Button } from "@chakra-ui/react"
 import {
-	setVerification,
-	SendOtpSms,
+	setVerification
+	// SendOtpSms,
 } from '../../../ReduxContianer/actions/auth/signupActions';
-
+import { getBusinessUserInfo } from '../../../ReduxContianer/BussinessRedux/BusinessAction';
 
 const Verify = () => {
     const yellowbtn = useColorModeValue('yellow.500');
 
-    const { email, phoneNumber, verification } = useSelector(
+    const { email, tel, verification } = useSelector(
 			(state) => state.businessSignup
 		);
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    // useEffect(()=>{
-    //     console.log(email, tel, verification)
-    //     if(!email || !tel){
-    //         navigate(-1)
-    //     }
-    // }, [])
+    useEffect(()=>{
+        console.log(email, tel, verification)
+         dispatch(getBusinessUserInfo());
+        // if(!email || !tel){
+        //     navigate(-1)
+        // }
+    }, [])
 
-    function handleClick() {
-        if (verification === 'phoneNumber') {
-            dispatch(SendOtpSms(phoneNumber));
-        }
-      return navigate('otp');
-    }		
+    // function handleClick() {
+    //     if (verification === 'tel') {
+    //         dispatch(SendOtpSms(tel));
+    //     }
+    //   return navigate('otp');
+    // }		
 
   return (
+		// <>
+		// 	<FormTitle
+		// 		title='Create a business account'
+		// 		text={
+		// 			verification === 'tel'
+		// 				? 'We need to verify a phone number with which you can recieve OTP for your card transactions.'
+		// 				: 'We need to verify an email with which you can recieve OTP for your card transactions.'
+		// 		}
+		// 	/>
+		// 	<Container>
+		// 		{verification === 'tel' ? (
+		// 			<CustomField
+		// 				type='tel'
+		// 				label='Phone Number'
+		// 				value={tel}
+		// 			/>
+		// 		) : (
+		// 			<CustomField type='email' label='Email' value={email} />
+		// 		)}
+
+		// 		<HowTitle>How would you like to receive the OTP?</HowTitle>
+		// 		<Select
+		// 			selected={verification === 'tel'}
+		// 			onClick={() =>
+		// 				verification === 'tel'
+		// 					? null
+		// 					: setVerification(dispatch)
+		// 			}>
+		// 			<LeftIcon>
+		// 				<FaComment />
+		// 			</LeftIcon>
+		// 			<p>Via Message</p>
+		// 			<Check>
+		// 				<FaCheck />
+		// 			</Check>
+		// 		</Select>
+		// 		<Select
+		// 			selected={verification === 'email'}
+		// 			onClick={() =>
+		// 				verification === 'email' ? null : setVerification(dispatch)
+		// 			}>
+		// 			<LeftIcon>
+		// 				<FaEnvelope />
+		// 			</LeftIcon>
+		// 			<p>Via Email</p>
+		// 			<Check>
+		// 				<FaCheck />
+		// 			</Check>
+		// 		</Select>
+		// <Button
+		// 	// onClick={handleClick}
+		// 	mt={4}
+		// 	bg={yellowbtn}
+		// 	width='500px'
+		// 	h='75px'
+		// 	borderRadius='0px 11px 11px 11px'
+		// 	type='submit'
+		// 	color='white'
+		// 	_hover={{ bg: '#1A202C' }}
+		// 	// loadingText='Sending Otp...'
+		// 	spinnerPlacement='end'>
+		// 	Continue
+		// </Button>
+		// 	</Container>
+		// </>
 		<>
 			<FormTitle
 				title='Create a business account'
 				text={
-					verification === 'phoneNumber'
+					verification === 'tel'
 						? 'We need to verify a phone number with which you can recieve OTP for your card transactions.'
 						: 'We need to verify an email with which you can recieve OTP for your card transactions.'
 				}
 			/>
 			<Container>
-				{verification === 'phoneNumber' ? (
-					<CustomField
-						type='phoneNumber'
-						label='Phone Number'
-						value={phoneNumber}
-					/>
+				{verification === 'tel' ? (
+					<CustomField type='tel' label='Phone Number' value={tel} />
 				) : (
 					<CustomField type='email' label='Email' value={email} />
 				)}
 
 				<HowTitle>How would you like to receive the OTP?</HowTitle>
 				<Select
-					selected={verification === 'phoneNumber'}
+					selected={verification === 'tel'}
 					onClick={() =>
-						verification === 'phoneNumber'
-							? null
-							: setVerification(dispatch)
+						verification === 'tel' ? null : setVerification(dispatch)
 					}>
 					<LeftIcon>
 						<FaComment />
@@ -86,7 +146,7 @@ const Verify = () => {
 					</Check>
 				</Select>
 				<Button
-					onClick={handleClick}
+					// onClick={handleClick}
 					mt={4}
 					bg={yellowbtn}
 					width='500px'

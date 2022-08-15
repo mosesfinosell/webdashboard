@@ -3,11 +3,13 @@
   justify-content: space-between;
   height:100vh;
   background: #e5e5e5;
+  
 }
 .dashy-cover {
   display: flex;
   justify-content: space-between;
-  background: #e5e5e5;
+  /* background: #e5e5e5; */
+  padding-left: 300px;
 }
 .url-dash {
   margin-left: 5rem;
@@ -35,7 +37,7 @@
   margin-left: 3rem;
 }
 .left-step-dash {
-  width: 40%;
+  width: 400px;
   margin-left: 4rem;
   margin-top: 4rem;
   height: 100%;
@@ -102,7 +104,7 @@ inner-trans-dash {
   border-radius: 0px 11px 11px 11px;
 }
 .order-right {
-  width: 48%;
+  width: 400px;
   margin-right: 3rem;
   margin-top: 2.6rem;
 }

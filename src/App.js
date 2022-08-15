@@ -20,7 +20,7 @@ import Cart from './pages/Dashboard/BusinessDashboard/HomeBusiness/Cart';
 // import InputOtp from './pages/SignUp/PersonalSignUpPage/VerifyOtp';
 // import PasswordPage from './pages/SignUp/PasswordPage';
 // import DashboardPage from './pages/Dashboard/DashboardPage';
-import BusinessDashboard from './pages/Dashboard/DashboardItems/BusinessDashboard';
+// import BusinessDashboard from './pages/Dashboard/DashboardItems/BusinessDashboard';
 // import AddProduct from './pages/Dashboard/BusinessDashboard/HomeBusiness/addProduct';
 // import ProductModal from './pages/Dashboard/BusinessDashboard/HomeBusiness/addProductModal';
 // import DeliveryRequest from './pages/Dashboard/BusinessDashboard/HomeBusiness/delivery';
@@ -31,11 +31,12 @@ import BusinessDashboard from './pages/Dashboard/DashboardItems/BusinessDashboar
 // import AddTeam from './pages/Dashboard/BusinessDashboard/Account/addTeam';
 import DealDashboard from './pages/Dashboard/DashboardItems/DealDashboard';
 import HomeDashboard from './pages/Dashboard/DashboardItems/HomeDashboard';
+// import HomeBusiness from './pages/Dashboard/BusinessDashboard/HomeBusiness/HomeBusiness';
 // import PaymentPage from './pages/Dashboard/DashboardItems/PaymentPage';
 import AccountUserProfile from './pages/Dashboard/DashboardItems/AccountUserProfile';
 import BusinessOrders from './pages/Dashboard/DashboardItems/OrderHistory';
-import StoreLink from './pages/Dashboard/BusinessDashboard/StoreLink/addUrlPage';
-import CreateTransaction from './pages/Dashboard/BusinessDashboard/Payment/createTransaction';
+// import StoreLink from './pages/Dashboard/BusinessDashboard/StoreLink/addUrlPage';
+// import CreateTransaction from './pages/Dashboard/BusinessDashboard/Payment/createTransaction';
 import PayWithCard from './pages/Dashboard/DashboardItems/PayWithCard';
 import PayWithUssd from './pages/Dashboard/DashboardItems/PayWithUssd';
 import UssdConfirmation from './pages/Dashboard/DashboardItems/UssdConfirmation';
@@ -67,11 +68,12 @@ import AuthContainer from './components/Layout/AuthContainer';
 import StoreContainer from './components/Store/StoreContainer';
 import PaymentContainer from './components/Payment/container';
 
-import BusinessLayout from './components/Layout/BusinessLayout'
+// import BusinessLayout from './components/Layout/BusinessLayout'
 
 import ScrollToTop from './utils/scrollToTop';
 
 import { Toaster } from 'react-hot-toast';
+import DashboardPage from './pages/Dashboard/DashboardPage';
 
 function App() {
 	useEffect(() => {}, []);
@@ -164,12 +166,13 @@ function App() {
 							element={<BusinessAccountSignIn />}
 							// element={<PrivateRoute />}
 						/>
-						<Route
+						{/* <Route
 							exact
 							path='/dashboard'
 							element={<BusinessLayout />}
-							// element={<PrivateRoute />}
-						/>
+							element={<PrivateRoute />}
+						/> */}
+						<Route path='/dashboard' exact element={<DashboardPage />}/>
 						<Route
 							exact
 							path='/business/orders'
@@ -177,23 +180,24 @@ function App() {
 							// element={<PrivateRoute  />}
 						/>
 						<Route
-							exact
-							path='/business/store-inventory'
+							exact ='true'
+							path='/dashboard/store-inventory'
 							element={<StoreInventory />}
 						/>
 						<Route
 							path='/business/store-page'
 							element={<PrivateRoute element={<StorePage />} />}
 						/>
-						<Route
-							path='/business/storelink'
-							element={<PrivateRoute element={<StoreLink />} />}
-						/>
+						{/* <Route
+							path='/store-link' exact
+							// element={<PrivateRoute element={<StoreLink />} />}
+							element={<StoreLink />}
+						/> */}
 						<Route
 							path='/business/store-page/cart'
 							element={<PrivateRoute element={Cart} />}
 						/>
-						<Route path='/business/payment' element={CreateTransaction} />
+						{/* <Route path='/business/payment' element={CreateTransaction} /> */}
 						<Route path='/store/:businessID' element={<StoreContainer />}>
 							<Route index element={<Store />} />
 							<Route path='product/:productID' element={<StoreItem />} />

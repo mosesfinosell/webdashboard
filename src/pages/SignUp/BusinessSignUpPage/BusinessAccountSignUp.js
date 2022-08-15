@@ -44,7 +44,7 @@ const toast = createStandaloneToast();
 		const validationSchema = Yup.object().shape({
 			name: Yup.string().required('Name is required'),
 			email: Yup.string().email('Invalid Email').required('Email is required'),
-			phoneNumber: Yup.number()
+			tel: Yup.number()
 				.typeError('Phone number must be digits')
 				.required('Phone number is required'),
 			address: Yup.string().required('Address is required'),
@@ -57,7 +57,7 @@ const toast = createStandaloneToast();
 		const initialValues = {
 			name: '',
 			email: '',
-			phoneNumber: '',
+			tel: '',
 			password: '',
 			address: '',
 			industry: '',
@@ -72,13 +72,13 @@ const toast = createStandaloneToast();
 			 name: values.name,
 			 email: values.email,
 			 password: values.password,
-			 phone_number: values.phoneNumber,
+			 phone_number: values.tel,
 			 address: values.address,
 			 industry: values.industry,
 			 account_type: 'business',
 		 };
 		  axios
-      .post("https://finosell.link/api/v2/auths/firststage", formData)
+      .post("https://dev.finosell.link/api/v2/auths/firststage", formData)
       .then((response) => {
         setIsLoading(false);
 		  const userDetails = response?.data.message;
@@ -93,7 +93,7 @@ const toast = createStandaloneToast();
 				});
         localStorage.setItem("password", response.data?.message.password);
         tools.resetForm();
-        return history('/download-app');
+        return history('/verify');
       })
       .catch((error) => {
         setIsLoading(false);
@@ -247,22 +247,22 @@ const toast = createStandaloneToast();
 													<Input
 														mb={4}
 														pl='60px'
-														type='phoneNumber'
-														id='phoneNumber'
+														type='tel'
+														id='tel'
 														placeholder='08012345678'
 														onChange={formik.handleChange}
 														onBlur={formik.handleBlur}
-														value={formik.values.phoneNumber}
+														value={formik.values.tel}
 														width='500px'
 														h='75px'
 														borderRadius='0px 11px 11px 11px'
 														_focus={{ bg: '#fdf9ed', borderColor: '#f7e8b5' }}
 													/>
 												</InputGroup>
-												{formik.touched.phoneNumber &&
-												formik.errors.phoneNumber ? (
+												{formik.touched.tel &&
+												formik.errors.tel? (
 													<span className='error-message'>
-														{formik.errors.phoneNumber}
+														{formik.errors.tel}
 													</span>
 												) : null}
 											</FormControl>

@@ -35,6 +35,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { v4 as uuidv4 } from "uuid";
 import { Spinner } from "@chakra-ui/react";
+
+
 export default function CreateTransaction() {
   const [loading, setLoading] = useState(false);
   const [payments, setPayments] = useState([]);
@@ -66,7 +68,7 @@ export default function CreateTransaction() {
   });
   const formik = useFormik({
     initialValues: {
-      transaction_id: paymentDetails.trans,
+      transaction_id: paymentDetails?.trans,
       Itemtype: "",
       payment_date: "",
       payment_id: uuidv4(),
@@ -74,9 +76,9 @@ export default function CreateTransaction() {
       customer_id: "",
       payment_status: "",
       payment_method: "",
-      payment_ref: paymentDetails.trxref,
+      payment_ref: paymentDetails?.trxref,
       transtype: "",
-      amount: paymentDetails.amount,
+      amount: paymentDetails?.amount,
       product_id: "",
     },
     onSubmit: (values) => {
@@ -101,7 +103,8 @@ export default function CreateTransaction() {
     }
   };
   return (
-    <BusinessLayout>
+  
+    
       <div className="dashy-cover">
         <div className="left-step-dash">
           {/* <Text className="history" color="gray">
@@ -316,7 +319,7 @@ export default function CreateTransaction() {
           <div className="right-step-dash">
             <Tabs variant="unstyled">
               <div className="payment-div">
-                <TabList style={{ paddingLeft: "1.7rem" }}>
+                <TabList style={{ paddingLeft: "5.7rem"}}>
                   <Tab fontSize="16px" fontWeight="bold" color="black">
                     All
                   </Tab>
@@ -532,6 +535,6 @@ export default function CreateTransaction() {
           </div>
         </div>
       </div>
-    </BusinessLayout>
+
   );
 }

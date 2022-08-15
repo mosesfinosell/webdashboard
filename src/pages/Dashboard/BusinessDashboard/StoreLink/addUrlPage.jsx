@@ -46,45 +46,57 @@ export default function AddUrlPage() {
   }
 
   return (
-    <BusinessLayout>
-      <div className="url-dash">
-        <Heading fontSize="38px" className="add-url">Add Url</Heading>
-        <div className="url-form">
-          <div className="store-form">
-            <InputGroup>
-              <InputLeftAddon width="20%" h="60px">
-                http://
-              </InputLeftAddon>
-              <Input
-                type="name"
-                value={storeName}
-                onChange={(e) => setStoreName(e.target.value)}
-                width="40%"
-                h="60px"
-                placeholder="Input your Store Name"
-                style={{backgroundColor:'#FAFAFA'}}
-              />
-              <InputRightAddon className="right-addon" width="22%" h="60px">
-                finosell.com
-              </InputRightAddon>
-            </InputGroup>
-          </div>
-          <Button
-          onClick={()=>history('/business/store-page')}
-          className="add-store"
-            mt={4}
-            bg={yellowbtn}
-            width="82%"
-            h="60px"
-            borderRadius="0px 11px 11px 11px"
-            type="submit"
-            color="white"
-            _hover={{ bg: "#1A202C" }}
-          >
-            Add
-          </Button>
-        </div>
-      </div>
-    </BusinessLayout>
-  );
+  <Container maxW='container.lg'>
+				<Flex direction='column' pt='150px' alignItems='center'>
+					<Stack>
+						<Heading textAlign='left' fontSize='38px'>Add Url</Heading>
+					</Stack>
+					<Box pt='20px'>
+						<Formik>
+							{() => (
+								<Form onSubmit={handleSubmit}>
+									<Field name='name'>
+										{({ field, form }) => (
+											<FormControl
+												isInvalid={form.errors.name && form.touched.name}>
+												<InputGroup>
+													<InputLeftAddon width='100px' h='60px'>
+														https://
+													</InputLeftAddon>
+													<Input
+														type='name'
+														value={storeName}
+														onChange={(e) => setStoreName(e.target.value)}
+														width='250px'
+														h='60px'
+														placeholder='Input your Store Name'
+													/>
+													<InputRightAddon width='120px' h='60px'>
+														finosell.shop
+													</InputRightAddon>
+												</InputGroup>
+											</FormControl>
+										)}
+									</Field>
+									<Button
+										mt={4}
+										bg={yellowbtn}
+										width='480px'
+										h='60px'
+										borderRadius='0px 11px 11px 11px'
+										type='submit'
+										color='white'
+										_hover={{ bg: '#1A202C' }}>
+										Add
+									</Button>
+								</Form>
+							)}
+						</Formik>
+					</Box>
+				</Flex>
+			</Container>
+
+	
+			
+	);
 }

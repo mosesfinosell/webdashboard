@@ -7,11 +7,12 @@ import {
 
 const initialState = {
 	users: null,
-	verification: 'phoneNumber',
+	verification: 'tel',
 	type: undefined,
 };
-const signupReducer = (state=initialState, action) => {
-    switch (action.type) {
+const signupReducer = (state= initialState, action) => {
+	switch (action.type) {
+		
 			case SIGN_UP_LOADING:
 				return {
 					...state,
@@ -39,7 +40,7 @@ const signupReducer = (state=initialState, action) => {
 			case VERIFICATION:
 				return {
 					...state,
-					verification: state.verification === 'phoneNumber' ? 'email' : 'phoneNumber',
+					verification: state.verification === 'tel' ? 'email' : 'tel',
 				};
 			default:
 				return state;

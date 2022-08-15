@@ -10,8 +10,8 @@ import card from "../../assets/card.svg";
 // import ussd from "../../assets/ussd.svg";
 // import bank from "../../assets/bank.svg";
 // import Logomark from "../../assets/Logomark.svg";
-import { useNavigate, Link, useParams } from "react-router-dom";
-import {useSelector, useDispatch} from "react-redux"
+import { useNavigate, useParams } from "react-router-dom";
+import {useDispatch} from "react-redux"
 import {InfoContainer, Info, Title, OptionsContainer, Option} from "./styles"
 import {Payment} from "../../utils/API"
 import {setStore} from "../../ReduxContianer/shoppingCart/shoppingCartActions" 
@@ -27,7 +27,10 @@ function PaymentPage() {
   const history = useNavigate();
   const pay = new Payment()
 
-  const {isLoading, isData, isError, error, data} = useQuery(["payment", id], ()=>pay.getPaymentLinkInfo(id))
+  const { isLoading, isData, isError, error, data } = useQuery(
+		['payment', id],
+		() => pay.getPaymentLinkInfo(id)
+	);
   // const shoppingCart = useSelector((state)=>state.shoppingCart)
   // const checkout = shoppingCart.checkout
   // const total = shoppingCart.cart.filter((item)=>item.businessID === checkout.id)
@@ -39,11 +42,12 @@ function PaymentPage() {
   useEffect(()=>{
     if(data){
       setBusiness({
-        reference: (new Date()).getTime().toString(),
-        email: data.businessmail,
-        amount: parseInt(data.amount) * 100,
-        publicKey: process.env.REACT_APP_PAYSTACK_PUBLIC_KEY,
-      })
+				reference: new Date().getTime().toString(),
+				email: data.email,
+				metadata: { businessId: data.business_id },
+				amount: parseInt(data.amount) * 100,
+				publicKey: process.env.REACT_APP_PAYSTACK_PUBLIC_KEY,
+			});
       setStore(dispatch, data)
     }
     // console.log("Business", data)

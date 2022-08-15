@@ -70,7 +70,7 @@ export default function BusinessAccountSignIn() {
 				});
         localStorage.setItem("password", response.data.message.password);
         tools.resetForm();
-        return history('/verify');
+        return history('/dashboard');
       })
       .catch((error) => {
         setIsLoading(false);
