@@ -1,15 +1,10 @@
 import {
-	Grid,
 	Box,
-	GridItem,
 	Container,
-	Text,
 	Stack,
-	Center,
 	Flex,
 	Heading,
-	Textarea,
-	Image,
+	Textarea,	
 	Input,
 	Drawer,
 	DrawerBody,
@@ -18,7 +13,6 @@ import {
 	DrawerOverlay,
 	DrawerContent,
 	DrawerCloseButton,
-	InputRightElement,
 	InputGroup,
 	FormControl,
 	FormLabel,
@@ -27,15 +21,20 @@ import {
 	useDisclosure,
 } from '@chakra-ui/react';
 import { Formik, Form, Field } from 'formik';
+
 import { useState, useRef } from 'react';
-import { FaUser, FaLock, FaEyeSlash, FaEye, FaAngleDown } from 'react-icons/fa';
+import { FaPlus} from 'react-icons/fa';
 import { useColorModeValue } from '@chakra-ui/color-mode';
-import { BiPencil } from 'react-icons/bi';
-import shoe from '../../../../assets/shoe.svg';
-import ProductModal from './addProductModal';
-// import { createProduct } from '../../../../ReduxContianer/BussinessRedux/BusinessAction';
+// import { BiPencil } from 'react-icons/bi';
+// import shoe from '../../../../assets/shoe.svg';
+import FileUpload from '../Account/uploadImage';
+import { useForm } from 'react-hook-form';
+
+// import ProductModal from './addProductModal';
+import { createProduct } from '../../../../ReduxContianer/BussinessRedux/BusinessAction';
 import { useSelector, useDispatch} from 'react-redux'
 //   import ProductModal from '../../../Dashboard/BusinessDashboard/BusinessDashboard'
+import QrReaderPage from '../../../Dashboard/BusinessDashboard/QRcode/QrReaderPage';
 
 export default function AddProduct() {
 	 const { isOpen, onOpen, onClose } = useDisclosure();
@@ -44,33 +43,47 @@ const dispatch = useDispatch();
 	//   const {onOpen} = ProductModal
 	const yellowbtn = useColorModeValue('yellow.500');
 
+		const {
+			// handleSubmit,
+			register,
+			setError,
+			control,
+			formState: { errors, isSubmitting },
+		} = useForm();
+
+
 	const [title, setTitle] = useState('');
-	const [phoneNumber, setPhoneNumber] = useState('');
 	const [price, setPrice] = useState('');
 	const [color, setColor] = useState('');
 	const [description, setDescription] = useState('');
 	const [category, setCategory] = useState('');
 	const [size, setSize] = useState('');
 	const [image, setImage] = useState('');
+  const isFetching = useSelector((state) => state.businessReducer.isFetching);
 
+// const [businessId] = useState('c3cd4210-6e69-48ac-975f-b4a0b3b2ef9d');
+const businessInfo = useSelector(
+	(state) => state.businessReducer.businessUserInfo
+);
+	
 	function handleSubmit(e) {
 		e.preventDefault();
-    //    dispatch(
-	// 				createProduct(
-	// 					title,
-	// 					phoneNumber,
-	// 					price,
-	// 					color,
-	// 					description,
-	// 					category,
-	// 					size,
-	// 					image
-	// 				)
-	// 			);
-		console.log(title,phoneNumber,price,color,description,category,size,image)
+		const formData = new FormData();
+        formData.append('title', title);
+		formData.append('description', description);
+		formData.append('businessid', businessInfo.business_id);
+		formData.append('product_img', image);
+		formData.append('category', category);
+		formData.append('size', size);
+		formData.append('color', color);
+		formData.append('price', price);
+		
+       dispatch(createProduct(FormData));
+		console.log(image)
 	}
 
-    // const [businessId] = useState(message.business_id);
+	
+    
 	return (
 		<Container m='20px' maxW='container.lg'>
 			<Stack>
@@ -83,8 +96,9 @@ const dispatch = useDispatch();
 					color='white'
 					_hover={{ bg: '#1A202C' }}
 					ref={btnRef}
-					onClick={onOpen}>
-					+ Add Product
+					onClick={onOpen}
+					leftIcon={<FaPlus />}>
+					Add Product
 				</Button>
 			</Stack>
 			<Drawer
@@ -102,25 +116,13 @@ const dispatch = useDispatch();
 						<Flex direction='row' justifyContent='space-between' mt='20px'>
 							<Box>
 								<Box
-									w='150px'
-									h='350px'
+									// w='150px'
+									// h='750px'
 									border='0.5px solid white.500'
 									borderRadius='0px 8px 8px 8px'>
-									<Image src={shoe} alt='user' h='180px' />
+									<QrReaderPage />
 								</Box>
-								<Box
-									color='white'
-									fontSize='18px'
-									w='70px'
-									border='0.5px solid yellow.500'
-									bg='yellow.500'
-									p='20px'
-									borderRadius='0px 8px 8px 8px'
-									position='relative'
-									bottom='120px'
-									left='90px'>
-									<BiPencil />
-								</Box>
+
 								<Stack mt='80px'>
 									<Heading fontSize='16px' as='h6'>
 										Product Specification
@@ -134,12 +136,7 @@ const dispatch = useDispatch();
 							</Box>
 							<Box alignItems='start'>
 								<Stack>
-									<Formik
-										initialValues={{image: ""}}
-										onSubmit={(values) => {
-											console.log(values)
-										}}
-									>
+									<Formik initialValues={{ image: '' }}>
 										{() => (
 											<Form onSubmit={handleSubmit}>
 												<Field name='text'>
@@ -154,33 +151,6 @@ const dispatch = useDispatch();
 																	value={title}
 																	onChange={(e) => setTitle(e.target.value)}
 																	placeholder='Product Title'
-																	width='300px'
-																	h='60px'
-																	borderRadius='0px 11px 11px 11px'
-																/>
-															</InputGroup>
-															<FormErrorMessage>
-																{form.errors.name}
-															</FormErrorMessage>
-														</FormControl>
-													)}
-												</Field>
-												<Field name='number'>
-													{({ field, form }) => (
-														<FormControl
-															isInvalid={form.errors.name && form.touched.name}>
-															<FormLabel htmlFor='phoneName'>
-																Seller Phone Number
-															</FormLabel>
-															<InputGroup>
-																<Input
-																	{...field}
-																	mb='20px'
-																	value={phoneNumber}
-																	onChange={(e) =>
-																		setPhoneNumber(e.target.value)
-																	}
-																	placeholder='08123456789'
 																	width='300px'
 																	h='60px'
 																	borderRadius='0px 11px 11px 11px'
@@ -318,7 +288,7 @@ const dispatch = useDispatch();
 														</FormControl>
 													)}
 												</Field>
-												<Field name='text'>
+												{/* <Field name='text'>
 													{({ field, form }) => (
 														<FormControl
 															isInvalid={form.errors.name && form.touched.name}>
@@ -331,9 +301,12 @@ const dispatch = useDispatch();
 																	mb='20px'
 																	type='file'
 																	name='image'
-																	onChange={(event) => 
-																		form.setFieldValue("image", event.target.files[0])
-																	
+																	onChange={(event) =>
+																		
+																			form.setFieldValue(
+																				'image',
+																				event.target.files[0]
+																			)
 																	}
 																	placeholder='Select available colors'
 																	width='300px'
@@ -346,7 +319,19 @@ const dispatch = useDispatch();
 															</FormErrorMessage>
 														</FormControl>
 													)}
-												</Field>
+												</Field> */}
+												<FileUpload
+													name='image'
+													acceptedFileTypes='image/*'
+													isRequired={true}
+													placeholder='Select picture'
+													width='300px'
+													height='60px'
+													value={image}
+													onChange={(e) => setImage(e.target.files[0])}
+													control={control}>
+													Product Image
+												</FileUpload>
 												{/* </Flex> */}
 												<DrawerFooter>
 													<Button
@@ -357,8 +342,11 @@ const dispatch = useDispatch();
 														borderRadius='0px 11px 11px 11px'
 														type='submit'
 														color='white'
-														_hover={{ bg: '#1A202C' }}>
-														Add Product
+														_hover={{ bg: '#1A202C' }}
+														isLoading={isSubmitting}
+														loadingText='Adding...'
+														spinnerPlacement='end'>
+														{!isFetching ? 'Add Product' : 'Adding Product...'}
 													</Button>
 												</DrawerFooter>
 											</Form>

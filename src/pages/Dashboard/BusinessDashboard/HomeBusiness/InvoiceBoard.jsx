@@ -1,11 +1,4 @@
 import {
-	Tabs,
-	TabList,
-	TabPanels,
-	Tab,
-	TabPanel,
-	Grid,
-	GridItem,
 	Container,
 	Flex,
 	Stack,
@@ -13,316 +6,252 @@ import {
 	InputLeftElement,
 	InputGroup,
 	FormControl,
-	FormLabel,
 	FormErrorMessage,
 	Button,
 	Text,
-	Center,
 	Box,
-	Avatar,
+	VStack,
+	HStack,
+	Heading,
+	StackDivider,
 } from '@chakra-ui/react';
 import { Formik, Form, Field } from 'formik';
 import { useColorModeValue } from '@chakra-ui/color-mode';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { BsSortUp } from 'react-icons/bs';
-import { MdFilterAlt, MdAddchart } from 'react-icons/md';
-import user1 from '../../../../assets/user1.png';
-import { FaAngleDown } from 'react-icons/fa';
-import { RiHomeSmile2Line } from 'react-icons/ri';
-import { IoExitOutline, IoBusinessOutline } from 'react-icons/io5';
-import { BiStore } from 'react-icons/bi';
-import { GiBanknote } from 'react-icons/gi';
+import { MdFilterAlt} from 'react-icons/md';
+import { FaPlus } from 'react-icons/fa';
+import { useSelector, useDispatch } from 'react-redux';
+// import user1 from '../../../../assets/user1.png';
+// import { FaAngleDown } from 'react-icons/fa';
+// import { RiHomeSmile2Line } from 'react-icons/ri';
+// import { IoExitOutline, IoBusinessOutline } from 'react-icons/io5';
+// import { BiStore } from 'react-icons/bi';
+// import { GiBanknote } from 'react-icons/gi';
+import {
+	generateInvoice,
+	getInvoice,
+} from '../../../../ReduxContianer/BussinessRedux/BusinessAction';
 
 export default function InvoiceBoard() {
+	const dispatch = useDispatch();
 	const yellowbtn = useColorModeValue('yellow.500');
 	const [search, setSearch] = useState('');
+    const orderId = 'sdjeshshshsd';
+	const customers = useSelector((state) => state.businessReducer.customers);
+	const order = useSelector((state) => state.businessReducer.orders);
+	
+	function handleClick() {
+		dispatch(generateInvoice(orderId,customers.customers_id));
+	}
+
+	const downloadFile = () => {
+		 dispatch(getInvoice(orderId,customers.customers_id));
+			
+	};
+
+	// useEffect(() => {
+	// 	dispatch(getInvoice(orderId));
+	// },[])
 
 	return (
-		<Grid templateRows='repeat(6, 1fr)' templateColumns='repeat(12, 1fr)'>
-			<Tabs orientation='vertical' variant='unstyled'>
-				<GridItem rowSpan={7} colSpan={2} bg='white' h='100vh'>
-					<Box bg='white' w='250px' h='100%' border='0.5px solid #D9D9D9'>
-						<Center p='45px'>
-							<Flex display='flex' direction='row' alignItems='center'>
-								<Avatar name='user' src={user1} />
-								<Stack>
-									{/* <Text>Hello {users[0variant='unstyled']}</Text> */}
-								</Stack>
-								<Stack>
-									<FaAngleDown />
-								</Stack>
-							</Flex>
-						</Center>
-						<TabList>
-							<Tab fontSize='16px' color='black'>
-								<Stack px='20px' fontSize='20px'>
-									<RiHomeSmile2Line />
-								</Stack>
-								Home
-							</Tab>
-							<Tab fontSize='16px' color='black'>
-								<Stack px='20px' fontSize='20px'>
-									<BiStore />
-								</Stack>
-								Storelink
-							</Tab>
-							<Tab fontSize='16px' color='black'>
-								<Stack px='20px' fontSize='20px'>
-									<MdAddchart />
-								</Stack>
-								Order
-							</Tab>
-							<Tab fontSize='16px' color='black'>
-								<Stack px='20px' fontSize='20px'>
-									<GiBanknote />
-								</Stack>
-								Finance
-							</Tab>
-							<Tab fontSize='16px' color='black'>
-								<Stack px='20px' fontSize='20px'>
-									<IoBusinessOutline />
-								</Stack>
-								Account
-							</Tab>
-							<Tab fontSize='16px' color='black'>
-								<Stack px='20px' fontSize='20px'>
-									<IoExitOutline />
-								</Stack>
-								LogOut
-							</Tab>
-						</TabList>
-					</Box>
-				</GridItem>
-			</Tabs>
-			<GridItem colSpan={9} rowSpan={9} bg='white'>
-				<Container maxW='container.lg' mt='40px'>
+		<Container maxW='container.lg' mt='20px' pl='180px'>
+			<Flex
+				w='100%'
+				direction='row'
+				alignItems='center'
+				justifyContent='space-between'
+				mb='50px'
+				gap='40px'>
+				<Stack>
+					<Text color='black' fontWeight='bold' fontSize='30px'>
+						Invoices
+					</Text>
+				</Stack>
+				<Stack direction='row' justifyContent='center' alignItems='center'>
+					<Formik>
+						{() => (
+							<Form>
+								<Field name='text'>
+									{({ field, form }) => (
+										<FormControl
+											isInvalid={form.errors.name && form.touched.name}>
+											<InputGroup>
+												<InputLeftElement
+													pointerEvents='none'
+													m='25px 1px'
+													fontSize='20px'
+													color='yellow.500'
+													children=''
+												/>
+												<Input
+													{...field}
+													onChange={(e) => setSearch(e.target.value)}
+													type='text'
+													placeholder='Search'
+													value={search}
+													padding='30px 10px'
+													borderRadius='0px 11px 11px 11px'
+												/>
+											</InputGroup>
+											<FormErrorMessage>{form.errors.name}</FormErrorMessage>
+										</FormControl>
+									)}
+								</Field>
+							</Form>
+						)}
+					</Formik>
+					<Flex direction='row' gap='10px' alignItems='center'>
+						<Button
+							// onClick={handleClick}
+							bg={yellowbtn}
+							width='180px'
+							h='60px'
+							borderRadius='0px 11px 11px 11px'
+							type='submit'
+							color='white'
+							_hover={{ bg: '#1A202C' }}
+							leftIcon={<FaPlus />}>
+							<a href={handleClick} download>
+								Generate Invoice
+							</a>
+						</Button>
+						<Button
+							onClick={downloadFile}
+							bg={yellowbtn}
+							width='180px'
+							h='60px'
+							borderRadius='0px 11px 11px 11px'
+							type='submit'
+							color='white'
+							_hover={{ bg: '#1A202C' }}>
+							Download Invoice
+						</Button>
+					</Flex>
+				</Stack>
+			</Flex>
+			<Stack>
+				<Box
+					w='65vw'
+					h='100%'
+					borderWidth='1px'
+					borderRadius='0px 11px 11px 11px'
+					overflow='hidden'>
 					<Flex
-						px='30px'
 						direction='row'
+						justifyContent='space-between'
 						alignItems='center'
-						justifyContent='space-between'>
+						p='20px'>
 						<Stack>
-							<Text fontWeight='bold' fontSize='30px'>
-								Invoice
+							<Text color='black' fontWeight='bold' fontSize='16px'>
+								All Invoice
 							</Text>
 						</Stack>
-						<Flex direction='row'>
-							<Formik>
-								{() => (
-									<Form>
-										<Field name='text'>
-											{({ field, form }) => (
-												<FormControl
-													isInvalid={form.errors.name && form.touched.name}>
-													<InputGroup>
-														<InputLeftElement
-															pointerEvents='none'
-															m='25px 1px'
-															fontSize='20px'
-															color='yellow.500'
-															children=''
-														/>
-														<Input
-															{...field}
-															onChange={(e) => setSearch(e.target.value)}
-															type='text'
-															placeholder='Search'
-															value={search}
-															width='300px'
-															h='60px'
-															borderRadius='0px 11px 11px 11px'
-														/>
-													</InputGroup>
-													<FormErrorMessage>
-														{form.errors.name}
-													</FormErrorMessage>
-												</FormControl>
-											)}
-										</Field>
-									</Form>
-								)}
-							</Formik>
-							<Stack px='35px'>
-								<Button
-									bg={yellowbtn}
-									width='150px'
-									h='60px'
-									borderRadius='0px 11px 11px 11px'
-									type='submit'
-									color='white'
-									_hover={{ bg: '#1A202C' }}>
-									+ Add Invoice
-								</Button>
+
+						<Stack direction='row' alignItems='center' fontWeight='bold'>
+							<Stack
+								color='black'
+								direction='row'
+								alignItems='center'
+								// pr='30px'
+							>
+								<BsSortUp />
+								<Text color='black' fontSize='16px'>
+									Sort
+								</Text>
 							</Stack>
-						</Flex>
+							<Stack direction='row' alignItems='center'>
+								<MdFilterAlt />
+								<Text color='black' fontSize='16px'>
+									Filter
+								</Text>
+							</Stack>
+						</Stack>
 					</Flex>
-					<Container maxW='container.lg' mt='40px'>
+
+					<VStack
+						divider={<StackDivider borderColor='gray.200' />}
+						// spacing={4}
+						align='stretch'>
 						<Box
 							px='30px'
-							w='60vw'
-							boxSizing='border-box'
-							borderWidth='1px'
-							borderRadius='0px 21px 21px 21px'
-							borderRadius='lg'
-							overflow='hidden'
+							// h='60px'
 							display='flex'
 							direction='row'
 							alignItems='center'
 							justifyContent='space-between'>
 							<Stack>
-								<Text color='black' fontSize='16px'>
-									All Invoice
-								</Text>
-							</Stack>
-							<Flex h='10vh' direction='row' alignItems='center'>
-								<Stack
-									direction='row'
-									color='black'
-									alignItems='center'
-									pr='30px'>
-									<BsSortUp />
-									<Text color='black' fontSize='16px'>
-										Sort
-									</Text>
-								</Stack>
-								<Stack direction='row' direction='row' alignItems='center'>
-									<MdFilterAlt />
-									<Text color='black' fontSize='16px'>
-										Filter
-									</Text>
-								</Stack>
-							</Flex>
-						</Box>
-						<Box
-							px='30px'
-							w='60vw'
-							boxSizing='border-box'
-							borderWidth='1px'
-							borderRadius='0px 21px 21px 21px'
-							borderRadius='lg'
-							overflow='hidden'>
-							<Stack
-								h='10vh'
-								display='flex'
-								direction='row'
-								alignItems='center'
-								justifyContent='space-between'>
 								<Text color='gray' fontSize='14px'>
 									Customer Name
 								</Text>
-								<Text color='gray' fontSize='14px'>
-									Price
-								</Text>
-								<Text color='gray' fontSize='14px'>
-									Date
-								</Text>
-								<Text color='gray' fontSize='14px'>
-									Status
-								</Text>
 							</Stack>
+							<HStack
+								direction='row'
+								spacing='175px'
+								// justifyContent='space-between'
+								alignItems='center'>
+								<Stack>
+									<Text color='gray' textAlign='center' fontSize='14px'>
+										Price
+									</Text>
+								</Stack>
+								<Stack>
+									<Text color='gray' textAlign='left' fontSize='14px'>
+										Date
+									</Text>
+								</Stack>
+								<Stack>
+									<Text color='gray' fontSize='14px'>
+										Status
+									</Text>
+								</Stack>
+							</HStack>
 						</Box>
 						<Box
-							px='20px'
-							h='100px'
-							w='60vw'
-							border='0.5px solid #D9D9D9'
+							px='30px'
+							h='60px'
 							display='flex'
+							direction='row'
 							alignItems='center'
 							justifyContent='space-between'>
-							<Stack>
-								<Text>Buy Airtime</Text>
+							<Stack direction='column' alignItems='center'>
+								<Heading color='black' fontSize='13px'>
+									Ridwan Egbeyemi
+								</Heading>
 								<Text color='gray' fontSize='12px'>
-									Success
+									#01982303885
 								</Text>
 							</Stack>
-							<Text fontSize='12px' color='red.500'>
-								₦12,000
-							</Text>
-							<Text fontSize='12px' color='gray'>
-								Jan 3, 2022
-							</Text>
-							<Text fontSize='12px' color='gray'>
-								Jan 3, 2022
-							</Text>
+							<HStack
+								direction='row'
+								spacing='130px'
+								// justifyContent='space-between'
+								alignItems='center'>
+								<Stack>
+									<Heading fontSize='13px'>₦12,000</Heading>
+									<Text fontSize='12px' color='gary.500'>
+										on 24.05.2019
+									</Text>
+								</Stack>
+								<Stack>
+									<Heading fontSize='13px' color='black'>
+										Jan 3, 2022
+									</Heading>
+									<Text fontSize='12px' color='gray'>
+										6:30 PM
+									</Text>
+								</Stack>
+								<Stack>
+									<Text fontSize='12px' color='yellow.400'>
+										Pending
+									</Text>
+								</Stack>
+							</HStack>
 						</Box>
-						<Box
-							px='25px'
-							h='100px'
-							w='60vw'
-							border='0.5px solid #D9D9D9'
-							display='flex'
-							alignItems='center'
-							justifyContent='space-between'>
-							<Stack>
-								<Text>Buy Airtime</Text>
-								<Text color='gray' fontSize='12px'>
-									Success
-								</Text>
-							</Stack>
-
-							<Text fontSize='12px' color='red.500'>
-								₦12,000
-							</Text>
-							<Text fontSize='12px' color='gray'>
-								Jan 3, 2022
-							</Text>
-							<Text fontSize='12px' color='gray'>
-								Jan 3, 2022
-							</Text>
-						</Box>
-						<Box
-							px='25px'
-							h='100px'
-							w='60vw'
-							border='0.5px solid #D9D9D9'
-							display='flex'
-							alignItems='center'
-							justifyContent='space-between'>
-							<Stack>
-								<Text>Buy Airtime</Text>
-								<Text color='gray' fontSize='12px'>
-									Success
-								</Text>
-							</Stack>
-
-							<Text fontSize='12px' color='red.500'>
-								₦12,000
-							</Text>
-							<Text fontSize='12px' color='gray'>
-								Jan 3, 2022
-							</Text>
-							<Text fontSize='12px' color='gray'>
-								Jan 3, 2022
-							</Text>
-						</Box>
-						<Box
-							px='25px'
-							h='100px'
-							w='60vw'
-							border='0.5px solid #D9D9D9'
-							display='flex'
-							alignItems='center'
-							justifyContent='space-between'>
-							<Stack>
-								<Text>Buy Airtime</Text>
-								<Text color='gray' fontSize='12px'>
-									Success
-								</Text>
-							</Stack>
-
-							<Text fontSize='12px' color='red.500'>
-								₦12,000
-							</Text>
-							<Text fontSize='12px' color='gray'>
-								Jan 3, 2022
-							</Text>
-							<Text fontSize='12px' color='gray'>
-								Jan 3, 2022
-							</Text>
-						</Box>
-					</Container>
-				</Container>
-			</GridItem>
-		</Grid>
+						<Box h='80px'></Box>
+					</VStack>
+				</Box>
+			</Stack>
+		</Container>
 	);
 }

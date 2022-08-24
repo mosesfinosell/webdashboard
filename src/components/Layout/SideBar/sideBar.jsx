@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import {
 	Link,
 	Stack,
@@ -8,49 +8,44 @@ import {
 	Avatar,
 	Text,
 	Center,
+	AvatarBadge,
 } from '@chakra-ui/react';
-import user1 from '../../../assets/user1.png';
 import SideBarComponent from './SideBarComponent'
 import '../../../components/sidebar.css';
 import Logomark from '../../../assets/Logomark.svg';
-import { useEffect } from 'react';
-import { getBusinessUserDetails } from '../../../ReduxContianer/BussinessRedux/BusinessAction';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector} from 'react-redux';
 
-
-export default function SideBar({children,tabs, selected, setSelected}) {
-
-
-	const dispatch = useDispatch();
+export default function SideBar({ children, tabs, selected, setSelected }) {
+	
 	const businessInfo = useSelector(
 		(state) => state.businessReducer.businessUserInfo
 	);
 
-	useEffect(() => {
-		dispatch(getBusinessUserDetails(businessInfo?.user_id));
-	}, [businessInfo?.user_id, dispatch]);
-
   return (
 		<>
 			<Stack className='side-nav'>
-				<Stack mb='40px'>
-					<Flex display='flex' direction='row' alignItems='center'>
-						<Stack pr='18px'>
-							<Avatar name='user' src={user1} />
+				<Stack mb='20px'>
+					<Flex display='flex' direction='column' px='25px'>
+						<Stack px='20px'>
+							<Avatar src={businessInfo.business_image}>
+								<AvatarBadge boxSize='1em' bg='green.500' />
+							</Avatar>
 						</Stack>
 						<Stack>
-							<Text>Hello {businessInfo.business_name}</Text>
+							<Text color='black' fontWeight='bold' fontSize='14px'>
+								Hi,{businessInfo.business_name}
+							</Text>
 						</Stack>
 					</Flex>
 				</Stack>
 				{tabs &&
 					tabs.map((tab, index) => {
-						const active =
-							tab.label === selected ? <div className='active'></div> : '';
+						const active = tab.label === selected ? 'activenow' : '';
+
 						return (
 							<SideBarComponent
-								key={index}
 								className={active}
+								key={index}
 								label={tab.label}
 								icon={tab.icon}
 								link={tab.link}

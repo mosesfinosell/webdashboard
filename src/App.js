@@ -30,7 +30,7 @@ import Store from './pages/Store/productList';
 import Search from './pages/Store/SearchProducts';
 import StoreItem from './pages/Store/StoreItem';
 
-import AuthContainer from './components/Layout/AuthContainer';
+// import AuthContainer from './components/Layout/AuthContainer';
 import StoreContainer from './components/Store/StoreContainer';
 import PaymentContainer from './components/Payment/container';
 

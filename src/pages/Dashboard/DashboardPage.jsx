@@ -3,26 +3,28 @@ import React,{ useState} from 'react'
 
 import SideBar from '../../components/Layout/SideBar/sideBar'
 import { RiHomeSmile2Line } from 'react-icons/ri';
-import { MdAddchart } from 'react-icons/md';
+import { MdAddchart, MdManageAccounts } from 'react-icons/md';
 import { BiStore } from 'react-icons/bi';
+import { BsJournalText } from 'react-icons/bs';
 import { GiBanknote } from 'react-icons/gi';
-import { IoExitOutline, IoBusinessOutline } from 'react-icons/io5';
+import { FaStore } from 'react-icons/fa';
+// import { IoExitOutline } from 'react-icons/io5';
 import RenderBar from '../../components/Layout/SideBar/RenderBar';
 import HomeBusiness from '../Dashboard/BusinessDashboard/HomeBusiness/HomeBusiness'
+import StoreInventory from '../Dashboard/BusinessDashboard/HomeBusiness/StoreInventory';
+import InvoiceBoard from '../Dashboard/BusinessDashboard/HomeBusiness/InvoiceBoard';
 import StoreLink from '../Dashboard/BusinessDashboard/StoreLink/addUrlPage';
 import Order from '../Dashboard/BusinessDashboard/Order/createOrder';
 import Payments from '../Dashboard/BusinessDashboard/Payment/createTransaction';
-
+import StoreProfile from '../Dashboard/BusinessDashboard/Account/AccountBusinessProfile'
 
 export default function DashboardPage() {
-
-
-  const [selected, setSelected] = useState('Home');
+	const [selected, setSelected] = useState('Home');
 
 	const handleSelect = (tab) => {
 		setSelected(tab);
 	};
-  return (
+	return (
 		<>
 			<SideBar
 				tabs={[
@@ -37,6 +39,16 @@ export default function DashboardPage() {
 						icon: <BiStore />,
 					},
 					{
+						label: 'Inventory',
+						link: '/store-inventory',
+						icon: <FaStore />,
+					},
+					{
+						label: 'Invoice',
+						link: '/invoice',
+						icon: <BsJournalText />,
+					},
+					{
 						label: 'Orders',
 						link: '/order',
 						icon: <MdAddchart />,
@@ -49,12 +61,7 @@ export default function DashboardPage() {
 					{
 						label: 'Account',
 						link: '/account',
-						icon: <IoBusinessOutline />,
-					},
-					{
-						label: 'Logout',
-						link: '/logout',
-						icon: <IoExitOutline />,
+						icon: <MdManageAccounts />,
 					},
 				]}
 				selected={selected}
@@ -65,17 +72,20 @@ export default function DashboardPage() {
 				<RenderBar isSelected={selected === 'Store'}>
 					<StoreLink />
 				</RenderBar>
+				<RenderBar isSelected={selected === 'Inventory'}>
+					<StoreInventory />
+				</RenderBar>
 				<RenderBar isSelected={selected === 'Orders'}>
 					<Order />
 				</RenderBar>
 				<RenderBar isSelected={selected === 'Payment'}>
 					<Payments />
 				</RenderBar>
-				{/* <RenderBar isSelected={selected === 'Account'}>
-					<StoreLink />
-				</RenderBar> */}
-				<RenderBar isSelected={selected === 'Logout'}>
-					<StoreLink />
+				<RenderBar isSelected={selected === 'Invoice'}>
+					<InvoiceBoard />
+				</RenderBar>
+				<RenderBar isSelected={selected === 'Account'}>
+					<StoreProfile />
 				</RenderBar>
 			</SideBar>
 		</>

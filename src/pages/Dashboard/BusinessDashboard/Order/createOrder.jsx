@@ -1,31 +1,24 @@
 import {
-  Grid,
+  // Grid,
   Box,
-  GridItem,
+  // GridItem,
   Container,
   Text,
   Stack,
-  Center,
+  // Center,
   Tabs,
   TabList,
   TabPanels,
+  Flex,
   Tab,
   TabPanel,
-  Input,
-  InputGroup,
-  FormControl,
-  FormLabel,
-  Button,
-  Select,
-  InputLeftElement,
-  FormErrorMessage,
 } from "@chakra-ui/react";
 import { BiShoppingBag } from "react-icons/bi";
-import { MdWifiCalling3, MdEmail } from "react-icons/md";
+// import { MdWifiCalling3, MdEmail } from "react-icons/md";
 import { useState, useEffect } from "react";
-import { Formik, Form, Field } from "formik";
+// import { Formik, Form, Field } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {
   getOrders,
@@ -41,6 +34,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
+
+
+
+
 const useStyles = makeStyles({
   root: {
     "& .MuiStepIcon-rootMuiStepIcon-active": {
@@ -68,20 +65,6 @@ export default function CreateOrder() {
   const customers = useSelector((state) => state.businessReducer.customers);
 
 
-  const [title, setTitle] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [startDate, setStartDate] = useState(null);
-  const [orderStatus, setOrderStatus] = useState("");
-  const [orderType, setOrderType] = useState("");
-  const [saleStatus, setSaleStatus] = useState("");
-  const [discount, setDiscount] = useState("");
-  const [shippingAddress, setShippingAddress] = useState("");
-  const [paymentStatus, setPaymentStatus] = useState("");
-  const [paymentMethod, setPaymentMethod] = useState("");
-  const [totalAmount, setTotalAmount] = useState("");
-  const [selectProduct, setSelectProduct] = useState("");
-  const [selectCustomer, setSelectCustomer] = useState("");
   const [businessId] = useState(businessInfo.business_id);
   const [page, setPage] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
@@ -190,374 +173,214 @@ export default function CreateOrder() {
         return "Unknown Step";
     }
   }
-  const classes = useStyles();
+//   const classes = useStyles();
   return (
-    <Container pt='40px' pl="240px" maxW="container.lg">
-      {/* <Grid  templateColumns="repeat(5, 1fr)"> */}
-        {/* <GridItem colSpan={4} rowSpan={6} bg="white" gap="5"> */}
-          <Stack pb="30px">
-            <Text color="black" fontWeight="bold" fontSize="14px">
-              Add a order
-            </Text>
-          </Stack>
-          <Box
-            h="100%"
-            w="400px"
-            borderRadius="0px 11px 11px 11px"
-            border="0.5px solid #D9D9D9"
-            px="40px"
-          >
-            <Stepper
-              activeStep={activeStep}
-              alternativeLabel
-            >
-              {steppings.map((label) => (
-                <Step key={label}>
-                  <StepLabel>{label}</StepLabel>
-                </Step>
-              ))}
-            </Stepper>
-            <>
-              {activeStep === steppings.length ? (
-                "Steps Complete"
-              ) : (
-                <>
-                  {getStepsContents(activeStep)}
-                </>
-              )}
-            </>
-          </Box>
-        {/* </GridItem> */}
-        {/* <GridItem colStart={6} colEnd={9} h="10" bg="white"> */}
-          <Stack m="10px">
-            <Text color="gray" fontSize="14px">
-              Order History
-            </Text>
-          </Stack>
-          <Tabs variant="unstyled">
-            
-              <Box
-                h="100px"
-                w="400px"
-                borderRadius="0px 11px 0px 0px"
-                border="0.5px solid #D9D9D9"
-                display="flex"
-                direction="column"
-                alignItems="center"
-                justifyContent="center"
-              >
-                <TabList>
-                  <Tab fontSize="16px" fontWeight="bold" color="black">
-                    All
-                  </Tab>
-                  <Tab fontSize="16px" fontWeight="bold" color="black">
-                    Payments
-                  </Tab>
-                  <Tab fontSize="16px" fontWeight="bold" color="black">
-                    Debit
-                  </Tab>
-                </TabList>
-              </Box>
-           
-           
-              <TabPanels>
-                <TabPanel id="scrollTarget">
-                  {isFetching ? (
-                    // <Spinner />
-                    <h4>...</h4>
-                  ) : orders.length === 0 ? (
-                    <h1>There are no orders</h1>
-                  ) : (
-                    <InfiniteScroll
-                      dataLength={orders.length}
-                      next={fetchMore}
-                      hasMore={Number(currentPage) !== Number(totalPages)}
-                      loader={<h4>Loading...</h4>}
-					  scrollableTarget="scrollTarget"
-                      endMessage={
-                        <p
-                          style={{
-                            textAlign: "center",
-                            paddingTop: "7px",
-                            color: "#D6AA1B",
-                            fontFamily: "Circular Std",
-                          }}
-                        >
-                          <b>No more orders</b>
-                        </p>
-                      }
-                    >
-                      {orders.map((order) => (
-                        <Box
-                          key={order.id}
-                          h="100px"
-                          w="400px"
-                          border="0.5px solid #D9D9D9"
-                          display="flex"
-                          alignItems="center"
-                          justifyContent="space-evenly"
-                        >
-                          <Stack
-                            color="yellow.500"
-                            bg="yellow.100"
-                            borderRadius="0px 8px 8px 8px"
-                            border="0.2px solid yellow.100"
-                            p="12px"
-                            fontSize="22px"
-                          >
-                            <BiShoppingBag />
-                          </Stack>
-                          <Stack pr="10px">
-                            <Text color="#273B4A" w="200px">
-                              {order.title}
-                            </Text>
-                            <Text color="gray" fontSize="12px">
-                              {order.order_status}
-                            </Text>
-                          </Stack>
+		<Container pl='200px' maxW='container.lg'>
+			<Flex direction='row' pt='30px' gap='50px'>
+				<Stack>
+					<Stack pb='30px'>
+						<Text color='black' fontWeight='bold' fontSize='24px'>
+							Add a order
+						</Text>
+					</Stack>
+					<Box
+						h='100%'
+						w='380px'
+						borderRadius='0px 11px 11px 11px'
+						border='0.5px solid #D9D9D9'
+						px='40px'>
+						<Stepper activeStep={activeStep} alternativeLabel>
+							{steppings.map((label) => (
+								<Step key={label}>
+									<StepLabel>{label}</StepLabel>
+								</Step>
+							))}
+						</Stepper>
+						<>
+							{activeStep === steppings.length ? (
+								'Steps Complete'
+							) : (
+								<>{getStepsContents(activeStep)}</>
+							)}
+						</>
+					</Box>
+				</Stack>
+				<Stack mt='30px'>
+					<Stack>
+						<Text color='gray' fontSize='14px'>
+							Order History
+						</Text>
+					</Stack>
+					<Tabs variant='unstyled'>
+						<Box
+							w='450px'
+							h='100%'
+							borderWidth='1px'
+							borderRadius='0px 11px 11px 11px'
+							border='0.5px solid #D9D9D9'>
+							<Flex
+								direction='row'
+								justifyContent='center'
+								alignItems='center'
+								p='20px'>
+								<TabList>
+									<Tab fontSize='16px' fontWeight='bold' color='black'>
+										All
+									</Tab>
+									<Tab fontSize='16px' fontWeight='bold' color='black'>
+										Payments
+									</Tab>
+									<Tab fontSize='16px' fontWeight='bold' color='black'>
+										Debit
+									</Tab>
+								</TabList>
+							</Flex>
 
-                          <Stack>
-                            <Text fontSize="12px" color="yellow.500">
-                              ₦{order.amount}
-                            </Text>
-                            <Text fontSize="12px" color="gray">
-                              {new Date(order.createdAt).toLocaleDateString(
-                                "fr"
-                              )}
-                            </Text>
-                          </Stack>
-                        </Box>
-                      ))}
-                    </InfiniteScroll>
-                  )}
-                </TabPanel>
-                <TabPanel>
-                  <Box
-                    h="100px"
-                    w="400px"
-                    border="0.5px solid #D9D9D9"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="space-evenly"
-                  >
-                    <Stack
-                      color="green.500"
-                      bg="green.100"
-                      borderRadius="0px 8px 8px 8px"
-                      border="0.2px solid green.100"
-                      p="12px"
-                      fontSize="22px"
-                    >
-                      <BiShoppingBag />
-                    </Stack>
-                    <Stack pr="10px">
-                      <Text color="#273B4A" w="200px">
-                        {" "}
-                        Sneakers Adidas Core
-                      </Text>
-                      <Text color="gray" fontSize="12px">
-                        Accepted
-                      </Text>
-                    </Stack>
+							<TabPanels>
+								<TabPanel id='scrollTarget'>
+									{isFetching ? (
+										<Spinner />
+									) : orders.length === 0 ? (
+										<h1>There are no orders</h1>
+									) : (
+										<InfiniteScroll
+											dataLength={orders.length}
+											next={fetchMore}
+											hasMore={Number(currentPage) !== Number(totalPages)}
+											loader={<h4>Loading...</h4>}
+											scrollableTarget='scrollTarget'
+											endMessage={
+												<p
+													style={{
+														textAlign: 'center',
+														paddingTop: '7px',
+														color: '#D6AA1B',
+														fontFamily: 'Circular Std',
+													}}>
+													<b>No more orders</b>
+												</p>
+											}>
+											{orders.map((order) => (
+												<Box
+													key={order.id}
+													h='100px'
+													w='400px'
+													border='0.5px solid #D9D9D9'
+													display='flex'
+													alignItems='center'
+													justifyContent='space-evenly'>
+													<Stack
+														color='yellow.500'
+														bg='yellow.100'
+														borderRadius='0px 8px 8px 8px'
+														border='0.2px solid yellow.100'
+														p='12px'
+														fontSize='22px'>
+														<BiShoppingBag />
+													</Stack>
+													<Stack pr='10px'>
+														<Text color='#273B4A' w='200px'>
+															{order.title}
+														</Text>
+														<Text color='gray' fontSize='12px'>
+															{order.order_status}
+														</Text>
+													</Stack>
 
-                    <Stack>
-                      <Text fontSize="12px" color="green.500">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
-                    </Stack>
-                  </Box>
-                  <Box
-                    h="100px"
-                    w="400px"
-                    border="0.5px solid #D9D9D9"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="space-evenly"
-                  >
-                    <Stack
-                      color="yellow.500"
-                      bg="yellow.100"
-                      borderRadius="0px 8px 8px 8px"
-                      border="0.2px solid yellow.100"
-                      p="12px"
-                      fontSize="22px"
-                    >
-                      <BiShoppingBag />
-                    </Stack>
-                    <Stack pr="10px">
-                      <Text color="#273B4A" w="200px">
-                        Adidas Core Sneakers{" "}
-                      </Text>
-                      <Text color="gray" fontSize="12px">
-                        Accepted
-                      </Text>
-                    </Stack>
+													<Stack>
+														<Text fontSize='12px' color='yellow.500'>
+															₦{order.amount}
+														</Text>
+														<Text fontSize='12px' color='gray'>
+															{new Date(order.createdAt).toLocaleDateString(
+																'fr'
+															)}
+														</Text>
+													</Stack>
+												</Box>
+											))}
+										</InfiniteScroll>
+									)}
+								</TabPanel>
+								<TabPanel>
+									<Box
+										h='100px'
+										w='400px'
+										border='0.5px solid #D9D9D9'
+										display='flex'
+										alignItems='center'
+										justifyContent='space-evenly'>
+										<Stack
+											color='green.500'
+											bg='green.100'
+											borderRadius='0px 8px 8px 8px'
+											border='0.2px solid green.100'
+											p='12px'
+											fontSize='22px'>
+											<BiShoppingBag />
+										</Stack>
+										<Stack pr='10px'>
+											<Text color='#273B4A' w='200px'>
+												{' '}
+												Sneakers Adidas Core
+											</Text>
+											<Text color='gray' fontSize='12px'>
+												Accepted
+											</Text>
+										</Stack>
 
-                    <Stack>
-                      <Text fontSize="12px" color="yellow.500">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
-                    </Stack>
-                  </Box>
-                  <Box
-                    h="100px"
-                    w="400px"
-                    border="0.5px solid #D9D9D9"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="space-evenly"
-                  >
-                    <Stack
-                      color="gray.500"
-                      bg="gray.100"
-                      borderRadius="0px 8px 8px 8px"
-                      border="0.2px solid gray.100"
-                      p="12px"
-                      fontSize="24px"
-                    >
-                      <BiShoppingBag />
-                    </Stack>
-                    <Stack pr="10px">
-                      <Text color="#273B4A" w="200px">
-                        Adidas Core Sneakers{" "}
-                      </Text>
-                      <Text color="gray" fontSize="12px">
-                        Accepted
-                      </Text>
-                    </Stack>
+										<Stack>
+											<Text fontSize='12px' color='green.500'>
+												₦12,000
+											</Text>
+											<Text fontSize='12px' color='gray'>
+												Jan 3, 2022
+											</Text>
+										</Stack>
+									</Box>
+								</TabPanel>
+								<TabPanel>
+									<Box
+										h='100px'
+										w='400px'
+										border='0.5px solid #D9D9D9'
+										display='flex'
+										alignItems='center'
+										justifyContent='space-evenly'>
+										<Stack
+											color='yellow.500'
+											bg='yellow.100'
+											borderRadius='0px 8px 8px 8px'
+											border='0.2px solid green.100'
+											p='12px'
+											fontSize='22px'>
+											<BiShoppingBag />
+										</Stack>
+										<Stack pr='10px'>
+											<Text color='#273B4A' w='200px'>
+												{' '}
+												Sneakers Adidas Core
+											</Text>
+											<Text color='gray' fontSize='12px'>
+												Accepted
+											</Text>
+										</Stack>
 
-                    <Stack>
-                      <Text fontSize="12px" color="gray.500">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
-                    </Stack>
-                  </Box>
-                </TabPanel>
-                <TabPanel>
-                  <Box
-                    h="100px"
-                    w="400px"
-                    border="0.5px solid #D9D9D9"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="space-evenly"
-                  >
-                    <Stack
-                      color="yellow.500"
-                      bg="yellow.100"
-                      borderRadius="0px 8px 8px 8px"
-                      border="0.2px solid green.100"
-                      p="12px"
-                      fontSize="22px"
-                    >
-                      <BiShoppingBag />
-                    </Stack>
-                    <Stack pr="10px">
-                      <Text color="#273B4A" w="200px">
-                        {" "}
-                        Sneakers Adidas Core
-                      </Text>
-                      <Text color="gray" fontSize="12px">
-                        Accepted
-                      </Text>
-                    </Stack>
-
-                    <Stack>
-                      <Text fontSize="12px" color="green.500">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
-                    </Stack>
-                  </Box>
-                  <Box
-                    h="100px"
-                    w="400px"
-                    border="0.5px solid #D9D9D9"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="space-evenly"
-                  >
-                    <Stack
-                      color="yellow.500"
-                      bg="yellow.100"
-                      borderRadius="0px 8px 8px 8px"
-                      border="0.2px solid yellow.100"
-                      p="12px"
-                      fontSize="22px"
-                    >
-                      <BiShoppingBag />
-                    </Stack>
-                    <Stack pr="10px">
-                      <Text color="#273B4A" w="200px">
-                        Adidas Core Sneakers{" "}
-                      </Text>
-                      <Text color="gray" fontSize="12px">
-                        Accepted
-                      </Text>
-                    </Stack>
-
-                    <Stack>
-                      <Text fontSize="12px" color="yellow.500">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
-                    </Stack>
-                  </Box>
-                  <Box
-                    h="100px"
-                    w="400px"
-                    border="0.5px solid #D9D9D9"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="space-evenly"
-                  >
-                    <Stack
-                      color="gray.500"
-                      bg="gray.100"
-                      borderRadius="0px 8px 8px 8px"
-                      border="0.2px solid gray.100"
-                      p="12px"
-                      fontSize="24px"
-                    >
-                      <BiShoppingBag />
-                    </Stack>
-                    <Stack pr="10px">
-                      <Text color="#273B4A" w="200px">
-                        Adidas Core Sneakers{" "}
-                      </Text>
-                      <Text color="gray" fontSize="12px">
-                        Accepted
-                      </Text>
-                    </Stack>
-
-                    <Stack>
-                      <Text fontSize="12px" color="gray.500">
-                        ₦12,000
-                      </Text>
-                      <Text fontSize="12px" color="gray">
-                        Jan 3, 2022
-                      </Text>
-                    </Stack>
-                  </Box>
-                </TabPanel>
-              </TabPanels>
-            
-          </Tabs>
-        {/* </GridItem> */}
-      {/* </Grid> */}
-    </Container>
-  );
+										<Stack>
+											<Text fontSize='12px' color='green.500'>
+												₦12,000
+											</Text>
+											<Text fontSize='12px' color='gray'>
+												Jan 3, 2022
+											</Text>
+										</Stack>
+									</Box>
+								</TabPanel>
+							</TabPanels>
+						</Box>
+					</Tabs>
+				</Stack>
+			</Flex>
+		</Container>
+	);
 }

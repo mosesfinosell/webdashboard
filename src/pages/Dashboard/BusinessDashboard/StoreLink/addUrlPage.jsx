@@ -1,16 +1,16 @@
 import {
-  Grid,
+//   Grid,
   Box,
   Container,
   Stack,
   Flex,
   Heading,
   Input,
-  Checkbox,
+//   Checkbox,
   InputGroup,
   FormControl,
-  FormLabel,
-  FormErrorMessage,
+//   FormLabel,
+//   FormErrorMessage,
   InputRightAddon,
   InputLeftAddon,
   Button,
@@ -20,7 +20,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import { createStoreLink } from "../../../../ReduxContianer/BussinessRedux/BusinessAction";
-import BusinessLayout from "../../../../components/Layout/BusinessLayout";
+// import BusinessLayout from "../../../../components/Layout/BusinessLayout";
 import { useNavigate } from "react-router-dom";
 import "../../Dash.css";
 export default function AddUrlPage() {
@@ -31,9 +31,6 @@ export default function AddUrlPage() {
   const businessInfo = useSelector(
     (state) => state.businessReducer.businessUserInfo
   );
-  // const { user } = businessSignIn;
-  // const { businessDetails } = user;
-  // const { message } = businessDetails;
 
   const [userId] = useState(businessInfo.user_id);
   const [storeName, setStoreName] = useState("");
@@ -48,7 +45,7 @@ export default function AddUrlPage() {
   return (
   <Container maxW='container.lg'>
 				<Flex direction='column' pt='150px' alignItems='center'>
-					<Stack>
+					<Stack mb='80px'>
 						<Heading textAlign='left' fontSize='38px'>Add Url</Heading>
 					</Stack>
 					<Box pt='20px'>

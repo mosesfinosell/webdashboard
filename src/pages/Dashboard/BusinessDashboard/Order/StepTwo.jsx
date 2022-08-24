@@ -1,5 +1,12 @@
 import React from "react";
-import { FormLabel, Button, Select, Input, InputGroup } from "@chakra-ui/react";
+import {
+	FormLabel,
+	Button,
+	Select,
+	Input,
+	InputGroup,
+	InputRightElement,
+} from '@chakra-ui/react';
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useEffect, useState } from "react";
@@ -8,6 +15,8 @@ import {
   getStepTwoDetails,
   getProduct,
 } from "../../../../ReduxContianer/BussinessRedux/BusinessAction";
+import AddCustomerModal from '../Customer/addCustomerModal';
+import AddProductModal from '../Products/addProductsModal';
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 // import DatePicker from "react-datepicker";
@@ -65,204 +74,213 @@ function StepTwo({ activeStep, steppings, handleNext }) {
     validationSchema: createStepTwoSchema,
   });
   return (
-    <div>
-      <form
-        onSubmit={formik.handleSubmit}
-        style={{ width: "90%", border: "none" }}
-      >
-        <FormLabel htmlFor="order_status">Order Status</FormLabel>
-        <Select
-          id="order_status"
-          name="order_status"
-          mb="20px"
-          placeholder="Add Order Status"
-          value={formik.values.order_status}
-          onChange={formik.handleChange}
-          width="100%"
-          h="60px"
-          borderRadius="0px 11px 11px 11px"
-        >
-          <option value="pending">Pending</option>
-          <option value="in-delivery">In-Delivery</option>
-          <option value="completed">Completed</option>
-          <option value="cancelled">Cancelled</option>
-        </Select>
-        {formik.touched.order_status && formik.errors.order_status ? (
-          <span>{formik.errors.order_status}</span>
-        ) : null}
+		<div>
+			<form
+				onSubmit={formik.handleSubmit}
+				style={{ width: '90%', border: 'none' }}>
+				<FormLabel htmlFor='order_status'>Order Status</FormLabel>
+				<Select
+					id='order_status'
+					name='order_status'
+					mb='20px'
+					placeholder='Add Order Status'
+					value={formik.values.order_status}
+					onChange={formik.handleChange}
+					width='100%'
+					h='60px'
+					borderRadius='0px 11px 11px 11px'>
+					<option value='pending'>Pending</option>
+					<option value='in-delivery'>In-Delivery</option>
+					<option value='completed'>Completed</option>
+					<option value='cancelled'>Cancelled</option>
+				</Select>
+				{formik.touched.order_status && formik.errors.order_status ? (
+					<span>{formik.errors.order_status}</span>
+				) : null}
 
-        <FormLabel htmlFor="order_type">Order Type</FormLabel>
-        <Select
-          mb="20px"
-          placeholder="Add Order Type"
-          value={formik.values.order_type}
-          onChange={formik.handleChange}
-          width="100%"
-          h="60px"
-          borderRadius="0px 11px 11px 11px"
-          id="order_type"
-          name="order_type"
-        >
-          <option value="normal">Normal</option>
-          <option value="escrow">Escrow</option>
-        </Select>
-        {formik.touched.order_type && formik.errors.order_type ? (
-          <span>{formik.errors.order_type}</span>
-        ) : null}
+				<FormLabel htmlFor='order_type'>Order Type</FormLabel>
+				<Select
+					mb='20px'
+					placeholder='Add Order Type'
+					value={formik.values.order_type}
+					onChange={formik.handleChange}
+					width='100%'
+					h='60px'
+					borderRadius='0px 11px 11px 11px'
+					id='order_type'
+					name='order_type'>
+					<option value='normal'>Normal</option>
+					<option value='escrow'>Escrow</option>
+				</Select>
+				{formik.touched.order_type && formik.errors.order_type ? (
+					<span>{formik.errors.order_type}</span>
+				) : null}
 
-        <FormLabel htmlFor="payment_status">Payment Status</FormLabel>
-        <Select
-          mb="20px"
-          placeholder="Add Payment Status"
-          value={formik.values.payment_status}
-          onChange={formik.handleChange}
-          width="100%"
-          h="60px"
-          borderRadius="0px 11px 11px 11px"
-          id="payment_status"
-          name="payment_status"
-        >
-          <option value="paid">Paid</option>
-          <option value="unpaid">Unpaid</option>
-        </Select>
-        {formik.touched.payment_status && formik.errors.payment_status ? (
-          <span>{formik.errors.payment_status}</span>
-        ) : null}
-        <FormLabel htmlFor="customer_id">Select Customers</FormLabel>
-        <Select
-          mb="20px"
-          placeholder="Select Customer"
-          value={formik.values.customer_id}
-          onChange={formik.handleChange}
-          width="100%"
-          h="60px"
-          borderRadius="0px 11px 11px 11px"
-          id="customer_id"
-          name="customer_id"
-        >
-          {!isFetching &&
-            customers?.map((customer) => {
-              return (
-                <option value={customer._id}>{customer.customer_name}</option>
-              );
-            })}
-        </Select>
-        {formik.touched.customer_id && formik.errors.customer_id ? (
-          <span>{formik.errors.customer_id}</span>
-        ) : null}
-        <FormLabel htmlFor="productID">Select Products</FormLabel>
-        <Select
-          mb="20px"
-          placeholder="Select Product"
-          value={formik.values.productID}
-          onChange={formik.handleChange}
-          width="100%"
-          h="60px"
-          borderRadius="0px 11px 11px 11px"
-          id="productID"
-          name="productID"
-        >
-          {!isFetching &&
-            products?.map((product) => {
-              return <option value={product.productID}>{product.title}</option>;
-            })}
-        </Select>
-        {formik.touched.productID && formik.errors.productID ? (
-          <span>{formik.errors.productID}</span>
-        ) : null}
-        <FormLabel htmlFor="quantity">Product Quantity</FormLabel>
-        <InputGroup>
-          <Input
-            id="quantity"
-            name="quantity"
-            mb="20px"
-            value={formik.values.quantity}
-            onChange={formik.handleChange}
-            placeholder="Enter Product Quantity"
-            width="100%"
-            height="60px"
-            borderRadius="0px 11px 11px 11px"
-          />
-        </InputGroup>
-        {formik.touched.quantity && formik.errors.quantity ? (
-          <span>{formik.errors.quantity}</span>
-        ) : null}
-        <FormLabel htmlFor="sales_channel">Sales Channel</FormLabel>
-        <Select
-          mb="20px"
-          placeholder="Choose sales Channel"
-          value={formik.values.sales_channel}
-          onChange={formik.handleChange}
-          width="100%"
-          h="60px"
-          borderRadius="0px 11px 11px 11px"
-          id="sales_channel"
-          name="sales_channel"
-        >
-          <option value="offline">Offline</option>
-          <option value="online">Online</option>
-        </Select>
-        {formik.touched.sales_channel && formik.errors.sales_channel ? (
-          <span>{formik.errors.sales_channel}</span>
-        ) : null}
+				<FormLabel htmlFor='payment_status'>Payment Status</FormLabel>
+				<Select
+					mb='20px'
+					placeholder='Add Payment Status'
+					value={formik.values.payment_status}
+					onChange={formik.handleChange}
+					width='100%'
+					h='60px'
+					borderRadius='0px 11px 11px 11px'
+					id='payment_status'
+					name='payment_status'>
+					<option value='paid'>Paid</option>
+					<option value='unpaid'>Unpaid</option>
+				</Select>
+				{formik.touched.payment_status && formik.errors.payment_status ? (
+					<span>{formik.errors.payment_status}</span>
+				) : null}
+				<FormLabel htmlFor='customer_id'>Select Customers</FormLabel>
+				<InputGroup>
+					<InputRightElement
+						pointerEvents='visible'
+						m='15px 15px'
+						ml={2}
+						color='yellow.500'>
+						<Button fontSize='25px' size='sm' b='transparent' cursor='pointer'>
+							<AddCustomerModal />
+						</Button>
+					</InputRightElement>
+					<Input
+						mb='20px'
+						placeholder='Select Customer'
+						value={formik.values.customer_id}
+						onChange={formik.handleChange}
+						// width="100%"
+						h='65px'
+						borderRadius='0px 11px 11px 11px'
+						id='customer_id'
+						name='customer_id'
+						background='#FAFAFA'
+					/>
+				</InputGroup>
 
-        <FormLabel htmlFor="payment_method">Payment Method</FormLabel>
-        <Select
-          mb="20px"
-          placeholder="Add Payment Method"
-          value={formik.values.payment_method}
-          onChange={formik.handleChange}
-          width="100%"
-          h="60px"
-          borderRadius="0px 11px 11px 11px"
-          id="payment_method"
-          name="payment_method"
-        >
-          <option>Offline</option>
-          <option>Checkout</option>
-          <option>Transfer</option>
-        </Select>
-        {formik.touched.payment_method && formik.errors.payment_method ? (
-          <span>{formik.errors.payment_method}</span>
-        ) : null}
-        <FormLabel htmlFor="order_date">Order Date</FormLabel>
-        <InputGroup>
-          <Input
-            type="date"
-            id="order_date"
-            name="order_date"
-            mb="20px"
-            value={formik.values.order_date}
-            onChange={formik.handleChange}
-            placeholder="Order Date"
-            width="100%"
-            height="60px"
-            borderRadius="0px 11px 11px 11px"
-          />
-        </InputGroup>
-        {formik.touched.order_date && formik.errors.order_date ? (
-          <span>{formik.errors.order_date}</span>
-        ) : null}
-        <Button
-          disabled={!formik.isValid}
-          //   onClick={handleNext}
-          mt={4}
-          mb={6}
-          bg="yellow.500"
-          width="100%"
-          h="60px"
-          borderRadius="0px 11px 11px 11px"
-          type="submit"
-          color="white"
-          _hover={{ bg: "#1A202C" }}
-        >
-          COMPLETE STEP TWO
-        </Button>
-      </form>
+				{formik.touched.customer_id && formik.errors.customer_id ? (
+					<span>{formik.errors.customer_id}</span>
+				) : null}
+				{/* </div> */}
 
-      {/* </Formik> */}
-    </div>
-  );
+				{/* <div className="trans-div"> */}
+				<FormLabel htmlFor='product_id'>Select Product</FormLabel>
+				<InputGroup>
+					<InputRightElement
+						pointerEvents='visible'
+						m='15px 15px'
+						ml={2}
+						color='yellow.500'>
+						<Button fontSize='25px' size='sm' b='transparent' cursor='pointer'>
+							<AddProductModal />
+						</Button>
+					</InputRightElement>
+					<Input
+						mb='20px'
+						placeholder='Select Product'
+						value={formik.values.product_id}
+						onChange={formik.handleChange}
+						// width="100%"
+						h='65px'
+						borderRadius='0px 11px 11px 11px'
+						id='product_id'
+						name='product_id'
+						background='#FAFAFA'
+					/>
+				</InputGroup>
+				{formik.touched.product_id && formik.errors.product_id ? (
+					<span>{formik.errors.product_id}</span>
+				) : null}
+				<FormLabel htmlFor='quantity'>Product Quantity</FormLabel>
+				<InputGroup>
+					<Input
+						id='quantity'
+						name='quantity'
+						mb='20px'
+						value={formik.values.quantity}
+						onChange={formik.handleChange}
+						placeholder='Enter Product Quantity'
+						width='100%'
+						height='60px'
+						borderRadius='0px 11px 11px 11px'
+					/>
+				</InputGroup>
+				{formik.touched.quantity && formik.errors.quantity ? (
+					<span>{formik.errors.quantity}</span>
+				) : null}
+				<FormLabel htmlFor='sales_channel'>Sales Channel</FormLabel>
+				<Select
+					mb='20px'
+					placeholder='Choose sales Channel'
+					value={formik.values.sales_channel}
+					onChange={formik.handleChange}
+					width='100%'
+					h='60px'
+					borderRadius='0px 11px 11px 11px'
+					id='sales_channel'
+					name='sales_channel'>
+					<option value='offline'>Offline</option>
+					<option value='online'>Online</option>
+				</Select>
+				{formik.touched.sales_channel && formik.errors.sales_channel ? (
+					<span>{formik.errors.sales_channel}</span>
+				) : null}
+
+				<FormLabel htmlFor='payment_method'>Payment Method</FormLabel>
+				<Select
+					mb='20px'
+					placeholder='Add Payment Method'
+					value={formik.values.payment_method}
+					onChange={formik.handleChange}
+					width='100%'
+					h='60px'
+					borderRadius='0px 11px 11px 11px'
+					id='payment_method'
+					name='payment_method'>
+					<option>Offline</option>
+					<option>Checkout</option>
+					<option>Transfer</option>
+				</Select>
+				{formik.touched.payment_method && formik.errors.payment_method ? (
+					<span>{formik.errors.payment_method}</span>
+				) : null}
+				<FormLabel htmlFor='order_date'>Order Date</FormLabel>
+				<InputGroup>
+					<Input
+						type='date'
+						id='order_date'
+						name='order_date'
+						mb='20px'
+						value={formik.values.order_date}
+						onChange={formik.handleChange}
+						placeholder='Order Date'
+						width='100%'
+						height='60px'
+						borderRadius='0px 11px 11px 11px'
+					/>
+				</InputGroup>
+				{formik.touched.order_date && formik.errors.order_date ? (
+					<span>{formik.errors.order_date}</span>
+				) : null}
+				<Button
+					disabled={!formik.isValid}
+					//   onClick={handleNext}
+					mt={4}
+					mb={6}
+					bg='yellow.500'
+					width='100%'
+					h='60px'
+					borderRadius='0px 11px 11px 11px'
+					type='submit'
+					color='white'
+					_hover={{ bg: '#1A202C' }}>
+					COMPLETE STEP TWO
+				</Button>
+			</form>
+
+			{/* </Formik> */}
+		</div>
+	);
 }
 
 export default StepTwo;

@@ -1,16 +1,18 @@
 .dash-cover {
   display: flex;
   justify-content: space-between;
-  height:100vh;
+  height: 100vh;
   background: #e5e5e5;
-  
+
 }
+
 .dashy-cover {
   display: flex;
   justify-content: space-between;
   /* background: #e5e5e5; */
   padding-left: 300px;
 }
+
 .url-dash {
   margin-left: 5rem;
   margin-top: 5rem;
@@ -21,6 +23,7 @@
 .MuiStepIcon-root.MuiStepIcon-active {
   color: #d6aa1b !important;
 }
+
 .form-transaction {
   width: 90%;
   margin: 0 auto;
@@ -29,13 +32,16 @@
   border-radius: 0px 21px 21px 21px;
   border: none;
 }
+
 .add-url {
   padding-bottom: 10rem;
 }
+
 .left-dash {
   width: 46%;
   margin-left: 3rem;
 }
+
 .left-step-dash {
   width: 400px;
   margin-left: 4rem;
@@ -46,6 +52,7 @@
   box-sizing: border-box;
   border-radius: 0px 11px 11px 11px;
 }
+
 .copy-div {
   display: flex;
   flex-direction: column;
@@ -56,6 +63,7 @@
   width: 80%;
   padding: 1.4rem 3rem;
 }
+
 .copy-copy {
   font-size: 14px;
   display: flex;
@@ -64,14 +72,17 @@
   align-items: center;
   width: 50px;
 }
+
 .copy-top {
   display: flex;
   justify-content: space-between;
 }
+
 .left-deal-dash {
   width: 44%;
   margin-left: 1.6rem;
 }
+
 .left-trans-dash {
   width: 46%;
   margin-left: 1.6rem;
@@ -80,21 +91,26 @@
   box-sizing: border-box;
   border-radius: 0px 11px 11px 11px;
 }
+
 .complete-div {
   text-align: center;
 }
+
 .complete-text {
   text-align: center;
   font-size: 18px;
 }
+
 inner-trans-dash {
   width: 90%;
   margin: 0 auto;
 }
+
 .right-deal-dash {
   width: 46%;
   margin-right: 1.4rem;
 }
+
 .right-dash {
   width: 48%;
   margin-right: 3rem;
@@ -103,11 +119,13 @@ inner-trans-dash {
   box-sizing: border-box;
   border-radius: 0px 11px 11px 11px;
 }
+
 .order-right {
   width: 400px;
   margin-right: 3rem;
   margin-top: 2.6rem;
 }
+
 .right-step-dash {
   width: 100%;
   /* margin-right: 3rem; */
@@ -116,20 +134,24 @@ inner-trans-dash {
   box-sizing: border-box;
   border-radius: 0px 11px 11px 11px;
 }
+
 .right-chart-dash {
   width: 48%;
   margin-right: 3rem;
 }
+
 .store-form {
   display: flex;
- width: 100%;
+  width: 100%;
 }
+
 .url-form {
   display: flex;
   flex-direction: column;
   width: 100%;
   /* justify-content:left; */
 }
+
 .chart-div {
   margin-top: 16rem;
   background: #ffffff;
@@ -143,6 +165,7 @@ inner-trans-dash {
   margin: 0 auto; */
   /* justify-content: center; */
 }
+
 .right-dash-inner {
   background: #ffffff;
 
@@ -158,29 +181,35 @@ inner-trans-dash {
   width: 100%;
   margin-top: 4.5rem;
 }
+
 .tab-click {
   display: flex;
   margin-top: 4.5rem;
   width: 100%;
   margin-left: 4.5rem;
 }
+
 .tab-inners {
   display: flex !important;
   /* width: 100% !important; */
   justify-content: space-between !important;
   background-color: red;
 }
+
 .tab-inners-left {
   width: 50% !important;
   padding-top: 2.7rem !important;
 }
+
 .tab-inners-right {
   padding-top: 3rem;
   /* width: 50%; */
 }
+
 .tab-profile {
   padding: 2.5rem 5.3rem !important;
 }
+
 .tab-password {
   width: 100% !important;
   display: flex !important;
@@ -189,6 +218,7 @@ inner-trans-dash {
   flex-direction: column !important;
   justify-content: left;
 }
+
 .search-div {
   display: flex;
   justify-content: center;
@@ -196,31 +226,37 @@ inner-trans-dash {
   width: 88%;
   margin: 7rem auto 1rem auto;
 }
+
 .select-div {
   width: 88%;
   margin: 1rem auto 3rem auto;
   display: flex;
   justify-content: center;
 }
+
 .trans-div {
   width: 90%;
   margin: 0 auto;
 }
+
 .btn-div {
   display: flex;
   justify-content: center;
   padding-bottom: 6rem;
 }
+
 .text-act {
   padding-top: 1.2rem;
   padding-bottom: 1.5rem;
   text-align: left;
 }
+
 .act-box-holder {
   display: flex;
   flex-direction: column;
   align-items: left;
 }
+
 .act-box {
   display: flex;
   width: 80%;
@@ -235,10 +271,12 @@ inner-trans-dash {
   padding: 1.1rem 0;
   margin-bottom: 1.2rem;
 }
+
 .history {
   padding-top: 4.3rem;
   padding-bottom: 0.9rem;
 }
+
 .payment-div {
   height: 80px;
   display: flex;
@@ -246,6 +284,7 @@ inner-trans-dash {
   border-radius: 0px 11px 0px 0px;
   border: 0.5px solid #d9d9d9;
 }
+
 .order-para {
   /* font-family: "Circular Std"; */
   font-style: normal;
@@ -255,6 +294,7 @@ inner-trans-dash {
   color: #8c8c8c;
   margin-bottom: 0.5rem;
 }
+
 .transactions {
   display: flex;
   align-items: center;
@@ -262,72 +302,88 @@ inner-trans-dash {
   border: 0.5px solid #d9d9d9;
   padding: 1.6rem 0;
 }
+
 .transactions-inner {
   display: flex;
   justify-content: space-between;
   padding-left: 2.5rem;
 }
+
 .trans-tab {
   padding: 0 !important;
 }
+
 .deals-left {
   background: #ffffff;
   border: 0.5px solid #d9d9d9;
   box-sizing: border-box;
   border-radius: 0px 11px 11px 11px;
 }
+
 .tab-inner-div {
   display: flex;
 }
+
 @media screen and (max-width: 768px) {
   .dash-cover {
     flex-direction: column;
     justify-content: center;
-    background:#e5e5e5;
-    height:100%;
+    background: #e5e5e5;
+    height: 100%;
   }
+
   .dashy-cover {
     flex-direction: column;
     justify-content: center;
-    background:#e5e5e5;
-    height:100%;
+    background: #e5e5e5;
+    height: 100%;
   }
+
   .left-dash {
     margin-left: 0.8rem;
     width: 100%;
   }
+
   .left-step-dash {
     margin: 0 auto;
     width: 95%;
     margin-top: 2rem;
     /* margin-left: 1.6rem; */
   }
+
   .order-right {
     margin: 0 auto;
     width: 100%;
     margin-top: 2rem;
     /* margin-left: 1.6rem; */
   }
+
   .left-deal-dash {
     margin: 0 auto;
     width: 97%;
   }
+
   .tab-div {
     justify-content: center;
     margin-top: 1.7rem;
   }
+
   .balance {
     text-align: center;
   }
+
   .act-box {
     width: 70%;
   }
+
   .act-box-holder {
     align-items: center;
   }
+
   .text-act {
     text-align: center;
   }
+
   #cancelled-order {
     display: none;
   }
@@ -336,45 +392,57 @@ inner-trans-dash {
     width: 92%;
     margin: 0 auto;
   }
+
   .right-chart-dash {
     width: 86%;
     margin: 0 auto;
     margin-bottom: 6rem;
   }
+
   .chart-div {
     margin-top: 0;
   }
+
   .right-deal-dash {
     width: 92%;
     margin: 0 auto;
   }
+
   .copy-div {
     width: 90%;
     margin: 0 auto;
   }
+
   .store-form {
     /* flex-direction: column; */
   }
+
   .url-form {
     flex-direction: column;
   }
+
   .order-para {
     padding-left: 1rem;
   }
-  .url-dash{
+
+  .url-dash {
     margin-left: 1.5rem;
   }
-  .right-addon{
+
+  .right-addon {
     width: 40% !important;
   }
-  .add-store{
+
+  .add-store {
     width: 100% !important;
     margin-bottom: 2rem !important;
   }
-  .add-url{
+
+  .add-url {
     padding-bottom: 2rem;
     padding-left: 2rem;
   }
+
   #tabs-1--tab-3 {
     display: none;
   }
