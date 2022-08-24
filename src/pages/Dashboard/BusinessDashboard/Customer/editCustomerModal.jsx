@@ -7,10 +7,7 @@ import {
 	ModalBody,
 	ModalCloseButton,
 	useDisclosure,
-	Button,
-	FormControl,
-	FormLabel,
-	Input,
+	
 	InputLeftElement,
 	InputRightElement,
 	InputGroup,
@@ -109,7 +106,8 @@ export default function EditCustomerModal() {
 																m='15px 1px'
 																fontSize='20px'
 																color='gray.500'
-																children={<MdEmail />}
+																// children={<MdEmail />
+																
 															/>
 															<Input
 																{...field}
@@ -143,7 +141,7 @@ export default function EditCustomerModal() {
 																m='15px 1px'
 																fontSize='20px'
 																color='gray.500'
-																children={<MdWifiCalling3 />}
+																// children={<MdWifiCalling3 />}
 															/>
 															<Input
 																{...field}

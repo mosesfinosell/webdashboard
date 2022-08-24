@@ -7,6 +7,7 @@ import { useColorModeValue } from '@chakra-ui/color-mode';
 import FormTitle from "../../../components/Form/FormTitle"
 import CustomField from "../../../components/Form/Input/UnControlled"
 import { Button } from "@chakra-ui/react"
+
 import {
 	setVerification
 	// SendOtpSms,
@@ -123,7 +124,8 @@ const Verify = () => {
 					selected={verification === 'tel'}
 					onClick={() =>
 						verification === 'tel' ? null : setVerification(dispatch)
-					}>
+					}
+			  >
 					<LeftIcon>
 						<FaComment />
 					</LeftIcon>

@@ -65,78 +65,77 @@ export default function AddMoneyBusinessModal() {
   };
 
   return (
-    <>
-      <Stack fontSize="34px" color="yellow.500" px="32px" onClick={onOpen}>
-        <BsPlusSquare />
-      </Stack>
-      <Modal
-        isOpen={isOpen}
-        onClose={onClose}
-        size="md"
-        borderRadius="0px 11px 11px 11px"
-      >
-        <ModalOverlay />
-        <ModalContent>
-          <Center>
-            <Text fontSize="24px" pt="35px" fontWeight="bold">
-              Add Money
-            </Text>
-          </Center>
-          <ModalCloseButton />
+		<>
+			<Stack fontSize='34px' color='yellow.500' px='32px' onClick={onOpen}>
+				<BsPlusSquare />
+			</Stack>
+			<Modal
+				isOpen={isOpen}
+				onClose={onClose}
+				size='md'
+				borderRadius='0px 11px 11px 11px'>
+				<ModalOverlay />
+				<ModalContent>
+					<Center>
+						<Text
+							fontSize='24px'
+							textAlign='center'
+							pt='35px'
+							fontWeight='bold'>
+							Add Money
+						</Text>
+					</Center>
+					<ModalCloseButton />
 
-          <ModalBody>
-            <FormControl>
-              <FormLabel>Amount</FormLabel>
-              <Input
-                name="amount"
-                type="text"
-                placeholder="₦0.00"
-                w="400px"
-                h="70px"
-                borderRadius="0px 11px 11px 11px"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-              />
-            </FormControl>
-            <Flex
-              direction="row"
-              align="center"
-              mt={4}
-              justifyContent="space-between"
-            >
-              <Text>Save your Card</Text>
-              <Stack
-                onClick={handleClick}
-                fontSize="35px"
-                cursor="pointer"
-                px="30px"
-                color="gray.300"
-              >
-                {show ? <BsToggleOn /> : <BsToggleOff />}
-              </Stack>
-            </Flex>
-          </ModalBody>
-          <ModalFooter>
-            <PaystackConsumer {...componentProps}>
-              {({ initializePayment }) => (
-                <Button
-                  mt={4}
-                  bg={yellowbtn}
-                  width="400px"
-                  h="70px"
-                  borderRadius="0px 11px 11px 11px"
-                  type="submit"
-                  color="white"
-                  _hover={{ bg: "#1A202C" }}
-                  onClick={() => initializePayment(handleSuccess, onClose)}
-                >
-                  Add Money
-                </Button>
-              )}
-            </PaystackConsumer>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </>
-  );
+					<ModalBody>
+						<FormControl>
+							<FormLabel>Amount</FormLabel>
+							<Input
+								name='amount'
+								type='text'
+								placeholder='₦0.00'
+								padding='30px'
+								borderRadius='0px 11px 11px 11px'
+								value={amount}
+								onChange={(e) => setAmount(e.target.value)}
+							/>
+						</FormControl>
+						<Flex
+							direction='row'
+							alignItems='center'
+							mt={4}
+							justifyContent='space-between'>
+							<Text>Save your Card</Text>
+							<Stack
+								onClick={handleClick}
+								fontSize='35px'
+								cursor='pointer'
+								px='30px'
+								color='gray.300'>
+								{show ? <BsToggleOn /> : <BsToggleOff />}
+							</Stack>
+						</Flex>
+					</ModalBody>
+					<ModalFooter>
+						<PaystackConsumer {...componentProps}>
+							{({ initializePayment }) => (
+								<Button
+									mt={4}
+									bg={yellowbtn}
+									width='400px'
+									h='70px'
+									borderRadius='0px 11px 11px 11px'
+									type='submit'
+									color='white'
+									_hover={{ bg: '#1A202C' }}
+									onClick={() => initializePayment(handleSuccess, onClose)}>
+									Add Money
+								</Button>
+							)}
+						</PaystackConsumer>
+					</ModalFooter>
+				</ModalContent>
+			</Modal>
+		</>
+	);
 }

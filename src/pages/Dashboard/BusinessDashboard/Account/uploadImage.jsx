@@ -1,54 +1,60 @@
-// import {
-// 	Input,
-//     InputGroup,
-//     Box,
-//     Stack
+import { Input, FormControl, FormLabel, InputGroup, InputRightElement, FormErrorMessage, Icon } from "@chakra-ui/react";
+import { useController } from "react-hook-form";
+import { useRef } from "react";
+
+import { FaImage} from 'react-icons/fa';
+export const FileUpload = ({ name,width,height, placeholder, acceptedFileTypes, control, children, isRequired = false }) => {
+	const inputRef = useRef();
+	const {
+		field: { ref, onChange, value, ...inputProps },
+		fieldState: { invalid},
+	} = useController({
+		name,
+		control,
+		rules: { required: isRequired },
+	});
+
+	return (
+		<FormControl isInvalid={invalid} isRequired>
+			<FormLabel htmlFor='writeUpFile'>{children}</FormLabel>
+			<InputGroup>
+				<InputRightElement
+					pointerEvents='pointer'
+					mr='120px'
+					mt='8px'
+					fontSize='20px'
+					color='yellow.500'>
+					<Icon as={FaImage} />
+				</InputRightElement>
+				<input
+					type='file'
+					onChange={(e) => onChange(e.target.files[0])}
+					accept={acceptedFileTypes}
+					name={name}
+					ref={inputRef}
+					{...inputProps}
+					style={{ display: 'none' }}
+				/>
+				<Input
+					placeholder={placeholder || 'Your file ...'}
+					onClick={() => inputRef.current.click()}
+					// onChange={(e) => {}}
+					width={width}
+					h={height}
+					borderRadius='0px 11px 11px 11px'
+					readOnly={true}
+					value={(value && value.name) || ''}
+				/>
+			</InputGroup>
+			<FormErrorMessage>{invalid}</FormErrorMessage>
+		</FormControl>
+	);
+}
+
+FileUpload.defaultProps = {
+	acceptedFileTypes: '',
+	allowMultipleFiles: false,
+};
+
+export default FileUpload;
 	
-// } from '@chakra-ui/react';
-// import { useState } from 'react'
-// import { BiPencil } from 'react-icons/bi';
-// import { useSelector, useDispatch } from 'react-redux';
-// import {ImageUploading} from 'react-images-uploading'
-// import { uploadImage } from '../../../../ReduxContianer/BussinessRedux/BusinessAction';
-
-
-// export default function ImageUploaded() {
-// 	// Redux
-// 	const businessSignIn = useSelector((state) => state.businessSignIn);
-// 	const { user } = businessSignIn;
-// 	const { businessDetails } = user;
-//     const { message } = businessDetails;
-
-//     const dispatch = useDispatch();
-//     const [businessId] = useState(message.business_id);
-//     const [image] = useState([])
-    
-//     function handleUpload() {
-//         dispatch(uploadImage(businessId,image))
-//     }
-
-//     return (
-// 			<Stack>
-// 				<ImageUploading multiple value={image} onChange={handleUpload}>
-// 					{({ onImageUpload }) => (
-// 						<Box
-// 							color='white'
-// 							fontSize='18px'
-// 							w='130px'
-// 							border='0.5px solid yellow.500'
-// 							bg='yellow.500'
-// 							p='5px'
-// 							borderRadius='0px 8px 8px 8px'
-// 							position='relative'
-// 							bottom='30px'
-// 							left='50px'
-// 							onClick={onImageUpload}>
-// 							<BiPencil />
-// 						</Box>
-// 					)}
-// 				</ImageUploading>
-// 			</Stack>
-// 		);
-// }
-
-
