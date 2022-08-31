@@ -7,6 +7,8 @@ import BusinessAccountSignUp from './pages/SignUp/BusinessSignUpPage/BusinessAcc
 import Verify from './pages/SignUp/BusinessSignUpPage/Verify';
 import OTP from './pages/SignUp/BusinessSignUpPage/OTP';
 import BusinessAccountSignIn from './pages/SignIn/BusinessLogInPage/BusinessAccountSignIn';
+import BusinessForgetPassword from './pages/SignIn/BusinessLogInPage/BusinessForgetPassword';
+
 
 import StoreInventory from './pages/Dashboard/BusinessDashboard/HomeBusiness/StoreInventory';
 import StorePage from './pages/Dashboard/BusinessDashboard/HomeBusiness/StorePage';
@@ -48,9 +50,9 @@ function App() {
 				<ScrollToTop>
 					<Routes>
 						{/* <Route path='/' element={<AuthContainer />}> */}
-							<Route path='/' element={<AccountBox />} />
+						<Route path='/' element={<AccountBox />} />
 
-							{/* <Route path='verify' element={<Verify />} />
+						{/* <Route path='verify' element={<Verify />} />
 							<Route path='/verify/otp' element={<OTP />} /> */}
 						{/* </Route> */}
 						{/* <Route
@@ -115,8 +117,8 @@ function App() {
 							element={<BusinessAccountSignIn />}
 							// element={<PrivateRoute />}
 						/>
-					
-						<Route path='/dashboard' exact element={<DashboardPage />}/>
+
+						<Route path='/dashboard' exact element={<DashboardPage />} />
 						<Route
 							exact
 							path='/business/orders'
@@ -124,7 +126,7 @@ function App() {
 							// element={<PrivateRoute  />}
 						/>
 						<Route
-							exact ='true'
+							exact='true'
 							path='/dashboard/store-inventory'
 							element={<StoreInventory />}
 						/>
@@ -132,11 +134,12 @@ function App() {
 							path='/business/store-page'
 							element={<PrivateRoute element={<StorePage />} />}
 						/>
-						{/* <Route
-							path='/store-link' exact
+						<Route
+							path='/forget-password'
+							
 							// element={<PrivateRoute element={<StoreLink />} />}
-							element={<StoreLink />}
-						/> */}
+							element={<BusinessForgetPassword />}
+						/>
 						<Route
 							path='/business/store-page/cart'
 							element={<PrivateRoute element={Cart} />}

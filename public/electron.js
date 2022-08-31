@@ -93,7 +93,7 @@ ipcMain.handle('previewComponent', (event, url) => {
     let buf = Buffer.from(data);
     var data = buf.toString('base64');
     let url = 'data:application/pdf;base64,' + data;
-
+ 
     win.webContents.on('ready-to-show', () => {
      win.show();
      win.setTitle('Preview');

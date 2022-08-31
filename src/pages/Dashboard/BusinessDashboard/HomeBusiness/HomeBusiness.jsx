@@ -18,12 +18,12 @@ import {
 	VStack,
 	StackDivider,
 } from '@chakra-ui/react';
-import { Link as RLink,useNavigate } from "react-router-dom";
-import { BsJournalText,BsArrowDownLeftSquare } from "react-icons/bs";
+import {useNavigate } from "react-router-dom";
+// import { BsJournalText,BsArrowDownLeftSquare } from "react-icons/bs";
 // import { FaStore } from "react-icons/fa";
 // import {
 // 	MdOutlineContentCopy,
-// 	MdDeliveryDining,
+// 	MdDelivery Dining,
 // 	MdPeopleAlt,
 // } from 'react-icons/md';
 // import { BsPlusSquare, BsArrowDownLeftSquare, BsPhone } from "react-icons/bs";
