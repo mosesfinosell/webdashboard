@@ -22,6 +22,7 @@ import { BsSortUp } from 'react-icons/bs';
 import { MdFilterAlt} from 'react-icons/md';
 import { FaPlus } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
+import PrintInvoice from './printInvoice';
 // import user1 from '../../../../assets/user1.png';
 // import { FaAngleDown } from 'react-icons/fa';
 // import { RiHomeSmile2Line } from 'react-icons/ri';
@@ -30,25 +31,22 @@ import { useSelector, useDispatch } from 'react-redux';
 // import { GiBanknote } from 'react-icons/gi';
 import {
 	generateInvoice,
-	getInvoice,
 } from '../../../../ReduxContianer/BussinessRedux/BusinessAction';
 
 export default function InvoiceBoard() {
 	const dispatch = useDispatch();
 	const yellowbtn = useColorModeValue('yellow.500');
 	const [search, setSearch] = useState('');
-    const orderId = 'sdjeshshshsd';
-	const customers = useSelector((state) => state.businessReducer.customers);
-	const order = useSelector((state) => state.businessReducer.orders);
+	const orderId = 'xwesdwdso1';
+	//   const customerId = 'sldjhdjdsdsdhkdasddssd';
+	// const customers = useSelector((state) => state.businessReducer.customers);
+	// const ordersInfo = useSelector((state) => state.businessReducer.order);
 	
 	function handleClick() {
-		dispatch(generateInvoice(orderId,customers.customers_id));
+		dispatch(generateInvoice(orderId));
 	}
 
-	const downloadFile = () => {
-		 dispatch(getInvoice(orderId,customers.customers_id));
-			
-	};
+	
 
 	// useEffect(() => {
 	// 	dispatch(getInvoice(orderId));
@@ -103,7 +101,7 @@ export default function InvoiceBoard() {
 					</Formik>
 					<Flex direction='row' gap='10px' alignItems='center'>
 						<Button
-							// onClick={handleClick}
+							onClick={handleClick}
 							bg={yellowbtn}
 							width='180px'
 							h='60px'
@@ -112,24 +110,16 @@ export default function InvoiceBoard() {
 							color='white'
 							_hover={{ bg: '#1A202C' }}
 							leftIcon={<FaPlus />}>
-							<a href={handleClick} download>
-								Generate Invoice
-							</a>
-						</Button>
-						<Button
-							onClick={downloadFile}
-							bg={yellowbtn}
-							width='180px'
-							h='60px'
-							borderRadius='0px 11px 11px 11px'
-							type='submit'
-							color='white'
-							_hover={{ bg: '#1A202C' }}>
-							Download Invoice
+							{/* <a href={handleClick}> */}
+							Generate Invoice
+							{/* </a> */}
 						</Button>
 					</Flex>
 				</Stack>
 			</Flex>
+			<Stack p='30px'>
+				<PrintInvoice />
+			</Stack>
 			<Stack>
 				<Box
 					w='65vw'

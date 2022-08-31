@@ -18,7 +18,7 @@ function StepThree({
   const handleOrder = () => {
     console.log(page, "PAGE");
     let orderPayload = { ...stepOne, ...stepTwo };
-    orderPayload.order_date = new Date(orderPayload.order_date).toISOString();
+    orderPayload.order_date = new Date(orderPayload.order_date);
     orderPayload.products = [
       { product_id: orderPayload.productID, quantity: orderPayload.quantity },
     ];

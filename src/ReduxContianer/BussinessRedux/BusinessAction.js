@@ -548,10 +548,10 @@ export const setBusinessModal = (payload) => {
 //     });
 // };
 
-export const generateInvoice = (order_id,customer_id) => (dispatch) => {
+export const generateInvoice = (order_id) => (dispatch) => {
   dispatch({ type: CREATE_INVOICE_START });
   axiosWithAuth()
-    .get(`invoice/generate?order_id=${order_id}?customer_id=${customer_id}`)
+    .get(`invoice/generate?order_id=${order_id}`)
     .then((res) => {
 		 toast({
         position: "top",
