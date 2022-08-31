@@ -50,6 +50,7 @@
 		"react-router-dom": "^6.3.0",
 		"react-scripts": "5.0.0",
 		"react-select": "^5.2.2",
+		"react-to-print": "^2.14.7",
 		"react-transition-group": "^4.4.5",
 		"redux": "^4.1.2",
 		"redux-devtools-extension": "^2.13.9",
