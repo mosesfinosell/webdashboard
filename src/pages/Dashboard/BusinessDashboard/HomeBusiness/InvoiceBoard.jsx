@@ -41,12 +41,15 @@ export default function InvoiceBoard() {
 	//   const customerId = 'sldjhdjdsdsdhkdasddssd';
 	// const customers = useSelector((state) => state.businessReducer.customers);
 	// const ordersInfo = useSelector((state) => state.businessReducer.order);
+	  const invoiceInfo = useSelector(
+			(state) => state.businessReducer?.invoice?.invoice
+		);
 	
+
 	function handleClick() {
 		dispatch(generateInvoice(orderId));
 	}
 
-	
 
 	// useEffect(() => {
 	// 	dispatch(getInvoice(orderId));
@@ -114,12 +117,13 @@ export default function InvoiceBoard() {
 							Generate Invoice
 							{/* </a> */}
 						</Button>
+						<Stack >
+				<PrintInvoice />
+			</Stack>
 					</Flex>
 				</Stack>
 			</Flex>
-			<Stack p='30px'>
-				<PrintInvoice />
-			</Stack>
+			
 			<Stack>
 				<Box
 					w='65vw'
