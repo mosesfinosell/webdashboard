@@ -71,6 +71,12 @@ import {
 	UPDATE_SOCIALMEDIA_START,
 	UPDATE_SOCIALMEDIA_SUCCESS,
 	UPDATE_SOCIALMEDIA_ERROR,
+	RESET_PASSWORD_START,
+	RESET_PASSWORD_SUCCESS,
+	RESET_PASSWORD_ERROR,
+	GET_STORE_METRIC_START,
+	GET_STORE_METRIC_SUCCESS,
+	GET_STORE_METRIC_ERROR,
 } from '../constants/UserActionType.js';
 
 const initialState = {
@@ -91,7 +97,8 @@ const initialState = {
 	businessStat: null,
 	profileImage: null,
 	codeSend: '',
-	store: null
+	store: null,
+	storeMetrics: null
 };
 
 const BusinessReducer = (state = initialState, action) => {
@@ -355,7 +362,7 @@ const BusinessReducer = (state = initialState, action) => {
 				...state,
 				error: action.payload,
 			};
-			case CREATE_STORE_LINK_START:
+		case CREATE_STORE_LINK_START:
 			return {
 				...state,
 				isFetching: true,
@@ -371,7 +378,7 @@ const BusinessReducer = (state = initialState, action) => {
 				...state,
 				error: action.payload,
 			};
-			case GET_STORE_LINK_START:
+		case GET_STORE_LINK_START:
 			return {
 				...state,
 				isFetching: true,
@@ -388,7 +395,7 @@ const BusinessReducer = (state = initialState, action) => {
 				error: action.payload,
 			};
 
-       case UPDATE_STORE_PROFILE_START:
+		case UPDATE_STORE_PROFILE_START:
 			return {
 				...state,
 				isFetching: true,
@@ -404,7 +411,7 @@ const BusinessReducer = (state = initialState, action) => {
 				...state,
 				error: action.payload,
 			};
-			case UPDATE_SOCIALMEDIA_START:
+		case UPDATE_SOCIALMEDIA_START:
 			return {
 				...state,
 				isFetching: true,
@@ -451,6 +458,38 @@ const BusinessReducer = (state = initialState, action) => {
 				data: action.payload,
 			};
 		case UPDATE_PASSWORD_ERROR:
+			return {
+				...state,
+				error: action.payload,
+			};
+		case RESET_PASSWORD_START:
+			return {
+				...state,
+				isFetching: true,
+			};
+		case RESET_PASSWORD_SUCCESS:
+			return {
+				...state,
+				isFetching: false,
+				data: action.payload,
+			};
+		case RESET_PASSWORD_ERROR:
+			return {
+				...state,
+				error: action.payload,
+			};
+		case GET_STORE_METRIC_START:
+			return {
+				...state,
+				isFetching: true,
+			};
+		case GET_STORE_METRIC_SUCCESS:
+			return {
+				...state,
+				isFetching: false,
+				storeMetrics: action.payload,
+			};
+		case GET_STORE_METRIC_ERROR:
 			return {
 				...state,
 				error: action.payload,

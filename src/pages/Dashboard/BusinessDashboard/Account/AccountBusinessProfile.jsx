@@ -398,7 +398,7 @@ function handleUpload() {
 												color='white'
 												_hover={{ bg: '#1A202C' }}
 												onClick={handleClick}>
-												{!isLoading ? 'Send Code' : 'Sending...'}
+												Send Code
 											</Button>
 										</Stack>
 									</Box>

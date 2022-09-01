@@ -1,57 +1,45 @@
-import {Formik,Form,Field} from 'formik'
+import { Formik, Form, Field } from 'formik';
 import {
-    Container,
-    Center,
-    Input,
-    InputLeftElement,
-    InputGroup,
-    FormControl,
-    FormLabel,
-    // FormErrorMessage,
-    Button,
-    Box,
-    Stack,
-    Image,
-    Text,
-  } from '@chakra-ui/react'
+	Container,
+	Center,
+	Input,
+	InputLeftElement,
+	InputGroup,
+	FormControl,
+	FormLabel,
+	// FormErrorMessage,
+	Button,
+	Box,
+	Stack,
+	Image,
+	Text,
+} from '@chakra-ui/react';
 
-import logo from '../../../assets/Logomark.png'
-import {useState} from 'react'
-  import {MdEmail} from 'react-icons/md'
-import { useColorModeValue } from "@chakra-ui/color-mode";
-  import { useSelector, useDispatch } from 'react-redux';
-import * as Yup from 'yup';
-import { useFormik } from 'formik';
+import logo from '../../../assets/Logomark.png';
+import { useState } from 'react';
+import { MdEmail } from 'react-icons/md';
+import { useColorModeValue } from '@chakra-ui/color-mode';
+import { useDispatch } from 'react-redux';
+
 import { useNavigate } from 'react-router-dom';
 import { sendAuthCode } from '../../../ReduxContianer/BussinessRedux/BusinessAction';
 
 export default function BusinessForgetPassword() {
-    const yellowbtn = useColorModeValue('yellow.500');
-    const dispatch = useDispatch();
-    
-	const [email, setEmail] = useState('');
-const navigate = useNavigate();
-	const validationSchema = Yup.object().shape({
-		email: Yup.string().email('Invalid Email').required('Email is required'),
-	});
-	const initialValues = {
-		email: '',
-	};
-	const formik = useFormik({
-		initialValues,
-		// onSubmit,
-		validationSchema,
-	});
+	const yellowbtn = useColorModeValue('yellow.500');
+	const dispatch = useDispatch();
 
-    const businessInfo = useSelector(
-	(state) => state.businessReducer.businessUserInfo
-);
+	const [email, setEmail] = useState('');
+	const navigate = useNavigate();
+	
+
+	  
+  
 
 	function handleClick() {
-	    if ('email') {
-	        dispatch(sendAuthCode(businessInfo.email));
-	    }
-	  return navigate('otp');
+		// if ('email') {
+		// 	dispatch(sendAuthCode(email));
+		// }
+		return navigate('/reset-password');
 	}
 
 	return (
@@ -105,9 +93,8 @@ const navigate = useNavigate();
 													pl='60px'
 													type='email'
 													id='email'
-													onChange={formik.handleChange}
-													onBlur={formik.handleBlur}
-													value={formik.values.email}
+													onChange={(e) => setEmail(e.target.value)}
+													value={email}
 													placeholder='Email Address'
 													width='500px'
 													h='75px'
@@ -118,11 +105,6 @@ const navigate = useNavigate();
 													}}
 												/>
 											</InputGroup>
-											{formik.touched.email && formik.errors.email ? (
-												<span className='error-message'>
-													{formik.errors.email}
-												</span>
-											) : null}
 										</FormControl>
 									)}
 								</Field>
@@ -141,11 +123,9 @@ const navigate = useNavigate();
 							</Form>
 						</Center>
 					)}
-					;
+					
 				</Formik>
 			</Box>
 		</Container>
 	);
 }
-      
-
