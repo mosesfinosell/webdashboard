@@ -8,3 +8,5 @@ export const axiosWithAuth = () => {
 		},
 	});
 };
+
+export const cancelToken = axios.CancelToken.source();

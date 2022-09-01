@@ -305,9 +305,8 @@ export default function StoreProfile() {
 														type='submit'
 														color='white'
 														_hover={{ bg: '#1A202C' }}>
-														{!isFetching
-															? 'Update Store Profile'
-															: 'Updating Store Profile...'}
+														Update Store Profile
+														
 													</Button>
 												</Form>
 											)}

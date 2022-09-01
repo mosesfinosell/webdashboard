@@ -78,7 +78,7 @@ const toast = createStandaloneToast();
 			 account_type: 'business',
 		 };
 		  axios
-      .post("https://dev.finosell.link/api/v2/auths/firststage", formData)
+      .post("https://finosell.link/api/v2/auths/firststage", formData)
       .then((response) => {
         setIsLoading(false);
 		  const userDetails = response?.data.message;

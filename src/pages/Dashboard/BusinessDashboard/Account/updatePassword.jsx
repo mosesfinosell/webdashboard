@@ -154,7 +154,7 @@ export default function UpdatePassword() {
 							type='submit'
 							color='white'
 							_hover={{ bg: '#1A202C' }}>
-							{!isLoading ? 'Update Password' : 'Update...'}
+							Update Password
 						</Button>
 					</Form>
 				)}

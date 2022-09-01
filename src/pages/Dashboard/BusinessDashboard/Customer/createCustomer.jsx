@@ -223,7 +223,7 @@ const dispatch = useDispatch();
 											type='submit'
 											color='white'
 											_hover={{ bg: '#1A202C' }}>
-											{!isFetching ? 'Create Customer' : 'Creating Customer...'}
+											Create Customer
 										</Button>
 									</Form>
 								)}

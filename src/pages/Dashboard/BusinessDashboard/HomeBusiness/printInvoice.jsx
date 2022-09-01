@@ -1,8 +1,6 @@
 import * as React from 'react';
-// import ReactToPrint from 'react-to-print';
+import { BsPrinterFill } from 'react-icons/bs';
 import { useReactToPrint } from 'react-to-print';
-
-
 import { Button} from '@chakra-ui/react';
 import { useColorModeValue } from '@chakra-ui/color-mode';
 import { useSelector} from 'react-redux';
@@ -37,8 +35,10 @@ return (
 				borderRadius='0px 11px 11px 11px'
 				type='submit'
 				color='white'
-				_hover={{ bg: '#1A202C' }}>
-				Print
+				_hover={{ bg: '#1A202C' }}
+				leftIcon={<BsPrinterFill/>}
+				>
+				Print Invoice
 			</Button>
 		</a>
 	</div>

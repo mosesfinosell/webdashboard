@@ -1,12 +1,8 @@
 import {
-	Grid,
 	Box,
-	GridItem,
 	Container,
 	Text,
 	Stack,
-	Center,
-	Link,
 	Heading,
 	Tabs,
 	TabList,
@@ -14,81 +10,43 @@ import {
 	Tab,
 	TabPanel,
 	Flex,
-	HStack,
-	VStack,
-	StackDivider,
 } from '@chakra-ui/react';
-import {useNavigate } from "react-router-dom";
-// import { BsJournalText,BsArrowDownLeftSquare } from "react-icons/bs";
-// import { FaStore } from "react-icons/fa";
-// import {
-// 	MdOutlineContentCopy,
-// 	MdDelivery Dining,
-// 	MdPeopleAlt,
-// } from 'react-icons/md';
-// import { BsPlusSquare, BsArrowDownLeftSquare, BsPhone } from "react-icons/bs";
-// import { BiStore } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 import { RiTeamLine } from "react-icons/ri";
 import AddMoneyBusinessModal from "./addMoneyModal";
-// import SendMoneyModal from "./SendMoney/sendMoneyModal";
+
 import { useEffect } from "react";
 import { getBusinessUserDetails } from "../../../../ReduxContianer/BussinessRedux/BusinessAction";
 import { useSelector, useDispatch } from "react-redux";
-// import Qrcode from '../../BusinessDashboard/QRcode'
+
 import CreateCustomer from '../Customer/createCustomer';
 import StoreProfile from '../StoreProfile/storeProfile';
-
-// import { Bar } from 'react-chartjs-2';
-// import chartData from '../../../../components/ChartData';
-// import { useState } from 'react';
-// import BusinessLayout from "../../../../components/Layout/BusinessLayout"
+import StoreMetric from './Metric/storeMetric'
+import RequestMoney from './RequestMoneyModal'
+import Spinner from '../../../../components/Spinner'
 
 
 export default function HomeBusiness() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate()
 
-// 	function handleNavigate() {
-// 	;
-//  }
-// const [userChart, setUserChart] = useState({
-// 	labels: chartData.map((data) => data.year),
-// 	datasets: [
-// 		{
-// 			label: 'Users Gained',
-// 			data: chartData.map((data) => data.userGain),
-// 			backgroundColor: ['#D6AA1B'],
-// 		},
-// 		{
-// 			label: 'Users Lost',
-// 			data: chartData.map((data) => data.userLost),
-// 			backgroundColor: ['#8C8C8C'],
-// 		},
-// 	],
-// });
+
 const businessInfo = useSelector(
 	(state) => state.businessReducer.businessUserInfo
 );
-// const businessDetails = useSelector(
-// 	(state) => state.businessReducer.businessUserIdDetails
-// );
+
+	
 useEffect(() => {
 	dispatch(getBusinessUserDetails(businessInfo?.user_id));
 }, [businessInfo?.user_id, dispatch]);
-  useEffect(() => {
-    dispatch(getBusinessUserDetails(businessInfo.user_id));
-  }, [businessInfo?.user_id, dispatch]);
-  //   useEffect(() => {
-  //     dispatch(getBusinessUserDetails(businessUserInfo.user_id));
-  //   }, [dispatch, businessUserInfo.user_id]);
-
+	
 
 	
 	return (
-		<Container pt='50px' ml='350px' maxW='container.md'>
+		<Container pt='50px' ml='300px' maxW='container.lg' overflowY='hidden'>
 			<Tabs variant='unstyled'>
-				<Flex>
-					<TabList ml='40px'>
+				<Flex ml='80px'>
+					<TabList>
 						<Tab
 							_selected={{
 								color: 'white',
@@ -119,20 +77,22 @@ useEffect(() => {
 				</Flex>
 				<TabPanels>
 					<TabPanel>
-						<Stack pl={25}>
-							<Heading as='h6'>₦66,789,567</Heading>
+						<Stack ml='80px' direction='row'>
+							<Heading as='h2'>
+								₦{businessInfo?.p_balance || ' n/a'}
+							</Heading>
 						</Stack>
 					</TabPanel>
 					<TabPanel>
-						<Stack pl={25}>
-							<Heading as='h6'>₦6,745,563.09</Heading>
+						<Stack ml='80px'>
+							<Heading as='h6'>₦ n/a</Heading>
 						</Stack>
 					</TabPanel>
 				</TabPanels>
 			</Tabs>
 			<Tabs />
-			<Flex direction='row' justifyContent='space-between' alignItems='center'>
-				<Stack pl='30'>
+			<Flex direction='row' justify='space-around' alignItems='center' w='100%'>
+				<Stack pl='30px'>
 					{/* <Stack pt='23'>
 					<Text color='gray' fontSize='14px'>
 						Virtual Account Details
@@ -143,7 +103,7 @@ useEffect(() => {
 						{/* <Box
 							as='button'
 							h='160px'
-							w='350px'
+							w='300px'
 							borderRadius='0px 11px 11px 11px'
 							border='0.5px solid #D9D9D9'>
 							<Flex
@@ -184,85 +144,49 @@ useEffect(() => {
 								Action
 							</Text>
 						</Stack>
-
-						{/* <Box
-							onClick={handleNavigate}
-							as='button'
-							h='90px'
-							w='350px'
-							borderRadius='0px 11px 11px 11px'
-							border='0.5px solid #D9D9D9'
-							display='flex'
-							alignItems='center'>
-							<Stack fontSize='34px' color='yellow.500' px='32px'>
-								<FaStore />
-							</Stack>
-							<Stack onClick={handleStore}>
-								<Text textAlign='left'>Store Inventory</Text>
-								<Text color='gray' fontSize='14px'>
-									Space for subtitle text
-								</Text>
-							</Stack>
-						</Box> */}
 						<Box
 							as='button'
-							h='90px'
-							w='350px'
+							h='95px'
+							w='320px'
 							borderRadius='0px 11px 11px 11px'
 							border='0.5px solid #D9D9D9'
 							display='flex'
 							alignItems='center'>
 							<AddMoneyBusinessModal />
 							<Stack>
-								<Text textAlign='left'>Add Money</Text>
+								<Text textAlign='left' fontSize='16px' fontWeight='bold'>
+									Add Money
+								</Text>
 								<Text color='gray' fontSize='14px'>
-									Space for subtitle text
+									Add money to your account
 								</Text>
 							</Stack>
 						</Box>
-						{/* <Box
-							pt='20px'
-							as='button'
-							h='90px'
-							w='350px'
-							borderRadius='0px 11px 11px 11px'
-							border='0.5px solid #D9D9D9'
-							display='flex'
-							alignItems='center'>
-							<Stack fontSize='34px' color='yellow.500' px='32px'>
-								<BsArrowDownLeftSquare />
-							</Stack>
-							<Stack>
-								<Text textAlign='left'>Request Money</Text>
-								<Text color='gray' fontSize='14px'>
-									Space for subtitle text
-								</Text>
-							</Stack>
-						</Box> */}
-						{/* <Box
-							onClick={() => navigate('/business-dashboard/invoice')}
-							as='button'
-							h='90px'
-							w='350px'
-							borderRadius='0px 11px 11px 11px'
-							border='0.5px solid #D9D9D9'
-							display='flex'
-							alignItems='center'>
-							<Stack fontSize='34px' color='yellow.500' px='32px'>
-								<BsJournalText />
-							</Stack>
-							<Stack>
-								<Text textAlign='left'>Invoice</Text>
-								<Text color='gray' fontSize='14px'>
-									Space for subtitle text
-								</Text>
-							</Stack>
-						</Box> */}
 						<Box
-							onClick={() => navigate('/business-dashboard/team')}
 							as='button'
-							h='90px'
-							w='350px'
+							h='95px'
+							w='320px'
+							borderRadius='0px 11px 11px 11px'
+							border='0.5px solid #D9D9D9'
+							display='flex'
+							alignItems='center'>
+							<Stack color='yellow.500' px='32px'>
+								<RequestMoney />
+							</Stack>
+							<Stack>
+								<Text textAlign='left' fontSize='16px' fontWeight='bold'>
+									Request Money
+								</Text>
+								<Text color='gray' fontSize='14px'>
+									Request money for products
+								</Text>
+							</Stack>
+						</Box>
+						<Box
+							onClick={() => navigate('/dashboard/team')}
+							as='button'
+							h='95px'
+							w='320px'
 							borderRadius='0px 11px 11px 11px'
 							border='0.5px solid #D9D9D9'
 							display='flex'
@@ -271,7 +195,9 @@ useEffect(() => {
 								<RiTeamLine />
 							</Stack>
 							<Stack>
-								<Text textAlign='left'>Team Management</Text>
+								<Text textAlign='left' fontSize='16px' fontWeight='bold'>
+									Team Management
+								</Text>
 								<Text color='gray' fontSize='14px'>
 									Add and Manage Teams
 								</Text>
@@ -279,8 +205,8 @@ useEffect(() => {
 						</Box>
 						<Box
 							as='button'
-							h='90px'
-							w='350px'
+							h='95px'
+							w='320px'
 							borderRadius='0px 11px 11px 11px'
 							border='0.5px solid #D9D9D9'
 							display='flex'
@@ -289,16 +215,35 @@ useEffect(() => {
 								<CreateCustomer />
 							</Stack>
 							<Stack>
-								<Text textAlign='left'>Add Customer</Text>
+								<Text textAlign='left' fontSize='16px' fontWeight='bold'>
+									Add Customer
+								</Text>
 								<Text color='gray' fontSize='14px'>
 									Create Customers
 								</Text>
 							</Stack>
 						</Box>
+					</Stack>
+				</Stack>
+				<Stack>
+					<Stack
+						spacing={8}
+						// direction='row'
+						w='100%'
+						h='300px'
+						// position='relative'
+						// // left='85px'
+						// top='25px'
+						mt='50px'
+						border='1px solid #D9D9D9'
+						borderRadius='0px 11px 11px 11px'>
+						<StoreMetric />
+					</Stack>
+					<Stack>
 						<Box
 							as='button'
-							h='90px'
-							w='350px'
+							h='95px'
+							w='100%'
 							borderRadius='0px 11px 11px 11px'
 							border='0.5px solid #D9D9D9'
 							display='flex'
@@ -307,74 +252,15 @@ useEffect(() => {
 								<StoreProfile />
 							</Stack>
 							<Stack>
-								<Text textAlign='left'>Store Profile</Text>
+								<Text textAlign='left' fontSize='16px' fontWeight='bold'>
+									Store Profile
+								</Text>
 								<Text color='gray' fontSize='14px'>
 									Edit Store Profile
 								</Text>
 							</Stack>
 						</Box>
-						{/* <Box
-							as='button'
-							h='90px'
-							w='350px'
-							borderRadius='0px 11px 11px 11px'
-							border='0.5px solid #D9D9D9'
-							display='flex'
-							alignItems='center'>
-							<Stack fontSize='34px' color='yellow.500' px='32px'>
-								<BsJournalText />
-							</Stack>
-							<Stack>
-								<Text textAlign='left'>Invoicing</Text>
-								<Text color='gray' fontSize='14px'>
-									Space for subtitle text
-								</Text>
-							</Stack>
-						</Box> */}
-
-						{/* <Box
-							as='button'
-							h='90px'
-							w='350px'
-							borderRadius='0px 11px 11px 11px'
-							border='0.5px solid #D9D9D9'
-							display='flex'
-							alignItems='center'>
-							<SendMoneyModal />
-							<Stack>
-								<Text>Send Money</Text>
-								<Text color='gray' fontSize='14px'>
-									Space for subtitle text
-								</Text>
-							</Stack>
-						</Box> */}
 					</Stack>
-
-					{/* <Stack position='relative' top='-150px'> */}
-					{/* <Stack >
-							<Text>Balance inflow & outflow for the last 24hours</Text>
-							<Box
-								w='500px'
-								h='300px'
-								bg='white'
-								border='1px solid #D9D9D9'
-								borderRadius='0px 11px 11px 11px'>
-								<Bar data={userChart} />
-							</Box>
-						</Stack> */}
-					{/* </Stack> */}
-				</Stack>
-				<Stack
-					spacing={8}
-					// direction='row'
-					w='541px'
-					h='380px'
-					position='relative'
-					left='80px'
-					top='30px'
-					border='1px solid #D9D9D9'
-					borderRadius='0px 11px 11px 11px'>
-					<Feature />
 				</Stack>
 			</Flex>
 			{/* <Stack>
@@ -386,41 +272,4 @@ useEffect(() => {
 
 
 
-function Feature({ title, total, ...rest }) {
-	return (
-		<VStack
-			// direction='row'
-			divider={<StackDivider borderColor='gray.200' />}
-			// spacing={4}
-			align='stretch'>
-			<HStack direction='row'>
-				<Box p={8} {...rest}>
-					<Text fontSize='sm'>Total Spending</Text>
-					<Heading fontSize='xl' mt={4}>
-						₦400,0000
-					</Heading>
-				</Box>
-				<Box p={8} {...rest}>
-					<Text fontSize='sm'>Total Sales</Text>
-					<Heading fontSize='xl' mt={4}>
-						₦50,000,00
-					</Heading>
-				</Box>
-			</HStack>
-			<HStack direction='row'>
-				<Box p={8} {...rest}>
-					<Text fontSize='sm'>Total Spending</Text>
-					<Heading fontSize='xl' mt={4}>
-						₦40,000,00
-					</Heading>
-				</Box>
-				<Box p={8} {...rest}>
-					<Text fontSize='sm'>Total Sales</Text>
-					<Heading fontSize='xl' mt={4}>
-						₦50,000,00
-					</Heading>
-				</Box>
-			</HStack>
-		</VStack>
-	);
-}
+

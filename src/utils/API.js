@@ -96,3 +96,12 @@ export class Payment {
 // }
 
 
+export const generatePaymentLink = async (id, amount) => {
+	const data = await finosellClient.post(`/paylink/create`, {
+		business_id: id,
+		amount,
+		title: 'Payment',
+	});
+	console.log('generate payment', data.data.link);
+	return data.data.link;
+};

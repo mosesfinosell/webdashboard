@@ -28,6 +28,7 @@
 		"lodash": "^4.17.21",
 		"multiselect-react-dropdown": "^2.0.21",
 		"react": "^17.0.2",
+		"react-barcode-reader": "^0.0.2",
 		"react-bootstrap": "^2.1.2",
 		"react-chartjs-2": "^4.1.0",
 		"react-copy-to-clipboard": "^5.0.4",

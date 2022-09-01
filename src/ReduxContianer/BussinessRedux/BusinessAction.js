@@ -74,8 +74,14 @@ import {
 	UPDATE_PASSWORD_START,
 	UPDATE_PASSWORD_SUCCESS,
 	UPDATE_PASSWORD_ERROR,
+	RESET_PASSWORD_START,
+	RESET_PASSWORD_SUCCESS,
+	RESET_PASSWORD_ERROR,
+		GET_STORE_METRIC_START,
+	GET_STORE_METRIC_SUCCESS,
+	GET_STORE_METRIC_ERROR,
 } from '../constants/UserActionType';
-import { axiosWithAuth } from "../../utils/axiosWithAuth";
+import { axiosWithAuth,cancelToken } from "../../utils/axiosWithAuth";
 import { createStandaloneToast } from "@chakra-ui/react";
 const toast = createStandaloneToast();
 export const getBusinessUserInfo = (payload) => {
@@ -98,7 +104,7 @@ export const getBusinessUserDetails = (user_id) => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: FETCH_BUSINESS_USER_DETAIL_WITH_ID_ERROR,
-        payload: err.response.data.error,
+        payload: err.response?.data?.error,
       });
     });
 };
@@ -195,6 +201,49 @@ export const createStoreLink = (user_id, storeName) => (dispatch) => {
 };
 
 
+export const resetPassword =
+	(authCode,email, password,retypePassword) => (dispatch) => {
+		dispatch({ type: RESET_PASSWORD_START });
+		axiosWithAuth()
+			.post(`/reset/vcode`, {
+				auth_code: authCode,
+				email: email,
+				password: password,
+				retype_new_password: retypePassword,
+			})
+			.then((res) => {
+				localStorage.setItem("password", res.data?.message.password);
+				 toast({
+        position: "top",
+        title: `Password Reset`,
+        description: "You have successfully reset your password",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+				dispatch({
+					type: RESET_PASSWORD_SUCCESS,
+					payload: res.data,
+				});
+				
+			})
+			.catch((err) => {
+				 toast({
+				position: 'top',
+				title: `Unsuccessful Attempt`,
+				description: `${err.response.data.message}`,
+				status: 'error',
+				duration: 3000,
+				isClosable: true,
+			});
+				dispatch({
+					type: RESET_PASSWORD_ERROR,
+					payload: err.response.data.error,
+				});
+			});
+	};
+
+
 export const updatePassword =
 	(user_id, oldPassword, newPassword, retypeNewPassword) => (dispatch) => {
 		dispatch({ type: UPDATE_PASSWORD_START });
@@ -206,6 +255,7 @@ export const updatePassword =
 				retype_new_password: retypeNewPassword,
 			})
 			.then((res) => {
+					localStorage.setItem("password", res.data?.message.password);
 				 toast({
         position: "top",
         title: `Password Updated`,
@@ -217,7 +267,7 @@ export const updatePassword =
 				dispatch({
 					type: UPDATE_PASSWORD_SUCCESS,
 					payload: res.data,
-				});
+				})
 			})
 			.catch((err) => {
 				 toast({
@@ -797,6 +847,27 @@ export const saveTransactionRef = (payload) => {
 // 	  });
 //   }
 
+export const getStoreMetric = (business_id) => (dispatch) => {
+  dispatch({ type: GET_STORE_METRIC_START });
+  axiosWithAuth()
+    .get(`storemetrics/${business_id}`, {cancelToken: cancelToken.token,})
+    .then((res) => {
+      dispatch({
+        type: GET_STORE_METRIC_SUCCESS,
+        payload: res.data
+      });
+//    console.log(res.data, "Store Metric")
+    })
+    .catch((err) => {
+      dispatch({
+        type: GET_STORE_METRIC_ERROR,
+        payload: err.response?.data.error,
+      });
+    });
+	return () => {
+		cancelToken.cancel();
+	}
+};
 
 export const updateStoreInfo =
 	(businessId,name,desc,email,industry,address) => (dispatch) => {

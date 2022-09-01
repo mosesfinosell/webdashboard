@@ -20,93 +20,92 @@ import {
 	Select,
 	InputRightElement,
 } from '@chakra-ui/react';
-import { BiShoppingBag } from "react-icons/bi";
-import { useState, useEffect } from "react";
+import { BiShoppingBag } from 'react-icons/bi';
+import { useState, useEffect } from 'react';
 // import { Formik, Form, Field } from "formik";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 // import DatePicker from "react-datepicker";
-import AddCustomerModal from '../Customer/addCustomerModal'
+import AddCustomerModal from '../Customer/addCustomerModal';
 import AddProductModal from '../Products/addProductsModal';
 import {
-  createTransaction,
-  getPayment,
-} from "../../../../ReduxContianer/BussinessRedux/BusinessAction";
+	createTransaction,
+	getPayment,
+} from '../../../../ReduxContianer/BussinessRedux/BusinessAction';
 // import BusinessLayout from "../../../../components/Layout/BusinessLayout";
-import "../../../Dashboard/Dash.css";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { v4 as uuidv4 } from "uuid";
-import { Spinner } from "@chakra-ui/react";
-
+import '../../../Dashboard/Dash.css';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { v4 as uuidv4 } from 'uuid';
+import { Spinner } from '@chakra-ui/react';
 
 export default function CreateTransaction() {
-  const [loading, setLoading] = useState(false);
-  const [payments, setPayments] = useState([]);
-  const dispatch = useDispatch();
-  const businessInfo = useSelector(
-    (state) => state.businessReducer.businessUserInfo
-  );
-  const businessId = businessInfo.business_id;
-//   const customers = useSelector((state) => state.businessReducer.customers);
-  const product = []
-//   const products = useSelector((state) => state.businessReducer.products);
-//   console.log(products)
-  const isFetching = useSelector((state) => state.businessReducer.isFetching);
-  // const isFetching = useSelector((state) => state.businessReducer.isFetching);
-  const paymentDetails = useSelector(
-    (state) => state.businessReducer.transactionRef
-  );
-  useEffect(() => {
-    paymentFetching(businessId);
-  }, [businessId]);
+	const [loading, setLoading] = useState(false);
+	const [payments, setPayments] = useState([]);
+	const dispatch = useDispatch();
+	const businessInfo = useSelector(
+		(state) => state.businessReducer.businessUserInfo
+	);
+	const businessId = businessInfo.business_id;
+	const customers = useSelector((state) => state.businessReducer.customers);
+	//   const product = []
+	const products = useSelector((state) => state.businessReducer.products);
+	//   console.log(products)
+	const isFetching = useSelector((state) => state.businessReducer.isFetching);
+	// const isFetching = useSelector((state) => state.businessReducer.isFetching);
+	const paymentDetails = useSelector(
+		(state) => state.businessReducer.transactionRef
+	);
+	useEffect(() => {
+		paymentFetching(businessId);
+	}, [businessId]);
 
-  const paymentSchema = Yup.object().shape({
-    customer_id: Yup.string().required("Select a customer"),
-    product_id: Yup.string().required("Select a product"),
-    Itemtype: Yup.string().required("Enter product details"),
-    payment_date: Yup.string().required("Select Payment Date"),
-    payment_status: Yup.string().required("Payment status is required"),
-    payment_method: Yup.string().required("Choose payment method"),
-    transtype: Yup.string().required("Enter Transaction Details"),
-    amount: Yup.number().required("Amount is required"),
-  });
-  const formik = useFormik({
-    initialValues: {
-      transaction_id: paymentDetails?.trans,
-      Itemtype: "",
-      payment_date: "",
-      payment_id: uuidv4(),
-      business_id: businessId,
-      customer_id: "",
-      payment_status: "",
-      payment_method: "",
-      payment_ref: paymentDetails?.trxref,
-      transtype: "",
-      amount: paymentDetails?.amount,
-      product_id: "",
-    },
-    onSubmit: (values) => {
-      console.log(values, "VALU ");
-      dispatch(createTransaction(values));
-    },
-    validationSchema: paymentSchema,
-  });
-  const paymentFetching = async (businessId) => {
-    setLoading(true);
-    try {
-      const res = await getPayment(businessId);
-      console.log(res, "PAYMENT");
-      const { payments } = res.data;
-      setPayments(payments);
-      // const total = Math.ceil(allOrders / perPage);
-      // setTotalPages(total);
-      setLoading(false);
-    } catch (err) {
-      setLoading(false);
-      return err;
-    }
-  };
-  return (
+	const paymentSchema = Yup.object().shape({
+		customer_id: Yup.string().required('Select a customer'),
+		product_id: Yup.string().required('Select a product'),
+		Itemtype: Yup.string().required('Enter product details'),
+		payment_date: Yup.string().required('Select Payment Date'),
+		payment_status: Yup.string().required('Payment status is required'),
+		payment_method: Yup.string().required('Choose payment method'),
+		transtype: Yup.string().required('Enter Transaction Details'),
+		amount: Yup.number().required('Amount is required'),
+	});
+	const formik = useFormik({
+		initialValues: {
+			transaction_id: paymentDetails?.trans,
+			Itemtype: '',
+			payment_date: '',
+			payment_id: uuidv4(),
+			business_id: businessId,
+			customer_id: '',
+			payment_status: '',
+			payment_method: '',
+			payment_ref: paymentDetails?.trxref,
+			transtype: '',
+			amount: paymentDetails?.amount,
+			product_id: '',
+		},
+		onSubmit: (values) => {
+			// console.log(values, 'VALU ');
+			dispatch(createTransaction(values));
+		},
+		validationSchema: paymentSchema,
+	});
+	const paymentFetching = async (businessId) => {
+		setLoading(true);
+		try {
+			const res = await getPayment(businessId);
+			// console.log(res, 'PAYMENT');
+			const { payments } = res.data;
+			setPayments(payments);
+			// const total = Math.ceil(allOrders / perPage);
+			// setTotalPages(total);
+			setLoading(false);
+		} catch (err) {
+			setLoading(false);
+			return err;
+		}
+	};
+	return (
 		<div className='dashy-cover'>
 			<div className='left-step-dash'>
 				{/* <Text className="history" color="gray">
@@ -244,63 +243,50 @@ export default function CreateTransaction() {
 
 					{/* <div className="trans-div"> */}
 					<FormLabel htmlFor='customer_id'>Select Customer</FormLabel>
-					{/* <Select
-              mb="20px"
-              placeholder="Select Customer"
-              value={formik.values.customer_id}
-              onChange={formik.handleChange}
-              // width="100%"
-              h="65px"
-              borderRadius="0px 11px 11px 11px"
-              id="customer_id"
-              name="customer_id"
-              background="#FAFAFA"
-            >
-              {!isFetching &&
-                customers?.map((customer) => {
-                  return (
-                    <option value={customer._id}>
-                      {customer.customer_name}
-                    </option>
-                  );
-                })}
-            </Select> */}
-					<InputGroup>
-						<InputRightElement
-							pointerEvents='visible'
-							m='15px 15px'
-							ml={2}
-							color='yellow.500'>
-							<Button
-								fontSize='25px'
-								size='sm'
-								b='transparent'
-								cursor='pointer'>
-								<AddCustomerModal />
-							</Button>
-						</InputRightElement>
-						<Input
-							mb='20px'
-							placeholder='Select Customer'
-							value={formik.values.customer_id}
-							onChange={formik.handleChange}
-							// width="100%"
-							h='65px'
-							borderRadius='0px 11px 11px 11px'
-							id='customer_id'
-							name='customer_id'
-							background='#FAFAFA'
-						/>
-					</InputGroup>
-
-					{formik.touched.customer_id && formik.errors.customer_id ? (
-						<span>{formik.errors.customer_id}</span>
-					) : null}
-					{/* </div> */}
+					<Select
+						mb='20px'
+						placeholder='Select Customer'
+						value={formik.values.customer_id}
+						onChange={formik.handleChange}
+						// width="100%"
+						h='65px'
+						borderRadius='0px 11px 11px 11px'
+						id='customer_id'
+						name='customer_id'
+						background='#FAFAFA'>
+						{!isFetching &&
+							customers?.map((customer,index) => {
+								return (
+									<option value={customer._id} key={index}>
+										{customer.customer_name || 'no customer'}
+									</option>
+								);
+							})}
+					</Select>
 
 					{/* <div className="trans-div"> */}
 					<FormLabel htmlFor='product_id'>Select Product</FormLabel>
-					<InputGroup>
+					<Select
+						mb='20px'
+						placeholder='Select Product'
+						value={formik.values.product_id}
+						onChange={formik.handleChange}
+						// width="100%"
+						h='65px'
+						borderRadius='0px 11px 11px 11px'
+						id='product_id'
+						name='product_id'
+						background='#FAFAFA'>
+						{!isFetching &&
+							products?.map((product,index) => {
+								return (
+									<option value={product._id} key={index}>
+										{product.title || 'no product'}
+									</option>
+								);
+							})}
+					</Select>
+					{/* <InputGroup>
 						<InputRightElement
 							pointerEvents='visible'
 							m='15px 15px'
@@ -330,7 +316,7 @@ export default function CreateTransaction() {
 					</InputGroup>
 					{formik.touched.product_id && formik.errors.product_id ? (
 						<span>{formik.errors.product_id}</span>
-					) : null}
+					) : null} */}
 					{/* </div> */}
 					{/* <div className="btn-div"> */}
 					<Button

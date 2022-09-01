@@ -7,9 +7,10 @@ import BusinessAccountSignUp from './pages/SignUp/BusinessSignUpPage/BusinessAcc
 import Verify from './pages/SignUp/BusinessSignUpPage/Verify';
 import OTP from './pages/SignUp/BusinessSignUpPage/OTP';
 import BusinessAccountSignIn from './pages/SignIn/BusinessLogInPage/BusinessAccountSignIn';
-import BusinessForgetPassword from './pages/SignIn/BusinessLogInPage/BusinessForgetPassword';
+import ForgetPassword from './pages/SignIn/BusinessLogInPage/BusinessForgetPassword';
+import ResetPassword from './pages/SignIn/BusinessLogInPage/BusinessResetPassword';
 
-
+import AddTeam from './pages/Dashboard/BusinessDashboard/Account/addTeam';
 import StoreInventory from './pages/Dashboard/BusinessDashboard/HomeBusiness/StoreInventory';
 import StorePage from './pages/Dashboard/BusinessDashboard/HomeBusiness/StorePage';
 import Cart from './pages/Dashboard/BusinessDashboard/HomeBusiness/Cart';
@@ -119,6 +120,7 @@ function App() {
 						/>
 
 						<Route path='/dashboard' exact element={<DashboardPage />} />
+							<Route path='/dashboard/team' element={<AddTeam />} />
 						<Route
 							exact
 							path='/business/orders'
@@ -136,9 +138,14 @@ function App() {
 						/>
 						<Route
 							path='/forget-password'
-							
 							// element={<PrivateRoute element={<StoreLink />} />}
-							element={<BusinessForgetPassword />}
+							element={<ForgetPassword />}
+							
+						/>
+						<Route
+							path='/reset-password'
+							// element={<PrivateRoute element={<StoreLink />} />}
+							element={<ResetPassword/>}
 						/>
 						<Route
 							path='/business/store-page/cart'
