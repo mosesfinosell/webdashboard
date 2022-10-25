@@ -1,0 +1,44 @@
+
+
+strong {
+    font-family: DM Sans;
+    color: rgb(15, 15, 15);
+}
+.privacy-text__ul{
+ padding: 30px;
+}
+
+/* p,li {
+    line-height: 23px;
+    color: #8c8c8c;
+    width: 100%;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 30px;
+} */
+
+.privacy-text__h1 {
+    font-family: DM Sans;
+    font-size: 35px;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.privacy-text__h3 {
+    font-family: DM Sans;
+    font-size: 25px;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.privacy-text__h5 {
+    font-family: DM Sans;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: left;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
