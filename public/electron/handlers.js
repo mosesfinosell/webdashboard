@@ -9,8 +9,6 @@ const handleTitle = (e, title) => {
 };
 
 const handleText = (e, text) => {
-  console.log(e, text);
-
   return Promise.resolve(text);
 };
 

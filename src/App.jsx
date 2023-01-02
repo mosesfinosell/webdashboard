@@ -22,19 +22,17 @@ import { BusinessHome } from "./pages/Dashboard/BusinessDashboard/HomeBusiness/H
 import { StoreInventory } from "./pages/Dashboard/BusinessDashboard/Inventory/StoreInventory/StoreInventory";
 import { AddProduct } from "./pages/Dashboard/BusinessDashboard/Inventory/AddProduct/AddProduct";
 import { EditProduct } from "./pages/Dashboard/BusinessDashboard/Inventory/EditProduct/EditProduct";
-import InvoiceBoard from "./pages/Dashboard/BusinessDashboard/HomeBusiness/InvoiceBoard";
+
 import { Invoice } from "./pages/Dashboard/BusinessDashboard/Invoice/Invoice";
 
 // import Order from "./pages/Dashboard/BusinessDashboard/Order/createOrder";
 import { CreateOrder } from "./pages/Dashboard/BusinessDashboard/Order/CreateOrder/CreateOrder";
-import Payments from "./pages/Dashboard/BusinessDashboard/Payment/createTransaction";
+// import Payments from "./pages/Dashboard/BusinessDashboard/Payment/createTransaction";
 import { BusinessPayment } from "./pages/Dashboard/BusinessDashboard/Payment/BusinessPayment";
 // import StoreProfile from "./pages/Dashboard/BusinessDashboard/Account/AccountBusinessProfile";
 
 import { Account } from "./pages/Dashboard/BusinessDashboard/Account/Account";
 
-import StorePage from "./pages/Dashboard/BusinessDashboard/HomeBusiness/StorePage";
-import Cart from "./pages/Dashboard/BusinessDashboard/HomeBusiness/Cart";
 // import VerifyPhoneNumber from './pages/SignUp/PersonalSignUpPage/VerifyPhoneNumber';
 // import InputOtp from './pages/SignUp/PersonalSignUpPage/VerifyOtp';
 // import PasswordPage from './pages/SignUp/PasswordPage';
@@ -199,33 +197,9 @@ function App() {
               path="/personal-account"
               element={<PrivateRoute element={AccountUserProfile} />}
             />
-            {/* </Switch> */}
-            {/* Bussiness Account  */}
-            {/* <Route
-              path="/business-dashboard/store-profile"
-              element={<StoreProfile />}
-            /> */}
             <Route path="/business-dashboard/team" element={<AddTeam />} />
             <Route path="/business-dashboard/team" element={<AddTeam />} />
-            <Route
-              path="/business/orders"
-              element={<BusinessOrders />}
-              // element={<PrivateRoute  />}
-            />
-            <Route
-              path="/business/store-page"
-              element={<PrivateRoute element={<StorePage />} />}
-            />
-            {/* <Route
-							path='/store-link' exact
-							// element={<PrivateRoute element={<StoreLink />} />}
-							element={<StoreLink />}
-						/> */}
-            <Route
-              path="/business/store-page/cart"
-              element={<PrivateRoute element={Cart} />}
-            />
-            {/* <Route path='/business/payment' element={CreateTransaction} /> */}
+            <Route path="/business/orders" element={<BusinessOrders />} />
           </Routes>
         </ScrollToTop>
       </Router>

@@ -12,7 +12,7 @@ export const Metrics = () => {
       <p>
         <span className="title">Total Products</span>
         <span className="info">
-          {isLoading ? (
+          {isLoading || !data ? (
             <Spinner size="3" border="0.3" margin="0" />
           ) : (
             data.noOfProducts
@@ -22,7 +22,7 @@ export const Metrics = () => {
       <p>
         <span className="title">Total Sales</span>
         <span className="info">
-          {isLoading ? (
+          {isLoading || !data ? (
             <Spinner size="3" border="0.3" margin="0" />
           ) : (
             `₦${data.totalSales}`
@@ -32,7 +32,7 @@ export const Metrics = () => {
       <p>
         <span className="title">Number of Sales</span>
         <span className="info">
-          {isLoading ? (
+          {isLoading || !data ? (
             <Spinner size="3" border="0.3" margin="0" />
           ) : (
             `${data.noOfSales}`
@@ -42,7 +42,7 @@ export const Metrics = () => {
       <p>
         <span className="title">Number of Visitors</span>
         <span className="info">
-          {isLoading ? (
+          {isLoading || !data ? (
             <Spinner size="3" border="0.3" margin="0" />
           ) : (
             data.noOfVisitors
